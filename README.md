@@ -1,0 +1,103 @@
+# Analisis LOGIKA UI 2026
+
+Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`**. Data diunduh menggunakan kredensial Kaggle lokal. Kompetisi ini memprediksi probabilitas mencapai DPD 90 dalam 12 bulan kalender.
+
+## Hasil yang dapat dibuka
+
+- [Submission terbaru](submission_v3.csv), public KS **0,55845** berdasarkan hasil yang dilaporkan pengguna; `submission.csv` berisi prediksi yang sama
+- [Laporan bergrafik](artifacts/laporan_analisis.html), satu berkas HTML dengan grafik tertanam
+- [Laporan Markdown](artifacts/laporan_analisis.md)
+- [Notebook analisis](analisis_logika.ipynb)
+- [Tabel hasil lengkap](artifacts/tables/)
+- [Audit kualitas dan waktu](artifacts/quality_audit.json)
+- [Ringkasan JSON](artifacts/summary.json)
+
+Ada 70.000 aplikasi latih, 30.000 aplikasi uji, dan 9.507 target positif pada train (13,58%). Pada baseline XGBoost berparameter tetap, ROC-AUC holdout stratified meningkat dari 0,6411 untuk aplikasi saja menjadi 0,8302 dengan seluruh riwayat; ROC-AUC temporal 0,8258. Metrik resmi kompetisi adalah **Kolmogorov-Smirnov (KS)** sesuai Evaluation yang diberikan pengguna. KS baseline holdout 0,50671, sedangkan skor publik yang diperoleh pengguna adalah 0,52623. Tidak ada submission yang dikirim otomatis oleh skrip.
+
+## Reproduksi
+
+Lingkungan yang dipakai tercatat pada `artifacts/summary.json`; gunakan Python 3.10 atau 3.11 dengan versi paket yang tercantum.
+
+```bash
+python -m pip install -r requirements.txt
+python scripts/download_data.py
+python scripts/analyze.py
+```
+
+Skrip unduh mencari berkas `*kaggle*.json` di direktori proyek, kemudian `~/.kaggle/kaggle.json` atau `~/.config/kaggle/kaggle.json`. Jalur lain dapat diberikan secara eksplisit:
+
+```bash
+python scripts/download_data.py --credentials '/path/to/kaggle.json'
+```
+
+Kredensial juga dapat disediakan melalui environment Kaggle. Isi kredensial tidak dicetak atau dimasukkan ke laporan/notebook. Data mentah sekitar 949 MB; berkas yang sudah lengkap dilewati saat unduh ulang. Manifest unduhan disimpan di `data/raw/download_manifest.json`.
+
+```bash
+# Gunakan agregasi yang sudah tersedia, jalankan ulang EDA dan baseline:
+python scripts/analyze.py --reuse-features
+
+# Perbarui laporan dari fitur dan benchmark yang sudah tersimpan:
+python scripts/analyze.py --report-only
+
+# Analisis tanpa melatih baseline:
+python scripts/analyze.py --reuse-features --skip-model
+
+# Dependensi tambahan untuk menjalankan notebook:
+python -m pip install -r requirements-notebook.txt
+```
+
+`--report-only` menggunakan fitur dan benchmark yang sudah ada; gunakan setelah keduanya dibangun dari versi data yang sama. `--skip-model` menghasilkan laporan tanpa bagian baseline. Notebook adalah pembaca hasil, sehingga tidak mengunduh ulang data atau melatih model.
+
+## Aturan agregasi
+
+Cutoff analisis adalah waktu keputusan aplikasi terpilih. Observasi biro harus sudah dilaporkan dan tersedia sebelum cutoff; rekening hanya memakai bulan yang selesai; riwayat aplikasi, cicilan, dan transaksi memakai informasi sebelum cutoff. Fitur snapshot pembayaran mengikuti definisi kamus data. Seluruh waktu observasi diperiksa terhadap cutoff.
+
+Transaksi e-commerce tersimpan per barang. `order_total` dideduplicasi per pesanan dan hanya completed dihitung sebagai belanja. Saldo antarprovider biro tidak dijumlahkan karena cakupan utangnya dapat tumpang tindih. ID dan tanggal mentah dikeluarkan dari model. Nilai kosong struktural dipertahankan dan indikator ketersediaan riwayat dibentuk.
+
+Contoh submission memiliki urutan berbeda dari test. Fungsi `align_submission` pada notebook menunjukkan join melalui `application_id` dengan pemeriksaan ID unik dan probabilitas. Notebook tidak membuat atau mengirim submission otomatis.
+
+## Membuat submission
+
+```bash
+python scripts/create_submission.py
+```
+
+Skrip melatih baseline semua riwayat pada 70.000 label, lalu membuat `submission.csv` di direktori proyek dengan 30.000 probabilitas dalam urutan contoh submission. Model disimpan di `artifacts/submission_model.joblib`; parameter, ringkasan probabilitas, checksum, dan hasil pemeriksaan tersimpan di `artifacts/submission_metadata.json`. Skrip tidak mengirim berkas ke Kaggle.
+
+Data mentah, fitur hasil agregasi, prediksi validasi per baris, dan model tersimpan dikecualikan dari Git. Laporan, grafik, tabel ringkasan, dan metadata eksperimen disertakan agar hasil dapat ditinjau langsung di GitHub. Berkas kredensial dikecualikan secara khusus dalam `.gitignore`.
+
+## Optimasi untuk KS
+
+```bash
+python -m pip install -r requirements-optimization.txt
+python scripts/extend_features.py
+python scripts/optimize_ks.py --features base
+python scripts/optimize_ks.py --features extended
+python scripts/optimize_ks.py --features compact
+python scripts/finalize_ks_submission.py
+python scripts/crossvalidate_ks.py
+```
+
+Fitur extended menambahkan riwayat/tren biro, beban pinjaman aktif, keterlambatan terbaru, tren rekening, dan belanja pada beberapa jendela waktu. Compact memakai fitur awal ditambah fitur ber-gain tinggi yang dipelajari pada bagian development. Semua waktu observasi tetap sebelum keputusan; audit tersedia di `artifacts/extended_feature_audit.json`.
+
+Tuning memakai 42.000 baris train dan 10.500 baris validasi. Holdout awal 17.500 baris dipertahankan untuk konfirmasi parameter dan bobot yang sudah dikunci. Tahap selanjutnya menjalankan validasi silang tiga fold pada kandidat berparameter tetap dan memilih bobot gabungan berdasarkan rata-rata KS fold. Karena pemilihan bobot menggunakan OOF, skor CV merupakan estimasi validasi, bukan skor test akhir yang bebas optimisme seleksi.
+
+Hasil lengkap tersedia pada `artifacts/optimization/`. `submission_v2.csv` berasal dari kandidat tuning yang dilatih pada seluruh label; `submission_ks.csv` berasal dari rata-rata model tiga fold. `submission.csv` diperbarui ke versi CV jika KS rata-rata fold dan KS OOF melampaui baseline pada split yang sama. Baseline asli dipertahankan sebagai `artifacts/optimization/submission_baseline_0_52623.csv`.
+
+## Submission versi 3
+
+Skor public `submission_ks.csv` terkonfirmasi **0,54710** melalui API Kaggle. Checkpoint persisnya disimpan di `artifacts/optimization/submission_public_0_54710.csv`.
+
+Versi 3 menambahkan harga per unit dan komposisi belanja per kategori, variasi belanja bulanan, shrinkage keterlambatan historis, serta cakupan cicilan oleh arus kas. Dua model baru memakai pembobotan kelas dan sepuluh fold dengan parameter yang sudah dikunci. Prediksi digabungkan dengan versi 0,54710, masing-masing sepertiga.
+
+```bash
+python scripts/build_features_v3.py
+python scripts/refine_ks.py
+python scripts/refine_ks.py --balanced
+python scripts/select_refinement.py
+python scripts/train_tenfold_submission.py
+```
+
+`submission_v3.csv` adalah berkas baru; `submission.csv` memiliki isi yang sama setelah seluruh pemeriksaan berhasil. Perbandingan yang memakai tiga fold sama meningkatkan rata-rata KS dari 0,51492 ke 0,52285. KS OOF keseluruhan tahap akhir 0,51901, dibanding 0,51147 untuk versi sebelumnya; model baru memakai 90% baris per fold, dibanding 67% sebelumnya. Kedua angka rata-rata fold 3 dan 10 tidak dibandingkan langsung. Skor public versi 3 adalah **0,55845** berdasarkan hasil yang dilaporkan pengguna, meningkat 0,01135 dari versi 0,54710.
+
+Definisi, bobot yang dikunci, seluruh metrik dan model akhir ada di `artifacts/optimization/tenfold/`. Laporan lengkap: `artifacts/optimization/tenfold/laporan_submission_v3.md`. Hasil validasi dapat mengandung optimisme seleksi karena fitur, jumlah pohon, dan bobot dipilih dari label training yang sama; tidak ada label test yang digunakan.
