@@ -4,6 +4,7 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 
 ## Hasil yang dapat dibuka
 
+- [Lima notebook pipeline: EDA sampai submission](notebooks/README.md), dengan kode langsung di sel dan penjelasan per versi
 - [Submission terbaru](submission_v4.csv), kandidat versi 4; skor public belum tersedia, dan `submission.csv` berisi prediksi yang sama
 - [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
 - [Laporan validasi versi 4](artifacts/optimization/v4/laporan_submission_v4.md)
@@ -48,7 +49,7 @@ python scripts/analyze.py --reuse-features --skip-model
 python -m pip install -r requirements-notebook.txt
 ```
 
-`--report-only` menggunakan fitur dan benchmark yang sudah ada; gunakan setelah keduanya dibangun dari versi data yang sama. `--skip-model` menghasilkan laporan tanpa bagian baseline. Notebook adalah pembaca hasil, sehingga tidak mengunduh ulang data atau melatih model.
+`--report-only` menggunakan fitur dan benchmark yang sudah ada; gunakan setelah keduanya dibangun dari versi data yang sama. `--skip-model` menghasilkan laporan tanpa bagian baseline. Notebook EDA lama di root adalah pembaca hasil. [Notebook pipeline baru](notebooks/README.md) memuat EDA, kode agregasi, training, validasi, prediksi test, dan ekspor CSV untuk seluruh versi.
 
 ## Aturan agregasi
 
@@ -56,7 +57,7 @@ Cutoff analisis adalah waktu keputusan aplikasi terpilih. Observasi biro harus s
 
 Transaksi e-commerce tersimpan per barang. `order_total` dideduplicasi per pesanan dan hanya completed dihitung sebagai belanja. Saldo antarprovider biro tidak dijumlahkan karena cakupan utangnya dapat tumpang tindih. ID dan tanggal mentah dikeluarkan dari model. Nilai kosong struktural dipertahankan dan indikator ketersediaan riwayat dibentuk.
 
-Contoh submission memiliki urutan berbeda dari test. Fungsi `align_submission` pada notebook menunjukkan join melalui `application_id` dengan pemeriksaan ID unik dan probabilitas. Notebook tidak membuat atau mengirim submission otomatis.
+Contoh submission memiliki urutan berbeda dari test. Fungsi `align_submission` pada notebook EDA lama menunjukkan join melalui `application_id` dengan pemeriksaan ID unik dan probabilitas. Notebook pipeline baru menjalankan pemeriksaan yang sama dan menghasilkan `submission.csv` pada folder output masing-masing versi. Tidak ada pengiriman otomatis ke Kaggle.
 
 ## Membuat submission
 
