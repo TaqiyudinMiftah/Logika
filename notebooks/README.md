@@ -67,3 +67,13 @@ Notebook EDA lama di root tetap merupakan pembaca laporan. Enam notebook dalam f
 Untuk meregenerasi notebook dari kode sumber: `python scripts/build_review_notebooks.py`. Untuk sekaligus mengeksekusinya: `python scripts/build_review_notebooks.py --execute`.
 
 Untuk notebook 06: `python scripts/build_review_notebook_v5.py --execute`. Generator 06 memakai sel pipeline notebook 05 sebagai komponen versi 4, lalu menambahkan kode fitur dan TabM secara langsung. Jalankan generator 01–05 terlebih dahulu jika ingin meregenerasi seluruh notebook dari awal.
+
+## Notebook audit generator
+
+[07 — Reverse engineering RNG dan jitter](07_reverse_engineering_rng.ipynb) mereview struktur sintetis, rounding, probe seed dan ID, inferensi noise harga/biro/income, prior keterlambatan, serta generator pendekatan. Seed asli belum ditemukan. Kode seluruh langkah tersedia langsung di sel; simulasi memakai seed demo sendiri.
+
+Bagian audit dapat dijalankan dari data mentah dengan paket optimization dan notebook. Validasi CatBoost/spline memerlukan fitur serta OOF versi 5; bila prasyarat belum tersedia, tabel validasi historis tetap ditampilkan. Notebook ini menulis output audit di `artifacts/notebook_runs/07_reverse/` dan tidak menghasilkan atau mengganti submission.
+
+Untuk membangun dan mengeksekusi notebook 07: `python scripts/build_reverse_notebook.py --execute`. Flag mengatur pengulangan probe RNG, audit mentah, validasi model dan retraining. [Laporan reverse engineering](../artifacts/reverse_engineering/laporan_reverse_engineering.md) menjelaskan batas identifikasi dan hasil pengujian fitur.
+
+Notebook 07 telah dijalankan seluruhnya: 21 fitur dari data mentah identik dengan eksperimen, seluruh OOF CatBoost/spline serta metriknya direproduksi persis, dan checksum kedua submission sebelumnya tidak berubah. Rincian ada pada [verifikasi notebook 07](../artifacts/reverse_engineering/notebook_verification.json).

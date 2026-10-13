@@ -5,6 +5,7 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 ## Hasil yang dapat dibuka
 
 - [Enam notebook pipeline: EDA sampai submission](notebooks/README.md), dengan kode langsung di sel dan penjelasan per versi
+- [Notebook reverse engineering RNG dan jitter](notebooks/07_reverse_engineering_rng.ipynb), dengan probe seed, inferensi noise, dan generator pendekatan
 - [Kandidat terbaru](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, skor public belum tersedia
 - [Submission default](submission_v4.csv), versi 4; `submission.csv` berisi prediksi yang sama. Versi 5 belum memenuhi syarat promosi minimal enam fold membaik
 - [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
@@ -149,3 +150,21 @@ python scripts/build_review_notebook_v5.py --execute
 ```
 
 Untuk mengulang screening lain, gunakan `evaluate_v5.py --group` dengan `spline_plus`, `ebm`, `xgb`, `specialist`, `basket`, `shallow`, `neuralcore`, atau `smoothing`. `select_v5.py` mereview bobot kasar 25%/50% dengan aturan seleksi ketat; tidak ada kandidat yang lolos aturan itu pada eksperimen ini. Kandidat TabM diteruskan sebagai konfirmasi eksploratif karena KS gabungan dan rata-ratanya meningkat sedikit pada tiga fold. Fitur, model, serta bobot menggunakan label train yang sama sehingga hasil mengandung optimisme seleksi.
+
+## Reverse engineering generator dan jitter
+
+[Notebook 07](notebooks/07_reverse_engineering_rng.ipynb) dan [laporan rinci](artifacts/reverse_engineering/laporan_reverse_engineering.md) memisahkan aturan observasi yang terkonfirmasi dari estimasi noise dan hipotesis generator. **Seed RNG asli belum ditemukan.** Probe mencakup stream usia, template hash ID, RNG per customer, ID sebagai raw output, dan uji cloning state MT19937 dengan positive control.
+
+Cicilan terpilih tepat sama dengan `ceil` formula anuitas. Semua unit price merupakan kelipatan Rp1.000 sebelum dikalikan quantity. Delay keputusan cocok dengan tiga rentang uniform 0,2–3, 6–30, dan 36–120 jam, dengan proporsi sekitar 45%/35%/20% dan dua celah tanpa observasi. SD noise pada log harga diperkirakan 0,654; pada skor biro sekitar 23 poin. Angka noise dan efek laten adalah estimasi, bukan nilai RNG asli yang diketahui.
+
+Sebanyak 21 fitur laten/ketidakpastian diuji dengan CatBoost dan spline pada tiga fold yang sama. Belum ada peningkatan KS yang konsisten, sehingga submission tidak berubah. Prototype di `synthetic_generator_prototype.py` memakai seed demo yang dipilih sendiri dan hanya meniru sebagian pola data; tidak menghasilkan label test asli.
+
+```bash
+python scripts/reverse_rng_probe.py --seed-limit 10000
+python scripts/reverse_synthetic_patterns.py
+python scripts/validate_reverse_features.py
+python scripts/report_reverse_engineering.py
+python scripts/build_reverse_notebook.py --execute
+```
+
+Audit mentah dan simulasi notebook dapat berjalan tanpa model sebelumnya. Bagian validasi memerlukan fitur dan OOF versi 5. Hasil audit ada di `artifacts/reverse_engineering/`; fitur per customer dan model tetap disimpan lokal serta dikecualikan dari Git.
