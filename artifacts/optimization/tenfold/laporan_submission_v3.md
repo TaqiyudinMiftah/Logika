@@ -1,6 +1,6 @@
 # Submission versi 3 untuk KS
 
-Versi sebelumnya (`submission_ks.csv`) memperoleh public KS **0,54710**, terkonfirmasi lewat API Kaggle. Versi 3 memperoleh public KS **0,55845** berdasarkan hasil yang dilaporkan pengguna, meningkat **0,01135**. Saat pengecekan 12 Oktober 2026, peringkat 10 bernilai 0,56333. Tidak ada upload otomatis.
+Versi sebelumnya (`submission_ks.csv`) memperoleh public KS **0,54710**, terkonfirmasi lewat API Kaggle. Versi 3 memperoleh public KS **0,55845** terkonfirmasi melalui API Kaggle, meningkat **0,01135**. Saat pengecekan 12 Oktober 2026, peringkat 10 bernilai 0,56333. Tidak ada upload otomatis.
 
 Penambahan fitur mencakup harga per unit dan komposisi belanja per kategori, variasi belanja bulanan, shrinkage frekuensi keterlambatan historis, skor biro berbobot usia laporan, dan cakupan cicilan oleh arus kas. Semua observasi diaudit sebelum keputusan. Prior keterlambatan berasal dari kejadian historis yang diketahui, bukan label target.
 

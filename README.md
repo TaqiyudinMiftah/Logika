@@ -4,7 +4,9 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 
 ## Hasil yang dapat dibuka
 
-- [Submission terbaru](submission_v3.csv), public KS **0,55845** berdasarkan hasil yang dilaporkan pengguna; `submission.csv` berisi prediksi yang sama
+- [Submission terbaru](submission_v4.csv), kandidat versi 4; skor public belum tersedia, dan `submission.csv` berisi prediksi yang sama
+- [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
+- [Laporan validasi versi 4](artifacts/optimization/v4/laporan_submission_v4.md)
 - [Laporan bergrafik](artifacts/laporan_analisis.html), satu berkas HTML dengan grafik tertanam
 - [Laporan Markdown](artifacts/laporan_analisis.md)
 - [Notebook analisis](analisis_logika.ipynb)
@@ -98,6 +100,28 @@ python scripts/select_refinement.py
 python scripts/train_tenfold_submission.py
 ```
 
-`submission_v3.csv` adalah berkas baru; `submission.csv` memiliki isi yang sama setelah seluruh pemeriksaan berhasil. Perbandingan yang memakai tiga fold sama meningkatkan rata-rata KS dari 0,51492 ke 0,52285. KS OOF keseluruhan tahap akhir 0,51901, dibanding 0,51147 untuk versi sebelumnya; model baru memakai 90% baris per fold, dibanding 67% sebelumnya. Kedua angka rata-rata fold 3 dan 10 tidak dibandingkan langsung. Skor public versi 3 adalah **0,55845** berdasarkan hasil yang dilaporkan pengguna, meningkat 0,01135 dari versi 0,54710.
+`submission_v3.csv` adalah checkpoint public versi 3. Pada tahap tersebut, `submission.csv` diperbarui ke berkas yang sama setelah seluruh pemeriksaan berhasil. Perbandingan yang memakai tiga fold sama meningkatkan rata-rata KS dari 0,51492 ke 0,52285. KS OOF keseluruhan tahap akhir 0,51901, dibanding 0,51147 untuk versi sebelumnya; model baru memakai 90% baris per fold, dibanding 67% sebelumnya. Kedua angka rata-rata fold 3 dan 10 tidak dibandingkan langsung. Skor public versi 3 adalah **0,55845**, terkonfirmasi melalui API Kaggle, meningkat 0,01135 dari versi 0,54710.
 
 Definisi, bobot yang dikunci, seluruh metrik dan model akhir ada di `artifacts/optimization/tenfold/`. Laporan lengkap: `artifacts/optimization/tenfold/laporan_submission_v3.md`. Hasil validasi dapat mengandung optimisme seleksi karena fitur, jumlah pohon, dan bobot dipilih dari label training yang sama; tidak ada label test yang digunakan.
+
+
+## Submission versi 4
+
+`submission_v4.csv` menggabungkan versi 3, CatBoost dengan fitur baru, dan regresi logistik dengan spline, masing-masing sepertiga. `submission.csv` memuat prediksi versi 4; checkpoint versi 3 tetap tersedia terpisah. Skor public versi 4 belum tersedia dan tidak ada upload otomatis ke Kaggle.
+
+Fitur baru merangkum harga yang dinormalisasi menurut kategori, frekuensi keterlambatan pada cicilan yang cukup umur untuk mencapai ambang DPD, serta skor biro dengan bobot setara antarprovider. Seluruh waktu observasi diperiksa sebelum keputusan. Normalisasi dan prior historis tidak memakai label target; imputasi dan transformasi spline dipelajari pada bagian training setiap fold.
+
+Seleksi pada tiga fold meningkatkan KS OOF dari 0,51970 menjadi 0,52411, dengan peningkatan pada ketiga fold. Pada tahap akhir sepuluh fold, KS OOF meningkat dari **0.51901** menjadi **0.52293**, dan KS membaik pada **9 dari 10 fold**. Fitur, jumlah pohon, dan bobot dipilih dari label training yang sama; hasil lokal mengandung optimisme seleksi dan tidak menjamin skor leaderboard.
+
+```bash
+# Setelah fitur dan prediksi versi 3 tersedia:
+python scripts/build_features_v4.py
+python scripts/evaluate_v4.py
+python scripts/evaluate_spline_v4.py
+python scripts/select_v4.py
+python scripts/train_v4_candidate.py --candidate spline
+python scripts/train_v4_candidate.py --candidate v4_cat5_balanced_500
+python scripts/export_v4_submission.py
+```
+
+[Laporan versi 4](artifacts/optimization/v4/laporan_submission_v4.md) memuat perbandingan pada fold yang sama, grafik KS/ROC, bobot gabungan, dan checksum. [Metadata submission](artifacts/optimization/v4/submission_v4_metadata.json), [audit fitur](artifacts/optimization/v4/feature_audit.json), dan [perbandingan kelompok customer](artifacts/optimization/v4/cohort_metrics.json) juga disertakan. Model akhir dan prediksi validasi per baris disimpan lokal dan dikecualikan dari Git.
