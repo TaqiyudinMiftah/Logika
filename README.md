@@ -4,8 +4,9 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 
 ## Hasil yang dapat dibuka
 
-- [Lima notebook pipeline: EDA sampai submission](notebooks/README.md), dengan kode langsung di sel dan penjelasan per versi
-- [Submission terbaru](submission_v4.csv), kandidat versi 4; skor public belum tersedia, dan `submission.csv` berisi prediksi yang sama
+- [Enam notebook pipeline: EDA sampai submission](notebooks/README.md), dengan kode langsung di sel dan penjelasan per versi
+- [Kandidat terbaru](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, skor public belum tersedia
+- [Submission default](submission_v4.csv), versi 4; `submission.csv` berisi prediksi yang sama. Versi 5 belum memenuhi syarat promosi minimal enam fold membaik
 - [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
 - [Laporan validasi versi 4](artifacts/optimization/v4/laporan_submission_v4.md)
 - [Laporan bergrafik](artifacts/laporan_analisis.html), satu berkas HTML dengan grafik tertanam
@@ -126,3 +127,25 @@ python scripts/export_v4_submission.py
 ```
 
 [Laporan versi 4](artifacts/optimization/v4/laporan_submission_v4.md) memuat perbandingan pada fold yang sama, grafik KS/ROC, bobot gabungan, dan checksum. [Metadata submission](artifacts/optimization/v4/submission_v4_metadata.json), [audit fitur](artifacts/optimization/v4/feature_audit.json), dan [perbandingan kelompok customer](artifacts/optimization/v4/cohort_metrics.json) juga disertakan. Model akhir dan prediksi validasi per baris disimpan lokal dan dikecualikan dari Git.
+
+## Kandidat submission versi 5
+
+Versi 5 memakai **75% versi 4 + 25% TabM**, dilatih dari label kompetisi tanpa model pretrained atau data eksternal. Empat fitur tambahan merangkum harga per unit dari semua basket, termasuk cancelled sebagai pilihan produk; cancelled tetap tidak dihitung sebagai belanja. Early stopping TabM berada di dalam training setiap outer fold, lalu model dilatih ulang pada seluruh training fold dengan jumlah epoch yang dipilih.
+
+Pada sepuluh fold yang sama, KS OOF meningkat dari **0,522934 menjadi 0,524464**, rata-rata KS fold dari **0,529401 menjadi 0,530121**, dan ROC-AUC dari 0,844598 menjadi 0,845405. Lima dari sepuluh fold membaik. Kandidat ini belum memenuhi syarat promosi enam fold, sehingga **`submission_v5.csv` disediakan terpisah dan `submission.csv` tetap versi 4**. Bootstrap berpasangan masih mencakup nol; peningkatan kecil ini belum membuktikan keuntungan yang stabil atau skor public lebih tinggi. Skor public versi 5 belum tersedia, dan tidak ada submit otomatis.
+
+[Notebook 06](notebooks/06_submission_v5.ipynb) memuat seluruh pipeline hingga CSV. [Laporan versi 5](artifacts/optimization/v5/laporan_submission_v5.md) menjelaskan pemilihan eksploratif, hasil eksperimen yang tidak dipromosikan, dan keterbatasan validasi. Model tersimpan berhasil mereproduksi OOF dan prediksi test secara persis.
+
+```bash
+# Python 3.10; setelah fitur dan model versi 4 tersedia:
+python -m pip install -r requirements-v5.txt -r requirements-notebook.txt
+python scripts/build_features_v5.py
+python scripts/evaluate_v5.py --group tabm
+python scripts/train_v5_candidate.py --candidate v5_tabm_weight1 --new-weight .25
+python scripts/export_v5_submission.py
+
+# Buat ulang notebook 06 dan jalankan seluruh sel:
+python scripts/build_review_notebook_v5.py --execute
+```
+
+Untuk mengulang screening lain, gunakan `evaluate_v5.py --group` dengan `spline_plus`, `ebm`, `xgb`, `specialist`, `basket`, `shallow`, `neuralcore`, atau `smoothing`. `select_v5.py` mereview bobot kasar 25%/50% dengan aturan seleksi ketat; tidak ada kandidat yang lolos aturan itu pada eksperimen ini. Kandidat TabM diteruskan sebagai konfirmasi eksploratif karena KS gabungan dan rata-ratanya meningkat sedikit pada tiga fold. Fitur, model, serta bobot menggunakan label train yang sama sehingga hasil mengandung optimisme seleksi.
