@@ -6,7 +6,7 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 
 - [Enam notebook pipeline: EDA sampai submission](notebooks/README.md), dengan kode langsung di sel dan penjelasan per versi
 - [Notebook reverse engineering RNG dan jitter](notebooks/07_reverse_engineering_rng.ipynb), dengan probe seed, inferensi noise, dan generator pendekatan
-- [Kandidat terbaru](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, skor public belum tersedia
+- [Kandidat terbaru](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, public **0,55680** menurut laporan pengguna
 - [Submission default](submission_v4.csv), versi 4; `submission.csv` berisi prediksi yang sama. Versi 5 belum memenuhi syarat promosi minimal enam fold membaik
 - [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
 - [Laporan validasi versi 4](artifacts/optimization/v4/laporan_submission_v4.md)
@@ -133,7 +133,7 @@ python scripts/export_v4_submission.py
 
 Versi 5 memakai **75% versi 4 + 25% TabM**, dilatih dari label kompetisi tanpa model pretrained atau data eksternal. Empat fitur tambahan merangkum harga per unit dari semua basket, termasuk cancelled sebagai pilihan produk; cancelled tetap tidak dihitung sebagai belanja. Early stopping TabM berada di dalam training setiap outer fold, lalu model dilatih ulang pada seluruh training fold dengan jumlah epoch yang dipilih.
 
-Pada sepuluh fold yang sama, KS OOF meningkat dari **0,522934 menjadi 0,524464**, rata-rata KS fold dari **0,529401 menjadi 0,530121**, dan ROC-AUC dari 0,844598 menjadi 0,845405. Lima dari sepuluh fold membaik. Kandidat ini belum memenuhi syarat promosi enam fold, sehingga **`submission_v5.csv` disediakan terpisah dan `submission.csv` tetap versi 4**. Bootstrap berpasangan masih mencakup nol; peningkatan kecil ini belum membuktikan keuntungan yang stabil atau skor public lebih tinggi. Skor public versi 5 belum tersedia, dan tidak ada submit otomatis.
+Pada sepuluh fold yang sama, KS OOF meningkat dari **0,522934 menjadi 0,524464**, rata-rata KS fold dari **0,529401 menjadi 0,530121**, dan ROC-AUC dari 0,844598 menjadi 0,845405. Lima dari sepuluh fold membaik. Kandidat ini belum memenuhi syarat promosi enam fold, sehingga **`submission_v5.csv` disediakan terpisah dan `submission.csv` tetap versi 4**. Bootstrap berpasangan masih mencakup nol; peningkatan kecil ini belum membuktikan keuntungan yang stabil atau skor public lebih tinggi. Public versi 5 **0,55680**, dilaporkan pengguna pada 2026-10-15, turun **0,00165** dibanding versi 3 (0,55845). Kenaikan validasi lokal belum diikuti kenaikan public. Versi 3 tetap checkpoint public terbaik yang tercatat; skor public versi 4 belum tersedia. Tidak ada submit otomatis.
 
 [Notebook 06](notebooks/06_submission_v5.ipynb) memuat seluruh pipeline hingga CSV. [Laporan versi 5](artifacts/optimization/v5/laporan_submission_v5.md) menjelaskan pemilihan eksploratif, hasil eksperimen yang tidak dipromosikan, dan keterbatasan validasi. Model tersimpan berhasil mereproduksi OOF dan prediksi test secara persis.
 

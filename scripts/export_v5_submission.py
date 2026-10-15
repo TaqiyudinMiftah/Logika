@@ -146,6 +146,19 @@ def main():
     }
     file = ROOT / "submission_v5.csv"
     submission.to_csv(file, index=False, float_format="%.12f")
+    digest = hashlib.sha256(file.read_bytes()).hexdigest()
+    public_result_file = DESTINATION / "public_leaderboard_result.json"
+    public_result = (
+        json.loads(public_result_file.read_text())
+        if public_result_file.exists()
+        else None
+    )
+    # A reported score belongs to this prediction file, not to a newly trained variant.
+    if public_result and (
+        public_result.get("file") != file.name or public_result.get("sha256") != digest
+    ):
+        public_result = None
+    public_score = public_result["public_score"] if public_result else None
     reread = pd.read_csv(file)
     assert (
         reread.application_id.equals(sample.application_id)
@@ -159,7 +172,7 @@ def main():
         shutil.copy2(file, ROOT / "submission.csv")
     metadata = {
         "file": file.name,
-        "sha256": hashlib.sha256(file.read_bytes()).hexdigest(),
+        "sha256": digest,
         "baseline_file": old_file.name,
         "baseline_sha256": old_digest,
         "training_rows": 70000,
@@ -176,7 +189,8 @@ def main():
         "confirmation_10fold": confirmation,
         "paired_bootstrap": bootstrap,
         "best_recorded_public_score": 0.55845,
-        "new_public_score": None,
+        "new_public_score": public_score,
+        "public_leaderboard_result": public_result,
         "promoted_to_submission_csv": confirmation["promote"],
         "probability_summary": reread.default_probability.describe().to_dict(),
         "checks": {
@@ -188,7 +202,7 @@ def main():
             "baseline_reproduction": True,
             "independent_ks": True,
         },
-        "caveat": "Features, model variants and weights reuse training labels. Validation contains selection optimism; public score remains unknown.",
+        "caveat": "Features, model variants and weights reuse training labels. Validation contains selection optimism; leaderboard observations are recorded separately with their source.",
     }
     # Read the exact selection metrics rather than relying on rounded report text.
     selection = pd.read_parquet(DESTINATION / "selection_oof_tabm.parquet")
@@ -219,6 +233,14 @@ def main():
     predicted.to_parquet(DESTINATION / "combined_final_test.parquet", index=False)
     write_figure(y, oof.version4, oof.version5)
     old, new = confirmation["baseline"], confirmation["version5"]
+    public_note = (
+        f"Skor public versi 5 **{public_score:.5f}**, dilaporkan pengguna pada "
+        f"{public_result['reported_on']}; selisih terhadap versi 3 (0,55845) adalah "
+        f"**{public_score - .55845:+.5f}**. Hasil ini belum diverifikasi ulang melalui API Kaggle. "
+        "Peningkatan OOF belum diikuti peningkatan public leaderboard."
+        if public_result
+        else "Skor public versi 5 **belum tersedia**."
+    )
     report = f"""# Kandidat submission versi 5
 
 Versi 5 menggabungkan 75% versi 4 dan 25% TabM. TabM dilatih dari label kompetisi; tidak memakai model pretrained atau data eksternal. Harga per unit dari basket completed dan cancelled dipakai sebagai sinyal pilihan produk. Nilai cancelled tidak dihitung sebagai belanja. Waktu seluruh transaksi diperiksa sebelum keputusan.
@@ -240,7 +262,7 @@ Early stopping TabM memakai split stratified 12,5% **di dalam training setiap ou
 
 Eksperimen yang belum dipromosikan meliputi spline dengan fitur tambahan/interaksi/regularisasi berbeda, Explainable Boosting Machine, XGBoost dangkal, CatBoost dangkal, specialist menurut ketersediaan riwayat pembayaran, dan TabM dengan fitur inti. Definisi dan ringkasan seluruh kelompok tersedia dalam folder ini; `blend_ranking.json` menunjukkan hasil pencarian. Pencarian menggunakan label train yang sama sehingga hasil lokal mengandung optimisme seleksi. Bootstrap pada metadata hanya memakai prediksi OOF tetap dan tidak mengoreksi proses seleksi. Tidak ada label test yang digunakan.
 
-Skor public versi 5 **belum tersedia**. Skor public terbaik yang tercatat tetap versi 3: **0,55845**. File dibuat untuk diunggah oleh pengguna; tidak ada submit otomatis. `submission_v5.csv` berisi kandidat baru; `submission.csv` tetap versi 4 karena syarat promosi belum terpenuhi. Versi 4 dan checkpoint versi 3 tetap tersedia.
+{public_note} Skor public terbaik yang tercatat tetap versi 3: **0,55845**. File dibuat untuk diunggah oleh pengguna; tidak ada submit otomatis. `submission_v5.csv` berisi kandidat versi 5; `submission.csv` tetap versi 4 karena syarat promosi belum terpenuhi. Versi 4 dan checkpoint versi 3 tetap tersedia.
 
 SHA-256: `{metadata['sha256']}`.
 

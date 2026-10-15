@@ -9,7 +9,7 @@ Mulai dari **01** untuk mempelajari alur paling sederhana. Baca **02–06** untu
 | [03 — Ensemble KS](03_ensemble_ks.ipynb) | Pemilihan bobot LightGBM dan CatBoost | Tiga fold; 25% LightGBM + 75% CatBoost | 0,54710 |
 | [04 — Submission versi 3](04_submission_v3.ipynb) | Harga per kategori, shrinkage, arus kas, dan class weighting | Dua model baru sepuluh fold, digabungkan dengan versi KS | 0,55845 |
 | [05 — Submission versi 4](05_submission_v4.ipynb) | Harga dinormalisasi, cicilan matang, dan model spline | Versi 3 + CatBoost baru + spline, masing-masing sepertiga | Belum tercatat |
-| [06 — Kandidat versi 5](06_submission_v5.ipynb) | Harga semua basket dan TabM, early stopping di dalam training fold | 75% versi 4 + 25% TabM; KS OOF 0,52446 | Belum tercatat |
+| [06 — Kandidat versi 5](06_submission_v5.ipynb) | Harga semua basket dan TabM, early stopping di dalam training fold | 75% versi 4 + 25% TabM; KS OOF 0,52446 | 0,55680 (laporan pengguna) |
 
 Skor public di atas berasal dari file historis. Angka validasi di notebook adalah KS lokal, bukan skor leaderboard. `submission_v2.csv` adalah alternatif yang pernah dibuat; skor 0,54710 berasal dari `submission_ks.csv`.
 

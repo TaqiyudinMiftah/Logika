@@ -19,7 +19,7 @@ Early stopping TabM memakai split stratified 12,5% **di dalam training setiap ou
 
 Eksperimen yang belum dipromosikan meliputi spline dengan fitur tambahan/interaksi/regularisasi berbeda, Explainable Boosting Machine, XGBoost dangkal, CatBoost dangkal, specialist menurut ketersediaan riwayat pembayaran, dan TabM dengan fitur inti. Definisi dan ringkasan seluruh kelompok tersedia dalam folder ini; `blend_ranking.json` menunjukkan hasil pencarian. Pencarian menggunakan label train yang sama sehingga hasil lokal mengandung optimisme seleksi. Bootstrap pada metadata hanya memakai prediksi OOF tetap dan tidak mengoreksi proses seleksi. Tidak ada label test yang digunakan.
 
-Skor public versi 5 **belum tersedia**. Skor public terbaik yang tercatat tetap versi 3: **0,55845**. File dibuat untuk diunggah oleh pengguna; tidak ada submit otomatis. `submission_v5.csv` berisi kandidat baru; `submission.csv` tetap versi 4 karena syarat promosi belum terpenuhi. Versi 4 dan checkpoint versi 3 tetap tersedia.
+Skor public versi 5 **0,55680**, dilaporkan pengguna pada **2026-10-15**. Selisih terhadap versi 3 (0,55845) adalah **−0,00165**. Hasil ini belum diverifikasi ulang melalui API Kaggle. Peningkatan OOF belum diikuti peningkatan public leaderboard. Skor public terbaik yang tercatat tetap versi 3: **0,55845**. File dibuat untuk diunggah oleh pengguna; tidak ada submit otomatis. `submission_v5.csv` berisi kandidat versi 5; `submission.csv` tetap versi 4 karena syarat promosi belum terpenuhi. Versi 4 dan checkpoint versi 3 tetap tersedia.
 
 SHA-256: `2b97dcdc26f38cabc6ab1a3f3053903975b488a5480df8ff739415a7bc750526`.
 

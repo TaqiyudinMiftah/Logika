@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 
 import nbformat as nbf
@@ -22,6 +23,18 @@ from build_review_notebooks import (
 
 
 def build():
+    public_file = ROOT / "artifacts/optimization/v5/public_leaderboard_result.json"
+    public_result = (
+        json.loads(public_file.read_text()) if public_file.exists() else None
+    )
+    canonical_file = ROOT / "submission_v5.csv"
+    if public_result and (
+        not canonical_file.exists()
+        or public_result.get("sha256")
+        != hashlib.sha256(canonical_file.read_bytes()).hexdigest()
+    ):
+        public_result = None
+    public_score = public_result["public_score"] if public_result else None
     notebook = nbf.read(DEST / "05_submission_v4.ipynb", as_version=4)
     # Keep EDA, all earlier feature stages, and every component of version 4.
     cells = notebook.cells[:-3]
@@ -39,6 +52,13 @@ Instal `requirements-v5.txt` dan `requirements-notebook.txt` dengan Python 3.10.
 GPU mempercepat training; CPU juga didukung. Default memakai cache jika tersedia,
 tetapi probabilitas test tetap dihitung kembali dari model.
 """
+    if public_result:
+        cells[0].source = cells[0].source.replace(
+            "Skor public versi 5 belum diketahui.",
+            f"Skor public versi 5 **{public_score:.5f}**, dilaporkan pengguna pada "
+            f"{public_result['reported_on']}; versi 3 memperoleh 0,55845. "
+            "Kenaikan validasi lokal belum diikuti kenaikan public leaderboard.",
+        )
     for cell in cells:
         if cell.cell_type == "code":
             cell.outputs = []
@@ -49,6 +69,10 @@ tetapi probabilitas test tetap dihitung kembali dari model.
             cell.source = cell.source.replace(
                 '"submission_v4.csv"', '"submission_v5.csv"'
             ).replace("'submission_v4.csv'", "'submission_v5.csv'")
+            if public_score is not None:
+                cell.source = cell.source.replace(
+                    "PUBLIC_SCORE = None", f"PUBLIC_SCORE = {public_score!r}"
+                )
     feature_body = body("build_features_v5.py", "main")
     for quote in ["'", '"']:
         for old, new in [
