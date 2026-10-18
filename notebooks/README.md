@@ -1,6 +1,6 @@
 # Panduan review notebook LOGIKA
 
-Mulai dari **01** untuk mempelajari alur paling sederhana. Baca **02–06** untuk melihat perubahan fitur, validasi, dan model. Untuk eksperimen Kumo terbaru, buka **08**; **07** membahas reverse engineering data sintetis. Submission default tetap **05**. Setiap notebook dapat dijalankan sendiri dari dalam proyek: kode EDA, agregasi fitur, preprocessing, training, prediksi test, dan ekspor CSV berada di sel notebook.
+Mulai dari **01** untuk mempelajari alur paling sederhana. Baca **02–06** untuk melihat perubahan fitur, validasi, dan model. **08** menghasilkan checkpoint Kumo public terbaik yang sudah tercatat; **09** mereview eksperimen lanjutannya. **07** membahas reverse engineering data sintetis. Submission default tetap **05**. Kode EDA, agregasi fitur, preprocessing, training, prediksi test, dan ekspor CSV tersedia di sel notebook.
 
 | Notebook | Pipeline yang direview | Validasi / model final | Public historis |
 |---|---|---|---:|
@@ -102,3 +102,79 @@ ketiga fold. Notebook mengekspor Kumo murni dan campuran 25% Kumo secara terpisa
 Skor tersebut adalah validasi lokal. Public score Kumo murni **0,56262** dikonfirmasi
 melalui API Kaggle pada 18 Oktober 2026. Skor campuran belum diketahui; skor historis
 hanya digunakan kembali jika checksum CSV cocok dengan catatan hasil.
+
+## 09 — Eksperimen lanjutan Kumo
+
+[09_kumo_improvement.ipynb](09_kumo_improvement.ipynb) memakai lingkungan yang sama
+dengan 08. Sel memperlihatkan seluruh kode fitur dan model, termasuk TabICLv2
+dengan checkpoint resmi yang dipatok ke commit tertentu. Sampling konteks mengambil
+hanya baris outer-training; query dibuat untuk susunan anggota ensemble yang sama.
+
+Default membaca laporan screening yang tersimpan, lalu mereproduksi lima fold
+baseline dan kandidat konteks penuh dari cache yang datanya cocok atau menghitungnya
+jika belum tersedia. `RUN_SCREEN=True` mengulang seluruh screening tiga fold.
+`FORCE_RERUN_IMPROVEMENT=True` menghitung ulang inferensi. Semua prediksi validation
+bersifat OOF, tetapi pemilihan berulang memakai label training yang sama.
+
+Campuran 75/25 dan penambahan konteks belum memenuhi kriteria pooled KS dan rata-rata
+KS sama-sama naik. Karena itu sel ekspor mencetak alasan tidak membuat kandidat CSV.
+Checkpoint `submission_kumo.csv` dengan public **0,56262** dipertahankan.
+Rincian ada di [laporan eksperimen](../artifacts/optimization/kumo_improvement/laporan_improvement.md).
+
+Regenerasi dan eksekusi: `python scripts/build_kumo_improvement_notebook.py --execute`.
+Audit memeriksa KS secara independen dengan SciPy, pembagian konteks/validation,
+checksum checkpoint, dan kesesuaian kandidat CSV jika kelak memenuhi kriteria.
+
+Notebook 09 sudah dieksekusi: **58 sel kode, tanpa error**. Sel ekspor dengan benar
+melewati pembuatan CSV karena kandidat tidak lolos. Semua checksum submission lama
+dan notebook analisis pengguna tetap sama. [Verifikasi](../artifacts/optimization/kumo_improvement/notebook_verification.json).
+
+## 10 — Kumo dan spline fitur laten
+
+[10_kumo_spline.ipynb](10_kumo_spline.ipynb) memuat pipeline lengkap gabungan
+**75% Kumo Large + 25% spline**, memakai lingkungan Python 3.11 Kumo. Kode spline
+meliputi transformasi log bertanda, imputasi, spline kubik lima knot, standardisasi,
+indikator missing, one-hot kategori, serta regresi logistik C=0,05.
+
+Tiga fold screening memakai seed 8247, dan lima fold berikutnya seed 31027. Data
+input baseline Kumo diperiksa melalui fingerprint; kedua model dibandingkan pada
+baris yang sama. Model spline disimpan dan prediksi test dihitung ulang untuk
+memeriksa cache. Dataset dan lima split pernah dipakai untuk eksperimen lain;
+hasil tetap mengandung optimisme seleksi.
+
+Sel ekspor hanya membuat `submission_kumo_v2.csv` jika pooled KS dan rata-rata KS
+naik serta minimal 3/5 fold membaik. Salinan bernama `submission.csv` berada pada
+`artifacts/notebook_runs/10_kumo_spline/`. Checkpoint public 0,56262 tetap disimpan.
+Skor public kandidat baru belum diketahui.
+
+Hasil aktual belum lolos aturan promosi: pooled KS naik **0,52722 → 0,52851**,
+tetapi rata-rata KS turun **0,53198 → 0,53095**, dan hanya **1/5 fold membaik**.
+Dengan `EXPORT_EXPLORATORY=True`, notebook membuat file terpisah
+`submission_kumo_spline_exploratory.csv` untuk uji Kaggle. File eksploratif ini tidak
+mengganti checkpoint public dan tidak diberi skor public historis.
+
+Regenerasi: `python scripts/build_hybrid_kumo_notebook.py --execute`. Jalur CLI:
+`python scripts/hybrid_kumo.py`, setelah fitur V5 dan reverse tersedia.
+
+Notebook 10 sudah dieksekusi: **59 sel kode, tanpa error**. Salinan `submission.csv`
+cocok dengan CSV eksploratif di root; seluruh submission lama dan notebook analisis
+pengguna tetap utuh. [Verifikasi notebook](../artifacts/optimization/kumo_hybrid/notebook_verification.json)
+dan [audit model serta CSV](../artifacts/optimization/kumo_hybrid/verification.json).
+
+## 11 — Pilot fine-tuning Kumo
+
+[11_kumo_finetune_pilot.ipynb](11_kumo_finetune_pilot.ipynb) menunjukkan training
+dua layer ICL terakhir beserta norm dan kepala klasifikasi. Episode training memakai
+1.024 konteks dan 512 query dari inner-fitting, AdamW, BF16, dan gradient clipping.
+Checkpoint 0/32/64/128 dipilih dengan AUC pada 15% inner-validation.
+
+Hanya outer fold pertama yang dijalankan. Checkpoint **langkah 0 terpilih** karena
+AUC internal checkpoint hasil training sedikit lebih rendah. Prediksi outer/test
+pilot memakai kembali bobot pretrained. Pilot tidak mengekspor submission baru dan
+belum menilai fine-tuning pada semua outer fold.
+
+Regenerasi: `python scripts/build_finetune_pilot_notebook.py --execute`.
+Pipeline `scripts/run_kumo_finetune.py` dapat meneruskan seluruh fold secara terpisah;
+itu merupakan eksperimen tambahan yang tidak dibutuhkan resep notebook 10.
+
+Notebook 11 sudah dieksekusi: **51 sel kode, tanpa error**. [Verifikasi](../artifacts/optimization/kumo_finetune/notebook_verification.json).

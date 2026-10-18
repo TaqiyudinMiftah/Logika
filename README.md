@@ -4,9 +4,11 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 
 ## Hasil yang dapat dibuka
 
-- [Enam notebook pipeline: EDA sampai submission](notebooks/README.md), dengan kode langsung di sel dan penjelasan per versi
+- [Notebook pipeline: EDA sampai submission](notebooks/README.md), dengan kode langsung di sel dan penjelasan per versi
 - [Notebook reverse engineering RNG dan jitter](notebooks/07_reverse_engineering_rng.ipynb), dengan probe seed, inferensi noise, dan generator pendekatan
 - [Checkpoint Kumo Large: public **0,56262**](submission_kumo.csv), dikonfirmasi melalui API Kaggle; [notebook 08](notebooks/08_kumo_tabular.ipynb)
+- [Eksperimen lanjutan Kumo](notebooks/09_kumo_improvement.ipynb): fitur laten, TabICLv2, sampling kelas, ensemble lebih besar, dan konteks penuh; [laporan](artifacts/optimization/kumo_improvement/laporan_improvement.md)
+- [CSV eksploratif Kumo–spline](submission_kumo_spline_exploratory.csv): pooled KS lima fold 0,52851 vs 0,52722; rata-rata KS turun dan hanya 1/5 fold membaik. Public belum diketahui; [notebook 10](notebooks/10_kumo_spline.ipynb)
 - [Kandidat versi 5](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, public **0,55680** menurut laporan pengguna
 - [Submission default](submission_v4.csv), versi 4; `submission.csv` berisi prediksi yang sama. Versi 5 belum memenuhi syarat promosi minimal enam fold membaik
 - [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
@@ -208,3 +210,55 @@ Hasil tersedia di `artifacts/optimization/kumo/`; submission kandidat terpisah
 
 Sumber: [model NVIDIA](https://huggingface.co/nvidia/Kumo-Tabular) dan
 [kode SDM](https://github.com/NVIDIA/structured-data-models).
+
+## Eksperimen lanjutan Kumo
+
+[Notebook 09](notebooks/09_kumo_improvement.ipynb) memperlihatkan delapan kandidat
+pada tiga fold awal, lalu dua uji pada lima fold yang sama dengan baseline.
+Campuran 75% Kumo baseline + 25% konteks seimbang menaikkan rata-rata KS lima fold
+sebesar 0,00029, tetapi pooled KS turun 0,00020. Konteks penuh 56.000 baris
+menaikkan rata-rata KS sebesar 0,00033, tetapi pooled KS turun 0,00017.
+Keduanya membaik pada 3/5 fold dan belum memenuhi syarat kedua ringkasan KS naik.
+Checkpoint public **0,56262** tetap tersedia; eksperimen ini tidak mengekspor CSV baru.
+
+Baseline pooled KS lima fold adalah **0,52722**. Angka tersebut hanya dibandingkan
+dengan kandidat pada lima fold identik. Uji konteks penuh dilakukan setelah
+campuran awal gagal dan memakai lima split yang sama, sehingga hasil tetap
+mengandung optimisme pemilihan model. [Laporan lengkap](artifacts/optimization/kumo_improvement/laporan_improvement.md)
+dan metadata menyimpan percobaan yang tidak lolos.
+
+```bash
+# Dalam lingkungan Python 3.11 Kumo; notebook membangun fitur jika belum ada:
+python scripts/build_kumo_improvement_notebook.py --execute
+# Jalur CLI setelah fitur V5 dan reverse tersedia:
+python scripts/run_kumo_improvement.py
+python scripts/verify_kumo_improvement.py
+```
+
+## Gabungan Kumo–spline dan pilot fine-tuning
+
+[Notebook 10](notebooks/10_kumo_spline.ipynb) melatih spline dengan fitur laten dan
+menggabungkannya dengan Kumo, masing-masing 25% dan 75%. Tiga fold awal menaikkan
+pooled KS dari 0,52807 menjadi 0,52914 serta rata-rata KS dari 0,52907 menjadi
+0,53037. Pada lima fold, pooled KS naik dari **0,52722 menjadi 0,52851**, tetapi
+rata-rata KS turun dari **0,53198 menjadi 0,53095**, dengan hanya **1/5 fold membaik**.
+
+[submission_kumo_spline_exploratory.csv](submission_kumo_spline_exploratory.csv)
+disediakan untuk uji Kaggle sebagai kandidat **eksploratif**. Kandidat belum memenuhi
+aturan promosi; checkpoint public terbaik yang sudah tercatat tetap Kumo 0,56262.
+CSV berisi 30.000 probabilitas dan skor public belum diketahui. [Laporan](artifacts/optimization/kumo_hybrid/laporan_hybrid.md)
+mencatat semua metrik dan batas interpretasi. Campuran TabM langsung juga diuji
+dari OOF historis dan belum lolos screening.
+
+[Notebook 11](notebooks/11_kumo_finetune_pilot.ipynb) mendokumentasikan satu pilot
+fine-tuning dua layer ICL terakhir dan kepala klasifikasi. Validasi internal memilih
+checkpoint langkah 0, sehingga pilot memakai kembali bobot pretrained dan tidak
+membuat submission baru. Hasil ini hanya mencakup satu outer fold.
+
+```bash
+# Dalam lingkungan Python 3.11 Kumo, setelah fitur tersedia:
+python scripts/hybrid_kumo.py --export-exploratory
+python scripts/report_hybrid_kumo.py
+python scripts/build_hybrid_kumo_notebook.py --execute
+python scripts/build_finetune_pilot_notebook.py --execute
+```
