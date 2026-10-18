@@ -6,7 +6,8 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 
 - [Enam notebook pipeline: EDA sampai submission](notebooks/README.md), dengan kode langsung di sel dan penjelasan per versi
 - [Notebook reverse engineering RNG dan jitter](notebooks/07_reverse_engineering_rng.ipynb), dengan probe seed, inferensi noise, dan generator pendekatan
-- [Kandidat terbaru](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, public **0,55680** menurut laporan pengguna
+- [Checkpoint Kumo Large: public **0,56262**](submission_kumo.csv), dikonfirmasi melalui API Kaggle; [notebook 08](notebooks/08_kumo_tabular.ipynb)
+- [Kandidat versi 5](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, public **0,55680** menurut laporan pengguna
 - [Submission default](submission_v4.csv), versi 4; `submission.csv` berisi prediksi yang sama. Versi 5 belum memenuhi syarat promosi minimal enam fold membaik
 - [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
 - [Laporan validasi versi 4](artifacts/optimization/v4/laporan_submission_v4.md)
@@ -19,7 +20,7 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 
 Ada 70.000 aplikasi latih, 30.000 aplikasi uji, dan 9.507 target positif pada train (13,58%). Pada baseline XGBoost berparameter tetap, ROC-AUC holdout stratified meningkat dari 0,6411 untuk aplikasi saja menjadi 0,8302 dengan seluruh riwayat; ROC-AUC temporal 0,8258. Metrik resmi kompetisi adalah **Kolmogorov-Smirnov (KS)** sesuai Evaluation yang diberikan pengguna. KS baseline holdout 0,50671, sedangkan skor publik yang diperoleh pengguna adalah 0,52623. Tidak ada submission yang dikirim otomatis oleh skrip.
 
-Eksperimen tambahan: [Kumo Large](artifacts/optimization/kumo/laporan_kumo.md), KS OOF tiga fold **0,52807**, dibanding V5 **0,52529** pada fold identik. [CSV Kumo](submission_kumo.csv) dan [notebook 08](notebooks/08_kumo_tabular.ipynb) tersedia; public score belum diketahui.
+Eksperimen tambahan: [Kumo Large](artifacts/optimization/kumo/laporan_kumo.md), KS OOF tiga fold **0,52807**, dibanding V5 **0,52529** pada fold identik. [CSV Kumo](submission_kumo.csv) dan [notebook 08](notebooks/08_kumo_tabular.ipynb) tersedia; public **0,56262**, dikonfirmasi melalui API Kaggle pada 18 Oktober 2026.
 
 ## Reproduksi
 
@@ -177,7 +178,9 @@ Audit mentah dan simulasi notebook dapat berjalan tanpa model sebelumnya. Bagian
 anggota ensemble, dan seluruh training setiap fold (46.666–46.667 konteks). Pada
 tiga fold yang identik dengan seleksi V5, KS OOF naik dari **0,52529** ke **0,52807**;
 rata-rata KS fold naik dari **0,52752** ke **0,52907**, dengan **3/3 fold membaik**.
-Ini berbeda dari validasi akhir V5 sepuluh fold; skor public Kumo belum diketahui.
+Ini berbeda dari validasi akhir V5 sepuluh fold. Skor public Kumo murni adalah **0,56262**,
+dikonfirmasi melalui API Kaggle pada 18 Oktober 2026: naik **0,00417** terhadap V3
+(0,55845) dan **0,00582** terhadap V5 (0,55680). Skor public campuran belum diketahui.
 [Campuran 75% V5 + 25% Kumo](submission_kumo_blend.csv) tersedia terpisah.
 [Laporan lengkap](artifacts/optimization/kumo/laporan_kumo.md) mencatat seluruh konfigurasi.
 

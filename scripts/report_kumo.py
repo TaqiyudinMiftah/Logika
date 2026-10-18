@@ -133,6 +133,17 @@ def export(variant):
         "public_score": None,
         "replaces_default": False,
     }
+    public_path = OUT / "public_leaderboard_result.json"
+    if public_path.exists():
+        recorded = json.loads(public_path.read_text())
+        if (
+            recorded.get("file") == result["file"]
+            and recorded.get("sha256") == result["sha256"]
+        ):
+            result["public_score"] = recorded["public_score"]
+            result["public_score_verified_via_kaggle_api"] = recorded.get(
+                "verified_via_kaggle_api", False
+            )
     (OUT / "submission_metadata.json").write_text(json.dumps(result, indent=2) + "\n")
     return result
 
@@ -179,6 +190,17 @@ def export_blend(variant, weight=0.25):
         "public_score": None,
         "replaces_default": False,
     }
+    public_path = OUT / "public_leaderboard_result.json"
+    if public_path.exists():
+        recorded = json.loads(public_path.read_text())
+        if (
+            recorded.get("file") == result["file"]
+            and recorded.get("sha256") == result["sha256"]
+        ):
+            result["public_score"] = recorded["public_score"]
+            result["public_score_verified_via_kaggle_api"] = recorded.get(
+                "verified_via_kaggle_api", False
+            )
     (OUT / "blend_submission_metadata.json").write_text(
         json.dumps(result, indent=2) + "\n"
     )

@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 import ast
 import copy
+import hashlib
+import json
 from pathlib import Path
 
 import nbformat as nbf
@@ -23,6 +25,18 @@ def function(filename, name):
 
 
 def build(variant):
+    public_path = ROOT / "artifacts/optimization/kumo/public_leaderboard_result.json"
+    public_result = (
+        json.loads(public_path.read_text()) if public_path.exists() else None
+    )
+    canonical = ROOT / "submission_kumo.csv"
+    if public_result and (
+        public_result.get("variant") != variant
+        or not canonical.exists()
+        or public_result.get("sha256")
+        != hashlib.sha256(canonical.read_bytes()).hexdigest()
+    ):
+        public_result = None
     size, features, context, estimators = variant.split("_")
     context, estimators = int(context.removeprefix("ctx")), int(
         estimators.removeprefix("e")
@@ -47,12 +61,22 @@ Submission Kumo disimpan terpisah sebagai `submission_kumo.csv`; public score be
 """
         )
     ]
+    if public_result:
+        cells[0].source = cells[0].source.replace(
+            "public score belum diketahui.",
+            f"public score **{public_result['public_score']:.5f}**, dilaporkan pada "
+            f"{public_result['reported_on']} dan dikonfirmasi melalui API Kaggle. "
+            "Skor public campuran belum diketahui.",
+        )
     setup = copy.deepcopy(previous.cells[2])
     setup.source = setup.source.replace('RUN_NAME = "06_v5"', 'RUN_NAME = "08_kumo"')
     setup.source = setup.source.replace(
         'CANONICAL_FILE = "submission_v5.csv"', 'CANONICAL_FILE = "submission_kumo.csv"'
     )
-    setup.source = setup.source.replace("PUBLIC_SCORE = 0.5568", "PUBLIC_SCORE = None")
+    public_score = public_result["public_score"] if public_result else None
+    setup.source = setup.source.replace(
+        "PUBLIC_SCORE = 0.5568", f"PUBLIC_SCORE = {public_score!r}"
+    )
     setup.source = "\n".join(
         line
         for line in setup.source.splitlines()

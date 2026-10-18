@@ -99,4 +99,6 @@ training fold, 8 anggota), memakai cache prediksi yang resep dan datanya cocok.
 `RUN_ALL_VARIANTS=False` membatasi ke konfigurasi terpilih. Kumo Large menghasilkan
 KS OOF **0,52807**, dibanding V5 **0,52529** pada tiga fold identik, dan membaik pada
 ketiga fold. Notebook mengekspor Kumo murni dan campuran 25% Kumo secara terpisah.
-Skor tersebut adalah validasi lokal; public score Kumo belum diketahui.
+Skor tersebut adalah validasi lokal. Public score Kumo murni **0,56262** dikonfirmasi
+melalui API Kaggle pada 18 Oktober 2026. Skor campuran belum diketahui; skor historis
+hanya digunakan kembali jika checksum CSV cocok dengan catatan hasil.

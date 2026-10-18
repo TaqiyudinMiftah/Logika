@@ -1,6 +1,6 @@
 # Hasil Kumo Tabular — 18 Oktober 2026
 
-Kumo Large memperbaiki KS pada ketiga fold dibanding V5. Kandidat utama adalah `submission_kumo.csv`, Kumo murni. Skor public kedua CSV Kumo belum diketahui.
+Kumo Large memperbaiki KS pada ketiga fold dibanding V5. Kandidat utama adalah `submission_kumo.csv`, Kumo murni. Public score Kumo murni adalah **0,56262**, dilaporkan pengguna dan dikonfirmasi melalui API Kaggle pada 18 Oktober 2026. Skor campuran belum diketahui. Kenaikan terhadap V3 (0,55845) adalah **0,00417** dan terhadap V5 (0,55680) **0,00582**. Riwayat akun juga memuat skor 0,56188 dari submission lain yang modelnya tidak teridentifikasi di repo; skor baru unggul 0,00074 terhadap catatan tersebut.
 
 | Model | KS OOF pooled | Rata-rata KS fold | Selisih pooled vs V5 | Fold membaik |
 |---|---:|---:|---:|---:|
@@ -22,7 +22,7 @@ Kumo Large memperbaiki KS pada ketiga fold dibanding V5. Kandidat utama adalah `
 - Medium: subset stratified 32.768 konteks, 4 anggota ensemble. Large: seluruh 46.666–46.667 baris training fold, 8 anggota ensemble. Tidak ada baris validation dalam konteks prediksinya sendiri.
 - Resep preprocessing default SDM dipelajari dari konteks setiap fold. Label validation tidak dipakai dalam imputasi, transformasi, ataupun konteks. Proporsi positif konteks mengikuti data asli.
 - Query batch 8.192, estimator batch 1, autocast float16, GPU A100 80 GB. Stabilitas prediksi antarukuran batch diperiksa pada setiap fold. Selisih kecil float16 dicatat pada metadata.
-- Pemilihan fitur/model menggunakan label training yang sama dengan eksperimen sebelumnya. Hasil ini mengandung optimisme seleksi; belum ada konfirmasi sepuluh fold atau hasil leaderboard Kumo. Perbedaan ukuran, konteks, dan jumlah estimator tidak mengisolasi efek ukuran model.
+- Pemilihan fitur/model menggunakan label training yang sama dengan eksperimen sebelumnya. Hasil ini mengandung optimisme seleksi; belum ada konfirmasi sepuluh fold. Hasil public Kumo murni 0,56262 merupakan evaluasi test terpisah; skor private belum diketahui. Perbedaan ukuran, konteks, dan jumlah estimator tidak mengisolasi efek ukuran model.
 
 ## CSV dan notebook
 
@@ -34,3 +34,5 @@ Kumo Large memperbaiki KS pada ketiga fold dibanding V5. Kandidat utama adalah `
 - Data mentah, bobot model, dan prediksi per baris tetap lokal serta dikecualikan dari Git. Metadata konfigurasi, metrik, checksum CSV, dan verifikasi disertakan.
 
 Sumber model: [NVIDIA Kumo Tabular](https://huggingface.co/nvidia/Kumo-Tabular); [implementasi SDM](https://github.com/NVIDIA/structured-data-models).
+
+Catatan public beserta checksum dan waktu upload: [public_leaderboard_result.json](public_leaderboard_result.json). API mengonfirmasi skor serta nama file; checksum lokal dicatat terpisah karena API tidak menyediakan checksum upload.
