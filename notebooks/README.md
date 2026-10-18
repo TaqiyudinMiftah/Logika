@@ -1,6 +1,6 @@
 # Panduan review notebook LOGIKA
 
-Mulai dari **01** untuk mempelajari alur paling sederhana. Baca **02–06** untuk melihat perubahan fitur, validasi, dan model. Jika ingin mereview kandidat terbaru, buka **06**; submission default tetap **05**. Setiap notebook dapat dijalankan sendiri dari dalam proyek: kode EDA, agregasi fitur, preprocessing, training, prediksi test, dan ekspor CSV berada di sel notebook.
+Mulai dari **01** untuk mempelajari alur paling sederhana. Baca **02–06** untuk melihat perubahan fitur, validasi, dan model. Untuk eksperimen Kumo terbaru, buka **08**; **07** membahas reverse engineering data sintetis. Submission default tetap **05**. Setiap notebook dapat dijalankan sendiri dari dalam proyek: kode EDA, agregasi fitur, preprocessing, training, prediksi test, dan ekspor CSV berada di sel notebook.
 
 | Notebook | Pipeline yang direview | Validasi / model final | Public historis |
 |---|---|---|---:|
@@ -77,3 +77,26 @@ Bagian audit dapat dijalankan dari data mentah dengan paket optimization dan not
 Untuk membangun dan mengeksekusi notebook 07: `python scripts/build_reverse_notebook.py --execute`. Flag mengatur pengulangan probe RNG, audit mentah, validasi model dan retraining. [Laporan reverse engineering](../artifacts/reverse_engineering/laporan_reverse_engineering.md) menjelaskan batas identifikasi dan hasil pengujian fitur.
 
 Notebook 07 telah dijalankan seluruhnya: 21 fitur dari data mentah identik dengan eksperimen, seluruh OOF CatBoost/spline serta metriknya direproduksi persis, dan checksum kedua submission sebelumnya tidak berubah. Rincian ada pada [verifikasi notebook 07](../artifacts/reverse_engineering/notebook_verification.json).
+
+## 08 — Kumo Tabular
+
+[08_kumo_tabular.ipynb](08_kumo_tabular.ipynb) memakai lingkungan Python 3.11 terpisah
+(`requirements-kumo.txt`) dan GPU CUDA. Kode EDA dan agregasi fitur terlihat di sel,
+dilanjutkan inferensi Kumo pretrained dan perbandingan dengan tiga fold seleksi V5.
+`fit` membentuk cache konteks berlabel; bobot model tidak dilatih ulang. Data tetap lokal.
+
+OOF V5 `selection_oof_tabm.parquet` dipakai jika tersedia untuk perbandingan pada baris
+identik. Tanpa OOF V5, Kumo tetap berjalan hingga ekspor CSV. Aktifkan
+`FORCE_RERUN_KUMO` untuk menghitung ulang inferensi; cache diperiksa terhadap resep dan
+fingerprint data. Output terpisah adalah `submission_kumo.csv` di root proyek.
+
+Regenerasi: `python scripts/build_kumo_notebook.py --variant large_v5_ctx50000_e8`.
+Notebook 08 telah dieksekusi sampai ekspor: **48 sel kode, tanpa error**.
+Rincian: `artifacts/optimization/kumo/notebook_verification.json`.
+
+Default menjalankan Medium (32.768 konteks, 4 anggota ensemble) dan Large (seluruh
+training fold, 8 anggota), memakai cache prediksi yang resep dan datanya cocok.
+`RUN_ALL_VARIANTS=False` membatasi ke konfigurasi terpilih. Kumo Large menghasilkan
+KS OOF **0,52807**, dibanding V5 **0,52529** pada tiga fold identik, dan membaik pada
+ketiga fold. Notebook mengekspor Kumo murni dan campuran 25% Kumo secara terpisah.
+Skor tersebut adalah validasi lokal; public score Kumo belum diketahui.

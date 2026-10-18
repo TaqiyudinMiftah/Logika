@@ -19,6 +19,8 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 
 Ada 70.000 aplikasi latih, 30.000 aplikasi uji, dan 9.507 target positif pada train (13,58%). Pada baseline XGBoost berparameter tetap, ROC-AUC holdout stratified meningkat dari 0,6411 untuk aplikasi saja menjadi 0,8302 dengan seluruh riwayat; ROC-AUC temporal 0,8258. Metrik resmi kompetisi adalah **Kolmogorov-Smirnov (KS)** sesuai Evaluation yang diberikan pengguna. KS baseline holdout 0,50671, sedangkan skor publik yang diperoleh pengguna adalah 0,52623. Tidak ada submission yang dikirim otomatis oleh skrip.
 
+Eksperimen tambahan: [Kumo Large](artifacts/optimization/kumo/laporan_kumo.md), KS OOF tiga fold **0,52807**, dibanding V5 **0,52529** pada fold identik. [CSV Kumo](submission_kumo.csv) dan [notebook 08](notebooks/08_kumo_tabular.ipynb) tersedia; public score belum diketahui.
+
 ## Reproduksi
 
 Lingkungan yang dipakai tercatat pada `artifacts/summary.json`; gunakan Python 3.10 atau 3.11 dengan versi paket yang tercantum.
@@ -168,3 +170,38 @@ python scripts/build_reverse_notebook.py --execute
 ```
 
 Audit mentah dan simulasi notebook dapat berjalan tanpa model sebelumnya. Bagian validasi memerlukan fitur dan OOF versi 5. Hasil audit ada di `artifacts/reverse_engineering/`; fitur per customer dan model tetap disimpan lokal serta dikecualikan dari Git.
+
+## Eksperimen Kumo Tabular
+
+[Submission Kumo murni](submission_kumo.csv) memakai Kumo Large, 90 fitur, delapan
+anggota ensemble, dan seluruh training setiap fold (46.666–46.667 konteks). Pada
+tiga fold yang identik dengan seleksi V5, KS OOF naik dari **0,52529** ke **0,52807**;
+rata-rata KS fold naik dari **0,52752** ke **0,52907**, dengan **3/3 fold membaik**.
+Ini berbeda dari validasi akhir V5 sepuluh fold; skor public Kumo belum diketahui.
+[Campuran 75% V5 + 25% Kumo](submission_kumo_blend.csv) tersedia terpisah.
+[Laporan lengkap](artifacts/optimization/kumo/laporan_kumo.md) mencatat seluruh konfigurasi.
+
+Kumo dijalankan lokal memakai bobot pretrained NVIDIA `nvidia/Kumo-Tabular`, revisi
+`v1.0.1`, melalui `structured-data-models==0.2.1`. Lingkungan Python 3.11 terpisah
+menghindari perubahan pada dependensi historis V5. `fit` membangun preprocessing dan
+cache konteks berlabel; eksperimen ini tidak melakukan fine-tuning bobot.
+
+```bash
+python3.11 -m venv .venv
+.venv/bin/python -m pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+.venv/bin/python -m pip install -r requirements-kumo.txt
+# Setelah fitur V5 tersedia (OOF V5 opsional untuk perbandingan):
+.venv/bin/python scripts/kumo_tabular.py --size large --features v5 --context 50000 --estimators 8 --batch-size 8192 --test
+.venv/bin/python scripts/report_kumo.py --export large_v5_ctx50000_e8 --blend-weight 0.25
+.venv/bin/python -m ipykernel install --user --name logika-kumo --display-name "LOGIKA Kumo (Python 3.11)"
+```
+
+[Notebook 08](notebooks/08_kumo_tabular.ipynb) menampilkan EDA, seluruh kode agregasi
+fitur, konteks Kumo, validasi, dan ekspor. Tiga fold identik dengan seleksi V5
+(`StratifiedKFold`, seed 8247). Baris validation tidak masuk konteks prediksinya.
+Preprocessing dipelajari dari konteks, dan proporsi kelas konteks mengikuti data asli.
+Hasil tersedia di `artifacts/optimization/kumo/`; submission kandidat terpisah
+`submission_kumo.csv` tidak mengganti `submission.csv`.
+
+Sumber: [model NVIDIA](https://huggingface.co/nvidia/Kumo-Tabular) dan
+[kode SDM](https://github.com/NVIDIA/structured-data-models).
