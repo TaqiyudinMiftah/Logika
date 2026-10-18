@@ -8,7 +8,7 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 - [Notebook reverse engineering RNG dan jitter](notebooks/07_reverse_engineering_rng.ipynb), dengan probe seed, inferensi noise, dan generator pendekatan
 - [Checkpoint Kumo Large: public **0,56262**](submission_kumo.csv), dikonfirmasi melalui API Kaggle; [notebook 08](notebooks/08_kumo_tabular.ipynb)
 - [Eksperimen lanjutan Kumo](notebooks/09_kumo_improvement.ipynb): fitur laten, TabICLv2, sampling kelas, ensemble lebih besar, dan konteks penuh; [laporan](artifacts/optimization/kumo_improvement/laporan_improvement.md)
-- [CSV eksploratif Kumo–spline](submission_kumo_spline_exploratory.csv): pooled KS lima fold 0,52851 vs 0,52722; rata-rata KS turun dan hanya 1/5 fold membaik. Public belum diketahui; [notebook 10](notebooks/10_kumo_spline.ipynb)
+- [Checkpoint Kumo–spline: public **0,56393**](submission_kumo_spline_exploratory.csv), menurut laporan pengguna 18 Oktober 2026; [bukti pencatatan file](artifacts/optimization/kumo_hybrid/public_result_056393.json). Pooled KS lima fold 0,52851 vs 0,52722; rata-rata KS turun dan hanya 1/5 fold membaik; [notebook 10](notebooks/10_kumo_spline.ipynb)
 - [Kandidat versi 5](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, public **0,55680** menurut laporan pengguna
 - [Submission default](submission_v4.csv), versi 4; `submission.csv` berisi prediksi yang sama. Versi 5 belum memenuhi syarat promosi minimal enam fold membaik
 - [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
@@ -244,9 +244,10 @@ pooled KS dari 0,52807 menjadi 0,52914 serta rata-rata KS dari 0,52907 menjadi
 rata-rata KS turun dari **0,53198 menjadi 0,53095**, dengan hanya **1/5 fold membaik**.
 
 [submission_kumo_spline_exploratory.csv](submission_kumo_spline_exploratory.csv)
-disediakan untuk uji Kaggle sebagai kandidat **eksploratif**. Kandidat belum memenuhi
-aturan promosi; checkpoint public terbaik yang sudah tercatat tetap Kumo 0,56262.
-CSV berisi 30.000 probabilitas dan skor public belum diketahui. [Laporan](artifacts/optimization/kumo_hybrid/laporan_hybrid.md)
+awalnya disediakan sebagai kandidat **eksploratif** karena belum memenuhi aturan
+promosi lokal. Pengguna kemudian melaporkan public **0,56393** pada 18 Oktober 2026,
+naik **0,00131** dari Kumo murni. CSV dengan checksum yang sama dipertahankan sebagai
+checkpoint public terbaru. CSV berisi 30.000 probabilitas. [Laporan](artifacts/optimization/kumo_hybrid/laporan_hybrid.md)
 mencatat semua metrik dan batas interpretasi. Campuran TabM langsung juga diuji
 dari OOF historis dan belum lolos screening.
 
@@ -254,6 +255,15 @@ dari OOF historis dan belum lolos screening.
 fine-tuning dua layer ICL terakhir dan kepala klasifikasi. Validasi internal memilih
 checkpoint langkah 0, sehingga pilot memakai kembali bobot pretrained dan tidak
 membuat submission baru. Hasil ini hanya mencakup satu outer fold.
+
+Keterangan "public belum diketahui" pada metadata ekspor, notebook, dan laporan
+awal mencatat keadaan
+saat eksperimen dibuat; [pencatatan hasil baru](artifacts/optimization/kumo_hybrid/public_result_056393.json)
+memisahkan umpan balik Kaggle dari skor validasi.
+
+Riset berikutnya menargetkan **pooled KS OOF ≥ 0,54** pada lima fold seed 31027.
+[Rencana riset](artifacts/optimization/goal054/research_plan.json) memuat baseline,
+protokol, dan keluarga eksperimen awal. Target belum tercapai.
 
 ```bash
 # Dalam lingkungan Python 3.11 Kumo, setelah fitur tersedia:

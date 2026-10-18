@@ -145,7 +145,10 @@ hasil tetap mengandung optimisme seleksi.
 Sel ekspor hanya membuat `submission_kumo_v2.csv` jika pooled KS dan rata-rata KS
 naik serta minimal 3/5 fold membaik. Salinan bernama `submission.csv` berada pada
 `artifacts/notebook_runs/10_kumo_spline/`. Checkpoint public 0,56262 tetap disimpan.
-Skor public kandidat baru belum diketahui.
+Pada saat notebook dibuat, skor public kandidat belum diketahui. Pengguna kemudian
+melaporkan **0,56393** pada 18 Oktober 2026; [pencatatan hasil](../artifacts/optimization/kumo_hybrid/public_result_056393.json)
+mengikat skor itu ke checksum CSV yang sama. Output notebook tetap menjadi catatan
+keadaan pada saat eksekusi.
 
 Hasil aktual belum lolos aturan promosi: pooled KS naik **0,52722 → 0,52851**,
 tetapi rata-rata KS turun **0,53198 → 0,53095**, dan hanya **1/5 fold membaik**.
