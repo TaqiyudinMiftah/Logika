@@ -15,8 +15,26 @@ import research_goal054 as r
 
 
 def audit():
-    specs = r.specifications()
+    spline_spec = next(
+        s
+        for s in json.loads(
+            (
+                r.ROOT / "artifacts/reverse_engineering/validation_definitions.json"
+            ).read_text()
+        )
+        if s["name"] == "reverse_spline"
+    )
+    specs = r.specifications() + [dict(columns=spline_spec["columns"])]
     data, test = r.inputs(specs)
+    stage = r.DEST / f"cv{r.SPLITS}_seed{r.FOLD_SEED}"
+    definitions = sorted(stage.glob("*/definition.json"))
+    if any(
+        json.loads(p.read_text()).get("family") == "calendar_transfer"
+        for p in definitions
+    ):
+        from research_calendar054 import add_calendar
+
+        data, test = add_calendar(data, test)
     y = data.target.astype(int)
     folds = list(
         StratifiedKFold(r.SPLITS, shuffle=True, random_state=r.FOLD_SEED).split(data, y)
@@ -49,8 +67,7 @@ def audit():
     proofs = []
     incomplete = []
     completed_fold_counts = {}
-    stage = r.DEST / f"cv{r.SPLITS}_seed{r.FOLD_SEED}"
-    for definition in sorted(stage.glob("*/definition.json")):
+    for definition in definitions:
         directory = definition.parent
         recipe = json.loads(definition.read_text())
         completed = [
@@ -76,6 +93,10 @@ def audit():
             if fold not in completed:
                 continue
             meta = json.loads((directory / f"fold{fold}_metadata.json").read_text())
+            correction_proof = None
+            calendar_proof = None
+            relational_proof = None
+            blend_proof = None
             assert meta["recipe"] == recipe
             assert meta["training_ids_sha256"] == r.ids_hash(data, ti)
             assert meta["validation_ids_sha256"] == r.ids_hash(data, vi)
@@ -86,6 +107,26 @@ def audit():
                 assert len(ci) == meta["context_rows"] and not len(
                     np.intersect1d(ci, vi)
                 )
+            elif spec.get("family") == "offset_kumo":
+                from research_context_correction054 import audit_correction
+
+                correction_proof = audit_correction(
+                    data, test, fold, ti, vi, directory, meta
+                )
+            elif spec.get("family") == "calendar_transfer":
+                from research_calendar054 import audit_calendar
+
+                calendar_proof = audit_calendar(
+                    data, test, fold, ti, vi, directory, meta
+                )
+            elif spec.get("family") == "kumo_relational":
+                from research_relational054 import audit_relational
+
+                relational_proof = audit_relational(data, test, fold, ti, vi, meta)
+            elif spec.get("family") == "fixed_ensemble":
+                from blend_relational054 import audit_blend
+
+                blend_proof = audit_blend(data, test, fold, ti, vi, directory, meta)
             oof_file = directory / f"fold{fold}_oof.parquet"
             assert r.checksum(oof_file) == meta["oof_sha256"]
             oof = pd.read_parquet(oof_file)
@@ -108,14 +149,25 @@ def audit():
                     candidate=directory.name,
                     fold=fold,
                     ks=independent["ks"],
-                    contexts_checked=spec.get("family") == "tabpfn35",
+                    contexts_checked=spec.get("family")
+                    in {"tabpfn35", "offset_kumo", "kumo_relational"},
                     prediction_hash_verified=True,
+                    correction_proof=correction_proof,
+                    calendar_proof=calendar_proof,
+                    relational_proof=relational_proof,
+                    blend_proof=blend_proof,
                 )
             )
         if len(completed) < r.SPLITS:
             continue
         p = r.read_oof(directory, data, folds)
-        for weight in [1.0, 0.25, 0.5, 0.75]:
+        weights = (
+            [1.0]
+            if spec.get("family")
+            in {"offset_kumo", "calendar_transfer", "fixed_ensemble"}
+            else [1.0, 0.25, 0.5, 0.75]
+        )
+        for weight in weights:
             row = dict(
                 candidate=directory.name,
                 new_model_weight=weight,

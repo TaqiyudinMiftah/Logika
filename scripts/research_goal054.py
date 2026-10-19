@@ -38,7 +38,7 @@ PUBLIC_SHA256 = "3de98287976a7137ad63c946e9932b6ac3ba3a7ee6df607d74cde1aa6a8fc41
 
 def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(".tmp")
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.{time.monotonic_ns()}.tmp")
     temporary.write_text(json.dumps(value, indent=2) + "\n")
     temporary.replace(path)
 

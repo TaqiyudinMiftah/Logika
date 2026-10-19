@@ -1,6 +1,6 @@
 # Panduan review notebook LOGIKA
 
-Mulai dari **01** untuk mempelajari alur paling sederhana. Baca **02–06** untuk melihat perubahan fitur, validasi, dan model. **08** menghasilkan checkpoint Kumo public terbaik yang sudah tercatat; **09** mereview eksperimen lanjutannya. **07** membahas reverse engineering data sintetis. Submission default tetap **05**. Kode EDA, agregasi fitur, preprocessing, training, prediksi test, dan ekspor CSV tersedia di sel notebook.
+Mulai dari **01** untuk mempelajari alur paling sederhana. Baca **02–06** untuk melihat perubahan fitur, validasi, dan model. **08** memuat Kumo Tabular; **09** mereview eksperimen lanjutannya. **10** memuat checkpoint public 0,56393; **12** memuat riset terbaru dan kandidat koreksi dengan KS OOF 0,52930. **07** membahas reverse engineering data sintetis. Submission default tetap **05**. Kode EDA, agregasi fitur, preprocessing, training, prediksi test, dan ekspor CSV tersedia di sel notebook.
 
 | Notebook | Pipeline yang direview | Validasi / model final | Public historis |
 |---|---|---|---:|
@@ -181,3 +181,22 @@ Pipeline `scripts/run_kumo_finetune.py` dapat meneruskan seluruh fold secara ter
 itu merupakan eksperimen tambahan yang tidak dibutuhkan resep notebook 10.
 
 Notebook 11 sudah dieksekusi: **51 sel kode, tanpa error**. [Verifikasi](../artifacts/optimization/kumo_finetune/notebook_verification.json).
+
+## 12 — Riset menuju KS OOF 0,54
+
+[12_goal054_research.ipynb](12_goal054_research.ipynb) menyertakan EDA hingga kode
+prediksi, audit, dan ekspor kandidat. Memuat TabPFN 3.5, EBM, koreksi Kumo dan
+kalender, serta Kumo Relational dengan riwayat sebelum keputusan. Gunakan
+Python 3.11, `requirements-goal054.txt` dan GPU CUDA. Flag training default `False`
+untuk review hasil yang tersedia. Aktifkan `BUILD_RELATED_TABLES` untuk membuat
+riwayat graf dari raw data; preflight relasional tidak menghitung KS.
+
+Target berlaku untuk **pooled KS seluruh lima fold seed 31027**, bukan satu fold
+atau rata-rata fold. Notebook menghitung ulang audit hash/ID dan metrik pada cache.
+CSV kandidat goal diekspor jika pooled KS mencapai 0,54. Flag interim dapat mengekspor kandidat yang pooled KS-nya naik dan membaik pada 5/5 fold, dengan status target tetap belum tercapai. Checkpoint public
+0,56393 tetap terpisah; public kandidat baru belum diketahui.
+
+Regenerasi dan verifikasi: `python scripts/build_goal054_notebook.py --execute`.
+[Progres](../artifacts/optimization/goal054/README.md),
+[laporan](../artifacts/optimization/goal054/laporan_riset.md), dan
+[verifikasi notebook](../artifacts/optimization/goal054/notebook_verification.json).

@@ -9,6 +9,7 @@ Analisis untuk kompetisi dengan slug **`data-science-competition-logika-ui-2026`
 - [Checkpoint Kumo Large: public **0,56262**](submission_kumo.csv), dikonfirmasi melalui API Kaggle; [notebook 08](notebooks/08_kumo_tabular.ipynb)
 - [Eksperimen lanjutan Kumo](notebooks/09_kumo_improvement.ipynb): fitur laten, TabICLv2, sampling kelas, ensemble lebih besar, dan konteks penuh; [laporan](artifacts/optimization/kumo_improvement/laporan_improvement.md)
 - [Checkpoint Kumo–spline: public **0,56393**](submission_kumo_spline_exploratory.csv), menurut laporan pengguna 18 Oktober 2026; [bukti pencatatan file](artifacts/optimization/kumo_hybrid/public_result_056393.json). Pooled KS lima fold 0,52851 vs 0,52722; rata-rata KS turun dan hanya 1/5 fold membaik; [notebook 10](notebooks/10_kumo_spline.ipynb)
+- [Riset target KS OOF 0,54](notebooks/12_goal054_research.ipynb): lima fold identik, kandidat interim KS **0,52930** vs **0,52851** (5/5 fold membaik), kode model dan audit; [progres dan batas interpretasi](artifacts/optimization/goal054/README.md). Target belum tercapai.
 - [Kandidat versi 5](submission_v5.csv), versi 5; KS OOF 0,52446 dibanding versi 4 0,52293, public **0,55680** menurut laporan pengguna
 - [Submission default](submission_v4.csv), versi 4; `submission.csv` berisi prediksi yang sama. Versi 5 belum memenuhi syarat promosi minimal enam fold membaik
 - [Checkpoint public 0,55845](submission_v3.csv), terkonfirmasi melalui API Kaggle
