@@ -13,6 +13,7 @@ from experiments import fit_head
 from conservative_adapters import main as evaluate
 from stability_worker import solve_quadratic_newton,postprocess
 SCOPES=dict(capacity=['re_income_geometric_mean','re_declared_income_log_gap','re_outflow_income_geometric_ratio','installment_observed_income_ratio','v2_existing_total_burden_observed'],evidence=['re_price_posterior_sd','re_bureau_posterior_sd','risk_conditional_negative_months','risk_conditional_nonnegative_months','aux_account_months','aux_orders90','aux_ecommerce_observed_days','aux_allocation_count'])
+SCOPES['credit_signal']=['re_bureau_score_posterior','re_late_1_posterior','re_late_30_posterior']
 
 
 def fit_adapter(f,spec,columns):

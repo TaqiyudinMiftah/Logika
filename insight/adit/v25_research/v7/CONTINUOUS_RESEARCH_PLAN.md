@@ -105,3 +105,26 @@ Coverage counts and posterior SDs can create unstable residual bends, while burd
 
 Formula: `V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on evidence inputs; other bases unchanged; shrink.5 and original75:25spline77fusion`
 
+
+## Refill after frozen-Small and smoothing evaluation
+
+V207 frozenSmall27,458,266 parameters: KS0.52989497, AUC0.84621623; V208 stable9 addition KS0.52913656/AUC0.84623254. Do not infer that lower backbone capacity is automatically safer. V206 remains an AUC-oriented low-KS alternative.
+
+### V216: Smooth credit-level responses only
+
+V200 all-response smoothing improved AUC but reduced KS. ContrastV214 capacity andV215 evidence scopes by isolating the three credit-level responses. This diagnoses which domain drives the AUC/KS tradeoff, without assuming that residual risk is monotonic.
+
+Formula: `V25 original18/globalKumo; add.03/2 D2 penalty only to bureau-score and late1/late30 posterior spline coefficients; other responses originalL2.003; shrink.5 and75:25spline77fusion`
+
+### V217: V193 anchor plus10% highest-AUC stable spectral smoother
+
+V206 AUC.84740092 is highest among these correction candidates, but KS.52885147 loses separation at its best threshold. Test limited complementary risk ordering from the smoother rather than selecting a new blend weight on outer labels; compareV213 for a different information source.
+
+Formula: `Perfold p=.90*pV193+.10*pV206; fixed weights; mean5foldtest`
+
+### V218: Public-incumbent anchor with10% frozen Small
+
+V209 anchors Small to development-bestV193, which inherits periodicity and selection risk. Test an otherwise identical capacity-diversity blend anchored directly to the public-incumbentV25, preserving a lower-complexity alternative. Small standalone lower AUC is a reason for caution, not assumed complementary benefit.
+
+Formula: `Perfold p=.90*pV25+.10*pV207; fixed weights; mean5foldtest`
+

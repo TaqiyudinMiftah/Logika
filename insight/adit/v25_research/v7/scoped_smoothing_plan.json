@@ -48,5 +48,30 @@
     "roughness_penalty": 0.03,
     "formula": "V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on evidence inputs; other bases unchanged; shrink.5 and original75:25spline77fusion",
     "rationale": "Coverage counts and posterior SDs can create unstable residual bends, while burden/delinquency levels may need thresholds. Smooth only8 measurement-reliability/coverage effects; preserve financial-risk response flexibility. This tests a different mechanism from smoothing monetary capacity."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V216",
+    "label": "Smooth credit-level responses only",
+    "method": "scoped_coefficient_smoothing",
+    "worker": "scoped_smoothing.py",
+    "source_script": "v7/scripts/scoped_smoothing.py",
+    "roughness_scope": "credit_signal",
+    "roughness_penalty": 0.03,
+    "formula": "V25 original18/globalKumo; add.03/2 D2 penalty only to bureau-score and late1/late30 posterior spline coefficients; other responses originalL2.003; shrink.5 and75:25spline77fusion",
+    "rationale": "V200 all-response smoothing improved AUC but reduced KS. ContrastV214 capacity andV215 evidence scopes by isolating the three credit-level responses. This diagnoses which domain drives the AUC/KS tradeoff, without assuming that residual risk is monotonic."
   }
 ]
