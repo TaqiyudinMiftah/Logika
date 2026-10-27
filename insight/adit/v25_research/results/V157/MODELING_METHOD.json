@@ -1,0 +1,59 @@
+{
+  "method": "corrected=sigmoid(logit(p_Kumo)+0.5*X_V25@beta); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities; beta=beta_V25+student_theta/strength; student trained with soft_cdf loss and teacher tether",
+  "objective": "BCE(teacher_eta+Xtheta) + 0.03*soft_cdf_loss + 3.0/2*mean((Xtheta)^2) +.03/2*sum(theta[1:]^2); training rows only",
+  "spec": {
+    "id": "V157",
+    "families": [
+      "conditional_allocation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months"
+    ],
+    "label": "V25 teacher-tethered soft_cdf student, weight=0.03, tether=3.0",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "rankloss": "soft_cdf",
+    "loss_weight": 0.03,
+    "teacher_tether": 3.0,
+    "comparison_baseline": "V25",
+    "features_changed": false
+  },
+  "source": "v7/scripts/modeling_features.py",
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "metrics": {
+    "KS": 0.5302560114596842,
+    "signed_KS": 0.5302560114596842,
+    "AUC": 0.8469958294765941,
+    "rows": 70000,
+    "logloss": 0.2926211921968912,
+    "brier": 0.08875338274312074
+  },
+  "error_analysis": {
+    "json": "v7/runs/V157/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V157/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V157/ERROR_CASES.csv"
+  },
+  "source_sha256": "d8762f63ca17d39ff48a97b42fe866de5ea2b3acd7bd52ca0549009bac97c6b3"
+}

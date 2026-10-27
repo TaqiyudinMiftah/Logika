@@ -1,0 +1,59 @@
+{
+  "method": "corrected=sigmoid(logit(p_Kumo)+0.5*(X_V25@beta + interaction_representation)); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities",
+  "objective": "mean BCE with unweighted labels + 0.003/2*sum(beta[1:]^2); fit full correction, shrink at inference + 0.003/2*||interaction_parameters||^2; representation=fm",
+  "spec": {
+    "id": "V142",
+    "families": [
+      "conditional_allocation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months"
+    ],
+    "label": "V25 factorization interaction embedding rank=8, L2base=0.003, L2embedding=0.003",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "representation": "fm",
+    "rank": 8,
+    "interaction_penalty": 0.003,
+    "comparison_baseline": "V25",
+    "features_changed": false
+  },
+  "source": "v7/scripts/modeling_features.py",
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "metrics": {
+    "KS": 0.5266343598757859,
+    "signed_KS": 0.5266343598757859,
+    "AUC": 0.8461635268950176,
+    "rows": 70000,
+    "logloss": 0.29327241702360274,
+    "brier": 0.08897881866496654
+  },
+  "error_analysis": {
+    "json": "v7/runs/V142/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V142/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V142/ERROR_CASES.csv"
+  },
+  "source_sha256": "0a7967010d6275dc4e11c3b7df1b6428c97623d9aa037e20c024e9e12a2b180e"
+}

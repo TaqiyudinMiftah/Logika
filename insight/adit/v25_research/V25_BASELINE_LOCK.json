@@ -1,0 +1,56 @@
+{
+  "status": "ACTIVE",
+  "baseline_id": "V25",
+  "workspace": "/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019",
+  "submission": "v7/submissions/submission_V25_goal054_offset_v7.csv",
+  "submission_sha256": "e7f0748c6c8ded776f0a6a03bdebcd0787cf6c0057d0b078c31196fb34f58efe",
+  "public_score": 0.56822,
+  "public_source": "Authenticated Kaggle API; exact downloaded CSV SHA256 verified",
+  "kaggle_submission_ref": 57444414,
+  "OOF_KS": 0.5302846600440411,
+  "OOF_AUC": 0.8470292789071159,
+  "weights_frozen_fraction": 1.0,
+  "original_comparison_baseline": "V00",
+  "original_baseline_lock_preserved": true,
+  "activation_UTC": "2026-10-27T07:29:22.866644+00:00",
+  "user_instruction": "Stick with V25; run requested V119 combination without replacing incumbent automatically",
+  "correction_features": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "configuration": {
+    "id": "V25",
+    "families": [
+      "conditional_allocation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months"
+    ],
+    "label": "Coverage-only control for conditional Empirical Bayes V14",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "extension/data",
+    "feature_catalog": "extension/reports/FEATURE_CATALOG.csv",
+    "extension": true
+  },
+  "original_Kumo_spline_lock": "BASELINE_LOCK.json",
+  "checkpoint_pattern": "v7/runs/V25/foldN_correction.joblib",
+  "formula": "p=.75*sigmoid(logit(p_Kumo)+.5*X_V25@beta)+.25*p_spline; mean5fold"
+}

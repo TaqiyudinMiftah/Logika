@@ -1,0 +1,3 @@
+# Shared V25 research workspace
+
+Use V25 as baseline. Follow SYNC_PROTOCOL.md before and after EACH experiment, including checking peer commits and redundancy. Keep Kumo100% frozen. The user allows modeling and feature research to reach pooled KS>=0.531, but validation isolation and truthful uncertainty remain required. Preserve all negative outcomes. Publish no credentials, raw data, case-level labels/OOF or large model files. Never overwrite peer results or force push. Do not restart the entire historical queue automatically; run one new experiment, report, then sync. Runtime private cache lives on node480.

@@ -1,0 +1,58 @@
+{
+  "method": "corrected=sigmoid(logit(p_Kumo)+0.75*X_V25@beta); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities",
+  "objective": "mean BCE with unweighted labels + 0.003/2*sum(beta[1:]^2); fit full correction, shrink at inference",
+  "spec": {
+    "id": "V121",
+    "families": [
+      "conditional_allocation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months"
+    ],
+    "label": "Fixed V25 modeling: L2=0.003, strength=0.75, Kumo weight=0.75, blend=probability",
+    "penalty": 0.003,
+    "strength": 0.75,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": false,
+    "modeling_only": true,
+    "comparison_baseline": "V25",
+    "features_changed": false
+  },
+  "source": "v7/scripts/modeling_features.py",
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "metrics": {
+    "KS": 0.5291349730182621,
+    "signed_KS": 0.5291349730182621,
+    "AUC": 0.8463616361333112,
+    "rows": 70000,
+    "logloss": 0.2930704007230956,
+    "brier": 0.08887760099347895
+  },
+  "error_analysis": {
+    "json": "v7/runs/V121/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V121/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V121/ERROR_CASES.csv"
+  },
+  "source_sha256": "7b6e70b2b5eb76d48d9ed27ca2a7f3063fc1e15e9db9cc7e64020e9f50ef6303"
+}
