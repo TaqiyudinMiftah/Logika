@@ -1,0 +1,109 @@
+{
+  "experiment": "V215",
+  "method": "scoped_coefficient_smoothing",
+  "hypothesis": "Coverage counts and posterior SDs can create unstable residual bends, while burden/delinquency levels may need thresholds. Smooth only8 measurement-reliability/coverage effects; preserve financial-risk response flexibility. This tests a different mechanism from smoothing monetary capacity.",
+  "formula": "V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on evidence inputs; other bases unchanged; shrink.5 and original75:25spline77fusion",
+  "findings": [
+    "BROAD_RANKING_GAIN_WITHOUT_KS_GAIN",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5295894328357718,
+      "signed_KS": 0.5295894328357718,
+      "AUC": 0.847197016403302,
+      "rows": 70000
+    },
+    "delta_KS": -0.0018700817267639502,
+    "delta_AUC": 8.947205369458366e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5223858701457427,
+        0.538448842926609
+      ],
+      "delta_KS": [
+        -0.004225944054013072,
+        0.0008846048967332968
+      ],
+      "candidate_AUC": [
+        0.8435548505916076,
+        0.8508778259402398
+      ],
+      "delta_AUC": [
+        -0.00021796319759662675,
+        0.0003748680130280983
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.009911397339331862,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3860,
+      "net_bad_captured": 19,
+      "new_members": 280,
+      "exited_members": 280,
+      "entrant_bad_rate": 0.4035714285714286,
+      "exit_bad_rate": 0.3357142857142857
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5860,
+      "net_bad_captured": 5,
+      "new_members": 459,
+      "exited_members": 459,
+      "entrant_bad_rate": 0.23093681917211328,
+      "exit_bad_rate": 0.22004357298474944
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7407,
+      "net_bad_captured": -15,
+      "new_members": 549,
+      "exited_members": 549,
+      "entrant_bad_rate": 0.11293260473588343,
+      "exit_bad_rate": 0.14025500910746813
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8004,
+      "net_bad_captured": -11,
+      "new_members": 567,
+      "exited_members": 567,
+      "entrant_bad_rate": 0.07936507936507936,
+      "exit_bad_rate": 0.09876543209876543
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8640,
+      "net_bad_captured": -9,
+      "new_members": 575,
+      "exited_members": 575,
+      "entrant_bad_rate": 0.06086956521739131,
+      "exit_bad_rate": 0.07652173913043478
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
