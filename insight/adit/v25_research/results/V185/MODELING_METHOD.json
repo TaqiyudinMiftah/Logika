@@ -1,0 +1,29 @@
+{
+  "method": "z0=logit(V25); d=clip((logit(V167)-z0)+(logit(V178)-z0),-.25,.25); p=sigmoid(z0+d); average5fold test",
+  "spec": {
+    "id": "V185",
+    "label": "Bounded additive spectral and local-context logit residuals over V25",
+    "families": [
+      "score_fusion"
+    ],
+    "method": "additive_logit_residual",
+    "sources": [
+      "V25",
+      "V167",
+      "V178"
+    ],
+    "residual_cap": 0.25,
+    "penalty": 0.0,
+    "strength": 1.0,
+    "formula": "z0=logit(V25); d=clip((logit(V167)-z0)+(logit(V178)-z0),-.25,.25); p=sigmoid(z0+d); average5fold test",
+    "source_script": "v7/scripts/score_fusion_local.py",
+    "rationale": "Preserve full existing correction amplitudes instead of halving them through averaging, with a prespecified logit cap. Residual independence is not assumed; this is not claimed to be formal Bayesian evidence fusion."
+  },
+  "source_results_sha256": {
+    "V25": "683ae5a63edee50e2c3a7c1c0a3b305bf3b9ef271baab0517e69eb7b56b41363",
+    "V167": "a35133fd7349c28be137ab5516c3a8e4ec54ec9ab044b99b71f0be601fb99078",
+    "V178": "58b7d1c7c4872fc3c9dd91473989e55b7553e9fddf3102a79ee9a2d87cf2eeff"
+  },
+  "source_sha256": "d28afa44922182989776724fa7f6f77e463e34b1eee772374166025b6eeb6a92",
+  "execution_host": "local_windows"
+}
