@@ -1,6 +1,6 @@
 # Antrean15 eksperimen Kumo100% frozen
 
-Selesai12/15. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 dan adapterV179â€“V183 tidak memerlukan GPU.
+Selesai13/15. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 dan adapterV179â€“V183 tidak memerlukan GPU.
 
 | ID | Metode | Status | KS | AUC |
 |---|---|---|---:|---:|
@@ -16,6 +16,6 @@ Selesai12/15. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cuku
 | V178 | Conservative global-local frozen context experts by history coverage | COMPLETE | 0.5305973914406749 | 0.8471293837656989 |
 | V179 | Group-ridge spectral correction: preserve V25 penalty, shrink new family10x | COMPLETE | 0.5297030656129211 | 0.8470628048451461 |
 | V180 | Reliability-weighted spectral residual with frozen V25 correction | COMPLETE | 0.5302846600440411 | 0.8470484353439852 |
-| V181 | Fixed equal average of V167 spectral and V146 tree-complemented V25 | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |
+| V181 | Fixed equal average of V167 spectral and V146 tree-complemented V25 | COMPLETE | 0.5300242736937464 | 0.8471525272870506 |
 | V182 | 64-landmark Nystrom RBF residual on existing V25 domain features | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |
 | V183 | Strongly regularized shallow LightGBM residual on fixed V25 logits | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |
