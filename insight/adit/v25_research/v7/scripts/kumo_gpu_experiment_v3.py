@@ -201,7 +201,7 @@ def main(name):
             assert source_result['frozen_Kumo_fraction']==1. and source_result['all_outer_indices_identical']
             for part,ids in [('holdout',tr.application_id.iloc[hi]),('oof',tr.application_id.iloc[vi]),('test',te.application_id)]:
                 cached=pd.read_parquet(source/f'fold{fold}_kumo_{part}.parquet');assert cached.application_id.tolist()==ids.tolist()
-                predictions[part]=cached.prediction.to_numpy()
+                predictions[part]=cached.prediction.to_numpy(copy=True)
             context_audits=[dict(reused_frozen_source=spec['reuse_kumo_from'],reason='Exactly identical Kumo inputs/folds/fit settings; only final coverage gate differs')]
         else:
             bags=spec.get('context_bags',1)

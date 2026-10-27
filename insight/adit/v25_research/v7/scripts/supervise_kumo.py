@@ -21,10 +21,10 @@ def gpu_free():
 
 def wait_capacity(args,out):
     while True:
-        snapshot=memory();unused=snapshot['limit_GiB']-snapshot['current_GiB'];reusable=min(snapshot['inactive_file_GiB'],.75)
+        snapshot=memory();unused=snapshot['limit_GiB']-snapshot['current_GiB'];reusable=min(snapshot['inactive_file_GiB']*.5,1.5)
         free_gpu=gpu_free() if args.gpu_required else None;ram_ok=unused+reusable>=args.ram_required;gpu_ok=not args.gpu_required or (free_gpu is not None and free_gpu>=args.gpu_required)
         if ram_ok and gpu_ok:return
-        dump(dict(status='WAITING_FOR_RAM' if not ram_ok else 'WAITING_FOR_GPU',experiment=args.run,pid=os.getpid(),UTC=time.time(),memory=snapshot,GPU_free_GiB=free_gpu,required_available_plus_cache_GiB=args.ram_required,required_GPU_free_GiB=args.gpu_required,check_interval_seconds=10,note='Automatically launch real model work when budgets fit; no training data or reservation buffers held while waiting'),out/'STATUS.json')
+        dump(dict(status='WAITING_FOR_RAM' if not ram_ok else 'WAITING_FOR_GPU',experiment=args.run,pid=os.getpid(),UTC=time.time(),memory=snapshot,conservatively_counted_reclaimable_cache_GiB=reusable,GPU_free_GiB=free_gpu,required_available_plus_cache_GiB=args.ram_required,required_GPU_free_GiB=args.gpu_required,check_interval_seconds=10,note='Automatically launch real model work when budgets fit; only half inactive file cache, capped1.5GiB, counts as reclaimable; no reservation buffers held while waiting'),out/'STATUS.json')
         time.sleep(10)
 
 def run_once(args,worker,out):
