@@ -1,6 +1,6 @@
 # Antrean10 eksperimen Kumo100% frozen
 
-Selesai8/10. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 membutuhkan lebih sedikit RAM dan tidak memerlukan GPU.
+Selesai9/10. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 membutuhkan lebih sedikit RAM dan tidak memerlukan GPU.
 
 | ID | Metode | Status | KS | AUC |
 |---|---|---|---:|---:|
@@ -12,5 +12,5 @@ Selesai8/10. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup
 | V174 | Empirical-Bayes allocation propensity and uncertainty inside frozen Kumo | COMPLETE | 0.5292927367174179 | 0.8469899262267827 |
 | V175 | Selective latent uncertainty and income-contradiction inputs | COMPLETE | 0.5284933723571009 | 0.8472016433687654 |
 | V176 | Compact item-value basket composition, without unverified order denominators | COMPLETE | 0.529325332393696 | 0.8469974152685905 |
-| V177 | Conservative fixed90:10 V25 and V169 score blend | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |
+| V177 | Conservative fixed90:10 V25 and V169 score blend | COMPLETE | 0.5303371946203446 | 0.847059735850767 |
 | V178 | Conservative global-local frozen context experts by history coverage | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |

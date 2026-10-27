@@ -1,0 +1,31 @@
+{
+  "method": "p_final=.90*p_V25+.10*p_V169; fixed matched-fold score average",
+  "spec": {
+    "id": "V177",
+    "label": "Conservative fixed90:10 V25 and V169 score blend",
+    "families": [
+      "score_complementarity"
+    ],
+    "context_features": "locked90_plus_v25_score_anchor",
+    "backbone_frozen_fraction": 1.0,
+    "context_rows": 50000,
+    "estimators": 8,
+    "estimator_batch_size": 4,
+    "query_batch_size": 8192,
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "comparison_baseline": "V168",
+    "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+    "error_analysis_basis": "V169 AUC +0.0001914 with paired95% CI[+0.0000301,+0.0003501] and9 extra defaults captured top20%, despite pooledKS -0.001472; test limited complementary contribution without more backbone fitting",
+    "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased",
+    "reuse_kumo_from": "V168",
+    "score_blend_weight": 0.1
+  },
+  "source_prediction_controls": {
+    "V25": "683ae5a63edee50e2c3a7c1c0a3b305bf3b9ef271baab0517e69eb7b56b41363",
+    "V169": "7dcd484bba346a72c3ca9c83391842f68069b4c2c1a210c1283cca921b992fc5"
+  },
+  "source_sha256": "2f0c84579222de66ea967c6208fb8f22982eed10b7e9042faa2df5fc519dbb00",
+  "new_training": false
+}
