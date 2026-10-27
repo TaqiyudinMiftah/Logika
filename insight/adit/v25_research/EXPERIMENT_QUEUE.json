@@ -1,34 +1,5 @@
 [
   {
-    "id": "V188",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "Kumo_frozen_fraction": 1.0,
-      "modeling_only": true,
-      "inner_splits": 3,
-      "inner_seed": 52027,
-      "no_outer_validation_tuning": true,
-      "source_script": "v7/scripts/adaptive_adapters.py",
-      "id": "V188",
-      "label": "Baseline-orthogonalized spectral innovation residual",
-      "method": "orthogonal_spectral_residual",
-      "new_penalty": 0.03,
-      "teacher_tether": 0.2,
-      "residual_strength": 0.25,
-      "projection_ridge": 0.01,
-      "formula": "B=(X25^T*X25/n+.01I)^(-1)*X25^T*S9/n; R=S9-X25*B; fit gamma by BCE(z25+R*gamma)+.03/2||gamma||^2+.2/2 mean((R*gamma)^2); eta=z25+.25*R*gamma; final=.75*sigmoid(eta)+.25*spline77",
-      "rationale": "V167 spectral addition has strongest KS .530795 but higher head gap; V179 group ridge andV180 reliability residual did not improve KS. This tests only spectral basis innovation after ridge projection on existing V25 design, including missingness, rather than refitting redundant coefficients. All projections use6k correction only.",
-      "batch": "adaptive",
-      "feature_catalog": "adaptive/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V189",
     "status": "QUEUED",
     "definition": {
