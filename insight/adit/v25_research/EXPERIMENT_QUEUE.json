@@ -1,32 +1,5 @@
 [
   {
-    "id": "V186",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "Kumo_frozen_fraction": 1.0,
-      "modeling_only": true,
-      "inner_splits": 3,
-      "inner_seed": 52027,
-      "no_outer_validation_tuning": true,
-      "source_script": "v7/scripts/adaptive_adapters.py",
-      "id": "V186",
-      "label": "Inner-crossfitted restrained affine calibration before fixed spline fusion",
-      "method": "crossfit_calibration",
-      "calibration_penalty": 0.02,
-      "calibration_strength": 0.5,
-      "formula": "3-fold inner OOF corrected Kumo on6k; fit a,b by meanBCE(a+b*logit(p_inner))+.02/2*(a^2+(b-1)^2), a in[-.5,.5], b in[.5,1.5]; pK=sigmoid(z25+.5*(a+(b-1)*z25)); final=.75*pK+.25*spline77",
-      "rationale": "V178 improves4/5folds but loses4 defaults at top20%; alignment across expert/fold scores may affect pooled ranking. V163 only class-prior shift was exactly baseline. This tests empirical crossfitted slope+intercept, not theoretical prior correction. Positive monotone calibration alone cannot improve standalone within-fold KS; any change must arise from fusion or fold alignment.",
-      "batch": "adaptive",
-      "feature_catalog": "adaptive/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V187",
     "status": "QUEUED",
     "definition": {

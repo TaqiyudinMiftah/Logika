@@ -1,0 +1,527 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V186",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "Kumo_frozen_fraction": 1.0,
+    "modeling_only": true,
+    "inner_splits": 3,
+    "inner_seed": 52027,
+    "no_outer_validation_tuning": true,
+    "source_script": "v7/scripts/adaptive_adapters.py",
+    "id": "V186",
+    "label": "Inner-crossfitted restrained affine calibration before fixed spline fusion",
+    "method": "crossfit_calibration",
+    "calibration_penalty": 0.02,
+    "calibration_strength": 0.5,
+    "formula": "3-fold inner OOF corrected Kumo on6k; fit a,b by meanBCE(a+b*logit(p_inner))+.02/2*(a^2+(b-1)^2), a in[-.5,.5], b in[.5,1.5]; pK=sigmoid(z25+.5*(a+(b-1)*z25)); final=.75*pK+.25*spline77",
+    "rationale": "V178 improves4/5folds but loses4 defaults at top20%; alignment across expert/fold scores may affect pooled ranking. V163 only class-prior shift was exactly baseline. This tests empirical crossfitted slope+intercept, not theoretical prior correction. Positive monotone calibration alone cannot improve standalone within-fold KS; any change must arise from fusion or fold alignment."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "OOF": {
+    "KS": 0.5306076886558098,
+    "signed_KS": 0.5306076886558098,
+    "AUC": 0.8470329634391778,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": 0.00032302861176869424,
+  "delta_AUC": 3.684532061898338e-06,
+  "mean_fold_KS": 0.5333373984040646,
+  "std_fold_KS": 0.00544231973529689,
+  "delta_mean_fold_KS": 7.573847513242527e-06,
+  "fold_wins": 1,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440768273352767,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": 0.0,
+      "delta_AUC": 7.0434173201627814e-06,
+      "parameters": 92,
+      "new_trainable_parameters": 2,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5483751501203922,
+      "heldout_corrected_Kumo_KS": 0.5282302992248024,
+      "train_validation_head_KS_gap": 0.020144850895589816,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "optimization": {
+        "inner_checks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "512d91dcd12ea73b40439eb4200d0f4e79e68d03b9f903fa709d4672e72bf946",
+            "query_ids_sha256": "f3a31c4dbeb732aaf0a986c1bf9290e160d6a3eced8ea90a2d56466ae08ed950"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "2f0aa565ef377fe67815321c2f655f40fac9582473bcfb583daa8c6eb07d8ddf",
+            "query_ids_sha256": "e56832323b4c15d45912922f3fa086bc3b3628c05ad2d11c7784363434d79877"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "8cf33a23eefda5b076d5073ea98c500fccd1a384c740c38c68400e9fcdd8dc67",
+            "query_ids_sha256": "01d1739774d77ddd96d488f4a12a34b13203e9abdc228ec5c906c6fa830a489e"
+          }
+        ],
+        "inner_training_targets_never_in_own_prediction": true,
+        "no_spline_used_for_inner_calibration": true,
+        "affine_intercept": -0.011290334930513662,
+        "affine_slope": 0.9722923429787264,
+        "gradient_max_abs": 2.1704604151288887e-11,
+        "iterations": 6,
+        "objective": 0.2972648105395655
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496064316660911,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": 0.0,
+      "delta_AUC": 1.4782480793895658e-06,
+      "parameters": 92,
+      "new_trainable_parameters": 2,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5372127006288787,
+      "heldout_corrected_Kumo_KS": 0.5377141736904102,
+      "train_validation_head_KS_gap": -0.0005014730615314766,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "optimization": {
+        "inner_checks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "1fead41b02dc5ddf2ff6e2aa8ce00c6a5f211d85414f23407708da02460c8f8f",
+            "query_ids_sha256": "425e50006cdefaf61cc6c39ecec979cddb512bc07fe474183c3867bb143da393"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "793fb0974beac8db4be4dffcb09e4bc34c52ad045f3048b116632ea5f4f78fdd",
+            "query_ids_sha256": "79bfbf89f0f308f4cd8ebbb86dc446b8013b84826d6ad24426c85c6dbc1aa7ff"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "0afba27c6df95f401ebce2287fe3c8d1766eb0c536a395b8f9e26ecfb18d1513",
+            "query_ids_sha256": "3da8a4df8351ea8ad548d07d6ff8dba3320162ca3605026f28703a89aadf317d"
+          }
+        ],
+        "inner_training_targets_never_in_own_prediction": true,
+        "no_spline_used_for_inner_calibration": true,
+        "affine_intercept": -0.019577180526951954,
+        "affine_slope": 0.9744506055931103,
+        "gradient_max_abs": 2.973332606059746e-10,
+        "iterations": 7,
+        "objective": 0.2971892041660564
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5403361075267219,
+        "signed_KS": 0.5403361075267219,
+        "AUC": 0.8498559947242196,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": 3.786923756621263e-05,
+      "delta_AUC": -9.130355784758848e-07,
+      "parameters": 92,
+      "new_trainable_parameters": 2,
+      "correction_rows": 6000,
+      "head_training_KS": 0.559544698901385,
+      "heldout_corrected_Kumo_KS": 0.5414846628066131,
+      "train_validation_head_KS_gap": 0.018060036094771914,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "optimization": {
+        "inner_checks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "610384f01622faf983e051c32ca0e0defc8c2bc44cf7f9166cf29f3b029e7dfd",
+            "query_ids_sha256": "934f9ff23f8a92e0db763fa8f5c1e42628a48e39e4f3cef438d7957ef38db22b"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "2d6fbd32c8a53b79f94e3d8ff54377f77244f31ff208e8b2e6ceb97dc2347cbf",
+            "query_ids_sha256": "1a526f03996f67f939d2b34ee4dc95278a64d296a44474d73ebfec85cc1e48f6"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "b53540c7e35a015c5edb5a3f841fe324f683860901cae4cde83ca854e795bb8b",
+            "query_ids_sha256": "a7246e039344b626beae287638aaec177374b14a3588070ee251d62844d0d38d"
+          }
+        ],
+        "inner_training_targets_never_in_own_prediction": true,
+        "no_spline_used_for_inner_calibration": true,
+        "affine_intercept": 0.013156519064542026,
+        "affine_slope": 1.0022738656607244,
+        "gradient_max_abs": 2.0117896080921864e-09,
+        "iterations": 7,
+        "objective": 0.29006625805405944
+      }
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.843865355468024,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": 0.0,
+      "delta_AUC": 1.9990964081895157e-06,
+      "parameters": 92,
+      "new_trainable_parameters": 2,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5291088616880928,
+      "heldout_corrected_Kumo_KS": 0.5293457791860687,
+      "train_validation_head_KS_gap": -0.00023691749797594142,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "optimization": {
+        "inner_checks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "851df7aa13bc73c106311c669418ea72a309197f860d3e8aef54cbf82735c24b",
+            "query_ids_sha256": "f1ea68ddd7edbb5ba7c8160bce4eccae64afcedcd98fbc6cac8b33a00fcc3565"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "74ba0ec9cf4b880a66d61a8433cff34593b007ee69e30cf055120730846bdfac",
+            "query_ids_sha256": "9967916cb4d084793e5bedac1a1657b4acb69a4c2ef3acd8a17efc924561db38"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "0d702be938b549b3f0efdc81a30a7e949553a590dc303f33c2e63628eb08d7e5",
+            "query_ids_sha256": "6512255f32e7b079ee9f35364620434238c416b0ef208946af256ccc40c6f8da"
+          }
+        ],
+        "inner_training_targets_never_in_own_prediction": true,
+        "no_spline_used_for_inner_calibration": true,
+        "affine_intercept": -0.017996246091055733,
+        "affine_slope": 0.9899813679722045,
+        "gradient_max_abs": 2.2133942085850872e-11,
+        "iterations": 6,
+        "objective": 0.29501904878341223
+      }
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478954903687881,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": 0.0,
+      "delta_AUC": -1.216841292173143e-06,
+      "parameters": 92,
+      "new_trainable_parameters": 2,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5486981677917069,
+      "heldout_corrected_Kumo_KS": 0.5306263308115167,
+      "train_validation_head_KS_gap": 0.018071836980190215,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "optimization": {
+        "inner_checks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "78cf4009279e72b3ed24192a860c16b181c9e91cea6a8c82e85f145685ff7fd5",
+            "query_ids_sha256": "9dd933e6769cf3eca5a5a36706efb823f94227fe535cce6b1dfa883731b936ff"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "f6054c33cf462799467d60ab9ac9e3c062dbd062ec43ff4b882c071bd6b4257c",
+            "query_ids_sha256": "805d1e8de2c376030d10a9021cbfb9f2b11824627b7d4c80370c3576bffbf021"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "1de0652ab35b74e00cca66277a6873dba8cbc13658be5ba06d4054122bc635f8",
+            "query_ids_sha256": "03ba6aa467a95226e6d5be95d27f0f594d316251c07ea3fe8c4fa9dead464f3f"
+          }
+        ],
+        "inner_training_targets_never_in_own_prediction": true,
+        "no_spline_used_for_inner_calibration": true,
+        "affine_intercept": -0.005351599235462141,
+        "affine_slope": 0.9892983550177997,
+        "gradient_max_abs": 2.562703576907896e-10,
+        "iterations": 6,
+        "objective": 0.2927696427289315
+      }
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5228933726189652,
+      0.5394139434162395
+    ],
+    "delta_KS": [
+      -0.00021540810763042982,
+      0.0006579051502370005
+    ],
+    "candidate_AUC": [
+      0.8433544396075296,
+      0.8507832474885181
+    ],
+    "delta_AUC": [
+      -1.4437749336154715e-05,
+      2.2626574026593494e-05
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "modeling_formula": "3-fold inner OOF corrected Kumo on6k; fit a,b by meanBCE(a+b*logit(p_inner))+.02/2*(a^2+(b-1)^2), a in[-.5,.5], b in[.5,1.5]; pK=sigmoid(z25+.5*(a+(b-1)*z25)); final=.75*pK+.25*spline77 ; final=.75*sigmoid(eta)+.25*original_spline77; mean5fold test probabilities",
+  "modeling_objective": "3-fold inner OOF corrected Kumo on6k; fit a,b by meanBCE(a+b*logit(p_inner))+.02/2*(a^2+(b-1)^2), a in[-.5,.5], b in[.5,1.5]; pK=sigmoid(z25+.5*(a+(b-1)*z25)); final=.75*pK+.25*spline77",
+  "controller_source": "v7/scripts/adaptive_adapters.py",
+  "source_sha256": "34bd4b22ba2fed1a87f1f29921cf476a9dad68a1c7e293593233a79ee2c5ea7b",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": false,
+  "submission": "v7/submissions/submission_V186_V25_conservative.csv",
+  "submission_sha256": "a98b144215df5714d6bdbb65ec9aa4e2905b5fb14813155a0f55a80e4d54b680",
+  "public_score": null,
+  "elapsed_seconds": 9.270797729492188,
+  "peak_RSS_MiB": 386.6171875,
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY",
+    "diagnostic": "V178 improves4/5folds but loses4 defaults at top20%; alignment across expert/fold scores may affect pooled ranking. V163 only class-prior shift was exactly baseline. This tests empirical crossfitted slope+intercept, not theoretical prior correction. Positive monotone calibration alone cannot improve standalone within-fold KS; any change must arise from fusion or fold alignment.; all new fitting uses correction rows only; repeated development selection remains.",
+    "inner_crossfit_used": true
+  },
+  "error_analysis": {
+    "json": "v7/runs/V186/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V186/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V186/ERROR_CASES.csv"
+  },
+  "additional_source_sha256": "f9969e5ba1ec33b10e6e4a41c468e08387207aaadd989685a9de0f6b69b9dc16"
+}
