@@ -31,10 +31,19 @@ def main(ident,expected,resume=False):
     vault=json.loads(protect((Path.home()/'.codex/private/node480_session.dpapi').read_bytes(),decrypt=True))
     session=requests.Session();session.cookies.update(vault['cookies'])
     base=vault['base_url'].rstrip('/')+'/api/contents/'
-    from node480_task import client as remote_client
-    command="python - <<'PY'\nimport subprocess\np=subprocess.run(['/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python','/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019/v7/scripts/audit_frozen_result.py',"+repr(ident)+"],check=True)\nPY"
-    assert remote_client().execute(command,'python3')==0,'Artifact/metric audit failed; inspect before publishing'
+    remote_result=session.get(base+quote('adit/Logika/insight/goal054_offset_baseline_20261019/'+f'v7/runs/{ident}/RESULT.json')+'?content=1',timeout=20);remote_result.raise_for_status()
+    metadata=json.loads(remote_result.json()['content'])
+    if metadata.get('execution_host')=='local_windows':
+        # The same verifier runs against the authenticated local mirror and
+        # uploaded byte-checked artifacts, without loading another node process.
+        subprocess.run([str(ROOT/'.venv-local-score/Scripts/python.exe'),str(V/'scripts/audit_frozen_result.py'),ident],check=True)
+    else:
+        from node480_task import client as remote_client
+        command="python - <<'PY'\nimport subprocess\np=subprocess.run(['/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python','/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019/v7/scripts/audit_frozen_result.py',"+repr(ident)+"],check=True)\nPY"
+        assert remote_client().execute(command,'python3')==0,'Artifact/metric audit failed; inspect before publishing'
     def download(name,optional=False):
+        name=name.replace(chr(92),'/')
+        assert (ROOT/name).resolve().is_relative_to(ROOT.resolve()),'Artifact path escapes workspace'
         r=session.get(base+quote('adit/Logika/insight/goal054_offset_baseline_20261019/'+name)+'?content=1',timeout=20)
         if optional and r.status_code==404:return
         r.raise_for_status()

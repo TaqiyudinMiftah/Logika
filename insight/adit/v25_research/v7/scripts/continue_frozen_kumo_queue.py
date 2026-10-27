@@ -13,6 +13,7 @@ sys.path.insert(0,str(ROOT.parent))
 from node480_task import client,BASE
 
 def status_name(after):
+    if after=='V185':return 'LOCAL_ADAPTIVE_QUEUE.json'
     if after=='V178':return 'LOCAL_CONSERVATIVE_QUEUE.json'
     return 'LOCAL_KUMO_EXTRA_QUEUE.json' if after else 'LOCAL_KUMO_QUEUE.json'
 

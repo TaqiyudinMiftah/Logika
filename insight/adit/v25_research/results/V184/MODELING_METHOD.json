@@ -1,0 +1,31 @@
+{
+  "method": "p=.5*p_V167+.5*p_V178; identical outer folds; average5fold test after per-fold fusion",
+  "spec": {
+    "id": "V184",
+    "label": "Fixed equal average of strongest spectral and local-context models",
+    "families": [
+      "score_fusion"
+    ],
+    "method": "probability_average",
+    "sources": [
+      "V167",
+      "V178"
+    ],
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "penalty": 0.0,
+    "strength": 1.0,
+    "formula": "p=.5*p_V167+.5*p_V178; identical outer folds; average5fold test after per-fold fusion",
+    "source_script": "v7/scripts/score_fusion_local.py",
+    "rationale": "V167 has strongest earlier KS; V178 wins4/5folds and improves AUC. Test complementary learned risk corrections, without fitting weights on outer labels."
+  },
+  "source_results_sha256": {
+    "V25": "683ae5a63edee50e2c3a7c1c0a3b305bf3b9ef271baab0517e69eb7b56b41363",
+    "V167": "a35133fd7349c28be137ab5516c3a8e4ec54ec9ab044b99b71f0be601fb99078",
+    "V178": "58b7d1c7c4872fc3c9dd91473989e55b7553e9fddf3102a79ee9a2d87cf2eeff"
+  },
+  "source_sha256": "172f4b357cd8b88bc848106e914bc2f6f5f720511b05b5d38b526a1174445b6d",
+  "execution_host": "local_windows"
+}

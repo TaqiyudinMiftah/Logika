@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "real_competition_scores_not_evaluated": true,
+  "gradient_checks": [
+    {
+      "objective": "affine",
+      "finite_difference_gradient_error": 8.293528997174252e-09
+    },
+    {
+      "objective": "partial_pool",
+      "finite_difference_gradient_error": 2.2775797813659723e-08
+    },
+    {
+      "objective": "group_regret",
+      "finite_difference_gradient_error": 4.907346497371146e-09
+    },
+    {
+      "objective": "spectral_residual",
+      "finite_difference_gradient_error": 1.898875003217648e-08
+    }
+  ],
+  "branch_checks": [
+    {
+      "method": "crossfit_calibration",
+      "parameters": 2,
+      "unseen_employment_predicts": true,
+      "checkpoint_replay_exact": true
+    },
+    {
+      "method": "delete_block_bagging",
+      "parameters": 60,
+      "unseen_employment_predicts": true,
+      "checkpoint_replay_exact": true
+    },
+    {
+      "method": "orthogonal_spectral_residual",
+      "parameters": 45,
+      "unseen_employment_predicts": true,
+      "checkpoint_replay_exact": true
+    },
+    {
+      "method": "partial_pool_group_calibration",
+      "parameters": 8,
+      "unseen_employment_predicts": true,
+      "checkpoint_replay_exact": true
+    },
+    {
+      "method": "group_regret_robust_head",
+      "parameters": 20,
+      "unseen_employment_predicts": true,
+      "checkpoint_replay_exact": true
+    }
+  ],
+  "inner_isolation": [
+    {
+      "block": 0,
+      "fit_rows": 4000,
+      "query_rows": 2000,
+      "disjoint": true,
+      "fit_ids_sha256": "427efd83aaa4609c2a84a0959d7dea2b18f01a4942fb70213fe7693101bb0197",
+      "query_ids_sha256": "3084875aa1dc264da912a5e9ab49aa5451f4d0b93e540f9027855336ca987526"
+    },
+    {
+      "block": 1,
+      "fit_rows": 4000,
+      "query_rows": 2000,
+      "disjoint": true,
+      "fit_ids_sha256": "b294d4304ce4a85e87551ae7d3c882341ffa2385669af648a337ddb8dc17b164",
+      "query_ids_sha256": "ab3295cdb8abe55707bcabfc3326d8b9ee575ffeb69e85b68f5334122f995869"
+    },
+    {
+      "block": 2,
+      "fit_rows": 4000,
+      "query_rows": 2000,
+      "disjoint": true,
+      "fit_ids_sha256": "d12653e165b681dcf5fe0465566c61c62560e59fe1f19eb8e30a9fdda57fdd8f",
+      "query_ids_sha256": "3f2a255f109e921b28df19bd8fc29a75dda413d41637b0929b1aada9fb7f900d"
+    }
+  ],
+  "positive_affine_rank_preserved": true,
+  "source_sha256": "f9969e5ba1ec33b10e6e4a41c468e08387207aaadd989685a9de0f6b69b9dc16"
+}

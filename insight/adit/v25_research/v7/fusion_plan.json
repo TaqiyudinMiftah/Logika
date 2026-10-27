@@ -1,0 +1,248 @@
+[
+  {
+    "id": "V102",
+    "label": "Three source-restricted nested source risk probabilities",
+    "families": [
+      "mv_scores"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "snapshot_dependent": true,
+    "quarantined": false,
+    "snapshot_fields": [
+      "max_days_past_due"
+    ],
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V103",
+    "label": "Source risk probabilities plus explicit disagreement",
+    "families": [
+      "mv_scores",
+      "mv_disagreement"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "snapshot_dependent": true,
+    "quarantined": false,
+    "snapshot_fields": [
+      "max_days_past_due"
+    ],
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V104",
+    "label": "Fixed weekly motif distance control",
+    "families": [
+      "shapelet_fixed"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V105",
+    "label": "Nested learned weekly subsequence motifs",
+    "families": [
+      "shapelet"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V106",
+    "label": "Multivariate training-reference KNN and LOF",
+    "families": [
+      "peer"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "snapshot_dependent": true,
+    "quarantined": false,
+    "snapshot_fields": [
+      "max_days_past_due"
+    ],
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V107",
+    "label": "Category substitution during observed income stress",
+    "families": [
+      "substitution"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V108",
+    "label": "Clipped selection-adjusted mature repayment rates",
+    "families": [
+      "selection"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "snapshot_dependent": true,
+    "quarantined": false,
+    "snapshot_fields": [
+      "max_days_past_due"
+    ],
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V109",
+    "label": "Dated calendar-cohort financial residuals",
+    "families": [
+      "calendar"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V110",
+    "label": "Censor-aware pooled Weibull and individual Gamma renewal",
+    "families": [
+      "dormancy"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V111",
+    "label": "Target-free monthly masked reconstruction SSL16",
+    "families": [
+      "ssl"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V112",
+    "label": "Source disagreement and local-peer anomalies",
+    "families": [
+      "mv_scores",
+      "mv_disagreement",
+      "peer"
+    ],
+    "penalty": 0.01,
+    "strength": 0.5,
+    "snapshot_dependent": true,
+    "quarantined": false,
+    "snapshot_fields": [
+      "max_days_past_due"
+    ],
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V113",
+    "label": "Learned subsequence motifs and renewal hazard",
+    "families": [
+      "shapelet",
+      "dormancy"
+    ],
+    "penalty": 0.01,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V114",
+    "label": "All eight mechanisms except SSL conservative",
+    "families": [
+      "mv_scores",
+      "mv_disagreement",
+      "shapelet",
+      "peer",
+      "substitution",
+      "selection",
+      "calendar",
+      "dormancy"
+    ],
+    "penalty": 0.03,
+    "strength": 0.25,
+    "snapshot_dependent": true,
+    "quarantined": false,
+    "snapshot_fields": [
+      "max_days_past_due"
+    ],
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V115",
+    "label": "All eight mechanisms including SSL conservative",
+    "families": [
+      "mv_scores",
+      "mv_disagreement",
+      "shapelet",
+      "peer",
+      "substitution",
+      "selection",
+      "calendar",
+      "dormancy",
+      "ssl"
+    ],
+    "penalty": 0.03,
+    "strength": 0.25,
+    "snapshot_dependent": true,
+    "quarantined": false,
+    "snapshot_fields": [
+      "max_days_past_due"
+    ],
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V116",
+    "label": "Archived renewal-intensity proxy matched control",
+    "families": [
+      "dormancy_proxy"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  },
+  {
+    "id": "V117",
+    "label": "Monthly PCA16 unsupervised representation control",
+    "families": [
+      "pca"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "fold_feature_root": "fusion/data",
+    "feature_catalog": "fusion/reports/FEATURE_CATALOG.csv",
+    "fusion": true
+  }
+]

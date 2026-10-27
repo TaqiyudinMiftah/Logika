@@ -97,17 +97,20 @@ def probability(model,d,kumo,base_head):
         result[w==0]=p[w==0];assert np.array_equal(result[w==0],p[w==0])
     return result,model['strength']*delta
 
-def main(ident):
+def main(ident, plan_file="conservative_plan.json", adapter_fit=None, adapter_probability=None, method_formulas=None, spectral_methods=None):
+    fit_fn=adapter_fit or fit_adapter; predict_fn=adapter_probability or probability
     started=time.time();out=V/'runs'/ident;out.mkdir(parents=True,exist_ok=True);assert not (out/'RESULT.json').exists()
     lock=(out/'adapter.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-    spec=next(s for s in json.loads((V/'conservative_plan.json').read_text()) if s['id']==ident)
+    spec=next(s for s in json.loads((V/plan_file).read_text()) if s['id']==ident)
     gate=json.loads((V/'modeling/reports/REPO_REVIEW_GATE.json').read_text());assert gate['experiment']==ident
     req=urllib.request.Request('https://api.github.com/repos/TaqiyudinMiftah/Logika/git/ref/heads/main?fresh='+str(time.time_ns()),headers={'User-Agent':'Logika-research','Cache-Control':'no-cache'})
     with urllib.request.urlopen(req,timeout=20) as response:head=json.load(response)
     assert head['object']['sha']==gate['reviewed_head'],'Review new peer work before fitting'
     dump(dict(status='LOADING_FROZEN_V25',experiment=ident,pid=os.getpid()),out/'STATUS.json')
     for file in [Path(__file__),ROOT/'scripts/baseline.py',V/'scripts/experiments.py',V/'scripts/modeling_features.py']:shutil.copyfile(file,out/('SOURCE_'+file.name))
-    loaded=load();tr,te,sample,y,folds,reference,frames,parent=loaded;method=spec['method'];use_spectral=method in ['group_ridge','reliability_residual','tree_residual'];cols=parent['columns']+(SPECTRAL if use_spectral else [])
+    if adapter_fit is not None:
+        shutil.copyfile(V/'scripts/adaptive_adapters.py',out/'SOURCE_adaptive_adapters.py')
+    loaded=load();tr,te,sample,y,folds,reference,frames,parent=loaded;method=spec['method'];use_spectral=method in (spectral_methods if spectral_methods is not None else ['group_ridge','reliability_residual','tree_residual']);cols=parent['columns']+(SPECTRAL if use_spectral else [])
     cache=pd.read_parquet(V/'light_fe/data/spectral_features.parquet').set_index('application_id') if use_spectral else None
     oof=np.full(len(tr),np.nan);pt=np.zeros(len(sample));checks=[];extra_bins={'orders90_exposure_band':np.full(len(tr),'missing',dtype=object)}
     for original in frames:
@@ -115,10 +118,10 @@ def main(ident):
         if use_spectral:
             for part in ['h','val','test']:
                 d=f[part].copy();assert d.application_id.isin(cache.index).all();d[SPECTRAL]=cache.reindex(d.application_id)[SPECTRAL].to_numpy();f[part]=d
-        model,audit,trainable=fit_adapter(f,spec,cols)
+        model,audit,trainable=fit_fn(f,spec,cols)
         n90=f['val'].aux_orders90.to_numpy(float)
         extra_bins['orders90_exposure_band'][f['vi']]=np.select([~np.isfinite(n90),n90<=0,n90<=3,n90<=10],['missing','zero','1_to3','4_to10'],default='over10')
-        ph,dh=probability(model,f['h'],f['kh'],f['head']);pv,dv=probability(model,f['val'],f['kv'],f['head']);ptest,dt=probability(model,f['test'],f['kt'],f['head'])
+        ph,dh=predict_fn(model,f['h'],f['kh'],f['head']);pv,dv=predict_fn(model,f['val'],f['kv'],f['head']);ptest,dt=predict_fn(model,f['test'],f['kt'],f['head'])
         p=.75*pv+.25*f['sv'];tp=.75*ptest+.25*f['st']
         if method=='source_average':
             p=np.zeros(len(f['val']));tp=np.zeros(len(f['test']))
@@ -128,7 +131,7 @@ def main(ident):
                     saved=pd.read_parquet(V/'runs'/source/f"fold{f['fold']}_{part}.parquet");assert saved.application_id.tolist()==d.application_id.tolist();pred+=w*saved.prediction.to_numpy()
         oof[f['vi']]=p;pt+=pd.Series(tp,index=f['test'].application_id).reindex(sample.application_id).to_numpy()/5
         m,b=scores(y[f['vi']],p),scores(y[f['vi']],reference[f['vi']]);train=scores(f['h'].target,ph);corrected=scores(y[f['vi']],pv)
-        row=dict(fold=f['fold'],metrics=m,baseline=b,delta_KS=m['KS']-b['KS'],delta_AUC=m['AUC']-b['AUC'],parameters=trainable+(0 if method=='group_ridge' else len(f['head']['coefficients'])),new_trainable_parameters=trainable,correction_rows=6000,head_training_KS=train['KS'],heldout_corrected_Kumo_KS=corrected['KS'],train_validation_head_KS_gap=train['KS']-corrected['KS'],train_ids_sha256=ids_hash(tr,f['hi']),validation_ids_sha256=ids_hash(tr,f['vi']),optimization=audit)
+        row=dict(fold=f['fold'],metrics=m,baseline=b,delta_KS=m['KS']-b['KS'],delta_AUC=m['AUC']-b['AUC'],parameters=trainable+(0 if method in ['group_ridge','delete_block_bagging','group_regret_robust_head'] else len(f['head']['coefficients'])),new_trainable_parameters=trainable,correction_rows=6000,head_training_KS=train['KS'],heldout_corrected_Kumo_KS=corrected['KS'],train_validation_head_KS_gap=train['KS']-corrected['KS'],train_ids_sha256=ids_hash(tr,f['hi']),validation_ids_sha256=ids_hash(tr,f['vi']),optimization=audit)
         if method=='source_average':row['head_gap_caveat']='Unchanged V25 head diagnostic; fixed blend has no trained meta-parameters'
         checks.append(row);joblib.dump(dict(adapter=model,base_head=f['head'],spec=spec,kumo_weight=.75,original_spline=True),out/f"fold{f['fold']}_correction.joblib",compress=3)
         pd.DataFrame(dict(application_id=f['val'].application_id,prediction=p,correction_logit=dv)).to_parquet(out/f"fold{f['fold']}_validation.parquet",index=False)
@@ -138,10 +141,15 @@ def main(ident):
     assert np.isfinite(oof).all() and np.isfinite(pt).all();m,b=scores(y,oof),scores(y,reference);interval=bootstrap(y,reference,oof,folds)
     submission=V/'submissions'/f'submission_{ident}_V25_conservative.csv';pd.DataFrame(dict(application_id=sample.application_id,default_probability=pt)).to_csv(submission,index=False)
     pd.DataFrame(dict(application_id=tr.application_id,target=y,fold=folds,prediction=oof,baseline_prediction=reference)).to_csv(out/'OOF.csv',index=False);error_analysis(out,tr,y,folds,reference,oof,frames,extra_bins)
-    formulas=dict(group_ridge='V25 offset design plus9 spectral inputs; meanBCE+.003/2||base_beta||²+.03/2||new_beta||²; inference strength.5',reliability_residual='eta=eta_V25+.25*w*phi_spectral@gamma; w=I(spectral_supported)*n_completed90/(n_completed90+10); fitBCE+.03/2||gamma||²+.2/2 mean((w*phi@gamma)^2)',source_average='p_final=.5*p_V167+.5*p_V146; fixed matched-fold score average',kernel_residual='eta=eta_V25+.25*Nystrom64_RBF(robust_scaled8inputs+missing)@gamma; fitBCE+.05/2||gamma||²+.2/2 mean(delta²)',tree_residual='eta=eta_V25+.15*clip(GBDT80_depth2_residual,-.5,.5); tree training init_score=eta_V25; fixed trees, no outer early stopping')
+    formulas=dict(group_ridge='V25 offset design plus9 spectral inputs; meanBCE+.003/2||base_beta||Ã‚Â²+.03/2||new_beta||Ã‚Â²; inference strength.5',reliability_residual='eta=eta_V25+.25*w*phi_spectral@gamma; w=I(spectral_supported)*n_completed90/(n_completed90+10); fitBCE+.03/2||gamma||Ã‚Â²+.2/2 mean((w*phi@gamma)^2)',source_average='p_final=.5*p_V167+.5*p_V146; fixed matched-fold score average',kernel_residual='eta=eta_V25+.25*Nystrom64_RBF(robust_scaled8inputs+missing)@gamma; fitBCE+.05/2||gamma||Ã‚Â²+.2/2 mean(deltaÃ‚Â²)',tree_residual='eta=eta_V25+.15*clip(GBDT80_depth2_residual,-.5,.5); tree training init_score=eta_V25; fixed trees, no outer early stopping')
+    formulas.update(method_formulas or {})
     formula=formulas[method]+(' ; final=.75*sigmoid(eta)+.25*original_spline77' if method!='source_average' else '')+'; mean5fold test probabilities'
     result=dict(status='COMPLETE',experiment=ident,spec=spec,columns=cols,new_features=parent['new_features']+(SPECTRAL if use_spectral else []),support_features=parent['support_features'],context_columns=json.loads((ROOT/'BASELINE_LOCK.json').read_text())['Kumo']['features'],OOF=m,baseline=b,comparison_baseline='V25',delta_KS=m['KS']-b['KS'],delta_AUC=m['AUC']-b['AUC'],mean_fold_KS=float(np.mean([q['metrics']['KS'] for q in checks])),std_fold_KS=float(np.std([q['metrics']['KS'] for q in checks],ddof=1)),delta_mean_fold_KS=float(np.mean([q['delta_KS'] for q in checks])),fold_wins=sum(q['delta_KS']>0 for q in checks),folds=checks,confidence_interval=interval,modeling_formula=formula,modeling_objective=formulas[method],controller_source='v7/scripts/conservative_adapters.py',source_sha256=sha(__file__),frozen_Kumo_fraction=1.,backbone_retrained=False,backbone_gradient_updated=False,in_context_refitted=False,original_spline_unchanged=True,all_outer_indices_identical=True,point_in_time_certified=False,inherited_baseline_snapshot_uncertainty=True,features_changed_vs_V25=use_spectral,submission=str(submission.relative_to(ROOT)),submission_sha256=sha(submission),public_score=None,elapsed_seconds=time.time()-started,peak_RSS_MiB=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024,overfitting_assessment=dict(development_folds_reused=True,independent_holdout=False,hyperparameters_prespecified=True,selection_corrected_CI=False,public_score_unknown=True,risk='HIGH_SEARCH_MULTIPLICITY',diagnostic='Residual teacher was already fitted on the6k correction rows; training gains are optimistic. All new basis/reference fitting uses correction rows only, all outer labels held out.'),error_analysis=dict(json=str((out/'ERROR_ANALYSIS.json').relative_to(ROOT)),markdown=str((out/'ERROR_ANALYSIS.md').relative_to(ROOT)),cases=str((out/'ERROR_CASES.csv').relative_to(ROOT))))
     if use_spectral:result['spectral_cache_sha256']=sha(V/'light_fe/data/spectral_features.parquet')
+    if adapter_fit is not None:
+        result['additional_source_sha256']=sha(V/'scripts/adaptive_adapters.py');result['controller_source']='v7/scripts/adaptive_adapters.py'
+        result['overfitting_assessment']['diagnostic']=spec['rationale']+'; all new fitting uses correction rows only; repeated development selection remains.'
+        result['overfitting_assessment']['inner_crossfit_used']=method in ['crossfit_calibration','delete_block_bagging','partial_pool_group_calibration']
     dump(dict(method=formula,spec=spec,columns=cols,source_sha256=sha(__file__)),out/'MODELING_METHOD.json')
     dump(dict(control='V25',candidate_metrics=m,control_metrics=b,delta_KS=result['delta_KS'],delta_AUC=result['delta_AUC'],confidence_interval=interval,head_gap_candidate=float(np.mean([q['train_validation_head_KS_gap'] for q in checks])),head_gap_control=float(np.mean([q['train_validation_head_KS_gap'] for q in parent['folds']]))),out/'MATCHED_CONTROL.json')
     (out/'REPORT.md').write_text(f"# {ident}: {spec['label']}\n\n{formula}\n\nKS={m['KS']:.10f}; AUC={m['AUC']:.10f}; deltaKS={result['delta_KS']:+.10f}; paired95% CI={interval['delta_KS']}.\n\nSame5outer folds. Kumo frozen and its context scores unchanged. Teacher was fitted on the same6k correction rows; judge utility on held-out OOF, not training loss. Repeated development search remains. V25 public incumbent unchanged; no new public score claimed.\n")

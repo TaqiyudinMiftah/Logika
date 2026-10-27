@@ -53,6 +53,8 @@ def main():
         args.worker='cached_frozen_experiment.py';args.ram_required=.6;args.gpu_required=0.;args.python='/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python'
     elif args.run in ['V179','V180','V181','V182','V183']:
         args.worker='conservative_adapters.py';args.ram_required=.85;args.gpu_required=0.;args.python='/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python'
+    if args.run in ['V186','V187','V188','V189','V190']:
+        args.worker='adaptive_adapters.py';args.ram_required=.9;args.gpu_required=0.;args.max_rss_gib=min(args.max_rss_gib,2.);args.python='/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python'
     worker=(V/'scripts'/args.worker).resolve();assert worker.parent==(V/'scripts').resolve() and worker.is_file()
     out=V/'runs'/args.run;out.mkdir(parents=True,exist_ok=True)
     attempts=out/'PROCESS_ATTEMPTS.json'

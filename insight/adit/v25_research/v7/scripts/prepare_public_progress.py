@@ -53,7 +53,13 @@ def main():
     for name in ['v7/KUMO_QUEUE_10.json','v7/KUMO_QUEUE_10.md','v7/KUMO_EXTRA_QUEUE.md','v7/KUMO_EXTRA_REJECTED_DRAFT.json','v7/scripts/kumo_gpu_experiment_v3.py','v7/scripts/cached_frozen_experiment.py','v7/scripts/replay_v25_test_cache.py','v7/scripts/audit_frozen_result.py','v7/reports/V25_TEST_CACHE_REPLAY.json','v7/scripts/extra_frozen_context.py','v7/scripts/review_extra_frozen.py','v7/kumo_gpu/extra_review/REVIEW.json','v7/kumo_gpu/extra_review/DRAFT_REVIEW.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    for name in ['v7/adaptive_plan.json','v7/ADAPTIVE_QUEUE_5.md','v7/scripts/adaptive_adapters.py','v7/adaptive/reports/PREFLIGHT.json','v7/reports/LEDGER_PLAN_RESTORATION.json']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
+    for name in ['v7/fusion_plan.json','v7/score_fusion_plan.json','v7/scripts/score_fusion_local.py','v7/scripts/upload_local_score_run.py','v7/scripts/mirror_score_sources.py']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     for name in ['v7/conservative_plan.json','v7/CONSERVATIVE_QUEUE_5.md','v7/KUMO_QUEUE_15.json','v7/KUMO_QUEUE_15.md','v7/scripts/conservative_adapters.py','v7/conservative/reports/GRADIENT_CHECK.json','v7/conservative/reports/LIGHTGBM_OFFSET_CHECK.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
