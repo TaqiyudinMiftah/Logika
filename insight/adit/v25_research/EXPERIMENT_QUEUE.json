@@ -1,38 +1,5 @@
 [
   {
-    "id": "V208",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "source_script": "v7/scripts/small_kumo_worker.py",
-      "research_ready": true,
-      "no_outer_validation_tuning": true,
-      "id": "V208",
-      "label": "Frozen Small plus stable9 correction information",
-      "method": "small_spectral",
-      "worker": "capacity_followups.py",
-      "spectral_inputs": "stable9",
-      "depends_on": [
-        "V207"
-      ],
-      "formula": "ReuseV207 frozenSmall context predictions; fit27-input correction adding stable9 spectral inputs, L2.003/shrink.5; retain original75:25spline77fusion",
-      "rationale": "Separate capacity from representation by reusing identical Small scores and only adding9 stable power/support inputs. The Large analogV196 improves AUC without KS; Small may need complementary explicit temporal information, but benefit is unproved.",
-      "batch": "capacity",
-      "feature_catalog": "capacity/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V209",
     "status": "QUEUED",
     "definition": {
