@@ -79,6 +79,8 @@ def main(name):
         if current['object']['sha']==gate['reviewed_head']:break
         time.sleep(2)
     else:raise AssertionError(f"Shared HEAD changed: expected {gate['reviewed_head']}, observed {current['object']['sha']}; review required")
+    population_preflight=json.loads((V/'population/reports/PREFLIGHT.json').read_text());assert population_preflight['status']=='PASS'
+    assert population_preflight['source_sha256']==hashlib.sha256((V/'scripts/population_context.py').read_bytes()).hexdigest()
     setup=json.loads((V/'kumo_gpu/SETUP_STATUS.json').read_text());assert setup['status']=='READY',setup
     try:Path('/proc/self/oom_score_adj').write_text('500')
     except OSError:pass
@@ -195,7 +197,7 @@ def main(name):
             reference_audit['transformed_train_input_sha256']=hashlib.sha256(pd.util.hash_pandas_object(tr[['application_id']+context_columns],index=False).values.tobytes()).hexdigest()
         receipt=out/f'fold{fold}_audit.json'
         if receipt.exists():
-            row=json.loads(receipt.read_text());assert row['source_sha256']==sha(__file__)
+            row=json.loads(receipt.read_text());assert row['source_sha256']==sha(__file__) and row['population_helper_sha256']==sha(V/'scripts/population_context.py')
             saved=pd.read_parquet(out/f'fold{fold}_validation.parquet');test=pd.read_parquet(out/f'fold{fold}_test.parquet')
             assert saved.application_id.tolist()==tr.application_id.iloc[vi].tolist() and test.application_id.tolist()==te.application_id.tolist()
             oof[vi]=saved.prediction;pt+=pd.Series(test.prediction.to_numpy(),index=te.application_id).reindex(sample.application_id).to_numpy()/5
@@ -270,6 +272,8 @@ def main(name):
         raw_control=pd.read_parquet(a/'kumo_oof.parquet');assert raw_control.application_id.tolist()==val.application_id.tolist()
         row=dict(fold=fold,metrics=scores(y[vi],p),baseline=scores(y[vi],reference[vi]),delta_KS=scores(y[vi],p)['KS']-scores(y[vi],reference[vi])['KS'],delta_AUC=scores(y[vi],p)['AUC']-scores(y[vi],reference[vi])['AUC'],head_training_KS=scores(y[hi],ph)['KS'],heldout_corrected_Kumo_KS=scores(y[vi],pv)['KS'],train_validation_head_KS_gap=scores(y[hi],ph)['KS']-scores(y[vi],pv)['KS'],parameters=len(head['coefficients']),correction_rows=6000,
                  context_ids_sha256=ids_hash(tr,ci),train_ids_sha256=ids_hash(tr,hi),validation_ids_sha256=ids_hash(tr,vi),source_sha256=sha(__file__),backbone_max_GPU_GiB=peak_gpu,memory=memory(),frozen_parameters_fraction=1.,old_raw_Kumo_mean_abs_error=float(np.mean(abs(predictions['oof']-raw_control.prediction.to_numpy()))),old_raw_Kumo_max_abs_error=float(np.max(abs(predictions['oof']-raw_control.prediction.to_numpy()))))
+        row['population_helper_sha256']=sha(V/'scripts/population_context.py')
+        row['population_grouping']=spec['population_grouping']
         row['context_fit_audit']=context_audits
         row['extra_feature_reference']=reference_audit
         joblib.dump(dict(head=head,kumo_weight=.75,blend='probability'),out/f'fold{fold}_correction.joblib',compress=3)

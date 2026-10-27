@@ -1,0 +1,109 @@
+{
+  "experiment": "V222",
+  "method": "population_context",
+  "hypothesis": "The three employment populations differ in income regularity and affordability mechanisms. Observed labeled sizes33473/20987/15540 and targetrates.132405/.137943/.140283 motivate conditional relationships, not a causal employment claim. V178 grouped only history coverage; test a different population axis using unchanged90inputs.",
+  "formula": "Group only original50k context by observedemployment; cap24k pergroup, keepnatural target proportions,8 frozenestimators; rawKumo=.85globalV168+.15matchinglocal, refit original18-input6k head and75:25spline77fusion",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5298719715874204,
+      "signed_KS": 0.5298719715874204,
+      "AUC": 0.8469842646711463,
+      "rows": 70000
+    },
+    "delta_KS": -0.0015875429751153192,
+    "delta_AUC": -0.0001232796784611523,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5224543684918876,
+        0.5389921316565691
+      ],
+      "delta_KS": [
+        -0.0036513923564105905,
+        0.0006257056176668879
+      ],
+      "candidate_AUC": [
+        0.8433052344988958,
+        0.8507403123875649
+      ],
+      "delta_AUC": [
+        -0.0003815965441182928,
+        9.542651137240389e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.011634629512655347,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3848,
+      "net_bad_captured": 7,
+      "new_members": 247,
+      "exited_members": 247,
+      "entrant_bad_rate": 0.3765182186234818,
+      "exit_bad_rate": 0.3481781376518219
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5853,
+      "net_bad_captured": -2,
+      "new_members": 382,
+      "exited_members": 382,
+      "entrant_bad_rate": 0.22774869109947643,
+      "exit_bad_rate": 0.23298429319371727
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7427,
+      "net_bad_captured": 5,
+      "new_members": 437,
+      "exited_members": 437,
+      "entrant_bad_rate": 0.14187643020594964,
+      "exit_bad_rate": 0.13043478260869565
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8024,
+      "net_bad_captured": 9,
+      "new_members": 474,
+      "exited_members": 474,
+      "entrant_bad_rate": 0.08438818565400844,
+      "exit_bad_rate": 0.06540084388185655
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8649,
+      "net_bad_captured": 0,
+      "new_members": 456,
+      "exited_members": 456,
+      "entrant_bad_rate": 0.06578947368421052,
+      "exit_bad_rate": 0.06578947368421052
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

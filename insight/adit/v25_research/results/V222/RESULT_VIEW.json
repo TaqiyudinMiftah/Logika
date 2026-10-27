@@ -1,0 +1,1021 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V222",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "method": "population_context",
+    "worker": "population_kumo_worker.py",
+    "source_script": "v7/scripts/population_kumo_worker.py",
+    "context_features": "locked90_plus_v25_local_context",
+    "reuse_kumo_from": "V168",
+    "context_rows": 50000,
+    "estimators": 8,
+    "estimator_batch_size": 4,
+    "query_batch_size": 8192,
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "local_context_weight": 0.15,
+    "local_context_max_rows": 24000,
+    "Kumo_frozen_fraction": 1.0,
+    "research_ready": true,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V222",
+    "label": "Employment-conditioned frozen Large population context",
+    "population_grouping": "employment",
+    "formula": "Group only original50k context by observedemployment; cap24k pergroup, keepnatural target proportions,8 frozenestimators; rawKumo=.85globalV168+.15matchinglocal, refit original18-input6k head and75:25spline77fusion",
+    "rationale": "The three employment populations differ in income regularity and affordability mechanisms. Observed labeled sizes33473/20987/15540 and targetrates.132405/.137943/.140283 motivate conditional relationships, not a causal employment claim. V178 grouped only history coverage; test a different population axis using unchanged90inputs."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "OOF": {
+    "KS": 0.5298719715874204,
+    "signed_KS": 0.5298719715874204,
+    "AUC": 0.8469842646711463,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "delta_KS": -0.0004126884566206801,
+  "delta_AUC": -4.501423596958709e-05,
+  "comparison_baseline": "V25",
+  "mean_fold_KS": 0.5334125631955631,
+  "std_fold_KS": 0.006045272355115714,
+  "delta_mean_fold_KS": 8.273863901173684e-05,
+  "fold_wins": 2,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5284636015540561,
+        "signed_KS": 0.5284636015540561,
+        "AUC": 0.8440366972477064,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": -1.6304206759243378e-05,
+      "delta_AUC": -3.3086670250148664e-05,
+      "head_training_KS": 0.550217415740308,
+      "heldout_corrected_Kumo_KS": 0.5279856491676441,
+      "train_validation_head_KS_gap": 0.022231766572663902,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "8876ed7d0f4b2a09e7334309136079ee171cf993cf37eae28896889ea97f4f40",
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "source_sha256": "0e4be7697d27722367118127dfa0da2b6f3d5bc10d38b548f2b3cc5d9bfab938",
+      "backbone_max_GPU_GiB": 9.979077816009521,
+      "memory": {
+        "rss_MiB": 2685.52734375,
+        "peak_rss_MiB": 3005.0390625,
+        "cgroup_current_GiB": 15.66617202758789,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 2.031177520751953
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.0016327936900779605,
+      "old_raw_Kumo_max_abs_error": 0.032458215951919556,
+      "population_helper_sha256": "f5897c663b67c383b5b05e0d5730a55011346380ad9d7bf696432db6e45b7427",
+      "population_grouping": "employment",
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Identical frozen global inputs and indices; new local population contexts are fitted below"
+        },
+        {
+          "group": "salaried",
+          "population_grouping": "employment",
+          "context_pool_rows": 23918,
+          "context_rows": 23918,
+          "context_ids_sha256": "79a7e6c8adcf8dee254c9ece2282cb037907ceb4aa1e5cca2a83e2715cccb39b",
+          "seed": 42026,
+          "natural_pool_event_rate": 0.13245254619951502,
+          "sampled_event_rate": 0.13245254619951502,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "self_employed",
+          "population_grouping": "employment",
+          "context_pool_rows": 14926,
+          "context_rows": 14926,
+          "context_ids_sha256": "eaae0b62dd6cbed2fe40219b61aa2af5b7639f107023c09601d0550ba4780d8c",
+          "seed": 42126,
+          "natural_pool_event_rate": 0.13875117245075708,
+          "sampled_event_rate": 0.13875117245075708,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "variable_income",
+          "population_grouping": "employment",
+          "context_pool_rows": 11156,
+          "context_rows": 11156,
+          "context_ids_sha256": "4032b0060f0cbc5bbcbed742c43209599b7fa88fd6cc96bcca6f115c441552aa",
+          "seed": 42226,
+          "natural_pool_event_rate": 0.13911796342775187,
+          "sampled_event_rate": 0.13911796342775187,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5364813147921025,
+        "signed_KS": 0.5364813147921025,
+        "AUC": 0.8494486069446616,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": -0.0015178564324594968,
+      "delta_AUC": -0.00015634647335005525,
+      "head_training_KS": 0.5381072111032887,
+      "heldout_corrected_Kumo_KS": 0.5365863573615167,
+      "train_validation_head_KS_gap": 0.0015208537417720214,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "8ab37a950e812c07b461af2763a1012473598197d343f3e2a528d03fbe37e267",
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "source_sha256": "0e4be7697d27722367118127dfa0da2b6f3d5bc10d38b548f2b3cc5d9bfab938",
+      "backbone_max_GPU_GiB": 9.954095363616943,
+      "memory": {
+        "rss_MiB": 2687.015625,
+        "peak_rss_MiB": 3037.796875,
+        "cgroup_current_GiB": 15.629314422607422,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 1.973175048828125
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.0019018641905859113,
+      "old_raw_Kumo_max_abs_error": 0.03092658519744873,
+      "population_helper_sha256": "f5897c663b67c383b5b05e0d5730a55011346380ad9d7bf696432db6e45b7427",
+      "population_grouping": "employment",
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Identical frozen global inputs and indices; new local population contexts are fitted below"
+        },
+        {
+          "group": "salaried",
+          "population_grouping": "employment",
+          "context_pool_rows": 23810,
+          "context_rows": 23810,
+          "context_ids_sha256": "a60074afb859d6891fe29b0efbdddf297bf1dc0cbe7969da24192e893fc4c171",
+          "seed": 42027,
+          "natural_pool_event_rate": 0.13250734985300294,
+          "sampled_event_rate": 0.13250734985300294,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "self_employed",
+          "population_grouping": "employment",
+          "context_pool_rows": 15055,
+          "context_rows": 15055,
+          "context_ids_sha256": "0568472e499c16b79eeff0607de77a19b54947b9a636ac510a510977999f3132",
+          "seed": 42127,
+          "natural_pool_event_rate": 0.13643307871139157,
+          "sampled_event_rate": 0.13643307871139157,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "variable_income",
+          "population_grouping": "employment",
+          "context_pool_rows": 11135,
+          "context_rows": 11135,
+          "context_ids_sha256": "a8d6de0adecd28483c8a05a0fed71e0306048f5c2c5615f8ff566cb25b5a0cf4",
+          "seed": 42227,
+          "natural_pool_event_rate": 0.14207453973955994,
+          "sampled_event_rate": 0.14207453973955994,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5425428275642311,
+        "signed_KS": 0.5425428275642311,
+        "AUC": 0.8498932552714001,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": 0.002244589275075426,
+      "delta_AUC": 3.634751160208616e-05,
+      "head_training_KS": 0.5597375629322432,
+      "heldout_corrected_Kumo_KS": 0.5422268737761791,
+      "train_validation_head_KS_gap": 0.01751068915606413,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "3f252a14aa1b8a159873e45308847d67bfc8b16328e36ca76ef882d2033213f8",
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "source_sha256": "0e4be7697d27722367118127dfa0da2b6f3d5bc10d38b548f2b3cc5d9bfab938",
+      "backbone_max_GPU_GiB": 9.998046398162842,
+      "memory": {
+        "rss_MiB": 2688.046875,
+        "peak_rss_MiB": 3037.796875,
+        "cgroup_current_GiB": 15.638130187988281,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 1.9778709411621094
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.0017941417172551155,
+      "old_raw_Kumo_max_abs_error": 0.022748827934265137,
+      "population_helper_sha256": "f5897c663b67c383b5b05e0d5730a55011346380ad9d7bf696432db6e45b7427",
+      "population_grouping": "employment",
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Identical frozen global inputs and indices; new local population contexts are fitted below"
+        },
+        {
+          "group": "salaried",
+          "population_grouping": "employment",
+          "context_pool_rows": 24050,
+          "context_rows": 24000,
+          "context_ids_sha256": "761fd0a11dd584a2ae23267d5ef187f3f936691d090681b943ba65b427fd01a3",
+          "seed": 42028,
+          "natural_pool_event_rate": 0.13264033264033265,
+          "sampled_event_rate": 0.132625,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "self_employed",
+          "population_grouping": "employment",
+          "context_pool_rows": 14912,
+          "context_rows": 14912,
+          "context_ids_sha256": "50da6f5bc9b1302ffae727e94f3fe9dd6950fc7d6021248443287af1815ce6f5",
+          "seed": 42128,
+          "natural_pool_event_rate": 0.13760729613733905,
+          "sampled_event_rate": 0.13760729613733905,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "variable_income",
+          "population_grouping": "employment",
+          "context_pool_rows": 11038,
+          "context_rows": 11038,
+          "context_ids_sha256": "4c4d9016a8b647a0e57b64171ebd31414a5c3dbac3dd817b004b295bc401bd2c",
+          "seed": 42228,
+          "natural_pool_event_rate": 0.14033339373074832,
+          "sampled_event_rate": 0.14033339373074832,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5309339309067085,
+        "signed_KS": 0.5309339309067085,
+        "AUC": 0.8438202019643642,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": 0.00028187259358780636,
+      "delta_AUC": -4.3154407251555504e-05,
+      "head_training_KS": 0.5289893569818553,
+      "heldout_corrected_Kumo_KS": 0.5297401226819392,
+      "train_validation_head_KS_gap": -0.0007507657000838108,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "da1c17ad01de0f88ca7c966d408bf30691cea1584a5c91430fd3885a5407a65c",
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "source_sha256": "0e4be7697d27722367118127dfa0da2b6f3d5bc10d38b548f2b3cc5d9bfab938",
+      "backbone_max_GPU_GiB": 9.95987606048584,
+      "memory": {
+        "rss_MiB": 2694.99609375,
+        "peak_rss_MiB": 3037.796875,
+        "cgroup_current_GiB": 15.646770477294922,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 1.9818916320800781
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.001658045337535441,
+      "old_raw_Kumo_max_abs_error": 0.033966004848480225,
+      "population_helper_sha256": "f5897c663b67c383b5b05e0d5730a55011346380ad9d7bf696432db6e45b7427",
+      "population_grouping": "employment",
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Identical frozen global inputs and indices; new local population contexts are fitted below"
+        },
+        {
+          "group": "salaried",
+          "population_grouping": "employment",
+          "context_pool_rows": 23835,
+          "context_rows": 23835,
+          "context_ids_sha256": "49687c6b5073d7c52ac2122f783d968f9c1689187cb188c3e1092e449b4ae666",
+          "seed": 42029,
+          "natural_pool_event_rate": 0.1329137822529893,
+          "sampled_event_rate": 0.1329137822529893,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "self_employed",
+          "population_grouping": "employment",
+          "context_pool_rows": 15039,
+          "context_rows": 15039,
+          "context_ids_sha256": "10cac51a34f5743ab4aadcdbea1b6827f757aafe23757eb8278715001af7def4",
+          "seed": 42129,
+          "natural_pool_event_rate": 0.1384400558547776,
+          "sampled_event_rate": 0.1384400558547776,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "variable_income",
+          "population_grouping": "employment",
+          "context_pool_rows": 11126,
+          "context_rows": 11126,
+          "context_ids_sha256": "502a62c01e62e53f5f91e7009f5c5af1aef60ddefc6483acd3f4f1d5e4895c16",
+          "seed": 42229,
+          "natural_pool_event_rate": 0.13841452453712025,
+          "sampled_event_rate": 0.13841452453712025,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5286411411607171,
+        "signed_KS": 0.5286411411607171,
+        "AUC": 0.8478659385088374,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": -0.000578608034385808,
+      "delta_AUC": -3.076870124285591e-05,
+      "head_training_KS": 0.5495891286213771,
+      "heldout_corrected_Kumo_KS": 0.5319285248285166,
+      "train_validation_head_KS_gap": 0.017660603792860496,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "becb7cfd548e1fd54f8696ce8cf6bfd52553a54dc98309cb1565ec2e1f300dfc",
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "source_sha256": "0e4be7697d27722367118127dfa0da2b6f3d5bc10d38b548f2b3cc5d9bfab938",
+      "backbone_max_GPU_GiB": 9.98000431060791,
+      "memory": {
+        "rss_MiB": 2687.7734375,
+        "peak_rss_MiB": 3037.796875,
+        "cgroup_current_GiB": 15.643356323242188,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 1.9863777160644531
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.0018542095785960555,
+      "old_raw_Kumo_max_abs_error": 0.023947030305862427,
+      "population_helper_sha256": "f5897c663b67c383b5b05e0d5730a55011346380ad9d7bf696432db6e45b7427",
+      "population_grouping": "employment",
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Identical frozen global inputs and indices; new local population contexts are fitted below"
+        },
+        {
+          "group": "salaried",
+          "population_grouping": "employment",
+          "context_pool_rows": 23922,
+          "context_rows": 23922,
+          "context_ids_sha256": "07772b22a8a9e789260abbc41f8dfe7c76608e0627d8a46887955b14cc3152d0",
+          "seed": 42030,
+          "natural_pool_event_rate": 0.13167795334838225,
+          "sampled_event_rate": 0.13167795334838225,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "self_employed",
+          "population_grouping": "employment",
+          "context_pool_rows": 14982,
+          "context_rows": 14982,
+          "context_ids_sha256": "a28c27cce7cc7d8589f1591308a5042da0770d3a7a579234fea5cbef0866e54b",
+          "seed": 42130,
+          "natural_pool_event_rate": 0.14050193565612068,
+          "sampled_event_rate": 0.14050193565612068,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": "variable_income",
+          "population_grouping": "employment",
+          "context_pool_rows": 11096,
+          "context_rows": 11096,
+          "context_ids_sha256": "1f5f1bf9f5a3bcd4153dd503d7da82854db5149f3498915ac80661459c81b0e6",
+          "seed": 42230,
+          "natural_pool_event_rate": 0.1383381398702235,
+          "sampled_event_rate": 0.1383381398702235,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5224543684918876,
+      0.5389921316565691
+    ],
+    "delta_KS": [
+      -0.0013818590587683255,
+      0.0007891887747328821
+    ],
+    "candidate_AUC": [
+      0.8433052344988958,
+      0.8507403123875649
+    ],
+    "delta_AUC": [
+      -0.0001041326311494617,
+      1.4500520269314357e-05
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "submission": "v7/submissions/submission_V222_Kumo_Large_V25.csv",
+  "submission_sha256": "cbe54cfc2468565f5c4b7719511a7d6b4cc3198705846e5d497803221a63e2f9",
+  "public_score": null,
+  "elapsed_seconds": 199.57907676696777,
+  "source_sha256": "0e4be7697d27722367118127dfa0da2b6f3d5bc10d38b548f2b3cc5d9bfab938",
+  "modeling_formula": "Frozen Kumo Large;50k labeled context,8 estimators; disjoint6k offset-head training;14k outer validation; .75*sigmoid(logit(p_Kumo)+.5*Xbeta)+.25*p_original_spline77; mean5fold test probabilities; p_Kumo=.85*global_V168_90inputs+.15*local_employment_expert; reference and local contexts use original50k pool only",
+  "modeling_objective": "Unweighted BCE + .003/2*sum(beta[1:]**2); full correction fitting and .5 shrink at inference",
+  "controller_source": "v7/scripts/population_kumo_worker.py",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": true,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": true,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": true,
+  "memory": {
+    "rss_MiB": 2702.796875,
+    "peak_rss_MiB": 3037.796875,
+    "cgroup_current_GiB": 15.664939880371094,
+    "cgroup_limit_GiB": 16.0,
+    "inactive_file_GiB": 1.9928817749023438
+  },
+  "GPU_cache_parity": {
+    "patch": "Only skip CPU offload of completed estimator cache batches",
+    "original_fit_sha256": "84fc1c05156dc788fb21d2293277fc97b4dfc40cfd9c58b5924706499bd724df",
+    "patched_fit_sha256": "2cf1e87797089fd105841dc355150ee6427a038b7980010b4ca153530c943f08",
+    "removed_blocks": 1,
+    "installed_package_unchanged": true,
+    "status": "PASS",
+    "maximum_absolute_prediction_difference": 0.0,
+    "context_rows": 512,
+    "query_rows": 64,
+    "estimators": 2,
+    "batch_size": 1,
+    "criterion": 1e-06,
+    "assertion": "Storage optimization only; the cache retains original tensor values and ordering"
+  },
+  "weights_manifest": {
+    "repository": "nvidia/Kumo-Tabular",
+    "revision": "3c3e10bbdb590ace29e7026847f92db3c603096d",
+    "tag": "v1.0.1",
+    "files": [
+      "config.json",
+      "large/classifier.pt",
+      "large/regressor.pt"
+    ],
+    "cache": "/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019/v7/kumo_gpu/hf_cache"
+  },
+  "feature_matrix_sha256": "2c1d2255dc45478dfa1c2e9f7bc3e961f7eba01b6beab61bcc13638af9c99951",
+  "packages": {
+    "torch": "2.14.1",
+    "structured-data-models": "0.2.1",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2"
+  },
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "retrained_seeds": 1,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY and new CUDA runtime; matched fresh control required"
+  },
+  "error_analysis": {
+    "json": "v7/runs/V222/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V222/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V222/ERROR_CASES.csv"
+  },
+  "derived_context_features": [],
+  "derived_context_formulas": {},
+  "context_event_cache_sha256": {},
+  "fresh_control_delta_KS": -0.0003300342652265975,
+  "fresh_control_confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.5225231786930706,
+      0.539391109359066
+    ],
+    "candidate_KS": [
+      0.5224543684918876,
+      0.5389921316565691
+    ],
+    "delta_KS": [
+      -0.0012696673614018745,
+      0.0008586022984793545
+    ],
+    "candidate_AUC": [
+      0.8433052344988958,
+      0.8507403123875649
+    ],
+    "delta_AUC": [
+      -0.00010536340222396246,
+      1.4249697357684973e-05
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "population_helper_sha256": "f5897c663b67c383b5b05e0d5730a55011346380ad9d7bf696432db6e45b7427",
+  "backbone_model_size": "large",
+  "comparison_to_V185": {
+    "control": "V185",
+    "control_metrics": {
+      "KS": 0.5311516622583823,
+      "signed_KS": 0.5311516622583823,
+      "AUC": 0.8471087754249731,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5298719715874204,
+      "signed_KS": 0.5298719715874204,
+      "AUC": 0.8469842646711463,
+      "rows": 70000
+    },
+    "delta_KS": -0.0012796906709618971,
+    "delta_AUC": -0.00012451075382680088,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5234363951810418,
+        0.5406116770704794
+      ],
+      "candidate_KS": [
+        0.5224543684918876,
+        0.5389921316565691
+      ],
+      "delta_KS": [
+        -0.0034715614574444805,
+        0.0009804888447608989
+      ],
+      "candidate_AUC": [
+        0.8433052344988958,
+        0.8507403123875649
+      ],
+      "delta_AUC": [
+        -0.00038333230821970264,
+        9.924314929724541e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "generalization_review": {
+    "status": "REVIEWED",
+    "candidate": "V222",
+    "decision": "EXPERIMENT_ONLY_KEEP_V25_PUBLIC_INCUMBENT",
+    "pooled_KS": 0.5298719715874204,
+    "AUC": 0.8469842646711463,
+    "delta_AUC_vs_V25": -4.501423596958709e-05,
+    "delta_AUC_vs_V185": -0.00012451075382680088,
+    "head_gap": 0.011634629512655347,
+    "V25_head_gap": 0.011107666682208906,
+    "flags": [
+      "REUSED_DEVELOPMENT_FOLDS",
+      "MANY_PRIOR_EXPERIMENTS",
+      "NO_INDEPENDENT_GENERALIZATION_TEST",
+      "AUC_DECREASE_VS_V25",
+      "AUC_DECREASE_VS_V185",
+      "DELTA_KS_V25_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "DELTA_KS_V185_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "FEWER_THAN_FOUR_FOLD_KS_WINS_VS_V185"
+    ],
+    "public_incumbent": {
+      "id": "V25",
+      "KS": 0.56822
+    },
+    "development_incumbent_public_outcome": {
+      "id": "V185",
+      "KS": 0.56699
+    },
+    "causation_note": "Public decline does not uniquely establish overfitting; sample variability, population drift and source instability remain possible.",
+    "selection_caveat": "Intervals condition on fitted predictions and exclude search/retraining uncertainty; operational rules are heuristics, not significance tests.",
+    "top_risk_capture_vs_V185": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3842,
+        "candidate_bad_captured": 3848,
+        "net_bad_captured": 6,
+        "new_members": 247,
+        "exited_members": 247,
+        "entrant_bad_rate": 0.3724696356275304,
+        "exit_bad_rate": 0.3481781376518219
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5853,
+        "net_bad_captured": -2,
+        "new_members": 378,
+        "exited_members": 378,
+        "entrant_bad_rate": 0.22486772486772486,
+        "exit_bad_rate": 0.23015873015873015
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7417,
+        "candidate_bad_captured": 7427,
+        "net_bad_captured": 10,
+        "new_members": 441,
+        "exited_members": 441,
+        "entrant_bad_rate": 0.1473922902494331,
+        "exit_bad_rate": 0.12471655328798185
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8018,
+        "candidate_bad_captured": 8024,
+        "net_bad_captured": 6,
+        "new_members": 469,
+        "exited_members": 469,
+        "entrant_bad_rate": 0.08102345415778252,
+        "exit_bad_rate": 0.06823027718550106
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8649,
+        "net_bad_captured": 0,
+        "new_members": 464,
+        "exited_members": 464,
+        "entrant_bad_rate": 0.0668103448275862,
+        "exit_bad_rate": 0.0668103448275862
+      }
+    ]
+  },
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5298719715874204,
+      "signed_KS": 0.5298719715874204,
+      "AUC": 0.8469842646711463,
+      "rows": 70000
+    },
+    "delta_KS": -0.0015875429751153192,
+    "delta_AUC": -0.0001232796784611523,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5224543684918876,
+        0.5389921316565691
+      ],
+      "delta_KS": [
+        -0.0036513923564105905,
+        0.0006257056176668879
+      ],
+      "candidate_AUC": [
+        0.8433052344988958,
+        0.8507403123875649
+      ],
+      "delta_AUC": [
+        -0.0003815965441182928,
+        9.542651137240389e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "continuous_insight": {
+    "experiment": "V222",
+    "method": "population_context",
+    "hypothesis": "The three employment populations differ in income regularity and affordability mechanisms. Observed labeled sizes33473/20987/15540 and targetrates.132405/.137943/.140283 motivate conditional relationships, not a causal employment claim. V178 grouped only history coverage; test a different population axis using unchanged90inputs.",
+    "formula": "Group only original50k context by observedemployment; cap24k pergroup, keepnatural target proportions,8 frozenestimators; rawKumo=.85globalV168+.15matchinglocal, refit original18-input6k head and75:25spline77fusion",
+    "findings": [
+      "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+      "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+    ],
+    "comparison_to_V193": {
+      "control": "V193",
+      "control_metrics": {
+        "KS": 0.5314595145625357,
+        "signed_KS": 0.5314595145625357,
+        "AUC": 0.8471075443496074,
+        "rows": 70000
+      },
+      "candidate_metrics": {
+        "KS": 0.5298719715874204,
+        "signed_KS": 0.5298719715874204,
+        "AUC": 0.8469842646711463,
+        "rows": 70000
+      },
+      "delta_KS": -0.0015875429751153192,
+      "delta_AUC": -0.0001232796784611523,
+      "fold_wins": 2,
+      "confidence_interval": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5237657171439752,
+          0.5406826945132854
+        ],
+        "candidate_KS": [
+          0.5224543684918876,
+          0.5389921316565691
+        ],
+        "delta_KS": [
+          -0.0036513923564105905,
+          0.0006257056176668879
+        ],
+        "candidate_AUC": [
+          0.8433052344988958,
+          0.8507403123875649
+        ],
+        "delta_AUC": [
+          -0.0003815965441182928,
+          9.542651137240389e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      }
+    },
+    "head_gap": 0.011634629512655347,
+    "top_risk_capture": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3841,
+        "candidate_bad_captured": 3848,
+        "net_bad_captured": 7,
+        "new_members": 247,
+        "exited_members": 247,
+        "entrant_bad_rate": 0.3765182186234818,
+        "exit_bad_rate": 0.3481781376518219
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5853,
+        "net_bad_captured": -2,
+        "new_members": 382,
+        "exited_members": 382,
+        "entrant_bad_rate": 0.22774869109947643,
+        "exit_bad_rate": 0.23298429319371727
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7422,
+        "candidate_bad_captured": 7427,
+        "net_bad_captured": 5,
+        "new_members": 437,
+        "exited_members": 437,
+        "entrant_bad_rate": 0.14187643020594964,
+        "exit_bad_rate": 0.13043478260869565
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8015,
+        "candidate_bad_captured": 8024,
+        "net_bad_captured": 9,
+        "new_members": 474,
+        "exited_members": 474,
+        "entrant_bad_rate": 0.08438818565400844,
+        "exit_bad_rate": 0.06540084388185655
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8649,
+        "net_bad_captured": 0,
+        "new_members": 456,
+        "exited_members": 456,
+        "entrant_bad_rate": 0.06578947368421052,
+        "exit_bad_rate": 0.06578947368421052
+      }
+    ],
+    "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+    "public_incumbent": "V25",
+    "independent_generalization_established": false
+  }
+}

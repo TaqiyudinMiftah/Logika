@@ -6,7 +6,7 @@ import pandas as pd
 
 
 def reference(frame,mode):
-    if mode=='employment':return dict(mode=mode,levels=sorted(frame.employment_type.fillna('MISSING').astype(str).unique().tolist()))
+    if mode=='employment':return dict(mode=mode,levels=sorted(frame.employment_type.dropna().astype(str).unique().tolist()))
     if mode=='apr_regime':
         x=frame.annual_interest_rate.to_numpy(float);x=x[np.isfinite(x)];assert len(x)>0
         return dict(mode=mode,median_APR=float(np.median(x)),levels=['low_or_equal','high'])

@@ -1,39 +1,5 @@
 [
   {
-    "id": "V222",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "method": "population_context",
-      "worker": "population_kumo_worker.py",
-      "source_script": "v7/scripts/population_kumo_worker.py",
-      "context_features": "locked90_plus_v25_local_context",
-      "reuse_kumo_from": "V168",
-      "context_rows": 50000,
-      "estimators": 8,
-      "estimator_batch_size": 4,
-      "query_batch_size": 8192,
-      "penalty": 0.003,
-      "strength": 0.5,
-      "kumo_weight": 0.75,
-      "local_context_weight": 0.15,
-      "local_context_max_rows": 24000,
-      "Kumo_frozen_fraction": 1.0,
-      "research_ready": true,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "id": "V222",
-      "label": "Employment-conditioned frozen Large population context",
-      "population_grouping": "employment",
-      "formula": "Group only original50k context by observedemployment; cap24k pergroup, keepnatural target proportions,8 frozenestimators; rawKumo=.85globalV168+.15matchinglocal, refit original18-input6k head and75:25spline77fusion",
-      "rationale": "The three employment populations differ in income regularity and affordability mechanisms. Observed labeled sizes33473/20987/15540 and targetrates.132405/.137943/.140283 motivate conditional relationships, not a causal employment claim. V178 grouped only history coverage; test a different population axis using unchanged90inputs.",
-      "batch": "population",
-      "feature_catalog": "population/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V223",
     "status": "QUEUED",
     "definition": {
@@ -95,6 +61,105 @@
       "no_outer_validation_tuning": true,
       "formula": "rawKumo=.5*rawV178+.5*rawV222=.85global+.075history-local+.075employment-local; refit18-input6k correction, .5shrink,75:25spline77fusion; mean5foldtest",
       "rationale": "Occupation and history availability represent different borrower conditions. Test complementary context information before nonlinear correction with fixed weights and unchanged18 head inputs; avoid fitting dynamic weights on reused outer labels.",
+      "batch": "population_fusion",
+      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V225",
+    "status": "QUEUED",
+    "definition": {
+      "method": "population_raw_fusion",
+      "worker": "population_fusion.py",
+      "source_script": "v7/scripts/population_fusion.py",
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "replaces_base_head": true,
+      "Kumo_frozen_fraction": 1.0,
+      "comparison_baseline": "V25",
+      "no_outer_validation_tuning": true,
+      "id": "V225",
+      "label": "Coverage and underwriting population contexts",
+      "research_ready": true,
+      "raw_sources": [
+        "V178",
+        "V223"
+      ],
+      "depends_on": [
+        "V223"
+      ],
+      "formula": "rawKumo=.5rawV178+.5rawV223=.85global+.075coverage-local+.075APR-local; refit18-input correction and75:25spline77fusion",
+      "rationale": "History availability and underwriting regimes represent different mechanisms. Complete the paired population ablation with matched total15%local weight, unchanged data inputs, no optimized outer weights, and original6k correction.",
+      "batch": "population_fusion",
+      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V226",
+    "status": "QUEUED",
+    "definition": {
+      "method": "population_raw_fusion",
+      "worker": "population_fusion.py",
+      "source_script": "v7/scripts/population_fusion.py",
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "replaces_base_head": true,
+      "Kumo_frozen_fraction": 1.0,
+      "comparison_baseline": "V25",
+      "no_outer_validation_tuning": true,
+      "id": "V226",
+      "label": "Occupation and underwriting population contexts",
+      "research_ready": true,
+      "raw_sources": [
+        "V222",
+        "V223"
+      ],
+      "depends_on": [
+        "V222",
+        "V223"
+      ],
+      "formula": "rawKumo=.5rawV222+.5rawV223=.85global+.075employment-local+.075APR-local; refit18-input correction and75:25spline77fusion",
+      "rationale": "Test complementarity of employment-conditioned affordability and policy-conditioned context without the coverage expert. This completes a controlled context-family ablation; shared context examples are not independent evidence.",
+      "batch": "population_fusion",
+      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V227",
+    "status": "QUEUED",
+    "definition": {
+      "method": "population_raw_fusion",
+      "worker": "population_fusion.py",
+      "source_script": "v7/scripts/population_fusion.py",
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "replaces_base_head": true,
+      "Kumo_frozen_fraction": 1.0,
+      "comparison_baseline": "V25",
+      "no_outer_validation_tuning": true,
+      "id": "V227",
+      "label": "Three population views with a fixed global anchor",
+      "research_ready": true,
+      "raw_sources": [
+        "V178",
+        "V222",
+        "V223"
+      ],
+      "depends_on": [
+        "V222",
+        "V223"
+      ],
+      "formula": "rawKumo=mean(rawV178,rawV222,rawV223)=.85global+.05each coverage/employment/APR local; refit18-input correction and75:25spline77fusion",
+      "rationale": "Compare all three population views to each matched pair under the same total15%local budget. No additional correction features or outer-fitted weights; source overlap and repeated selection remain caveats.",
       "batch": "population_fusion",
       "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
     }

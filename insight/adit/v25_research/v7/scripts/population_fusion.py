@@ -35,7 +35,9 @@ def probability(model,frame,k,base_head):
 
 def preflight():
     rng=np.random.default_rng(58027);n=1000;k=rng.beta(2,8,n);h=pd.DataFrame(dict(application_id=[f'SYNTHETIC_{i}' for i in range(n)],a=rng.lognormal(size=n),employment_type=np.resize(['salaried','self_employed'],n),target=rng.binomial(1,k)));f=dict(h=h,synthetic_preflight=True,synthetic_contexts=pd.Series(k,index=h.application_id))
-    spec=json.loads((V/'population_fusion_plan.json').read_text())[0];model,audit,count=fit_adapter(f,spec,['a','employment_type']);p,_=probability(model,h,k,None);assert np.isfinite(p).all();buf=io.BytesIO();joblib.dump(model,buf);buf.seek(0);q,_=probability(joblib.load(buf),h,k,None);assert np.array_equal(p,q)
+    specifications=json.loads((V/'population_fusion_plan.json').read_text());assert all(len(a['raw_sources'])>=2 and len(set(a['raw_sources']))==len(a['raw_sources']) for a in specifications)
+    assert np.allclose(np.mean([[.1,.8],[.3,.4],[.2,.6]],axis=0),[.2,.6])
+    spec=specifications[0];model,audit,count=fit_adapter(f,spec,['a','employment_type']);p,_=probability(model,h,k,None);assert np.isfinite(p).all();buf=io.BytesIO();joblib.dump(model,buf);buf.seek(0);q,_=probability(joblib.load(buf),h,k,None);assert np.array_equal(p,q)
     dump(dict(status='PASS',synthetic_only=True,checkpoint_replay_exact=True,source_sha256=sha(__file__)),V/'population_fusion/reports/PREFLIGHT.json');print('POPULATION_FUSION_PREFLIGHT_PASS',flush=True)
 
 
