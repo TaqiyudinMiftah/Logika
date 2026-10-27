@@ -1,0 +1,109 @@
+{
+  "experiment": "V232",
+  "method": "population_raw_fusion",
+  "hypothesis": "V207 Small alone was weaker, whileV209 final-score blending gave a tiny numerical gain. Test combination before the18-input correction; changing fusion stage can expose complementary errors, but equal weights are not claimed optimal.",
+  "formula": "raw=.50globalLargeV168+.50globalSmallV207; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5301855915144382,
+      "signed_KS": 0.5301855915144382,
+      "AUC": 0.8467773257708374,
+      "rows": 70000
+    },
+    "delta_KS": -0.0012739230480974806,
+    "delta_AUC": -0.00033021857877002514,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5222322697156898,
+        0.5394677511470384
+      ],
+      "delta_KS": [
+        -0.0032999584628564337,
+        0.0010291578791924035
+      ],
+      "candidate_AUC": [
+        0.8430742405945986,
+        0.8504923431189758
+      ],
+      "delta_AUC": [
+        -0.0006173342182400288,
+        -4.3197008759513426e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.012226843097377626,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3844,
+      "net_bad_captured": 3,
+      "new_members": 279,
+      "exited_members": 279,
+      "entrant_bad_rate": 0.3942652329749104,
+      "exit_bad_rate": 0.3835125448028674
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5865,
+      "net_bad_captured": 10,
+      "new_members": 416,
+      "exited_members": 416,
+      "entrant_bad_rate": 0.25,
+      "exit_bad_rate": 0.22596153846153846
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7429,
+      "net_bad_captured": 7,
+      "new_members": 513,
+      "exited_members": 513,
+      "entrant_bad_rate": 0.13840155945419103,
+      "exit_bad_rate": 0.12475633528265107
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8011,
+      "net_bad_captured": -4,
+      "new_members": 581,
+      "exited_members": 581,
+      "entrant_bad_rate": 0.08433734939759036,
+      "exit_bad_rate": 0.09122203098106713
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8645,
+      "net_bad_captured": -4,
+      "new_members": 557,
+      "exited_members": 557,
+      "entrant_bad_rate": 0.06463195691202872,
+      "exit_bad_rate": 0.0718132854578097
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
