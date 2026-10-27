@@ -1,34 +1,5 @@
 [
   {
-    "id": "V189",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "Kumo_frozen_fraction": 1.0,
-      "modeling_only": true,
-      "inner_splits": 3,
-      "inner_seed": 52027,
-      "no_outer_validation_tuning": true,
-      "source_script": "v7/scripts/adaptive_adapters.py",
-      "id": "V189",
-      "label": "Inner-OOF hierarchical employment and history calibration",
-      "method": "partial_pool_group_calibration",
-      "group_penalty": 0.04,
-      "global_penalty": 0.02,
-      "calibration_strength": 0.5,
-      "residual_cap": 0.25,
-      "formula": "On inner OOF z fit additive b0+b_employment+b_history with meanBCE(z+delta)+.02/2*b0^2+.04/2*sum(b_group^2); history=zero/1_to3/over3/missing allocation. eta=z25+.5*clip(delta,-.25,.25); final=.75*sigmoid(eta)+.25*spline77; unseen levels use global fallback",
-      "rationale": "V167 no-allocation segment deltaKS -.002942 vs +.004588 at1:3 observations; V178 zero-history remains -.000260. Partial pooling learns modest group bias from strictly inner-held-out correction predictions, not outer error-derived gates or separate small Kumo backbones. Sparse groups shrink to global correction.",
-      "batch": "adaptive",
-      "feature_catalog": "adaptive/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V190",
     "status": "QUEUED",
     "definition": {
