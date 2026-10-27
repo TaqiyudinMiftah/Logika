@@ -1,0 +1,109 @@
+{
+  "experiment": "V224",
+  "method": "population_raw_fusion",
+  "hypothesis": "Occupation and history availability represent different borrower conditions. Test complementary context information before nonlinear correction with fixed weights and unchanged18 head inputs; avoid fitting dynamic weights on reused outer labels.",
+  "formula": "rawKumo=.5*rawV178+.5*rawV222=.85global+.075history-local+.075employment-local; refit18-input6k correction, .5shrink,75:25spline77fusion; mean5foldtest",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5301117635074455,
+      "signed_KS": 0.5301117635074455,
+      "AUC": 0.8470654982572103,
+      "rows": 70000
+    },
+    "delta_KS": -0.0013477510550902183,
+    "delta_AUC": -4.204609239710777e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.522423199897996,
+        0.5395368854183784
+      ],
+      "delta_KS": [
+        -0.003533856609568295,
+        0.0006993565271653265
+      ],
+      "candidate_AUC": [
+        0.8433944154328261,
+        0.8508381141093181
+      ],
+      "delta_AUC": [
+        -0.0002909907013104257,
+        0.00016313743876134043
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.011020532634856094,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3854,
+      "net_bad_captured": 13,
+      "new_members": 240,
+      "exited_members": 240,
+      "entrant_bad_rate": 0.3958333333333333,
+      "exit_bad_rate": 0.3416666666666667
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5849,
+      "net_bad_captured": -6,
+      "new_members": 368,
+      "exited_members": 368,
+      "entrant_bad_rate": 0.22554347826086957,
+      "exit_bad_rate": 0.2418478260869565
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7429,
+      "net_bad_captured": 7,
+      "new_members": 413,
+      "exited_members": 413,
+      "entrant_bad_rate": 0.13317191283292978,
+      "exit_bad_rate": 0.1162227602905569
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8027,
+      "net_bad_captured": 12,
+      "new_members": 453,
+      "exited_members": 453,
+      "entrant_bad_rate": 0.09713024282560706,
+      "exit_bad_rate": 0.0706401766004415
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8655,
+      "net_bad_captured": 6,
+      "new_members": 429,
+      "exited_members": 429,
+      "entrant_bad_rate": 0.07459207459207459,
+      "exit_bad_rate": 0.06060606060606061
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
