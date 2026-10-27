@@ -74,6 +74,8 @@ def audit(ident):
     assert not set(feature_names)&{'application_id','customer_id','loan_id','target','application_datetime','decision_datetime'}
     value=dict(status='PASS',experiment=ident,UTC=time.time(),measured_OOF=measured,delta_KS=r['delta_KS'],delta_AUC=r['delta_AUC'],labels_and_ids_match=True,all_five_outer_folds_match=True,entity_disjoint=True,frozen_backbone_record=True,score_direction_verified=True,test_rows=30000,submission_sha256=sha(sub),test_mean_max_abs_error=error,required_artifacts=required,folds=fold_audits,goal_threshold_reached=measured['KS']>=.531,limitations='Artifact/metric/split checks do not establish unknown legacy snapshot provenance or independent generalization. CI remains conditional on fitted predictions and repeated development search.',source_sha256=sha(__file__))
     dump(value,out/'REQUIREMENTS_AUDIT.json');print(json.dumps(dict(experiment=ident,status='PASS',KS=measured['KS'],AUC=measured['AUC'],goal_threshold_reached=value['goal_threshold_reached'])),flush=True)
+    from update_development_incumbents import update
+    update()
     return value
 
 if __name__=='__main__':

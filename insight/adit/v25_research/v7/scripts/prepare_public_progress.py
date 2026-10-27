@@ -68,6 +68,12 @@ def main():
     for name in ['v7/scoped_smoothing_plan.json','v7/scripts/scoped_smoothing.py','v7/scoped_smoothing/reports/PREFLIGHT.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    for name in ['v7/scripts/update_development_incumbents.py','v7/reports/DEVELOPMENT_PARETO_FRONTIER.json','v7/reports/DEVELOPMENT_BEST_HISTORY.jsonl']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    for name in ['v7/resample_plan.json','v7/scripts/resample_worker.py','v7/resample/reports/PREFLIGHT.json','v7/NEXT_RESEARCH_DIRECTIONS.md']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
     for name in ['v7/fusion_plan.json','v7/score_fusion_plan.json','v7/scripts/score_fusion_local.py','v7/scripts/upload_local_score_run.py','v7/scripts/mirror_score_sources.py']:
         if (ROOT/name).exists():

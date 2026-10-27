@@ -293,5 +293,41 @@
     ],
     "formula": "Perfold p=.90*pV25+.10*pV207; fixed weights; mean5foldtest",
     "rationale": "V209 anchors Small to development-bestV193, which inherits periodicity and selection risk. Test an otherwise identical capacity-diversity blend anchored directly to the public-incumbentV25, preserving a lower-complexity alternative. Small standalone lower AUC is a reason for caution, not assumed complementary benefit."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "no_outer_validation_tuning": true,
+    "worker": "capacity_followups.py",
+    "source_script": "v7/scripts/capacity_followups.py",
+    "spectral_inputs": "none",
+    "fixed_score_fusion": true,
+    "id": "V220",
+    "label": "V193 anchor with10% resampled reduced-knot expert",
+    "method": "auc_diversity_blend",
+    "research_ready": true,
+    "sources": [
+      "V193",
+      "V219"
+    ],
+    "weights": [
+      0.9,
+      0.1
+    ],
+    "depends_on": [
+      "V219"
+    ],
+    "formula": "Perfold p=.9*pV193+.1*pV219; fixed weights; mean5foldtest",
+    "rationale": "Matched toV210, replacing only the singleV198 correction with its3-resample mean. Test whether the small simultaneous KS/AUC gain survives correction retraining variation; do not select the best member using held-out labels."
   }
 ]

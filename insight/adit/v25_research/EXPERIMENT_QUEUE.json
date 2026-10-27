@@ -1,36 +1,5 @@
 [
   {
-    "id": "V216",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "research_ready": true,
-      "no_outer_validation_tuning": true,
-      "id": "V216",
-      "label": "Smooth credit-level responses only",
-      "method": "scoped_coefficient_smoothing",
-      "worker": "scoped_smoothing.py",
-      "source_script": "v7/scripts/scoped_smoothing.py",
-      "roughness_scope": "credit_signal",
-      "roughness_penalty": 0.03,
-      "formula": "V25 original18/globalKumo; add.03/2 D2 penalty only to bureau-score and late1/late30 posterior spline coefficients; other responses originalL2.003; shrink.5 and75:25spline77fusion",
-      "rationale": "V200 all-response smoothing improved AUC but reduced KS. ContrastV214 capacity andV215 evidence scopes by isolating the three credit-level responses. This diagnoses which domain drives the AUC/KS tradeoff, without assuming that residual risk is monotonic.",
-      "batch": "scoped_smoothing",
-      "feature_catalog": "scoped_smoothing/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V217",
     "status": "QUEUED",
     "definition": {
@@ -112,6 +81,113 @@
       "rationale": "V209 anchors Small to development-bestV193, which inherits periodicity and selection risk. Test an otherwise identical capacity-diversity blend anchored directly to the public-incumbentV25, preserving a lower-complexity alternative. Small standalone lower AUC is a reason for caution, not assumed complementary benefit.",
       "batch": "capacity",
       "feature_catalog": "capacity/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V219",
+    "status": "QUEUED",
+    "definition": {
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "comparison_baseline": "V25",
+      "development_comparators": [
+        "V185",
+        "V193"
+      ],
+      "Kumo_frozen_fraction": 1.0,
+      "replaces_base_head": true,
+      "worker": "resample_worker.py",
+      "source_script": "v7/scripts/resample_worker.py",
+      "research_ready": true,
+      "no_outer_validation_tuning": true,
+      "id": "V219",
+      "label": "Bootstrap stability ensemble of reduced-knot local correction",
+      "method": "bagged_lowknots",
+      "n_knots": 2,
+      "head_gap_caveat": "Bootstrap-ensemble apparent training score mixes in-bag and out-of-bag predictions; its train/validation gap is not directly comparable with single-head in-sample gaps. Judge held-out metrics and member variability.",
+      "formula": "3 class-stratified bootstrap draws of6k correction; each fitsV19827-input2-knot head on fixedrawV178; pK=mean3 corrected probabilities; final=.75*pK+.25*spline77; save variance of member logits",
+      "rationale": "V210 adds a tiny KS/AUC gain from10%V198, while V198 alone improves AUC but loses KS. Test retraining sensitivity of that specific representation through three intentional resamples, rather than declaring an OOF-only improvement. V187 used4k delete-block bagging on a different18-input representation and was negative.",
+      "batch": "resample",
+      "feature_catalog": "resample/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V220",
+    "status": "QUEUED",
+    "definition": {
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "comparison_baseline": "V25",
+      "development_comparators": [
+        "V185",
+        "V193"
+      ],
+      "Kumo_frozen_fraction": 1.0,
+      "replaces_base_head": true,
+      "no_outer_validation_tuning": true,
+      "worker": "capacity_followups.py",
+      "source_script": "v7/scripts/capacity_followups.py",
+      "spectral_inputs": "none",
+      "fixed_score_fusion": true,
+      "id": "V220",
+      "label": "V193 anchor with10% resampled reduced-knot expert",
+      "method": "auc_diversity_blend",
+      "research_ready": true,
+      "sources": [
+        "V193",
+        "V219"
+      ],
+      "weights": [
+        0.9,
+        0.1
+      ],
+      "depends_on": [
+        "V219"
+      ],
+      "formula": "Perfold p=.9*pV193+.1*pV219; fixed weights; mean5foldtest",
+      "rationale": "Matched toV210, replacing only the singleV198 correction with its3-resample mean. Test whether the small simultaneous KS/AUC gain survives correction retraining variation; do not select the best member using held-out labels.",
+      "batch": "capacity",
+      "feature_catalog": "capacity/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V221",
+    "status": "QUEUED",
+    "definition": {
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "comparison_baseline": "V25",
+      "development_comparators": [
+        "V185",
+        "V193"
+      ],
+      "Kumo_frozen_fraction": 1.0,
+      "replaces_base_head": true,
+      "worker": "resample_worker.py",
+      "source_script": "v7/scripts/resample_worker.py",
+      "research_ready": true,
+      "no_outer_validation_tuning": true,
+      "id": "V221",
+      "label": "Uncertainty-gated V193 and bootstrap correction blend",
+      "method": "confidence_gate",
+      "fixed_score_fusion": true,
+      "depends_on": [
+        "V219"
+      ],
+      "head_gap_caveat": "Fixed-score fusion has no new trained head; inherits source models and resampling-proxy limitations.",
+      "formula": "m=median of3-member logit variance on correction-training only; w=.1*m/(m+query_variance); p=(1-w)*pV193+w*pV219; ifm undefined/nearzero retainV193 explicitly; mean5foldtest",
+      "rationale": "Test a bounded credibility gate that limits the lower-complexity representation where resampled corrections disagree. This is an epistemic proxy from3 conditional resamples, not a full posterior or a guarantee of safer risk estimates; no outer labels choose the gate.",
+      "batch": "resample",
+      "feature_catalog": "resample/reports/FEATURE_CATALOG.csv"
     }
   }
 ]

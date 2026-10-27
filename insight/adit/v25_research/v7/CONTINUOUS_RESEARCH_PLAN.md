@@ -128,3 +128,26 @@ V209 anchors Small to development-bestV193, which inherits periodicity and selec
 
 Formula: `Perfold p=.90*pV25+.10*pV207; fixed weights; mean5foldtest`
 
+
+## Refill based on V210 numerical and AUC gains
+
+V210 KS0.53149711 and AUC0.84715044 improve numerically vsV193 by0.00003759/0.00004290. This is small and repeatedly selected. Test correction-resampling stability rather than assume improvement.
+
+### V219: Bootstrap stability ensemble of reduced-knot local correction
+
+V210 adds a tiny KS/AUC gain from10%V198, while V198 alone improves AUC but loses KS. Test retraining sensitivity of that specific representation through three intentional resamples, rather than declaring an OOF-only improvement. V187 used4k delete-block bagging on a different18-input representation and was negative.
+
+Formula: `3 class-stratified bootstrap draws of6k correction; each fitsV19827-input2-knot head on fixedrawV178; pK=mean3 corrected probabilities; final=.75*pK+.25*spline77; save variance of member logits`
+
+### V220: V193 anchor with10% resampled reduced-knot expert
+
+Matched toV210, replacing only the singleV198 correction with its3-resample mean. Test whether the small simultaneous KS/AUC gain survives correction retraining variation; do not select the best member using held-out labels.
+
+Formula: `Perfold p=.9*pV193+.1*pV219; fixed weights; mean5foldtest`
+
+### V221: Uncertainty-gated V193 and bootstrap correction blend
+
+Test a bounded credibility gate that limits the lower-complexity representation where resampled corrections disagree. This is an epistemic proxy from3 conditional resamples, not a full posterior or a guarantee of safer risk estimates; no outer labels choose the gate.
+
+Formula: `m=median of3-member logit variance on correction-training only; w=.1*m/(m+query_variance); p=(1-w)*pV193+w*pV219; ifm undefined/nearzero retainV193 explicitly; mean5foldtest`
+
