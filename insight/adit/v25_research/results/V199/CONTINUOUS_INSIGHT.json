@@ -1,0 +1,109 @@
+{
+  "experiment": "V199",
+  "method": "gaussian_rank",
+  "hypothesis": "Extreme historical financial measurements affect boundary knots and basis scaling. Train-reference ranks test robustness to outlier magnitudes without fitting on test distributions. Same18 inputs and frozen context.",
+  "formula": "On6k correction only: median impute, QuantileTransformer100quantiles normal output, quadratic3-knot spline, scale; missing indicators+employment; original offset BCE+L2.003 and shrink.5; original75:25 spline fusion",
+  "findings": [
+    "BROAD_RANKING_GAIN_WITHOUT_KS_GAIN",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5299487416558802,
+      "signed_KS": 0.5299487416558802,
+      "AUC": 0.8471200081182813,
+      "rows": 70000
+    },
+    "delta_KS": -0.0015107729066554665,
+    "delta_AUC": 1.2463768673809383e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5220065873886474,
+        0.5392110316364442
+      ],
+      "delta_KS": [
+        -0.0036192712875069864,
+        0.000983248505372356
+      ],
+      "candidate_AUC": [
+        0.8434243509951943,
+        0.8509407088091342
+      ],
+      "delta_AUC": [
+        -0.00025258649673323696,
+        0.0003084446722328298
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.011127328763888134,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3856,
+      "net_bad_captured": 15,
+      "new_members": 264,
+      "exited_members": 264,
+      "entrant_bad_rate": 0.3977272727272727,
+      "exit_bad_rate": 0.3409090909090909
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5863,
+      "net_bad_captured": 8,
+      "new_members": 435,
+      "exited_members": 435,
+      "entrant_bad_rate": 0.23908045977011494,
+      "exit_bad_rate": 0.2206896551724138
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7424,
+      "net_bad_captured": 2,
+      "new_members": 522,
+      "exited_members": 522,
+      "entrant_bad_rate": 0.13218390804597702,
+      "exit_bad_rate": 0.12835249042145594
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8022,
+      "net_bad_captured": 7,
+      "new_members": 554,
+      "exited_members": 554,
+      "entrant_bad_rate": 0.10288808664259928,
+      "exit_bad_rate": 0.09025270758122744
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8644,
+      "net_bad_captured": -5,
+      "new_members": 529,
+      "exited_members": 529,
+      "entrant_bad_rate": 0.06805293005671077,
+      "exit_bad_rate": 0.07750472589792061
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
