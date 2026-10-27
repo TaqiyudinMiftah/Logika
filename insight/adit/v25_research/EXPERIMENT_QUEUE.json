@@ -1,0 +1,134 @@
+[
+  {
+    "id": "V169",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V169",
+      "label": "Kumo Large learns V25 exposure and conditional-liquidity counts directly",
+      "families": [
+        "conditional_allocation"
+      ],
+      "context_features": "locked90_plus_v25_support",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+      "error_analysis_basis": "V167 allocation_count=0 segment deltaKS -0.002942; explicit evidence strength currently enters only correction, not frozen Kumo",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V170",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V170",
+      "label": "Frozen Kumo with spending velocity and liquidity pressure",
+      "families": [
+        "conditional_allocation",
+        "spending_velocity"
+      ],
+      "context_features": "locked90_plus_v25_velocity",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+      "error_analysis_basis": "V167 improves variable-income subgroup +0.001693 KS but raw seasonal behavior alone is not capacity; test explicit velocity relative to income and liquidity as a domain hypothesis",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V171",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V171",
+      "label": "Frozen Kumo with compact spectral band representation",
+      "families": [
+        "conditional_allocation",
+        "spectral"
+      ],
+      "context_features": "locked90_plus_v25_spectral",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+      "error_analysis_basis": "V167 highest development KS0.530795 but AUC slightly down and head gap0.01610 vs0.01111; retain interpretable band powers, omit unstable dominant-cycle argmax, keep correction18 unchanged",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V172",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V172",
+      "label": "Coverage-aware spectral model with V25 fallback for unobserved repayment allocation",
+      "families": [
+        "conditional_allocation",
+        "spectral"
+      ],
+      "context_features": "locked90_plus_v25_spectral",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+      "reuse_kumo_from": "V171",
+      "coverage_fallback": "V25_if_allocation_count_zero",
+      "error_analysis_basis": "V167 no-allocation segment deltaKS -0.002942, positive-allocation1:3 segment +0.004588. Fixed coverage gate uses no labels; rule inspired by OOF errors, so post-selection optimism must be reported",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V173",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V173",
+      "label": "Stratified context bagging: two40k frozen Kumo fits from identical50k eligible pool",
+      "families": [
+        "conditional_allocation"
+      ],
+      "context_features": "locked90_plus_v25_support",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+      "context_bags": 2,
+      "bag_context_rows": 40000,
+      "error_analysis_basis": "V168 numerical reproduction shifts pooledKS -0.00008265 with AUC effectively unchanged; V167 gain has CI crossing zero. Test context-sampling robustness rather than expanding the6k-trained correction",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  }
+]

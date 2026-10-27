@@ -107,6 +107,8 @@ def generate():
    record['method_formula']=r['modeling_formula'];record['objective']=r.get('modeling_objective',record['objective'])
    record['source_code']=r.get('controller_source',record['source_code'])
    record['error_analysis']=r.get('error_analysis')
+   if r.get('in_context_refitted'):
+    record['validation']='Identical5fold seed31027;50k context,6k correction,14k validation; fresh frozen Kumo in-context fitting, context columns recorded in result; original spline unchanged'
   record['public_leaderboard_observations']=[p for p in public_observations if r and p.get('submission_sha256')==r.get('submission_sha256')]
   active.append(record)
  queues={p.name:read_json(p) for p in OUT.glob('*QUEUE.json')};feature_stages={p.relative_to(ROOT).as_posix():read_json(p) for p in V.glob('*/reports/FEATURE_STATUS.json')}

@@ -31,14 +31,22 @@ def main(ident,expected,resume=False):
     vault=json.loads(protect((Path.home()/'.codex/private/node480_session.dpapi').read_bytes(),decrypt=True))
     session=requests.Session();session.cookies.update(vault['cookies'])
     base=vault['base_url'].rstrip('/')+'/api/contents/'
-    files=['v7/reports/EXPERIMENT_MASTER_LOG.json','v7/modeling/reports/MODELING_EXPERIMENTS.csv','v7/reports/MODELING_QUEUE.json']
-    files += [f'v7/runs/{ident}/{name}' for name in ['RESULT.json','ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json']]
-    files += [f'v7/submissions/submission_{ident}_V25_modeling.csv']
-    for name in files:
-        r=session.get(base+quote('adit/Logika/insight/goal054_offset_baseline_20261019/'+name)+'?content=1',timeout=20);r.raise_for_status()
+    def download(name,optional=False):
+        r=session.get(base+quote('adit/Logika/insight/goal054_offset_baseline_20261019/'+name)+'?content=1',timeout=20)
+        if optional and r.status_code==404:return
+        r.raise_for_status()
         target=ROOT/name;target.parent.mkdir(parents=True,exist_ok=True)
         target.write_bytes(r.json()['content'].replace('\r\n','\n').encode('utf-8'))
+    download(f'v7/runs/{ident}/RESULT.json')
     result=json.loads((V/'runs'/ident/'RESULT.json').read_text())
+    files=['v7/reports/EXPERIMENT_MASTER_LOG.json','v7/modeling/reports/MODELING_EXPERIMENTS.csv','v7/reports/MODELING_QUEUE.json']
+    files += [f'v7/runs/{ident}/{name}' for name in ['RESULT.json','ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json']]
+    files += [result['submission']]
+    for name in files:
+        download(name)
+    for name in ['GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json']:
+        download(f'v7/runs/{ident}/{name}',optional=True)
+    download('v7/kumo_gpu/WEIGHTS_MANIFEST.json',optional=True)
     assert hashlib.sha256((ROOT/result['submission']).read_bytes()).hexdigest()==result['submission_sha256']
     subprocess.run([sys.executable,str(V/'scripts/prepare_public_progress.py')],check=True,capture_output=True,text=True)
     source=ROOT.parent/'github_sync_20261027/insight/adit/v25_research'

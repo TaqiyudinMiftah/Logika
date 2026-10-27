@@ -14,11 +14,14 @@ DEST=ROOT.parent/'github_sync_20261027'/'insight/adit/v25_research'
 def main():
     DEST.mkdir(parents=True,exist_ok=True)
     master=json.loads((V/'reports/EXPERIMENT_MASTER_LOG.json').read_text(encoding='utf-8'))
-    experiments=master['active_experiments'];modeling=[x for x in experiments if int(x['id'][1:])>=120]
+    planned=master['active_experiments']
+    experiments=[x for x in planned if x['status']=='COMPLETE' and x.get('result')]
+    modeling=[x for x in experiments if int(x['id'][1:])>=120]
     assert len(modeling)>=40 and all(x['status']=='COMPLETE' for x in modeling)
+    (DEST/'EXPERIMENT_QUEUE.json').write_text(json.dumps([dict(id=x['id'],status=x['status'],definition=x['definition']) for x in planned if x['status']!='COMPLETE'],indent=2),encoding='utf-8')
     registry=[];table=[]
     for x in experiments:
-        r=x['result'];signature=dict(configuration=r['spec'],features=r['columns'],feature_matrix_sha256=r.get('feature_matrix_sha256'),extension_feature_matrix_sha256=r.get('extension_feature_matrix_sha256'),folds=[dict(fold=f['fold'],validation_ids_sha256=f['validation_ids_sha256'],training_ids_sha256=f.get('train_ids_sha256')) for f in r['folds']],backbone='BASELINE_LOCK.json')
+        r=x['result'];signature=dict(configuration=r['spec'],features=r['columns'],context_features=r.get('context_columns'),feature_matrix_sha256=r.get('feature_matrix_sha256'),extension_feature_matrix_sha256=r.get('extension_feature_matrix_sha256'),folds=[dict(fold=f['fold'],validation_ids_sha256=f['validation_ids_sha256'],training_ids_sha256=f.get('train_ids_sha256')) for f in r['folds']],backbone='BASELINE_LOCK.json')
         canonical=dict(signature,configuration={k:v for k,v in signature['configuration'].items() if k not in ['id','label','families','only','fold_feature_root','feature_catalog','extension','discovery','repayment','statistical','behavior','lifecycle','fusion','combination','modeling']})
         fingerprint=hashlib.sha256(json.dumps(canonical,sort_keys=True,separators=(',',':')).encode()).hexdigest()
         registry.append(dict(id=x['id'],signature_sha256=fingerprint,configuration=signature,KS=r['OOF']['KS'],AUC=r['OOF']['AUC'],comparison_baseline=r.get('comparison_baseline','V00'),delta_KS=r['delta_KS'],delta_AUC=r['delta_AUC'],public_observations=x['public_leaderboard_observations'],submission=r['submission'],submission_sha256=r['submission_sha256'],node_result_source=f"v7/runs/{x['id']}/RESULT.json",original_result_sha256=x['source_result_sha256']))
@@ -26,7 +29,7 @@ def main():
         if int(x['id'][1:])>=120 or x['id'] in ['V00','V25','V118','V119']:
             folder=DEST/'results'/x['id'];folder.mkdir(parents=True,exist_ok=True)
             (folder/'RESULT_VIEW.json').write_text(json.dumps(r,indent=2),encoding='utf-8')
-            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json']:
+            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json']:
                 source=V/'runs'/x['id']/name
                 if source.exists():shutil.copyfile(source,folder/name)
     (DEST/'EXPERIMENT_REGISTRY.json').write_text(json.dumps(registry,indent=2),encoding='utf-8')
@@ -41,7 +44,7 @@ def main():
     files=['BASELINE_LOCK.json','V25_BASELINE_LOCK.json','ACTIVE_BASELINE.json','requirements-lock.txt','scripts/baseline.py','v7/modeling_plan.json','v7/V25_MODELING_PLAN.md','v7/FEATURE_POLICY.json','v7/scripts/modeling_features.py','v7/scripts/modeling_representations.py','v7/scripts/modeling_experts.py','v7/scripts/modeling_ranking.py','v7/scripts/experiments.py','v7/scripts/features.py','v7/scripts/feature_policy.py','v7/scripts/master_log.py','v7/scripts/prepare_public_progress.py','v7/scripts/sync_completed_experiment.py']
     for name in files:
         target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
-    for name in ['v7/scripts/basket_value_features.py','v7/scripts/cache_spectral_features.py','v7/light_fe/reports/BASKET_VALUE_BUILD.json','v7/light_fe/reports/SPECTRAL_CACHE.json']:
+    for name in ['v7/scripts/basket_value_features.py','v7/scripts/cache_spectral_features.py','v7/light_fe/reports/BASKET_VALUE_BUILD.json','v7/light_fe/reports/SPECTRAL_CACHE.json','v7/kumo_plan.json','v7/scripts/setup_kumo_gpu.py','v7/scripts/kumo_gpu_experiment.py','v7/scripts/kumo_gpu_experiment_v2.py','v7/scripts/supervise_kumo.py','v7/scripts/continue_frozen_kumo_queue.py','v7/KUMO_FROZEN_QUEUE.md','v7/kumo_gpu/WEIGHTS_MANIFEST.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     for name in ['v7/reports/MODELING_QUEUE.json','v7/modeling/reports/CACHE_AUDIT.json','v7/modeling/reports/GRADIENT_CHECK.json','v7/modeling/reports/MODELING_EXPERIMENTS.csv']:
