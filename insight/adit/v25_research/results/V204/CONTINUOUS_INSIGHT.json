@@ -1,0 +1,109 @@
+{
+  "experiment": "V204",
+  "method": "gaussian_rank",
+  "hypothesis": "V196 removes unstable cycle argmax and improves AUC vsV193 +0.0000178 but loses KS and retains a high head gap. Test bounded train-reference ranks of the stable financial/power inputs, rather than expanding the representation.",
+  "formula": "V19627 inputs andrawV178; training-only100-quantile Gaussian ranks before3-knot correction splines; L2.003, shrink.5; original75:25 spline fusion",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5310554192901765,
+      "signed_KS": 0.5310554192901765,
+      "AUC": 0.8470483310155644,
+      "rows": 70000
+    },
+    "delta_KS": -0.00040409527235918397,
+    "delta_AUC": -5.9213334043017873e-05,
+    "fold_wins": 3,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.523371094805286,
+        0.540456440031795
+      ],
+      "delta_KS": [
+        -0.0023489035781103064,
+        0.0019050596990610586
+      ],
+      "candidate_AUC": [
+        0.8434717292262391,
+        0.8508338475550785
+      ],
+      "delta_AUC": [
+        -0.00028794370284008776,
+        0.00014584765469127236
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.014292905635555232,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3835,
+      "net_bad_captured": -6,
+      "new_members": 196,
+      "exited_members": 196,
+      "entrant_bad_rate": 0.35714285714285715,
+      "exit_bad_rate": 0.3877551020408163
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5869,
+      "net_bad_captured": 14,
+      "new_members": 297,
+      "exited_members": 297,
+      "entrant_bad_rate": 0.23232323232323232,
+      "exit_bad_rate": 0.18518518518518517
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7429,
+      "net_bad_captured": 7,
+      "new_members": 382,
+      "exited_members": 382,
+      "entrant_bad_rate": 0.15706806282722513,
+      "exit_bad_rate": 0.1387434554973822
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8030,
+      "net_bad_captured": 15,
+      "new_members": 397,
+      "exited_members": 397,
+      "entrant_bad_rate": 0.11586901763224182,
+      "exit_bad_rate": 0.07808564231738035
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8636,
+      "net_bad_captured": -13,
+      "new_members": 379,
+      "exited_members": 379,
+      "entrant_bad_rate": 0.052770448548812667,
+      "exit_bad_rate": 0.0870712401055409
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

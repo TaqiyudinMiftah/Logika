@@ -1,0 +1,58 @@
+{
+  "method": "V19627 inputs andrawV178; training-only100-quantile Gaussian ranks before3-knot correction splines; L2.003, shrink.5; original75:25 spline fusion; mean5fold test probabilities",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V204",
+    "label": "Gaussian-rank stable9 local-context correction",
+    "method": "gaussian_rank",
+    "input_source": "V178",
+    "spectral_inputs": "stable9",
+    "formula": "V19627 inputs andrawV178; training-only100-quantile Gaussian ranks before3-knot correction splines; L2.003, shrink.5; original75:25 spline fusion",
+    "rationale": "V196 removes unstable cycle argmax and improves AUC vsV193 +0.0000178 but loses KS and retains a high head gap. Test bounded train-reference ranks of the stable financial/power inputs, rather than expanding the representation."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "beh_spectral_spend_power_7d",
+    "beh_spectral_spend_power_14d",
+    "beh_spectral_spend_power_30d",
+    "beh_spectral_spend_periodicity_strength",
+    "beh_spectral_orders_power_7d",
+    "beh_spectral_orders_power_14d",
+    "beh_spectral_orders_power_30d",
+    "beh_spectral_orders_periodicity_strength",
+    "beh_spectral_window_supported"
+  ],
+  "source_sha256": "e5905366dee876e2ffa439dfd59bc6d22bc30c8924b5bcc7cecfe523369cf2e6"
+}
