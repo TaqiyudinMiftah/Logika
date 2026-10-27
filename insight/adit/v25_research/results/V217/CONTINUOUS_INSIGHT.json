@@ -1,0 +1,109 @@
+{
+  "experiment": "V217",
+  "method": "auc_diversity_blend",
+  "hypothesis": "V206 AUC.84740092 is highest among these correction candidates, but KS.52885147 loses separation at its best threshold. Test limited complementary risk ordering from the smoother rather than selecting a new blend weight on outer labels; compareV213 for a different information source.",
+  "formula": "Perfold p=.90*pV193+.10*pV206; fixed weights; mean5foldtest",
+  "findings": [
+    "BROAD_RANKING_GAIN_WITHOUT_KS_GAIN",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.530920114022409,
+      "signed_KS": 0.530920114022409,
+      "AUC": 0.8471930519233108,
+      "rows": 70000
+    },
+    "delta_KS": -0.0005394005401266888,
+    "delta_AUC": 8.550757370340278e-05,
+    "fold_wins": 1,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5232896928157629,
+        0.540504802992722
+      ],
+      "delta_KS": [
+        -0.0009532766888779631,
+        0.0005388229953770136
+      ],
+      "candidate_AUC": [
+        0.8435856596002088,
+        0.850900325277063
+      ],
+      "delta_AUC": [
+        5.30837784988164e-05,
+        0.00011591509176523684
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.011107666682208906,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3839,
+      "net_bad_captured": -2,
+      "new_members": 23,
+      "exited_members": 23,
+      "entrant_bad_rate": 0.4782608695652174,
+      "exit_bad_rate": 0.5652173913043478
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5857,
+      "net_bad_captured": 2,
+      "new_members": 44,
+      "exited_members": 44,
+      "entrant_bad_rate": 0.2727272727272727,
+      "exit_bad_rate": 0.22727272727272727
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7415,
+      "net_bad_captured": -7,
+      "new_members": 60,
+      "exited_members": 60,
+      "entrant_bad_rate": 0.1,
+      "exit_bad_rate": 0.21666666666666667
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8019,
+      "net_bad_captured": 4,
+      "new_members": 52,
+      "exited_members": 52,
+      "entrant_bad_rate": 0.09615384615384616,
+      "exit_bad_rate": 0.019230769230769232
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8650,
+      "net_bad_captured": 1,
+      "new_members": 67,
+      "exited_members": 67,
+      "entrant_bad_rate": 0.07462686567164178,
+      "exit_bad_rate": 0.05970149253731343
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

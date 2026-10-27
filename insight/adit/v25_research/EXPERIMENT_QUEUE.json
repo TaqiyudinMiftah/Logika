@@ -1,47 +1,5 @@
 [
   {
-    "id": "V217",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "no_outer_validation_tuning": true,
-      "worker": "capacity_followups.py",
-      "source_script": "v7/scripts/capacity_followups.py",
-      "spectral_inputs": "none",
-      "fixed_score_fusion": true,
-      "id": "V217",
-      "label": "V193 anchor plus10% highest-AUC stable spectral smoother",
-      "method": "auc_diversity_blend",
-      "research_ready": true,
-      "sources": [
-        "V193",
-        "V206"
-      ],
-      "weights": [
-        0.9,
-        0.1
-      ],
-      "depends_on": [
-        "V206"
-      ],
-      "formula": "Perfold p=.90*pV193+.10*pV206; fixed weights; mean5foldtest",
-      "rationale": "V206 AUC.84740092 is highest among these correction candidates, but KS.52885147 loses separation at its best threshold. Test limited complementary risk ordering from the smoother rather than selecting a new blend weight on outer labels; compareV213 for a different information source.",
-      "batch": "capacity",
-      "feature_catalog": "capacity/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V218",
     "status": "QUEUED",
     "definition": {
