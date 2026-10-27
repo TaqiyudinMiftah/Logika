@@ -1,6 +1,6 @@
 # Antrean10 eksperimen Kumo100% frozen
 
-Selesai5/10. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 membutuhkan lebih sedikit RAM dan tidak memerlukan GPU.
+Selesai6/10. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 membutuhkan lebih sedikit RAM dan tidak memerlukan GPU.
 
 | ID | Metode | Status | KS | AUC |
 |---|---|---|---:|---:|
@@ -9,7 +9,7 @@ Selesai5/10. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup
 | V171 | Frozen Kumo with compact spectral band representation | COMPLETE | 0.5293593991007075 | 0.8471952967231657 |
 | V172 | Coverage-aware spectral model with V25 fallback for unobserved repayment allocation | COMPLETE | 0.5303631341433743 | 0.8471641199134107 |
 | V173 | Stratified context bagging: two40k frozen Kumo fits from identical50k eligible pool | COMPLETE | 0.5286022721015591 | 0.8470521268312751 |
-| V174 | Empirical-Bayes allocation propensity and uncertainty inside frozen Kumo | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |
+| V174 | Empirical-Bayes allocation propensity and uncertainty inside frozen Kumo | COMPLETE | 0.5292927367174179 | 0.8469899262267827 |
 | V175 | Selective latent uncertainty and income-contradiction inputs | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |
 | V176 | Compact item-value basket composition, without unverified order denominators | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |
 | V177 | Conservative fixed90:10 V25 and V169 score blend | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |

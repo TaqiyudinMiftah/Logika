@@ -31,6 +31,9 @@ def main(ident,expected,resume=False):
     vault=json.loads(protect((Path.home()/'.codex/private/node480_session.dpapi').read_bytes(),decrypt=True))
     session=requests.Session();session.cookies.update(vault['cookies'])
     base=vault['base_url'].rstrip('/')+'/api/contents/'
+    from node480_task import client as remote_client
+    command="python - <<'PY'\nimport subprocess\np=subprocess.run(['/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python','/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019/v7/scripts/audit_frozen_result.py',"+repr(ident)+"],check=True)\nPY"
+    assert remote_client().execute(command,'python3')==0,'Artifact/metric audit failed; inspect before publishing'
     def download(name,optional=False):
         r=session.get(base+quote('adit/Logika/insight/goal054_offset_baseline_20261019/'+name)+'?content=1',timeout=20)
         if optional and r.status_code==404:return
@@ -41,6 +44,7 @@ def main(ident,expected,resume=False):
     result=json.loads((V/'runs'/ident/'RESULT.json').read_text())
     files=['v7/reports/EXPERIMENT_MASTER_LOG.json','v7/modeling/reports/MODELING_EXPERIMENTS.csv','v7/reports/MODELING_QUEUE.json']
     files += [f'v7/runs/{ident}/{name}' for name in ['RESULT.json','ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json']]
+    files += [f'v7/runs/{ident}/REQUIREMENTS_AUDIT.json']
     files += [result['submission']]
     for name in files:
         download(name)

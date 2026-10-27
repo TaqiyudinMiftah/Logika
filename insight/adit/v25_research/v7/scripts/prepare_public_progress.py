@@ -29,7 +29,7 @@ def main():
         if int(x['id'][1:])>=120 or x['id'] in ['V00','V25','V118','V119']:
             folder=DEST/'results'/x['id'];folder.mkdir(parents=True,exist_ok=True)
             (folder/'RESULT_VIEW.json').write_text(json.dumps(r,indent=2),encoding='utf-8')
-            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json']:
+            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json']:
                 source=V/'runs'/x['id']/name
                 if source.exists():shutil.copyfile(source,folder/name)
     (DEST/'EXPERIMENT_REGISTRY.json').write_text(json.dumps(registry,indent=2),encoding='utf-8')
@@ -50,7 +50,7 @@ def main():
     for name in ['v7/reports/MODELING_QUEUE.json','v7/modeling/reports/CACHE_AUDIT.json','v7/modeling/reports/GRADIENT_CHECK.json','v7/modeling/reports/MODELING_EXPERIMENTS.csv']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
-    for name in ['v7/KUMO_QUEUE_10.json','v7/KUMO_QUEUE_10.md','v7/KUMO_EXTRA_QUEUE.md','v7/KUMO_EXTRA_REJECTED_DRAFT.json','v7/scripts/kumo_gpu_experiment_v3.py','v7/scripts/cached_frozen_experiment.py','v7/scripts/replay_v25_test_cache.py','v7/reports/V25_TEST_CACHE_REPLAY.json','v7/scripts/extra_frozen_context.py','v7/scripts/review_extra_frozen.py','v7/kumo_gpu/extra_review/REVIEW.json','v7/kumo_gpu/extra_review/DRAFT_REVIEW.json']:
+    for name in ['v7/KUMO_QUEUE_10.json','v7/KUMO_QUEUE_10.md','v7/KUMO_EXTRA_QUEUE.md','v7/KUMO_EXTRA_REJECTED_DRAFT.json','v7/scripts/kumo_gpu_experiment_v3.py','v7/scripts/cached_frozen_experiment.py','v7/scripts/replay_v25_test_cache.py','v7/scripts/audit_frozen_result.py','v7/reports/V25_TEST_CACHE_REPLAY.json','v7/scripts/extra_frozen_context.py','v7/scripts/review_extra_frozen.py','v7/kumo_gpu/extra_review/REVIEW.json','v7/kumo_gpu/extra_review/DRAFT_REVIEW.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
