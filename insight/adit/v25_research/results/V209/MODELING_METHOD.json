@@ -1,0 +1,60 @@
+{
+  "method": "Perfold final=.90*pV193+.10*pV207, fixed weights before seeingSmall results; test probabilities averaged after per-fold blending; mean5fold test probabilities",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/small_kumo_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V209",
+    "label": "Conservative Small/Large capacity-diversity blend",
+    "method": "small_score_blend",
+    "worker": "capacity_followups.py",
+    "spectral_inputs": "none",
+    "depends_on": [
+      "V207"
+    ],
+    "fixed_score_fusion": true,
+    "formula": "Perfold final=.90*pV193+.10*pV207, fixed weights before seeingSmall results; test probabilities averaged after per-fold blending",
+    "rationale": "A smaller frozen expert can have different ranking errors despite lower standalone performance. Test limited complementary information, without fitting blend weights on outer labels; no public-score gain assumed.",
+    "sources": [
+      "V193",
+      "V207"
+    ],
+    "weights": [
+      0.9,
+      0.1
+    ]
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "source_sha256": "e5905366dee876e2ffa439dfd59bc6d22bc30c8924b5bcc7cecfe523369cf2e6"
+}

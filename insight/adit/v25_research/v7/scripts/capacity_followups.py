@@ -41,6 +41,18 @@ def probability(model,frame,k,head):
     return corrected_probability(model['head'],frame,p)
 
 
+def fuse(spec,values,allocation_count):
+    assert len(spec['sources'])>=2 and all(s in values for s in spec['sources'])
+    if spec['method']=='capacity_coverage_blend':
+        n=np.asarray(allocation_count,float);n=np.where(np.isfinite(n)&(n>0),n,0.);w=.15*10/(n+10)
+        pred=(1-w)*values['V193']+w*values['V207']
+    else:
+        assert len(spec['weights'])==len(spec['sources']) and abs(sum(spec['weights'])-1)<1e-12 and min(spec['weights'])>=0
+        pred=sum(weight*values[source] for source,weight in zip(spec['sources'],spec['weights']))
+    assert np.isfinite(pred).all() and np.all((pred>=0)&(pred<=1))
+    return pred
+
+
 def final_prediction(model,f,p,tp):
     if not model['spec'].get('fixed_score_fusion'):return p,tp
     output=[]
@@ -48,10 +60,7 @@ def final_prediction(model,f,p,tp):
         spec=model['spec'];sources=spec['sources'];values={};hashes={}
         for source in sources:
             path=V/'runs'/source/f"fold{f['fold']}_{part}.parquet";d=pd.read_parquet(path);assert d.application_id.tolist()==f[key].application_id.tolist();values[source]=d.prediction.to_numpy();hashes[source]=sha(path)
-        if spec['method']=='capacity_coverage_blend':
-            n=f[key].aux_allocation_count.to_numpy(float);n=np.where(np.isfinite(n)&(n>0),n,0.);w=.15*10/(n+10)
-            pred=(1-w)*values['V193']+w*values['V207']
-        else:pred=sum(weight*values[source] for source,weight in zip(sources,spec['weights']))
+        pred=fuse(spec,values,f[key].aux_allocation_count.to_numpy(float))
         output.append(pred);model['sources_'+part+'_sha256']=hashes
     return tuple(output)
 
@@ -62,7 +71,13 @@ def preflight():
     for c in SPECTRAL:h[c]=rng.random(n)
     f=dict(h=h,kh=k,fold=0,synthetic_preflight=True,synthetic_small=pd.Series(k,index=h.application_id));base=fit_head(h,k,['a','employment_type'],.003,.5);checks=[]
     for spec in json.loads((V/'capacity_plan.json').read_text()):
-        if spec['worker']!='capacity_followups.py' or spec.get('fixed_score_fusion'):continue
+        if spec['worker']!='capacity_followups.py':continue
+        if spec.get('fixed_score_fusion'):
+            values={name:np.array([.1,.3,.6,.9])+j*.001 for j,name in enumerate(spec['sources'])};counts=np.array([0.,1.,10.,np.nan]);p=fuse(spec,values,counts)
+            if spec['method']=='capacity_coverage_blend':
+                w=.15*10/(np.array([0.,1.,10.,0.])+10);expected=(1-w)*values['V193']+w*values['V207']
+            else:expected=np.array(spec['weights'])@np.stack([values[name] for name in spec['sources']])
+            assert np.allclose(p,expected,rtol=0,atol=1e-15);checks.append(dict(method=spec['method'],fixed_score_formula_verified=True));continue
         columns=['a','employment_type']+(SPECTRAL if spec.get('spectral_inputs')=='stable9' else []);m,audit,count=fit_adapter(f,spec,columns);p,_=probability(m,h.iloc[:50],k[:50],base);assert np.isfinite(p).all()
         stream=io.BytesIO();joblib.dump(m,stream);stream.seek(0);again,_=probability(joblib.load(stream),h.iloc[:50],k[:50],base);assert np.array_equal(p,again);checks.append(dict(method=spec['method'],parameters=count,replay_exact=True))
     n=np.array([0.,1.,10.,100.]);w=.15*10/(n+10);assert np.all(w>0)&np.all(w<=.15)&np.all(np.diff(w)<0)
