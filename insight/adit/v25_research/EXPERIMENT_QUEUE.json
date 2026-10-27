@@ -1,39 +1,5 @@
 [
   {
-    "id": "V228",
-    "status": "QUEUED",
-    "definition": {
-      "method": "population_raw_fusion",
-      "worker": "population_fusion.py",
-      "source_script": "v7/scripts/population_fusion.py",
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "replaces_base_head": true,
-      "Kumo_frozen_fraction": 1.0,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "id": "V228",
-      "label": "Conservative global/coverage/employment raw fusion",
-      "research_ready": true,
-      "raw_sources": [
-        "V168",
-        "V178",
-        "V222"
-      ],
-      "depends_on": [
-        "V222"
-      ],
-      "formula": "raw=mean(globalV168,rawV178,rawV222)=.90global+.05coverage+.05employment; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
-      "rationale": "V222 employment context KS.529872 and AUC.846984 did not improveV25; test stronger global anchoring for the same coverage/employment views instead of trusting local retrieval at15%.",
-      "priority": "P1",
-      "batch": "population_fusion",
-      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V229",
     "status": "QUEUED",
     "definition": {
