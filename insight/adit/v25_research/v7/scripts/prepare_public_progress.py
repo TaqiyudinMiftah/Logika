@@ -29,7 +29,7 @@ def main():
         if int(x['id'][1:])>=120 or x['id'] in ['V00','V25','V118','V119']:
             folder=DEST/'results'/x['id'];folder.mkdir(parents=True,exist_ok=True)
             (folder/'RESULT_VIEW.json').write_text(json.dumps(r,indent=2),encoding='utf-8')
-            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json']:
+            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json','MATCHED_V193.json','ERROR_ANALYSIS_V193.md','ERROR_ANALYSIS_V193.json','CONTINUOUS_INSIGHT.json']:
                 source=V/'runs'/x['id']/name
                 if source.exists():shutil.copyfile(source,folder/name)
     (DEST/'EXPERIMENT_REGISTRY.json').write_text(json.dumps(registry,indent=2),encoding='utf-8')
@@ -57,6 +57,9 @@ def main():
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     for name in ['v7/joint_followup_plan.json','v7/JOINT_FOLLOWUP_PLAN.md','v7/scripts/joint_followups.py','v7/joint_followup/reports/PREFLIGHT.json','v7/reports/V185_LEADERBOARD_VERIFICATION.json','reports/LEADERBOARD_OBSERVATIONS.json','v7/reports/SUBMISSION_RECOMMENDATION_20261027_AFTER_V195.json','v7/reports/BEST_DEVELOPMENT_MODEL.json']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    for name in ['v7/stability_plan.json','v7/CONTINUOUS_PLAN_FILES.json','v7/CONTINUOUS_RESEARCH_PLAN.md','v7/scripts/stability_worker.py','v7/scripts/continuous_research.py','v7/scripts/publish_research_note.py','v7/stability/reports/PREFLIGHT.json','v7/reports/CONTINUOUS_QUEUE.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']

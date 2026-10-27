@@ -33,6 +33,11 @@ def audit(ident):
         m185=scores(train.target.to_numpy(),p185.prediction.to_numpy());compare=r['comparison_to_V185']
         for key in ['KS','AUC']:assert abs(compare['delta_'+key]-(measured[key]-m185[key]))<1e-12
         assert compare['confidence_interval']['repetitions']>=200 and (out/'GENERALIZATION_REVIEW.json').exists()
+    if 'comparison_to_V193' in r:
+        p193=pd.read_csv(V/'runs/V193/OOF.csv',float_precision='round_trip');assert p193.application_id.tolist()==train.application_id.tolist()
+        m193=scores(train.target.to_numpy(),p193.prediction.to_numpy());compare=r['comparison_to_V193']
+        for key in ['KS','AUC']:assert abs(compare['delta_'+key]-(measured[key]-m193[key]))<1e-12
+        assert compare['confidence_interval']['repetitions']>=200 and (out/'CONTINUOUS_INSIGHT.json').exists()
     assigned=np.zeros(len(train),dtype=int);test_mean=np.zeros(len(test));fold_audits=[]
     for fold in range(5):
         index=np.load(ROOT/'artifacts'/f'fold{fold}/indices.npz');ci,hi,vi=[index[k] for k in ['context','correction','validation']]

@@ -1,0 +1,205 @@
+[
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V196",
+    "label": "Stable9 spectral correction on local-context Kumo",
+    "method": "regularized_head",
+    "input_source": "V178",
+    "spectral_inputs": "stable9",
+    "formula": "Drop only2 dominant-cycle argmax inputs fromV191; fit27-input head with L2.003, shrink.5 on cached rawV178 Kumo; original75:25 spline fusion",
+    "rationale": "V191 all11 spectral inputs raised head gap to.017657 and decreased AUC vsV185; phase argmax can be unstable under sparse orders. Test removal while preserving9 band-power/support features and identical context scores."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V197",
+    "label": "Stable9 spectral correction with original global Kumo",
+    "method": "regularized_head",
+    "input_source": "V25",
+    "spectral_inputs": "stable9",
+    "formula": "Drop only2 dominant-cycle argmax inputs fromV167; fit27-input head on original global Kumo with L2.003, shrink.5; original75:25 spline fusion",
+    "rationale": "Separate spectral selection from the local-context interaction. V167 remains stronger than many expanded inputs, but its11-feature head gap.016101 and V185 public decline suggest instability. This is correction-level removal; V171 previously changed frozen Kumo context inputs."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V198",
+    "label": "Reduced-knot stable9 local-context correction",
+    "method": "reduced_knots",
+    "input_source": "V178",
+    "spectral_inputs": "stable9",
+    "n_knots": 2,
+    "formula": "Same27 inputs/rawV178 asV196; quadratic spline2knots instead3, training-only knots/scales; L2.003 and shrink.5; original75:25 spline fusion",
+    "rationale": "V192 stronger L2 on11 spectral features reduced KS and left head gap.016393. Test reducing basis complexity rather than shrinking all coefficients; removes one spline coefficient per numeric input."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V199",
+    "label": "Gaussian-rank preprocessing for V25 correction",
+    "method": "gaussian_rank",
+    "input_source": "V25",
+    "spectral_inputs": "none",
+    "formula": "On6k correction only: median impute, QuantileTransformer100quantiles normal output, quadratic3-knot spline, scale; missing indicators+employment; original offset BCE+L2.003 and shrink.5; original75:25 spline fusion",
+    "rationale": "Extreme historical financial measurements affect boundary knots and basis scaling. Train-reference ranks test robustness to outlier magnitudes without fitting on test distributions. Same18 inputs and frozen context."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V200",
+    "label": "P-spline-inspired coefficient roughness correction",
+    "method": "coefficient_smoothing",
+    "input_source": "V25",
+    "spectral_inputs": "none",
+    "roughness_penalty": 0.03,
+    "formula": "V25 head objective meanBCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2; difference penalty within each numeric spline block; shrink.5; original75:25 spline fusion",
+    "rationale": "Global L2 does not distinguish smooth financial relationships from oscillating residual corrections. Add coefficient-difference regularization while keeping the18 inputs and90-coefficient design. Quantile knots differ from canonical equally spaced P-splines; do not claim an exact continuous curvature penalty."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V201",
+    "label": "Stabilized Jeffreys-information correction",
+    "method": "jeffreys_stabilized",
+    "input_source": "V25",
+    "spectral_inputs": "none",
+    "information_ridge": 0.0001,
+    "formula": "Minimize meanBCE+.003/2||beta_nonintercept||^2-.5/n*logdet(X^T*W(beta)*X/n+.0001I); original V25 design and shrink.5; original75:25 spline fusion",
+    "rationale": "Sparse combinations of employment/missingness and repayment evidence can bias correction coefficients. Test a stabilized Firth-inspired information penalty; addedridge andL2 mean this is not exact classical Firth logistic regression. No transfer of published performance claims."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V202",
+    "label": "Laplace predictive uncertainty for original V25 head",
+    "method": "laplace_predictive",
+    "input_source": "V25",
+    "spectral_inputs": "none",
+    "formula": "Fit original V25 beta; Sigma=(X^T*W*X+n*.003*diag(0,1,...)+1e-6I)^-1; eta=zK+.5Xbeta; v=.25*diag(X*Sigma*X^T); pK~=sigmoid(eta/sqrt(1+pi*v/8)); original75:25 spline fusion",
+    "rationale": "V189 partial pooling gives a small gain without more input dimensions. Extend reliability to the head posterior: high-leverage applicants receive more predictive integration. Approximate Laplace uncertainty conditions on encoder/prior, excludes Kumo and model-selection uncertainty."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V203",
+    "label": "Laplace uncertainty for stable9 local-context correction",
+    "method": "laplace_predictive",
+    "input_source": "V178",
+    "spectral_inputs": "stable9",
+    "formula": "UseV19627-input local-context head; calculate conditional Laplace coefficient covariance and logistic-normal predictive approximation asV202; original75:25 spline fusion",
+    "rationale": "Test whether uncertainty is especially useful for the higher-dimensional spectral head rather than the compact original18. Same formula and conditional caveats asV202; compareV196 for the specific effect."
+  }
+]
