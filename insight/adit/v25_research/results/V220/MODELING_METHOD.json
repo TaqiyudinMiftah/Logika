@@ -1,0 +1,60 @@
+{
+  "method": "Perfold p=.9*pV193+.1*pV219; fixed weights; mean5foldtest; mean5fold test probabilities",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "no_outer_validation_tuning": true,
+    "worker": "capacity_followups.py",
+    "source_script": "v7/scripts/capacity_followups.py",
+    "spectral_inputs": "none",
+    "fixed_score_fusion": true,
+    "id": "V220",
+    "label": "V193 anchor with10% resampled reduced-knot expert",
+    "method": "auc_diversity_blend",
+    "research_ready": true,
+    "sources": [
+      "V193",
+      "V219"
+    ],
+    "weights": [
+      0.9,
+      0.1
+    ],
+    "depends_on": [
+      "V219"
+    ],
+    "formula": "Perfold p=.9*pV193+.1*pV219; fixed weights; mean5foldtest",
+    "rationale": "Matched toV210, replacing only the singleV198 correction with its3-resample mean. Test whether the small simultaneous KS/AUC gain survives correction retraining variation; do not select the best member using held-out labels."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "source_sha256": "d1b012a9f9199eb6afbafa17c174b599faa1adad2bc97c3bd19fa761ff3af9dd"
+}
