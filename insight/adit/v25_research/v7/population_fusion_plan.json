@@ -247,5 +247,148 @@
     "formula": "raw=.50globalLargeV168+.50globalSmallV207; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
     "rationale": "V207 Small alone was weaker, whileV209 final-score blending gave a tiny numerical gain. Test combination before the18-input correction; changing fusion stage can expose complementary errors, but equal weights are not claimed optimal.",
     "priority": "P1"
+  },
+  {
+    "method": "population_raw_fusion",
+    "worker": "population_fusion.py",
+    "source_script": "v7/scripts/population_fusion.py",
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V233",
+    "label": "Half-strength history-population context",
+    "research_ready": true,
+    "raw_sources": [
+      "V168",
+      "V178"
+    ],
+    "depends_on": [
+      "V178"
+    ],
+    "formula": "raw=mean(globalV168,rawV178)=.925global+.075coverage-local; refit18-input6k correction L2.003/shrink.5; same75:25spline77; mean5foldtest",
+    "rationale": "V178 was the strongest single population view among those tested. Isolate whether halving its15%local contribution improves stability before combining it with weaker views; fixed shrinkage and unchanged18-input correction.",
+    "priority": "P1"
+  },
+  {
+    "method": "population_raw_fusion",
+    "worker": "population_fusion.py",
+    "source_script": "v7/scripts/population_fusion.py",
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V234",
+    "label": "Half-strength employment-population context",
+    "research_ready": true,
+    "raw_sources": [
+      "V168",
+      "V222"
+    ],
+    "depends_on": [
+      "V222"
+    ],
+    "formula": "raw=mean(globalV168,rawV222)=.925global+.075employment-local; refit18-input6k correction L2.003/shrink.5; same75:25spline77; mean5foldtest",
+    "rationale": "V222 full15%employment context KS.529872/AUC.846984 was belowV25. This controlled single-view ablation tests weaker reliance; it is not assumed beneficial and is needed to interpret the multi-view combinations.",
+    "priority": "P1"
+  },
+  {
+    "method": "population_raw_fusion",
+    "worker": "population_fusion.py",
+    "source_script": "v7/scripts/population_fusion.py",
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V235",
+    "label": "Half-strength underwriting-population context",
+    "research_ready": true,
+    "raw_sources": [
+      "V168",
+      "V223"
+    ],
+    "depends_on": [
+      "V223"
+    ],
+    "formula": "raw=mean(globalV168,rawV223)=.925global+.075APR-local; refit18-input6k correction L2.003/shrink.5; same75:25spline77; mean5foldtest",
+    "rationale": "V223 full15%APR context KS.530213/AUC.847032 was almost flat vsV25. Test half-strength policy-context influence, with references already fitted only on original50k context and no outer-fitted weights.",
+    "priority": "P1"
+  },
+  {
+    "method": "population_raw_fusion",
+    "worker": "population_fusion.py",
+    "source_script": "v7/scripts/population_fusion.py",
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V236",
+    "label": "Global, history-population and Small raw capacity fusion",
+    "research_ready": true,
+    "raw_sources": [
+      "V168",
+      "V178",
+      "V207"
+    ],
+    "depends_on": [
+      "V178",
+      "V207"
+    ],
+    "formula": "raw=mean(globalLargeV168,rawV178,globalSmallV207)=.6166667globalLarge+.05coverage-local+.3333333Small; refit18-input6k correction L2.003/shrink.5; same75:25spline77; mean5foldtest",
+    "rationale": "Small alone lost AUC, while weak final-score blending gave only small numerical gains. Change the fusion stage and retain a history-context view, using three equal votes before fitting the same correction. CompareV23250:50 raw capacity fusion; do not assume independent errors.",
+    "priority": "P1"
+  },
+  {
+    "method": "population_raw_fusion",
+    "worker": "population_fusion.py",
+    "source_script": "v7/scripts/population_fusion.py",
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V237",
+    "label": "Five-view conservative raw context/capacity fusion",
+    "research_ready": true,
+    "raw_sources": [
+      "V168",
+      "V178",
+      "V222",
+      "V223",
+      "V207"
+    ],
+    "depends_on": [
+      "V178",
+      "V222",
+      "V223",
+      "V207"
+    ],
+    "formula": "raw=mean(globalLarge,coverageRaw,employmentRaw,APRRaw,globalSmall)=.71globalLarge+.03each local view+.20Small; refit18-input6k correction L2.003/shrink.5; same75:25spline77; mean5foldtest",
+    "rationale": "Test all prepared contextual views with Small capped at an implicit20%equal-vote contribution before correction. Shared context examples and global components overlap, so this is fixed score fusion, not formal independent Bayesian evidence.",
+    "priority": "P1"
   }
 ]

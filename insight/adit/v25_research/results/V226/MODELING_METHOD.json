@@ -1,0 +1,51 @@
+{
+  "method": "rawKumo=.5rawV222+.5rawV223=.85global+.075employment-local+.075APR-local; refit18-input correction and75:25spline77fusion; mean5fold test probabilities",
+  "spec": {
+    "method": "population_raw_fusion",
+    "worker": "population_fusion.py",
+    "source_script": "v7/scripts/population_fusion.py",
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V226",
+    "label": "Occupation and underwriting population contexts",
+    "research_ready": true,
+    "raw_sources": [
+      "V222",
+      "V223"
+    ],
+    "depends_on": [
+      "V222",
+      "V223"
+    ],
+    "formula": "rawKumo=.5rawV222+.5rawV223=.85global+.075employment-local+.075APR-local; refit18-input correction and75:25spline77fusion",
+    "rationale": "Test complementarity of employment-conditioned affordability and policy-conditioned context without the coverage expert. This completes a controlled context-family ablation; shared context examples are not independent evidence."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "source_sha256": "d1b012a9f9199eb6afbafa17c174b599faa1adad2bc97c3bd19fa761ff3af9dd"
+}
