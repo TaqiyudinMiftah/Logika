@@ -41,6 +41,9 @@ def main():
     files=['BASELINE_LOCK.json','V25_BASELINE_LOCK.json','ACTIVE_BASELINE.json','requirements-lock.txt','scripts/baseline.py','v7/modeling_plan.json','v7/V25_MODELING_PLAN.md','v7/FEATURE_POLICY.json','v7/scripts/modeling_features.py','v7/scripts/modeling_representations.py','v7/scripts/modeling_experts.py','v7/scripts/modeling_ranking.py','v7/scripts/experiments.py','v7/scripts/features.py','v7/scripts/feature_policy.py','v7/scripts/master_log.py','v7/scripts/prepare_public_progress.py','v7/scripts/sync_completed_experiment.py']
     for name in files:
         target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    for name in ['v7/scripts/basket_value_features.py','v7/light_fe/reports/BASKET_VALUE_BUILD.json']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     for name in ['v7/reports/MODELING_QUEUE.json','v7/modeling/reports/CACHE_AUDIT.json','v7/modeling/reports/GRADIENT_CHECK.json','v7/modeling/reports/MODELING_EXPERIMENTS.csv']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)

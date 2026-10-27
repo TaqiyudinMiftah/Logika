@@ -1,0 +1,65 @@
+{
+  "method": "corrected=sigmoid(logit(p_Kumo)+0.5*X_V25@beta); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities; extra_inputs=['light_basket_value_entropy_30d']; undefined exposure stays missing; event cache or training-only reference",
+  "objective": "mean BCE with unweighted labels + 0.003/2*sum(beta[1:]^2); fit full correction, shrink at inference",
+  "spec": {
+    "id": "V166",
+    "families": [
+      "conditional_allocation",
+      "basket_value"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "light_basket_value_entropy_30d"
+    ],
+    "label": "V25 plus streamed30d item-value category entropy",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": true,
+    "cached_feature_file": "light_fe/data/basket_value_features.parquet",
+    "cached_feature_names": [
+      "light_basket_value_entropy_30d"
+    ],
+    "cached_feature_formula": "-sum_c(p_c*log(p_c)); p_c=sum(completed item_total for category c in30d)/sum(completed item_total in30d); NA with no positive spend",
+    "comparison_baseline": "V25",
+    "features_changed": true
+  },
+  "source": "v7/scripts/modeling_features.py",
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "light_basket_value_entropy_30d"
+  ],
+  "metrics": {
+    "KS": 0.5297692619959309,
+    "signed_KS": 0.5297692619959309,
+    "AUC": 0.8470151250180247,
+    "rows": 70000,
+    "logloss": 0.2926155729765234,
+    "brier": 0.08875347581712109
+  },
+  "error_analysis": {
+    "json": "v7/runs/V166/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V166/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V166/ERROR_CASES.csv"
+  },
+  "source_sha256": "bda130b50d6834a623a1bf22401cc12eb0558ceff8bfc933e9def9886c092ae5"
+}

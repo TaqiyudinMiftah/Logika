@@ -86,7 +86,7 @@ def top_set(p,fraction):
     return mask
 
 
-def error_analysis(out,tr,y,folds,reference,pred,frames):
+def error_analysis(out,tr,y,folds,reference,pred,frames,extra_bins=None):
     analysis=[];mask20=top_set(reference,.2)
     for fraction in [.1,.2,.3236857142857143,.4,.5]:
         a,b=top_set(reference,fraction),top_set(pred,fraction);entrants=b&~a;exits=a&~b
@@ -102,6 +102,8 @@ def error_analysis(out,tr,y,folds,reference,pred,frames):
     if 'decision_datetime' in tr:
         segments['decision_quarter']=pd.to_datetime(tr.decision_datetime).dt.to_period('Q').astype(str).to_numpy()
     segments['baseline_risk_band']=np.select([reference<.05,reference<.15,reference<.4],['under005','005_to015','015_to04'],default='over04')
+    if extra_bins:
+        segments.update(extra_bins)
     segment_rows=[]
     for name,labels in segments.items():
         for value in sorted(set(labels)):
@@ -138,7 +140,11 @@ def evaluate(spec,loaded):
         if (V/'scripts'/source).exists():(out/('SOURCE_'+source)).write_bytes((V/'scripts'/source).read_bytes())
     dump(dict(status='RUNNING',spec=spec,pid=os.getpid()),out/'STATUS.json')
     oof=np.full(len(tr),np.nan);pt=np.zeros(len(te));checks=[]
-    derived={'cf_share':['modeling_cf_negative_share'],'cf_bayes_burden':['modeling_cf_credible_stress_burden']}.get(spec.get('feature_transform'),[])
+    derived=spec.get('cached_feature_names') or {'cf_share':['modeling_cf_negative_share'],'cf_bayes_burden':['modeling_cf_credible_stress_burden']}.get(spec.get('feature_transform'),[])
+    cached=None;extra_bins={name:np.full(len(y),'missing',dtype=object) for name in derived}
+    if spec.get('cached_feature_file'):
+        cached=pd.read_parquet(V/spec['cached_feature_file'],columns=['application_id']+derived).set_index('application_id')
+        assert cached.index.is_unique
     columns=parent['columns']+derived;weight=spec.get('kumo_weight',.75);strength=spec['strength'];blend=spec.get('blend','probability')
     expert=None;expert_audits=None
     if spec.get('expert_key'):
@@ -148,17 +154,29 @@ def evaluate(spec,loaded):
         f=source_frame
         if derived:
             f=dict(source_frame)
-            k=source_frame['h'].risk_conditional_negative_months.to_numpy(float)
-            nh=k+source_frame['h'].risk_conditional_nonnegative_months.to_numpy(float)
-            mu=float((k.sum()+.5)/(nh.sum()+1.))
-            transform_meta=dict(pooled_negative_CF_mean=mu,prior_strength=10.,reference_fit='6k correction-training only')
+            if cached is not None:
+                transform_meta=dict(source=spec['cached_feature_file'],sha256=sha(V/spec['cached_feature_file']),target_free_event_aggregation=True)
+            else:
+                k=source_frame['h'].risk_conditional_negative_months.to_numpy(float)
+                nh=k+source_frame['h'].risk_conditional_nonnegative_months.to_numpy(float)
+                mu=float((k.sum()+.5)/(nh.sum()+1.))
+                transform_meta=dict(pooled_negative_CF_mean=mu,prior_strength=10.,reference_fit='6k correction-training only')
             for part in ['h','val','test']:
                 d=source_frame[part].copy();n=d.risk_conditional_negative_months+d.risk_conditional_nonnegative_months
-                if spec['feature_transform']=='cf_share':d[derived[0]]=np.where(n>0,d.risk_conditional_negative_months/np.where(n>0,n,1.),np.nan)
+                if cached is not None:
+                    assert d.application_id.isin(cached.index).all()
+                    d[derived]=cached.reindex(d.application_id)[derived].to_numpy()
+                elif spec['feature_transform']=='cf_share':d[derived[0]]=np.where(n>0,d.risk_conditional_negative_months/np.where(n>0,n,1.),np.nan)
                 else:
                     posterior=(d.risk_conditional_negative_months+10.*mu)/(n+10.)
                     d[derived[0]]=np.where(n>0,posterior*d.installment_observed_income_ratio,np.nan)
                 f[part]=d
+            for c in derived:
+                observed=f['h'][c].dropna().to_numpy(float)
+                if len(observed):
+                    bounds=np.quantile(observed,[.25,.5,.75]);values=f['val'][c].to_numpy(float)
+                    labels=np.array(['Q1','Q2','Q3','Q4'],dtype=object)[np.searchsorted(bounds,values,side='right')]
+                    labels[~np.isfinite(values)]='missing';extra_bins[c][f['vi']]=labels
         head=f['head']
         if spec.get('rankloss'):
             from modeling_ranking import fit as fit_ranking
@@ -206,7 +224,7 @@ def evaluate(spec,loaded):
     pd.DataFrame(dict(application_id=sample.application_id,default_probability=pt)).to_csv(submission,index=False)
     pd.DataFrame(dict(application_id=tr.application_id,target=y,fold=folds,prediction=oof,baseline_prediction=reference)).to_csv(out/'OOF.csv',index=False)
     intervals=bootstrap(y,reference,oof,folds);m,b=metric(y,oof),metric(y,reference)
-    error=error_analysis(out,tr,y,folds,reference,oof,frames)
+    error=error_analysis(out,tr,y,folds,reference,oof,frames,extra_bins)
     formula=f"corrected=sigmoid(logit(p_Kumo)+{strength}*X_V25@beta); final="+(f"sigmoid({weight}*logit(corrected)+{1-weight}*logit(p_spline77))" if blend=='logit' else f"{weight}*corrected+{1-weight}*p_spline77")+'; mean5fold test probabilities'
     if spec.get('representation'):
         formula=formula.replace('X_V25@beta','(X_V25@beta + interaction_representation)')
@@ -214,7 +232,7 @@ def evaluate(spec,loaded):
         formula=f"p_final=(1-{spec['expert_weight']})*p_V25+{spec['expert_weight']}*p_{spec['expert_key']}_116; expert trained56k outer-training with inner early stopping; mean5fold test"
     if spec.get('rankloss'):
         formula+='; beta=beta_V25+student_theta/strength; student trained with '+spec['rankloss']+' loss and teacher tether'
-    if derived:formula+='; feature_transform='+spec['feature_transform']+' from V25 counts; undefined exposure stays missing; training-only reference'
+    if derived:formula+='; extra_inputs='+str(derived)+'; undefined exposure stays missing; event cache or training-only reference'
     if spec.get('prior_alignment'):formula+='; corrected Kumo logit adds alpha*(logit(pi_outertrain)-(1-strength)*logit(pi_context)-strength*logit(pi_correction)); priors from training only'
     result=dict(status='COMPLETE',experiment=name,spec=spec,columns=columns,new_features=parent['new_features'],support_features=parent['support_features'],OOF=m,baseline=b,comparison_baseline='V25',delta_KS=m['KS']-b['KS'],delta_AUC=m['AUC']-b['AUC'],mean_fold_KS=float(np.mean([q['metrics']['KS'] for q in checks])),std_fold_KS=float(np.std([q['metrics']['KS'] for q in checks],ddof=1)),delta_mean_fold_KS=float(np.mean([q['delta_KS'] for q in checks])),fold_wins=sum(q['delta_KS']>0 for q in checks),folds=checks,confidence_interval=intervals,evidence='TARGET_REACHED_DEVELOPMENT_ONLY' if m['KS']>=TARGET else 'INCONCLUSIVE_OR_NEGATIVE',overfitting_assessment=dict(development_folds_reused=True,independent_holdout=False,hyperparameters_prespecified=True,retrained_seeds=1,extra_head_features=0,selection_corrected_CI=False,public_score_unknown=True,risk='HIGH_SEARCH_MULTIPLICITY; do not equate pooled target with hidden-test improvement',diagnostic='Head training metric is optimistic; error analysis uses only outer-held-out predictions.'),frozen_Kumo_fraction=1.,backbone_retrained=False,original_spline_unchanged=True,all_outer_indices_identical=True,point_in_time_certified=False,inherited_baseline_snapshot_uncertainty=True,new_features_DPD_used=parent.get('new_features_DPD_used',False),new_features_snapshot_dependent=False,effective_quarantined=False,submission=str(submission.relative_to(ROOT)),submission_sha256=sha(submission),public_score=None,elapsed_seconds=time.time()-started,source_sha256=sha(__file__),source_feature_manifest='v7/modeling/reports/CACHE_AUDIT.json',feature_matrix_sha256=sha(V/'data/features_raw.parquet'),extension_feature_matrix_sha256=sha(V/'extension/data/raw_features.parquet'),features_changed_vs_V25=False,modeling_formula=formula,modeling_objective=f"mean BCE with unweighted labels + {spec['penalty']}/2*sum(beta[1:]^2); fit full correction, shrink at inference",controller_source='v7/scripts/modeling_features.py',error_analysis=dict(json=str((out/'ERROR_ANALYSIS.json').relative_to(ROOT)),markdown=str((out/'ERROR_ANALYSIS.md').relative_to(ROOT)),cases=str((out/'ERROR_CASES.csv').relative_to(ROOT))))
     if spec.get('representation'):
@@ -229,7 +247,9 @@ def evaluate(spec,loaded):
         result['ranking_source_sha256']=sha(V/'scripts/modeling_ranking.py')
     if derived:
         result['new_features']=parent['new_features']+derived;result['features_changed_vs_V25']=True
-        result['derived_feature_formula']='negative eligible-CF months / total eligible-CF months, missing when total0; same V25 inputs/cutoff' if spec['feature_transform']=='cf_share' else '(negative_months+10*mu_training)/(total_months+10)*installment_to_observed_income; NA for total0 or undefined burden; mu from correction rows only'
+        if cached is not None:
+            result['derived_feature_formula']=spec['cached_feature_formula'];result['cached_feature_sha256']=sha(V/spec['cached_feature_file'])
+        else:result['derived_feature_formula']='negative eligible-CF months / total eligible-CF months, missing when total0; same V25 inputs/cutoff' if spec['feature_transform']=='cf_share' else '(negative_months+10*mu_training)/(total_months+10)*installment_to_observed_income; NA for total0 or undefined burden; mu from correction rows only'
     dump(result,out/'RESULT.json')
     gap=lambda r:float(np.mean([f['train_validation_head_KS_gap'] for f in r['folds']]))
     control=dict(control='V25',candidate_metrics=m,control_metrics=b,delta_KS=result['delta_KS'],delta_AUC=result['delta_AUC'],KS_fold_wins=result['fold_wins'],delta_mean_fold_KS=result['delta_mean_fold_KS'],per_fold=[dict(fold=q['fold'],delta_KS=q['delta_KS'],delta_AUC=q['delta_AUC']) for q in checks],confidence_interval=intervals,head_gap_candidate=gap(result),head_gap_control=gap(parent),head_gap_delta=gap(result)-gap(parent),parameter_count_candidate=[f['parameters'] for f in checks],parameter_count_control=[f['parameters'] for f in parent['folds']])
@@ -256,8 +276,10 @@ def main(requested=None):
     status={s.split(':',1)[0]:s.split(':',1)[1].strip() for s in Path('/proc/self/status').read_text().splitlines() if ':' in s}
     resident=int(status['VmRSS'].split()[0])*1024
     needed=max(0,450*2**20-resident)+150*2**20
-    dump(dict(headroom_bytes=headroom,resident_bytes=resident,projected_remaining_plus_reserve_bytes=needed,streaming_prediction_bases=True),V/'modeling/reports/LAUNCH_MEMORY.json')
-    assert headroom>=needed,'Insufficient RAM headroom for streamed cached-model process plus reserve'
+    memory_stat=dict(line.split() for line in (cg/'memory.stat').read_text().splitlines())
+    reclaimable_estimate=min(int(memory_stat.get('inactive_file',0)),512*2**20)
+    dump(dict(headroom_bytes=headroom,resident_bytes=resident,inactive_file_bytes=int(memory_stat.get('inactive_file',0)),conservatively_counted_reclaimable_cache_bytes=reclaimable_estimate,projected_remaining_plus_reserve_bytes=needed,streaming_prediction_bases=True,note='Reclaimable file-cache estimate is not an exclusive RAM reservation'),V/'modeling/reports/LAUNCH_MEMORY.json')
+    assert headroom+reclaimable_estimate>=needed,'Insufficient RAM including conservative inactive-file estimate for cached process plus reserve'
     state('LOADING_FIXED_V25_CACHE',experiments=[s['id'] for s in specs])
     loaded=load()
     baseline_out=V/'modeling/reports';error_analysis(baseline_out,loaded[0],loaded[3],loaded[4],loaded[5],loaded[5],loaded[6])

@@ -899,5 +899,30 @@
     "feature_transform": "cf_bayes_burden",
     "comparison_baseline": "V25",
     "features_changed": true
+  },
+  {
+    "id": "V166",
+    "families": [
+      "conditional_allocation",
+      "basket_value"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "light_basket_value_entropy_30d"
+    ],
+    "label": "V25 plus streamed30d item-value category entropy",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": true,
+    "cached_feature_file": "light_fe/data/basket_value_features.parquet",
+    "cached_feature_names": [
+      "light_basket_value_entropy_30d"
+    ],
+    "cached_feature_formula": "-sum_c(p_c*log(p_c)); p_c=sum(completed item_total for category c in30d)/sum(completed item_total in30d); NA with no positive spend",
+    "comparison_baseline": "V25",
+    "features_changed": true
   }
 ]
