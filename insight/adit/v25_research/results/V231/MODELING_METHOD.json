@@ -1,0 +1,54 @@
+{
+  "method": "raw=mean(globalV168,rawV178,rawV222,rawV223)=.8875global+.0375each local view; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest; mean5fold test probabilities",
+  "spec": {
+    "method": "population_raw_fusion",
+    "worker": "population_fusion.py",
+    "source_script": "v7/scripts/population_fusion.py",
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V231",
+    "label": "Global anchor vote with all three population views",
+    "research_ready": true,
+    "raw_sources": [
+      "V168",
+      "V178",
+      "V222",
+      "V223"
+    ],
+    "depends_on": [
+      "V222",
+      "V223"
+    ],
+    "formula": "raw=mean(globalV168,rawV178,rawV222,rawV223)=.8875global+.0375each local view; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
+    "rationale": "Complete the all-view ablation againstV227 by giving the global expert its own equal vote. Shared context borrowers are not independent evidence; fixed weights avoid an outer-validation weight search.",
+    "priority": "P1"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "source_sha256": "d1b012a9f9199eb6afbafa17c174b599faa1adad2bc97c3bd19fa761ff3af9dd"
+}
