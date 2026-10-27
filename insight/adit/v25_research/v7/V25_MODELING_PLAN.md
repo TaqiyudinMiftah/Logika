@@ -53,3 +53,8 @@ V160 L2.0003 yieldsKS0.5304969684 and loses to V127 L2.001. Retain the V127 corr
 ## V162: normalized financial-stress exposure
 
 V161 low-L2 plus20% tree reachesKS0.530540, below V127. With scope expanded by user, add just one deterministic representation: n_negative/(n_negative+n_nonnegative), NA for zero exposure. Existing additive splines on two counts cannot express this ratio exactly. No additional raw source is read; cutoff and denominators are exactly V25. Keep L2.003, strength.5 and75:25, now19 input fields. This is not a re-run of V14 (conditional late-allocation posterior). Shared main843b807e9d4e081ab7d871c96961753372706298 inspected; no peer update.
+
+
+## V163: training-population class-prior alignment
+
+V162 nonlinear count ratio failed KS0.529401. Test a distinct split-level hypothesis: finite6k correction sample prevalence can differ from50k context prevalence, whereas original spline is trained on56k outer-training. Add to corrected-Kumo logit the training-derived shift logit(pi_56k)-0.5*logit(pi_50k)-0.5*logit(pi_6k), preserving feature scores and75:25 mixture. This is a hypothesis about prior transfer in a shrunken correction, not an established property of Kumo. All priors use only context/correction labels; no validation/test labels or fold-specific validation calibration. Evaluate pooled versus within-fold KS separately. This is not a claim that a global monotone calibration improves KS. Main b976d0cdd8dbc1944497baf3ab2683b23c69a0c2 inspected; no peer update.

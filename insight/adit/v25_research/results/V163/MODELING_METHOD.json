@@ -1,0 +1,58 @@
+{
+  "method": "corrected=sigmoid(logit(p_Kumo)+0.5*X_V25@beta); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities; corrected Kumo logit adds alpha*(logit(pi_outertrain)-(1-strength)*logit(pi_context)-strength*logit(pi_correction)); priors from training only",
+  "objective": "mean BCE with unweighted labels + 0.003/2*sum(beta[1:]^2); fit full correction, shrink at inference",
+  "spec": {
+    "id": "V163",
+    "families": [
+      "conditional_allocation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months"
+    ],
+    "label": "V25 training-population class-prior alignment, no validation-label fit",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "prior_alignment": true,
+    "prior_alignment_alpha": 1.0,
+    "comparison_baseline": "V25",
+    "features_changed": false
+  },
+  "source": "v7/scripts/modeling_features.py",
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "metrics": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470293554146245,
+    "rows": 70000,
+    "logloss": 0.2925987510730996,
+    "brier": 0.08874673818586122
+  },
+  "error_analysis": {
+    "json": "v7/runs/V163/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V163/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V163/ERROR_CASES.csv"
+  },
+  "source_sha256": "c1a3d8e614a1f18f1dfeb145d21221d244478230909a2693a43d7cc4816911af"
+}

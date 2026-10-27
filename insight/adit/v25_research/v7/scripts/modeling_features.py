@@ -72,7 +72,8 @@ def load():
         old=pd.read_parquet(V/'runs/V25'/f'fold{fold}_validation.parquet')
         assert np.max(abs(.75*pv+.25*sv.prediction.to_numpy()-old.prediction))<2e-12
         fold_ids[vi]=fold;basepred[vi]=old.prediction
-        frames.append(dict(fold=fold,hi=hi,vi=vi,h=h,val=val,test=test,kh=kh.prediction.to_numpy(),kv=kv.prediction.to_numpy(),kt=kt.prediction.to_numpy(),sv=sv.prediction.to_numpy(),st=st.prediction.to_numpy(),head=model,basis=basis))
+        priors=dict(context=float(y[ci].mean()),correction=float(y[hi].mean()),outer_training=float(y[np.r_[ci,hi]].mean()),source='Only50k context and6k correction labels; no outer-validation or test labels')
+        frames.append(dict(fold=fold,hi=hi,vi=vi,h=h,val=val,test=test,kh=kh.prediction.to_numpy(),kv=kv.prediction.to_numpy(),kt=kt.prediction.to_numpy(),sv=sv.prediction.to_numpy(),st=st.prediction.to_numpy(),head=model,basis=basis,training_priors=priors))
         cache_checks.append(dict(fold=fold,context_ids_sha256=ids_hash(tr,ci),correction_ids_sha256=ids_hash(tr,hi),validation_ids_sha256=ids_hash(tr,vi),V25_replay_max_abs_error=float(np.max(abs(.75*pv+.25*sv.prediction.to_numpy()-old.prediction)))))
     assert np.isfinite(basepred).all()
     dump(dict(status='PASS',folds=cache_checks,V25_submission_sha256=parent['submission_sha256'],features_unchanged=True,backbone_frozen=1.),V/'modeling/reports/CACHE_AUDIT.json')
@@ -170,6 +171,11 @@ def evaluate(spec,loaded):
                 d=x@head['coefficients'];return expit(z+strength*d),d
             return corrected_probability(head,f[{'correction':'h','validation':'val','test':'test'}[part]],k)
         ph,dh=predict('correction',f['kh']);pv,dv=predict('validation',f['kv']);test,dt=predict('test',f['kt'])
+        prior_shift=0.
+        if spec.get('prior_alignment'):
+            priors=f['training_priors']
+            prior_shift=spec.get('prior_alignment_alpha',1.)*(logit(priors['outer_training'])-((1-strength)*logit(priors['context'])+strength*logit(priors['correction'])))
+            ph,pv,test=[expit(logit(np.clip(a,1e-6,1-1e-6))+prior_shift) for a in [ph,pv,test]]
         def combine(a,b):
             if blend=='logit':return expit(weight*logit(np.clip(a,1e-6,1-1e-6))+(1-weight)*logit(np.clip(b,1e-6,1-1e-6)))
             return weight*a+(1-weight)*b
@@ -179,7 +185,8 @@ def evaluate(spec,loaded):
         oof[f['vi']]=p;pt+=pd.Series(tp,index=f['test'].application_id).reindex(sample.application_id).to_numpy()/5
         bstat=metric(y[f['vi']],reference[f['vi']]);m=metric(y[f['vi']],p)
         row=dict(fold=f['fold'],metrics=m,baseline=bstat,delta_KS=m['KS']-bstat['KS'],delta_AUC=m['AUC']-bstat['AUC'],correction_rows=6000,parameters=len(head['coefficients']),head_training_KS=scores(f['h'].target,ph)['KS'],heldout_corrected_Kumo_KS=scores(f['val'].target,pv)['KS'],train_validation_head_KS_gap=scores(f['h'].target,ph)['KS']-scores(f['val'].target,pv)['KS'],mean_abs_correction=float(np.mean(abs(dv))),P99_abs_correction=float(np.quantile(abs(dv),.99)),optimizer_gradient_max=head['gradient_max_abs'],optimizer_iterations=head['iterations'],train_ids_sha256=ids_hash(tr,f['hi']),validation_ids_sha256=ids_hash(tr,f['vi']))
-        checks.append(row);joblib.dump(dict(head=head,kumo_weight=weight,blend=blend,test_averaging='probability_mean_5fold'),out/f"fold{f['fold']}_correction.joblib",compress=3)
+        if spec.get('prior_alignment'):row.update(prior_alignment_shift=float(prior_shift),training_only_class_priors=f['training_priors'])
+        checks.append(row);joblib.dump(dict(head=head,kumo_weight=weight,blend=blend,prior_alignment_shift=float(prior_shift),test_averaging='probability_mean_5fold'),out/f"fold{f['fold']}_correction.joblib",compress=3)
         if expert is not None:
             row['additional_expert_audit']=expert_audits[f['fold']]
             dump(dict(expert_key=spec['expert_key'],expert_weight=spec['expert_weight'],checkpoint=f"v7/modeling/experts/{spec['expert_key']}/fold{f['fold']}.joblib"),out/f"fold{f['fold']}_expert_reference.json")
@@ -200,6 +207,7 @@ def evaluate(spec,loaded):
     if spec.get('rankloss'):
         formula+='; beta=beta_V25+student_theta/strength; student trained with '+spec['rankloss']+' loss and teacher tether'
     if derived:formula+='; X includes negative_CF_months/(negative_CF_months+nonnegative_CF_months); undefined exposure stays missing'
+    if spec.get('prior_alignment'):formula+='; corrected Kumo logit adds alpha*(logit(pi_outertrain)-(1-strength)*logit(pi_context)-strength*logit(pi_correction)); priors from training only'
     result=dict(status='COMPLETE',experiment=name,spec=spec,columns=columns,new_features=parent['new_features'],support_features=parent['support_features'],OOF=m,baseline=b,comparison_baseline='V25',delta_KS=m['KS']-b['KS'],delta_AUC=m['AUC']-b['AUC'],mean_fold_KS=float(np.mean([q['metrics']['KS'] for q in checks])),std_fold_KS=float(np.std([q['metrics']['KS'] for q in checks],ddof=1)),delta_mean_fold_KS=float(np.mean([q['delta_KS'] for q in checks])),fold_wins=sum(q['delta_KS']>0 for q in checks),folds=checks,confidence_interval=intervals,evidence='TARGET_REACHED_DEVELOPMENT_ONLY' if m['KS']>=TARGET else 'INCONCLUSIVE_OR_NEGATIVE',overfitting_assessment=dict(development_folds_reused=True,independent_holdout=False,hyperparameters_prespecified=True,retrained_seeds=1,extra_head_features=0,selection_corrected_CI=False,public_score_unknown=True,risk='HIGH_SEARCH_MULTIPLICITY; do not equate pooled target with hidden-test improvement',diagnostic='Head training metric is optimistic; error analysis uses only outer-held-out predictions.'),frozen_Kumo_fraction=1.,backbone_retrained=False,original_spline_unchanged=True,all_outer_indices_identical=True,point_in_time_certified=False,inherited_baseline_snapshot_uncertainty=True,new_features_DPD_used=parent.get('new_features_DPD_used',False),new_features_snapshot_dependent=False,effective_quarantined=False,submission=str(submission.relative_to(ROOT)),submission_sha256=sha(submission),public_score=None,elapsed_seconds=time.time()-started,source_sha256=sha(__file__),source_feature_manifest='v7/modeling/reports/CACHE_AUDIT.json',feature_matrix_sha256=sha(V/'data/features_raw.parquet'),extension_feature_matrix_sha256=sha(V/'extension/data/raw_features.parquet'),features_changed_vs_V25=False,modeling_formula=formula,modeling_objective=f"mean BCE with unweighted labels + {spec['penalty']}/2*sum(beta[1:]^2); fit full correction, shrink at inference",controller_source='v7/scripts/modeling_features.py',error_analysis=dict(json=str((out/'ERROR_ANALYSIS.json').relative_to(ROOT)),markdown=str((out/'ERROR_ANALYSIS.md').relative_to(ROOT)),cases=str((out/'ERROR_CASES.csv').relative_to(ROOT))))
     if spec.get('representation'):
         result['modeling_objective'] += f" + {spec['interaction_penalty']}/2*||interaction_parameters||^2; representation={spec['representation']}"
