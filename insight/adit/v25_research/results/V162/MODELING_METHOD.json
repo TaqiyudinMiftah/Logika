@@ -1,0 +1,61 @@
+{
+  "method": "corrected=sigmoid(logit(p_Kumo)+0.5*X_V25@beta); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities; X includes negative_CF_months/(negative_CF_months+nonnegative_CF_months); undefined exposure stays missing",
+  "objective": "mean BCE with unweighted labels + 0.003/2*sum(beta[1:]^2); fit full correction, shrink at inference",
+  "spec": {
+    "id": "V162",
+    "families": [
+      "conditional_allocation",
+      "coverage_representation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "modeling_cf_negative_share"
+    ],
+    "label": "V25 plus normalized eligible-month cashflow stress representation",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": true,
+    "feature_transform": "cf_share",
+    "comparison_baseline": "V25",
+    "features_changed": true
+  },
+  "source": "v7/scripts/modeling_features.py",
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "modeling_cf_negative_share"
+  ],
+  "metrics": {
+    "KS": 0.5294011704615964,
+    "signed_KS": 0.5294011704615964,
+    "AUC": 0.8469981177466241,
+    "rows": 70000,
+    "logloss": 0.29263125811237134,
+    "brier": 0.08875643071623171
+  },
+  "error_analysis": {
+    "json": "v7/runs/V162/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V162/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V162/ERROR_CASES.csv"
+  },
+  "source_sha256": "c715a16a002bc271f723d633714d4d03b96fd4445d25a9d90a8498ff19802313"
+}

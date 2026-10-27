@@ -14667,5 +14667,93 @@
     "submission_sha256": "3ea7f748b32cbfaa445bc8dfe3ea0c2eb014e1563631e08fb09d0c933426cd26",
     "node_result_source": "v7/runs/V161/RESULT.json",
     "original_result_sha256": "86c2754de480c7d3bce8a9cc19c3180c4092cb0511b8f4e0f68723d8f3a6389b"
+  },
+  {
+    "id": "V162",
+    "signature_sha256": "00a062955075ce12fbd2adb3d608643a23b7e5e17d9c590c13c12fa0784553b1",
+    "configuration": {
+      "configuration": {
+        "id": "V162",
+        "families": [
+          "conditional_allocation",
+          "coverage_representation"
+        ],
+        "only": [
+          "risk_conditional_negative_months",
+          "risk_conditional_nonnegative_months",
+          "modeling_cf_negative_share"
+        ],
+        "label": "V25 plus normalized eligible-month cashflow stress representation",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "blend": "probability",
+        "refit": true,
+        "feature_transform": "cf_share",
+        "comparison_baseline": "V25",
+        "features_changed": true
+      },
+      "features": [
+        "re_price_log_posterior",
+        "re_price_posterior_sd",
+        "re_bureau_score_posterior",
+        "re_bureau_posterior_sd",
+        "re_income_geometric_mean",
+        "re_declared_income_log_gap",
+        "re_outflow_income_geometric_ratio",
+        "re_late_1_posterior",
+        "re_late_30_posterior",
+        "installment_observed_income_ratio",
+        "v2_existing_total_burden_observed",
+        "employment_type",
+        "risk_conditional_negative_months",
+        "risk_conditional_nonnegative_months",
+        "aux_account_months",
+        "aux_orders90",
+        "aux_ecommerce_observed_days",
+        "aux_allocation_count",
+        "modeling_cf_negative_share"
+      ],
+      "feature_matrix_sha256": "c90db5d2c2b0d8a5b2937cd6d76041c477f9eae1c88ac03201ba4a8435e037ae",
+      "extension_feature_matrix_sha256": "3deb81d9c874058370a5c39112a2b9205dcb33d50dd36227130d64393f9c133a",
+      "folds": [
+        {
+          "fold": 0,
+          "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+          "training_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964"
+        },
+        {
+          "fold": 1,
+          "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+          "training_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0"
+        },
+        {
+          "fold": 2,
+          "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+          "training_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07"
+        },
+        {
+          "fold": 3,
+          "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+          "training_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56"
+        },
+        {
+          "fold": 4,
+          "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+          "training_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89"
+        }
+      ],
+      "backbone": "BASELINE_LOCK.json"
+    },
+    "KS": 0.5294011704615964,
+    "AUC": 0.8469981177466241,
+    "comparison_baseline": "V25",
+    "delta_KS": -0.0008834895824446631,
+    "delta_AUC": -3.116116049173279e-05,
+    "public_observations": [],
+    "submission": "v7/submissions/submission_V162_V25_modeling.csv",
+    "submission_sha256": "80cac642556f0127051d9ed4431ea9cb78f422e42632f7f1443f21f1cb0ade98",
+    "node_result_source": "v7/runs/V162/RESULT.json",
+    "original_result_sha256": "7e67709649b9173e8c0fc6924913ed5c85c8e67a30b9b924fc6fac3ad7981ee1"
   }
 ]
