@@ -1,12 +1,12 @@
 {
-  "UTC": 1793121028.6363854,
+  "UTC": 1793121088.3100631,
   "scope": "Audited frozen-Kumo model experiments V120+ on the locked outer folds",
   "numerical_best": {
-    "id": "V209",
-    "pooled_KS": 0.5315002808929707,
-    "AUC": 0.8471027000332675,
-    "submission": "v7/submissions/submission_V209_V25_conservative.csv",
-    "submission_sha256": "42d5cea3e34a5559fb3568e49c150a507147594af137b2d31f09190f58396860",
+    "id": "V221",
+    "pooled_KS": 0.5316293525375944,
+    "AUC": 0.8471248959047967,
+    "submission": "v7/submissions/submission_V221_V25_conservative.csv",
+    "submission_sha256": "253e6d9a2a6fd70579c48ff39e1c570610891b99414d4fb6d5bfd11a10045c52",
     "comparison_to_V193": {
       "control": "V193",
       "control_metrics": {
@@ -16,13 +16,13 @@
         "rows": 70000
       },
       "candidate_metrics": {
-        "KS": 0.5315002808929707,
-        "signed_KS": 0.5315002808929707,
-        "AUC": 0.8471027000332675,
+        "KS": 0.5316293525375944,
+        "signed_KS": 0.5316293525375944,
+        "AUC": 0.8471248959047967,
         "rows": 70000
       },
-      "delta_KS": 4.076633043503808e-05,
-      "delta_AUC": -4.844316339958077e-06,
+      "delta_KS": 0.00016983797505865095,
+      "delta_AUC": 1.735155518922671e-05,
       "fold_wins": 2,
       "confidence_interval": {
         "repetitions": 300,
@@ -32,20 +32,20 @@
           0.5406826945132854
         ],
         "candidate_KS": [
-          0.5235001590599798,
-          0.5406430769257039
+          0.523474569341451,
+          0.5409138933359893
         ],
         "delta_KS": [
-          -0.0009711864445887618,
-          0.0008398786941456672
+          -0.000570580088502573,
+          0.0005896054627933019
         ],
         "candidate_AUC": [
-          0.8434683078191486,
-          0.8508051133344761
+          0.8435051766136626,
+          0.8508337208395174
         ],
         "delta_AUC": [
-          -4.150632322992287e-05,
-          3.506839026192198e-05
+          2.3752103813223834e-07,
+          3.465546706628852e-05
         ],
         "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
       }
@@ -59,14 +59,14 @@
         "rows": 70000
       },
       "candidate_metrics": {
-        "KS": 0.5315002808929707,
-        "signed_KS": 0.5315002808929707,
-        "AUC": 0.8471027000332675,
+        "KS": 0.5316293525375944,
+        "signed_KS": 0.5316293525375944,
+        "AUC": 0.8471248959047967,
         "rows": 70000
       },
-      "delta_KS": 0.0003486186345884601,
-      "delta_AUC": -6.07539170560667e-06,
-      "fold_wins": 2,
+      "delta_KS": 0.00047769027921207297,
+      "delta_AUC": 1.6120479823578115e-05,
+      "fold_wins": 3,
       "confidence_interval": {
         "repetitions": 300,
         "seed": 192026,
@@ -75,20 +75,20 @@
           0.5406116770704794
         ],
         "candidate_KS": [
-          0.5235001590599798,
-          0.5406430769257039
+          0.523474569341451,
+          0.5409138933359893
         ],
         "delta_KS": [
-          -0.0006987261661526356,
-          0.0010102810424907876
+          -0.00029151151748111893,
+          0.0008013130848074171
         ],
         "candidate_AUC": [
-          0.8434683078191486,
-          0.8508051133344761
+          0.8435051766136626,
+          0.8508337208395174
         ],
         "delta_AUC": [
-          -4.620870944755939e-05,
-          3.644596011844746e-05
+          -4.110713660970821e-06,
+          3.509899326533672e-05
         ],
         "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
       }
@@ -101,20 +101,20 @@
         0.539432023183806
       ],
       "candidate_KS": [
-        0.5235001590599798,
-        0.5406430769257039
+        0.523474569341451,
+        0.5409138933359893
       ],
       "delta_KS": [
-        -0.0011157525985110133,
-        0.0031707158500331426
+        -0.0010941447045733298,
+        0.0033411652331080477
       ],
       "candidate_AUC": [
-        0.8434683078191486,
-        0.8508051133344761
+        0.8435051766136626,
+        0.8508337208395174
       ],
       "delta_AUC": [
-        -0.00012675624920413243,
-        0.0003013723355258235
+        -0.00012472080171401778,
+        0.00034010443563564624
       ],
       "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
     },
@@ -125,19 +125,20 @@
       "selection_corrected_CI": false,
       "public_score_unknown": true,
       "risk": "HIGH_SEARCH_MULTIPLICITY",
-      "diagnostic": "A smaller frozen expert can have different ranking errors despite lower standalone performance. Test limited complementary information, without fitting blend weights on outer labels; no public-score gain assumed.; all new fitting uses correction rows only; repeated development selection remains.",
-      "inner_crossfit_used": false
+      "diagnostic": "Test a bounded credibility gate that limits the lower-complexity representation where resampled corrections disagree. This is an epistemic proxy from3 conditional resamples, not a full posterior or a guarantee of safer risk estimates; no outer labels choose the gate.; all new fitting uses correction rows only; repeated development selection remains.",
+      "inner_crossfit_used": false,
+      "bootstrap_uncertainty_is_proxy": true
     },
     "public_score": null,
     "public_promotion": false
   },
   "pareto": [
     {
-      "id": "V209",
-      "pooled_KS": 0.5315002808929707,
-      "AUC": 0.8471027000332675,
-      "submission": "v7/submissions/submission_V209_V25_conservative.csv",
-      "submission_sha256": "42d5cea3e34a5559fb3568e49c150a507147594af137b2d31f09190f58396860",
+      "id": "V221",
+      "pooled_KS": 0.5316293525375944,
+      "AUC": 0.8471248959047967,
+      "submission": "v7/submissions/submission_V221_V25_conservative.csv",
+      "submission_sha256": "253e6d9a2a6fd70579c48ff39e1c570610891b99414d4fb6d5bfd11a10045c52",
       "comparison_to_V193": {
         "control": "V193",
         "control_metrics": {
@@ -147,13 +148,13 @@
           "rows": 70000
         },
         "candidate_metrics": {
-          "KS": 0.5315002808929707,
-          "signed_KS": 0.5315002808929707,
-          "AUC": 0.8471027000332675,
+          "KS": 0.5316293525375944,
+          "signed_KS": 0.5316293525375944,
+          "AUC": 0.8471248959047967,
           "rows": 70000
         },
-        "delta_KS": 4.076633043503808e-05,
-        "delta_AUC": -4.844316339958077e-06,
+        "delta_KS": 0.00016983797505865095,
+        "delta_AUC": 1.735155518922671e-05,
         "fold_wins": 2,
         "confidence_interval": {
           "repetitions": 300,
@@ -163,20 +164,20 @@
             0.5406826945132854
           ],
           "candidate_KS": [
-            0.5235001590599798,
-            0.5406430769257039
+            0.523474569341451,
+            0.5409138933359893
           ],
           "delta_KS": [
-            -0.0009711864445887618,
-            0.0008398786941456672
+            -0.000570580088502573,
+            0.0005896054627933019
           ],
           "candidate_AUC": [
-            0.8434683078191486,
-            0.8508051133344761
+            0.8435051766136626,
+            0.8508337208395174
           ],
           "delta_AUC": [
-            -4.150632322992287e-05,
-            3.506839026192198e-05
+            2.3752103813223834e-07,
+            3.465546706628852e-05
           ],
           "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
         }
@@ -190,14 +191,14 @@
           "rows": 70000
         },
         "candidate_metrics": {
-          "KS": 0.5315002808929707,
-          "signed_KS": 0.5315002808929707,
-          "AUC": 0.8471027000332675,
+          "KS": 0.5316293525375944,
+          "signed_KS": 0.5316293525375944,
+          "AUC": 0.8471248959047967,
           "rows": 70000
         },
-        "delta_KS": 0.0003486186345884601,
-        "delta_AUC": -6.07539170560667e-06,
-        "fold_wins": 2,
+        "delta_KS": 0.00047769027921207297,
+        "delta_AUC": 1.6120479823578115e-05,
+        "fold_wins": 3,
         "confidence_interval": {
           "repetitions": 300,
           "seed": 192026,
@@ -206,20 +207,20 @@
             0.5406116770704794
           ],
           "candidate_KS": [
-            0.5235001590599798,
-            0.5406430769257039
+            0.523474569341451,
+            0.5409138933359893
           ],
           "delta_KS": [
-            -0.0006987261661526356,
-            0.0010102810424907876
+            -0.00029151151748111893,
+            0.0008013130848074171
           ],
           "candidate_AUC": [
-            0.8434683078191486,
-            0.8508051133344761
+            0.8435051766136626,
+            0.8508337208395174
           ],
           "delta_AUC": [
-            -4.620870944755939e-05,
-            3.644596011844746e-05
+            -4.110713660970821e-06,
+            3.509899326533672e-05
           ],
           "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
         }
@@ -232,20 +233,20 @@
           0.539432023183806
         ],
         "candidate_KS": [
-          0.5235001590599798,
-          0.5406430769257039
+          0.523474569341451,
+          0.5409138933359893
         ],
         "delta_KS": [
-          -0.0011157525985110133,
-          0.0031707158500331426
+          -0.0010941447045733298,
+          0.0033411652331080477
         ],
         "candidate_AUC": [
-          0.8434683078191486,
-          0.8508051133344761
+          0.8435051766136626,
+          0.8508337208395174
         ],
         "delta_AUC": [
-          -0.00012675624920413243,
-          0.0003013723355258235
+          -0.00012472080171401778,
+          0.00034010443563564624
         ],
         "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
       },
@@ -256,8 +257,9 @@
         "selection_corrected_CI": false,
         "public_score_unknown": true,
         "risk": "HIGH_SEARCH_MULTIPLICITY",
-        "diagnostic": "A smaller frozen expert can have different ranking errors despite lower standalone performance. Test limited complementary information, without fitting blend weights on outer labels; no public-score gain assumed.; all new fitting uses correction rows only; repeated development selection remains.",
-        "inner_crossfit_used": false
+        "diagnostic": "Test a bounded credibility gate that limits the lower-complexity representation where resampled corrections disagree. This is an epistemic proxy from3 conditional resamples, not a full posterior or a guarantee of safer risk estimates; no outer labels choose the gate.; all new fitting uses correction rows only; repeated development selection remains.",
+        "inner_crossfit_used": false,
+        "bootstrap_uncertainty_is_proxy": true
       },
       "public_score": null,
       "public_promotion": false
