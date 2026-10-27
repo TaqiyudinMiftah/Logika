@@ -924,5 +924,50 @@
     "cached_feature_formula": "-sum_c(p_c*log(p_c)); p_c=sum(completed item_total for category c in30d)/sum(completed item_total in30d); NA with no positive spend",
     "comparison_baseline": "V25",
     "features_changed": true
+  },
+  {
+    "id": "V167",
+    "families": [
+      "conditional_allocation",
+      "spectral"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "beh_spectral_spend_power_7d",
+      "beh_spectral_spend_power_14d",
+      "beh_spectral_spend_power_30d",
+      "beh_spectral_spend_periodicity_strength",
+      "beh_spectral_spend_dominant_cycle_days",
+      "beh_spectral_orders_power_7d",
+      "beh_spectral_orders_power_14d",
+      "beh_spectral_orders_power_30d",
+      "beh_spectral_orders_periodicity_strength",
+      "beh_spectral_orders_dominant_cycle_days",
+      "beh_spectral_window_supported"
+    ],
+    "label": "V25 plus V80 spectral features only, without V19/V40 pricing",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": true,
+    "cached_feature_file": "light_fe/data/spectral_features.parquet",
+    "cached_feature_names": [
+      "beh_spectral_spend_power_7d",
+      "beh_spectral_spend_power_14d",
+      "beh_spectral_spend_power_30d",
+      "beh_spectral_spend_periodicity_strength",
+      "beh_spectral_spend_dominant_cycle_days",
+      "beh_spectral_orders_power_7d",
+      "beh_spectral_orders_power_14d",
+      "beh_spectral_orders_power_30d",
+      "beh_spectral_orders_periodicity_strength",
+      "beh_spectral_orders_dominant_cycle_days",
+      "beh_spectral_window_supported"
+    ],
+    "cached_feature_formula": "Exact11 V80 spectral fields; Hann-window detrended180-full-day spending/order periodograms with7/14/30d bands and support; source parity verified on all5folds",
+    "comparison_baseline": "V25",
+    "features_changed": true
   }
 ]

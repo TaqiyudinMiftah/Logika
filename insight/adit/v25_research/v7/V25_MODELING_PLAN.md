@@ -73,3 +73,8 @@ After LightGBM116 standalone KS0.522992, user explicitly prioritized FE because 
 ## V166: recent item-value category composition
 
 Read DATA_DICTIONARY v2 in full; stream all4359817 item rows in50000-row chunks. Aggregate completed item_total by category for windows30/90 days strictly before selected decisions. All100k applications join one selected customer each; cancelled item rows262868 excluded. Feature build peak219.625MiB; no targets used, no order_total double count. Test30d Shannon entropy as one new correction field,19inputs, retaining V25 settings. Next hypotheses, only after review/push, are90d entropy and recent-versus-prior60d composition change. New error segments use feature quartiles fitted on correction-training only. Main40ede897776357c787975267dd8a28ce46c5ea6e reviewed; no peer update.
+
+
+## V167: V25 exposure counts plus V80 spectral family
+
+V166 item-value entropy30d yieldsKS0.529769, below V25; no automatic adoption. Test exact V25+V80 union without pricing. This differs from V80 alone and V119 four-way union. Reuse11 existing spectral fields after equality checks against all5saved outer-validation partitions. New head29inputs; L2.003, strength.5 and75:25 fixed. Model source retains temporal coverage/support caveats from V80. V80 had public0.56430 below V25; development pooled target is separate from leaderboard. Main1300c43787f3409f82dfc48ae1afe165b9a4392e reviewed; no peer update.

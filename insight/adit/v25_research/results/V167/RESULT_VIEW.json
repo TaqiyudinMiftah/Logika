@@ -1,0 +1,376 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V167",
+  "spec": {
+    "id": "V167",
+    "families": [
+      "conditional_allocation",
+      "spectral"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "beh_spectral_spend_power_7d",
+      "beh_spectral_spend_power_14d",
+      "beh_spectral_spend_power_30d",
+      "beh_spectral_spend_periodicity_strength",
+      "beh_spectral_spend_dominant_cycle_days",
+      "beh_spectral_orders_power_7d",
+      "beh_spectral_orders_power_14d",
+      "beh_spectral_orders_power_30d",
+      "beh_spectral_orders_periodicity_strength",
+      "beh_spectral_orders_dominant_cycle_days",
+      "beh_spectral_window_supported"
+    ],
+    "label": "V25 plus V80 spectral features only, without V19/V40 pricing",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": true,
+    "cached_feature_file": "light_fe/data/spectral_features.parquet",
+    "cached_feature_names": [
+      "beh_spectral_spend_power_7d",
+      "beh_spectral_spend_power_14d",
+      "beh_spectral_spend_power_30d",
+      "beh_spectral_spend_periodicity_strength",
+      "beh_spectral_spend_dominant_cycle_days",
+      "beh_spectral_orders_power_7d",
+      "beh_spectral_orders_power_14d",
+      "beh_spectral_orders_power_30d",
+      "beh_spectral_orders_periodicity_strength",
+      "beh_spectral_orders_dominant_cycle_days",
+      "beh_spectral_window_supported"
+    ],
+    "cached_feature_formula": "Exact11 V80 spectral fields; Hann-window detrended180-full-day spending/order periodograms with7/14/30d bands and support; source parity verified on all5folds",
+    "comparison_baseline": "V25",
+    "features_changed": true
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "beh_spectral_spend_power_7d",
+    "beh_spectral_spend_power_14d",
+    "beh_spectral_spend_power_30d",
+    "beh_spectral_spend_periodicity_strength",
+    "beh_spectral_spend_dominant_cycle_days",
+    "beh_spectral_orders_power_7d",
+    "beh_spectral_orders_power_14d",
+    "beh_spectral_orders_power_30d",
+    "beh_spectral_orders_periodicity_strength",
+    "beh_spectral_orders_dominant_cycle_days",
+    "beh_spectral_window_supported"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "beh_spectral_spend_power_7d",
+    "beh_spectral_spend_power_14d",
+    "beh_spectral_spend_power_30d",
+    "beh_spectral_spend_periodicity_strength",
+    "beh_spectral_spend_dominant_cycle_days",
+    "beh_spectral_orders_power_7d",
+    "beh_spectral_orders_power_14d",
+    "beh_spectral_orders_power_30d",
+    "beh_spectral_orders_periodicity_strength",
+    "beh_spectral_orders_dominant_cycle_days",
+    "beh_spectral_window_supported"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "OOF": {
+    "KS": 0.5307954554699862,
+    "signed_KS": 0.5307954554699862,
+    "AUC": 0.8469783788094051,
+    "rows": 70000,
+    "logloss": 0.2927103196851733,
+    "brier": 0.08879687551298127
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000,
+    "logloss": 0.29259872368613593,
+    "brier": 0.08874672566929512
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": 0.0005107954259451208,
+  "delta_AUC": -5.090009771080428e-05,
+  "mean_fold_KS": 0.532948612000945,
+  "std_fold_KS": 0.0060004437439699606,
+  "delta_mean_fold_KS": -0.00038121255560625845,
+  "fold_wins": 3,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5254234539448985,
+        "signed_KS": 0.5254234539448985,
+        "AUC": 0.8438510032021898,
+        "rows": 14000,
+        "logloss": 0.2938634359039354,
+        "brier": 0.08886635464650773
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000,
+        "logloss": 0.29362395039095357,
+        "brier": 0.08878022367454512
+      },
+      "delta_KS": -0.0030564518159168497,
+      "delta_AUC": -0.00021878071576675318,
+      "correction_rows": 6000,
+      "parameters": 145,
+      "head_training_KS": 0.5551585212180014,
+      "heldout_corrected_Kumo_KS": 0.5253529762938138,
+      "train_validation_head_KS_gap": 0.02980554492418752,
+      "mean_abs_correction": 0.3418914820480093,
+      "P99_abs_correction": 1.3189911615136922,
+      "optimizer_gradient_max": 5.815521342230126e-07,
+      "optimizer_iterations": 86,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "feature_transform_reference": {
+        "source": "light_fe/data/spectral_features.parquet",
+        "sha256": "07eae01e1edcb98ea032997a0e27434a03c8b42326b5e5200130935a2bc9943a",
+        "target_free_event_aggregation": true
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5348506767267536,
+        "signed_KS": 0.5348506767267536,
+        "AUC": 0.849666344191196,
+        "rows": 14000,
+        "logloss": 0.29070584067110017,
+        "brier": 0.08837744325829222
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000,
+        "logloss": 0.29075557216256626,
+        "brier": 0.08841494597598963
+      },
+      "delta_KS": -0.0031484944978084073,
+      "delta_AUC": 6.139077318434438e-05,
+      "correction_rows": 6000,
+      "parameters": 145,
+      "head_training_KS": 0.5414557093077601,
+      "heldout_corrected_Kumo_KS": 0.5354438889854822,
+      "train_validation_head_KS_gap": 0.006011820322277872,
+      "mean_abs_correction": 0.24891924815129104,
+      "P99_abs_correction": 1.0217194910408538,
+      "optimizer_gradient_max": 3.723174095874942e-07,
+      "optimizer_iterations": 85,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "feature_transform_reference": {
+        "source": "light_fe/data/spectral_features.parquet",
+        "sha256": "07eae01e1edcb98ea032997a0e27434a03c8b42326b5e5200130935a2bc9943a",
+        "target_free_event_aggregation": true
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.541770486420574,
+        "signed_KS": 0.541770486420574,
+        "AUC": 0.8497226045739865,
+        "rows": 14000,
+        "logloss": 0.29110876841343375,
+        "brier": 0.08837115863380884
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000,
+        "logloss": 0.29083487835059463,
+        "brier": 0.08824674446694904
+      },
+      "delta_KS": 0.00147224813141833,
+      "delta_AUC": -0.0001343031858115351,
+      "correction_rows": 6000,
+      "parameters": 145,
+      "head_training_KS": 0.567255710490975,
+      "heldout_corrected_Kumo_KS": 0.5413555769669645,
+      "train_validation_head_KS_gap": 0.02590013352401055,
+      "mean_abs_correction": 0.352062815513008,
+      "P99_abs_correction": 1.2260018088071913,
+      "optimizer_gradient_max": 3.2981804991803754e-07,
+      "optimizer_iterations": 89,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "feature_transform_reference": {
+        "source": "light_fe/data/spectral_features.parquet",
+        "sha256": "07eae01e1edcb98ea032997a0e27434a03c8b42326b5e5200130935a2bc9943a",
+        "target_free_event_aggregation": true
+      }
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5319949295961705,
+        "signed_KS": 0.5319949295961705,
+        "AUC": 0.8435567123660107,
+        "rows": 14000,
+        "logloss": 0.29542159291073977,
+        "brier": 0.08954559556472502
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000,
+        "logloss": 0.29521447734100104,
+        "brier": 0.08947486296029543
+      },
+      "delta_KS": 0.0013428712830497735,
+      "delta_AUC": -0.00030664400560509453,
+      "correction_rows": 6000,
+      "parameters": 145,
+      "head_training_KS": 0.5295809644384758,
+      "heldout_corrected_Kumo_KS": 0.5308200693286634,
+      "train_validation_head_KS_gap": -0.0012391048901876367,
+      "mean_abs_correction": 0.2875669465666164,
+      "P99_abs_correction": 0.9626749567446309,
+      "optimizer_gradient_max": 5.484602960436941e-07,
+      "optimizer_iterations": 85,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "feature_transform_reference": {
+        "source": "light_fe/data/spectral_features.parquet",
+        "sha256": "07eae01e1edcb98ea032997a0e27434a03c8b42326b5e5200130935a2bc9943a",
+        "target_free_event_aggregation": true
+      }
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5307035133163288,
+        "signed_KS": 0.5307035133163288,
+        "AUC": 0.8482309474378451,
+        "rows": 14000,
+        "logloss": 0.2924519605266575,
+        "brier": 0.08882382546157248
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000,
+        "logloss": 0.2925647401855643,
+        "brier": 0.08881685126869625
+      },
+      "delta_KS": 0.0014837641212258612,
+      "delta_AUC": 0.0003342402277648482,
+      "correction_rows": 6000,
+      "parameters": 145,
+      "head_training_KS": 0.5510989108506723,
+      "heldout_corrected_Kumo_KS": 0.5310721293105951,
+      "train_validation_head_KS_gap": 0.0200267815400772,
+      "mean_abs_correction": 0.2895237246322268,
+      "P99_abs_correction": 1.060796666806912,
+      "optimizer_gradient_max": 7.733607655199706e-07,
+      "optimizer_iterations": 88,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "feature_transform_reference": {
+        "source": "light_fe/data/spectral_features.parquet",
+        "sha256": "07eae01e1edcb98ea032997a0e27434a03c8b42326b5e5200130935a2bc9943a",
+        "target_free_event_aggregation": true
+      }
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5227353564450311,
+      0.5399322940455992
+    ],
+    "delta_KS": [
+      -0.001652640823324003,
+      0.002958116915543895
+    ],
+    "candidate_AUC": [
+      0.8433666911982777,
+      0.8506485645832509
+    ],
+    "delta_AUC": [
+      -0.00027304908196106313,
+      0.0002204572119664594
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "evidence": "INCONCLUSIVE_OR_NEGATIVE",
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "retrained_seeds": 1,
+    "extra_head_features": 0,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY; do not equate pooled target with hidden-test improvement",
+    "diagnostic": "Head training metric is optimistic; error analysis uses only outer-held-out predictions."
+  },
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "new_features_DPD_used": false,
+  "new_features_snapshot_dependent": false,
+  "effective_quarantined": false,
+  "submission": "v7/submissions/submission_V167_V25_modeling.csv",
+  "submission_sha256": "9f42a732b0001fa1d2bca9fab5be952a91c7c57952aebf9e48199bda90b6f0ba",
+  "public_score": null,
+  "elapsed_seconds": 7.168647289276123,
+  "source_sha256": "bda130b50d6834a623a1bf22401cc12eb0558ceff8bfc933e9def9886c092ae5",
+  "source_feature_manifest": "v7/modeling/reports/CACHE_AUDIT.json",
+  "feature_matrix_sha256": "c90db5d2c2b0d8a5b2937cd6d76041c477f9eae1c88ac03201ba4a8435e037ae",
+  "extension_feature_matrix_sha256": "3deb81d9c874058370a5c39112a2b9205dcb33d50dd36227130d64393f9c133a",
+  "features_changed_vs_V25": true,
+  "modeling_formula": "corrected=sigmoid(logit(p_Kumo)+0.5*X_V25@beta); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities; extra_inputs=['beh_spectral_spend_power_7d', 'beh_spectral_spend_power_14d', 'beh_spectral_spend_power_30d', 'beh_spectral_spend_periodicity_strength', 'beh_spectral_spend_dominant_cycle_days', 'beh_spectral_orders_power_7d', 'beh_spectral_orders_power_14d', 'beh_spectral_orders_power_30d', 'beh_spectral_orders_periodicity_strength', 'beh_spectral_orders_dominant_cycle_days', 'beh_spectral_window_supported']; undefined exposure stays missing; event cache or training-only reference",
+  "modeling_objective": "mean BCE with unweighted labels + 0.003/2*sum(beta[1:]^2); fit full correction, shrink at inference",
+  "controller_source": "v7/scripts/modeling_features.py",
+  "error_analysis": {
+    "json": "v7/runs/V167/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V167/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V167/ERROR_CASES.csv"
+  },
+  "derived_feature_formula": "Exact11 V80 spectral fields; Hann-window detrended180-full-day spending/order periodograms with7/14/30d bands and support; source parity verified on all5folds",
+  "cached_feature_sha256": "07eae01e1edcb98ea032997a0e27434a03c8b42326b5e5200130935a2bc9943a"
+}

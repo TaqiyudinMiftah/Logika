@@ -15105,5 +15105,127 @@
     "submission_sha256": "b6d03967204c4a0e1cc7979ba17c9b878c0d5c4329d2b8b9a8e61e93490a79e9",
     "node_result_source": "v7/runs/V166/RESULT.json",
     "original_result_sha256": "edb1539707e5ff9902789541cdeef32308fef84d90cf9766f11e672fa942889e"
+  },
+  {
+    "id": "V167",
+    "signature_sha256": "74f71222dd899be582ffd5014f5ff3af045e6c0c683e55b6d72c998192fe6ed7",
+    "configuration": {
+      "configuration": {
+        "id": "V167",
+        "families": [
+          "conditional_allocation",
+          "spectral"
+        ],
+        "only": [
+          "risk_conditional_negative_months",
+          "risk_conditional_nonnegative_months",
+          "beh_spectral_spend_power_7d",
+          "beh_spectral_spend_power_14d",
+          "beh_spectral_spend_power_30d",
+          "beh_spectral_spend_periodicity_strength",
+          "beh_spectral_spend_dominant_cycle_days",
+          "beh_spectral_orders_power_7d",
+          "beh_spectral_orders_power_14d",
+          "beh_spectral_orders_power_30d",
+          "beh_spectral_orders_periodicity_strength",
+          "beh_spectral_orders_dominant_cycle_days",
+          "beh_spectral_window_supported"
+        ],
+        "label": "V25 plus V80 spectral features only, without V19/V40 pricing",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "blend": "probability",
+        "refit": true,
+        "cached_feature_file": "light_fe/data/spectral_features.parquet",
+        "cached_feature_names": [
+          "beh_spectral_spend_power_7d",
+          "beh_spectral_spend_power_14d",
+          "beh_spectral_spend_power_30d",
+          "beh_spectral_spend_periodicity_strength",
+          "beh_spectral_spend_dominant_cycle_days",
+          "beh_spectral_orders_power_7d",
+          "beh_spectral_orders_power_14d",
+          "beh_spectral_orders_power_30d",
+          "beh_spectral_orders_periodicity_strength",
+          "beh_spectral_orders_dominant_cycle_days",
+          "beh_spectral_window_supported"
+        ],
+        "cached_feature_formula": "Exact11 V80 spectral fields; Hann-window detrended180-full-day spending/order periodograms with7/14/30d bands and support; source parity verified on all5folds",
+        "comparison_baseline": "V25",
+        "features_changed": true
+      },
+      "features": [
+        "re_price_log_posterior",
+        "re_price_posterior_sd",
+        "re_bureau_score_posterior",
+        "re_bureau_posterior_sd",
+        "re_income_geometric_mean",
+        "re_declared_income_log_gap",
+        "re_outflow_income_geometric_ratio",
+        "re_late_1_posterior",
+        "re_late_30_posterior",
+        "installment_observed_income_ratio",
+        "v2_existing_total_burden_observed",
+        "employment_type",
+        "risk_conditional_negative_months",
+        "risk_conditional_nonnegative_months",
+        "aux_account_months",
+        "aux_orders90",
+        "aux_ecommerce_observed_days",
+        "aux_allocation_count",
+        "beh_spectral_spend_power_7d",
+        "beh_spectral_spend_power_14d",
+        "beh_spectral_spend_power_30d",
+        "beh_spectral_spend_periodicity_strength",
+        "beh_spectral_spend_dominant_cycle_days",
+        "beh_spectral_orders_power_7d",
+        "beh_spectral_orders_power_14d",
+        "beh_spectral_orders_power_30d",
+        "beh_spectral_orders_periodicity_strength",
+        "beh_spectral_orders_dominant_cycle_days",
+        "beh_spectral_window_supported"
+      ],
+      "feature_matrix_sha256": "c90db5d2c2b0d8a5b2937cd6d76041c477f9eae1c88ac03201ba4a8435e037ae",
+      "extension_feature_matrix_sha256": "3deb81d9c874058370a5c39112a2b9205dcb33d50dd36227130d64393f9c133a",
+      "folds": [
+        {
+          "fold": 0,
+          "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+          "training_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964"
+        },
+        {
+          "fold": 1,
+          "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+          "training_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0"
+        },
+        {
+          "fold": 2,
+          "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+          "training_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07"
+        },
+        {
+          "fold": 3,
+          "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+          "training_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56"
+        },
+        {
+          "fold": 4,
+          "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+          "training_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89"
+        }
+      ],
+      "backbone": "BASELINE_LOCK.json"
+    },
+    "KS": 0.5307954554699862,
+    "AUC": 0.8469783788094051,
+    "comparison_baseline": "V25",
+    "delta_KS": 0.0005107954259451208,
+    "delta_AUC": -5.090009771080428e-05,
+    "public_observations": [],
+    "submission": "v7/submissions/submission_V167_V25_modeling.csv",
+    "submission_sha256": "9f42a732b0001fa1d2bca9fab5be952a91c7c57952aebf9e48199bda90b6f0ba",
+    "node_result_source": "v7/runs/V167/RESULT.json",
+    "original_result_sha256": "a35133fd7349c28be137ab5516c3a8e4ec54ec9ab044b99b71f0be601fb99078"
   }
 ]
