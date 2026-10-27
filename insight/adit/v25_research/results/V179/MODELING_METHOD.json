@@ -1,0 +1,49 @@
+{
+  "method": "V25 offset design plus9 spectral inputs; meanBCE+.003/2||base_beta||\u00c2\u00b2+.03/2||new_beta||\u00c2\u00b2; inference strength.5 ; final=.75*sigmoid(eta)+.25*original_spline77; mean5fold test probabilities",
+  "spec": {
+    "id": "V179",
+    "label": "Group-ridge spectral correction: preserve V25 penalty, shrink new family10x",
+    "families": [
+      "spectral"
+    ],
+    "method": "group_ridge",
+    "penalty": 0.003,
+    "new_group_penalty": 0.03,
+    "strength": 0.5,
+    "error_basis": "V167 KS0.530795 with larger head gap0.01610 versus V25 0.01111; regularize only additional spectral coefficients; omit dominant-cycle argmax",
+    "formula": "V25 offset spline design plus9 spectral inputs; meanBCE+.003/2||base_beta||^2+.03/2||new_beta||^2; infer shrink.5; blend original spline75:25",
+    "priority": "P0",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "beh_spectral_spend_power_7d",
+    "beh_spectral_spend_power_14d",
+    "beh_spectral_spend_power_30d",
+    "beh_spectral_spend_periodicity_strength",
+    "beh_spectral_orders_power_7d",
+    "beh_spectral_orders_power_14d",
+    "beh_spectral_orders_power_30d",
+    "beh_spectral_orders_periodicity_strength",
+    "beh_spectral_window_supported"
+  ],
+  "source_sha256": "4333920f61c77f5ead382bb8b15286a4b565be494285cfeacba49f60356481f4"
+}
