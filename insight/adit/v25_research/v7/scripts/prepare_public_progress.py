@@ -56,7 +56,7 @@ def main():
     for name in ['v7/adaptive_plan.json','v7/ADAPTIVE_QUEUE_5.md','v7/scripts/adaptive_adapters.py','v7/scripts/run_adaptive_queue.py','v7/adaptive/reports/PREFLIGHT.json','v7/reports/LEDGER_PLAN_RESTORATION.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
-    for name in ['v7/joint_followup_plan.json','v7/JOINT_FOLLOWUP_PLAN.md','v7/scripts/joint_followups.py','v7/joint_followup/reports/PREFLIGHT.json','v7/reports/V185_LEADERBOARD_VERIFICATION.json','reports/LEADERBOARD_OBSERVATIONS.json']:
+    for name in ['v7/joint_followup_plan.json','v7/JOINT_FOLLOWUP_PLAN.md','v7/scripts/joint_followups.py','v7/joint_followup/reports/PREFLIGHT.json','v7/reports/V185_LEADERBOARD_VERIFICATION.json','reports/LEADERBOARD_OBSERVATIONS.json','v7/reports/SUBMISSION_RECOMMENDATION_20261027_AFTER_V195.json','v7/reports/BEST_DEVELOPMENT_MODEL.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']

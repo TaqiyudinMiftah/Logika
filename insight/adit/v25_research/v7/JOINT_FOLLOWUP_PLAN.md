@@ -43,3 +43,17 @@ Every candidate receives pooled KS/AUC, per-fold metrics, paired300-resample del
 No automatic public promotion for passing0.531. Public incumbent staysV25. Stronger training separation alone is not evidence of useful representation. Fixed-score recipes report the inherited head diagnostic, not a newly fitted head gap. All additional fitting uses the6k correction partition, with50k Kumo context and14k outer validation unchanged. Kumo weights100% frozen.
 
 Runtime: node480 CPU environment; no new backbone/context inference. One real worker, twoCPUthreads, wait for0.9GiB effective freeRAM using bounded inactive-file allowance, maxprocessRSS2GiB. No reservation buffers. Before every candidate, fetch sharedHEAD and review new peer work; sync audit/results before continuing.
+
+## Completed results and decision
+
+| Run | PooledKS | AUC | DeltaKS vsV185 | DeltaAUC vsV185 | KS fold wins vsV185 |
+|---|---:|---:|---:|---:|---:|
+| V191 | 0.53118325 | 0.84707551 | +0.00003159 | -0.00003327 | 1/5 |
+| V192 | 0.53065097 | 0.84710701 | -0.00050069 | -0.00000177 | 3/5 |
+| V193 | 0.53145951 | 0.84710754 | +0.00030785 | -0.00000123 | 4/5 |
+| V194 | 0.53093506 | 0.84710888 | -0.00021660 | +0.00000011 | 1/5 |
+| V195 | 0.53011746 | 0.84713148 | -0.00103420 | +0.00002271 | 3/5 |
+
+V193 is the numerical development best. Its4/5fold KS wins and near-unchanged AUC are encouraging, but deltaKS95% CI[-0.00038960,+0.00076267] crosses zero and search/retraining uncertainty is excluded. V25 remains the public recommendation.
+
+Fixed-score V185/V193 have no newly trained ensemble head; their inherited V25 head gap must not be interpreted as a new model gap. Relevant source head gaps: V1670.0161010, V1780.0106863, V250.0111077. V193 still inherits spectral-model and search risk. See SUBMISSION_RECOMMENDATION_20261027_AFTER_V195.json for the complete decision.
