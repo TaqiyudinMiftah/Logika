@@ -55,7 +55,9 @@ def ensure(key,loaded):
     assert len(columns)==116 and all(c in tr for c in columns)
     config=dict(learning_rate=.05,max_leaf_nodes=7,min_samples_leaf=150,l2_regularization=20.,max_iter=400)
     if key=='hgb_b':config.update(learning_rate=.04,max_leaf_nodes=15,min_samples_leaf=150,l2_regularization=30.,max_iter=500)
-    assert key in ['hgb_a','hgb_b']
+    assert key in ['hgb_a','hgb_b','lgbm_a']
+    if key=='lgbm_a':
+        config=dict(n_estimators=2000,learning_rate=.035,num_leaves=15,max_depth=5,min_child_samples=150,reg_alpha=.1,reg_lambda=20.,colsample_bytree=.85,subsample=.85,subsample_freq=1,max_bin=127,n_jobs=2,verbosity=-1)
     predictions={};audits=[]
     for f in frames:
         fold=f['fold'];a=ROOT/'artifacts'/f'fold{fold}';idx=np.load(a/'indices.npz');ti,vi=idx['train'],idx['validation']
@@ -69,14 +71,22 @@ def ensure(key,loaded):
         xh,ref,cat_idx=matrix(tr.iloc[inner_train],columns)
         xv,_,_=matrix(tr.iloc[inner_valid],columns,ref)
         # Explicit arrays keep preprocessing and early stopping inside the inner split.
-        tune=HistGradientBoostingClassifier(**config,categorical_features=cat_idx,early_stopping=True,validation_fraction=None,n_iter_no_change=25,tol=1e-6,random_state=2026+fold)
-        with threadpool_limits(limits=2):tune.fit(xh,y[inner_train],X_val=xv,y_val=y[inner_valid])
-        iterations=int(tune.n_iter_)
+        if key=='lgbm_a':
+            from lightgbm import LGBMClassifier,early_stopping
+            tune=LGBMClassifier(**config,random_state=2026+fold)
+            with threadpool_limits(limits=2):tune.fit(xh,y[inner_train],categorical_feature=cat_idx,eval_set=[(xv,y[inner_valid])],eval_metric='binary_logloss',callbacks=[early_stopping(100,verbose=False)])
+            iterations=int(tune.best_iteration_)
+        else:
+            tune=HistGradientBoostingClassifier(**config,categorical_features=cat_idx,early_stopping=True,validation_fraction=None,n_iter_no_change=25,tol=1e-6,random_state=2026+fold)
+            with threadpool_limits(limits=2):tune.fit(xh,y[inner_train],X_val=xv,y_val=y[inner_valid])
+            iterations=int(tune.n_iter_)
         del tune,xh,xv
         xtrain,ref,cat_idx=matrix(tr.iloc[ti],columns);xval,_,_=matrix(tr.iloc[vi],columns,ref);xtest,_,_=matrix(te,columns,ref)
-        model=HistGradientBoostingClassifier(**dict(config,max_iter=iterations),categorical_features=cat_idx,early_stopping=False,random_state=2026+fold)
+        model=LGBMClassifier(**dict(config,n_estimators=iterations),random_state=2026+fold) if key=='lgbm_a' else HistGradientBoostingClassifier(**dict(config,max_iter=iterations),categorical_features=cat_idx,early_stopping=False,random_state=2026+fold)
         with threadpool_limits(limits=2):
-            model.fit(xtrain,y[ti]);pv=model.predict_proba(xval)[:,1];pt=model.predict_proba(xtest)[:,1];ph=model.predict_proba(xtrain)[:,1]
+            if key=='lgbm_a':model.fit(xtrain,y[ti],categorical_feature=cat_idx)
+            else:model.fit(xtrain,y[ti])
+            pv=model.predict_proba(xval)[:,1];pt=model.predict_proba(xtest)[:,1];ph=model.predict_proba(xtrain)[:,1]
         audit=dict(fold=fold,training_rows=56000,validation_rows=14000,inner_train_rows=len(inner_train),inner_validation_rows=len(inner_valid),selected_iterations=iterations,train_ids_sha256=ids_hash(tr,ti),validation_ids_sha256=ids_hash(tr,vi),training_metrics=scores(y[ti],ph),validation_metrics=scores(y[vi],pv),outer_validation_labels_used_in_training=False,existing_feature_inputs=columns,new_historical_features=False)
         joblib.dump(dict(model=model,category_reference=ref,columns=columns,configuration=config,selected_iterations=iterations),cache,compress=3)
         np.savez_compressed(predfile,validation=pv,test=pt)

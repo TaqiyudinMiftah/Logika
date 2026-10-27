@@ -58,3 +58,8 @@ V161 low-L2 plus20% tree reachesKS0.530540, below V127. With scope expanded by u
 ## V163: training-population class-prior alignment
 
 V162 nonlinear count ratio failed KS0.529401. Test a distinct split-level hypothesis: finite6k correction sample prevalence can differ from50k context prevalence, whereas original spline is trained on56k outer-training. Add to corrected-Kumo logit the training-derived shift logit(pi_56k)-0.5*logit(pi_50k)-0.5*logit(pi_6k), preserving feature scores and75:25 mixture. This is a hypothesis about prior transfer in a shrunken correction, not an established property of Kumo. All priors use only context/correction labels; no validation/test labels or fold-specific validation calibration. Evaluate pooled versus within-fold KS separately. This is not a claim that a global monotone calibration improves KS. Main b976d0cdd8dbc1944497baf3ab2683b23c69a0c2 inspected; no peer update.
+
+
+## V164: LightGBM on existing116-field information
+
+V163 prior alignment gives unchanged KS0.5302846600. Test LightGBM4.6.0,15 leaves, depth5, min_child150, L2leaf20, L1.1, learning rate.035, max2000 trees, max_bin127, row/feature sampling.85,2CPU threads. Tree count selected only inner15% holdout with100-round patience, then fit56k outer-training. Evaluate the expert standalone first; all features already exist in V25 pipeline union, no new raw feature. Keep V25 public incumbent. No peer update at main ad77946642b8f3028d3404212f3409c0f762c056.
