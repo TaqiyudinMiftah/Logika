@@ -1,0 +1,109 @@
+{
+  "experiment": "V202",
+  "method": "laplace_predictive",
+  "hypothesis": "V189 partial pooling gives a small gain without more input dimensions. Extend reliability to the head posterior: high-leverage applicants receive more predictive integration. Approximate Laplace uncertainty conditions on encoder/prior, excludes Kumo and model-selection uncertainty.",
+  "formula": "Fit original V25 beta; Sigma=(X^T*W*X+n*.003*diag(0,1,...)+1e-6I)^-1; eta=zK+.5Xbeta; v=.25*diag(X*Sigma*X^T); pK~=sigmoid(eta/sqrt(1+pi*v/8)); original75:25 spline fusion",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5305400942719609,
+      "signed_KS": 0.5305400942719609,
+      "AUC": 0.8470400855927056,
+      "rows": 70000
+    },
+    "delta_KS": -0.0009194202905747906,
+    "delta_AUC": -6.745875690183922e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5228193932053518,
+        0.5396264626264272
+      ],
+      "delta_KS": [
+        -0.003345798632157401,
+        0.0013417080486651475
+      ],
+      "candidate_AUC": [
+        0.843354016512313,
+        0.8507922599860908
+      ],
+      "delta_AUC": [
+        -0.00032834996981284946,
+        0.00015021575526044377
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.01172686665079956,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3849,
+      "net_bad_captured": 8,
+      "new_members": 245,
+      "exited_members": 245,
+      "entrant_bad_rate": 0.37142857142857144,
+      "exit_bad_rate": 0.33877551020408164
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5850,
+      "net_bad_captured": -5,
+      "new_members": 365,
+      "exited_members": 365,
+      "entrant_bad_rate": 0.22465753424657534,
+      "exit_bad_rate": 0.23835616438356164
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7434,
+      "net_bad_captured": 12,
+      "new_members": 425,
+      "exited_members": 425,
+      "entrant_bad_rate": 0.13647058823529412,
+      "exit_bad_rate": 0.10823529411764705
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8023,
+      "net_bad_captured": 8,
+      "new_members": 460,
+      "exited_members": 460,
+      "entrant_bad_rate": 0.09565217391304348,
+      "exit_bad_rate": 0.0782608695652174
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8649,
+      "net_bad_captured": 0,
+      "new_members": 440,
+      "exited_members": 440,
+      "entrant_bad_rate": 0.07272727272727272,
+      "exit_bad_rate": 0.07272727272727272
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
