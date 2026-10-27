@@ -1,37 +1,5 @@
 [
   {
-    "id": "V206",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "source_script": "v7/scripts/stability_worker.py",
-      "worker": "stability_worker.py",
-      "research_ready": true,
-      "no_outer_validation_tuning": true,
-      "id": "V206",
-      "label": "Roughness-regularized stable9 local-context correction",
-      "method": "coefficient_smoothing",
-      "input_source": "V178",
-      "spectral_inputs": "stable9",
-      "roughness_penalty": 0.03,
-      "formula": "V19627-input rawV178 head; meanBCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2; shrink.5; original75:25 spline fusion",
-      "rationale": "V196 retains high train-validation head gap despite removing2 cycle features. Test smoothing within each financial/spectral response, complementary to removing features or increasing global L2; same27 inputs permit a matched comparison.",
-      "batch": "stability",
-      "feature_catalog": "stability/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V207",
     "status": "QUEUED",
     "definition": {
