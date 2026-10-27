@@ -1,0 +1,436 @@
+{
+  "updated_UTC": "2026-10-27T13:53:00.372016+00:00",
+  "total_experiments": 15,
+  "completed": 10,
+  "baseline": "V25",
+  "target_pooled_KS": 0.531,
+  "Kumo_frozen_fraction": 1.0,
+  "automatic_start": true,
+  "resource_poll_seconds": 10,
+  "required_available_RAM_plus_limited_reclaimable_cache_GiB": 2.8,
+  "required_free_VRAM_GiB": 24.0,
+  "sequential": true,
+  "continue_after_previous_result_saved_and_pushed": true,
+  "review_peer_updates_before_each_experiment": true,
+  "stop_for_unreviewed_peer_changes": true,
+  "submission_each_completed_experiment": true,
+  "resource_kill_retries_per_supervisor": 2,
+  "experiments": [
+    {
+      "id": "V169",
+      "method": "Kumo Large learns V25 exposure and conditional-liquidity counts directly",
+      "status": "COMPLETE",
+      "KS": 0.5288125269068431,
+      "AUC": 0.8472206798279507,
+      "configuration": {
+        "id": "V169",
+        "label": "Kumo Large learns V25 exposure and conditional-liquidity counts directly",
+        "families": [
+          "conditional_allocation"
+        ],
+        "context_features": "locked90_plus_v25_support",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+        "error_analysis_basis": "V167 allocation_count=0 segment deltaKS -0.002942; explicit evidence strength currently enters only correction, not frozen Kumo"
+      }
+    },
+    {
+      "id": "V170",
+      "method": "Frozen Kumo with spending velocity and liquidity pressure",
+      "status": "COMPLETE",
+      "KS": 0.5289414385812214,
+      "AUC": 0.8472102261201847,
+      "configuration": {
+        "id": "V170",
+        "label": "Frozen Kumo with spending velocity and liquidity pressure",
+        "families": [
+          "conditional_allocation",
+          "spending_velocity"
+        ],
+        "context_features": "locked90_plus_v25_velocity",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+        "error_analysis_basis": "V167 improves variable-income subgroup +0.001693 KS but raw seasonal behavior alone is not capacity; test explicit velocity relative to income and liquidity as a domain hypothesis"
+      }
+    },
+    {
+      "id": "V171",
+      "method": "Frozen Kumo with compact spectral band representation",
+      "status": "COMPLETE",
+      "KS": 0.5293593991007075,
+      "AUC": 0.8471952967231657,
+      "configuration": {
+        "id": "V171",
+        "label": "Frozen Kumo with compact spectral band representation",
+        "families": [
+          "conditional_allocation",
+          "spectral"
+        ],
+        "context_features": "locked90_plus_v25_spectral",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+        "error_analysis_basis": "V167 highest development KS0.530795 but AUC slightly down and head gap0.01610 vs0.01111; retain interpretable band powers, omit unstable dominant-cycle argmax, keep correction18 unchanged"
+      }
+    },
+    {
+      "id": "V172",
+      "method": "Coverage-aware spectral model with V25 fallback for unobserved repayment allocation",
+      "status": "COMPLETE",
+      "KS": 0.5303631341433743,
+      "AUC": 0.8471641199134107,
+      "configuration": {
+        "id": "V172",
+        "label": "Coverage-aware spectral model with V25 fallback for unobserved repayment allocation",
+        "families": [
+          "conditional_allocation",
+          "spectral"
+        ],
+        "context_features": "locked90_plus_v25_spectral",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+        "reuse_kumo_from": "V171",
+        "coverage_fallback": "V25_if_allocation_count_zero",
+        "error_analysis_basis": "V167 no-allocation segment deltaKS -0.002942, positive-allocation1:3 segment +0.004588. Fixed coverage gate uses no labels; rule inspired by OOF errors, so post-selection optimism must be reported"
+      }
+    },
+    {
+      "id": "V173",
+      "method": "Stratified context bagging: two40k frozen Kumo fits from identical50k eligible pool",
+      "status": "COMPLETE",
+      "KS": 0.5286022721015591,
+      "AUC": 0.8470521268312751,
+      "configuration": {
+        "id": "V173",
+        "label": "Stratified context bagging: two40k frozen Kumo fits from identical50k eligible pool",
+        "families": [
+          "conditional_allocation"
+        ],
+        "context_features": "locked90_plus_v25_support",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+        "context_bags": 2,
+        "bag_context_rows": 40000,
+        "error_analysis_basis": "V168 numerical reproduction shifts pooledKS -0.00008265 with AUC effectively unchanged; V167 gain has CI crossing zero. Test context-sampling robustness rather than expanding the6k-trained correction"
+      }
+    },
+    {
+      "id": "V174",
+      "method": "Empirical-Bayes allocation propensity and uncertainty inside frozen Kumo",
+      "status": "COMPLETE",
+      "KS": 0.5292927367174179,
+      "AUC": 0.8469899262267827,
+      "configuration": {
+        "id": "V174",
+        "label": "Empirical-Bayes allocation propensity and uncertainty inside frozen Kumo",
+        "families": [
+          "allocation_bayes"
+        ],
+        "context_features": "locked90_plus_v25_bayes",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+        "error_analysis_basis": "Raw allocation counts and all-event rate may overstate evidence for small n; Beta-Binomial uncertainty is added to frozen nonlinear representation, unlike correction-only V14",
+        "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
+      }
+    },
+    {
+      "id": "V175",
+      "method": "Selective latent uncertainty and income-contradiction inputs",
+      "status": "COMPLETE",
+      "KS": 0.5284933723571009,
+      "AUC": 0.8472016433687654,
+      "configuration": {
+        "id": "V175",
+        "label": "Selective latent uncertainty and income-contradiction inputs",
+        "families": [
+          "latent_input"
+        ],
+        "context_features": "locked90_plus_v25_latent",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+        "error_analysis_basis": "Avoid redundant posterior means rho0.99899/0.99973; add only price/bureau posterior SD and income/outflow gaps to frozen baseline90",
+        "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
+      }
+    },
+    {
+      "id": "V176",
+      "method": "Compact item-value basket composition, without unverified order denominators",
+      "status": "COMPLETE",
+      "KS": 0.529325332393696,
+      "AUC": 0.8469974152685905,
+      "configuration": {
+        "id": "V176",
+        "label": "Compact item-value basket composition, without unverified order denominators",
+        "families": [
+          "basket_value"
+        ],
+        "context_features": "locked90_plus_v25_basket",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+        "error_analysis_basis": "Fold0 entropy30 KS0.17917,90d0.14924 and normalized entropy0.12394; moderate correlation with old lifetime entropy. Prior correction-only V166 was negative, so unique gain remains unproved",
+        "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
+      }
+    },
+    {
+      "id": "V177",
+      "method": "Conservative fixed90:10 V25 and V169 score blend",
+      "status": "COMPLETE",
+      "KS": 0.5303371946203446,
+      "AUC": 0.847059735850767,
+      "configuration": {
+        "id": "V177",
+        "label": "Conservative fixed90:10 V25 and V169 score blend",
+        "families": [
+          "score_complementarity"
+        ],
+        "context_features": "locked90_plus_v25_score_anchor",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+        "error_analysis_basis": "V169 AUC +0.0001914 with paired95% CI[+0.0000301,+0.0003501] and9 extra defaults captured top20%, despite pooledKS -0.001472; test limited complementary contribution without more backbone fitting",
+        "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased",
+        "reuse_kumo_from": "V168",
+        "score_blend_weight": 0.1
+      }
+    },
+    {
+      "id": "V178",
+      "method": "Conservative global-local frozen context experts by history coverage",
+      "status": "COMPLETE",
+      "KS": 0.5305973914406749,
+      "AUC": 0.8471293837656989,
+      "configuration": {
+        "id": "V178",
+        "label": "Conservative global-local frozen context experts by history coverage",
+        "families": [
+          "local_context"
+        ],
+        "context_features": "locked90_plus_v25_local_context",
+        "backbone_frozen_fraction": 1.0,
+        "context_rows": 50000,
+        "estimators": 8,
+        "estimator_batch_size": 4,
+        "query_batch_size": 8192,
+        "penalty": 0.003,
+        "strength": 0.5,
+        "kumo_weight": 0.75,
+        "comparison_baseline": "V168",
+        "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+        "error_analysis_basis": "Prior zero-allocation segment degrades in V167/V169; test85% baseline90 global plus15% local history-coverage context. Adapt retrieval idea without fine-tuning; no claim of LoCalPFN reproduction",
+        "reuse_kumo_from": "V168",
+        "local_context_weight": 0.15,
+        "local_context_max_rows": 24000,
+        "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
+      }
+    },
+    {
+      "id": "V179",
+      "method": "Group-ridge spectral correction: preserve V25 penalty, shrink new family10x",
+      "status": "QUEUED",
+      "KS": null,
+      "AUC": null,
+      "configuration": {
+        "id": "V179",
+        "label": "Group-ridge spectral correction: preserve V25 penalty, shrink new family10x",
+        "families": [
+          "spectral"
+        ],
+        "method": "group_ridge",
+        "penalty": 0.003,
+        "new_group_penalty": 0.03,
+        "strength": 0.5,
+        "error_basis": "V167 KS0.530795 with larger head gap0.01610 versus V25 0.01111; regularize only additional spectral coefficients; omit dominant-cycle argmax",
+        "formula": "V25 offset spline design plus9 spectral inputs; meanBCE+.003/2||base_beta||^2+.03/2||new_beta||^2; infer shrink.5; blend original spline75:25",
+        "priority": "P0",
+        "backbone_frozen_fraction": 1.0,
+        "source_script": "v7/scripts/conservative_adapters.py"
+      }
+    },
+    {
+      "id": "V180",
+      "method": "Reliability-weighted spectral residual with frozen V25 correction",
+      "status": "QUEUED",
+      "KS": null,
+      "AUC": null,
+      "configuration": {
+        "id": "V180",
+        "label": "Reliability-weighted spectral residual with frozen V25 correction",
+        "families": [
+          "spectral"
+        ],
+        "method": "reliability_residual",
+        "penalty": 0.03,
+        "teacher_tether": 0.2,
+        "strength": 0.25,
+        "error_basis": "Protect unsupported/thin transaction histories by multiplying only the new residual by observed spectral support and n90/(n90+10); V25 coefficients remain fixed",
+        "formula": "eta=eta_V25+.25*I(spectral_supported)*orders90/(orders90+10)*phi_spectral@gamma; BCE+.03/2||gamma||^2+.2/2 mean(delta^2)",
+        "priority": "P0",
+        "backbone_frozen_fraction": 1.0,
+        "source_script": "v7/scripts/conservative_adapters.py"
+      }
+    },
+    {
+      "id": "V181",
+      "method": "Fixed equal average of V167 spectral and V146 tree-complemented V25",
+      "status": "QUEUED",
+      "KS": null,
+      "AUC": null,
+      "configuration": {
+        "id": "V181",
+        "label": "Fixed equal average of V167 spectral and V146 tree-complemented V25",
+        "families": [
+          "score_complementarity"
+        ],
+        "method": "source_average",
+        "sources": [
+          "V167",
+          "V146"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "penalty": 0.0,
+        "strength": 1.0,
+        "error_basis": "V167 pooledKS0.530795 and V146 0.530528 reflect different source representations; combine without supervised weight fitting; original V25 remains an explicit component through V146",
+        "formula": "p=.5*p_V167+.5*p_V146; fixed matched-fold score averaging; no fitted meta weights",
+        "priority": "P0",
+        "backbone_frozen_fraction": 1.0,
+        "source_script": "v7/scripts/conservative_adapters.py"
+      }
+    },
+    {
+      "id": "V182",
+      "method": "64-landmark Nystrom RBF residual on existing V25 domain features",
+      "status": "QUEUED",
+      "KS": null,
+      "AUC": null,
+      "configuration": {
+        "id": "V182",
+        "label": "64-landmark Nystrom RBF residual on existing V25 domain features",
+        "families": [
+          "kernel_residual"
+        ],
+        "method": "kernel_residual",
+        "penalty": 0.05,
+        "teacher_tether": 0.2,
+        "strength": 0.25,
+        "components": 64,
+        "error_basis": "Pairwise polynomial/FM additions were negative; test bounded smooth local interactions with a low-rank kernel and strong teacher tether, without changing Kumo context inputs",
+        "formula": "eta=eta_V25+.25*Nystrom64_RBF(robust8numeric+missing)@gamma; BCE+.05/2||gamma||^2+.2/2 mean(delta^2)",
+        "priority": "P1",
+        "backbone_frozen_fraction": 1.0,
+        "source_script": "v7/scripts/conservative_adapters.py"
+      }
+    },
+    {
+      "id": "V183",
+      "method": "Strongly regularized shallow LightGBM residual on fixed V25 logits",
+      "status": "QUEUED",
+      "KS": null,
+      "AUC": null,
+      "configuration": {
+        "id": "V183",
+        "label": "Strongly regularized shallow LightGBM residual on fixed V25 logits",
+        "families": [
+          "spectral",
+          "residual_boosting"
+        ],
+        "method": "tree_residual",
+        "penalty": 50.0,
+        "strength": 0.15,
+        "error_basis": "Standalone tree experts are weaker but offer some complementarity; fit only a small additive logit correction, rather than replacing Kumo or fitting a large full-risk model",
+        "formula": "eta=eta_V25+.15*clip(tree_raw_margin,-.5,.5);80 depth2 LightGBM trees trained with init_score=eta_V25",
+        "priority": "P1",
+        "backbone_frozen_fraction": 1.0,
+        "source_script": "v7/scripts/conservative_adapters.py"
+      }
+    }
+  ],
+  "cache_only_experiments": [
+    "V172",
+    "V177"
+  ],
+  "cache_only_required_RAM_GiB": 0.6,
+  "cache_only_required_VRAM_GiB": 0.0,
+  "extra_batch_after": "V178",
+  "cpu_adapter_experiments": [
+    "V179",
+    "V180",
+    "V181",
+    "V182",
+    "V183"
+  ],
+  "cpu_adapter_RAM_GiB": 0.85,
+  "cpu_adapter_VRAM_GiB": 0.0
+}

@@ -12,6 +12,10 @@ V=ROOT/'v7'
 sys.path.insert(0,str(ROOT.parent))
 from node480_task import client,BASE
 
+def status_name(after):
+    if after=='V178':return 'LOCAL_CONSERVATIVE_QUEUE.json'
+    return 'LOCAL_KUMO_EXTRA_QUEUE.json' if after else 'LOCAL_KUMO_QUEUE.json'
+
 def persistent_status(path,value):
     """A transient Windows reader/AV lock must not stop remote model work."""
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
@@ -33,7 +37,7 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
     checkout=ROOT.parent/'shared_repo_sync_20261027'
     def state(stage,**extra):
         value=dict(status=stage,pid=os.getpid(),UTC=time.time(),Kumo_frozen_fraction=1.,**extra)
-        p=V/'reports'/('LOCAL_KUMO_EXTRA_QUEUE.json' if wait_for else 'LOCAL_KUMO_QUEUE.json');persistent_status(p,value)
+        p=V/'reports'/status_name(wait_for);persistent_status(p,value)
         print(json.dumps(value),flush=True)
     def get(rel):
         r=session.get(api+quote(BASE+rel)+'?content=1',timeout=20)
@@ -69,7 +73,7 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
     if wait_for:
         preceding=V/'modeling/reports'/f'GITHUB_SYNC_{wait_for}.json'
         while not preceding.exists():
-            first=V/'reports/LOCAL_KUMO_QUEUE.json'
+            first=V/'reports'/('LOCAL_KUMO_EXTRA_QUEUE.json' if wait_for=='V178' else 'LOCAL_KUMO_QUEUE.json')
             previous=json.loads(first.read_text()) if first.exists() else {}
             if previous.get('status')=='STOPPED_FOR_FAILURE_OR_PEER_REVIEW':raise RuntimeError('Preceding queue stopped; no extra training will be launched')
             state('WAITING_FOR_PRECEDING_QUEUE',after=wait_for,remaining=identifiers)
@@ -109,4 +113,4 @@ if __name__=='__main__':
     try:main(args.expected_head,args.runs,args.after,args.worker)
     except Exception:
         value=dict(status='STOPPED_FOR_FAILURE_OR_PEER_REVIEW',pid=os.getpid(),UTC=time.time(),traceback=traceback.format_exc())
-        persistent_status(V/'reports'/('LOCAL_KUMO_EXTRA_QUEUE.json' if args.after else 'LOCAL_KUMO_QUEUE.json'),value);raise
+        persistent_status(V/'reports'/status_name(args.after),value);raise

@@ -109,6 +109,8 @@ def generate():
    record['error_analysis']=r.get('error_analysis')
    if r.get('in_context_refitted'):
     record['validation']='Identical5fold seed31027;50k context,6k correction,14k validation; fresh frozen Kumo in-context fitting, context columns recorded in result; original spline unchanged'
+  elif definition.get('formula'):
+   record['method_formula']=definition['formula'];record['source_code']=definition.get('source_script',record['source_code'])
   record['public_leaderboard_observations']=[p for p in public_observations if r and p.get('submission_sha256')==r.get('submission_sha256')]
   active.append(record)
  queues={p.name:read_json(p) for p in OUT.glob('*QUEUE.json')};feature_stages={p.relative_to(ROOT).as_posix():read_json(p) for p in V.glob('*/reports/FEATURE_STATUS.json')}
@@ -197,17 +199,17 @@ def generate():
   modeling.append(dict(experiment=x['id'],method=x['definition']['label'],KS=r['OOF']['KS'],AUC=r['OOF']['AUC'],delta_KS=r['delta_KS'],delta_AUC=r['delta_AUC'],KS_fold_wins=r['fold_wins'],head_gap=sum(f['train_validation_head_KS_gap'] for f in r['folds'])/len(r['folds']),CI_low=interval[0],CI_high=interval[1],submission=r['submission']))
  if modeling:
   text=io.StringIO();writer=csv.DictWriter(text,fieldnames=list(modeling[0]));writer.writeheader();writer.writerows(modeling);atomic(V/'modeling/reports/MODELING_EXPERIMENTS.csv',text.getvalue())
- queue_file=V/'KUMO_QUEUE_10.json'
- if queue_file.exists():
+ for queue_file in [V/'KUMO_QUEUE_10.json',V/'KUMO_QUEUE_15.json']:
+  if not queue_file.exists():continue
   q=read_json(queue_file);states={x['id']:x for x in active}
   for row in q['experiments']:
    item=states[row['id']];r=item['result'];row.update(status=item['status'],KS=r['OOF']['KS'] if r else None,AUC=r['OOF']['AUC'] if r else None)
   q['completed']=sum(x['status']=='COMPLETE' for x in q['experiments']);q['updated_UTC']=value['updated_UTC']
   q['cache_only_experiments']=['V172','V177'];q['cache_only_required_RAM_GiB']=.6;q['cache_only_required_VRAM_GiB']=0.
   atomic(queue_file,json.dumps(q,indent=2))
-  lines=['# Antrean10 eksperimen Kumo100% frozen','',f"Selesai{q['completed']}/10. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 membutuhkan lebih sedikit RAM dan tidak memerlukan GPU.",'','| ID | Metode | Status | KS | AUC |','|---|---|---|---:|---:|']
+  total=q['total_experiments'];lines=[f'# Antrean{total} eksperimen Kumo100% frozen','',f"Selesai{q['completed']}/{total}. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 dan adapterV179–V183 tidak memerlukan GPU.",'','| ID | Metode | Status | KS | AUC |','|---|---|---|---:|---:|']
   for row in q['experiments']:lines.append('| '+' | '.join(esc(row[k]) if row[k] is not None else 'BELUM TERSEDIA' for k in ['id','method','status','KS','AUC'])+' |')
-  atomic(V/'KUMO_QUEUE_10.md','\n'.join(lines))
+  atomic(queue_file.with_suffix('.md'),'\n'.join(lines))
  atomic(OUT/'MASTER_LOG_STATUS.json',json.dumps(summary,indent=2));return summary
 
 if __name__=='__main__':

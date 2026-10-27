@@ -54,6 +54,9 @@ def main():
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
+    for name in ['v7/conservative_plan.json','v7/CONSERVATIVE_QUEUE_5.md','v7/KUMO_QUEUE_15.json','v7/KUMO_QUEUE_15.md','v7/scripts/conservative_adapters.py','v7/conservative/reports/GRADIENT_CHECK.json','v7/conservative/reports/LIGHTGBM_OFFSET_CHECK.json']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     latest_result=max(modeling,key=lambda x:int(x['id'][1:]))['result']
     selected=[next(x['result'] for x in experiments if x['id']=='V25'),best_result,latest_result]
     for selected_result in selected:

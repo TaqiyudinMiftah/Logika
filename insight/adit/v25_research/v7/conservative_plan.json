@@ -1,0 +1,90 @@
+[
+  {
+    "id": "V179",
+    "label": "Group-ridge spectral correction: preserve V25 penalty, shrink new family10x",
+    "families": [
+      "spectral"
+    ],
+    "method": "group_ridge",
+    "penalty": 0.003,
+    "new_group_penalty": 0.03,
+    "strength": 0.5,
+    "error_basis": "V167 KS0.530795 with larger head gap0.01610 versus V25 0.01111; regularize only additional spectral coefficients; omit dominant-cycle argmax",
+    "formula": "V25 offset spline design plus9 spectral inputs; meanBCE+.003/2||base_beta||^2+.03/2||new_beta||^2; infer shrink.5; blend original spline75:25",
+    "priority": "P0",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  },
+  {
+    "id": "V180",
+    "label": "Reliability-weighted spectral residual with frozen V25 correction",
+    "families": [
+      "spectral"
+    ],
+    "method": "reliability_residual",
+    "penalty": 0.03,
+    "teacher_tether": 0.2,
+    "strength": 0.25,
+    "error_basis": "Protect unsupported/thin transaction histories by multiplying only the new residual by observed spectral support and n90/(n90+10); V25 coefficients remain fixed",
+    "formula": "eta=eta_V25+.25*I(spectral_supported)*orders90/(orders90+10)*phi_spectral@gamma; BCE+.03/2||gamma||^2+.2/2 mean(delta^2)",
+    "priority": "P0",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  },
+  {
+    "id": "V181",
+    "label": "Fixed equal average of V167 spectral and V146 tree-complemented V25",
+    "families": [
+      "score_complementarity"
+    ],
+    "method": "source_average",
+    "sources": [
+      "V167",
+      "V146"
+    ],
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "penalty": 0.0,
+    "strength": 1.0,
+    "error_basis": "V167 pooledKS0.530795 and V146 0.530528 reflect different source representations; combine without supervised weight fitting; original V25 remains an explicit component through V146",
+    "formula": "p=.5*p_V167+.5*p_V146; fixed matched-fold score averaging; no fitted meta weights",
+    "priority": "P0",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  },
+  {
+    "id": "V182",
+    "label": "64-landmark Nystrom RBF residual on existing V25 domain features",
+    "families": [
+      "kernel_residual"
+    ],
+    "method": "kernel_residual",
+    "penalty": 0.05,
+    "teacher_tether": 0.2,
+    "strength": 0.25,
+    "components": 64,
+    "error_basis": "Pairwise polynomial/FM additions were negative; test bounded smooth local interactions with a low-rank kernel and strong teacher tether, without changing Kumo context inputs",
+    "formula": "eta=eta_V25+.25*Nystrom64_RBF(robust8numeric+missing)@gamma; BCE+.05/2||gamma||^2+.2/2 mean(delta^2)",
+    "priority": "P1",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  },
+  {
+    "id": "V183",
+    "label": "Strongly regularized shallow LightGBM residual on fixed V25 logits",
+    "families": [
+      "spectral",
+      "residual_boosting"
+    ],
+    "method": "tree_residual",
+    "penalty": 50.0,
+    "strength": 0.15,
+    "error_basis": "Standalone tree experts are weaker but offer some complementarity; fit only a small additive logit correction, rather than replacing Kumo or fitting a large full-risk model",
+    "formula": "eta=eta_V25+.15*clip(tree_raw_margin,-.5,.5);80 depth2 LightGBM trees trained with init_score=eta_V25",
+    "priority": "P1",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  }
+]

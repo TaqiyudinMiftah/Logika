@@ -1,0 +1,616 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V178",
+  "spec": {
+    "id": "V178",
+    "label": "Conservative global-local frozen context experts by history coverage",
+    "families": [
+      "local_context"
+    ],
+    "context_features": "locked90_plus_v25_local_context",
+    "backbone_frozen_fraction": 1.0,
+    "context_rows": 50000,
+    "estimators": 8,
+    "estimator_batch_size": 4,
+    "query_batch_size": 8192,
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "comparison_baseline": "V168",
+    "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+    "error_analysis_basis": "Prior zero-allocation segment degrades in V167/V169; test85% baseline90 global plus15% local history-coverage context. Adapt retrieval idea without fine-tuning; no claim of LoCalPFN reproduction",
+    "reuse_kumo_from": "V168",
+    "local_context_weight": 0.15,
+    "local_context_max_rows": 24000,
+    "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "OOF": {
+    "KS": 0.5305973914406749,
+    "signed_KS": 0.5305973914406749,
+    "AUC": 0.8471293837656989,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "delta_KS": 0.0003127313966337919,
+  "delta_AUC": 0.00010010485858302776,
+  "comparison_baseline": "V25",
+  "mean_fold_KS": 0.5335854529602322,
+  "std_fold_KS": 0.0052989613034674435,
+  "delta_mean_fold_KS": 0.0002556284036809409,
+  "fold_wins": 4,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5297050255956481,
+        "signed_KS": 0.5297050255956481,
+        "AUC": 0.84417000044217,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": 0.0012251198348327552,
+      "delta_AUC": 0.00010021652421354776,
+      "head_training_KS": 0.5493394702746833,
+      "heldout_corrected_Kumo_KS": 0.5266737474749675,
+      "train_validation_head_KS_gap": 0.022665722799715793,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "8876ed7d0f4b2a09e7334309136079ee171cf993cf37eae28896889ea97f4f40",
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "source_sha256": "496ed2ded0494562bfc8e8b78ecc5744a59a3a16b464728cb2b9be9d92003162",
+      "backbone_max_GPU_GiB": 9.882661819458008,
+      "memory": {
+        "rss_MiB": 2615.83984375,
+        "peak_rss_MiB": 2937.53125,
+        "cgroup_current_GiB": 15.657939910888672,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 1.4896125793457031
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.001405601273290813,
+      "old_raw_Kumo_max_abs_error": 0.03790009021759033,
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Exactly identical Kumo inputs/folds/fit settings; only final coverage gate differs"
+        },
+        {
+          "group": 0,
+          "context_rows": 16888,
+          "context_ids_sha256": "0fb52b86d913dd335422cc3db2c14a27486d96d0be90813797a26fa8ef7c7a8c",
+          "seed": 42026,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": 1,
+          "context_rows": 24000,
+          "context_ids_sha256": "b723ec14759261169ecac4559e2d20f8557439e1c2f6b6b3ac3fb6ebf3a415ee",
+          "seed": 42126,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5368790939591436,
+        "signed_KS": 0.5368790939591436,
+        "AUC": 0.8496320836180593,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": -0.0011200772654184066,
+      "delta_AUC": 2.7130200047631448e-05,
+      "head_training_KS": 0.5371428909489975,
+      "heldout_corrected_Kumo_KS": 0.5369393543073258,
+      "train_validation_head_KS_gap": 0.00020353664167171992,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "8ab37a950e812c07b461af2763a1012473598197d343f3e2a528d03fbe37e267",
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "source_sha256": "496ed2ded0494562bfc8e8b78ecc5744a59a3a16b464728cb2b9be9d92003162",
+      "backbone_max_GPU_GiB": 9.882661819458008,
+      "memory": {
+        "rss_MiB": 2576.3671875,
+        "peak_rss_MiB": 2953.36328125,
+        "cgroup_current_GiB": 15.687477111816406,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 0.8431892395019531
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.0015082117170095444,
+      "old_raw_Kumo_max_abs_error": 0.03642967343330383,
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Exactly identical Kumo inputs/folds/fit settings; only final coverage gate differs"
+        },
+        {
+          "group": 0,
+          "context_rows": 17004,
+          "context_ids_sha256": "0e3b0c9afbcdf0c16f88d93a1786b93bfafdc2f1cb6a2ceb6d8ddcd6e7a43a5d",
+          "seed": 42027,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": 1,
+          "context_rows": 24000,
+          "context_ids_sha256": "d2bd3688e29e1ccf563e2f967541241f6cade084828174eec9f48222d9aa20a8",
+          "seed": 42127,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5413262728726825,
+        "signed_KS": 0.5413262728726825,
+        "AUC": 0.8499424287589858,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": 0.001028034583526849,
+      "delta_AUC": 8.552099918779366e-05,
+      "head_training_KS": 0.5572137655223006,
+      "heldout_corrected_Kumo_KS": 0.5429646500015065,
+      "train_validation_head_KS_gap": 0.014249115520794109,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "3f252a14aa1b8a159873e45308847d67bfc8b16328e36ca76ef882d2033213f8",
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "source_sha256": "496ed2ded0494562bfc8e8b78ecc5744a59a3a16b464728cb2b9be9d92003162",
+      "backbone_max_GPU_GiB": 9.882661819458008,
+      "memory": {
+        "rss_MiB": 2537.1484375,
+        "peak_rss_MiB": 2953.36328125,
+        "cgroup_current_GiB": 15.326301574707031,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 0.081024169921875
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.0014407341368496418,
+      "old_raw_Kumo_max_abs_error": 0.03716722130775452,
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Exactly identical Kumo inputs/folds/fit settings; only final coverage gate differs"
+        },
+        {
+          "group": 0,
+          "context_rows": 16950,
+          "context_ids_sha256": "cd5f3a07538ea4d94f3e0a04164c0d7d7aecac882cfd91153d07404b24ffb632",
+          "seed": 42028,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": 1,
+          "context_rows": 24000,
+          "context_ids_sha256": "b6459e14e8fb70f93322a7bcec171f9883845ecb1f5e291d8fbbd8277814c7b3",
+          "seed": 42128,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5306791764904872,
+        "signed_KS": 0.5306791764904872,
+        "AUC": 0.843967179009001,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": 2.7118177366558527e-05,
+      "delta_AUC": 0.00010382263738517583,
+      "head_training_KS": 0.5284143145340203,
+      "heldout_corrected_Kumo_KS": 0.5299122188075338,
+      "train_validation_head_KS_gap": -0.001497904273513484,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "da1c17ad01de0f88ca7c966d408bf30691cea1584a5c91430fd3885a5407a65c",
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "source_sha256": "496ed2ded0494562bfc8e8b78ecc5744a59a3a16b464728cb2b9be9d92003162",
+      "backbone_max_GPU_GiB": 9.882661819458008,
+      "memory": {
+        "rss_MiB": 2533.62109375,
+        "peak_rss_MiB": 2953.36328125,
+        "cgroup_current_GiB": 15.341484069824219,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 0.08163070678710938
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.0013353250687941909,
+      "old_raw_Kumo_max_abs_error": 0.05109143257141113,
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Exactly identical Kumo inputs/folds/fit settings; only final coverage gate differs"
+        },
+        {
+          "group": 0,
+          "context_rows": 16984,
+          "context_ids_sha256": "a21b4f02a7c3cff6e38e8d1af75bdd93e3cdc94e647911136ee6792ab52d8691",
+          "seed": 42029,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": 1,
+          "context_rows": 24000,
+          "context_ids_sha256": "0101d2bf7ce30f85cc0eadf26b12af81a3b5777e475a3bb30084efc9439023d0",
+          "seed": 42129,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5293376958831999,
+        "signed_KS": 0.5293376958831999,
+        "AUC": 0.848058069057134,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": 0.0001179466880969482,
+      "delta_AUC": 0.00016136184705373147,
+      "head_training_KS": 0.548841336796209,
+      "heldout_corrected_Kumo_KS": 0.5310301482860182,
+      "train_validation_head_KS_gap": 0.0178111885101907,
+      "parameters": 90,
+      "correction_rows": 6000,
+      "context_ids_sha256": "becb7cfd548e1fd54f8696ce8cf6bfd52553a54dc98309cb1565ec2e1f300dfc",
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "source_sha256": "496ed2ded0494562bfc8e8b78ecc5744a59a3a16b464728cb2b9be9d92003162",
+      "backbone_max_GPU_GiB": 9.882661819458008,
+      "memory": {
+        "rss_MiB": 2551.39453125,
+        "peak_rss_MiB": 2953.36328125,
+        "cgroup_current_GiB": 15.378215789794922,
+        "cgroup_limit_GiB": 16.0,
+        "inactive_file_GiB": 0.08182144165039062
+      },
+      "frozen_parameters_fraction": 1.0,
+      "old_raw_Kumo_mean_abs_error": 0.0015594204887747765,
+      "old_raw_Kumo_max_abs_error": 0.025458991527557373,
+      "context_fit_audit": [
+        {
+          "reused_frozen_source": "V168",
+          "reason": "Exactly identical Kumo inputs/folds/fit settings; only final coverage gate differs"
+        },
+        {
+          "group": 0,
+          "context_rows": 16999,
+          "context_ids_sha256": "2be6d89e2d7fca32b568fee3342f642ec3edac98aa23710797bb9b12e6197b38",
+          "seed": 42030,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        },
+        {
+          "group": 1,
+          "context_rows": 24000,
+          "context_ids_sha256": "641bda4c79baab6eecda72e7063cad7fb61fad5e06fb7946665adf7342bb0e6b",
+          "seed": 42130,
+          "local_weight": 0.15,
+          "global_weight": 0.85,
+          "backbone_frozen_fraction": 1.0,
+          "outer_labels_used": false
+        }
+      ],
+      "extra_feature_reference": null
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.523050818985841,
+      0.5402119710251946
+    ],
+    "delta_KS": [
+      -0.0005809140359355452,
+      0.0010435568531322016
+    ],
+    "candidate_AUC": [
+      0.8434685195623727,
+      0.8509151691247773
+    ],
+    "delta_AUC": [
+      4.783731956665427e-05,
+      0.00015221107977883008
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "submission": "v7/submissions/submission_V178_Kumo_Large_V25.csv",
+  "submission_sha256": "da2a0dcbe7a6c02abb2576d43259a9c576b707d72a22a180d42d458769a5f506",
+  "public_score": null,
+  "elapsed_seconds": 183.72064399719238,
+  "source_sha256": "496ed2ded0494562bfc8e8b78ecc5744a59a3a16b464728cb2b9be9d92003162",
+  "modeling_formula": "Frozen Kumo Large;50k labeled context,8 estimators; disjoint6k offset-head training;14k outer validation; .75*sigmoid(logit(p_Kumo)+.5*Xbeta)+.25*p_original_spline77; mean5fold test probabilities; p_Kumo=.85*global_V168_90inputs+.15*local_history-coverage_expert before refitting18-input correction; local context excludes all correction/validation rows",
+  "modeling_objective": "Unweighted BCE + .003/2*sum(beta[1:]**2); full correction fitting and .5 shrink at inference",
+  "controller_source": "v7/scripts/kumo_gpu_experiment_v3.py",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": true,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": true,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": true,
+  "memory": {
+    "rss_MiB": 2553.3828125,
+    "peak_rss_MiB": 2953.36328125,
+    "cgroup_current_GiB": 15.389263153076172,
+    "cgroup_limit_GiB": 16.0,
+    "inactive_file_GiB": 0.08182144165039062
+  },
+  "GPU_cache_parity": {
+    "patch": "Only skip CPU offload of completed estimator cache batches",
+    "original_fit_sha256": "84fc1c05156dc788fb21d2293277fc97b4dfc40cfd9c58b5924706499bd724df",
+    "patched_fit_sha256": "2cf1e87797089fd105841dc355150ee6427a038b7980010b4ca153530c943f08",
+    "removed_blocks": 1,
+    "installed_package_unchanged": true,
+    "status": "PASS",
+    "maximum_absolute_prediction_difference": 0.0,
+    "context_rows": 512,
+    "query_rows": 64,
+    "estimators": 2,
+    "batch_size": 1,
+    "criterion": 1e-06,
+    "assertion": "Storage optimization only; the cache retains original tensor values and ordering"
+  },
+  "weights_manifest": {
+    "repository": "nvidia/Kumo-Tabular",
+    "revision": "3c3e10bbdb590ace29e7026847f92db3c603096d",
+    "tag": "v1.0.1",
+    "files": [
+      "config.json",
+      "large/classifier.pt",
+      "large/regressor.pt"
+    ],
+    "cache": "/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019/v7/kumo_gpu/hf_cache"
+  },
+  "feature_matrix_sha256": "2c1d2255dc45478dfa1c2e9f7bc3e961f7eba01b6beab61bcc13638af9c99951",
+  "packages": {
+    "torch": "2.14.1",
+    "structured-data-models": "0.2.1",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2"
+  },
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "retrained_seeds": 1,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY and new CUDA runtime; matched fresh control required"
+  },
+  "error_analysis": {
+    "json": "v7/runs/V178/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V178/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V178/ERROR_CASES.csv"
+  },
+  "derived_context_features": [],
+  "derived_context_formulas": {},
+  "context_event_cache_sha256": {},
+  "fresh_control_delta_KS": 0.0003953855880278745,
+  "fresh_control_confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.5225231786930706,
+      0.539391109359066
+    ],
+    "candidate_KS": [
+      0.523050818985841,
+      0.5402119710251946
+    ],
+    "delta_KS": [
+      -0.0005187722465903987,
+      0.001065100932852389
+    ],
+    "candidate_AUC": [
+      0.8434685195623727,
+      0.8509151691247773
+    ],
+    "delta_AUC": [
+      4.734149874668636e-05,
+      0.00015167857013084207
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  }
+}

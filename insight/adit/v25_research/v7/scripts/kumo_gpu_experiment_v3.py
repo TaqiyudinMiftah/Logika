@@ -73,9 +73,12 @@ def main(name):
     specs=json.loads((V/'kumo_plan.json').read_text());spec=next(s for s in specs if s['id']==name)
     gate=json.loads((V/'modeling/reports/REPO_REVIEW_GATE.json').read_text())
     assert gate['experiment']==name and gate['status']=='REVIEWED_FOR_NEXT_RUN'
-    req=urllib.request.Request('https://api.github.com/repos/TaqiyudinMiftah/Logika/git/ref/heads/main',headers={'User-Agent':'Logika-research'})
-    with urllib.request.urlopen(req,timeout=20) as r:current=json.load(r)
-    assert current['object']['sha']==gate['reviewed_head'],'New peer commit requires review'
+    for head_attempt in range(3):
+        req=urllib.request.Request('https://api.github.com/repos/TaqiyudinMiftah/Logika/git/ref/heads/main?fresh='+str(time.time_ns()),headers={'User-Agent':'Logika-research','Cache-Control':'no-cache'})
+        with urllib.request.urlopen(req,timeout=20) as r:current=json.load(r)
+        if current['object']['sha']==gate['reviewed_head']:break
+        time.sleep(2)
+    else:raise AssertionError(f"Shared HEAD changed: expected {gate['reviewed_head']}, observed {current['object']['sha']}; review required")
     setup=json.loads((V/'kumo_gpu/SETUP_STATUS.json').read_text());assert setup['status']=='READY',setup
     try:Path('/proc/self/oom_score_adj').write_text('500')
     except OSError:pass
