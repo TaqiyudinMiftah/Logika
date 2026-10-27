@@ -1,0 +1,181 @@
+[
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/small_kumo_worker.py",
+    "research_ready": false,
+    "no_outer_validation_tuning": true,
+    "id": "V207",
+    "label": "Frozen Small90 capacity control with exact V25 folds",
+    "method": "frozen_small",
+    "worker": "small_kumo_worker.py",
+    "context_features": "locked90",
+    "context_rows": 50000,
+    "estimators": 8,
+    "estimator_batch_size": 4,
+    "query_batch_size": 8192,
+    "formula": "KumoSmall100%frozen, same90 inputs/50kcontext/seed2026+fold/8estimators; original18-input6k correction L2.003 shrink.5; same77-input spline and75:25fusion; mean5foldtest",
+    "rationale": "All previous new inputs retained the same Large backbone and yielded small or unstable gains. Test a substantive reduction of pretrained capacity with identical data information, folds and adaptation settings. Earlier public Small results used different pipelines and are not transferred. Compare fresh LargeV168 as runtime control."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/small_kumo_worker.py",
+    "research_ready": false,
+    "no_outer_validation_tuning": true,
+    "id": "V208",
+    "label": "Frozen Small plus stable9 correction information",
+    "method": "small_spectral",
+    "worker": "capacity_followups.py",
+    "spectral_inputs": "stable9",
+    "depends_on": [
+      "V207"
+    ],
+    "formula": "ReuseV207 frozenSmall context predictions; fit27-input correction adding stable9 spectral inputs, L2.003/shrink.5; retain original75:25spline77fusion",
+    "rationale": "Separate capacity from representation by reusing identical Small scores and only adding9 stable power/support inputs. The Large analogV196 improves AUC without KS; Small may need complementary explicit temporal information, but benefit is unproved."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/small_kumo_worker.py",
+    "research_ready": false,
+    "no_outer_validation_tuning": true,
+    "id": "V209",
+    "label": "Conservative Small/Large capacity-diversity blend",
+    "method": "small_score_blend",
+    "worker": "capacity_followups.py",
+    "spectral_inputs": "none",
+    "depends_on": [
+      "V207"
+    ],
+    "fixed_score_fusion": true,
+    "formula": "Perfold final=.90*pV193+.10*pV207, fixed weights before seeingSmall results; test probabilities averaged after per-fold blending",
+    "rationale": "A smaller frozen expert can have different ranking errors despite lower standalone performance. Test limited complementary information, without fitting blend weights on outer labels; no public-score gain assumed."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "research_ready": false,
+    "no_outer_validation_tuning": true,
+    "id": "V210",
+    "label": "V193 anchor with10% high-AUC reduced-knot representation",
+    "method": "auc_diversity_blend",
+    "worker": "capacity_followups.py",
+    "source_script": "v7/scripts/capacity_followups.py",
+    "spectral_inputs": "none",
+    "sources": [
+      "V193",
+      "V198"
+    ],
+    "weights": [
+      0.9,
+      0.1
+    ],
+    "depends_on": [
+      "V198"
+    ],
+    "fixed_score_fusion": true,
+    "formula": "Perfold p=.90*pV193+.10*pV198; fixed weights, then mean5foldtest",
+    "rationale": "V198 AUC.84726014 exceedsV193 by.00015260 but its KS.52937399 is lower. Test a prespecified small contribution to broader ranking without replacing the stronger KS model. This is a new representation source, not an outer-fitted blend search."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "research_ready": false,
+    "no_outer_validation_tuning": true,
+    "id": "V211",
+    "label": "Frozen Small original18 correction with reduced knots",
+    "method": "small_reduced_knots",
+    "worker": "capacity_followups.py",
+    "source_script": "v7/scripts/capacity_followups.py",
+    "spectral_inputs": "none",
+    "depends_on": [
+      "V207"
+    ],
+    "n_knots": 2,
+    "formula": "Same cachedSmall90/50kcontext asV207,18-input head with quadratic2knots ratherthan3, L2.003/shrink.5; same75:25spline77fusion",
+    "rationale": "Separate correction capacity from backbone capacity. Small may require a different residual complexity, but this remains a hypothesis. Context predictions and features are identical toV207."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "research_ready": false,
+    "no_outer_validation_tuning": true,
+    "id": "V212",
+    "label": "Coverage-aware conservative Small/Large blend",
+    "method": "capacity_coverage_blend",
+    "worker": "capacity_followups.py",
+    "source_script": "v7/scripts/capacity_followups.py",
+    "spectral_inputs": "none",
+    "sources": [
+      "V193",
+      "V207"
+    ],
+    "depends_on": [
+      "V207"
+    ],
+    "fixed_score_fusion": true,
+    "formula": "wSmall=.15*10/(max(finite_allocation_count,0)+10); p=(1-wSmall)*pV193+wSmall*pV207; missing count getsw.15; mean5foldtest",
+    "rationale": "V185 spectral contribution lost separation in no-allocation borrowers, while only one Large capacity was used. Test a bounded Small contribution larger for thin internal histories. Do not assume Small is safer: compare public-incumbent and development metrics, with explicit missing-data caveat."
+  }
+]
