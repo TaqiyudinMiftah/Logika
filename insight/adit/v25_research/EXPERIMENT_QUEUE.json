@@ -1,37 +1,5 @@
 [
   {
-    "id": "V198",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "source_script": "v7/scripts/stability_worker.py",
-      "worker": "stability_worker.py",
-      "research_ready": true,
-      "no_outer_validation_tuning": true,
-      "id": "V198",
-      "label": "Reduced-knot stable9 local-context correction",
-      "method": "reduced_knots",
-      "input_source": "V178",
-      "spectral_inputs": "stable9",
-      "n_knots": 2,
-      "formula": "Same27 inputs/rawV178 asV196; quadratic spline2knots instead3, training-only knots/scales; L2.003 and shrink.5; original75:25 spline fusion",
-      "rationale": "V192 stronger L2 on11 spectral features reduced KS and left head gap.016393. Test reducing basis complexity rather than shrinking all coefficients; removes one spline coefficient per numeric input.",
-      "batch": "stability",
-      "feature_catalog": "stability/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V199",
     "status": "QUEUED",
     "definition": {

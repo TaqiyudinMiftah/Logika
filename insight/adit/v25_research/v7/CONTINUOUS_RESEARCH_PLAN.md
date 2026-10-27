@@ -59,3 +59,26 @@ Formula: `UseV19627-input local-context head; calculate conditional Laplace coef
 - MacKay, Information Theory, Inference and Learning Algorithms, section43.5: https://www.inference.org.uk/itprnn/book.html ; approximate Gaussian integration inspiresV202/V203. No guarantee of KS improvement.
 
 Resource guard uses real work only; twoCPUthreads, at least0.9GiB effective RAM and maxRSS2GiB. Current jobs reuse frozen Kumo caches, requiring no newGPUcontext. The shared16GiB cgroup is monitored, and no buffers reserve unusedRAM. Review sharedHEAD before every fit and after result preparation; never force-push or overwrite peer work.
+
+## Refill after V196 error review
+
+V196 KS0.53046043, AUC0.84712534; deltaKS vsV193-0.00099909 and deltaAUC+0.00001780. No gain established. Preserve the three-job reserve with additional executable hypotheses:
+
+### V204: Gaussian-rank stable9 local-context correction
+
+V196 removes unstable cycle argmax and improves AUC vsV193 +0.0000178 but loses KS and retains a high head gap. Test bounded train-reference ranks of the stable financial/power inputs, rather than expanding the representation.
+
+Formula: `V19627 inputs andrawV178; training-only100-quantile Gaussian ranks before3-knot correction splines; L2.003, shrink.5; original75:25 spline fusion`
+
+### V205: Reduced-knot original18-input V25 correction
+
+Isolate model-capacity reduction on the public-incumbent pipeline; V198 separately tests reduced knots with27 local/spectral inputs. Avoid confusing different feature/context effects with coefficient count.
+
+Formula: `Same18 original V25 correction inputs andglobal frozenKumo; quadratic spline2knots rather than3; L2.003, shrink.5; original75:25 spline fusion`
+
+### V206: Roughness-regularized stable9 local-context correction
+
+V196 retains high train-validation head gap despite removing2 cycle features. Test smoothing within each financial/spectral response, complementary to removing features or increasing global L2; same27 inputs permit a matched comparison.
+
+Formula: `V19627-input rawV178 head; meanBCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2; shrink.5; original75:25 spline fusion`
+
