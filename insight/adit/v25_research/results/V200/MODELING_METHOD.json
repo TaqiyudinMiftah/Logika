@@ -1,0 +1,50 @@
+{
+  "method": "V25 head objective meanBCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2; difference penalty within each numeric spline block; shrink.5; original75:25 spline fusion; mean5fold test probabilities",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "source_script": "v7/scripts/stability_worker.py",
+    "worker": "stability_worker.py",
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V200",
+    "label": "P-spline-inspired coefficient roughness correction",
+    "method": "coefficient_smoothing",
+    "input_source": "V25",
+    "spectral_inputs": "none",
+    "roughness_penalty": 0.03,
+    "formula": "V25 head objective meanBCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2; difference penalty within each numeric spline block; shrink.5; original75:25 spline fusion",
+    "rationale": "Global L2 does not distinguish smooth financial relationships from oscillating residual corrections. Add coefficient-difference regularization while keeping the18 inputs and90-coefficient design. Quantile knots differ from canonical equally spaced P-splines; do not claim an exact continuous curvature penalty."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "source_sha256": "e5905366dee876e2ffa439dfd59bc6d22bc30c8924b5bcc7cecfe523369cf2e6"
+}

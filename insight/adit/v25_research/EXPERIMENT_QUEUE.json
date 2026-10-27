@@ -1,37 +1,5 @@
 [
   {
-    "id": "V200",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "source_script": "v7/scripts/stability_worker.py",
-      "worker": "stability_worker.py",
-      "research_ready": true,
-      "no_outer_validation_tuning": true,
-      "id": "V200",
-      "label": "P-spline-inspired coefficient roughness correction",
-      "method": "coefficient_smoothing",
-      "input_source": "V25",
-      "spectral_inputs": "none",
-      "roughness_penalty": 0.03,
-      "formula": "V25 head objective meanBCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2; difference penalty within each numeric spline block; shrink.5; original75:25 spline fusion",
-      "rationale": "Global L2 does not distinguish smooth financial relationships from oscillating residual corrections. Add coefficient-difference regularization while keeping the18 inputs and90-coefficient design. Quantile knots differ from canonical equally spaced P-splines; do not claim an exact continuous curvature penalty.",
-      "batch": "stability",
-      "feature_catalog": "stability/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V201",
     "status": "QUEUED",
     "definition": {

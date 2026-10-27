@@ -27,6 +27,26 @@ def quadratic_objective(beta,x,z,y,penalty):
     return float(np.mean(np.logaddexp(0,eta)-y*eta)+.5*beta@penalty@beta),x.T@(expit(eta)-y)/len(y)+penalty@beta
 
 
+def solve_quadratic_newton(initial,x,z,y,penalty):
+    beta=initial.copy();backtracks=0
+    with threadpool_limits(limits=2):
+        for iteration in range(60):
+            value,gradient=quadratic_objective(beta,x,z,y,penalty)
+            if np.max(abs(gradient))<1e-7:break
+            p=expit(z+x@beta);hessian=(x.T*(p*(1-p)))@x/len(y)+penalty
+            step=np.linalg.solve(hessian,gradient);descent=float(gradient@step);assert descent>0
+            length=1.
+            for _ in range(40):
+                candidate=beta-length*step;new_value,_=quadratic_objective(candidate,x,z,y,penalty)
+                if np.isfinite(new_value) and new_value<=value-1e-4*length*descent:break
+                length*=.5;backtracks+=1
+            else:raise RuntimeError('Quadratic-head Newton line search failed')
+            beta=candidate
+        value,gradient=quadratic_objective(beta,x,z,y,penalty)
+    assert np.max(abs(gradient))<1e-6,('Newton not converged',np.max(abs(gradient)))
+    return beta,dict(objective=value,gradient_max_abs=float(np.max(abs(gradient))),iterations=iteration+1,solver='Analytic Hessian Newton with Armijo backtracking',backtracks=backtracks)
+
+
 def jeffreys_objective(beta,x,z,y,penalty,information_ridge):
     eta=z+x@beta;p=expit(eta);w=p*(1-p);n=len(y)
     info=(x.T*w)@x/n+information_ridge*np.eye(x.shape[1])
@@ -69,7 +89,7 @@ def fit_adapter(f,spec,columns):
             for q in range(width-2):
                 row=np.zeros(x.shape[1]);ix=j*width+q;row[2+ix:2+ix+3]=np.array([1.,-2.,1.])/scale[ix:ix+3];rows.append(row)
         difference=np.array(rows);penalty+=spec['roughness_penalty']*(difference.T@difference)
-        head['coefficients'],optimization=solve(quadratic_objective,head['coefficients'],(x,z,y,penalty));audit.update(optimization,roughness_rows=len(rows));model['quadratic_penalty']=penalty
+        head['coefficients'],optimization=solve_quadratic_newton(head['coefficients'],x,z,y,penalty);audit.update(optimization,roughness_rows=len(rows));model['quadratic_penalty']=penalty
     elif method=='jeffreys_stabilized':
         head['coefficients'],optimization=solve(jeffreys_objective,head['coefficients'],(x,z,y,.003,spec['information_ridge']));audit.update(optimization,exact_classical_Firth=False,information_ridge=spec['information_ridge'])
     elif method=='laplace_predictive':
