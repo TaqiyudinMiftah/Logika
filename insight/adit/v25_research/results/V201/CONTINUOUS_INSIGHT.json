@@ -1,0 +1,109 @@
+{
+  "experiment": "V201",
+  "method": "jeffreys_stabilized",
+  "hypothesis": "Sparse combinations of employment/missingness and repayment evidence can bias correction coefficients. Test a stabilized Firth-inspired information penalty; addedridge andL2 mean this is not exact classical Firth logistic regression. No transfer of published performance claims.",
+  "formula": "Minimize meanBCE+.003/2||beta_nonintercept||^2-.5/n*logdet(X^T*W(beta)*X/n+.0001I); original V25 design and shrink.5; original75:25 spline fusion",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5307039316240154,
+      "signed_KS": 0.5307039316240154,
+      "AUC": 0.8470460044917801,
+      "rows": 70000
+    },
+    "delta_KS": -0.0007555829385202939,
+    "delta_AUC": -6.153985782730853e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5229993612527211,
+        0.5397390172562877
+      ],
+      "delta_KS": [
+        -0.0030974449133375852,
+        0.001439291897899586
+      ],
+      "candidate_AUC": [
+        0.8433542261254986,
+        0.8508118080892401
+      ],
+      "delta_AUC": [
+        -0.000317668782619207,
+        0.0001611936698709597
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.011167818927140648,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3849,
+      "net_bad_captured": 8,
+      "new_members": 248,
+      "exited_members": 248,
+      "entrant_bad_rate": 0.375,
+      "exit_bad_rate": 0.34274193548387094
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5851,
+      "net_bad_captured": -4,
+      "new_members": 377,
+      "exited_members": 377,
+      "entrant_bad_rate": 0.22015915119363394,
+      "exit_bad_rate": 0.23076923076923078
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7435,
+      "net_bad_captured": 13,
+      "new_members": 434,
+      "exited_members": 434,
+      "entrant_bad_rate": 0.1336405529953917,
+      "exit_bad_rate": 0.10368663594470046
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8023,
+      "net_bad_captured": 8,
+      "new_members": 460,
+      "exited_members": 460,
+      "entrant_bad_rate": 0.09565217391304348,
+      "exit_bad_rate": 0.0782608695652174
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8649,
+      "net_bad_captured": 0,
+      "new_members": 442,
+      "exited_members": 442,
+      "entrant_bad_rate": 0.07239819004524888,
+      "exit_bad_rate": 0.07239819004524888
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
