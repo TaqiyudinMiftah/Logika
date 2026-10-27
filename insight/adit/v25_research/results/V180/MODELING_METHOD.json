@@ -1,0 +1,49 @@
+{
+  "method": "eta=eta_V25+.25*w*phi_spectral@gamma; w=I(spectral_supported)*n_completed90/(n_completed90+10); fitBCE+.03/2||gamma||\u00c2\u00b2+.2/2 mean((w*phi@gamma)^2) ; final=.75*sigmoid(eta)+.25*original_spline77; mean5fold test probabilities",
+  "spec": {
+    "id": "V180",
+    "label": "Reliability-weighted spectral residual with frozen V25 correction",
+    "families": [
+      "spectral"
+    ],
+    "method": "reliability_residual",
+    "penalty": 0.03,
+    "teacher_tether": 0.2,
+    "strength": 0.25,
+    "error_basis": "Protect unsupported/thin transaction histories by multiplying only the new residual by observed spectral support and n90/(n90+10); V25 coefficients remain fixed",
+    "formula": "eta=eta_V25+.25*I(spectral_supported)*orders90/(orders90+10)*phi_spectral@gamma; BCE+.03/2||gamma||^2+.2/2 mean(delta^2)",
+    "priority": "P0",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "beh_spectral_spend_power_7d",
+    "beh_spectral_spend_power_14d",
+    "beh_spectral_spend_power_30d",
+    "beh_spectral_spend_periodicity_strength",
+    "beh_spectral_orders_power_7d",
+    "beh_spectral_orders_power_14d",
+    "beh_spectral_orders_power_30d",
+    "beh_spectral_orders_periodicity_strength",
+    "beh_spectral_window_supported"
+  ],
+  "source_sha256": "4333920f61c77f5ead382bb8b15286a4b565be494285cfeacba49f60356481f4"
+}

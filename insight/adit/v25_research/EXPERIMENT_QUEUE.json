@@ -1,27 +1,5 @@
 [
   {
-    "id": "V180",
-    "status": "QUEUED",
-    "definition": {
-      "id": "V180",
-      "label": "Reliability-weighted spectral residual with frozen V25 correction",
-      "families": [
-        "spectral"
-      ],
-      "method": "reliability_residual",
-      "penalty": 0.03,
-      "teacher_tether": 0.2,
-      "strength": 0.25,
-      "error_basis": "Protect unsupported/thin transaction histories by multiplying only the new residual by observed spectral support and n90/(n90+10); V25 coefficients remain fixed",
-      "formula": "eta=eta_V25+.25*I(spectral_supported)*orders90/(orders90+10)*phi_spectral@gamma; BCE+.03/2||gamma||^2+.2/2 mean(delta^2)",
-      "priority": "P0",
-      "backbone_frozen_fraction": 1.0,
-      "source_script": "v7/scripts/conservative_adapters.py",
-      "batch": "conservative",
-      "feature_catalog": "conservative/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V181",
     "status": "QUEUED",
     "definition": {
