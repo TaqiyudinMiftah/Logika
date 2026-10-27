@@ -151,3 +151,7 @@ Test a bounded credibility gate that limits the lower-complexity representation 
 
 Formula: `m=median of3-member logit variance on correction-training only; w=.1*m/(m+query_variance); p=(1-w)*pV193+w*pV219; ifm undefined/nearzero retainV193 explicitly; mean5foldtest`
 
+
+## Refill: population context instead of more correction features
+
+V222/V223 fit frozen Large local contexts by employment or train-context APR median; V224 combines history/occupation rawcontexts before refitting the same18-input correction. References and local samples use the original50kcontext only. Original dataset summary: employment33473/20987/15540, targetrates0.132405/0.137943/0.140283; train/testAPRmedian.20 and support.16:.32. See POPULATION_CONTEXT_PLAN.md. No public-score gain assumed.

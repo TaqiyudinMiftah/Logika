@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "checks": [
+    {
+      "mode": "employment",
+      "reference": {
+        "mode": "employment",
+        "levels": [
+          "salaried",
+          "self_employed",
+          "variable_income"
+        ]
+      },
+      "unsupported_falls_back_to_global": true
+    },
+    {
+      "mode": "apr_regime",
+      "reference": {
+        "mode": "apr_regime",
+        "median_APR": 0.2,
+        "levels": [
+          "low_or_equal",
+          "high"
+        ]
+      },
+      "unsupported_falls_back_to_global": true
+    }
+  ],
+  "source_sha256": "e980f18e9c1abb995e75100601b35456954997b8c0ffa582c0ae5a54f6fb70b4"
+}

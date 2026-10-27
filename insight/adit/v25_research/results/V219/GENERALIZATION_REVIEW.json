@@ -1,0 +1,82 @@
+{
+  "status": "REVIEWED",
+  "candidate": "V219",
+  "decision": "EXPERIMENT_ONLY_KEEP_V25_PUBLIC_INCUMBENT",
+  "pooled_KS": 0.5301791683613297,
+  "AUC": 0.8471111593293887,
+  "delta_AUC_vs_V25": 8.188042227286196e-05,
+  "delta_AUC_vs_V185": 2.383904415648175e-06,
+  "head_gap": 0.013019363637663095,
+  "V25_head_gap": 0.011107666682208906,
+  "flags": [
+    "REUSED_DEVELOPMENT_FOLDS",
+    "MANY_PRIOR_EXPERIMENTS",
+    "NO_INDEPENDENT_GENERALIZATION_TEST",
+    "DELTA_KS_V25_CI_INCLUDES_ZERO_OR_NEGATIVE",
+    "DELTA_KS_V185_CI_INCLUDES_ZERO_OR_NEGATIVE",
+    "FEWER_THAN_FOUR_FOLD_KS_WINS_VS_V185"
+  ],
+  "public_incumbent": {
+    "id": "V25",
+    "KS": 0.56822
+  },
+  "development_incumbent_public_outcome": {
+    "id": "V185",
+    "KS": 0.56699
+  },
+  "causation_note": "Public decline does not uniquely establish overfitting; sample variability, population drift and source instability remain possible.",
+  "selection_caveat": "Intervals condition on fitted predictions and exclude search/retraining uncertainty; operational rules are heuristics, not significance tests.",
+  "top_risk_capture_vs_V185": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3842,
+      "candidate_bad_captured": 3847,
+      "net_bad_captured": 5,
+      "new_members": 268,
+      "exited_members": 268,
+      "entrant_bad_rate": 0.373134328358209,
+      "exit_bad_rate": 0.35447761194029853
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5876,
+      "net_bad_captured": 21,
+      "new_members": 408,
+      "exited_members": 408,
+      "entrant_bad_rate": 0.25980392156862747,
+      "exit_bad_rate": 0.20833333333333334
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7417,
+      "candidate_bad_captured": 7418,
+      "net_bad_captured": 1,
+      "new_members": 522,
+      "exited_members": 522,
+      "entrant_bad_rate": 0.12452107279693486,
+      "exit_bad_rate": 0.12260536398467432
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8018,
+      "candidate_bad_captured": 8018,
+      "net_bad_captured": 0,
+      "new_members": 550,
+      "exited_members": 550,
+      "entrant_bad_rate": 0.09636363636363636,
+      "exit_bad_rate": 0.09636363636363636
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8648,
+      "net_bad_captured": -1,
+      "new_members": 563,
+      "exited_members": 563,
+      "entrant_bad_rate": 0.06216696269982238,
+      "exit_bad_rate": 0.06394316163410302
+    }
+  ],
+  "head_gap_interpretation": "Bootstrap-ensemble apparent training score mixes in-bag and out-of-bag predictions; its train/validation gap is not directly comparable with single-head in-sample gaps. Judge held-out metrics and member variability."
+}

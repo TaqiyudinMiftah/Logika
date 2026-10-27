@@ -74,6 +74,9 @@ def main():
     for name in ['v7/resample_plan.json','v7/scripts/resample_worker.py','v7/resample/reports/PREFLIGHT.json','v7/NEXT_RESEARCH_DIRECTIONS.md']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    for name in ['v7/population_plan.json','v7/population_fusion_plan.json','v7/POPULATION_CONTEXT_PLAN.md','v7/scripts/population_context.py','v7/scripts/population_kumo_worker.py','v7/scripts/population_fusion.py','v7/population/reports/PREFLIGHT.json','v7/population_fusion/reports/PREFLIGHT.json']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
     for name in ['v7/fusion_plan.json','v7/score_fusion_plan.json','v7/scripts/score_fusion_local.py','v7/scripts/upload_local_score_run.py','v7/scripts/mirror_score_sources.py']:
         if (ROOT/name).exists():

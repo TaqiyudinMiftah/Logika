@@ -1,0 +1,58 @@
+[
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "method": "population_context",
+    "worker": "population_kumo_worker.py",
+    "source_script": "v7/scripts/population_kumo_worker.py",
+    "context_features": "locked90_plus_v25_local_context",
+    "reuse_kumo_from": "V168",
+    "context_rows": 50000,
+    "estimators": 8,
+    "estimator_batch_size": 4,
+    "query_batch_size": 8192,
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "local_context_weight": 0.15,
+    "local_context_max_rows": 24000,
+    "Kumo_frozen_fraction": 1.0,
+    "research_ready": true,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V222",
+    "label": "Employment-conditioned frozen Large population context",
+    "population_grouping": "employment",
+    "formula": "Group only original50k context by observedemployment; cap24k pergroup, keepnatural target proportions,8 frozenestimators; rawKumo=.85globalV168+.15matchinglocal, refit original18-input6k head and75:25spline77fusion",
+    "rationale": "The three employment populations differ in income regularity and affordability mechanisms. Observed labeled sizes33473/20987/15540 and targetrates.132405/.137943/.140283 motivate conditional relationships, not a causal employment claim. V178 grouped only history coverage; test a different population axis using unchanged90inputs."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "method": "population_context",
+    "worker": "population_kumo_worker.py",
+    "source_script": "v7/scripts/population_kumo_worker.py",
+    "context_features": "locked90_plus_v25_local_context",
+    "reuse_kumo_from": "V168",
+    "context_rows": 50000,
+    "estimators": 8,
+    "estimator_batch_size": 4,
+    "query_batch_size": 8192,
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "local_context_weight": 0.15,
+    "local_context_max_rows": 24000,
+    "Kumo_frozen_fraction": 1.0,
+    "research_ready": true,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "id": "V223",
+    "label": "Underwriting-regime frozen Large population context",
+    "population_grouping": "apr_regime",
+    "formula": "For each fold, compute medianAPR only within50k context; low/equal vs high groups, cap24k and8 frozenestimators; .85global+.15matchinglocal before original18-input correction and75:25spline77fusion",
+    "rationale": "APR is discretized: train/test quantiles include.16,.20,.24,.32 and median.20; no missing APR. Test whether local underwriting regimes help interpret bureau/burden signals. APR is policy-generated and could drift; no claim that it independently measures risk, and grouping never uses outer target."
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "V224",
+    "label": "Combined history/occupation population contexts before correction",
+    "method": "population_raw_fusion",
+    "worker": "population_fusion.py",
+    "source_script": "v7/scripts/population_fusion.py",
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "research_ready": true,
+    "raw_sources": [
+      "V178",
+      "V222"
+    ],
+    "depends_on": [
+      "V222"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "rawKumo=.5*rawV178+.5*rawV222=.85global+.075history-local+.075employment-local; refit18-input6k correction, .5shrink,75:25spline77fusion; mean5foldtest",
+    "rationale": "Occupation and history availability represent different borrower conditions. Test complementary context information before nonlinear correction with fixed weights and unchanged18 head inputs; avoid fitting dynamic weights on reused outer labels."
+  }
+]
