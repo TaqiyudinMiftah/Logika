@@ -1,36 +1,5 @@
 [
   {
-    "id": "V214",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "research_ready": true,
-      "no_outer_validation_tuning": true,
-      "id": "V214",
-      "label": "Smooth capacity effects while retaining sharp credit-risk responses",
-      "method": "scoped_coefficient_smoothing",
-      "worker": "scoped_smoothing.py",
-      "source_script": "v7/scripts/scoped_smoothing.py",
-      "roughness_scope": "capacity",
-      "roughness_penalty": 0.03,
-      "formula": "V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on capacity inputs; other bases unchanged; shrink.5 and original75:25spline77fusion",
-      "rationale": "V200 smoothing all17 numeric responses improves AUC and reduces head gap but loses KS. It may over-smooth threshold-like delinquency/bureau effects. Apply the same penalty only to five income/cashflow/burden measurements; keep credit/history-response bases at original L2.",
-      "batch": "scoped_smoothing",
-      "feature_catalog": "scoped_smoothing/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V215",
     "status": "QUEUED",
     "definition": {

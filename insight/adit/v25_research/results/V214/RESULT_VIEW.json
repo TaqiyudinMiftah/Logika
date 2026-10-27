@@ -1,0 +1,713 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V214",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V214",
+    "label": "Smooth capacity effects while retaining sharp credit-risk responses",
+    "method": "scoped_coefficient_smoothing",
+    "worker": "scoped_smoothing.py",
+    "source_script": "v7/scripts/scoped_smoothing.py",
+    "roughness_scope": "capacity",
+    "roughness_penalty": 0.03,
+    "formula": "V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on capacity inputs; other bases unchanged; shrink.5 and original75:25spline77fusion",
+    "rationale": "V200 smoothing all17 numeric responses improves AUC and reduces head gap but loses KS. It may over-smooth threshold-like delinquency/bureau effects. Apply the same penalty only to five income/cashflow/burden measurements; keep credit/history-response bases at original L2."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "OOF": {
+    "KS": 0.5282367731284819,
+    "signed_KS": 0.5282367731284819,
+    "AUC": 0.8470604557168706,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": -0.0020478869155591273,
+  "delta_AUC": 3.117680975472936e-05,
+  "mean_fold_KS": 0.5321339055241897,
+  "std_fold_KS": 0.005620280570787857,
+  "delta_mean_fold_KS": -0.0011959190323615587,
+  "fold_wins": 1,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5261803169616054,
+        "signed_KS": 0.5261803169616054,
+        "AUC": 0.8440689143602625,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": -0.002299588799209995,
+      "delta_AUC": -8.695576939610206e-07,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.546084446048358,
+      "heldout_corrected_Kumo_KS": 0.5255028010844602,
+      "train_validation_head_KS_gap": 0.020581644963897805,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "optimization": {
+        "objective": 0.29130630540435637,
+        "gradient_max_abs": 3.3163576329542367e-12,
+        "iterations": 4,
+        "solver": "Analytic Hessian Newton with Armijo backtracking",
+        "backtracks": 0,
+        "roughness_scope": "capacity",
+        "smoothed_inputs": [
+          "re_income_geometric_mean",
+          "re_declared_income_log_gap",
+          "re_outflow_income_geometric_ratio",
+          "installment_observed_income_ratio",
+          "v2_existing_total_burden_observed"
+        ],
+        "roughness_rows": 10
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5363668809995948,
+        "signed_KS": 0.5363668809995948,
+        "AUC": 0.8497104742441577,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": -0.0016322902249671367,
+      "delta_AUC": 0.00010552082614601055,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.525159290307695,
+      "heldout_corrected_Kumo_KS": 0.5359198848670831,
+      "train_validation_head_KS_gap": -0.010760594559388048,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "optimization": {
+        "objective": 0.29345361239694817,
+        "gradient_max_abs": 6.271127627605066e-10,
+        "iterations": 4,
+        "solver": "Analytic Hessian Newton with Armijo backtracking",
+        "backtracks": 0,
+        "roughness_scope": "capacity",
+        "smoothed_inputs": [
+          "re_income_geometric_mean",
+          "re_declared_income_log_gap",
+          "re_outflow_income_geometric_ratio",
+          "installment_observed_income_ratio",
+          "v2_existing_total_burden_observed"
+        ],
+        "roughness_rows": 10
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5396353744591514,
+        "signed_KS": 0.5396353744591514,
+        "AUC": 0.8499623851080593,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": -0.0006628638300042455,
+      "delta_AUC": 0.00010547734826127364,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5578290372771858,
+      "heldout_corrected_Kumo_KS": 0.5374400021495467,
+      "train_validation_head_KS_gap": 0.02038903512763912,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "optimization": {
+        "objective": 0.2854106098536729,
+        "gradient_max_abs": 1.941380040060281e-11,
+        "iterations": 4,
+        "solver": "Analytic Hessian Newton with Armijo backtracking",
+        "backtracks": 0,
+        "roughness_scope": "capacity",
+        "smoothed_inputs": [
+          "re_income_geometric_mean",
+          "re_declared_income_log_gap",
+          "re_outflow_income_geometric_ratio",
+          "installment_observed_income_ratio",
+          "v2_existing_total_burden_observed"
+        ],
+        "roughness_rows": 10
+      }
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5291899365834469,
+        "signed_KS": 0.5291899365834469,
+        "AUC": 0.8439370621870219,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": -0.0014621217296737488,
+      "delta_AUC": 7.370581540611099e-05,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5282877105383037,
+      "heldout_corrected_Kumo_KS": 0.5282847804966069,
+      "train_validation_head_KS_gap": 2.930041696824759e-06,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "optimization": {
+        "objective": 0.2905430819256549,
+        "gradient_max_abs": 2.962101906348972e-13,
+        "iterations": 4,
+        "solver": "Analytic Hessian Newton with Armijo backtracking",
+        "backtracks": 0,
+        "roughness_scope": "capacity",
+        "smoothed_inputs": [
+          "re_income_geometric_mean",
+          "re_declared_income_log_gap",
+          "re_outflow_income_geometric_ratio",
+          "installment_observed_income_ratio",
+          "v2_existing_total_burden_observed"
+        ],
+        "roughness_rows": 10
+      }
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5292970186171503,
+        "signed_KS": 0.5292970186171503,
+        "AUC": 0.8478036623098533,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": 7.726942204733245e-05,
+      "delta_AUC": -9.304490022699063e-05,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5481728203702279,
+      "heldout_corrected_Kumo_KS": 0.5292902390728086,
+      "train_validation_head_KS_gap": 0.018882581297419265,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "optimization": {
+        "objective": 0.28860588058823844,
+        "gradient_max_abs": 5.01135786513951e-12,
+        "iterations": 4,
+        "solver": "Analytic Hessian Newton with Armijo backtracking",
+        "backtracks": 0,
+        "roughness_scope": "capacity",
+        "smoothed_inputs": [
+          "re_income_geometric_mean",
+          "re_declared_income_log_gap",
+          "re_outflow_income_geometric_ratio",
+          "installment_observed_income_ratio",
+          "v2_existing_total_burden_observed"
+        ],
+        "roughness_rows": 10
+      }
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5210080429457372,
+      0.5381731334264468
+    ],
+    "delta_KS": [
+      -0.0030235060139275185,
+      0.0003586031687522379
+    ],
+    "candidate_AUC": [
+      0.843447052468333,
+      0.8508342050538005
+    ],
+    "delta_AUC": [
+      -9.298014031479951e-05,
+      0.0001766230173767645
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "modeling_formula": "V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on capacity inputs; other bases unchanged; shrink.5 and original75:25spline77fusion; mean5fold test probabilities",
+  "modeling_objective": "V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on capacity inputs; other bases unchanged; shrink.5 and original75:25spline77fusion",
+  "controller_source": "v7/scripts/scoped_smoothing.py",
+  "source_sha256": "e5905366dee876e2ffa439dfd59bc6d22bc30c8924b5bcc7cecfe523369cf2e6",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": false,
+  "submission": "v7/submissions/submission_V214_V25_conservative.csv",
+  "submission_sha256": "305c8a647dec9bde899bc45eb11d8259fc8d5994f316dcea5f3db079c0f2b46c",
+  "public_score": null,
+  "elapsed_seconds": 8.172887086868286,
+  "peak_RSS_MiB": 390.73046875,
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY",
+    "diagnostic": "V200 smoothing all17 numeric responses improves AUC and reduces head gap but loses KS. It may over-smooth threshold-like delinquency/bureau effects. Apply the same penalty only to five income/cashflow/burden measurements; keep credit/history-response bases at original L2.; all new fitting uses correction rows only; repeated development selection remains.",
+    "inner_crossfit_used": false
+  },
+  "error_analysis": {
+    "json": "v7/runs/V214/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V214/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V214/ERROR_CASES.csv"
+  },
+  "additional_source_sha256": "98bd78996e73dc0105d9c4b3d0c0f28f283e19d9445a6bb63d3696f671dd1f2f",
+  "comparison_to_V185": {
+    "control": "V185",
+    "control_metrics": {
+      "KS": 0.5311516622583823,
+      "signed_KS": 0.5311516622583823,
+      "AUC": 0.8471087754249731,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5282367731284819,
+      "signed_KS": 0.5282367731284819,
+      "AUC": 0.8470604557168706,
+      "rows": 70000
+    },
+    "delta_KS": -0.0029148891299003443,
+    "delta_AUC": -4.8319708102484427e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5234363951810418,
+        0.5406116770704794
+      ],
+      "candidate_KS": [
+        0.5210080429457372,
+        0.5381731334264468
+      ],
+      "delta_KS": [
+        -0.005001703239716174,
+        -0.00015726918244114897
+      ],
+      "candidate_AUC": [
+        0.843447052468333,
+        0.8508342050538005
+      ],
+      "delta_AUC": [
+        -0.0003357951936839354,
+        0.00024361664340237477
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "generalization_review": {
+    "status": "REVIEWED",
+    "candidate": "V214",
+    "decision": "EXPERIMENT_ONLY_KEEP_V25_PUBLIC_INCUMBENT",
+    "pooled_KS": 0.5282367731284819,
+    "AUC": 0.8470604557168706,
+    "delta_AUC_vs_V25": 3.117680975472936e-05,
+    "delta_AUC_vs_V185": -4.8319708102484427e-05,
+    "head_gap": 0.009819119374252994,
+    "V25_head_gap": 0.011107666682208906,
+    "flags": [
+      "REUSED_DEVELOPMENT_FOLDS",
+      "MANY_PRIOR_EXPERIMENTS",
+      "NO_INDEPENDENT_GENERALIZATION_TEST",
+      "AUC_DECREASE_VS_V185",
+      "DELTA_KS_V25_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "DELTA_KS_V185_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "FEWER_THAN_FOUR_FOLD_KS_WINS_VS_V185"
+    ],
+    "public_incumbent": {
+      "id": "V25",
+      "KS": 0.56822
+    },
+    "development_incumbent_public_outcome": {
+      "id": "V185",
+      "KS": 0.56699
+    },
+    "causation_note": "Public decline does not uniquely establish overfitting; sample variability, population drift and source instability remain possible.",
+    "selection_caveat": "Intervals condition on fitted predictions and exclude search/retraining uncertainty; operational rules are heuristics, not significance tests.",
+    "top_risk_capture_vs_V185": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3842,
+        "candidate_bad_captured": 3848,
+        "net_bad_captured": 6,
+        "new_members": 270,
+        "exited_members": 270,
+        "entrant_bad_rate": 0.37407407407407406,
+        "exit_bad_rate": 0.35185185185185186
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5855,
+        "net_bad_captured": 0,
+        "new_members": 417,
+        "exited_members": 417,
+        "entrant_bad_rate": 0.2182254196642686,
+        "exit_bad_rate": 0.2182254196642686
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7417,
+        "candidate_bad_captured": 7413,
+        "net_bad_captured": -4,
+        "new_members": 506,
+        "exited_members": 506,
+        "entrant_bad_rate": 0.12055335968379446,
+        "exit_bad_rate": 0.12845849802371542
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8018,
+        "candidate_bad_captured": 8017,
+        "net_bad_captured": -1,
+        "new_members": 544,
+        "exited_members": 544,
+        "entrant_bad_rate": 0.08088235294117647,
+        "exit_bad_rate": 0.08272058823529412
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8646,
+        "net_bad_captured": -3,
+        "new_members": 517,
+        "exited_members": 517,
+        "entrant_bad_rate": 0.06576402321083172,
+        "exit_bad_rate": 0.07156673114119923
+      }
+    ]
+  },
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5282367731284819,
+      "signed_KS": 0.5282367731284819,
+      "AUC": 0.8470604557168706,
+      "rows": 70000
+    },
+    "delta_KS": -0.0032227414340537663,
+    "delta_AUC": -4.7088632736835834e-05,
+    "fold_wins": 1,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5210080429457372,
+        0.5381731334264468
+      ],
+      "delta_KS": [
+        -0.005156845426477863,
+        -0.0003144019120019661
+      ],
+      "candidate_AUC": [
+        0.843447052468333,
+        0.8508342050538005
+      ],
+      "delta_AUC": [
+        -0.0003361514752409867,
+        0.00024101217131695642
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "continuous_insight": {
+    "experiment": "V214",
+    "method": "scoped_coefficient_smoothing",
+    "hypothesis": "V200 smoothing all17 numeric responses improves AUC and reduces head gap but loses KS. It may over-smooth threshold-like delinquency/bureau effects. Apply the same penalty only to five income/cashflow/burden measurements; keep credit/history-response bases at original L2.",
+    "formula": "V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on capacity inputs; other bases unchanged; shrink.5 and original75:25spline77fusion",
+    "findings": [
+      "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+      "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+    ],
+    "comparison_to_V193": {
+      "control": "V193",
+      "control_metrics": {
+        "KS": 0.5314595145625357,
+        "signed_KS": 0.5314595145625357,
+        "AUC": 0.8471075443496074,
+        "rows": 70000
+      },
+      "candidate_metrics": {
+        "KS": 0.5282367731284819,
+        "signed_KS": 0.5282367731284819,
+        "AUC": 0.8470604557168706,
+        "rows": 70000
+      },
+      "delta_KS": -0.0032227414340537663,
+      "delta_AUC": -4.7088632736835834e-05,
+      "fold_wins": 1,
+      "confidence_interval": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5237657171439752,
+          0.5406826945132854
+        ],
+        "candidate_KS": [
+          0.5210080429457372,
+          0.5381731334264468
+        ],
+        "delta_KS": [
+          -0.005156845426477863,
+          -0.0003144019120019661
+        ],
+        "candidate_AUC": [
+          0.843447052468333,
+          0.8508342050538005
+        ],
+        "delta_AUC": [
+          -0.0003361514752409867,
+          0.00024101217131695642
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      }
+    },
+    "head_gap": 0.009819119374252994,
+    "top_risk_capture": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3841,
+        "candidate_bad_captured": 3848,
+        "net_bad_captured": 7,
+        "new_members": 269,
+        "exited_members": 269,
+        "entrant_bad_rate": 0.3828996282527881,
+        "exit_bad_rate": 0.35687732342007433
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5855,
+        "net_bad_captured": 0,
+        "new_members": 424,
+        "exited_members": 424,
+        "entrant_bad_rate": 0.22169811320754718,
+        "exit_bad_rate": 0.22169811320754718
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7422,
+        "candidate_bad_captured": 7413,
+        "net_bad_captured": -9,
+        "new_members": 503,
+        "exited_members": 503,
+        "entrant_bad_rate": 0.11332007952286283,
+        "exit_bad_rate": 0.1312127236580517
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8015,
+        "candidate_bad_captured": 8017,
+        "net_bad_captured": 2,
+        "new_members": 550,
+        "exited_members": 550,
+        "entrant_bad_rate": 0.08545454545454545,
+        "exit_bad_rate": 0.08181818181818182
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8646,
+        "net_bad_captured": -3,
+        "new_members": 515,
+        "exited_members": 515,
+        "entrant_bad_rate": 0.06601941747572816,
+        "exit_bad_rate": 0.07184466019417475
+      }
+    ],
+    "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+    "public_incumbent": "V25",
+    "independent_generalization_established": false
+  }
+}

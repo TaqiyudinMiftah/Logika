@@ -1,0 +1,109 @@
+{
+  "experiment": "V214",
+  "method": "scoped_coefficient_smoothing",
+  "hypothesis": "V200 smoothing all17 numeric responses improves AUC and reduces head gap but loses KS. It may over-smooth threshold-like delinquency/bureau effects. Apply the same penalty only to five income/cashflow/burden measurements; keep credit/history-response bases at original L2.",
+  "formula": "V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on capacity inputs; other bases unchanged; shrink.5 and original75:25spline77fusion",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5282367731284819,
+      "signed_KS": 0.5282367731284819,
+      "AUC": 0.8470604557168706,
+      "rows": 70000
+    },
+    "delta_KS": -0.0032227414340537663,
+    "delta_AUC": -4.7088632736835834e-05,
+    "fold_wins": 1,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5210080429457372,
+        0.5381731334264468
+      ],
+      "delta_KS": [
+        -0.005156845426477863,
+        -0.0003144019120019661
+      ],
+      "candidate_AUC": [
+        0.843447052468333,
+        0.8508342050538005
+      ],
+      "delta_AUC": [
+        -0.0003361514752409867,
+        0.00024101217131695642
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.009819119374252994,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3848,
+      "net_bad_captured": 7,
+      "new_members": 269,
+      "exited_members": 269,
+      "entrant_bad_rate": 0.3828996282527881,
+      "exit_bad_rate": 0.35687732342007433
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5855,
+      "net_bad_captured": 0,
+      "new_members": 424,
+      "exited_members": 424,
+      "entrant_bad_rate": 0.22169811320754718,
+      "exit_bad_rate": 0.22169811320754718
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7413,
+      "net_bad_captured": -9,
+      "new_members": 503,
+      "exited_members": 503,
+      "entrant_bad_rate": 0.11332007952286283,
+      "exit_bad_rate": 0.1312127236580517
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8017,
+      "net_bad_captured": 2,
+      "new_members": 550,
+      "exited_members": 550,
+      "entrant_bad_rate": 0.08545454545454545,
+      "exit_bad_rate": 0.08181818181818182
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8646,
+      "net_bad_captured": -3,
+      "new_members": 515,
+      "exited_members": 515,
+      "entrant_bad_rate": 0.06601941747572816,
+      "exit_bad_rate": 0.07184466019417475
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
