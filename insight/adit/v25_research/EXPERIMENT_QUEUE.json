@@ -1,28 +1,5 @@
 [
   {
-    "id": "V182",
-    "status": "QUEUED",
-    "definition": {
-      "id": "V182",
-      "label": "64-landmark Nystrom RBF residual on existing V25 domain features",
-      "families": [
-        "kernel_residual"
-      ],
-      "method": "kernel_residual",
-      "penalty": 0.05,
-      "teacher_tether": 0.2,
-      "strength": 0.25,
-      "components": 64,
-      "error_basis": "Pairwise polynomial/FM additions were negative; test bounded smooth local interactions with a low-rank kernel and strong teacher tether, without changing Kumo context inputs",
-      "formula": "eta=eta_V25+.25*Nystrom64_RBF(robust8numeric+missing)@gamma; BCE+.05/2||gamma||^2+.2/2 mean(delta^2)",
-      "priority": "P1",
-      "backbone_frozen_fraction": 1.0,
-      "source_script": "v7/scripts/conservative_adapters.py",
-      "batch": "conservative",
-      "feature_catalog": "conservative/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V183",
     "status": "QUEUED",
     "definition": {

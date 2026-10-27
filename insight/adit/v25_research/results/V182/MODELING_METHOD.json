@@ -1,0 +1,41 @@
+{
+  "method": "eta=eta_V25+.25*Nystrom64_RBF(robust_scaled8inputs+missing)@gamma; fitBCE+.05/2||gamma||\u00c2\u00b2+.2/2 mean(delta\u00c2\u00b2) ; final=.75*sigmoid(eta)+.25*original_spline77; mean5fold test probabilities",
+  "spec": {
+    "id": "V182",
+    "label": "64-landmark Nystrom RBF residual on existing V25 domain features",
+    "families": [
+      "kernel_residual"
+    ],
+    "method": "kernel_residual",
+    "penalty": 0.05,
+    "teacher_tether": 0.2,
+    "strength": 0.25,
+    "components": 64,
+    "error_basis": "Pairwise polynomial/FM additions were negative; test bounded smooth local interactions with a low-rank kernel and strong teacher tether, without changing Kumo context inputs",
+    "formula": "eta=eta_V25+.25*Nystrom64_RBF(robust8numeric+missing)@gamma; BCE+.05/2||gamma||^2+.2/2 mean(delta^2)",
+    "priority": "P1",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "source_sha256": "4333920f61c77f5ead382bb8b15286a4b565be494285cfeacba49f60356481f4"
+}
