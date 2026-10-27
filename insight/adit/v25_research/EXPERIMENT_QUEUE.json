@@ -1,38 +1,5 @@
 [
   {
-    "id": "V233",
-    "status": "QUEUED",
-    "definition": {
-      "method": "population_raw_fusion",
-      "worker": "population_fusion.py",
-      "source_script": "v7/scripts/population_fusion.py",
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "replaces_base_head": true,
-      "Kumo_frozen_fraction": 1.0,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "id": "V233",
-      "label": "Half-strength history-population context",
-      "research_ready": true,
-      "raw_sources": [
-        "V168",
-        "V178"
-      ],
-      "depends_on": [
-        "V178"
-      ],
-      "formula": "raw=mean(globalV168,rawV178)=.925global+.075coverage-local; refit18-input6k correction L2.003/shrink.5; same75:25spline77; mean5foldtest",
-      "rationale": "V178 was the strongest single population view among those tested. Isolate whether halving its15%local contribution improves stability before combining it with weaker views; fixed shrinkage and unchanged18-input correction.",
-      "priority": "P1",
-      "batch": "population_fusion",
-      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V234",
     "status": "QUEUED",
     "definition": {
