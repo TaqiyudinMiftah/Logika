@@ -1,38 +1,5 @@
 [
   {
-    "id": "V234",
-    "status": "QUEUED",
-    "definition": {
-      "method": "population_raw_fusion",
-      "worker": "population_fusion.py",
-      "source_script": "v7/scripts/population_fusion.py",
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "replaces_base_head": true,
-      "Kumo_frozen_fraction": 1.0,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "id": "V234",
-      "label": "Half-strength employment-population context",
-      "research_ready": true,
-      "raw_sources": [
-        "V168",
-        "V222"
-      ],
-      "depends_on": [
-        "V222"
-      ],
-      "formula": "raw=mean(globalV168,rawV222)=.925global+.075employment-local; refit18-input6k correction L2.003/shrink.5; same75:25spline77; mean5foldtest",
-      "rationale": "V222 full15%employment context KS.529872/AUC.846984 was belowV25. This controlled single-view ablation tests weaker reliance; it is not assumed beneficial and is needed to interpret the multi-view combinations.",
-      "priority": "P1",
-      "batch": "population_fusion",
-      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V235",
     "status": "QUEUED",
     "definition": {
