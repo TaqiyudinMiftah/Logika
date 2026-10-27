@@ -1,30 +1,5 @@
 [
   {
-    "id": "V192",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparator": "V185",
-      "Kumo_frozen_fraction": 1.0,
-      "source_script": "v7/scripts/joint_followups.py",
-      "no_outer_validation_tuning": true,
-      "id": "V192",
-      "label": "Joint context/spectral correction with selective group shrinkage",
-      "method": "joint_group_ridge",
-      "replaces_base_head": true,
-      "new_group_penalty": 0.01,
-      "formula": "Same raw V178 Kumo and29 inputs asV191; meanBCE+.003/2*sum(base_beta^2)+.01/2*sum(spectral_beta^2), intercept unpenalized; inference shrink.5; original75:25 spline fusion",
-      "rationale": "V167 head train-validation KS gap .016101 vsV25 .011108. Test joint information with stronger shrinkage specifically on all11 spectral inputs, including unstable dominant-cycle argmax; keeps input set matched to V191.",
-      "batch": "joint_followup",
-      "feature_catalog": "joint_followup/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V193",
     "status": "QUEUED",
     "definition": {
