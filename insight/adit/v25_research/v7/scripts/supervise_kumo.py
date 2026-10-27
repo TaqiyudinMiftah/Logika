@@ -29,9 +29,11 @@ def wait_capacity(args,out):
 
 def run_once(args,worker,out):
     env=os.environ.copy();env.update(OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='2',MKL_NUM_THREADS='2',PYTORCH_ALLOC_CONF='expandable_segments:True')
+    if args.worker=='population_kumo_worker.py':
+        env.update(MALLOC_ARENA_MAX='2',MALLOC_TRIM_THRESHOLD_='131072',MALLOC_MMAP_THRESHOLD_='131072')
     with (V/'logs'/f'{args.run}_kumo_gpu.log').open('a') as log:
         p=subprocess.Popen([args.python,'-u',str(worker),'--run',args.run],stdout=log,stderr=subprocess.STDOUT,env=env)
-        row=dict(pid=p.pid,supervisor_pid=os.getpid(),started=time.time(),memory_before=memory(),max_rss_GiB=0.,rss_limit_GiB=args.max_rss_gib)
+        row=dict(pid=p.pid,supervisor_pid=os.getpid(),started=time.time(),memory_before=memory(),max_rss_GiB=0.,rss_limit_GiB=args.max_rss_gib,allocator_controls={k:env[k] for k in ['MALLOC_ARENA_MAX','MALLOC_TRIM_THRESHOLD_','MALLOC_MMAP_THRESHOLD_'] if k in env})
         while p.poll() is None:
             try:
                 fields={l.split(':',1)[0]:l.split(':',1)[1].strip() for l in Path(f'/proc/{p.pid}/status').read_text().splitlines() if ':' in l}

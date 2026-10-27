@@ -36,3 +36,38 @@ Compare all three population views to each matched pair under the same total15%l
 
 Formula: `rawKumo=mean(rawV178,rawV222,rawV223)=.85global+.05each coverage/employment/APR local; refit18-input correction and75:25spline77fusion`
 
+
+## Five additional cached-score experiments V228-V232
+
+No new backbone training or weight download. Controlled global-anchor ablations and one changed fusion stage, with no outer-fitted weights. Every run has its own submission, matched uncertainty, errors and overfitting report.
+
+### V228: Conservative global/coverage/employment raw fusion
+
+V222 employment context KS.529872 and AUC.846984 did not improveV25; test stronger global anchoring for the same coverage/employment views instead of trusting local retrieval at15%.
+
+Formula: `raw=mean(globalV168,rawV178,rawV222)=.90global+.05coverage+.05employment; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest`
+
+### V229: Conservative global/coverage/underwriting raw fusion
+
+Matched toV225 with total local influence reduced15% to10%; APR is policy-generated, so a stronger global anchor is a prespecified stability control, not an assumed gain.
+
+Formula: `raw=mean(globalV168,rawV178,rawV223)=.90global+.05coverage+.05APR; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest`
+
+### V230: Conservative global/employment/underwriting raw fusion
+
+Matched toV226 at a lower local budget; inspect whether conditional affordability/pricing information survives stronger shrinkage after employment-only context was negative.
+
+Formula: `raw=mean(globalV168,rawV222,rawV223)=.90global+.05employment+.05APR; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest`
+
+### V231: Global anchor vote with all three population views
+
+Complete the all-view ablation againstV227 by giving the global expert its own equal vote. Shared context borrowers are not independent evidence; fixed weights avoid an outer-validation weight search.
+
+Formula: `raw=mean(globalV168,rawV178,rawV222,rawV223)=.8875global+.0375each local view; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest`
+
+### V232: Frozen Small/Large raw fusion before correction
+
+V207 Small alone was weaker, whileV209 final-score blending gave a tiny numerical gain. Test combination before the18-input correction; changing fusion stage can expose complementary errors, but equal weights are not claimed optimal.
+
+Formula: `raw=.50globalLargeV168+.50globalSmallV207; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest`
+

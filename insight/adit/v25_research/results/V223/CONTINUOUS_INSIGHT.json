@@ -1,0 +1,109 @@
+{
+  "experiment": "V223",
+  "method": "population_context",
+  "hypothesis": "APR is discretized: train/test quantiles include.16,.20,.24,.32 and median.20; no missing APR. Test whether local underwriting regimes help interpret bureau/burden signals. APR is policy-generated and could drift; no claim that it independently measures risk, and grouping never uses outer target.",
+  "formula": "For each fold, compute medianAPR only within50k context; low/equal vs high groups, cap24k and8 frozenestimators; .85global+.15matchinglocal before original18-input correction and75:25spline77fusion",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5302127690680616,
+      "signed_KS": 0.5302127690680616,
+      "AUC": 0.8470324157149683,
+      "rows": 70000
+    },
+    "delta_KS": -0.0012467454944741219,
+    "delta_AUC": -7.512863463909891e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5229516153509333,
+        0.5395487945945554
+      ],
+      "delta_KS": [
+        -0.0034914672331964602,
+        0.001509313047756952
+      ],
+      "candidate_AUC": [
+        0.8433601650643239,
+        0.8507700982821194
+      ],
+      "delta_AUC": [
+        -0.00034370872175386866,
+        0.0001449516039669557
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.011739468262031405,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3854,
+      "net_bad_captured": 13,
+      "new_members": 251,
+      "exited_members": 251,
+      "entrant_bad_rate": 0.3904382470119522,
+      "exit_bad_rate": 0.3386454183266932
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5854,
+      "net_bad_captured": -1,
+      "new_members": 380,
+      "exited_members": 380,
+      "entrant_bad_rate": 0.2236842105263158,
+      "exit_bad_rate": 0.22631578947368422
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7427,
+      "net_bad_captured": 5,
+      "new_members": 440,
+      "exited_members": 440,
+      "entrant_bad_rate": 0.1318181818181818,
+      "exit_bad_rate": 0.12045454545454545
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8020,
+      "net_bad_captured": 5,
+      "new_members": 480,
+      "exited_members": 480,
+      "entrant_bad_rate": 0.0875,
+      "exit_bad_rate": 0.07708333333333334
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8654,
+      "net_bad_captured": 5,
+      "new_members": 466,
+      "exited_members": 466,
+      "entrant_bad_rate": 0.0815450643776824,
+      "exit_bad_rate": 0.07081545064377683
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

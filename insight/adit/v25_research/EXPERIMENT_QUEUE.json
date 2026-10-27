@@ -1,39 +1,5 @@
 [
   {
-    "id": "V223",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "method": "population_context",
-      "worker": "population_kumo_worker.py",
-      "source_script": "v7/scripts/population_kumo_worker.py",
-      "context_features": "locked90_plus_v25_local_context",
-      "reuse_kumo_from": "V168",
-      "context_rows": 50000,
-      "estimators": 8,
-      "estimator_batch_size": 4,
-      "query_batch_size": 8192,
-      "penalty": 0.003,
-      "strength": 0.5,
-      "kumo_weight": 0.75,
-      "local_context_weight": 0.15,
-      "local_context_max_rows": 24000,
-      "Kumo_frozen_fraction": 1.0,
-      "research_ready": true,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "id": "V223",
-      "label": "Underwriting-regime frozen Large population context",
-      "population_grouping": "apr_regime",
-      "formula": "For each fold, compute medianAPR only within50k context; low/equal vs high groups, cap24k and8 frozenestimators; .85global+.15matchinglocal before original18-input correction and75:25spline77fusion",
-      "rationale": "APR is discretized: train/test quantiles include.16,.20,.24,.32 and median.20; no missing APR. Test whether local underwriting regimes help interpret bureau/burden signals. APR is policy-generated and could drift; no claim that it independently measures risk, and grouping never uses outer target.",
-      "batch": "population",
-      "feature_catalog": "population/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V224",
     "status": "QUEUED",
     "definition": {
@@ -160,6 +126,178 @@
       ],
       "formula": "rawKumo=mean(rawV178,rawV222,rawV223)=.85global+.05each coverage/employment/APR local; refit18-input correction and75:25spline77fusion",
       "rationale": "Compare all three population views to each matched pair under the same total15%local budget. No additional correction features or outer-fitted weights; source overlap and repeated selection remain caveats.",
+      "batch": "population_fusion",
+      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V228",
+    "status": "QUEUED",
+    "definition": {
+      "method": "population_raw_fusion",
+      "worker": "population_fusion.py",
+      "source_script": "v7/scripts/population_fusion.py",
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "replaces_base_head": true,
+      "Kumo_frozen_fraction": 1.0,
+      "comparison_baseline": "V25",
+      "no_outer_validation_tuning": true,
+      "id": "V228",
+      "label": "Conservative global/coverage/employment raw fusion",
+      "research_ready": true,
+      "raw_sources": [
+        "V168",
+        "V178",
+        "V222"
+      ],
+      "depends_on": [
+        "V222"
+      ],
+      "formula": "raw=mean(globalV168,rawV178,rawV222)=.90global+.05coverage+.05employment; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
+      "rationale": "V222 employment context KS.529872 and AUC.846984 did not improveV25; test stronger global anchoring for the same coverage/employment views instead of trusting local retrieval at15%.",
+      "priority": "P1",
+      "batch": "population_fusion",
+      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V229",
+    "status": "QUEUED",
+    "definition": {
+      "method": "population_raw_fusion",
+      "worker": "population_fusion.py",
+      "source_script": "v7/scripts/population_fusion.py",
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "replaces_base_head": true,
+      "Kumo_frozen_fraction": 1.0,
+      "comparison_baseline": "V25",
+      "no_outer_validation_tuning": true,
+      "id": "V229",
+      "label": "Conservative global/coverage/underwriting raw fusion",
+      "research_ready": true,
+      "raw_sources": [
+        "V168",
+        "V178",
+        "V223"
+      ],
+      "depends_on": [
+        "V223"
+      ],
+      "formula": "raw=mean(globalV168,rawV178,rawV223)=.90global+.05coverage+.05APR; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
+      "rationale": "Matched toV225 with total local influence reduced15% to10%; APR is policy-generated, so a stronger global anchor is a prespecified stability control, not an assumed gain.",
+      "priority": "P1",
+      "batch": "population_fusion",
+      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V230",
+    "status": "QUEUED",
+    "definition": {
+      "method": "population_raw_fusion",
+      "worker": "population_fusion.py",
+      "source_script": "v7/scripts/population_fusion.py",
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "replaces_base_head": true,
+      "Kumo_frozen_fraction": 1.0,
+      "comparison_baseline": "V25",
+      "no_outer_validation_tuning": true,
+      "id": "V230",
+      "label": "Conservative global/employment/underwriting raw fusion",
+      "research_ready": true,
+      "raw_sources": [
+        "V168",
+        "V222",
+        "V223"
+      ],
+      "depends_on": [
+        "V222",
+        "V223"
+      ],
+      "formula": "raw=mean(globalV168,rawV222,rawV223)=.90global+.05employment+.05APR; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
+      "rationale": "Matched toV226 at a lower local budget; inspect whether conditional affordability/pricing information survives stronger shrinkage after employment-only context was negative.",
+      "priority": "P1",
+      "batch": "population_fusion",
+      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V231",
+    "status": "QUEUED",
+    "definition": {
+      "method": "population_raw_fusion",
+      "worker": "population_fusion.py",
+      "source_script": "v7/scripts/population_fusion.py",
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "replaces_base_head": true,
+      "Kumo_frozen_fraction": 1.0,
+      "comparison_baseline": "V25",
+      "no_outer_validation_tuning": true,
+      "id": "V231",
+      "label": "Global anchor vote with all three population views",
+      "research_ready": true,
+      "raw_sources": [
+        "V168",
+        "V178",
+        "V222",
+        "V223"
+      ],
+      "depends_on": [
+        "V222",
+        "V223"
+      ],
+      "formula": "raw=mean(globalV168,rawV178,rawV222,rawV223)=.8875global+.0375each local view; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
+      "rationale": "Complete the all-view ablation againstV227 by giving the global expert its own equal vote. Shared context borrowers are not independent evidence; fixed weights avoid an outer-validation weight search.",
+      "priority": "P1",
+      "batch": "population_fusion",
+      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V232",
+    "status": "QUEUED",
+    "definition": {
+      "method": "population_raw_fusion",
+      "worker": "population_fusion.py",
+      "source_script": "v7/scripts/population_fusion.py",
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "replaces_base_head": true,
+      "Kumo_frozen_fraction": 1.0,
+      "comparison_baseline": "V25",
+      "no_outer_validation_tuning": true,
+      "id": "V232",
+      "label": "Frozen Small/Large raw fusion before correction",
+      "research_ready": true,
+      "raw_sources": [
+        "V168",
+        "V207"
+      ],
+      "depends_on": [
+        "V207"
+      ],
+      "formula": "raw=.50globalLargeV168+.50globalSmallV207; refit original18-input6k correction, L2.003/shrink.5; final75:25spline77; mean5foldtest",
+      "rationale": "V207 Small alone was weaker, whileV209 final-score blending gave a tiny numerical gain. Test combination before the18-input correction; changing fusion stage can expose complementary errors, but equal weights are not claimed optimal.",
+      "priority": "P1",
       "batch": "population_fusion",
       "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
     }
