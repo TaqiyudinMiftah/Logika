@@ -47,6 +47,8 @@ def main(ident,expected,resume=False):
     for name in ['GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json']:
         download(f'v7/runs/{ident}/{name}',optional=True)
     download('v7/kumo_gpu/WEIGHTS_MANIFEST.json',optional=True)
+    for name in ['v7/reports/V25_TEST_CACHE_REPLAY.json','v7/KUMO_QUEUE_10.json','v7/KUMO_QUEUE_10.md']:
+        download(name,optional=True)
     assert hashlib.sha256((ROOT/result['submission']).read_bytes()).hexdigest()==result['submission_sha256']
     subprocess.run([sys.executable,str(V/'scripts/prepare_public_progress.py')],check=True,capture_output=True,text=True)
     source=ROOT.parent/'github_sync_20261027/insight/adit/v25_research'

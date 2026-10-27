@@ -22,15 +22,15 @@ def gpu_free():
 def wait_capacity(args,out):
     while True:
         snapshot=memory();unused=snapshot['limit_GiB']-snapshot['current_GiB'];reusable=min(snapshot['inactive_file_GiB'],.75)
-        free_gpu=gpu_free();ram_ok=unused+reusable>=2.8;gpu_ok=free_gpu is not None and free_gpu>=24.
+        free_gpu=gpu_free() if args.gpu_required else None;ram_ok=unused+reusable>=args.ram_required;gpu_ok=not args.gpu_required or (free_gpu is not None and free_gpu>=args.gpu_required)
         if ram_ok and gpu_ok:return
-        dump(dict(status='WAITING_FOR_RAM' if not ram_ok else 'WAITING_FOR_GPU',experiment=args.run,pid=os.getpid(),UTC=time.time(),memory=snapshot,GPU_free_GiB=free_gpu,required_available_plus_cache_GiB=2.8,required_GPU_free_GiB=24.,check_interval_seconds=10,note='Automatically launch real model work when both budgets fit; no training data or reservation buffers held while waiting'),out/'STATUS.json')
+        dump(dict(status='WAITING_FOR_RAM' if not ram_ok else 'WAITING_FOR_GPU',experiment=args.run,pid=os.getpid(),UTC=time.time(),memory=snapshot,GPU_free_GiB=free_gpu,required_available_plus_cache_GiB=args.ram_required,required_GPU_free_GiB=args.gpu_required,check_interval_seconds=10,note='Automatically launch real model work when budgets fit; no training data or reservation buffers held while waiting'),out/'STATUS.json')
         time.sleep(10)
 
 def run_once(args,worker,out):
     env=os.environ.copy();env.update(OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='2',MKL_NUM_THREADS='2',PYTORCH_ALLOC_CONF='expandable_segments:True')
     with (V/'logs'/f'{args.run}_kumo_gpu.log').open('a') as log:
-        p=subprocess.Popen(['/home/fariselhakim/adit/.venv-kumo-gpu-20261027/bin/python','-u',str(worker),'--run',args.run],stdout=log,stderr=subprocess.STDOUT,env=env)
+        p=subprocess.Popen([args.python,'-u',str(worker),'--run',args.run],stdout=log,stderr=subprocess.STDOUT,env=env)
         row=dict(pid=p.pid,supervisor_pid=os.getpid(),started=time.time(),memory_before=memory(),max_rss_GiB=0.,rss_limit_GiB=args.max_rss_gib)
         while p.poll() is None:
             try:
@@ -48,6 +48,9 @@ def run_once(args,worker,out):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--run',required=True);parser.add_argument('--max-rss-gib',type=float,default=5.5);parser.add_argument('--worker',default='kumo_gpu_experiment.py');args=parser.parse_args()
+    args.ram_required=2.8;args.gpu_required=24.;args.python='/home/fariselhakim/adit/.venv-kumo-gpu-20261027/bin/python'
+    if args.run in ['V172','V177']:
+        args.worker='cached_frozen_experiment.py';args.ram_required=.6;args.gpu_required=0.;args.python='/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python'
     worker=(V/'scripts'/args.worker).resolve();assert worker.parent==(V/'scripts').resolve() and worker.is_file()
     out=V/'runs'/args.run;out.mkdir(parents=True,exist_ok=True)
     attempts=out/'PROCESS_ATTEMPTS.json'

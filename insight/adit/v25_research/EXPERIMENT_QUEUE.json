@@ -1,33 +1,5 @@
 [
   {
-    "id": "V172",
-    "status": "QUEUED",
-    "definition": {
-      "id": "V172",
-      "label": "Coverage-aware spectral model with V25 fallback for unobserved repayment allocation",
-      "families": [
-        "conditional_allocation",
-        "spectral"
-      ],
-      "context_features": "locked90_plus_v25_spectral",
-      "backbone_frozen_fraction": 1.0,
-      "context_rows": 50000,
-      "estimators": 8,
-      "estimator_batch_size": 4,
-      "query_batch_size": 8192,
-      "penalty": 0.003,
-      "strength": 0.5,
-      "kumo_weight": 0.75,
-      "comparison_baseline": "V168",
-      "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
-      "reuse_kumo_from": "V171",
-      "coverage_fallback": "V25_if_allocation_count_zero",
-      "error_analysis_basis": "V167 no-allocation segment deltaKS -0.002942, positive-allocation1:3 segment +0.004588. Fixed coverage gate uses no labels; rule inspired by OOF errors, so post-selection optimism must be reported",
-      "batch": "kumo",
-      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V173",
     "status": "QUEUED",
     "definition": {

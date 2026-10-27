@@ -1,0 +1,31 @@
+{
+  "method": "p_final=where(aux_allocation_count>0,p_V171,p_V25); exact completed source checkpoints",
+  "spec": {
+    "id": "V172",
+    "label": "Coverage-aware spectral model with V25 fallback for unobserved repayment allocation",
+    "families": [
+      "conditional_allocation",
+      "spectral"
+    ],
+    "context_features": "locked90_plus_v25_spectral",
+    "backbone_frozen_fraction": 1.0,
+    "context_rows": 50000,
+    "estimators": 8,
+    "estimator_batch_size": 4,
+    "query_batch_size": 8192,
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "comparison_baseline": "V168",
+    "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
+    "reuse_kumo_from": "V171",
+    "coverage_fallback": "V25_if_allocation_count_zero",
+    "error_analysis_basis": "V167 no-allocation segment deltaKS -0.002942, positive-allocation1:3 segment +0.004588. Fixed coverage gate uses no labels; rule inspired by OOF errors, so post-selection optimism must be reported"
+  },
+  "source_prediction_controls": {
+    "V25": "683ae5a63edee50e2c3a7c1c0a3b305bf3b9ef271baab0517e69eb7b56b41363",
+    "V171": "39502f6232db2925c452f8fde1f336301005eb66983700ede97dbe506243d572"
+  },
+  "source_sha256": "2f0c84579222de66ea967c6208fb8f22982eed10b7e9042faa2df5fc519dbb00",
+  "new_training": false
+}

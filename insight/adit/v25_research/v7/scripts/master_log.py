@@ -189,6 +189,25 @@ def generate():
  text=io.StringIO();writer=csv.DictWriter(text,fieldnames=columns);writer.writeheader();writer.writerows(flat);atomic(OUT/'EXPERIMENT_MASTER_LOG.csv',text.getvalue())
  summary=dict(status='READY',pid=os.getpid(),updated_UTC=value['updated_UTC'],active_planned=len(active),active_complete=done,active_failed=failed,
   archive_record_files=len(archives['records']),archive_feature_catalogs=len(archives['catalogs']),archive_method_documents=len(archives['documents']),all_active_catalog_features=sum(map(len,all_catalogs.values())),no_score_based_filter=True)
+ modeling=[]
+ for x in active:
+  r=x['result']
+  if not r or int(x['id'][1:])<120:continue
+  interval=r['confidence_interval']['delta_KS']
+  modeling.append(dict(experiment=x['id'],method=x['definition']['label'],KS=r['OOF']['KS'],AUC=r['OOF']['AUC'],delta_KS=r['delta_KS'],delta_AUC=r['delta_AUC'],KS_fold_wins=r['fold_wins'],head_gap=sum(f['train_validation_head_KS_gap'] for f in r['folds'])/len(r['folds']),CI_low=interval[0],CI_high=interval[1],submission=r['submission']))
+ if modeling:
+  text=io.StringIO();writer=csv.DictWriter(text,fieldnames=list(modeling[0]));writer.writeheader();writer.writerows(modeling);atomic(V/'modeling/reports/MODELING_EXPERIMENTS.csv',text.getvalue())
+ queue_file=V/'KUMO_QUEUE_10.json'
+ if queue_file.exists():
+  q=read_json(queue_file);states={x['id']:x for x in active}
+  for row in q['experiments']:
+   item=states[row['id']];r=item['result'];row.update(status=item['status'],KS=r['OOF']['KS'] if r else None,AUC=r['OOF']['AUC'] if r else None)
+  q['completed']=sum(x['status']=='COMPLETE' for x in q['experiments']);q['updated_UTC']=value['updated_UTC']
+  q['cache_only_experiments']=['V172','V177'];q['cache_only_required_RAM_GiB']=.6;q['cache_only_required_VRAM_GiB']=0.
+  atomic(queue_file,json.dumps(q,indent=2))
+  lines=['# Antrean10 eksperimen Kumo100% frozen','',f"Selesai{q['completed']}/10. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 membutuhkan lebih sedikit RAM dan tidak memerlukan GPU.",'','| ID | Metode | Status | KS | AUC |','|---|---|---|---:|---:|']
+  for row in q['experiments']:lines.append('| '+' | '.join(esc(row[k]) if row[k] is not None else 'BELUM TERSEDIA' for k in ['id','method','status','KS','AUC'])+' |')
+  atomic(V/'KUMO_QUEUE_10.md','\n'.join(lines))
  atomic(OUT/'MASTER_LOG_STATUS.json',json.dumps(summary,indent=2));return summary
 
 if __name__=='__main__':
