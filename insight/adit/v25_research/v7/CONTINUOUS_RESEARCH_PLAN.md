@@ -82,3 +82,26 @@ V196 retains high train-validation head gap despite removing2 cycle features. Te
 
 Formula: `V19627-input rawV178 head; meanBCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2; shrink.5; original75:25 spline fusion`
 
+
+## Refill after V200 convergence and error review
+
+The same P-spline objective converged with analytic-Hessian Newton after L-BFGS hit its500-iteration cap; partial files/source and failure are archived. V200 head gap0.00748166, AUC0.84731949, KS0.52956578.
+
+### V213: V193 anchor plus10% low-gap P-spline expert
+
+V200 AUC.84731949 exceedsV193 by.00021194 and its head gap.007482 is lower thanV25.011108, while KS.52956578 falls. Test a bounded contribution from a lower-variance correction, without selecting weights on outer labels; V200 deltaAUC CI vsV193 still crosses zero.
+
+Formula: `Perfold p=.90*pV193+.10*pV200; fixed weights before own evaluation; mean5foldtest`
+
+### V214: Smooth capacity effects while retaining sharp credit-risk responses
+
+V200 smoothing all17 numeric responses improves AUC and reduces head gap but loses KS. It may over-smooth threshold-like delinquency/bureau effects. Apply the same penalty only to five income/cashflow/burden measurements; keep credit/history-response bases at original L2.
+
+Formula: `V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on capacity inputs; other bases unchanged; shrink.5 and original75:25spline77fusion`
+
+### V215: Smooth evidence reliability while retaining risk-level thresholds
+
+Coverage counts and posterior SDs can create unstable residual bends, while burden/delinquency levels may need thresholds. Smooth only8 measurement-reliability/coverage effects; preserve financial-risk response flexibility. This tests a different mechanism from smoothing monetary capacity.
+
+Formula: `V25 original18/globalKumo; BCE+.003/2||beta_nonintercept||^2+.03/2||D2*(beta_spline/scale)||^2 only on evidence inputs; other bases unchanged; shrink.5 and original75:25spline77fusion`
+

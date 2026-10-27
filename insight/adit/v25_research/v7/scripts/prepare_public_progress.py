@@ -65,6 +65,9 @@ def main():
     for name in ['v7/capacity_plan.json','v7/CAPACITY_RESEARCH_PLAN.md','v7/scripts/small_kumo_worker.py','v7/scripts/capacity_followups.py','v7/kumo_gpu/SMALL_WEIGHTS_MANIFEST.json','v7/capacity/reports/PREFLIGHT.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    for name in ['v7/scoped_smoothing_plan.json','v7/scripts/scoped_smoothing.py','v7/scoped_smoothing/reports/PREFLIGHT.json']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
     for name in ['v7/fusion_plan.json','v7/score_fusion_plan.json','v7/scripts/score_fusion_local.py','v7/scripts/upload_local_score_run.py','v7/scripts/mirror_score_sources.py']:
         if (ROOT/name).exists():

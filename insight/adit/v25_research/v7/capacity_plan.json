@@ -177,5 +177,41 @@
     "fixed_score_fusion": true,
     "formula": "wSmall=.15*10/(max(finite_allocation_count,0)+10); p=(1-wSmall)*pV193+wSmall*pV207; missing count getsw.15; mean5foldtest",
     "rationale": "V185 spectral contribution lost separation in no-allocation borrowers, while only one Large capacity was used. Test a bounded Small contribution larger for thin internal histories. Do not assume Small is safer: compare public-incumbent and development metrics, with explicit missing-data caveat."
+  },
+  {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparators": [
+      "V185",
+      "V193"
+    ],
+    "Kumo_frozen_fraction": 1.0,
+    "replaces_base_head": true,
+    "research_ready": true,
+    "no_outer_validation_tuning": true,
+    "id": "V213",
+    "label": "V193 anchor plus10% low-gap P-spline expert",
+    "method": "auc_diversity_blend",
+    "worker": "capacity_followups.py",
+    "source_script": "v7/scripts/capacity_followups.py",
+    "spectral_inputs": "none",
+    "sources": [
+      "V193",
+      "V200"
+    ],
+    "weights": [
+      0.9,
+      0.1
+    ],
+    "depends_on": [
+      "V200"
+    ],
+    "fixed_score_fusion": true,
+    "formula": "Perfold p=.90*pV193+.10*pV200; fixed weights before own evaluation; mean5foldtest",
+    "rationale": "V200 AUC.84731949 exceedsV193 by.00021194 and its head gap.007482 is lower thanV25.011108, while KS.52956578 falls. Test a bounded contribution from a lower-variance correction, without selecting weights on outer labels; V200 deltaAUC CI vsV193 still crosses zero."
   }
 ]

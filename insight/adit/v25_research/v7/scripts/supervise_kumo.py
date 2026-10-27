@@ -60,8 +60,8 @@ def main():
     if args.worker=='stability_worker.py':
         args.ram_required=.9;args.gpu_required=0.;args.max_rss_gib=min(args.max_rss_gib,2.);args.python='/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python'
     if args.worker=='small_kumo_worker.py':
-        args.ram_required=1.3;args.gpu_required=16.;args.max_rss_gib=min(args.max_rss_gib,2.3);args.python='/home/fariselhakim/adit/.venv-kumo-gpu-20261027/bin/python'
-    elif args.worker=='capacity_followups.py':
+        args.ram_required=2.3;args.gpu_required=16.;args.max_rss_gib=min(args.max_rss_gib,3.0);args.python='/home/fariselhakim/adit/.venv-kumo-gpu-20261027/bin/python'
+    elif args.worker in ['capacity_followups.py','scoped_smoothing.py']:
         args.ram_required=.9;args.gpu_required=0.;args.max_rss_gib=min(args.max_rss_gib,2.);args.python='/home/fariselhakim/adit/.venv-logika-offset-20261027/bin/python'
     worker=(V/'scripts'/args.worker).resolve();assert worker.parent==(V/'scripts').resolve() and worker.is_file()
     out=V/'runs'/args.run;out.mkdir(parents=True,exist_ok=True)
