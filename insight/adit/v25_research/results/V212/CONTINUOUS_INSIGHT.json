@@ -1,0 +1,109 @@
+{
+  "experiment": "V212",
+  "method": "capacity_coverage_blend",
+  "hypothesis": "V185 spectral contribution lost separation in no-allocation borrowers, while only one Large capacity was used. Test a bounded Small contribution larger for thin internal histories. Do not assume Small is safer: compare public-incumbent and development metrics, with explicit missing-data caveat.",
+  "formula": "wSmall=.15*10/(max(finite_allocation_count,0)+10); p=(1-wSmall)*pV193+wSmall*pV207; missing count getsw.15; mean5foldtest",
+  "findings": [
+    "BROAD_RANKING_GAIN_WITHOUT_KS_GAIN",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.531139661012374,
+      "signed_KS": 0.531139661012374,
+      "AUC": 0.8471133432709979,
+      "rows": 70000
+    },
+    "delta_KS": -0.00031985355016173056,
+    "delta_AUC": 5.798921390409717e-06,
+    "fold_wins": 1,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5236005128722571,
+        0.5401219946739959
+      ],
+      "delta_KS": [
+        -0.0010782610937352278,
+        0.0007510896438461442
+      ],
+      "candidate_AUC": [
+        0.8434784456726206,
+        0.8508130803308618
+      ],
+      "delta_AUC": [
+        -3.8443371205226785e-05,
+        4.802893609953672e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.011107666682208906,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3843,
+      "net_bad_captured": 2,
+      "new_members": 32,
+      "exited_members": 32,
+      "entrant_bad_rate": 0.46875,
+      "exit_bad_rate": 0.40625
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5848,
+      "net_bad_captured": -7,
+      "new_members": 57,
+      "exited_members": 57,
+      "entrant_bad_rate": 0.24561403508771928,
+      "exit_bad_rate": 0.3684210526315789
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7419,
+      "net_bad_captured": -3,
+      "new_members": 63,
+      "exited_members": 63,
+      "entrant_bad_rate": 0.15873015873015872,
+      "exit_bad_rate": 0.20634920634920634
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8020,
+      "net_bad_captured": 5,
+      "new_members": 68,
+      "exited_members": 68,
+      "entrant_bad_rate": 0.11764705882352941,
+      "exit_bad_rate": 0.04411764705882353
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8650,
+      "net_bad_captured": 1,
+      "new_members": 69,
+      "exited_members": 69,
+      "entrant_bad_rate": 0.08695652173913043,
+      "exit_bad_rate": 0.07246376811594203
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

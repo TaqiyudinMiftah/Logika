@@ -1,43 +1,5 @@
 [
   {
-    "id": "V212",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "research_ready": true,
-      "no_outer_validation_tuning": true,
-      "id": "V212",
-      "label": "Coverage-aware conservative Small/Large blend",
-      "method": "capacity_coverage_blend",
-      "worker": "capacity_followups.py",
-      "source_script": "v7/scripts/capacity_followups.py",
-      "spectral_inputs": "none",
-      "sources": [
-        "V193",
-        "V207"
-      ],
-      "depends_on": [
-        "V207"
-      ],
-      "fixed_score_fusion": true,
-      "formula": "wSmall=.15*10/(max(finite_allocation_count,0)+10); p=(1-wSmall)*pV193+wSmall*pV207; missing count getsw.15; mean5foldtest",
-      "rationale": "V185 spectral contribution lost separation in no-allocation borrowers, while only one Large capacity was used. Test a bounded Small contribution larger for thin internal histories. Do not assume Small is safer: compare public-incumbent and development metrics, with explicit missing-data caveat.",
-      "batch": "capacity",
-      "feature_catalog": "capacity/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V213",
     "status": "QUEUED",
     "definition": {
