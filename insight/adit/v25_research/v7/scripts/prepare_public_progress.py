@@ -15,11 +15,12 @@ def main():
     DEST.mkdir(parents=True,exist_ok=True)
     master=json.loads((V/'reports/EXPERIMENT_MASTER_LOG.json').read_text(encoding='utf-8'))
     experiments=master['active_experiments'];modeling=[x for x in experiments if int(x['id'][1:])>=120]
-    assert len(modeling)==40 and all(x['status']=='COMPLETE' for x in modeling)
+    assert len(modeling)>=40 and all(x['status']=='COMPLETE' for x in modeling)
     registry=[];table=[]
     for x in experiments:
         r=x['result'];signature=dict(configuration=r['spec'],features=r['columns'],feature_matrix_sha256=r.get('feature_matrix_sha256'),extension_feature_matrix_sha256=r.get('extension_feature_matrix_sha256'),folds=[dict(fold=f['fold'],validation_ids_sha256=f['validation_ids_sha256'],training_ids_sha256=f.get('train_ids_sha256')) for f in r['folds']],backbone='BASELINE_LOCK.json')
-        fingerprint=hashlib.sha256(json.dumps(signature,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+        canonical=dict(signature,configuration={k:v for k,v in signature['configuration'].items() if k not in ['id','label','families','only','fold_feature_root','feature_catalog','extension','discovery','repayment','statistical','behavior','lifecycle','fusion','combination','modeling']})
+        fingerprint=hashlib.sha256(json.dumps(canonical,sort_keys=True,separators=(',',':')).encode()).hexdigest()
         registry.append(dict(id=x['id'],signature_sha256=fingerprint,configuration=signature,KS=r['OOF']['KS'],AUC=r['OOF']['AUC'],comparison_baseline=r.get('comparison_baseline','V00'),delta_KS=r['delta_KS'],delta_AUC=r['delta_AUC'],public_observations=x['public_leaderboard_observations'],submission=r['submission'],submission_sha256=r['submission_sha256'],node_result_source=f"v7/runs/{x['id']}/RESULT.json",original_result_sha256=x['source_result_sha256']))
         table.append(dict(experiment=x['id'],method=x['definition']['label'].replace('QUARANTINED ',''),KS=r['OOF']['KS'],AUC=r['OOF']['AUC'],comparison_baseline=r.get('comparison_baseline','V00'),delta_KS=r['delta_KS'],delta_AUC=r['delta_AUC'],fold_wins=r['fold_wins'],delta_KS_CI_low=r['confidence_interval']['delta_KS'][0],delta_KS_CI_high=r['confidence_interval']['delta_KS'][1],head_gap=sum(f['train_validation_head_KS_gap'] for f in r['folds'])/5,formula=r.get('modeling_formula',x['method_formula']),submission_sha256=r['submission_sha256']))
         if int(x['id'][1:])>=120 or x['id'] in ['V00','V25','V118','V119']:
@@ -37,21 +38,27 @@ def main():
     keys=list(dict.fromkeys(k for r in catalogs for k in r))
     with (DEST/'FEATURE_CATALOG.csv').open('w',newline='',encoding='utf-8') as f:
         writer=csv.DictWriter(f,fieldnames=keys);writer.writeheader();writer.writerows(catalogs)
-    files=['BASELINE_LOCK.json','V25_BASELINE_LOCK.json','ACTIVE_BASELINE.json','requirements-lock.txt','scripts/baseline.py','v7/modeling_plan.json','v7/V25_MODELING_PLAN.md','v7/FEATURE_POLICY.json','v7/scripts/modeling_features.py','v7/scripts/modeling_representations.py','v7/scripts/modeling_experts.py','v7/scripts/modeling_ranking.py','v7/scripts/experiments.py','v7/scripts/features.py','v7/scripts/feature_policy.py','v7/scripts/master_log.py','v7/scripts/prepare_public_progress.py']
+    files=['BASELINE_LOCK.json','V25_BASELINE_LOCK.json','ACTIVE_BASELINE.json','requirements-lock.txt','scripts/baseline.py','v7/modeling_plan.json','v7/V25_MODELING_PLAN.md','v7/FEATURE_POLICY.json','v7/scripts/modeling_features.py','v7/scripts/modeling_representations.py','v7/scripts/modeling_experts.py','v7/scripts/modeling_ranking.py','v7/scripts/experiments.py','v7/scripts/features.py','v7/scripts/feature_policy.py','v7/scripts/master_log.py','v7/scripts/prepare_public_progress.py','v7/scripts/sync_completed_experiment.py']
     for name in files:
         target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     for name in ['v7/reports/MODELING_QUEUE.json','v7/modeling/reports/CACHE_AUDIT.json','v7/modeling/reports/GRADIENT_CHECK.json','v7/modeling/reports/MODELING_EXPERIMENTS.csv']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
-    for ident,filename in [('V25','submission_V25_goal054_offset_v7.csv'),('V127','submission_V127_V25_modeling.csv'),('V159','submission_V159_V25_modeling.csv')]:
+    best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
+    latest_result=max(modeling,key=lambda x:int(x['id'][1:]))['result']
+    selected=[next(x['result'] for x in experiments if x['id']=='V25'),best_result,latest_result]
+    for selected_result in selected:
+        filename=Path(selected_result['submission']).name
         source=V/'submissions'/filename
         if source.exists():
             target=DEST/'submissions'/filename;target.parent.mkdir(exist_ok=True);shutil.copyfile(source,target)
-    report='''# Riset V25: target pooled OOF KS0.531
+    best=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
+    ci=best['confidence_interval']['delta_KS']
+    report=f'''# Riset V25: target pooled OOF KS0.531
 
-Baseline public tetap **V25:0.56822**, verified terhadap hash CSV. Pooled OOF V25 **0.5302846600**, AUC **0.8470292789**. Target pooled0.531 belum tercapai. Tidak ada submission otomatis ke Kaggle.
+Baseline public tetap **V25:0.56822**, verified terhadap hash CSV. Pooled OOF V25 **0.5302846600**, AUC **0.8470292789**. Target pooled0.531 {'tercapai pada fold pengembangan; generalisasi belum terbukti' if best['OOF']['KS']>=.531 else 'belum tercapai'}. Tidak ada submission otomatis ke Kaggle.
 
-**160 eksperimen aktif tercatat**, termasuk40 eksperimen modeling baru V120:V159. Semua40 memiliki lima fold, OOF, checkpoint dan submission di workspace node480. Hasil terbaik baru **V127: KS0.5306712194, AUC0.8469453328**, deltaKS vsV25 **+0.0003865594**, tetapi hanya2/5 fold menang. Paired95% deltaKS CI **[-0.00074575,+0.00134573]** masih melintasi nol. V127 tidak otomatis menggantikan incumbent.
+**{len(experiments)} eksperimen aktif tercatat**, termasuk{len(modeling)} eksperimen modeling baru. Semuanya memiliki lima fold, OOF, checkpoint dan submission di workspace node480. Hasil terbaik baru **{best['experiment']}: KS{best['OOF']['KS']:.10f}, AUC{best['OOF']['AUC']:.10f}**, deltaKS vsV25 **{best['delta_KS']:+.10f}**, dengan{best['fold_wins']}/5 fold menang. Paired95% deltaKS CI **[{ci[0]:+.8f},{ci[1]:+.8f}]**. Kandidat tidak otomatis menggantikan incumbent public.
 
 ## Hasil dan arah penelitian
 
@@ -75,6 +82,8 @@ Kumo Large100% frozen,90 input,50k context,8 estimators. Koreksi V25 memakai18 i
 Baca `SYNC_PROTOCOL.md` sebelum setiap eksperimen. Fetch main terbaru, periksa hasil teman, bandingkan signature, jalankan satu eksperimen, catat hasil/error analysis/submission hash, lalu push fast-forward. Jangan menimpa hasil teman atau memakai force push.
 '''
     (DEST/'README.md').write_text(report,encoding='utf-8')
+    with (DEST/'README.md').open('a',encoding='utf-8') as f:
+        f.write(f"\n\nLatest completed: **{latest_result['experiment']}**, pooledKS **{latest_result['OOF']['KS']:.10f}**, AUC **{latest_result['OOF']['AUC']:.10f}**. See its results directory.\n")
     protocol='''# Protokol eksperimen bersama
 
 1. Sebelum SETIAP eksperimen, baca HEAD terbaru main dan perubahan sejak receipt terakhir. Jika ada commit teman, baca konfigurasi, definisi fitur, folds, hasil, AUC dan error analysis terlebih dahulu.

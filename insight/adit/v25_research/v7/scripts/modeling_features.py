@@ -14,6 +14,7 @@ from pathlib import Path
 import sys
 import time
 import traceback
+import urllib.request
 import joblib
 import numpy as np
 import pandas as pd
@@ -65,7 +66,8 @@ def load():
             assert frame.application_id.tolist()==cached.application_id.tolist()
         model=joblib.load(V/'runs/V25'/f'fold{fold}_correction.joblib')
         assert model['columns']==columns
-        basis={part:design(model,frameset[part],k.prediction) for part,k in [('correction',kh),('validation',kv),('test',kt)]}
+        # Retain only the6k training basis; validation/test bases are transient.
+        basis={'correction':design(model,h,kh.prediction)}
         ph,_=corrected_probability(model,h,kh.prediction);pv,_=corrected_probability(model,val,kv.prediction)
         old=pd.read_parquet(V/'runs/V25'/f'fold{fold}_validation.parquet')
         assert np.max(abs(.75*pv+.25*sv.prediction.to_numpy()-old.prediction))<2e-12
@@ -155,7 +157,9 @@ def evaluate(spec,loaded):
                 from modeling_representations import predict as predict_representation
                 return predict_representation(head,f[{'correction':'h','validation':'val','test':'test'}[part]],k)
             if not spec.get('refit',False):
-                x,z=f['basis'][part];d=x@head['coefficients'];return expit(z+strength*d),d
+                frame=f[{'correction':'h','validation':'val','test':'test'}[part]]
+                x,z=f['basis'][part] if part in f['basis'] else design(head,frame,k)
+                d=x@head['coefficients'];return expit(z+strength*d),d
             return corrected_probability(head,f[{'correction':'h','validation':'val','test':'test'}[part]],k)
         ph,dh=predict('correction',f['kh']);pv,dv=predict('validation',f['kv']);test,dt=predict('test',f['kt'])
         def combine(a,b):
@@ -208,10 +212,24 @@ def evaluate(spec,loaded):
     return result
 
 
-def main():
+def main(requested=None):
     (V/'modeling/reports').mkdir(parents=True,exist_ok=True)
     guard=(V/'modeling.lock').open('a');fcntl.flock(guard,fcntl.LOCK_EX|fcntl.LOCK_NB)
-    specs=json.loads((V/'modeling_plan.json').read_text())
+    all_specs=json.loads((V/'modeling_plan.json').read_text())
+    pending=[s for s in all_specs if not (V/'runs'/s['id']/'RESULT.json').exists()]
+    specs=[s for s in pending if s['id']==requested] if requested else pending[:1]
+    assert len(specs)==1,'Run exactly one new experiment, then review and push before the next'
+    gate=json.loads((V/'modeling/reports/REPO_REVIEW_GATE.json').read_text())
+    assert gate['experiment']==specs[0]['id'] and gate['status']=='REVIEWED_FOR_NEXT_RUN'
+    request=urllib.request.Request('https://api.github.com/repos/TaqiyudinMiftah/Logika/git/ref/heads/main',headers={'User-Agent':'Logika-experiment-review'})
+    with urllib.request.urlopen(request,timeout=20) as response:remote=json.load(response)
+    assert remote['object']['sha']==gate['reviewed_head'],'Peer pushed new work; review before training'
+    cg=Path('/sys/fs/cgroup');headroom=int((cg/'memory.max').read_text())-int((cg/'memory.current').read_text())
+    status={s.split(':',1)[0]:s.split(':',1)[1].strip() for s in Path('/proc/self/status').read_text().splitlines() if ':' in s}
+    resident=int(status['VmRSS'].split()[0])*1024
+    needed=max(0,450*2**20-resident)+150*2**20
+    dump(dict(headroom_bytes=headroom,resident_bytes=resident,projected_remaining_plus_reserve_bytes=needed,streaming_prediction_bases=True),V/'modeling/reports/LAUNCH_MEMORY.json')
+    assert headroom>=needed,'Insufficient RAM headroom for streamed cached-model process plus reserve'
     state('LOADING_FIXED_V25_CACHE',experiments=[s['id'] for s in specs])
     loaded=load()
     baseline_out=V/'modeling/reports';error_analysis(baseline_out,loaded[0],loaded[3],loaded[4],loaded[5],loaded[5],loaded[6])
@@ -227,6 +245,8 @@ def main():
         generate()
         best=max(results,key=lambda r:r['OOF']['KS'])
         state('RUNNING',experiment=spec['id'],complete=done,best_variant=best['experiment'],best_metrics=best['OOF'],target_reached=best['OOF']['KS']>=TARGET)
+    results=[json.loads((V/'runs'/s['id']/'RESULT.json').read_text()) for s in all_specs if (V/'runs'/s['id']/'RESULT.json').exists()]
+    best=max(results,key=lambda r:r['OOF']['KS'])
     table=pd.DataFrame([dict(experiment=r['experiment'],method=r['spec']['label'],KS=r['OOF']['KS'],AUC=r['OOF']['AUC'],delta_KS=r['delta_KS'],delta_AUC=r['delta_AUC'],KS_fold_wins=r['fold_wins'],head_gap=float(np.mean([f['train_validation_head_KS_gap'] for f in r['folds']])),CI_low=r['confidence_interval']['delta_KS'][0],CI_high=r['confidence_interval']['delta_KS'][1],submission=r['submission']) for r in results])
     table.to_csv(V/'modeling/reports/MODELING_EXPERIMENTS.csv',index=False)
     state('COMPLETE',complete=done,best_variant=best['experiment'],best_metrics=best['OOF'],target_reached=best['OOF']['KS']>=TARGET)
@@ -234,6 +254,7 @@ def main():
 
 
 if __name__=='__main__':
-    try:main()
+    parser=argparse.ArgumentParser();parser.add_argument('--run');args=parser.parse_args()
+    try:main(args.run)
     except Exception:
         detail=traceback.format_exc();state('FAILED',traceback=detail);raise
