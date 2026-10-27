@@ -13,6 +13,7 @@ sys.path.insert(0,str(ROOT.parent))
 from node480_task import client,BASE
 
 def status_name(after):
+    if after=='V190':return 'LOCAL_JOINT_FOLLOWUP_QUEUE.json'
     if after=='V185':return 'LOCAL_ADAPTIVE_QUEUE.json'
     if after=='V178':return 'LOCAL_CONSERVATIVE_QUEUE.json'
     return 'LOCAL_KUMO_EXTRA_QUEUE.json' if after else 'LOCAL_KUMO_QUEUE.json'
@@ -30,7 +31,8 @@ def persistent_status(path,value):
     path.with_name(path.stem+f'.{os.getpid()}.json').write_text(text,encoding='utf-8')
     with path.with_suffix('.events.jsonl').open('a',encoding='utf-8') as f:f.write(json.dumps(value)+'\n')
 
-def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experiment_v2.py'):
+def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experiment_v2.py',status_override=None):
+    if status_override:assert Path(status_override).name==status_override and status_override.endswith('.json')
     from node380_remote import protect
     vault=json.loads(protect((Path.home()/'.codex/private/node480_session.dpapi').read_bytes(),decrypt=True))
     session=requests.Session();session.cookies.update(vault['cookies'])
@@ -38,7 +40,7 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
     checkout=ROOT.parent/'shared_repo_sync_20261027'
     def state(stage,**extra):
         value=dict(status=stage,pid=os.getpid(),UTC=time.time(),Kumo_frozen_fraction=1.,**extra)
-        p=V/'reports'/status_name(wait_for);persistent_status(p,value)
+        p=V/'reports'/(status_override or status_name(wait_for));persistent_status(p,value)
         print(json.dumps(value),flush=True)
     def get(rel):
         r=session.get(api+quote(BASE+rel)+'?content=1',timeout=20)
@@ -89,7 +91,7 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
         result=get(f'v7/runs/{ident}/RESULT.json')
         if ident!='V168' and result is None:
             peer_check(expected)
-            c=client();gate=dict(status='REVIEWED_FOR_NEXT_RUN',experiment=ident,reviewed_head=expected,UTC=time.time(),peer_new_commits=False,redundancy_review=('Fresh shared HEAD unchanged; distinct correction/calibration or robust-objective specification in adaptive_plan.json. Original Kumo/context scores frozen.' if worker_file=='adaptive_adapters.py' else 'Fresh shared HEAD unchanged since prior synced result; distinct frozen-Kumo specification. No backbone optimization or unfreezing.'))
+            c=client();gate=dict(status='REVIEWED_FOR_NEXT_RUN',experiment=ident,reviewed_head=expected,UTC=time.time(),peer_new_commits=False,redundancy_review=('Fresh shared HEAD unchanged; distinct correction/calibration or robust-objective specification in adaptive_plan.json or joint_followup_plan.json. Original Kumo/context scores frozen.' if worker_file in ['adaptive_adapters.py','joint_followups.py'] else 'Fresh shared HEAD unchanged since prior synced result; distinct frozen-Kumo specification. No backbone optimization or unfreezing.'))
             c.request('PUT','api/contents/'+BASE+'v7/modeling/reports/REPO_REVIEW_GATE.json',dict(type='file',format='text',content=json.dumps(gate,indent=2)))
             command="python - <<'PY'\nfrom pathlib import Path\nimport subprocess,sys\nr=Path('/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019')\np=subprocess.Popen([sys.executable,'-u',str(r/'v7/scripts/supervise_kumo.py'),'--run',"+repr(ident)+",'--worker',"+repr(worker_file)+",'--max-rss-gib','5.5'],stdout=(r/'v7/logs'/"+repr(ident+'_supervisor.log')+").open('a'),stderr=subprocess.STDOUT,start_new_session=True);print('SUPERVISOR_PID',p.pid)\nPY"
             c.execute(command,'python3');state('LAUNCHED_FROZEN_KUMO',experiment=ident,reviewed_head=expected)
@@ -110,8 +112,8 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
     state('COMPLETE',last_commit=expected)
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--expected-head',required=True);parser.add_argument('--runs',nargs='+');parser.add_argument('--after');parser.add_argument('--worker',default='kumo_gpu_experiment_v2.py');args=parser.parse_args()
-    try:main(args.expected_head,args.runs,args.after,args.worker)
+    parser=argparse.ArgumentParser();parser.add_argument('--expected-head',required=True);parser.add_argument('--runs',nargs='+');parser.add_argument('--status-file');parser.add_argument('--after');parser.add_argument('--worker',default='kumo_gpu_experiment_v2.py');args=parser.parse_args()
+    try:main(args.expected_head,args.runs,args.after,args.worker,args.status_file)
     except Exception:
         value=dict(status='STOPPED_FOR_FAILURE_OR_PEER_REVIEW',pid=os.getpid(),UTC=time.time(),traceback=traceback.format_exc())
-        persistent_status(V/'reports'/status_name(args.after),value);raise
+        persistent_status(V/'reports'/(args.status_file or status_name(args.after)),value);raise

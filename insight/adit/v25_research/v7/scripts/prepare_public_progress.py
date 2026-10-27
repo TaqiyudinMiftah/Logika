@@ -29,7 +29,7 @@ def main():
         if int(x['id'][1:])>=120 or x['id'] in ['V00','V25','V118','V119']:
             folder=DEST/'results'/x['id'];folder.mkdir(parents=True,exist_ok=True)
             (folder/'RESULT_VIEW.json').write_text(json.dumps(r,indent=2),encoding='utf-8')
-            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json']:
+            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json']:
                 source=V/'runs'/x['id']/name
                 if source.exists():shutil.copyfile(source,folder/name)
     (DEST/'EXPERIMENT_REGISTRY.json').write_text(json.dumps(registry,indent=2),encoding='utf-8')
@@ -54,6 +54,9 @@ def main():
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     for name in ['v7/adaptive_plan.json','v7/ADAPTIVE_QUEUE_5.md','v7/scripts/adaptive_adapters.py','v7/scripts/run_adaptive_queue.py','v7/adaptive/reports/PREFLIGHT.json','v7/reports/LEDGER_PLAN_RESTORATION.json']:
+        if (ROOT/name).exists():
+            target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    for name in ['v7/joint_followup_plan.json','v7/JOINT_FOLLOWUP_PLAN.md','v7/scripts/joint_followups.py','v7/joint_followup/reports/PREFLIGHT.json','v7/reports/V185_LEADERBOARD_VERIFICATION.json','reports/LEADERBOARD_OBSERVATIONS.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']

@@ -1,1 +1,124 @@
-[]
+[
+  {
+    "id": "V191",
+    "status": "QUEUED",
+    "definition": {
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "comparison_baseline": "V25",
+      "development_comparator": "V185",
+      "Kumo_frozen_fraction": 1.0,
+      "source_script": "v7/scripts/joint_followups.py",
+      "no_outer_validation_tuning": true,
+      "id": "V191",
+      "label": "Joint local-context Kumo and29-input spectral correction",
+      "method": "joint_spectral",
+      "replaces_base_head": true,
+      "formula": "Use exact cached V178 raw Kumo=.85*global+.15*local; refit29-input V167 correction with L2.003 and inference shrink.5; final=.75*sigmoid(logit(pK178)+.5*X29*beta)+.25*original_spline77",
+      "rationale": "V185 combines final scores after independent heads; directly test whether spectral and context signals survive joint training. V185 public .56699 below V25 .56822 warns that an OOF-only gain is insufficient. Expect higher capacity risk; compare29-input head gap to V25.",
+      "batch": "joint_followup",
+      "feature_catalog": "joint_followup/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V192",
+    "status": "QUEUED",
+    "definition": {
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "comparison_baseline": "V25",
+      "development_comparator": "V185",
+      "Kumo_frozen_fraction": 1.0,
+      "source_script": "v7/scripts/joint_followups.py",
+      "no_outer_validation_tuning": true,
+      "id": "V192",
+      "label": "Joint context/spectral correction with selective group shrinkage",
+      "method": "joint_group_ridge",
+      "replaces_base_head": true,
+      "new_group_penalty": 0.01,
+      "formula": "Same raw V178 Kumo and29 inputs asV191; meanBCE+.003/2*sum(base_beta^2)+.01/2*sum(spectral_beta^2), intercept unpenalized; inference shrink.5; original75:25 spline fusion",
+      "rationale": "V167 head train-validation KS gap .016101 vsV25 .011108. Test joint information with stronger shrinkage specifically on all11 spectral inputs, including unstable dominant-cycle argmax; keeps input set matched to V191.",
+      "batch": "joint_followup",
+      "feature_catalog": "joint_followup/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V193",
+    "status": "QUEUED",
+    "definition": {
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "comparison_baseline": "V25",
+      "development_comparator": "V185",
+      "Kumo_frozen_fraction": 1.0,
+      "source_script": "v7/scripts/joint_followups.py",
+      "no_outer_validation_tuning": true,
+      "id": "V193",
+      "label": "V185 plus bounded inner-OOF partial-pooling calibration residual",
+      "method": "partial_pool_composition",
+      "fixed_score_fusion": true,
+      "formula": "z=logit(pV185); d=.5*clip(logit(pV189)-logit(pV25),-.1,.1); p=sigmoid(z+d); per-fold test fusion then mean5fold",
+      "rationale": "V189 low-dimensional inner-OOF employment/history calibration yielded KS .530638, deltaAUC -0.0000041 vsV25; no generalization claim. Test bounded partial-pooling effect onV185; reject leaderboard recommendation if AUC or stability deteriorates. No fitted score weights.",
+      "batch": "joint_followup",
+      "feature_catalog": "joint_followup/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V194",
+    "status": "QUEUED",
+    "definition": {
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "comparison_baseline": "V25",
+      "development_comparator": "V185",
+      "Kumo_frozen_fraction": 1.0,
+      "source_script": "v7/scripts/joint_followups.py",
+      "no_outer_validation_tuning": true,
+      "id": "V194",
+      "label": "Inner-crossfitted spectral/local evidence combination",
+      "method": "inner_fusion",
+      "weight_penalty": 0.02,
+      "replaces_base_head": true,
+      "formula": "For each outer fold,3 inner splits of6k train base18/global, spectral29/global, local18/V178 heads on4k and predict held2k. Fit w_s,w_l in[0,1.5] by BCE(z_base+w_s*(z_s-z_base)+w_l*(z_l-z_base))+.02/2*((w_s-1)^2+(w_l-1)^2). Apply weights to full6k corrected-Kumo heads; final=.75*sigmoid(eta)+.25*original_spline77",
+      "rationale": "V185 fixed logit fusion increases pooledKS but only3/5folds and mixed public outcome. Learn complementarity using strictly inner-OOF predictions, never using in-sample original spline or outer labels for mixing weights. Difference from V185 includes fusion before original spline and training-only weight fit.",
+      "batch": "joint_followup",
+      "feature_catalog": "joint_followup/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V195",
+    "status": "QUEUED",
+    "definition": {
+      "families": [
+        "conditional_allocation"
+      ],
+      "penalty": 0.003,
+      "strength": 0.5,
+      "comparison_baseline": "V25",
+      "development_comparator": "V185",
+      "Kumo_frozen_fraction": 1.0,
+      "source_script": "v7/scripts/joint_followups.py",
+      "no_outer_validation_tuning": true,
+      "id": "V195",
+      "label": "Coverage safeguard for V185 spectral correction",
+      "method": "coverage_safeguard",
+      "fixed_score_fusion": true,
+      "formula": "p=pV178 when aux_allocation_count<=0 or missing; otherwise pV185; per-fold test fusion then mean5fold",
+      "rationale": "V185 no-allocation segment deltaKS -.003403 vsV25, while1:3 observations +.006123 and over3 +.000197; V178 no-allocation deltaKS -.000260. Fixed availability gate tests a mechanism suggested by prior outer errors; it is post-selection and not independent confirmation. Distinct from V172 fallback toV25 on a different spectral-context backbone.",
+      "batch": "joint_followup",
+      "feature_catalog": "joint_followup/reports/FEATURE_CATALOG.csv"
+    }
+  }
+]
