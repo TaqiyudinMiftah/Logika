@@ -1,29 +1,5 @@
 [
   {
-    "id": "V191",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparator": "V185",
-      "Kumo_frozen_fraction": 1.0,
-      "source_script": "v7/scripts/joint_followups.py",
-      "no_outer_validation_tuning": true,
-      "id": "V191",
-      "label": "Joint local-context Kumo and29-input spectral correction",
-      "method": "joint_spectral",
-      "replaces_base_head": true,
-      "formula": "Use exact cached V178 raw Kumo=.85*global+.15*local; refit29-input V167 correction with L2.003 and inference shrink.5; final=.75*sigmoid(logit(pK178)+.5*X29*beta)+.25*original_spline77",
-      "rationale": "V185 combines final scores after independent heads; directly test whether spectral and context signals survive joint training. V185 public .56699 below V25 .56822 warns that an OOF-only gain is insufficient. Expect higher capacity risk; compare29-input head gap to V25.",
-      "batch": "joint_followup",
-      "feature_catalog": "joint_followup/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V192",
     "status": "QUEUED",
     "definition": {

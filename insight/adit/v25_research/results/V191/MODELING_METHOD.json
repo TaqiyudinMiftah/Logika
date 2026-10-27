@@ -1,0 +1,53 @@
+{
+  "method": "Use exact cached V178 raw Kumo=.85*global+.15*local; refit29-input V167 correction with L2.003 and inference shrink.5; final=.75*sigmoid(logit(pK178)+.5*X29*beta)+.25*original_spline77; mean5fold test probabilities",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparator": "V185",
+    "Kumo_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/joint_followups.py",
+    "no_outer_validation_tuning": true,
+    "id": "V191",
+    "label": "Joint local-context Kumo and29-input spectral correction",
+    "method": "joint_spectral",
+    "replaces_base_head": true,
+    "formula": "Use exact cached V178 raw Kumo=.85*global+.15*local; refit29-input V167 correction with L2.003 and inference shrink.5; final=.75*sigmoid(logit(pK178)+.5*X29*beta)+.25*original_spline77",
+    "rationale": "V185 combines final scores after independent heads; directly test whether spectral and context signals survive joint training. V185 public .56699 below V25 .56822 warns that an OOF-only gain is insufficient. Expect higher capacity risk; compare29-input head gap to V25."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "beh_spectral_spend_power_7d",
+    "beh_spectral_spend_power_14d",
+    "beh_spectral_spend_power_30d",
+    "beh_spectral_spend_periodicity_strength",
+    "beh_spectral_spend_dominant_cycle_days",
+    "beh_spectral_orders_power_7d",
+    "beh_spectral_orders_power_14d",
+    "beh_spectral_orders_power_30d",
+    "beh_spectral_orders_periodicity_strength",
+    "beh_spectral_orders_dominant_cycle_days",
+    "beh_spectral_window_supported"
+  ],
+  "source_sha256": "e5905366dee876e2ffa439dfd59bc6d22bc30c8924b5bcc7cecfe523369cf2e6"
+}
