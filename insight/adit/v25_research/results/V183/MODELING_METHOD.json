@@ -1,0 +1,49 @@
+{
+  "method": "eta=eta_V25+.15*clip(GBDT80_depth2_residual,-.5,.5); tree training init_score=eta_V25; fixed trees, no outer early stopping ; final=.75*sigmoid(eta)+.25*original_spline77; mean5fold test probabilities",
+  "spec": {
+    "id": "V183",
+    "label": "Strongly regularized shallow LightGBM residual on fixed V25 logits",
+    "families": [
+      "spectral",
+      "residual_boosting"
+    ],
+    "method": "tree_residual",
+    "penalty": 50.0,
+    "strength": 0.15,
+    "error_basis": "Standalone tree experts are weaker but offer some complementarity; fit only a small additive logit correction, rather than replacing Kumo or fitting a large full-risk model",
+    "formula": "eta=eta_V25+.15*clip(tree_raw_margin,-.5,.5);80 depth2 LightGBM trees trained with init_score=eta_V25",
+    "priority": "P1",
+    "backbone_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/conservative_adapters.py"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "beh_spectral_spend_power_7d",
+    "beh_spectral_spend_power_14d",
+    "beh_spectral_spend_power_30d",
+    "beh_spectral_spend_periodicity_strength",
+    "beh_spectral_orders_power_7d",
+    "beh_spectral_orders_power_14d",
+    "beh_spectral_orders_power_30d",
+    "beh_spectral_orders_periodicity_strength",
+    "beh_spectral_window_supported"
+  ],
+  "source_sha256": "4333920f61c77f5ead382bb8b15286a4b565be494285cfeacba49f60356481f4"
+}

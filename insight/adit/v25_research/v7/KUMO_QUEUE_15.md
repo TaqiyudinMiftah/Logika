@@ -1,6 +1,6 @@
 # Antrean15 eksperimen Kumo100% frozen
 
-Selesai14/15. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 dan adapterV179â€“V183 tidak memerlukan GPU.
+Selesai15/15. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 dan adapterV179â€“V183 tidak memerlukan GPU.
 
 | ID | Metode | Status | KS | AUC |
 |---|---|---|---:|---:|
@@ -18,4 +18,4 @@ Selesai14/15. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cuku
 | V180 | Reliability-weighted spectral residual with frozen V25 correction | COMPLETE | 0.5302846600440411 | 0.8470484353439852 |
 | V181 | Fixed equal average of V167 spectral and V146 tree-complemented V25 | COMPLETE | 0.5300242736937464 | 0.8471525272870506 |
 | V182 | 64-landmark Nystrom RBF residual on existing V25 domain features | COMPLETE | 0.5303342525588775 | 0.8470281278168728 |
-| V183 | Strongly regularized shallow LightGBM residual on fixed V25 logits | QUEUED | BELUM TERSEDIA | BELUM TERSEDIA |
+| V183 | Strongly regularized shallow LightGBM residual on fixed V25 logits | COMPLETE | 0.5299917510473631 | 0.847020131043417 |
