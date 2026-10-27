@@ -1,0 +1,108 @@
+{
+  "unrun_proposals": [
+    {
+      "id": "V174",
+      "label": "Empirical-Bayes allocation propensity and uncertainty inside frozen Kumo",
+      "families": [
+        "allocation_bayes"
+      ],
+      "context_features": "locked90_plus_v25_bayes",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Raw allocation counts and all-event rate may overstate evidence for small n; Beta-Binomial uncertainty is added to frozen nonlinear representation, unlike correction-only V14"
+    },
+    {
+      "id": "V175",
+      "label": "Latent posterior view: baseline9 latent measurements enter frozen Kumo",
+      "families": [
+        "latent_input"
+      ],
+      "context_features": "locked90_plus_v25_latent",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Nine latent estimates currently enter correction only. Preserve existing inputs, expose posterior means/uncertainty directly to Kumo with unchanged18-input correction"
+    },
+    {
+      "id": "V176",
+      "label": "Item-value basket composition inside frozen Kumo",
+      "families": [
+        "basket_value"
+      ],
+      "context_features": "locked90_plus_v25_basket",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Entropy-only correction V166 was negative. Test conditional basket/spend-frequency interactions inside frozen Kumo, keeping correction parameter count fixed"
+    },
+    {
+      "id": "V177",
+      "label": "Training-context-normalized bureau consensus and freshness uncertainty",
+      "families": [
+        "bureau_measurement"
+      ],
+      "context_features": "locked90_plus_v25_provider",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Provider-score dispersion mixes systematic provider scales with borrower differences. Normalize providers using context rows only, expose disagreement/coverage/freshness without summing debt balances"
+    },
+    {
+      "id": "V178",
+      "label": "Conservative global-local frozen context experts by history coverage",
+      "families": [
+        "local_context"
+      ],
+      "context_features": "locked90_plus_v25_local_context",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Zero-allocation and observed-history groups have different prior error patterns. Test15% local-context contribution with85% global anchor; use only eligible50k pool, no outer labels",
+      "reuse_kumo_from": "V169",
+      "local_context_weight": 0.15,
+      "local_context_max_rows": 24000
+    }
+  ],
+  "decisions": {
+    "provider_consensus": "REJECT_BEFORE_TRAINING: Spearman0.999998 with existing bureau_score_mean; provider means668.28..668.61 and sd53.31..53.43 show negligible systematic scale differences",
+    "all9latent_means": "REDUCE_BEFORE_TRAINING: price posterior mean rho0.99899 and bureau posterior mean rho0.99973 with existing features; keep four uncertainty/gap inputs",
+    "basket_items_per_completed_order": "REMOVE_BEFORE_TRAINING: inherited order-count status semantics not re-established; do not label denominator completed"
+  },
+  "review_artifact": "v7/kumo_gpu/extra_review/DRAFT_REVIEW.json"
+}

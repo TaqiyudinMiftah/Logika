@@ -12,6 +12,19 @@ V=ROOT/'v7'
 sys.path.insert(0,str(ROOT.parent))
 from node480_task import client,BASE
 
+def persistent_status(path,value):
+    """A transient Windows reader/AV lock must not stop remote model work."""
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    text=json.dumps(value,indent=2);tmp=path.with_name(path.name+f'.{os.getpid()}.tmp')
+    tmp.write_text(text,encoding='utf-8')
+    for attempt in range(20):
+        try:tmp.replace(path);return
+        except PermissionError:time.sleep(.15)
+    # Keep a durable per-process status and event even if the common view is
+    # temporarily locked. This is observability, not a training dependency.
+    path.with_name(path.stem+f'.{os.getpid()}.json').write_text(text,encoding='utf-8')
+    with path.with_suffix('.events.jsonl').open('a',encoding='utf-8') as f:f.write(json.dumps(value)+'\n')
+
 def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experiment_v2.py'):
     from node380_remote import protect
     vault=json.loads(protect((Path.home()/'.codex/private/node480_session.dpapi').read_bytes(),decrypt=True))
@@ -20,7 +33,7 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
     checkout=ROOT.parent/'shared_repo_sync_20261027'
     def state(stage,**extra):
         value=dict(status=stage,pid=os.getpid(),UTC=time.time(),Kumo_frozen_fraction=1.,**extra)
-        p=V/'reports'/('LOCAL_KUMO_EXTRA_QUEUE.json' if wait_for else 'LOCAL_KUMO_QUEUE.json');tmp=p.with_suffix('.tmp');tmp.write_text(json.dumps(value,indent=2));tmp.replace(p)
+        p=V/'reports'/('LOCAL_KUMO_EXTRA_QUEUE.json' if wait_for else 'LOCAL_KUMO_QUEUE.json');persistent_status(p,value)
         print(json.dumps(value),flush=True)
     def get(rel):
         r=session.get(api+quote(BASE+rel)+'?content=1',timeout=20)
@@ -52,6 +65,7 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
                 failures+=1;state('TRANSIENT_NODE_CONNECTION_FAILURE',experiment=ident,consecutive_failures=failures)
                 if failures>=10:raise
             time.sleep(15)
+    state('STARTING_OR_RESUMING_QUEUE',experiments=identifiers or ['V168','V169','V170','V171','V172','V173'],reviewed_head=expected)
     if wait_for:
         preceding=V/'modeling/reports'/f'GITHUB_SYNC_{wait_for}.json'
         while not preceding.exists():
@@ -95,4 +109,4 @@ if __name__=='__main__':
     try:main(args.expected_head,args.runs,args.after,args.worker)
     except Exception:
         value=dict(status='STOPPED_FOR_FAILURE_OR_PEER_REVIEW',pid=os.getpid(),UTC=time.time(),traceback=traceback.format_exc())
-        (V/'reports'/('LOCAL_KUMO_EXTRA_QUEUE.json' if args.after else 'LOCAL_KUMO_QUEUE.json')).write_text(json.dumps(value,indent=2));raise
+        persistent_status(V/'reports'/('LOCAL_KUMO_EXTRA_QUEUE.json' if args.after else 'LOCAL_KUMO_QUEUE.json'),value);raise

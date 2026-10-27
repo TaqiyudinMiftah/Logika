@@ -134,11 +134,12 @@
     "kumo_weight": 0.75,
     "comparison_baseline": "V168",
     "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
-    "error_analysis_basis": "Raw allocation counts and all-event rate may overstate evidence for small n; Beta-Binomial uncertainty is added to frozen nonlinear representation, unlike correction-only V14"
+    "error_analysis_basis": "Raw allocation counts and all-event rate may overstate evidence for small n; Beta-Binomial uncertainty is added to frozen nonlinear representation, unlike correction-only V14",
+    "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
   },
   {
     "id": "V175",
-    "label": "Latent posterior view: baseline9 latent measurements enter frozen Kumo",
+    "label": "Selective latent uncertainty and income-contradiction inputs",
     "families": [
       "latent_input"
     ],
@@ -153,11 +154,12 @@
     "kumo_weight": 0.75,
     "comparison_baseline": "V168",
     "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
-    "error_analysis_basis": "Nine latent estimates currently enter correction only. Preserve existing inputs, expose posterior means/uncertainty directly to Kumo with unchanged18-input correction"
+    "error_analysis_basis": "Avoid redundant posterior means rho0.99899/0.99973; add only price/bureau posterior SD and income/outflow gaps to frozen baseline90",
+    "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
   },
   {
     "id": "V176",
-    "label": "Item-value basket composition inside frozen Kumo",
+    "label": "Compact item-value basket composition, without unverified order denominators",
     "families": [
       "basket_value"
     ],
@@ -172,15 +174,16 @@
     "kumo_weight": 0.75,
     "comparison_baseline": "V168",
     "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
-    "error_analysis_basis": "Entropy-only correction V166 was negative. Test conditional basket/spend-frequency interactions inside frozen Kumo, keeping correction parameter count fixed"
+    "error_analysis_basis": "Fold0 entropy30 KS0.17917,90d0.14924 and normalized entropy0.12394; moderate correlation with old lifetime entropy. Prior correction-only V166 was negative, so unique gain remains unproved",
+    "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
   },
   {
     "id": "V177",
-    "label": "Training-context-normalized bureau consensus and freshness uncertainty",
+    "label": "Conservative fixed90:10 V25 and V169 score blend",
     "families": [
-      "bureau_measurement"
+      "score_complementarity"
     ],
-    "context_features": "locked90_plus_v25_provider",
+    "context_features": "locked90_plus_v25_score_anchor",
     "backbone_frozen_fraction": 1.0,
     "context_rows": 50000,
     "estimators": 8,
@@ -191,7 +194,10 @@
     "kumo_weight": 0.75,
     "comparison_baseline": "V168",
     "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
-    "error_analysis_basis": "Provider-score dispersion mixes systematic provider scales with borrower differences. Normalize providers using context rows only, expose disagreement/coverage/freshness without summing debt balances"
+    "error_analysis_basis": "V169 AUC +0.0001914 with paired95% CI[+0.0000301,+0.0003501] and9 extra defaults captured top20%, despite pooledKS -0.001472; test limited complementary contribution without more backbone fitting",
+    "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased",
+    "reuse_kumo_from": "V168",
+    "score_blend_weight": 0.1
   },
   {
     "id": "V178",
@@ -210,9 +216,10 @@
     "kumo_weight": 0.75,
     "comparison_baseline": "V168",
     "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
-    "error_analysis_basis": "Zero-allocation and observed-history groups have different prior error patterns. Test15% local-context contribution with85% global anchor; use only eligible50k pool, no outer labels",
-    "reuse_kumo_from": "V169",
+    "error_analysis_basis": "Prior zero-allocation segment degrades in V167/V169; test85% baseline90 global plus15% local history-coverage context. Adapt retrieval idea without fine-tuning; no claim of LoCalPFN reproduction",
+    "reuse_kumo_from": "V168",
     "local_context_weight": 0.15,
-    "local_context_max_rows": 24000
+    "local_context_max_rows": 24000,
+    "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased"
   }
 ]

@@ -1,31 +1,5 @@
 [
   {
-    "id": "V171",
-    "status": "QUEUED",
-    "definition": {
-      "id": "V171",
-      "label": "Frozen Kumo with compact spectral band representation",
-      "families": [
-        "conditional_allocation",
-        "spectral"
-      ],
-      "context_features": "locked90_plus_v25_spectral",
-      "backbone_frozen_fraction": 1.0,
-      "context_rows": 50000,
-      "estimators": 8,
-      "estimator_batch_size": 4,
-      "query_batch_size": 8192,
-      "penalty": 0.003,
-      "strength": 0.5,
-      "kumo_weight": 0.75,
-      "comparison_baseline": "V168",
-      "purpose": "Move existing V25 evidence into in-context representation; unchanged correction and spline",
-      "error_analysis_basis": "V167 highest development KS0.530795 but AUC slightly down and head gap0.01610 vs0.01111; retain interpretable band powers, omit unstable dominant-cycle argmax, keep correction18 unchanged",
-      "batch": "kumo",
-      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V172",
     "status": "QUEUED",
     "definition": {
@@ -76,6 +50,141 @@
       "context_bags": 2,
       "bag_context_rows": 40000,
       "error_analysis_basis": "V168 numerical reproduction shifts pooledKS -0.00008265 with AUC effectively unchanged; V167 gain has CI crossing zero. Test context-sampling robustness rather than expanding the6k-trained correction",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V174",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V174",
+      "label": "Empirical-Bayes allocation propensity and uncertainty inside frozen Kumo",
+      "families": [
+        "allocation_bayes"
+      ],
+      "context_features": "locked90_plus_v25_bayes",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Raw allocation counts and all-event rate may overstate evidence for small n; Beta-Binomial uncertainty is added to frozen nonlinear representation, unlike correction-only V14",
+      "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V175",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V175",
+      "label": "Selective latent uncertainty and income-contradiction inputs",
+      "families": [
+        "latent_input"
+      ],
+      "context_features": "locked90_plus_v25_latent",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Avoid redundant posterior means rho0.99899/0.99973; add only price/bureau posterior SD and income/outflow gaps to frozen baseline90",
+      "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V176",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V176",
+      "label": "Compact item-value basket composition, without unverified order denominators",
+      "families": [
+        "basket_value"
+      ],
+      "context_features": "locked90_plus_v25_basket",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Fold0 entropy30 KS0.17917,90d0.14924 and normalized entropy0.12394; moderate correlation with old lifetime entropy. Prior correction-only V166 was negative, so unique gain remains unproved",
+      "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased",
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V177",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V177",
+      "label": "Conservative fixed90:10 V25 and V169 score blend",
+      "families": [
+        "score_complementarity"
+      ],
+      "context_features": "locked90_plus_v25_score_anchor",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "V169 AUC +0.0001914 with paired95% CI[+0.0000301,+0.0003501] and9 extra defaults captured top20%, despite pooledKS -0.001472; test limited complementary contribution without more backbone fitting",
+      "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased",
+      "reuse_kumo_from": "V168",
+      "score_blend_weight": 0.1,
+      "batch": "kumo",
+      "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
+    }
+  },
+  {
+    "id": "V178",
+    "status": "QUEUED",
+    "definition": {
+      "id": "V178",
+      "label": "Conservative global-local frozen context experts by history coverage",
+      "families": [
+        "local_context"
+      ],
+      "context_features": "locked90_plus_v25_local_context",
+      "backbone_frozen_fraction": 1.0,
+      "context_rows": 50000,
+      "estimators": 8,
+      "estimator_batch_size": 4,
+      "query_batch_size": 8192,
+      "penalty": 0.003,
+      "strength": 0.5,
+      "kumo_weight": 0.75,
+      "comparison_baseline": "V168",
+      "purpose": "New frozen inference input/auxiliary context experiment; preserve V25 control/correction/spline, no backbone gradients",
+      "error_analysis_basis": "Prior zero-allocation segment degrades in V167/V169; test85% baseline90 global plus15% local history-coverage context. Adapt retrieval idea without fine-tuning; no claim of LoCalPFN reproduction",
+      "reuse_kumo_from": "V168",
+      "local_context_weight": 0.15,
+      "local_context_max_rows": 24000,
+      "input_policy": "Retain original90 Kumo inputs; do not automatically add V169 coverage6 because V169 pooledKS decreased",
       "batch": "kumo",
       "feature_catalog": "kumo/reports/FEATURE_CATALOG.csv"
     }

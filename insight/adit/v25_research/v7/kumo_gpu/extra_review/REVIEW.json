@@ -1,0 +1,328 @@
+{
+  "status": "PASS",
+  "scope": "Feature/availability/reference/finite-division checks, plus exploratory fold0 univariate signal and redundancy. No Kumo fitting, no claimed incremental KS.",
+  "reference_rows": 50000,
+  "heldout_rows": 14000,
+  "checks": [
+    {
+      "id": "V174",
+      "hypothesis": "Raw allocation counts and all-event rate may overstate evidence for small n; Beta-Binomial uncertainty is added to frozen nonlinear representation, unlike correction-only V14",
+      "input_count": 4,
+      "formula_checks": "PASS",
+      "reference": {
+        "fold": 0,
+        "reference_rows": 50000,
+        "labels_used": false,
+        "reference": "Only this outer-fold50k Kumo context; no correction/validation/test reference fitting",
+        "prior": {
+          "alpha": 0.7183601307676951,
+          "beta": 1.6509534358880646,
+          "source": "Training-only Beta-Binomial MLE",
+          "customers": 33112,
+          "optimizer_success": true
+        },
+        "n0_rule": "Posterior equals fitted population prior when n0; explicit n/credibility distinguishes absence of evidence. Allocation delay is not DPD or full-settlement time."
+      },
+      "descriptive_validation_statistics": [
+        {
+          "feature": "kumo_allocation_bayes_mean",
+          "observed_validation": 14000,
+          "missing_test": 0,
+          "univariate_heldout": {
+            "KS": 0.3168525194064626,
+            "signed_KS": 0.3168525194064626,
+            "AUC": 0.7235752177622462,
+            "rows": 14000
+          },
+          "strongest_existing_correlation": [
+            [
+              "v3_repay_all_late_1_posterior_24",
+              0.9574806714133709
+            ],
+            [
+              "v5_price_pooled_all_mean",
+              0.3428858309582014
+            ]
+          ]
+        },
+        {
+          "feature": "kumo_allocation_bayes_variance",
+          "observed_validation": 14000,
+          "missing_test": 0,
+          "univariate_heldout": {
+            "KS": 0.14240494180072094,
+            "signed_KS": 0.14240494180072094,
+            "AUC": 0.5453397598864254,
+            "rows": 14000
+          },
+          "strongest_existing_correlation": [
+            [
+              "v3_repay_all_late_1_posterior_24",
+              0.6094713716445622
+            ],
+            [
+              "v4_bureau_all_equal_provider_mean_std",
+              0.2789662297171158
+            ]
+          ]
+        },
+        {
+          "feature": "kumo_allocation_credibility",
+          "observed_validation": 14000,
+          "missing_test": 0,
+          "univariate_heldout": {
+            "KS": 0.053545319325280616,
+            "signed_KS": 0.053545319325280616,
+            "AUC": 0.5003888879396218,
+            "rows": 14000
+          },
+          "strongest_existing_correlation": [
+            [
+              "v4_bureau_all_equal_provider_mean_std",
+              -0.3044220599826334
+            ],
+            [
+              "v2_bureau_history_score_mean",
+              0.06557822717585741
+            ]
+          ]
+        },
+        {
+          "feature": "kumo_allocation_bayes_burden",
+          "observed_validation": 9806,
+          "missing_test": 9000,
+          "univariate_heldout": {
+            "KS": 0.37251688139940287,
+            "signed_KS": 0.37251688139940287,
+            "AUC": 0.7495634379946702,
+            "rows": 9806
+          },
+          "strongest_existing_correlation": [
+            [
+              "v3_repay_all_late_1_posterior_24",
+              0.809899919238785
+            ],
+            [
+              "installment_observed_income_ratio",
+              0.48606794948841675
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "V175",
+      "hypothesis": "Avoid redundant posterior means rho0.99899/0.99973; add only price/bureau posterior SD and income/outflow gaps to frozen baseline90",
+      "input_count": 4,
+      "formula_checks": "PASS",
+      "reference": null,
+      "descriptive_validation_statistics": [
+        {
+          "feature": "re_price_posterior_sd",
+          "observed_validation": 14000,
+          "missing_test": 0,
+          "univariate_heldout": {
+            "KS": 0.02712120012526853,
+            "signed_KS": 0.02712120012526853,
+            "AUC": 0.5117682025272912,
+            "rows": 14000
+          },
+          "strongest_existing_correlation": [
+            [
+              "v3_ecom_category_entropy",
+              -0.1909064112508341
+            ],
+            [
+              "v2_ecom_30d_orders",
+              -0.1527373206041889
+            ]
+          ]
+        },
+        {
+          "feature": "re_bureau_posterior_sd",
+          "observed_validation": 14000,
+          "missing_test": 0,
+          "univariate_heldout": {
+            "KS": 0.06710437592300833,
+            "signed_KS": 0.0012544239291146786,
+            "AUC": 0.46243549892763974,
+            "rows": 14000
+          },
+          "strongest_existing_correlation": [
+            [
+              "v4_bureau_all_equal_provider_mean_std",
+              0.353101937134204
+            ],
+            [
+              "v3_repay_all_late_1_posterior_24",
+              -0.04616278958332516
+            ]
+          ]
+        },
+        {
+          "feature": "re_declared_income_log_gap",
+          "observed_validation": 9806,
+          "missing_test": 9000,
+          "univariate_heldout": {
+            "KS": 0.029363783303611335,
+            "signed_KS": 0.029363783303611335,
+            "AUC": 0.5147269755077778,
+            "rows": 9806
+          },
+          "strongest_existing_correlation": [
+            [
+              "installment_observed_income_ratio",
+              0.6636876678546315
+            ],
+            [
+              "v2_ecom_30d_orders",
+              0.021332973669795186
+            ]
+          ]
+        },
+        {
+          "feature": "re_outflow_income_geometric_ratio",
+          "observed_validation": 9806,
+          "missing_test": 9000,
+          "univariate_heldout": {
+            "KS": 0.029913138437493658,
+            "signed_KS": 0.029913138437493658,
+            "AUC": 0.5019374369660903,
+            "rows": 9806
+          },
+          "strongest_existing_correlation": [
+            [
+              "installment_observed_income_ratio",
+              0.3540312382367166
+            ],
+            [
+              "v3_repay_all_late_1_posterior_24",
+              0.10003284722469208
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "V176",
+      "hypothesis": "Fold0 entropy30 KS0.17917,90d0.14924 and normalized entropy0.12394; moderate correlation with old lifetime entropy. Prior correction-only V166 was negative, so unique gain remains unproved",
+      "input_count": 4,
+      "formula_checks": "PASS",
+      "reference": null,
+      "descriptive_validation_statistics": [
+        {
+          "feature": "light_basket_value_entropy_30d",
+          "observed_validation": 10286,
+          "missing_test": 8049,
+          "univariate_heldout": {
+            "KS": 0.17917459653069806,
+            "signed_KS": 0.17917459653069806,
+            "AUC": 0.6144325364773746,
+            "rows": 10286
+          },
+          "strongest_existing_correlation": [
+            [
+              "v2_ecom_30d_orders",
+              0.7340644663129676
+            ],
+            [
+              "v2_ecom_30d_spend",
+              0.5751071515252955
+            ]
+          ]
+        },
+        {
+          "feature": "light_basket_value_entropy_90d",
+          "observed_validation": 13306,
+          "missing_test": 1472,
+          "univariate_heldout": {
+            "KS": 0.14923522686221413,
+            "signed_KS": 0.14923522686221413,
+            "AUC": 0.6031387680579194,
+            "rows": 13306
+          },
+          "strongest_existing_correlation": [
+            [
+              "v2_ecom_30d_orders",
+              0.41548082391917646
+            ],
+            [
+              "v3_ecom_category_entropy",
+              0.33073111771951524
+            ]
+          ]
+        },
+        {
+          "feature": "light_basket_value_entropy_change_30_vs_prior60",
+          "observed_validation": 9952,
+          "missing_test": 8832,
+          "univariate_heldout": {
+            "KS": 0.1046805842814314,
+            "signed_KS": 0.1046805842814314,
+            "AUC": 0.5609967819649306,
+            "rows": 9952
+          },
+          "strongest_existing_correlation": [
+            [
+              "v2_ecom_30d_orders",
+              0.4433278942068914
+            ],
+            [
+              "v2_ecom_30d_spend",
+              0.3536100844702306
+            ]
+          ]
+        },
+        {
+          "feature": "kumo_basket_normalized_entropy",
+          "observed_validation": 10286,
+          "missing_test": 8049,
+          "univariate_heldout": {
+            "KS": 0.12393805222919108,
+            "signed_KS": 0.12393805222919108,
+            "AUC": 0.5619455567146056,
+            "rows": 10286
+          },
+          "strongest_existing_correlation": [
+            [
+              "v2_ecom_30d_orders",
+              0.4092197095302714
+            ],
+            [
+              "v2_ecom_30d_spend",
+              0.21955633912057596
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "V177",
+      "hypothesis": "V169 AUC +0.0001914 with paired95% CI[+0.0000301,+0.0003501] and9 extra defaults captured top20%, despite pooledKS -0.001472; test limited complementary contribution without more backbone fitting",
+      "input_count": 0,
+      "formula_checks": "PASS",
+      "reference": null,
+      "descriptive_validation_statistics": []
+    },
+    {
+      "id": "V178",
+      "hypothesis": "Prior zero-allocation segment degrades in V167/V169; test85% baseline90 global plus15% local history-coverage context. Adapt retrieval idea without fine-tuning; no claim of LoCalPFN reproduction",
+      "input_count": 0,
+      "formula_checks": "PASS",
+      "reference": null,
+      "descriptive_validation_statistics": []
+    }
+  ],
+  "provider_context_mean": {
+    "aux_Bureau_A": 668.6106577254802,
+    "aux_Bureau_B": 668.3485832415793,
+    "aux_Bureau_C": 668.2808657267691
+  },
+  "provider_context_sd": {
+    "aux_Bureau_A": 53.35738797396445,
+    "aux_Bureau_B": 53.314173047858766,
+    "aux_Bureau_C": 53.435081648680395
+  },
+  "snapshot_provenance": "Inherited baseline uncertainties remain; allocation is last-allocation timing, not DPD",
+  "source_sha256": "b8f915a88b301461cb74cedfea241dcdf05860b989f388b707ae8f78ce880255"
+}

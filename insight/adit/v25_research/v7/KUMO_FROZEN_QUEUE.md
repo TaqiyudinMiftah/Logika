@@ -19,7 +19,7 @@ After each completed run: inspect shared GitHub HEAD and changes, preserve metho
 
 ## Evidence and selection
 
-Exactly five pending experiments follow V168: V169 through V173. The unrun earlier draft is preserved in KUMO_SUPERSEDED_QUEUE_DRAFT.json. No extra research runs should start automatically beyond these five.
+The initial five experiments after V168 are V169 through V173. The unrun earlier draft is preserved in KUMO_SUPERSEDED_QUEUE_DRAFT.json. The user subsequently authorized five additional, reviewed hypotheses V174 through V178, documented in KUMO_EXTRA_QUEUE.md; they wait for V173 to finish and be pushed. Do not start any further runs beyond these ten automatically.
 
 V167 pooledKS0.5307954555 versus V25 0.5302846600, with delta95% CI[-0.00165264,+0.00295812]. AUC decreases0.00005090 and correction train/validation KS gap rises from0.01111 to0.01610. Allocation-count zero group has deltaKS -0.002942, while count1:3 improves+0.004588. Variable-income group improves+0.001693. These are exploratory development associations, not causal or independent selection evidence.
 
