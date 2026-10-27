@@ -34,6 +34,14 @@ def matrix(frame,columns,reference=None):
 def ensure(key,loaded):
     tr_small,te_small,sample,y,folds,basepred,frames,parent=loaded
     out=V/'modeling/experts'/key;out.mkdir(parents=True,exist_ok=True)
+    if all((out/f'fold{fold}_predictions.npz').exists() and (out/f'fold{fold}_audit.json').exists() and (out/f'fold{fold}.joblib').exists() for fold in range(5)):
+        predictions={};audits=[]
+        for fold in range(5):
+            with np.load(out/f'fold{fold}_predictions.npz') as saved:predictions[fold]={k:saved[k] for k in saved}
+            audit=json.loads((out/f'fold{fold}_audit.json').read_text())
+            assert audit['validation_ids_sha256']==ids_hash(tr_small,frames[fold]['vi'])
+            audits.append(audit)
+        return predictions,audits
     lock=json.loads((ROOT/'BASELINE_LOCK.json').read_text())
     columns=list(dict.fromkeys(lock['Kumo']['features']+lock['original_spline']['features']+parent['columns']))
     tr=pd.read_parquet(ROOT/'data/train_features.parquet');te=pd.read_parquet(ROOT/'data/test_features.parquet')

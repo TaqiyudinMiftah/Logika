@@ -43,3 +43,8 @@ V152:V159 implement the user's ranking-objective reference. A90-coefficient stud
 ## V160: one local regularization follow-up
 
 After40 model variants, V127 remains best pooledKS0.530671. Since L2.001 improved over.003 without a large optimism-gap increase, test one lower L2.0003 while holding18 features, strength0.5 and75:25 blend fixed. This is adaptively chosen development research; no hidden-label evidence or guaranteed KS is claimed. Shared GitHub main was reviewed at49a1b7872b884aa8562c3f974f15d18ec5b8a297. Execute one experiment only, push/review again before the next; enforce RAM headroom at launch.
+
+
+## V161: best small-head adjustment plus cached tree complement
+
+V160 L2.0003 yieldsKS0.5304969684 and loses to V127 L2.001. Retain the V127 correction and test20% HGB-a, since V146 showed positive pooledKS/AUC at that small weight but35% harmed separation. This is a new combination, not re-running V146 (which used L2.003). Preflight shared main4085af1996334f5e09944123692aec9b9283c58c shows no peer update. Cached expert predictions avoid repeated training and reduce RAM. No target-based gate or fold calibration is fitted.
