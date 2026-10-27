@@ -1,0 +1,503 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V193",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "development_comparator": "V185",
+    "Kumo_frozen_fraction": 1.0,
+    "source_script": "v7/scripts/joint_followups.py",
+    "no_outer_validation_tuning": true,
+    "id": "V193",
+    "label": "V185 plus bounded inner-OOF partial-pooling calibration residual",
+    "method": "partial_pool_composition",
+    "fixed_score_fusion": true,
+    "formula": "z=logit(pV185); d=.5*clip(logit(pV189)-logit(pV25),-.1,.1); p=sigmoid(z+d); per-fold test fusion then mean5fold",
+    "rationale": "V189 low-dimensional inner-OOF employment/history calibration yielded KS .530638, deltaAUC -0.0000041 vsV25; no generalization claim. Test bounded partial-pooling effect onV185; reject leaderboard recommendation if AUC or stability deteriorates. No fitted score weights."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "OOF": {
+    "KS": 0.5314595145625357,
+    "signed_KS": 0.5314595145625357,
+    "AUC": 0.8471075443496074,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": 0.001174854518494639,
+  "delta_AUC": 7.82654424915652e-05,
+  "mean_fold_KS": 0.5338037717358933,
+  "std_fold_KS": 0.006062826827005165,
+  "delta_mean_fold_KS": 0.0004739471793419936,
+  "fold_wins": 3,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5266856169374883,
+        "signed_KS": 0.5266856169374883,
+        "AUC": 0.8439340459619502,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": -0.001794288823327106,
+      "delta_AUC": -0.0001357379560062988,
+      "parameters": 90,
+      "new_trainable_parameters": 0,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5483751501203922,
+      "heldout_corrected_Kumo_KS": 0.5282302992248024,
+      "train_validation_head_KS_gap": 0.020144850895589816,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "optimization": {
+        "gradient_max_abs": 0.0,
+        "iterations": 0,
+        "new_fitted_parameters": 0
+      },
+      "head_gap_caveat": "Unchanged V25 head diagnostic; fixed blend has no trained meta-parameters"
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5348136335689966,
+        "signed_KS": 0.5348136335689966,
+        "AUC": 0.8497747780356161,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": -0.003185537655565396,
+      "delta_AUC": 0.00016982461760439715,
+      "parameters": 90,
+      "new_trainable_parameters": 0,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5372127006288787,
+      "heldout_corrected_Kumo_KS": 0.5377141736904102,
+      "train_validation_head_KS_gap": -0.0005014730615314766,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "optimization": {
+        "gradient_max_abs": 0.0,
+        "iterations": 0,
+        "new_fitted_parameters": 0
+      },
+      "head_gap_caveat": "Unchanged V25 head diagnostic; fixed blend has no trained meta-parameters"
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5432736908058926,
+        "signed_KS": 0.5432736908058926,
+        "AUC": 0.8498941248290939,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": 0.0029754525167369206,
+      "delta_AUC": 3.7217069295825134e-05,
+      "parameters": 90,
+      "new_trainable_parameters": 0,
+      "correction_rows": 6000,
+      "head_training_KS": 0.559544698901385,
+      "heldout_corrected_Kumo_KS": 0.5414846628066131,
+      "train_validation_head_KS_gap": 0.018060036094771914,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "optimization": {
+        "gradient_max_abs": 0.0,
+        "iterations": 0,
+        "new_fitted_parameters": 0
+      },
+      "head_gap_caveat": "Unchanged V25 head diagnostic; fixed blend has no trained meta-parameters"
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5322063123120523,
+        "signed_KS": 0.5322063123120523,
+        "AUC": 0.8436826988983589,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": 0.0015542539989316095,
+      "delta_AUC": -0.00018065747325690662,
+      "parameters": 90,
+      "new_trainable_parameters": 0,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5291088616880928,
+      "heldout_corrected_Kumo_KS": 0.5293457791860687,
+      "train_validation_head_KS_gap": -0.00023691749797594142,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "optimization": {
+        "gradient_max_abs": 0.0,
+        "iterations": 0,
+        "new_fitted_parameters": 0
+      },
+      "head_gap_caveat": "Unchanged V25 head diagnostic; fixed blend has no trained meta-parameters"
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5320396050550369,
+        "signed_KS": 0.5320396050550369,
+        "AUC": 0.8483657126109434,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": 0.0028198558599339396,
+      "delta_AUC": 0.0004690054008631428,
+      "parameters": 90,
+      "new_trainable_parameters": 0,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5486981677917069,
+      "heldout_corrected_Kumo_KS": 0.5306263308115167,
+      "train_validation_head_KS_gap": 0.018071836980190215,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "optimization": {
+        "gradient_max_abs": 0.0,
+        "iterations": 0,
+        "new_fitted_parameters": 0
+      },
+      "head_gap_caveat": "Unchanged V25 head diagnostic; fixed blend has no trained meta-parameters"
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5237657171439752,
+      0.5406826945132854
+    ],
+    "delta_KS": [
+      -0.00112906081881107,
+      0.0033472886158873905
+    ],
+    "candidate_AUC": [
+      0.8434839430414048,
+      0.8508119282842749
+    ],
+    "delta_AUC": [
+      -0.00014339302430030343,
+      0.0003356051420773247
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "modeling_formula": "z=logit(pV185); d=.5*clip(logit(pV189)-logit(pV25),-.1,.1); p=sigmoid(z+d); per-fold test fusion then mean5fold; mean5fold test probabilities",
+  "modeling_objective": "z=logit(pV185); d=.5*clip(logit(pV189)-logit(pV25),-.1,.1); p=sigmoid(z+d); per-fold test fusion then mean5fold",
+  "controller_source": "v7/scripts/joint_followups.py",
+  "source_sha256": "e5905366dee876e2ffa439dfd59bc6d22bc30c8924b5bcc7cecfe523369cf2e6",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": false,
+  "submission": "v7/submissions/submission_V193_V25_conservative.csv",
+  "submission_sha256": "23d38e88a46b3603a30ffa00a7eff760ec5256104b5c5e841e16b14ddf2b1caa",
+  "public_score": null,
+  "elapsed_seconds": 7.278045177459717,
+  "peak_RSS_MiB": 397.2578125,
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY",
+    "diagnostic": "V189 low-dimensional inner-OOF employment/history calibration yielded KS .530638, deltaAUC -0.0000041 vsV25; no generalization claim. Test bounded partial-pooling effect onV185; reject leaderboard recommendation if AUC or stability deteriorates. No fitted score weights.; all new fitting uses correction rows only; repeated development selection remains.",
+    "inner_crossfit_used": false
+  },
+  "error_analysis": {
+    "json": "v7/runs/V193/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V193/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V193/ERROR_CASES.csv"
+  },
+  "additional_source_sha256": "9a6975c6c6a190954fd55acbbacbb8b375041ea5732853142d4af424fca35fef",
+  "comparison_to_V185": {
+    "control": "V185",
+    "control_metrics": {
+      "KS": 0.5311516622583823,
+      "signed_KS": 0.5311516622583823,
+      "AUC": 0.8471087754249731,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "delta_KS": 0.000307852304153422,
+    "delta_AUC": -1.2310753656485929e-06,
+    "fold_wins": 4,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5234363951810418,
+        0.5406116770704794
+      ],
+      "candidate_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "delta_KS": [
+        -0.0003895990991073767,
+        0.0007626677076973815
+      ],
+      "candidate_AUC": [
+        0.8434839430414048,
+        0.8508119282842749
+      ],
+      "delta_AUC": [
+        -1.2871301567743409e-05,
+        1.1456173479612584e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "generalization_review": {
+    "status": "REVIEWED",
+    "candidate": "V193",
+    "decision": "EXPERIMENT_ONLY_KEEP_V25_PUBLIC_INCUMBENT",
+    "pooled_KS": 0.5314595145625357,
+    "AUC": 0.8471075443496074,
+    "delta_AUC_vs_V25": 7.82654424915652e-05,
+    "delta_AUC_vs_V185": -1.2310753656485929e-06,
+    "head_gap": 0.011107666682208906,
+    "V25_head_gap": 0.011107666682208906,
+    "flags": [
+      "REUSED_DEVELOPMENT_FOLDS",
+      "MANY_PRIOR_EXPERIMENTS",
+      "NO_INDEPENDENT_GENERALIZATION_TEST",
+      "AUC_DECREASE_VS_V185",
+      "DELTA_KS_V25_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "DELTA_KS_V185_CI_INCLUDES_ZERO_OR_NEGATIVE"
+    ],
+    "public_incumbent": {
+      "id": "V25",
+      "KS": 0.56822
+    },
+    "development_incumbent_public_outcome": {
+      "id": "V185",
+      "KS": 0.56699
+    },
+    "causation_note": "Public decline does not uniquely establish overfitting; sample variability, population drift and source instability remain possible.",
+    "selection_caveat": "Intervals condition on fitted predictions and exclude search/retraining uncertainty; operational rules are heuristics, not significance tests.",
+    "top_risk_capture_vs_V185": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3842,
+        "candidate_bad_captured": 3841,
+        "net_bad_captured": -1,
+        "new_members": 15,
+        "exited_members": 15,
+        "entrant_bad_rate": 0.3333333333333333,
+        "exit_bad_rate": 0.4
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5855,
+        "net_bad_captured": 0,
+        "new_members": 22,
+        "exited_members": 22,
+        "entrant_bad_rate": 0.18181818181818182,
+        "exit_bad_rate": 0.18181818181818182
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7417,
+        "candidate_bad_captured": 7422,
+        "net_bad_captured": 5,
+        "new_members": 26,
+        "exited_members": 26,
+        "entrant_bad_rate": 0.3076923076923077,
+        "exit_bad_rate": 0.11538461538461539
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8018,
+        "candidate_bad_captured": 8015,
+        "net_bad_captured": -3,
+        "new_members": 20,
+        "exited_members": 20,
+        "entrant_bad_rate": 0.0,
+        "exit_bad_rate": 0.15
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8649,
+        "net_bad_captured": 0,
+        "new_members": 27,
+        "exited_members": 27,
+        "entrant_bad_rate": 0.037037037037037035,
+        "exit_bad_rate": 0.037037037037037035
+      }
+    ]
+  }
+}

@@ -1,29 +1,5 @@
 [
   {
-    "id": "V193",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparator": "V185",
-      "Kumo_frozen_fraction": 1.0,
-      "source_script": "v7/scripts/joint_followups.py",
-      "no_outer_validation_tuning": true,
-      "id": "V193",
-      "label": "V185 plus bounded inner-OOF partial-pooling calibration residual",
-      "method": "partial_pool_composition",
-      "fixed_score_fusion": true,
-      "formula": "z=logit(pV185); d=.5*clip(logit(pV189)-logit(pV25),-.1,.1); p=sigmoid(z+d); per-fold test fusion then mean5fold",
-      "rationale": "V189 low-dimensional inner-OOF employment/history calibration yielded KS .530638, deltaAUC -0.0000041 vsV25; no generalization claim. Test bounded partial-pooling effect onV185; reject leaderboard recommendation if AUC or stability deteriorates. No fitted score weights.",
-      "batch": "joint_followup",
-      "feature_catalog": "joint_followup/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V194",
     "status": "QUEUED",
     "definition": {
