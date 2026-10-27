@@ -1,0 +1,110 @@
+{
+  "experiment": "V197",
+  "method": "regularized_head",
+  "hypothesis": "Separate spectral selection from the local-context interaction. V167 remains stronger than many expanded inputs, but its11-feature head gap.016101 and V185 public decline suggest instability. This is correction-level removal; V171 previously changed frozen Kumo context inputs.",
+  "formula": "Drop only2 dominant-cycle argmax inputs fromV167; fit27-input head on original global Kumo with L2.003, shrink.5; original75:25 spline fusion",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CORRECTION_HEAD_GAP_REMAINS_HIGH",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.530346530275201,
+      "signed_KS": 0.530346530275201,
+      "AUC": 0.8470262985918944,
+      "rows": 70000
+    },
+    "delta_KS": -0.0011129842873347506,
+    "delta_AUC": -8.124575771306652e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5229037041755387,
+        0.5398002482585191
+      ],
+      "delta_KS": [
+        -0.0021541768411002388,
+        0.0007591078915685017
+      ],
+      "candidate_AUC": [
+        0.8434208015684374,
+        0.8507002264957845
+      ],
+      "delta_AUC": [
+        -0.00020857033598954412,
+        3.33584909148861e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.01642322528117237,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3842,
+      "net_bad_captured": 1,
+      "new_members": 90,
+      "exited_members": 90,
+      "entrant_bad_rate": 0.43333333333333335,
+      "exit_bad_rate": 0.4222222222222222
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5847,
+      "net_bad_captured": -8,
+      "new_members": 163,
+      "exited_members": 163,
+      "entrant_bad_rate": 0.2085889570552147,
+      "exit_bad_rate": 0.25766871165644173
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7428,
+      "net_bad_captured": 6,
+      "new_members": 196,
+      "exited_members": 196,
+      "entrant_bad_rate": 0.15816326530612246,
+      "exit_bad_rate": 0.12755102040816327
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8025,
+      "net_bad_captured": 10,
+      "new_members": 192,
+      "exited_members": 192,
+      "entrant_bad_rate": 0.109375,
+      "exit_bad_rate": 0.057291666666666664
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8649,
+      "net_bad_captured": 0,
+      "new_members": 192,
+      "exited_members": 192,
+      "entrant_bad_rate": 0.06770833333333333,
+      "exit_bad_rate": 0.06770833333333333
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

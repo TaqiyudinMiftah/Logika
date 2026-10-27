@@ -1,36 +1,5 @@
 [
   {
-    "id": "V197",
-    "status": "QUEUED",
-    "definition": {
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "comparison_baseline": "V25",
-      "development_comparators": [
-        "V185",
-        "V193"
-      ],
-      "Kumo_frozen_fraction": 1.0,
-      "replaces_base_head": true,
-      "source_script": "v7/scripts/stability_worker.py",
-      "worker": "stability_worker.py",
-      "research_ready": true,
-      "no_outer_validation_tuning": true,
-      "id": "V197",
-      "label": "Stable9 spectral correction with original global Kumo",
-      "method": "regularized_head",
-      "input_source": "V25",
-      "spectral_inputs": "stable9",
-      "formula": "Drop only2 dominant-cycle argmax inputs fromV167; fit27-input head on original global Kumo with L2.003, shrink.5; original75:25 spline fusion",
-      "rationale": "Separate spectral selection from the local-context interaction. V167 remains stronger than many expanded inputs, but its11-feature head gap.016101 and V185 public decline suggest instability. This is correction-level removal; V171 previously changed frozen Kumo context inputs.",
-      "batch": "stability",
-      "feature_catalog": "stability/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V198",
     "status": "QUEUED",
     "definition": {
