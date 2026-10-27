@@ -1,0 +1,427 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V190",
+  "spec": {
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "comparison_baseline": "V25",
+    "Kumo_frozen_fraction": 1.0,
+    "modeling_only": true,
+    "inner_splits": 3,
+    "inner_seed": 52027,
+    "no_outer_validation_tuning": true,
+    "source_script": "v7/scripts/adaptive_adapters.py",
+    "id": "V190",
+    "label": "Regularized worst-group regret V25 correction",
+    "method": "group_regret_robust_head",
+    "robust_temperature": 0.05,
+    "min_group_rows": 200,
+    "formula": "g=employment x allocation-present; merge correction groups n<200 to OTHER; Rg(beta)=mean_g[BCE(zK+Xbeta)-BCE(zK)]; minimize .05*log(mean_g exp(Rg/.05))+.003/2||beta[1:]||^2; pK=sigmoid(zK+.5*Xbeta); final=.75*pK+.25*spline77",
+    "rationale": "KS gains differ by history coverage while pooled improvements remain small. Test a group-robust regret objective with existing90-coefficient V25 head, preserving dimensionality; distinct from prior global L2 and ranking-surrogate objectives. Group regret baseline avoids prioritizing high-entropy groups solely because of prevalence."
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "OOF": {
+    "KS": 0.5290371425192528,
+    "signed_KS": 0.5290371425192528,
+    "AUC": 0.8470924636763781,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": -0.0012475175247882442,
+  "delta_AUC": 6.318476926225891e-05,
+  "mean_fold_KS": 0.5330685442038098,
+  "std_fold_KS": 0.006876413059743936,
+  "delta_mean_fold_KS": -0.0002612803527415553,
+  "fold_wins": 2,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5258505372062217,
+        "signed_KS": 0.5258505372062217,
+        "AUC": 0.8441236530170891,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": -0.002629368554593725,
+      "delta_AUC": 5.3869099132630716e-05,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5475670143346486,
+      "heldout_corrected_Kumo_KS": 0.5275654788899871,
+      "train_validation_head_KS_gap": 0.020001535444661545,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "optimization": {
+        "objective": -0.005037036853908128,
+        "gradient_max_abs": 8.598737507030288e-07,
+        "iterations": 76,
+        "group_counts": {
+          "salaried|zero": 965,
+          "self_employed|observed": 1177,
+          "self_employed|zero": 662,
+          "variable_income|observed": 887,
+          "salaried|observed": 1835,
+          "variable_income|zero": 474
+        },
+        "rare_groups_merged": true,
+        "regret_reference": "Frozen Kumo margin without correction"
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5373070033002758,
+        "signed_KS": 0.5373070033002758,
+        "AUC": 0.8496129098709102,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": -0.0006921679242861689,
+      "delta_AUC": 7.956452898527644e-06,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5336914530470742,
+      "heldout_corrected_Kumo_KS": 0.5356462350608358,
+      "train_validation_head_KS_gap": -0.0019547820137615357,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "optimization": {
+        "objective": -0.0031303893136729677,
+        "gradient_max_abs": 3.917731248103502e-07,
+        "iterations": 64,
+        "group_counts": {
+          "salaried|zero": 955,
+          "self_employed|observed": 1241,
+          "salaried|observed": 1921,
+          "variable_income|observed": 852,
+          "self_employed|zero": 604,
+          "variable_income|zero": 427
+        },
+        "rare_groups_merged": true,
+        "regret_reference": "Frozen Kumo margin without correction"
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5428526944484263,
+        "signed_KS": 0.5428526944484263,
+        "AUC": 0.8499154724704774,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": 0.002554456159270635,
+      "delta_AUC": 5.856471067933189e-05,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5578456022859712,
+      "heldout_corrected_Kumo_KS": 0.5426271311826476,
+      "train_validation_head_KS_gap": 0.015218471103323639,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "optimization": {
+        "objective": -0.0040237429715881765,
+        "gradient_max_abs": 6.104932921158776e-07,
+        "iterations": 76,
+        "group_counts": {
+          "salaried|zero": 947,
+          "self_employed|observed": 1196,
+          "salaried|observed": 1947,
+          "variable_income|observed": 902,
+          "self_employed|zero": 558,
+          "variable_income|zero": 450
+        },
+        "rare_groups_merged": true,
+        "regret_reference": "Frozen Kumo margin without correction"
+      }
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5299786235751875,
+        "signed_KS": 0.5299786235751875,
+        "AUC": 0.843894168531476,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": -0.0006734347379331318,
+      "delta_AUC": 3.081215986022734e-05,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5296708887718821,
+      "heldout_corrected_Kumo_KS": 0.5292970186171503,
+      "train_validation_head_KS_gap": 0.0003738701547317813,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "optimization": {
+        "objective": -0.0032471763456378973,
+        "gradient_max_abs": 9.302176034748776e-07,
+        "iterations": 76,
+        "group_counts": {
+          "salaried|zero": 997,
+          "self_employed|observed": 1194,
+          "salaried|observed": 1901,
+          "variable_income|observed": 855,
+          "self_employed|zero": 605,
+          "variable_income|zero": 448
+        },
+        "rare_groups_merged": true,
+        "regret_reference": "Frozen Kumo margin without correction"
+      }
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5293538624889376,
+        "signed_KS": 0.5293538624889376,
+        "AUC": 0.8479660237051114,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": 0.00013411329383461457,
+      "delta_AUC": 6.931649503116866e-05,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5482793097124196,
+      "heldout_corrected_Kumo_KS": 0.5313675609928661,
+      "train_validation_head_KS_gap": 0.016911748719553477,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "optimization": {
+        "objective": -0.003759727024514603,
+        "gradient_max_abs": 1.530313358459888e-06,
+        "iterations": 56,
+        "group_counts": {
+          "salaried|zero": 998,
+          "self_employed|observed": 1190,
+          "salaried|observed": 1891,
+          "variable_income|observed": 908,
+          "self_employed|zero": 607,
+          "variable_income|zero": 406
+        },
+        "rare_groups_merged": true,
+        "regret_reference": "Frozen Kumo margin without correction"
+      }
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5220876624389817,
+      0.5383773047980427
+    ],
+    "delta_KS": [
+      -0.0020406661282034223,
+      0.0004421305020880253
+    ],
+    "candidate_AUC": [
+      0.8434709024669743,
+      0.8508153980736707
+    ],
+    "delta_AUC": [
+      -6.041606685434353e-05,
+      0.00018669357901747447
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "modeling_formula": "g=employment x allocation-present; merge correction groups n<200 to OTHER; Rg(beta)=mean_g[BCE(zK+Xbeta)-BCE(zK)]; minimize .05*log(mean_g exp(Rg/.05))+.003/2||beta[1:]||^2; pK=sigmoid(zK+.5*Xbeta); final=.75*pK+.25*spline77 ; final=.75*sigmoid(eta)+.25*original_spline77; mean5fold test probabilities",
+  "modeling_objective": "g=employment x allocation-present; merge correction groups n<200 to OTHER; Rg(beta)=mean_g[BCE(zK+Xbeta)-BCE(zK)]; minimize .05*log(mean_g exp(Rg/.05))+.003/2||beta[1:]||^2; pK=sigmoid(zK+.5*Xbeta); final=.75*pK+.25*spline77",
+  "controller_source": "v7/scripts/adaptive_adapters.py",
+  "source_sha256": "34bd4b22ba2fed1a87f1f29921cf476a9dad68a1c7e293593233a79ee2c5ea7b",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": false,
+  "submission": "v7/submissions/submission_V190_V25_conservative.csv",
+  "submission_sha256": "ab88d8fdf2bc920b7d1313107a5e3b5ca59247eb84fce8101d2d0739573442f8",
+  "public_score": null,
+  "elapsed_seconds": 10.84374475479126,
+  "peak_RSS_MiB": 390.51953125,
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY",
+    "diagnostic": "KS gains differ by history coverage while pooled improvements remain small. Test a group-robust regret objective with existing90-coefficient V25 head, preserving dimensionality; distinct from prior global L2 and ranking-surrogate objectives. Group regret baseline avoids prioritizing high-entropy groups solely because of prevalence.; all new fitting uses correction rows only; repeated development selection remains.",
+    "inner_crossfit_used": false
+  },
+  "error_analysis": {
+    "json": "v7/runs/V190/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V190/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V190/ERROR_CASES.csv"
+  },
+  "additional_source_sha256": "f9969e5ba1ec33b10e6e4a41c468e08387207aaadd989685a9de0f6b69b9dc16"
+}
