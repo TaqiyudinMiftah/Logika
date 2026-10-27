@@ -1,37 +1,5 @@
 [
   {
-    "id": "V225",
-    "status": "QUEUED",
-    "definition": {
-      "method": "population_raw_fusion",
-      "worker": "population_fusion.py",
-      "source_script": "v7/scripts/population_fusion.py",
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "replaces_base_head": true,
-      "Kumo_frozen_fraction": 1.0,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "id": "V225",
-      "label": "Coverage and underwriting population contexts",
-      "research_ready": true,
-      "raw_sources": [
-        "V178",
-        "V223"
-      ],
-      "depends_on": [
-        "V223"
-      ],
-      "formula": "rawKumo=.5rawV178+.5rawV223=.85global+.075coverage-local+.075APR-local; refit18-input correction and75:25spline77fusion",
-      "rationale": "History availability and underwriting regimes represent different mechanisms. Complete the paired population ablation with matched total15%local weight, unchanged data inputs, no optimized outer weights, and original6k correction.",
-      "batch": "population_fusion",
-      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V226",
     "status": "QUEUED",
     "definition": {
