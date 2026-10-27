@@ -63,3 +63,8 @@ V162 nonlinear count ratio failed KS0.529401. Test a distinct split-level hypoth
 ## V164: LightGBM on existing116-field information
 
 V163 prior alignment gives unchanged KS0.5302846600. Test LightGBM4.6.0,15 leaves, depth5, min_child150, L2leaf20, L1.1, learning rate.035, max2000 trees, max_bin127, row/feature sampling.85,2CPU threads. Tree count selected only inner15% holdout with100-round patience, then fit56k outer-training. Evaluate the expert standalone first; all features already exist in V25 pipeline union, no new raw feature. Keep V25 public incumbent. No peer update at main ad77946642b8f3028d3404212f3409c0f762c056.
+
+
+## V165: lightweight smoothed cash-stress burden
+
+After LightGBM116 standalone KS0.522992, user explicitly prioritized FE because shared RAM is tight. Add one scalar: ((n_negative+10*mu_train)/(N_eligible+10))*installment_observed_income_ratio, with mu_train from6k correction counts and prespecified prior strength10. N0 or undefined burden stays missing. Different from V14 late-allocation smoothing and V162 raw cashflow share; catalog searched before launch. Keep same frozen backbone and19-input head. Monthly dependence and incomplete visibility remain caveats. Main d889ec08127beaee0d40d8fffe5a543b7bd59d75 reviewed; no peer update.

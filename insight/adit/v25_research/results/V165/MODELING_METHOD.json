@@ -1,0 +1,61 @@
+{
+  "method": "corrected=sigmoid(logit(p_Kumo)+0.5*X_V25@beta); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities; feature_transform=cf_bayes_burden from V25 counts; undefined exposure stays missing; training-only reference",
+  "objective": "mean BCE with unweighted labels + 0.003/2*sum(beta[1:]^2); fit full correction, shrink at inference",
+  "spec": {
+    "id": "V165",
+    "families": [
+      "conditional_allocation",
+      "coverage_representation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "modeling_cf_credible_stress_burden"
+    ],
+    "label": "V25 plus credibility-smoothed financial stress times installment burden",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": true,
+    "feature_transform": "cf_bayes_burden",
+    "comparison_baseline": "V25",
+    "features_changed": true
+  },
+  "source": "v7/scripts/modeling_features.py",
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "modeling_cf_credible_stress_burden"
+  ],
+  "metrics": {
+    "KS": 0.5300942276387127,
+    "signed_KS": 0.5300942276387127,
+    "AUC": 0.8470775794883412,
+    "rows": 70000,
+    "logloss": 0.2925709475107242,
+    "brier": 0.08873851746890318
+  },
+  "error_analysis": {
+    "json": "v7/runs/V165/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V165/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V165/ERROR_CASES.csv"
+  },
+  "source_sha256": "596261774774ae78ff86bc669131d285f755a1912cf25a71af5a540b059ddb09"
+}

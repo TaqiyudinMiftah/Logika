@@ -138,7 +138,7 @@ def evaluate(spec,loaded):
         if (V/'scripts'/source).exists():(out/('SOURCE_'+source)).write_bytes((V/'scripts'/source).read_bytes())
     dump(dict(status='RUNNING',spec=spec,pid=os.getpid()),out/'STATUS.json')
     oof=np.full(len(tr),np.nan);pt=np.zeros(len(te));checks=[]
-    derived=['modeling_cf_negative_share'] if spec.get('feature_transform')=='cf_share' else []
+    derived={'cf_share':['modeling_cf_negative_share'],'cf_bayes_burden':['modeling_cf_credible_stress_burden']}.get(spec.get('feature_transform'),[])
     columns=parent['columns']+derived;weight=spec.get('kumo_weight',.75);strength=spec['strength'];blend=spec.get('blend','probability')
     expert=None;expert_audits=None
     if spec.get('expert_key'):
@@ -148,9 +148,16 @@ def evaluate(spec,loaded):
         f=source_frame
         if derived:
             f=dict(source_frame)
+            k=source_frame['h'].risk_conditional_negative_months.to_numpy(float)
+            nh=k+source_frame['h'].risk_conditional_nonnegative_months.to_numpy(float)
+            mu=float((k.sum()+.5)/(nh.sum()+1.))
+            transform_meta=dict(pooled_negative_CF_mean=mu,prior_strength=10.,reference_fit='6k correction-training only')
             for part in ['h','val','test']:
                 d=source_frame[part].copy();n=d.risk_conditional_negative_months+d.risk_conditional_nonnegative_months
-                d['modeling_cf_negative_share']=np.where(n>0,d.risk_conditional_negative_months/np.where(n>0,n,1.),np.nan)
+                if spec['feature_transform']=='cf_share':d[derived[0]]=np.where(n>0,d.risk_conditional_negative_months/np.where(n>0,n,1.),np.nan)
+                else:
+                    posterior=(d.risk_conditional_negative_months+10.*mu)/(n+10.)
+                    d[derived[0]]=np.where(n>0,posterior*d.installment_observed_income_ratio,np.nan)
                 f[part]=d
         head=f['head']
         if spec.get('rankloss'):
@@ -186,6 +193,7 @@ def evaluate(spec,loaded):
         bstat=metric(y[f['vi']],reference[f['vi']]);m=metric(y[f['vi']],p)
         row=dict(fold=f['fold'],metrics=m,baseline=bstat,delta_KS=m['KS']-bstat['KS'],delta_AUC=m['AUC']-bstat['AUC'],correction_rows=6000,parameters=len(head['coefficients']),head_training_KS=scores(f['h'].target,ph)['KS'],heldout_corrected_Kumo_KS=scores(f['val'].target,pv)['KS'],train_validation_head_KS_gap=scores(f['h'].target,ph)['KS']-scores(f['val'].target,pv)['KS'],mean_abs_correction=float(np.mean(abs(dv))),P99_abs_correction=float(np.quantile(abs(dv),.99)),optimizer_gradient_max=head['gradient_max_abs'],optimizer_iterations=head['iterations'],train_ids_sha256=ids_hash(tr,f['hi']),validation_ids_sha256=ids_hash(tr,f['vi']))
         if spec.get('prior_alignment'):row.update(prior_alignment_shift=float(prior_shift),training_only_class_priors=f['training_priors'])
+        if derived:row['feature_transform_reference']=transform_meta
         checks.append(row);joblib.dump(dict(head=head,kumo_weight=weight,blend=blend,prior_alignment_shift=float(prior_shift),test_averaging='probability_mean_5fold'),out/f"fold{f['fold']}_correction.joblib",compress=3)
         if expert is not None:
             row['additional_expert_audit']=expert_audits[f['fold']]
@@ -206,7 +214,7 @@ def evaluate(spec,loaded):
         formula=f"p_final=(1-{spec['expert_weight']})*p_V25+{spec['expert_weight']}*p_{spec['expert_key']}_116; expert trained56k outer-training with inner early stopping; mean5fold test"
     if spec.get('rankloss'):
         formula+='; beta=beta_V25+student_theta/strength; student trained with '+spec['rankloss']+' loss and teacher tether'
-    if derived:formula+='; X includes negative_CF_months/(negative_CF_months+nonnegative_CF_months); undefined exposure stays missing'
+    if derived:formula+='; feature_transform='+spec['feature_transform']+' from V25 counts; undefined exposure stays missing; training-only reference'
     if spec.get('prior_alignment'):formula+='; corrected Kumo logit adds alpha*(logit(pi_outertrain)-(1-strength)*logit(pi_context)-strength*logit(pi_correction)); priors from training only'
     result=dict(status='COMPLETE',experiment=name,spec=spec,columns=columns,new_features=parent['new_features'],support_features=parent['support_features'],OOF=m,baseline=b,comparison_baseline='V25',delta_KS=m['KS']-b['KS'],delta_AUC=m['AUC']-b['AUC'],mean_fold_KS=float(np.mean([q['metrics']['KS'] for q in checks])),std_fold_KS=float(np.std([q['metrics']['KS'] for q in checks],ddof=1)),delta_mean_fold_KS=float(np.mean([q['delta_KS'] for q in checks])),fold_wins=sum(q['delta_KS']>0 for q in checks),folds=checks,confidence_interval=intervals,evidence='TARGET_REACHED_DEVELOPMENT_ONLY' if m['KS']>=TARGET else 'INCONCLUSIVE_OR_NEGATIVE',overfitting_assessment=dict(development_folds_reused=True,independent_holdout=False,hyperparameters_prespecified=True,retrained_seeds=1,extra_head_features=0,selection_corrected_CI=False,public_score_unknown=True,risk='HIGH_SEARCH_MULTIPLICITY; do not equate pooled target with hidden-test improvement',diagnostic='Head training metric is optimistic; error analysis uses only outer-held-out predictions.'),frozen_Kumo_fraction=1.,backbone_retrained=False,original_spline_unchanged=True,all_outer_indices_identical=True,point_in_time_certified=False,inherited_baseline_snapshot_uncertainty=True,new_features_DPD_used=parent.get('new_features_DPD_used',False),new_features_snapshot_dependent=False,effective_quarantined=False,submission=str(submission.relative_to(ROOT)),submission_sha256=sha(submission),public_score=None,elapsed_seconds=time.time()-started,source_sha256=sha(__file__),source_feature_manifest='v7/modeling/reports/CACHE_AUDIT.json',feature_matrix_sha256=sha(V/'data/features_raw.parquet'),extension_feature_matrix_sha256=sha(V/'extension/data/raw_features.parquet'),features_changed_vs_V25=False,modeling_formula=formula,modeling_objective=f"mean BCE with unweighted labels + {spec['penalty']}/2*sum(beta[1:]^2); fit full correction, shrink at inference",controller_source='v7/scripts/modeling_features.py',error_analysis=dict(json=str((out/'ERROR_ANALYSIS.json').relative_to(ROOT)),markdown=str((out/'ERROR_ANALYSIS.md').relative_to(ROOT)),cases=str((out/'ERROR_CASES.csv').relative_to(ROOT))))
     if spec.get('representation'):
@@ -221,7 +229,7 @@ def evaluate(spec,loaded):
         result['ranking_source_sha256']=sha(V/'scripts/modeling_ranking.py')
     if derived:
         result['new_features']=parent['new_features']+derived;result['features_changed_vs_V25']=True
-        result['derived_feature_formula']='negative eligible-CF months / total eligible-CF months, missing when total0; same V25 inputs/cutoff'
+        result['derived_feature_formula']='negative eligible-CF months / total eligible-CF months, missing when total0; same V25 inputs/cutoff' if spec['feature_transform']=='cf_share' else '(negative_months+10*mu_training)/(total_months+10)*installment_to_observed_income; NA for total0 or undefined burden; mu from correction rows only'
     dump(result,out/'RESULT.json')
     gap=lambda r:float(np.mean([f['train_validation_head_KS_gap'] for f in r['folds']]))
     control=dict(control='V25',candidate_metrics=m,control_metrics=b,delta_KS=result['delta_KS'],delta_AUC=result['delta_AUC'],KS_fold_wins=result['fold_wins'],delta_mean_fold_KS=result['delta_mean_fold_KS'],per_fold=[dict(fold=q['fold'],delta_KS=q['delta_KS'],delta_AUC=q['delta_AUC']) for q in checks],confidence_interval=intervals,head_gap_candidate=gap(result),head_gap_control=gap(parent),head_gap_delta=gap(result)-gap(parent),parameter_count_candidate=[f['parameters'] for f in checks],parameter_count_control=[f['parameters'] for f in parent['folds']])

@@ -1,0 +1,331 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V165",
+  "spec": {
+    "id": "V165",
+    "families": [
+      "conditional_allocation",
+      "coverage_representation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "modeling_cf_credible_stress_burden"
+    ],
+    "label": "V25 plus credibility-smoothed financial stress times installment burden",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": true,
+    "feature_transform": "cf_bayes_burden",
+    "comparison_baseline": "V25",
+    "features_changed": true
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "modeling_cf_credible_stress_burden"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "modeling_cf_credible_stress_burden"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "OOF": {
+    "KS": 0.5300942276387127,
+    "signed_KS": 0.5300942276387127,
+    "AUC": 0.8470775794883412,
+    "rows": 70000,
+    "logloss": 0.2925709475107242,
+    "brier": 0.08873851746890318
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000,
+    "logloss": 0.29259872368613593,
+    "brier": 0.08874672566929512
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": -0.0001904324053283446,
+  "delta_AUC": 4.830058122529124e-05,
+  "mean_fold_KS": 0.5333743672484802,
+  "std_fold_KS": 0.005763641090057301,
+  "delta_mean_fold_KS": 4.4542691928883826e-05,
+  "fold_wins": 3,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5285625572196135,
+        "signed_KS": 0.5285625572196135,
+        "AUC": 0.8440804359997061,
+        "rows": 14000,
+        "logloss": 0.2936286214803433,
+        "brier": 0.08878969862377091
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000,
+        "logloss": 0.29362395039095357,
+        "brier": 0.08878022367454512
+      },
+      "delta_KS": 8.265145879815528e-05,
+      "delta_AUC": 1.0652081749551456e-05,
+      "correction_rows": 6000,
+      "parameters": 95,
+      "head_training_KS": 0.5489170625506563,
+      "heldout_corrected_Kumo_KS": 0.5273435242886377,
+      "train_validation_head_KS_gap": 0.021573538262018577,
+      "mean_abs_correction": 0.2981631425502927,
+      "P99_abs_correction": 1.1817595348774017,
+      "optimizer_gradient_max": 4.907829825593398e-07,
+      "optimizer_iterations": 86,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "feature_transform_reference": {
+        "pooled_negative_CF_mean": 0.28838639022326207,
+        "prior_strength": 10.0,
+        "reference_fit": "6k correction-training only"
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5371795696202455,
+        "signed_KS": 0.5371795696202455,
+        "AUC": 0.8496263880151645,
+        "rows": 14000,
+        "logloss": 0.29072646499091115,
+        "brier": 0.08839974543764136
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000,
+        "logloss": 0.29075557216256626,
+        "brier": 0.08841494597598963
+      },
+      "delta_KS": -0.0008196016043164889,
+      "delta_AUC": 2.143459715286955e-05,
+      "correction_rows": 6000,
+      "parameters": 95,
+      "head_training_KS": 0.5373357549798559,
+      "heldout_corrected_Kumo_KS": 0.5371510916057727,
+      "train_validation_head_KS_gap": 0.00018466337408318267,
+      "mean_abs_correction": 0.20510881782691903,
+      "P99_abs_correction": 0.8717857295231989,
+      "optimizer_gradient_max": 3.6545387862131976e-07,
+      "optimizer_iterations": 83,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "feature_transform_reference": {
+        "pooled_negative_CF_mean": 0.285998664950174,
+        "prior_strength": 10.0,
+        "reference_fit": "6k correction-training only"
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5415966183596934,
+        "signed_KS": 0.5415966183596934,
+        "AUC": 0.849916907240672,
+        "rows": 14000,
+        "logloss": 0.2907923305523048,
+        "brier": 0.08822425762816154
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000,
+        "logloss": 0.29083487835059463,
+        "brier": 0.08824674446694904
+      },
+      "delta_KS": 0.0012983800705377302,
+      "delta_AUC": 5.9999480873984545e-05,
+      "correction_rows": 6000,
+      "parameters": 95,
+      "head_training_KS": 0.5605788287355573,
+      "heldout_corrected_Kumo_KS": 0.5424084809005348,
+      "train_validation_head_KS_gap": 0.01817034783502247,
+      "mean_abs_correction": 0.2850528128549724,
+      "P99_abs_correction": 1.0982908461682879,
+      "optimizer_gradient_max": 9.440330508375758e-07,
+      "optimizer_iterations": 86,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "feature_transform_reference": {
+        "pooled_negative_CF_mean": 0.29141595033428846,
+        "prior_strength": 10.0,
+        "reference_fit": "6k correction-training only"
+      }
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5306629229675144,
+        "signed_KS": 0.5306629229675144,
+        "AUC": 0.8439676570537943,
+        "rows": 14000,
+        "logloss": 0.2951260736958779,
+        "brier": 0.08944555215611574
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000,
+        "logloss": 0.29521447734100104,
+        "brier": 0.08947486296029543
+      },
+      "delta_KS": 1.0864654393705209e-05,
+      "delta_AUC": 0.00010430068217848198,
+      "correction_rows": 6000,
+      "parameters": 95,
+      "head_training_KS": 0.5320917464843726,
+      "heldout_corrected_Kumo_KS": 0.5290517381795602,
+      "train_validation_head_KS_gap": 0.003040008304812436,
+      "mean_abs_correction": 0.23151496875807967,
+      "P99_abs_correction": 0.8768379016384216,
+      "optimizer_gradient_max": 3.8477430781250384e-07,
+      "optimizer_iterations": 90,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "feature_transform_reference": {
+        "pooled_negative_CF_mean": 0.2906877350656963,
+        "prior_strength": 10.0,
+        "reference_fit": "6k correction-training only"
+      }
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5288701680753343,
+        "signed_KS": 0.5288701680753343,
+        "AUC": 0.8479235211771236,
+        "rows": 14000,
+        "logloss": 0.292581246834184,
+        "brier": 0.08883333349882641
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000,
+        "logloss": 0.2925647401855643,
+        "brier": 0.08881685126869625
+      },
+      "delta_KS": -0.00034958111976868267,
+      "delta_AUC": 2.6813967043293196e-05,
+      "correction_rows": 6000,
+      "parameters": 95,
+      "head_training_KS": 0.5481030106903467,
+      "heldout_corrected_Kumo_KS": 0.5307848678484282,
+      "train_validation_head_KS_gap": 0.01731814284191857,
+      "mean_abs_correction": 0.2532767919829414,
+      "P99_abs_correction": 0.9475266568620009,
+      "optimizer_gradient_max": 4.0375648831123207e-07,
+      "optimizer_iterations": 82,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "feature_transform_reference": {
+        "pooled_negative_CF_mean": 0.2914479071335678,
+        "prior_strength": 10.0,
+        "reference_fit": "6k correction-training only"
+      }
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5227326939402615,
+      0.5396405228807606
+    ],
+    "delta_KS": [
+      -0.0008474618488830937,
+      0.0009324062229948621
+    ],
+    "candidate_AUC": [
+      0.843414320426115,
+      0.8508084302392652
+    ],
+    "delta_AUC": [
+      -9.436505663099059e-06,
+      9.975705371013656e-05
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "evidence": "INCONCLUSIVE_OR_NEGATIVE",
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "retrained_seeds": 1,
+    "extra_head_features": 0,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY; do not equate pooled target with hidden-test improvement",
+    "diagnostic": "Head training metric is optimistic; error analysis uses only outer-held-out predictions."
+  },
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "new_features_DPD_used": false,
+  "new_features_snapshot_dependent": false,
+  "effective_quarantined": false,
+  "submission": "v7/submissions/submission_V165_V25_modeling.csv",
+  "submission_sha256": "596828c0424c4e5e10a738284f7fef3e0caeacc2c901fb9afd7115e90560eda6",
+  "public_score": null,
+  "elapsed_seconds": 5.585918664932251,
+  "source_sha256": "596261774774ae78ff86bc669131d285f755a1912cf25a71af5a540b059ddb09",
+  "source_feature_manifest": "v7/modeling/reports/CACHE_AUDIT.json",
+  "feature_matrix_sha256": "c90db5d2c2b0d8a5b2937cd6d76041c477f9eae1c88ac03201ba4a8435e037ae",
+  "extension_feature_matrix_sha256": "3deb81d9c874058370a5c39112a2b9205dcb33d50dd36227130d64393f9c133a",
+  "features_changed_vs_V25": true,
+  "modeling_formula": "corrected=sigmoid(logit(p_Kumo)+0.5*X_V25@beta); final=0.75*corrected+0.25*p_spline77; mean5fold test probabilities; feature_transform=cf_bayes_burden from V25 counts; undefined exposure stays missing; training-only reference",
+  "modeling_objective": "mean BCE with unweighted labels + 0.003/2*sum(beta[1:]^2); fit full correction, shrink at inference",
+  "controller_source": "v7/scripts/modeling_features.py",
+  "error_analysis": {
+    "json": "v7/runs/V165/ERROR_ANALYSIS.json",
+    "markdown": "v7/runs/V165/ERROR_ANALYSIS.md",
+    "cases": "v7/runs/V165/ERROR_CASES.csv"
+  },
+  "derived_feature_formula": "(negative_months+10*mu_training)/(total_months+10)*installment_to_observed_income; NA for total0 or undefined burden; mu from correction rows only"
+}

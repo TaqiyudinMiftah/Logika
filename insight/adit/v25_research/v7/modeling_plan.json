@@ -878,5 +878,26 @@
     "expert_weight": 1.0,
     "comparison_baseline": "V25",
     "features_changed": false
+  },
+  {
+    "id": "V165",
+    "families": [
+      "conditional_allocation",
+      "coverage_representation"
+    ],
+    "only": [
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "modeling_cf_credible_stress_burden"
+    ],
+    "label": "V25 plus credibility-smoothed financial stress times installment burden",
+    "penalty": 0.003,
+    "strength": 0.5,
+    "kumo_weight": 0.75,
+    "blend": "probability",
+    "refit": true,
+    "feature_transform": "cf_bayes_burden",
+    "comparison_baseline": "V25",
+    "features_changed": true
   }
 ]
