@@ -36,12 +36,17 @@ def main():
     training=table.iloc[ix['train']].copy();training['target']=original.target.iloc[ix['train']].to_numpy(int)
     query=table.iloc[ix['validation']].copy();results={};predictions={}
     baseline_npz=np.load(frz/'frozen/fold0/baseline.npz')
-    joint_frame=pd.read_parquet(joint/'fold0/expanded.parquet')
-    for c in SPECTRAL:joint_frame[c]=spectral[c].to_numpy(dtype=np.float32)
-    joint_query=joint_frame.iloc[np.r_[ix['correction'],ix['validation']]].reset_index(drop=True)
+    # Reconstruct the true saved periodicity spline from the exact original
+    # correction query used by its source, rather than AGY's float32-expanded
+    # head surrogate. The latter intentionally remains in ALL66 route replay.
+    exact_query=pd.read_parquet(exp/'kumo-temperature-adaptation-20261021/full_data/fold0/query.parquet')
+    mature_ids=mature.copy();mature_ids.index=original.application_id
+    spectral_ids=spectral.copy();spectral_ids.index=original.application_id
+    for t in [1,30]:exact_query[f're_late_{t}_posterior']=mature_ids.loc[exact_query.application_id,f'matched_beta_late_{t}'].to_numpy(float)
+    for c in SPECTRAL:exact_query[c]=spectral_ids.loc[exact_query.application_id,c].to_numpy(float)
     head18=json.loads((frz/'frozen/fold0/MANIFEST.json').read_text())['head_columns']
-    h29=feature_head.fit(joint_query.iloc[:6000].assign(target=original.target.iloc[ix['correction']].to_numpy(int)),baseline_npz['raw'][:6000],head18+SPECTRAL,.003,.5)
-    corrected=baseline.corrected_probability(h29,joint_query.iloc[6000:],baseline_npz['raw'][6000:])[0]
+    h29=feature_head.fit(exact_query.iloc[:6000].assign(target=original.target.iloc[ix['correction']].to_numpy(int)),baseline_npz['raw'][:6000],head18+SPECTRAL,.003,.5)
+    corrected=baseline.corrected_probability(h29,exact_query.iloc[6000:],baseline_npz['raw'][6000:])[0]
     with np.load(exp/'transfer-20261025/ROBUSTNESS_OOF.npz')as z:refper=(z['periodicity__original'][ix['validation']]-.75*corrected)/.25
     for name,columns in [('mat77',cols),('per88',cols+SPECTRAL)]:
         fitted=fixed_spline_fit(training,columns,baseline.prepare)
@@ -57,7 +62,7 @@ def main():
     expanded=pd.read_parquet(joint/'fold0/expanded.parquet')
     with np.load(frz/'frozen/fold0/roles.npz')as z:rows=np.r_[z['context'],z['correction']];validation=z['validation']
     feature_cols=spline200_columns(frz,joint)
-    with threadpool_limits(limits=2):
+    with threadpool_limits(limits=4):
         X=make_scaled_spline_matrix(expanded,rows,feature_cols,n_knots=6,degree=2,top_inter_n=35)
         intercept,weights=fit_logistic_irls(X[rows],original.target.iloc[rows].to_numpy(int),C=.0025)
         pred,_=predict_irls(X[validation],intercept,weights)

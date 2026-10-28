@@ -1,0 +1,40 @@
+{
+  "id": "kumo-supervised-view-20261021",
+  "original_deadline": 1792585871.823748,
+  "selection_admitted": true,
+  "model_training_admitted": true,
+  "hypothesis": "Supervised fold-local selection may recover informative fields outside the manually curated90 while keeping constant Kumo feature budget. Raw broadCatBoost is weaker than compact, so do not feed all1032 columns to Kumo.",
+  "selector": {
+    "iterations": 1500,
+    "depth": 6,
+    "learning_rate": 0.02,
+    "l2_leaf_reg": 25,
+    "loss_function": "Logloss",
+    "bootstrap_type": "Bayesian",
+    "bagging_temperature": 0.5,
+    "random_strength": 1,
+    "border_count": 254
+  },
+  "selection": "Exactly90 fields, PredictionValuesChange ordered; context50000 Pearson0.95 greedy redundancy filter; no reserved6000 targets or outer labels. Preserve fitted selectors.",
+  "source_url": "https://catboost.ai/docs/en/concepts/output-data_feature-analysis_feature-importance",
+  "source_limitation": "Official importance describes fitted model prediction change, not a guarantee of generalization or feature causality.",
+  "pipeline": "KumoLarge50kcontext8estimators, new90fields; honest6000correction18features same0.003L2/0.5strength; same25percent spline. Complete original70kfivefold OOF, no performancefoldpruning.",
+  "exploration_design_count": 1,
+  "historical_label_reuse": true,
+  "point_in_time_snapshot_certified": false,
+  "no_submission": true,
+  "checkpoint": "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/assets/classifier.pt",
+  "checkpoint_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "source_sha256": {
+    "prepare.py": "c91960f5e81b1b59726c164881c09501ada0f5d4e7a3e971ffe1b9c1a4981c61",
+    "runner.py": "dd7988349a84fe8caae1f0d5e72f32c526f23a652142b1ca01dc2956566e27ba",
+    "selector.py": "c8f5d690527a6c0a79da5f55fe25c29a75742050120abbace1aba08986118d04",
+    "point_report.py": "463a5219837854ead48b800203c47a00d5747da6bfc698aa7f2b7125b8cedfd8",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "gpu_backend.py": "340bee1ed86223567de5c39d5c0ff3849b4a2ce2bfcc2530cc4bdaddda67fbcf",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "experiment.py": "353d14d435ab98b6643dd734e6698636af5b0810ce16ca4ba5298bd00df4959f",
+    "entrypoint.py": "e90b189e8c9e07c55047c2112eb33543325d8cc7732ed64981c7c6e3772658e2"
+  },
+  "preparation_policy": "Wait for all5 immutable selectors throughPC2; verify hashes and IDs; engineeringGPUcache/headreplay before Kumo admission. Same originaldeadline with3h reserve. Separate48GiB4CPU service GPU0 only."
+}

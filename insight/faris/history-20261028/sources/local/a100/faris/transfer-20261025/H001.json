@@ -1,0 +1,23 @@
+{
+  "id": "H001-correction-and-seed-bagging",
+  "frozen_before_new_scores": true,
+  "created_UTC": "2026-10-24T18:58:23.511666+00:00",
+  "mechanism": "Correction head uses only 6000 labels; sampling noise may exceed feature effects. Average original head with two predeclared stratified bootstrap heads. Separately average two Kumo seed pipelines. Compare fixed choices; no weight sweep.",
+  "comparators": [
+    "single_original",
+    "three_head_equal_mean",
+    "two_kumo_seed_equal_mean"
+  ],
+  "recipes": [
+    "baseline",
+    "maturity",
+    "periodicity"
+  ],
+  "success_rule": "Positive pooled KS versus matched original and broadly consistent fold changes; retain paired bootstrap interval and report inconclusive uncertainty. No claim fresh private generalization.",
+  "no_new_fit_beyond_pilots": true,
+  "no_public_score_for_fit": true,
+  "new_stage_source": {
+    "path": "source/diagnose.py",
+    "sha256": "e02916a57e541f6696355fe26ec40909344f2fd54701e0b5e5c619088cb8f05a"
+  }
+}

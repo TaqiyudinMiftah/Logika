@@ -1,0 +1,70 @@
+{
+  "nodes": [
+    {
+      "name": "node2003",
+      "ssh": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=15",
+        "-p",
+        "2003",
+        "faris@gpu-labkc.ub.ac.id"
+      ],
+      "root": "/mnt/home/faris/logika-horizontal-20261026",
+      "python": "/mnt/home/faris/faris/kumo-coverage-placement-20261021/.venv/bin/python",
+      "screening_units": [
+        "logika-horizontal-lane0-20261026.service",
+        "logika-horizontal-lane1-20261026.service"
+      ],
+      "HF_HOME": "/mnt/home/faris/logika-model-arena-20261025/storage/huggingface",
+      "bank": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank",
+      "confirmation_lanes": [
+        {
+          "lane": 0,
+          "gpu": 0
+        },
+        {
+          "lane": 1,
+          "gpu": 1
+        }
+      ]
+    },
+    {
+      "name": "node2002",
+      "ssh": [
+        "ssh",
+        "-o",
+        "ConnectTimeout=15",
+        "-S",
+        "/mnt/home/faris/logika-horizontal-20261026/runtime/node2002/ssh.sock",
+        "-p",
+        "2002",
+        "faris@gpu-labkc.ub.ac.id"
+      ],
+      "root": "/home/faris/logika-horizontal-20261026",
+      "python": "/home/faris/logika-horizontal-20261026/runtime/env/bin/python",
+      "screening_units": [
+        "logika-horizontal-node2002-gpu0-20261026.service",
+        "logika-horizontal-node2002-gpu1-20261026.service"
+      ],
+      "HF_HOME": "/home/faris/logika-horizontal-20261026/cache",
+      "bank": "/home/faris/logika-horizontal-20261026/bank",
+      "confirmation_lanes": [
+        {
+          "lane": 2,
+          "gpu": 0
+        },
+        {
+          "lane": 3,
+          "gpu": 1
+        }
+      ]
+    }
+  ],
+  "coordinator": "node2001",
+  "delegation_start_pack_index": 150,
+  "scientific_protocol_changed": false,
+  "user_authorization": "Move work from A100 to nodes 2001, 2002 and 2003"
+}

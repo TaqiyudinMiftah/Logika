@@ -1,0 +1,255 @@
+{
+  "status": "complete",
+  "rows": 100000,
+  "target_labels_opened": false,
+  "feature_shared_estimators": false,
+  "blocks": {
+    "repayment_cashflow": [
+      "fe_due_income_mean",
+      "fe_negative_cashflow_due_share",
+      "fe_due_account_overlap_share",
+      "fe_negative_allocated_due_share",
+      "fe_nonnegative_allocated_due_share",
+      "fe_recent_negative_due_share_change"
+    ],
+    "bureau_trajectory": [
+      "fe_provider_score_slope_mean",
+      "fe_provider_score_slope_min",
+      "fe_provider_logdebt_slope_mean",
+      "fe_provider_score_slope_disagreement",
+      "fe_latest_report_age_median",
+      "fe_latest_reporting_lag_median"
+    ],
+    "shopping_change": [
+      "fe_matched_category_logprice_change",
+      "fe_matched_category_change_SE",
+      "fe_matched_category_count",
+      "fe_category_mix_turnover",
+      "fe_cancellation_share_change",
+      "fe_purchase_gap_logratio"
+    ]
+  },
+  "audit": {
+    "account_ineligible_rows": 0,
+    "account_balance_identity_nonzero_fraction": 0.0,
+    "repayment_future_due_rows": 0,
+    "repayment_future_allocation_rows": 0,
+    "repayment_eligible_installments": 1280311,
+    "repayment_overlap_months": 676758,
+    "bureau_ineligible_rows": 0,
+    "bureau_providers_with_90day_pairs": 170945,
+    "shopping_ineligible_rows": 0,
+    "shopping_matching_category_pairs": 327505
+  },
+  "source_hashes": {
+    "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/train_applications.csv": "b60df5704bcd3713314a31c5382db22f41d38971bd76906b15f45a38edff509b",
+    "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/test_applications.csv": "113f6ee4ff15e4c8bf14fb9a85fc399b906d1c569f6a715675a5814da2e02dfe",
+    "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/account_behavior.csv": "2f46be03496583b0231591194e13bea7593e87323056dfead6b9b19c48871924",
+    "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/repayment_history.csv": "b0b00e18de2c05233653b3627bc7f9d679644e84c56680284766d71c5e279877",
+    "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/bureau_observations.csv": "e37b8a76fe4f97ee6f1fd78ab26ffb0e78e464714f77d961062e03d757d057a0",
+    "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/ecommerce_transactions.csv": "495b3859f2146f87e7f8a383b308770af3d48342e3e1acdb45d7f1bed2bab742"
+  },
+  "feature_hash": "eaf59e2dc03d2bb9fa5758b85d7f6eaf802caa6a1ef72879dcb5594a65b28304",
+  "distributions": {
+    "fe_due_income_mean": {
+      "nonmissing": 64195,
+      "unique": 64195,
+      "quantiles": [
+        0.03000029766754104,
+        0.24515842460214504,
+        0.6326592354911253,
+        1.5293771687964453,
+        14.478539069169372
+      ]
+    },
+    "fe_negative_cashflow_due_share": {
+      "nonmissing": 64195,
+      "unique": 41477,
+      "quantiles": [
+        0.0,
+        0.0,
+        0.29783155782926446,
+        0.6788908195767751,
+        1.0
+      ]
+    },
+    "fe_due_account_overlap_share": {
+      "nonmissing": 64195,
+      "unique": 29751,
+      "quantiles": [
+        0.007964895863968131,
+        0.4444438938172737,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "fe_negative_allocated_due_share": {
+      "nonmissing": 48987,
+      "unique": 2928,
+      "quantiles": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "fe_nonnegative_allocated_due_share": {
+      "nonmissing": 63088,
+      "unique": 4126,
+      "quantiles": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "fe_recent_negative_due_share_change": {
+      "nonmissing": 51215,
+      "unique": 31871,
+      "quantiles": [
+        -1.0,
+        -0.44511191927297145,
+        0.0,
+        0.5,
+        1.0
+      ]
+    },
+    "fe_provider_score_slope_mean": {
+      "nonmissing": 68763,
+      "unique": 68674,
+      "quantiles": [
+        -348.25768755835315,
+        -26.48800354984466,
+        -1.8772370953421529,
+        21.86000755771309,
+        447.925913826531
+      ]
+    },
+    "fe_provider_score_slope_min": {
+      "nonmissing": 68763,
+      "unique": 68032,
+      "quantiles": [
+        -358.71517124788676,
+        -54.47084735010386,
+        -18.0661349583296,
+        7.729142111595757,
+        447.925913826531
+      ]
+    },
+    "fe_provider_logdebt_slope_mean": {
+      "nonmissing": 69228,
+      "unique": 58400,
+      "quantiles": [
+        -73.08713880829498,
+        -0.2295144990982683,
+        0.0,
+        3.351828442743582,
+        68.34028630438263
+      ]
+    },
+    "fe_provider_score_slope_disagreement": {
+      "nonmissing": 62619,
+      "unique": 62618,
+      "quantiles": [
+        0.0,
+        5.50107900158833,
+        19.264183148238605,
+        48.93331665500541,
+        319.8553366853244
+      ]
+    },
+    "fe_latest_report_age_median": {
+      "nonmissing": 100000,
+      "unique": 60226,
+      "quantiles": [
+        0.013194444444444444,
+        26.022222222222222,
+        64.03611111111111,
+        104.04666666666668,
+        810.8583333333333
+      ]
+    },
+    "fe_latest_reporting_lag_median": {
+      "nonmissing": 100000,
+      "unique": 241,
+      "quantiles": [
+        0.0,
+        21.0,
+        57.0,
+        95.0,
+        120.0
+      ]
+    },
+    "fe_matched_category_logprice_change": {
+      "nonmissing": 94576,
+      "unique": 94567,
+      "quantiles": [
+        -2.9466835002339966,
+        -0.48199723143153,
+        0.011849409708306613,
+        0.4815928305521977,
+        2.9830348282528742
+      ]
+    },
+    "fe_matched_category_change_SE": {
+      "nonmissing": 85774,
+      "unique": 85774,
+      "quantiles": [
+        5.1648424008732255e-06,
+        0.11573943911735157,
+        0.27447098211700227,
+        0.5381761424066889,
+        2.1220247153489153
+      ]
+    },
+    "fe_matched_category_count": {
+      "nonmissing": 100000,
+      "unique": 8,
+      "quantiles": [
+        0.0,
+        1.0,
+        3.0,
+        5.0,
+        7.0
+      ]
+    },
+    "fe_category_mix_turnover": {
+      "nonmissing": 95089,
+      "unique": 15577,
+      "quantiles": [
+        0.0,
+        0.19106699751861045,
+        0.3571428571428571,
+        0.6521739130434783,
+        1.0000000000000002
+      ]
+    },
+    "fe_cancellation_share_change": {
+      "nonmissing": 95537,
+      "unique": 2297,
+      "quantiles": [
+        -1.0,
+        -0.125,
+        0.0,
+        0.15384615384615385,
+        1.0
+      ]
+    },
+    "fe_purchase_gap_logratio": {
+      "nonmissing": 87040,
+      "unique": 87026,
+      "quantiles": [
+        -4.515899907763126,
+        -1.2263190489266718,
+        -0.20079466048058658,
+        0.897804726775549,
+        3.311312205758278
+      ]
+    }
+  },
+  "seconds": 23.461257696151733,
+  "qualification": "Snapshot inherited; allocation availability is not proof of full settlement. Monthly net includes recorded outflows, not an independently observed debt-free surplus. No repayment amount_paid or DPD used."
+}

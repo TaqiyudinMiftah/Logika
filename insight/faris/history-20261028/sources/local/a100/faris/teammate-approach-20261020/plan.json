@@ -1,0 +1,31 @@
+{
+  "id": "teammate-approach-20261020",
+  "input": "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/input",
+  "inner_seed": 20261020,
+  "bootstrap_seed": 20261023,
+  "bootstrap_repetitions": 1200,
+  "versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.16.3",
+    "scikit-learn": "1.7.2",
+    "joblib": "1.6.0",
+    "pyarrow": "22.0.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "primary": "Three-fold internal choice of additive or one of three residualized interaction corrections; fixed five outer folds.",
+  "maximum_seconds": 86400,
+  "submission_write": false,
+  "historical_labels_reused": true,
+  "baseline_public_score": {
+    "value": 0.5647,
+    "source": "User-reported in teammate master log, exact CSV hash locked; not freshly queried."
+  },
+  "rationale_after_feature_attribution": "Preserve original .003 main-effect regularization; new residualized tensor directions use .03. Explicitly related to earlier EBM/embedding work, with a different fitted correction boundary and direct additive control.",
+  "related_previous_work_acknowledged": true,
+  "goal": {
+    "metric": "original five-fold 70,000-row OOF KS",
+    "target": 0.54,
+    "not_yet_achieved": true
+  }
+}

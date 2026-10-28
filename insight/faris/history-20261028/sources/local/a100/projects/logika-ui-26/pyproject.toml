@@ -1,0 +1,45 @@
+[project]
+name = "logika-ui-26"
+version = "0.1.0"
+description = "Credit risk modeling project for DSC LOGIKA UI 2026"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "duckdb>=1.5.6",
+    "lightgbm>=4.7",
+    "matplotlib>=3.9",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "pyarrow>=18.0",
+    "psutil>=7.0",
+    "scikit-learn>=1.6",
+    "seaborn>=0.13",
+]
+
+[project.optional-dependencies]
+gpu = ["catboost>=1.2.10,<2"]
+cpu_models = ["xgboost-cpu>=3.0,<4"]
+kumo = ["torch==2.7.1", "structured-data-models", "huggingface-hub"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+structured-data-models = { git = "https://github.com/NVIDIA/structured-data-models", rev = "329a707bbcf9ca147aa45a63fef8b2029f4ee37b" }
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29",
+    "jupyterlab>=4.3",
+    "ruff>=0.11",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

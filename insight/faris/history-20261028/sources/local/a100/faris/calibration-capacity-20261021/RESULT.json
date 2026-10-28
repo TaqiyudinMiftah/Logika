@@ -1,0 +1,84 @@
+{
+  "status": "complete",
+  "evaluation_labels_opened": false,
+  "folds": [
+    {
+      "fold": 0,
+      "training_rows": 6000,
+      "positive_training_rows": 815,
+      "parameters": 90,
+      "ridge_effective_degrees_of_freedom": 46.437873336320955,
+      "positives_per_effective_parameter": 17.550329966608423,
+      "conditional_shrunk_logit_SE_quantiles": [
+        0.08556060263340859,
+        0.14290321266234252,
+        0.2150737295756657,
+        0.3259472319130337
+      ],
+      "head_gradient_max": 7.145840780977975e-07
+    },
+    {
+      "fold": 1,
+      "training_rows": 6000,
+      "positive_training_rows": 815,
+      "parameters": 90,
+      "ridge_effective_degrees_of_freedom": 46.61124033775959,
+      "positives_per_effective_parameter": 17.48505283477238,
+      "conditional_shrunk_logit_SE_quantiles": [
+        0.08525965839659831,
+        0.13919222967916395,
+        0.20517420101552689,
+        0.30980967027528944
+      ],
+      "head_gradient_max": 5.945956889766356e-07
+    },
+    {
+      "fold": 2,
+      "training_rows": 6000,
+      "positive_training_rows": 815,
+      "parameters": 90,
+      "ridge_effective_degrees_of_freedom": 47.37427661446353,
+      "positives_per_effective_parameter": 17.203428912119318,
+      "conditional_shrunk_logit_SE_quantiles": [
+        0.08700350165285284,
+        0.14087976252195983,
+        0.20299638318488697,
+        0.3054177002090882
+      ],
+      "head_gradient_max": 9.171348982381063e-07
+    },
+    {
+      "fold": 3,
+      "training_rows": 6000,
+      "positive_training_rows": 815,
+      "parameters": 90,
+      "ridge_effective_degrees_of_freedom": 46.49004143744364,
+      "positives_per_effective_parameter": 17.530636127667318,
+      "conditional_shrunk_logit_SE_quantiles": [
+        0.08701429884095929,
+        0.1410513456132388,
+        0.20932436394402185,
+        0.30913614937813755
+      ],
+      "head_gradient_max": 8.027566445836648e-07
+    },
+    {
+      "fold": 4,
+      "training_rows": 6000,
+      "positive_training_rows": 815,
+      "parameters": 90,
+      "ridge_effective_degrees_of_freedom": 46.50033340238707,
+      "positives_per_effective_parameter": 17.52675605457406,
+      "conditional_shrunk_logit_SE_quantiles": [
+        0.08582111184873921,
+        0.1412923078205071,
+        0.2100232925055655,
+        0.29748623285998477
+      ],
+      "head_gradient_max": 4.2113529240575567e-07
+    }
+  ],
+  "variance_estimator": "Penalized logistic sandwich H^-1 X^Tdiag(residual^2)X H^-1/n^2; conditional on fixed backbone/design, then0.5headshrinkage.",
+  "limitations": "Approximate conditional diagnostic. Does not establish causality, generalization improvement or independence; excludes context, feature-builder and selection uncertainty. No new fitted recipe or score.",
+  "hypothesis": "If conditional estimation variance is material, honest inner crossfitting can expand calibration labels from6000 to56000. Every inner prior/encoder/context must fit without its heldout labels/covariates; final outer model refit preserves frozen outer evaluation."
+}

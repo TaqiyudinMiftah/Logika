@@ -1,0 +1,39 @@
+{
+  "created": 1792524470.4448915,
+  "consensus": "Search attempted; connector requires reauthentication. Official papers and pinned installed implementation used as fallback.",
+  "sources": [
+    {
+      "url": "https://arxiv.org/abs/2601.09654",
+      "version": "v1,2026-01-14",
+      "finding": "Fine-tuning gains depend on model/data; larger supervised updates can worsen calibration. Does not establish a benefit on Kumo or this competition."
+    },
+    {
+      "url": "https://arxiv.org/html/2610.12005v1",
+      "version": "v1,2026-10-08",
+      "finding": "Compact query/key similarity adaptation and selective aggregation were evaluated on other tabular backbones. Query-scaling updates motivate testing a smaller, existing attention-temperature subset. This is a Kumo-specific hypothesis, not a replication claim."
+    },
+    {
+      "url": "https://github.com/NVIDIA/structured-data-models/blob/main/sdm/models/kumo/tabular/model.py",
+      "version": "Online API reviewed; implementation must remain pinned to installed0.2.1",
+      "finding": "Public training-mode forward accepts separate context labels and query features. Actual gradients, zero-update equivalence and frozen-weight integrity must be verified before admission."
+    }
+  ],
+  "historical_evidence": {
+    "previous_large_Kumo_OOF": 0.5127016592,
+    "protocol": "Earlier cohort/protocol; cannot compare directly to original70k5fold",
+    "small_finetunes_public": [
+      0.54332,
+      0.54267
+    ],
+    "reported_current_V25_public": 0.56822,
+    "current_baseline": "Repaired coverage96 is being evaluated with full fivefold OOF; no partial-fold selection."
+  },
+  "proposal": "Train only existing ICL attention query-temperature parameters, leaving all other pretrained weights fixed. Fit on episodic support/query partitions drawn exclusively from each frozen50k context; keep6000correction and14000validation disjoint. Compare with a zero-update A100 control under identical features, fixed seeds, and budget.",
+  "rejection_criteria": [
+    "Any nonselected pretrained weight changes",
+    "No actual nonzero gradients on selected temperatures",
+    "Zero-update mismatch or cross-role label access",
+    "Cannot complete full fivefold before original deadline"
+  ],
+  "status": "research_and_preflight_design_only; no adaptation training admitted yet"
+}

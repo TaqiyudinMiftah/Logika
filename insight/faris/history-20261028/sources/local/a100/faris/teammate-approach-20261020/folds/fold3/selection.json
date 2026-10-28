@@ -1,0 +1,66 @@
+{
+  "selected": "consumption_obligations",
+  "metrics": {
+    "control": {
+      "KS": 0.5119510622311884,
+      "signed_KS": 0.5119510622311884,
+      "AUC": 0.8421101454762735,
+      "rows": 6000,
+      "logloss": 0.2960254212540728,
+      "average_precision": 0.495087435420558
+    },
+    "credit_agreement": {
+      "KS": 0.5177298838674563,
+      "signed_KS": 0.5177298838674563,
+      "AUC": 0.8418389526181588,
+      "rows": 6000,
+      "logloss": 0.2962672930015257,
+      "average_precision": 0.4940918415948547
+    },
+    "consumption_obligations": {
+      "KS": 0.5149102827292036,
+      "signed_KS": 0.5149102827292036,
+      "AUC": 0.8430723358437209,
+      "rows": 6000,
+      "logloss": 0.2951745339572595,
+      "average_precision": 0.4986194345328956
+    },
+    "measurement_reliability": {
+      "KS": 0.5157882281948283,
+      "signed_KS": 0.5157882281948283,
+      "AUC": 0.8417095089066503,
+      "rows": 6000,
+      "logloss": 0.2962640759782019,
+      "average_precision": 0.49471237753986447
+    }
+  },
+  "eligible": [
+    "control",
+    "consumption_obligations"
+  ],
+  "selection": "minimum inner OOF logloss with nondecreasing AUC versus control",
+  "selected_using_outer_labels": false,
+  "boundaries": [
+    {
+      "inner": 0,
+      "fit": 4000,
+      "evaluation": 2000,
+      "fitting_ids_sha": "3b248e1a0e5b4b4bb48a5d54566a4e496462f6a3a8f0f224b6db6c822fefc982",
+      "evaluation_ids_sha": "ec11bebbfff8711a775bd6ae664ff4f5350e674f79c584238f34dfd877c92478"
+    },
+    {
+      "inner": 1,
+      "fit": 4000,
+      "evaluation": 2000,
+      "fitting_ids_sha": "259c1ac5e6003ee4b0cc5e4de1e72a5c820d89bdc3d9e39fb84228fd78221444",
+      "evaluation_ids_sha": "23f60fc6bd019c4cb5df6e5d6b0bdf8b25a553489f244bc5cd304be06e52cbee"
+    },
+    {
+      "inner": 2,
+      "fit": 4000,
+      "evaluation": 2000,
+      "fitting_ids_sha": "8b2ef51800bf16e304a888160b88d587c6aff23221da681614eeb6e96d30cd67",
+      "evaluation_ids_sha": "cf1916849ed4af25870087c47f7e3dcaf41520db251f187a619b7b58a20fe901"
+    }
+  ]
+}

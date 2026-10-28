@@ -1,0 +1,54 @@
+{
+  "device": "cpu",
+  "id": "full_cv_smoke",
+  "mode": "cv",
+  "recipe": {
+    "control": "f_7c3c29bc9adf28f1",
+    "id": "p_8c97f47640d511c156d3",
+    "kind": "pipeline",
+    "model": "lgb",
+    "representation": {
+      "changes": {},
+      "config": {
+        "append": true,
+        "category_normalize": false,
+        "clip": 0,
+        "cohort_weight": false,
+        "correlation": 0.95,
+        "dimensions": 64,
+        "encoding": "onehot",
+        "feature_count": "all",
+        "half_life": 90,
+        "indicator": false,
+        "interactions": false,
+        "mature": true,
+        "missing": "median",
+        "reducer": "none",
+        "representation": "raw",
+        "scale": "none",
+        "select": "none",
+        "sources": [
+          "application",
+          "profile",
+          "previous",
+          "repayment",
+          "bureau",
+          "account",
+          "shopping"
+        ],
+        "spline": false,
+        "strength": 6,
+        "threshold": 30,
+        "transform": "identity",
+        "view": "v3",
+        "weight": 6,
+        "window": "all"
+      },
+      "family": "sources",
+      "hypothesis": "sources: {}",
+      "id": "f_7c3c29bc9adf28f1",
+      "is_control": true
+    },
+    "seed": 2026
+  }
+}

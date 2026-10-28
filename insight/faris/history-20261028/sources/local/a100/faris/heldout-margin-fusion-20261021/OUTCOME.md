@@ -1,0 +1,1 @@
+Joint heldout fusion: pooled KS0.53008935, AUC0.84701535. Both below matched control. Not promoted. All5 folds complete; no0.54 target attainment. Historical labels reused; no new competition submission.

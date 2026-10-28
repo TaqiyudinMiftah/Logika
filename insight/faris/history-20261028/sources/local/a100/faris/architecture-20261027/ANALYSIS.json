@@ -1,0 +1,168 @@
+{
+  "status": "complete_no_supported_gain",
+  "UTC": "2026-10-27T01:12:30.328549+00:00",
+  "primary": {
+    "KS": 0.5291772103794308,
+    "raw_KS": 0.5237492843309418,
+    "AUC": 0.8464289297035466,
+    "delta_KS": -0.0014588938605959445,
+    "fold_delta": [
+      -5.252128470711881e-05,
+      -0.0019396788697350065,
+      -0.00012660760022120687,
+      3.928659028729076e-05,
+      -0.000684299392326837
+    ]
+  },
+  "baseline_KS": 0.5306361042400267,
+  "uncertainty": {
+    "delta_KS": -0.0014588938605959445,
+    "percentile95": [
+      -0.0034979203807281867,
+      0.0007581955395255267
+    ],
+    "replicates": 2000,
+    "unit": "application,class-stratified",
+    "limits": "Conditional adaptively reused development evidence; not independentconfirmation."
+  },
+  "fixed_recipe_seed_deltas": {
+    "2026": -0.0022356832894546708,
+    "7731": -0.0013914159768170231
+  },
+  "positive_primary_folds": 1,
+  "target_reached": false,
+  "development_gain_supported": false,
+  "independent_confirmation": false,
+  "best_paired_design_diagnostic": {
+    "name": "resnet_master_bce",
+    "KS": 0.5249607250878106,
+    "raw_KS": 0.5199962450114779,
+    "AUC": 0.8440927016373342,
+    "delta_KS": -0.0056753791522161645,
+    "fold_delta": [
+      -0.007342979945521355,
+      -0.009808697742136885,
+      -0.002400196624385842,
+      -0.009168377632440494,
+      -0.002527205529187726
+    ]
+  },
+  "best_single_config_diagnostic": {
+    "name": "resnet_champion90_bce_s2026",
+    "KS": 0.5242128468031679,
+    "raw_KS": 0.5117951286942453,
+    "AUC": 0.843146227248434,
+    "delta_KS": -0.006423257436858787,
+    "fold_delta": [
+      -0.0031744942728538783,
+      -0.012357066997550792,
+      -0.004857349277717193,
+      -0.0030286310587613885,
+      0.0003482773612414336
+    ]
+  },
+  "paired_designs_beating_baseline": 0,
+  "individual_configs_beating_baseline": 0,
+  "frozen_input_view_comparisons": [
+    {
+      "kind": "mlp_control",
+      "loss": "bce",
+      "champion90_KS": 0.5204404076138527,
+      "master116_KS": 0.5231621118069221,
+      "master_minus_champion": 0.0027217041930693853
+    },
+    {
+      "kind": "resnet",
+      "loss": "bce",
+      "champion90_KS": 0.522975816023479,
+      "master116_KS": 0.5249607250878106,
+      "master_minus_champion": 0.0019849090643315748
+    },
+    {
+      "kind": "resnet",
+      "loss": "bce_pair",
+      "champion90_KS": 0.5248861546102231,
+      "master116_KS": 0.5247565439354254,
+      "master_minus_champion": -0.00012961067479777544
+    },
+    {
+      "kind": "dcn_stacked",
+      "loss": "bce",
+      "champion90_KS": 0.51990303104509,
+      "master116_KS": 0.5227933647423434,
+      "master_minus_champion": 0.0028903336972534444
+    },
+    {
+      "kind": "dcn_parallel",
+      "loss": "bce",
+      "champion90_KS": 0.52086184922498,
+      "master116_KS": 0.5242266685801193,
+      "master_minus_champion": 0.0033648193551393257
+    },
+    {
+      "kind": "tabm",
+      "loss": "bce",
+      "champion90_KS": 0.5228027734270944,
+      "master116_KS": 0.522384666847819,
+      "master_minus_champion": -0.0004181065792753236
+    },
+    {
+      "kind": "tabm",
+      "loss": "bce_pair",
+      "champion90_KS": 0.5239662091999302,
+      "master116_KS": 0.523178919115516,
+      "master_minus_champion": -0.0007872900844142494
+    },
+    {
+      "kind": "ft_transformer",
+      "loss": "bce",
+      "champion90_KS": 0.52341464744355,
+      "master116_KS": 0.5221912054406729,
+      "master_minus_champion": -0.001223442002877162
+    }
+  ],
+  "input_expansion_improved_point_KS_in_designs": 4,
+  "input_expansion_comparisons": 8,
+  "recipe_weights_by_fold": [
+    0.05,
+    0.7,
+    1.0,
+    0.05,
+    0.05
+  ],
+  "resource_summary": {
+    "host_device_counts": {
+      "labkc-comm1/cpu": 72,
+      "labkc-comm3/cpu": 57,
+      "labkc-comm1/cuda": 16,
+      "labkc-comm3/cuda": 15
+    },
+    "actual_campaign_seconds": 2158.903792858124,
+    "ceiling_seconds": 21600.0,
+    "fit_seconds_sum": 15422.207226991653,
+    "longest_fit_seconds": 478.60542702674866,
+    "max_fit_RSS_GiB": 1.6680641174316406,
+    "max_CUDA_GiB": 0.531517505645752
+  },
+  "failed_fits": 0,
+  "incomplete_fits": 0,
+  "changed_features": false,
+  "fitted_weights_saved": false,
+  "refit_made": false,
+  "submission_made": false,
+  "conclusion": "Preserve matched incumbent. The completed fixed architecture matrix provides no supported local gain or basis for a competition submission. No universal negative claim about these model families follows.",
+  "limitations": [
+    "All outer rows were previously exposed development; bootstrap is conditional, not independent confirmation.",
+    "The existing correction head and maturity mixture were fixed for a compatible comparison; architecture-specific calibration was not searched.",
+    "Two seeds, five folds and one declared parameter schedule per design are a finite comparison, not exhaustive architecture optimization.",
+    "Full-master learned representations used context labels before inner stopping, so the inner split is an intra-training device only.",
+    "CPU and CUDA floating-point/RNG backends differ; runtime provenance is retained, not bitwise equivalence asserted."
+  ],
+  "verified_evidence": [
+    "TERMINAL_AUDIT.json",
+    "LOCAL_TERMINAL_AUDIT.json",
+    "evaluation/FROZEN.json",
+    "evaluation/RESULT.json",
+    "MODEL_RUN_AUDIT.json"
+  ]
+}

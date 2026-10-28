@@ -1,0 +1,4728 @@
+{
+  "friend_active_counts": {
+    "COMPLETE": 60,
+    "QUEUED": 42
+  },
+  "friend_archive_records": 224,
+  "friend_log_sha256": "b3ed0d229e6c84e48aa2d1c6d5e30040682e1327b44c9c29b53a0f524ffec612",
+  "completed": [
+    {
+      "id": "V00",
+      "definition": {
+        "id": "V00",
+        "families": [],
+        "label": "Exact locked offset control",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0,
+      "delta_mean_fold_KS": 0.0,
+      "wins": 0,
+      "new_features": [],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "delta_KS": [
+          0.0,
+          0.0
+        ],
+        "candidate_AUC": [
+          0.8435656596680571,
+          0.8508722263730734
+        ],
+        "delta_AUC": [
+          0.0,
+          0.0
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "EXACT_CONTROL"
+    },
+    {
+      "id": "V01",
+      "definition": {
+        "id": "V01",
+        "families": [
+          "stress"
+        ],
+        "label": "Financial stress cascade",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0007122536065469198,
+      "delta_mean_fold_KS": -0.00028834857847208627,
+      "wins": 2,
+      "new_features": [
+        "v7_stress_spend_cash_gap",
+        "v7_stress_burst_lowbalance",
+        "v7_stress_tail_purchase_buffer",
+        "v7_stress_rejection_spending_shift",
+        "v7_stress_rejection_pretrend_adjusted",
+        "v7_stress_creditcard_shift",
+        "v7_stress_spending_income_anomaly"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5213926774030593,
+          0.5386094104955444
+        ],
+        "delta_KS": [
+          -0.0021714638865493324,
+          0.002086909439910377
+        ],
+        "candidate_AUC": [
+          0.8433231560350242,
+          0.85070599690074
+        ],
+        "delta_AUC": [
+          -0.00036321917973131666,
+          0.0001251528083165226
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V02",
+      "definition": {
+        "id": "V02",
+        "families": [
+          "dna"
+        ],
+        "label": "Behavioral DNA",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.00023360176705633506,
+      "delta_mean_fold_KS": -0.00046998886706060004,
+      "wins": 2,
+      "new_features": [
+        "v7_dna_order_value_gini",
+        "v7_dna_top10_spending_share",
+        "v7_dna_microburst_ratio",
+        "v7_dna_interarrival_irregularity",
+        "v7_dna_category_switch_rate",
+        "v7_dna_category_payment_mutual_info",
+        "v7_dna_large_basket_cancel_rate",
+        "v7_dna_spending_phase_entropy",
+        "v7_dna_order_clustering_index",
+        "v7_dna_tail_to_groceries_health"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5215891715069881,
+          0.5385641167898177
+        ],
+        "delta_KS": [
+          -0.00198687226439036,
+          0.002134511368477595
+        ],
+        "candidate_AUC": [
+          0.8430772492523743,
+          0.8504504248723643
+        ],
+        "delta_AUC": [
+          -0.0007587213112991931,
+          -0.0002185600865741877
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V03",
+      "definition": {
+        "id": "V03",
+        "families": [
+          "resilience"
+        ],
+        "label": "Financial resilience",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0005547663777063505,
+      "delta_mean_fold_KS": -0.0011481978106780756,
+      "wins": 2,
+      "new_features": [
+        "v7_resilience_income_shock_10",
+        "v7_resilience_income_shock_20",
+        "v7_resilience_break_even_shock",
+        "v7_resilience_250k_buffer_rate",
+        "v7_resilience_cashflow_run_length",
+        "v7_resilience_loan_vs_min_balance",
+        "v7_resilience_reported_income_gap",
+        "v7_resilience_reserve_months_stressed"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5213171216304774,
+          0.5380958154598969
+        ],
+        "delta_KS": [
+          -0.002464538417655157,
+          0.0016555058121702046
+        ],
+        "candidate_AUC": [
+          0.8430116247195211,
+          0.8504501160602387
+        ],
+        "delta_AUC": [
+          -0.0007840310384285315,
+          -0.0001688715895906329
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V04",
+      "definition": {
+        "id": "V04",
+        "families": [
+          "debt_safe"
+        ],
+        "label": "Debt seeking and allocation trajectory",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.00018462131228869083,
+      "delta_mean_fold_KS": 0.0001962096092707366,
+      "wins": 4,
+      "new_features": [
+        "v7_credit_rejection_acceleration",
+        "v7_credit_amount_ratchet",
+        "v7_repay_allocation_severity_auc",
+        "v7_repay_allocation_band_entropy",
+        "v7_repay_allocation_max_late_streak",
+        "v7_repay_allocation_amount_weighted_delay",
+        "v7_repay_allocation_bad_loan_concentration"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5217442171030202,
+          0.5384728835419692
+        ],
+        "delta_KS": [
+          -0.00197750074663946,
+          0.0018436299511880258
+        ],
+        "candidate_AUC": [
+          0.8436605115471818,
+          0.8509188530482568
+        ],
+        "delta_AUC": [
+          -0.00018459640387827602,
+          0.00024676457961991794
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V05",
+      "definition": {
+        "id": "V05",
+        "families": [
+          "contradiction"
+        ],
+        "label": "Financial contradiction",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0013527762073597405,
+      "delta_mean_fold_KS": -0.0015472695041715001,
+      "wins": 1,
+      "new_features": [
+        "v7_contradiction_bank_ecom_share",
+        "v7_contradiction_income_cashflow",
+        "v7_contradiction_goodscore_badallocation",
+        "v7_contradiction_score_allocation",
+        "v7_contradiction_bureau_provider_rank"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5207722360670963,
+          0.5373468901960812
+        ],
+        "delta_KS": [
+          -0.0028354602951061294,
+          0.0010616646154916816
+        ],
+        "candidate_AUC": [
+          0.8433836856459765,
+          0.8506623433247288
+        ],
+        "delta_AUC": [
+          -0.0004361860425505321,
+          3.7705117217448556e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V06",
+      "definition": {
+        "id": "V06",
+        "families": [
+          "purpose"
+        ],
+        "label": "Loan purpose consistency",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.00029732208887867095,
+      "delta_mean_fold_KS": -0.0004687548970101707,
+      "wins": 3,
+      "new_features": [
+        "v7_purpose_category_alignment",
+        "v7_purpose_spending_shift",
+        "v7_purpose_amount_surprise"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5214931300665152,
+          0.5386891533154152
+        ],
+        "delta_KS": [
+          -0.001919646333747721,
+          0.0017155998084954624
+        ],
+        "candidate_AUC": [
+          0.8432370909128518,
+          0.8504954168950741
+        ],
+        "delta_AUC": [
+          -0.0004751776161369986,
+          -6.769327849766885e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V07",
+      "definition": {
+        "id": "V07",
+        "families": [
+          "composites"
+        ],
+        "label": "Robust fragility and regime composites",
+        "penalty": 0.01,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.00033007773540205676,
+      "delta_mean_fold_KS": -2.5408987664810036e-05,
+      "wins": 2,
+      "new_features": [
+        "v7_recovery_strength",
+        "v7_deterioration_strength",
+        "v7_trajectory_uncertainty",
+        "v7_behavioral_regime_instability",
+        "v7_financial_fragility_index"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5220485670586165,
+          0.539223395945357
+        ],
+        "delta_KS": [
+          -0.0013323624826089508,
+          0.0018302622202178568
+        ],
+        "candidate_AUC": [
+          0.8436388529235496,
+          0.8508915832074511
+        ],
+        "delta_AUC": [
+          -0.0001399209744554153,
+          0.00018966750412305883
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V08",
+      "definition": {
+        "id": "V08",
+        "families": [
+          "stress",
+          "resilience"
+        ],
+        "label": "Stress plus resilience",
+        "penalty": 0.01,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0013641949530183162,
+      "delta_mean_fold_KS": -0.00010111250948763306,
+      "wins": 3,
+      "new_features": [
+        "v7_resilience_income_shock_10",
+        "v7_resilience_income_shock_20",
+        "v7_resilience_break_even_shock",
+        "v7_resilience_250k_buffer_rate",
+        "v7_resilience_cashflow_run_length",
+        "v7_resilience_loan_vs_min_balance",
+        "v7_resilience_reported_income_gap",
+        "v7_resilience_reserve_months_stressed",
+        "v7_stress_spend_cash_gap",
+        "v7_stress_burst_lowbalance",
+        "v7_stress_tail_purchase_buffer",
+        "v7_stress_rejection_spending_shift",
+        "v7_stress_rejection_pretrend_adjusted",
+        "v7_stress_creditcard_shift",
+        "v7_stress_spending_income_anomaly"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5209571548892651,
+          0.5378025240995565
+        ],
+        "delta_KS": [
+          -0.002944607124040785,
+          0.0015195704876813083
+        ],
+        "candidate_AUC": [
+          0.8431282756744145,
+          0.8505943120221476
+        ],
+        "delta_AUC": [
+          -0.0005219203132184296,
+          3.512594477401974e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V09",
+      "definition": {
+        "id": "V09",
+        "families": [
+          "stress",
+          "dna",
+          "resilience",
+          "debt_safe",
+          "contradiction",
+          "purpose",
+          "composites"
+        ],
+        "label": "All trusted incremental V7 L2 .01",
+        "penalty": 0.01,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.004417214912083245,
+      "delta_mean_fold_KS": -0.004048713314675112,
+      "wins": 1,
+      "new_features": [
+        "v7_resilience_income_shock_10",
+        "v7_resilience_income_shock_20",
+        "v7_resilience_break_even_shock",
+        "v7_resilience_250k_buffer_rate",
+        "v7_resilience_cashflow_run_length",
+        "v7_resilience_loan_vs_min_balance",
+        "v7_resilience_reported_income_gap",
+        "v7_resilience_reserve_months_stressed",
+        "v7_stress_spend_cash_gap",
+        "v7_stress_burst_lowbalance",
+        "v7_stress_tail_purchase_buffer",
+        "v7_dna_order_value_gini",
+        "v7_dna_top10_spending_share",
+        "v7_dna_microburst_ratio",
+        "v7_dna_interarrival_irregularity",
+        "v7_dna_category_switch_rate",
+        "v7_dna_category_payment_mutual_info",
+        "v7_dna_large_basket_cancel_rate",
+        "v7_dna_spending_phase_entropy",
+        "v7_dna_order_clustering_index",
+        "v7_dna_tail_to_groceries_health",
+        "v7_purpose_category_alignment",
+        "v7_purpose_spending_shift",
+        "v7_contradiction_bank_ecom_share",
+        "v7_contradiction_income_cashflow",
+        "v7_credit_rejection_acceleration",
+        "v7_credit_amount_ratchet",
+        "v7_stress_rejection_spending_shift",
+        "v7_stress_rejection_pretrend_adjusted",
+        "v7_repay_allocation_severity_auc",
+        "v7_repay_allocation_band_entropy",
+        "v7_repay_allocation_max_late_streak",
+        "v7_repay_allocation_amount_weighted_delay",
+        "v7_repay_allocation_bad_loan_concentration",
+        "v7_recovery_strength",
+        "v7_deterioration_strength",
+        "v7_trajectory_uncertainty",
+        "v7_stress_creditcard_shift",
+        "v7_contradiction_goodscore_badallocation",
+        "v7_behavioral_regime_instability",
+        "v7_stress_spending_income_anomaly",
+        "v7_contradiction_score_allocation",
+        "v7_contradiction_bureau_provider_rank",
+        "v7_purpose_amount_surprise",
+        "v7_financial_fragility_index"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5178528036952905,
+          0.5344622617419903
+        ],
+        "delta_KS": [
+          -0.006493122267965859,
+          -0.000906669836094485
+        ],
+        "candidate_AUC": [
+          0.8427249578661413,
+          0.8501158374540321
+        ],
+        "delta_AUC": [
+          -0.0011335961491447748,
+          -0.00029151564714786666
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V10",
+      "definition": {
+        "id": "V10",
+        "families": [
+          "stress",
+          "dna",
+          "resilience",
+          "debt_safe",
+          "contradiction",
+          "purpose",
+          "composites"
+        ],
+        "label": "All trusted incremental V7 conservative L2 .03 shrink .25",
+        "penalty": 0.03,
+        "strength": 0.25
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0013126358474495614,
+      "delta_mean_fold_KS": -0.0011390630989962958,
+      "wins": 1,
+      "new_features": [
+        "v7_resilience_income_shock_10",
+        "v7_resilience_income_shock_20",
+        "v7_resilience_break_even_shock",
+        "v7_resilience_250k_buffer_rate",
+        "v7_resilience_cashflow_run_length",
+        "v7_resilience_loan_vs_min_balance",
+        "v7_resilience_reported_income_gap",
+        "v7_resilience_reserve_months_stressed",
+        "v7_stress_spend_cash_gap",
+        "v7_stress_burst_lowbalance",
+        "v7_stress_tail_purchase_buffer",
+        "v7_dna_order_value_gini",
+        "v7_dna_top10_spending_share",
+        "v7_dna_microburst_ratio",
+        "v7_dna_interarrival_irregularity",
+        "v7_dna_category_switch_rate",
+        "v7_dna_category_payment_mutual_info",
+        "v7_dna_large_basket_cancel_rate",
+        "v7_dna_spending_phase_entropy",
+        "v7_dna_order_clustering_index",
+        "v7_dna_tail_to_groceries_health",
+        "v7_purpose_category_alignment",
+        "v7_purpose_spending_shift",
+        "v7_contradiction_bank_ecom_share",
+        "v7_contradiction_income_cashflow",
+        "v7_credit_rejection_acceleration",
+        "v7_credit_amount_ratchet",
+        "v7_stress_rejection_spending_shift",
+        "v7_stress_rejection_pretrend_adjusted",
+        "v7_repay_allocation_severity_auc",
+        "v7_repay_allocation_band_entropy",
+        "v7_repay_allocation_max_late_streak",
+        "v7_repay_allocation_amount_weighted_delay",
+        "v7_repay_allocation_bad_loan_concentration",
+        "v7_recovery_strength",
+        "v7_deterioration_strength",
+        "v7_trajectory_uncertainty",
+        "v7_stress_creditcard_shift",
+        "v7_contradiction_goodscore_badallocation",
+        "v7_behavioral_regime_instability",
+        "v7_stress_spending_income_anomaly",
+        "v7_contradiction_score_allocation",
+        "v7_contradiction_bureau_provider_rank",
+        "v7_purpose_amount_surprise",
+        "v7_financial_fragility_index"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5209161457779007,
+          0.5377719779116354
+        ],
+        "delta_KS": [
+          -0.003099550130459175,
+          0.0010502369149769447
+        ],
+        "candidate_AUC": [
+          0.8436379436144217,
+          0.8510481223082974
+        ],
+        "delta_AUC": [
+          -8.11398643658423e-05,
+          0.00040079510358761696
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V11",
+      "definition": {
+        "id": "V11",
+        "families": [
+          "stress"
+        ],
+        "only": [
+          "v7_stress_rejection_spending_shift",
+          "v7_stress_rejection_pretrend_adjusted"
+        ],
+        "label": "Rejection event response isolation",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0005047948029409666,
+      "delta_mean_fold_KS": 4.282128570962662e-05,
+      "wins": 4,
+      "new_features": [
+        "v7_stress_rejection_spending_shift",
+        "v7_stress_rejection_pretrend_adjusted"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5223937605476794,
+          0.539620244304785
+        ],
+        "delta_KS": [
+          -0.0013412879528906575,
+          0.0020810553983376
+        ],
+        "candidate_AUC": [
+          0.8434129541585039,
+          0.850715297040463
+        ],
+        "delta_AUC": [
+          -0.0003628750698233568,
+          1.198637920821748e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V12",
+      "definition": {
+        "id": "V12",
+        "families": [
+          "dpd_research"
+        ],
+        "label": "QUARANTINED DPD shape versus trusted allocation proxies",
+        "penalty": 0.003,
+        "strength": 0.5
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.00031415895719189013,
+      "delta_mean_fold_KS": -8.224660811109174e-05,
+      "wins": 3,
+      "new_features": [
+        "v7q_repay_dpd_severity_auc",
+        "v7q_repay_dpd_band_entropy",
+        "v7q_repay_max_late_streak",
+        "v7q_repay_cure_intensity",
+        "v7q_repay_amount_weighted_severity",
+        "v7q_repay_bad_loan_concentration",
+        "v7q_repay_curve_eligible_count",
+        "v7q_stress_dpd_cash_coincidence"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.521446214097315,
+          0.538358626533102
+        ],
+        "delta_KS": [
+          -0.0023894158253705304,
+          0.0017385871415071738
+        ],
+        "candidate_AUC": [
+          0.8435599684657611,
+          0.8509179882960587
+        ],
+        "delta_AUC": [
+          -0.00014727764957932766,
+          0.00027337297823759
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V13",
+      "definition": {
+        "id": "V13",
+        "families": [
+          "stress",
+          "dna",
+          "resilience",
+          "debt_safe",
+          "contradiction",
+          "purpose",
+          "composites",
+          "dpd_research"
+        ],
+        "label": "QUARANTINED V7 plus DPD shape",
+        "penalty": 0.03,
+        "strength": 0.25
+      },
+      "source_code": "v7/scripts/features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0014300557462745278,
+      "delta_mean_fold_KS": -0.0010267854669059994,
+      "wins": 1,
+      "new_features": [
+        "v7_resilience_income_shock_10",
+        "v7_resilience_income_shock_20",
+        "v7_resilience_break_even_shock",
+        "v7_resilience_250k_buffer_rate",
+        "v7_resilience_cashflow_run_length",
+        "v7_resilience_loan_vs_min_balance",
+        "v7_resilience_reported_income_gap",
+        "v7_resilience_reserve_months_stressed",
+        "v7_stress_spend_cash_gap",
+        "v7_stress_burst_lowbalance",
+        "v7_stress_tail_purchase_buffer",
+        "v7_dna_order_value_gini",
+        "v7_dna_top10_spending_share",
+        "v7_dna_microburst_ratio",
+        "v7_dna_interarrival_irregularity",
+        "v7_dna_category_switch_rate",
+        "v7_dna_category_payment_mutual_info",
+        "v7_dna_large_basket_cancel_rate",
+        "v7_dna_spending_phase_entropy",
+        "v7_dna_order_clustering_index",
+        "v7_dna_tail_to_groceries_health",
+        "v7_purpose_category_alignment",
+        "v7_purpose_spending_shift",
+        "v7_contradiction_bank_ecom_share",
+        "v7_contradiction_income_cashflow",
+        "v7_credit_rejection_acceleration",
+        "v7_credit_amount_ratchet",
+        "v7_stress_rejection_spending_shift",
+        "v7_stress_rejection_pretrend_adjusted",
+        "v7_repay_allocation_severity_auc",
+        "v7_repay_allocation_band_entropy",
+        "v7_repay_allocation_max_late_streak",
+        "v7_repay_allocation_amount_weighted_delay",
+        "v7_repay_allocation_bad_loan_concentration",
+        "v7_recovery_strength",
+        "v7_deterioration_strength",
+        "v7_trajectory_uncertainty",
+        "v7_stress_creditcard_shift",
+        "v7_contradiction_goodscore_badallocation",
+        "v7_behavioral_regime_instability",
+        "v7_stress_spending_income_anomaly",
+        "v7_contradiction_score_allocation",
+        "v7_contradiction_bureau_provider_rank",
+        "v7_purpose_amount_surprise",
+        "v7_financial_fragility_index",
+        "v7q_repay_dpd_severity_auc",
+        "v7q_repay_dpd_band_entropy",
+        "v7q_repay_max_late_streak",
+        "v7q_repay_cure_intensity",
+        "v7q_repay_amount_weighted_severity",
+        "v7q_repay_bad_loan_concentration",
+        "v7q_repay_curve_eligible_count",
+        "v7q_stress_dpd_cash_coincidence"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5205286831075008,
+          0.5376945675274928
+        ],
+        "delta_KS": [
+          -0.003129673788275983,
+          0.0009417657429774424
+        ],
+        "candidate_AUC": [
+          0.8436457542485867,
+          0.85105494069224
+        ],
+        "delta_AUC": [
+          -7.891101806564438e-05,
+          0.00040080679706483094
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V14",
+      "definition": {
+        "id": "V14",
+        "families": [
+          "conditional_allocation"
+        ],
+        "label": "Conditional late-allocation propensity with training-fold Empirical Bayes",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.00039669664851604836,
+      "delta_mean_fold_KS": -0.0002913403645023793,
+      "wins": 3,
+      "new_features": [
+        "risk_conditional_late_negative",
+        "risk_conditional_late_nonnegative",
+        "risk_allocation_cashflow_dependency",
+        "risk_conditional_dependency_sd",
+        "risk_conditional_negative_months",
+        "risk_conditional_nonnegative_months"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.522018392410284,
+          0.5387862038290683
+        ],
+        "delta_KS": [
+          -0.00209334285198024,
+          0.0021652500858053213
+        ],
+        "candidate_AUC": [
+          0.8432460140792143,
+          0.8506801368411907
+        ],
+        "delta_AUC": [
+          -0.0005471831794987087,
+          -3.444537570886926e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V15",
+      "definition": {
+        "id": "V15",
+        "families": [
+          "conditional_dpd"
+        ],
+        "label": "QUARANTINED conditional DPD15 propensity by due-month cashflow",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.00014076686059749655,
+      "delta_mean_fold_KS": 0.0004107599195516176,
+      "wins": 3,
+      "new_features": [
+        "riskq_conditional_late_negative",
+        "riskq_conditional_late_nonnegative",
+        "riskq_dpd_cashflow_dependency",
+        "riskq_conditional_dependency_sd",
+        "riskq_conditional_negative_months",
+        "riskq_conditional_nonnegative_months"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5223882935210776,
+          0.5387568662424322
+        ],
+        "delta_KS": [
+          -0.001805310513452621,
+          0.0024701094249163467
+        ],
+        "candidate_AUC": [
+          0.8433039855572881,
+          0.8507084221018222
+        ],
+        "delta_AUC": [
+          -0.0004959854414975179,
+          4.7900872963002414e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V16",
+      "definition": {
+        "id": "V16",
+        "families": [
+          "cliff"
+        ],
+        "label": "Nonlinear debt payment cliffs without double counting",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 8.900431460800995e-05,
+      "delta_mean_fold_KS": 0.00014787617968019527,
+      "wins": 3,
+      "new_features": [
+        "risk_debt_payment_cliff_net_new",
+        "risk_debt_payment_cliff_nonpositive_capacity",
+        "risk_debt_payment_cliff_shortfall",
+        "risk_debt_payment_cliff_gross_scheduled"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.522147375636571,
+          0.5384746197407724
+        ],
+        "delta_KS": [
+          -0.0018035521013898491,
+          0.001631438419182008
+        ],
+        "candidate_AUC": [
+          0.8434557080322961,
+          0.8507595529826938
+        ],
+        "delta_AUC": [
+          -0.00027502288874260705,
+          6.469392333952594e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V17",
+      "definition": {
+        "id": "V17",
+        "families": [
+          "recovery"
+        ],
+        "label": "Financial recovery failure with observed follow-up and censoring",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.001219873970885077,
+      "delta_mean_fold_KS": -0.0009269501963231397,
+      "wins": 1,
+      "new_features": [
+        "risk_recovery_probability_after_deficit",
+        "risk_recovery_time_to_positive_cashflow",
+        "risk_recovery_failure_3m",
+        "risk_liquidity_recovery_failure",
+        "risk_recovery_episodes",
+        "risk_recovery_one_observed",
+        "risk_recovery_three_observed"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.521194416279973,
+          0.5375905443107747
+        ],
+        "delta_KS": [
+          -0.0030624926753842208,
+          0.0009870950507778209
+        ],
+        "candidate_AUC": [
+          0.843153314973583,
+          0.8505318794173294
+        ],
+        "delta_AUC": [
+          -0.0006457320231554986,
+          -0.00016338213237835912
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V18",
+      "definition": {
+        "id": "V18",
+        "families": [
+          "decoupling"
+        ],
+        "label": "Six-month income versus spending decoupling",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -1.641433820886995e-05,
+      "delta_mean_fold_KS": -0.0002766812381113759,
+      "wins": 2,
+      "new_features": [
+        "risk_income_spending_decoupling",
+        "risk_income_spending_growth_gap",
+        "risk_income_down_spending_up"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5218938570958083,
+          0.5384964365089026
+        ],
+        "delta_KS": [
+          -0.0016608630765792942,
+          0.0016066517252022925
+        ],
+        "candidate_AUC": [
+          0.8435269118317438,
+          0.8508070679709103
+        ],
+        "delta_AUC": [
+          -0.0002439786630226426,
+          0.0001261333215915287
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V19",
+      "definition": {
+        "id": "V19",
+        "families": [
+          "pricing"
+        ],
+        "label": "Cross-fitted underwriting price surprise",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0011858507340489766,
+      "delta_mean_fold_KS": 0.0012138252190969645,
+      "wins": 4,
+      "new_features": [
+        "risk_underwriting_price_surprise",
+        "risk_underwriting_price_surprise_scaled"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5225968962858181,
+          0.539808743113244
+        ],
+        "delta_KS": [
+          -0.0008660066169152269,
+          0.0028749663382177664
+        ],
+        "candidate_AUC": [
+          0.8433486069098128,
+          0.8506584528744463
+        ],
+        "delta_AUC": [
+          -0.00043189592747595873,
+          -4.352360018687607e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V20",
+      "definition": {
+        "id": "V20",
+        "families": [
+          "joint_dpd"
+        ],
+        "label": "QUARANTINED DPD severity times consumption pressure",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0001725905065612654,
+      "delta_mean_fold_KS": 0.00048747391737609115,
+      "wins": 3,
+      "new_features": [
+        "riskq_joint_dpd_consumption"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5220404494380734,
+          0.538472878021257
+        ],
+        "delta_KS": [
+          -0.0018802263181131097,
+          0.001737767076649349
+        ],
+        "candidate_AUC": [
+          0.8435035638266872,
+          0.8507587094874115
+        ],
+        "delta_AUC": [
+          -0.00024611139676521956,
+          7.598082395640351e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V21",
+      "definition": {
+        "id": "V21",
+        "families": [
+          "bureau_dpd"
+        ],
+        "label": "QUARANTINED cross-fitted bureau versus repayment disagreement",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0008714153065418895,
+      "delta_mean_fold_KS": 0.0006348642985209762,
+      "wins": 3,
+      "new_features": [
+        "riskq_bureau_repayment_disagreement"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5223603349388138,
+          0.5394411253168804
+        ],
+        "delta_KS": [
+          -0.0012875384721266869,
+          0.002471559503025436
+        ],
+        "candidate_AUC": [
+          0.8433895887219072,
+          0.8506991984696077
+        ],
+        "delta_AUC": [
+          -0.0003358398810241192,
+          1.4148368378852314e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V22",
+      "definition": {
+        "id": "V22",
+        "families": [
+          "credit_sequence"
+        ],
+        "label": "Approval -> delayed allocation event -> rejection ordering",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.00021877495965094695,
+      "delta_mean_fold_KS": -0.00044149714814309957,
+      "wins": 3,
+      "new_features": [
+        "risk_credit_access_approval_to_rejection_count",
+        "risk_credit_access_deterioration_allocation_proxy",
+        "risk_credit_access_late_sequence_share"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5221283745621083,
+          0.5385197222646679
+        ],
+        "delta_KS": [
+          -0.0017366149865923163,
+          0.0018698901971713699
+        ],
+        "candidate_AUC": [
+          0.8434567377103394,
+          0.850671243364958
+        ],
+        "delta_AUC": [
+          -0.00027648392133591826,
+          8.633589789454876e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V23",
+      "definition": {
+        "id": "V23",
+        "families": [
+          "conditional_allocation",
+          "cliff",
+          "recovery",
+          "decoupling",
+          "pricing",
+          "credit_sequence"
+        ],
+        "label": "Combined incremental-safe conditional financial mechanisms",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.001012561227068165,
+      "delta_mean_fold_KS": -0.0010548095319648843,
+      "wins": 1,
+      "new_features": [
+        "risk_debt_payment_cliff_net_new",
+        "risk_debt_payment_cliff_nonpositive_capacity",
+        "risk_debt_payment_cliff_shortfall",
+        "risk_debt_payment_cliff_gross_scheduled",
+        "risk_recovery_probability_after_deficit",
+        "risk_recovery_time_to_positive_cashflow",
+        "risk_recovery_failure_3m",
+        "risk_liquidity_recovery_failure",
+        "risk_recovery_episodes",
+        "risk_recovery_one_observed",
+        "risk_recovery_three_observed",
+        "risk_income_spending_decoupling",
+        "risk_income_spending_growth_gap",
+        "risk_income_down_spending_up",
+        "risk_credit_access_approval_to_rejection_count",
+        "risk_credit_access_deterioration_allocation_proxy",
+        "risk_credit_access_late_sequence_share",
+        "risk_conditional_late_negative",
+        "risk_conditional_late_nonnegative",
+        "risk_allocation_cashflow_dependency",
+        "risk_conditional_dependency_sd",
+        "risk_conditional_negative_months",
+        "risk_conditional_nonnegative_months",
+        "risk_underwriting_price_surprise",
+        "risk_underwriting_price_surprise_scaled"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5206517982513482,
+          0.5384527735433334
+        ],
+        "delta_KS": [
+          -0.0028398693011103286,
+          0.0016045006905159368
+        ],
+        "candidate_AUC": [
+          0.8431791835098165,
+          0.8505325136471877
+        ],
+        "delta_AUC": [
+          -0.00071216953522793,
+          -9.73651507822056e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V24",
+      "definition": {
+        "id": "V24",
+        "families": [
+          "conditional_allocation",
+          "conditional_dpd",
+          "cliff",
+          "recovery",
+          "decoupling",
+          "pricing",
+          "credit_sequence",
+          "joint_dpd",
+          "bureau_dpd",
+          "recovery_dpd"
+        ],
+        "label": "QUARANTINED combined mechanisms conservative shrinkage",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "quarantined": true,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0006694041853094745,
+      "delta_mean_fold_KS": -0.00010645354777052418,
+      "wins": 2,
+      "new_features": [
+        "risk_debt_payment_cliff_net_new",
+        "risk_debt_payment_cliff_nonpositive_capacity",
+        "risk_debt_payment_cliff_shortfall",
+        "risk_debt_payment_cliff_gross_scheduled",
+        "risk_recovery_probability_after_deficit",
+        "risk_recovery_time_to_positive_cashflow",
+        "risk_recovery_failure_3m",
+        "risk_liquidity_recovery_failure",
+        "risk_recovery_episodes",
+        "risk_recovery_one_observed",
+        "risk_recovery_three_observed",
+        "risk_income_spending_decoupling",
+        "risk_income_spending_growth_gap",
+        "risk_income_down_spending_up",
+        "risk_credit_access_approval_to_rejection_count",
+        "risk_credit_access_deterioration_allocation_proxy",
+        "risk_credit_access_late_sequence_share",
+        "risk_conditional_late_negative",
+        "risk_conditional_late_nonnegative",
+        "risk_allocation_cashflow_dependency",
+        "risk_conditional_dependency_sd",
+        "risk_conditional_negative_months",
+        "risk_conditional_nonnegative_months",
+        "riskq_conditional_late_negative",
+        "riskq_conditional_late_nonnegative",
+        "riskq_dpd_cashflow_dependency",
+        "riskq_conditional_dependency_sd",
+        "riskq_conditional_negative_months",
+        "riskq_conditional_nonnegative_months",
+        "risk_underwriting_price_surprise",
+        "risk_underwriting_price_surprise_scaled",
+        "riskq_joint_dpd_consumption",
+        "riskq_bureau_repayment_disagreement",
+        "riskq_recovery_strength_x_recent_dpd",
+        "riskq_recovery_failure_x_recent_dpd"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.521460256181115,
+          0.5380859841581014
+        ],
+        "delta_KS": [
+          -0.002389333188567272,
+          0.0014831268314822196
+        ],
+        "candidate_AUC": [
+          0.8437009244650914,
+          0.8510658747889138
+        ],
+        "delta_AUC": [
+          -9.258077981389445e-05,
+          0.00038160902005864565
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V25",
+      "definition": {
+        "id": "V25",
+        "families": [
+          "conditional_allocation"
+        ],
+        "only": [
+          "risk_conditional_negative_months",
+          "risk_conditional_nonnegative_months"
+        ],
+        "label": "Coverage-only control for conditional Empirical Bayes V14",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "extension",
+        "feature_catalog": "extension/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/extension_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0009851941434803058,
+      "delta_mean_fold_KS": 0.00042323401247799095,
+      "wins": 5,
+      "new_features": [
+        "risk_conditional_negative_months",
+        "risk_conditional_nonnegative_months"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.522650793782529,
+          0.539432023183806
+        ],
+        "delta_KS": [
+          -0.001164102953087115,
+          0.0027360623485143385
+        ],
+        "candidate_AUC": [
+          0.8433548302739955,
+          0.8507767782570237
+        ],
+        "delta_AUC": [
+          -0.000382120881373188,
+          4.23609034069793e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V26",
+      "definition": {
+        "id": "V26",
+        "families": [
+          "basket_structure"
+        ],
+        "label": "Item-level basket complexity and temporal changes",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0002189210194399882,
+      "delta_mean_fold_KS": 0.0002253439445532468,
+      "wins": 3,
+      "new_features": [
+        "discover_basket_items_per_order_30d",
+        "discover_basket_categories_per_order_30d",
+        "discover_basket_quantity_per_order_30d",
+        "discover_basket_item_value_concentration_30d",
+        "discover_basket_multicategory_share_30d",
+        "discover_basket_item_complexity_change",
+        "discover_basket_category_complexity_change",
+        "discover_basket_quantity_change"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5214768932605025,
+          0.5393150541141695
+        ],
+        "delta_KS": [
+          -0.0021668788263349585,
+          0.0023963317129164705
+        ],
+        "candidate_AUC": [
+          0.8434197358970887,
+          0.8506762843838415
+        ],
+        "delta_AUC": [
+          -0.0005183162009808701,
+          3.408687717285358e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V27",
+      "definition": {
+        "id": "V27",
+        "families": [
+          "basket_cooccurrence"
+        ],
+        "label": "Time-local basket co-occurrence, rarity and novelty",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0007422271618484633,
+      "delta_mean_fold_KS": -0.00041581414907154723,
+      "wins": 2,
+      "new_features": [
+        "discover_basket_personal_combo_novelty",
+        "discover_basket_combo_entropy",
+        "discover_basket_combo_surprisal",
+        "discover_basket_rare_combo_share",
+        "discover_basket_pair_lift_surprisal"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5222367177579115,
+          0.5400510676926247
+        ],
+        "delta_KS": [
+          -0.0013125269981304837,
+          0.003441635154223622
+        ],
+        "candidate_AUC": [
+          0.8433354340121686,
+          0.8506633384874529
+        ],
+        "delta_AUC": [
+          -0.0005405558904468894,
+          -7.805026512328102e-06
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V28",
+      "definition": {
+        "id": "V28",
+        "families": [
+          "unitprice"
+        ],
+        "label": "Personal same-category unit-price anomalies",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.00015636569831678493,
+      "delta_mean_fold_KS": -0.00037128322040744786,
+      "wins": 2,
+      "new_features": [
+        "discover_unit_price_mean_z",
+        "discover_unit_price_p90_z",
+        "discover_unit_price_extreme_share",
+        "discover_unit_price_observed_items"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5217475188801882,
+          0.5382553345716734
+        ],
+        "delta_KS": [
+          -0.0016095792676308561,
+          0.0020363024181218976
+        ],
+        "candidate_AUC": [
+          0.84338357249311,
+          0.8505806697770203
+        ],
+        "delta_AUC": [
+          -0.00043521674458077143,
+          -7.364499755438417e-06
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V29",
+      "definition": {
+        "id": "V29",
+        "families": [
+          "application_events"
+        ],
+        "label": "Approval/rejection-aligned spending and payment methods",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0009426803119964022,
+      "delta_mean_fold_KS": -0.001033221012799923,
+      "wins": 2,
+      "new_features": [
+        "discover_event_approved_spend_change",
+        "discover_event_approved_spend_pretrend_adjusted",
+        "discover_event_approved_creditcard_shift",
+        "discover_event_approved_orders_support",
+        "discover_event_approved_payment_js",
+        "discover_event_rejected_spend_change",
+        "discover_event_rejected_spend_pretrend_adjusted",
+        "discover_event_rejected_creditcard_shift",
+        "discover_event_rejected_orders_support",
+        "discover_event_rejected_payment_js"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5208186184833645,
+          0.5386282845936251
+        ],
+        "delta_KS": [
+          -0.0021871612276860935,
+          0.0014847311417733034
+        ],
+        "candidate_AUC": [
+          0.843016558975654,
+          0.8504516196936037
+        ],
+        "delta_AUC": [
+          -0.0006650688612525851,
+          -9.425133865226586e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V30",
+      "definition": {
+        "id": "V30",
+        "families": [
+          "due_events"
+        ],
+        "label": "Spending around historical due dates with matched exposure",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0016689156657401227,
+      "delta_mean_fold_KS": -0.0012316283897199965,
+      "wins": 1,
+      "new_features": [
+        "discover_due_daily_spend_logratio",
+        "discover_due_creditcard_shift",
+        "discover_due_pre_spend_per_income",
+        "discover_due_event_count"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5210567389316775,
+          0.5372752710825781
+        ],
+        "delta_KS": [
+          -0.0033497171641731853,
+          0.0005195893554762823
+        ],
+        "candidate_AUC": [
+          0.8431038645192797,
+          0.8504929397906026
+        ],
+        "delta_AUC": [
+          -0.0006248001339145465,
+          -0.00015113019386887042
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V31",
+      "definition": {
+        "id": "V31",
+        "families": [
+          "pricing_tier"
+        ],
+        "label": "Cross-fitted APR tier surprise and uncertainty",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0004904339958151649,
+      "delta_mean_fold_KS": 0.0009537099529721482,
+      "wins": 5,
+      "new_features": [
+        "discover_pricing_tier_surprise",
+        "discover_pricing_tier_expected_gap",
+        "discover_pricing_tier_uncertainty",
+        "discover_pricing_tier_higher_mass"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5217788703096374,
+          0.5395049973930849
+        ],
+        "delta_KS": [
+          -0.0011039532714672729,
+          0.0025384047218723433
+        ],
+        "candidate_AUC": [
+          0.8432867561098214,
+          0.8506346592566223
+        ],
+        "delta_AUC": [
+          -0.00045197206284502414,
+          -5.721892239841243e-06
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V32",
+      "definition": {
+        "id": "V32",
+        "families": [
+          "pricing_transition"
+        ],
+        "label": "APR transition from most recent historically approved loan",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.00042508267301399894,
+      "delta_mean_fold_KS": -0.00023733649799415613,
+      "wins": 2,
+      "new_features": [
+        "discover_pricing_change_last_loan",
+        "discover_pricing_upward_transition",
+        "discover_pricing_transition_age"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5220096743796789,
+          0.5388098845983171
+        ],
+        "delta_KS": [
+          -0.0017301344963225412,
+          0.002361175295549559
+        ],
+        "candidate_AUC": [
+          0.8434264821640106,
+          0.8506562225066899
+        ],
+        "delta_AUC": [
+          -0.0003447846955339839,
+          3.941845070828392e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V33",
+      "definition": {
+        "id": "V33",
+        "families": [
+          "maturity"
+        ],
+        "label": "Contractual maturity distance and scheduled burden",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.001411427906737206,
+      "delta_mean_fold_KS": -0.0009139734237448404,
+      "wins": 1,
+      "new_features": [
+        "discover_maturity_nearest_signed_gap",
+        "discover_maturity_next_days",
+        "discover_maturity_since_last_days",
+        "discover_maturity_maturing30_count",
+        "discover_maturity_ended30_count",
+        "discover_maturity_maturing30_burden"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5201658527250177,
+          0.5371607372121642
+        ],
+        "delta_KS": [
+          -0.003591172253106634,
+          0.0008791267417667183
+        ],
+        "candidate_AUC": [
+          0.8432833147499202,
+          0.8506515064273671
+        ],
+        "delta_AUC": [
+          -0.000528258308253346,
+          2.6955290616847423e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V34",
+      "definition": {
+        "id": "V34",
+        "families": [
+          "maturity_inquiry"
+        ],
+        "label": "Maturity proximity times rolling inquiry and credit demand",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0010540995878173254,
+      "delta_mean_fold_KS": -0.0005081380755369569,
+      "wins": 0,
+      "new_features": [
+        "discover_maturity_application_alignment",
+        "discover_maturity_inquiry_pressure",
+        "discover_maturity_inquiry_net_change",
+        "discover_maturity_credit_demand"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5207699813125716,
+          0.5376417181836497
+        ],
+        "delta_KS": [
+          -0.002905022443381991,
+          0.0008464411691660475
+        ],
+        "candidate_AUC": [
+          0.8432057131404763,
+          0.8505643951519549
+        ],
+        "delta_AUC": [
+          -0.0005046733472710257,
+          -5.615172959368427e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V35",
+      "definition": {
+        "id": "V35",
+        "families": [
+          "basket_structure",
+          "basket_cooccurrence",
+          "unitprice"
+        ],
+        "label": "Combined new basket intelligence",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0004389340096846439,
+      "delta_mean_fold_KS": 0.00035355645640882115,
+      "wins": 4,
+      "new_features": [
+        "discover_basket_items_per_order_30d",
+        "discover_basket_categories_per_order_30d",
+        "discover_basket_quantity_per_order_30d",
+        "discover_basket_item_value_concentration_30d",
+        "discover_basket_multicategory_share_30d",
+        "discover_basket_item_complexity_change",
+        "discover_basket_category_complexity_change",
+        "discover_basket_quantity_change",
+        "discover_basket_personal_combo_novelty",
+        "discover_basket_combo_entropy",
+        "discover_unit_price_mean_z",
+        "discover_unit_price_p90_z",
+        "discover_unit_price_extreme_share",
+        "discover_unit_price_observed_items",
+        "discover_basket_combo_surprisal",
+        "discover_basket_rare_combo_share",
+        "discover_basket_pair_lift_surprisal"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5215030766077456,
+          0.5382418074790406
+        ],
+        "delta_KS": [
+          -0.0027090112061608136,
+          0.0019789539111308755
+        ],
+        "candidate_AUC": [
+          0.8433706680237986,
+          0.8506771332694256
+        ],
+        "delta_AUC": [
+          -0.0006058557010902854,
+          5.196468230477234e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V36",
+      "definition": {
+        "id": "V36",
+        "families": [
+          "application_events",
+          "due_events"
+        ],
+        "label": "Combined event-aligned financial behavior",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0009560795588436921,
+      "delta_mean_fold_KS": -0.0016770691923817748,
+      "wins": 1,
+      "new_features": [
+        "discover_event_approved_spend_change",
+        "discover_event_approved_spend_pretrend_adjusted",
+        "discover_event_approved_creditcard_shift",
+        "discover_event_approved_orders_support",
+        "discover_event_approved_payment_js",
+        "discover_event_rejected_spend_change",
+        "discover_event_rejected_spend_pretrend_adjusted",
+        "discover_event_rejected_creditcard_shift",
+        "discover_event_rejected_orders_support",
+        "discover_event_rejected_payment_js",
+        "discover_due_daily_spend_logratio",
+        "discover_due_creditcard_shift",
+        "discover_due_pre_spend_per_income",
+        "discover_due_event_count"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5211548479441,
+          0.5385029993751544
+        ],
+        "delta_KS": [
+          -0.0025741712431502526,
+          0.0010269617224639934
+        ],
+        "candidate_AUC": [
+          0.8430052652936897,
+          0.8504912937054728
+        ],
+        "delta_AUC": [
+          -0.0007359288550834869,
+          -9.355651136966915e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V37",
+      "definition": {
+        "id": "V37",
+        "families": [
+          "pricing_tier",
+          "pricing_transition"
+        ],
+        "label": "Combined hidden underwriting signals",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0008431162223946354,
+      "delta_mean_fold_KS": 0.0004141798091340743,
+      "wins": 3,
+      "new_features": [
+        "discover_pricing_change_last_loan",
+        "discover_pricing_upward_transition",
+        "discover_pricing_transition_age",
+        "discover_pricing_tier_surprise",
+        "discover_pricing_tier_expected_gap",
+        "discover_pricing_tier_uncertainty",
+        "discover_pricing_tier_higher_mass"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5222801250753792,
+          0.5397751873546734
+        ],
+        "delta_KS": [
+          -0.0013677404239894053,
+          0.002646697318391485
+        ],
+        "candidate_AUC": [
+          0.8433385935114528,
+          0.8506626330099774
+        ],
+        "delta_AUC": [
+          -0.0004133971074191112,
+          3.738917598303781e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V38",
+      "definition": {
+        "id": "V38",
+        "families": [
+          "basket_structure",
+          "basket_cooccurrence",
+          "unitprice",
+          "application_events",
+          "due_events",
+          "pricing_tier",
+          "pricing_transition",
+          "maturity",
+          "maturity_inquiry"
+        ],
+        "label": "All new discovery families conservative correction",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0004658055332737998,
+      "delta_mean_fold_KS": -0.0008641190038255253,
+      "wins": 3,
+      "new_features": [
+        "discover_basket_items_per_order_30d",
+        "discover_basket_categories_per_order_30d",
+        "discover_basket_quantity_per_order_30d",
+        "discover_basket_item_value_concentration_30d",
+        "discover_basket_multicategory_share_30d",
+        "discover_basket_item_complexity_change",
+        "discover_basket_category_complexity_change",
+        "discover_basket_quantity_change",
+        "discover_basket_personal_combo_novelty",
+        "discover_basket_combo_entropy",
+        "discover_unit_price_mean_z",
+        "discover_unit_price_p90_z",
+        "discover_unit_price_extreme_share",
+        "discover_unit_price_observed_items",
+        "discover_event_approved_spend_change",
+        "discover_event_approved_spend_pretrend_adjusted",
+        "discover_event_approved_creditcard_shift",
+        "discover_event_approved_orders_support",
+        "discover_event_approved_payment_js",
+        "discover_event_rejected_spend_change",
+        "discover_event_rejected_spend_pretrend_adjusted",
+        "discover_event_rejected_creditcard_shift",
+        "discover_event_rejected_orders_support",
+        "discover_event_rejected_payment_js",
+        "discover_due_daily_spend_logratio",
+        "discover_due_creditcard_shift",
+        "discover_due_pre_spend_per_income",
+        "discover_due_event_count",
+        "discover_maturity_nearest_signed_gap",
+        "discover_maturity_next_days",
+        "discover_maturity_since_last_days",
+        "discover_maturity_maturing30_count",
+        "discover_maturity_ended30_count",
+        "discover_maturity_maturing30_burden",
+        "discover_pricing_change_last_loan",
+        "discover_pricing_upward_transition",
+        "discover_pricing_transition_age",
+        "discover_maturity_application_alignment",
+        "discover_maturity_inquiry_pressure",
+        "discover_maturity_inquiry_net_change",
+        "discover_maturity_credit_demand",
+        "discover_basket_combo_surprisal",
+        "discover_basket_rare_combo_share",
+        "discover_basket_pair_lift_surprisal",
+        "discover_pricing_tier_surprise",
+        "discover_pricing_tier_expected_gap",
+        "discover_pricing_tier_uncertainty",
+        "discover_pricing_tier_higher_mass"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5219188154535103,
+          0.538604404165861
+        ],
+        "delta_KS": [
+          -0.0023336936680495553,
+          0.0019479835847089587
+        ],
+        "candidate_AUC": [
+          0.8436159351862885,
+          0.8510588460962629
+        ],
+        "delta_AUC": [
+          -0.00017804257942279078,
+          0.0003810948548247092
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V39",
+      "definition": {
+        "id": "V39",
+        "families": [
+          "pricing_tier",
+          "pricing_transition",
+          "maturity",
+          "maturity_inquiry"
+        ],
+        "label": "Underwriting tiers plus contractual credit-cycle signals",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0009043900427486706,
+      "delta_mean_fold_KS": -0.0015328133945173405,
+      "wins": 1,
+      "new_features": [
+        "discover_maturity_nearest_signed_gap",
+        "discover_maturity_next_days",
+        "discover_maturity_since_last_days",
+        "discover_maturity_maturing30_count",
+        "discover_maturity_ended30_count",
+        "discover_maturity_maturing30_burden",
+        "discover_pricing_change_last_loan",
+        "discover_pricing_upward_transition",
+        "discover_pricing_transition_age",
+        "discover_maturity_application_alignment",
+        "discover_maturity_inquiry_pressure",
+        "discover_maturity_inquiry_net_change",
+        "discover_maturity_credit_demand",
+        "discover_pricing_tier_surprise",
+        "discover_pricing_tier_expected_gap",
+        "discover_pricing_tier_uncertainty",
+        "discover_pricing_tier_higher_mass"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5206904010276865,
+          0.5380576832047366
+        ],
+        "delta_KS": [
+          -0.003140315200259136,
+          0.0015690119001882533
+        ],
+        "candidate_AUC": [
+          0.843124689906591,
+          0.8505053802157923
+        ],
+        "delta_AUC": [
+          -0.0006919810294554795,
+          -2.650672187759773e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V40",
+      "definition": {
+        "id": "V40",
+        "families": [
+          "pricing_dpd"
+        ],
+        "label": "QUARANTINED APR-tier disagreement with snapshot DPD",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0012706314864208146,
+      "delta_mean_fold_KS": 0.0013556221429488868,
+      "wins": 5,
+      "new_features": [
+        "discoverq_pricing_dpd_surprise",
+        "discoverq_pricing_dpd_expected_gap"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5227664281004318,
+          0.5396394837696893
+        ],
+        "delta_KS": [
+          -0.000625959179199706,
+          0.0029217130780253256
+        ],
+        "candidate_AUC": [
+          0.8433499006257011,
+          0.8506794747469502
+        ],
+        "delta_AUC": [
+          -0.00042405738545834567,
+          -9.346478929928388e-06
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V41",
+      "definition": {
+        "id": "V41",
+        "families": [
+          "basket_structure",
+          "basket_cooccurrence",
+          "unitprice",
+          "application_events",
+          "due_events",
+          "pricing_tier",
+          "pricing_transition",
+          "maturity",
+          "maturity_inquiry",
+          "pricing_dpd"
+        ],
+        "label": "QUARANTINED all new discovery families with DPD pricing",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "quarantined": true,
+        "batch": "discovery",
+        "feature_catalog": "discovery/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/discovery_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0005012702411242298,
+      "delta_mean_fold_KS": -0.0009833767244047608,
+      "wins": 2,
+      "new_features": [
+        "discover_basket_items_per_order_30d",
+        "discover_basket_categories_per_order_30d",
+        "discover_basket_quantity_per_order_30d",
+        "discover_basket_item_value_concentration_30d",
+        "discover_basket_multicategory_share_30d",
+        "discover_basket_item_complexity_change",
+        "discover_basket_category_complexity_change",
+        "discover_basket_quantity_change",
+        "discover_basket_personal_combo_novelty",
+        "discover_basket_combo_entropy",
+        "discover_unit_price_mean_z",
+        "discover_unit_price_p90_z",
+        "discover_unit_price_extreme_share",
+        "discover_unit_price_observed_items",
+        "discover_event_approved_spend_change",
+        "discover_event_approved_spend_pretrend_adjusted",
+        "discover_event_approved_creditcard_shift",
+        "discover_event_approved_orders_support",
+        "discover_event_approved_payment_js",
+        "discover_event_rejected_spend_change",
+        "discover_event_rejected_spend_pretrend_adjusted",
+        "discover_event_rejected_creditcard_shift",
+        "discover_event_rejected_orders_support",
+        "discover_event_rejected_payment_js",
+        "discover_due_daily_spend_logratio",
+        "discover_due_creditcard_shift",
+        "discover_due_pre_spend_per_income",
+        "discover_due_event_count",
+        "discover_maturity_nearest_signed_gap",
+        "discover_maturity_next_days",
+        "discover_maturity_since_last_days",
+        "discover_maturity_maturing30_count",
+        "discover_maturity_ended30_count",
+        "discover_maturity_maturing30_burden",
+        "discover_pricing_change_last_loan",
+        "discover_pricing_upward_transition",
+        "discover_pricing_transition_age",
+        "discover_maturity_application_alignment",
+        "discover_maturity_inquiry_pressure",
+        "discover_maturity_inquiry_net_change",
+        "discover_maturity_credit_demand",
+        "discover_basket_combo_surprisal",
+        "discover_basket_rare_combo_share",
+        "discover_basket_pair_lift_surprisal",
+        "discover_pricing_tier_surprise",
+        "discover_pricing_tier_expected_gap",
+        "discover_pricing_tier_uncertainty",
+        "discover_pricing_tier_higher_mass",
+        "discoverq_pricing_dpd_surprise",
+        "discoverq_pricing_dpd_expected_gap"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5219646113267026,
+          0.5384005548647942
+        ],
+        "delta_KS": [
+          -0.002300006368728408,
+          0.0020056918943412013
+        ],
+        "candidate_AUC": [
+          0.8436114526287477,
+          0.8510631294299902
+        ],
+        "delta_AUC": [
+          -0.00017794381518437818,
+          0.0003826172238352853
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V42",
+      "definition": {
+        "id": "V42",
+        "families": [
+          "crowding",
+          "multi_coverage"
+        ],
+        "label": "Scheduled payment crowding and multi-loan observation opportunity",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.00046603853341364854,
+      "delta_mean_fold_KS": 2.9243727573735612e-05,
+      "wins": 3,
+      "new_features": [
+        "repay_multi_loan_due_months",
+        "repay_multi_loan_due_month_share",
+        "repay_due_date_payment_crowding",
+        "repay_due_crowding_income",
+        "repay_crowding_observed_months"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5221082314391988,
+          0.5387606391058904
+        ],
+        "delta_KS": [
+          -0.0014102686875714864,
+          0.0024225841777384223
+        ],
+        "candidate_AUC": [
+          0.8432249661680754,
+          0.8506840287259891
+        ],
+        "delta_AUC": [
+          -0.0004490116569640129,
+          -1.343002373138948e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V43",
+      "definition": {
+        "id": "V43",
+        "families": [
+          "liquidity"
+        ],
+        "label": "Due-month liquidity mismatch without net-flow double counting",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0006972372691771422,
+      "delta_mean_fold_KS": -0.00036319549547965125,
+      "wins": 3,
+      "new_features": [
+        "repay_liquidity_mismatch_at_due_month_gross",
+        "repay_due_month_income_burden",
+        "repay_due_month_resource_burden",
+        "repay_due_month_negative_cashflow_share"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5211110486995314,
+          0.5381935152440889
+        ],
+        "delta_KS": [
+          -0.0022827304516442742,
+          0.0014480764813430862
+        ],
+        "candidate_AUC": [
+          0.8434110981558975,
+          0.8508195648638578
+        ],
+        "delta_AUC": [
+          -0.0003456019783005665,
+          9.005129378099847e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V44",
+      "definition": {
+        "id": "V44",
+        "families": [
+          "payment_timing"
+        ],
+        "label": "Observed last-allocation timing dispersion and deadline behavior",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 8.575622310647013e-05,
+      "delta_mean_fold_KS": -0.00023365378807196357,
+      "wins": 1,
+      "new_features": [
+        "repay_payment_delay_dispersion",
+        "repay_payment_delay_tail_spread",
+        "repay_allocation_after_due_fraction",
+        "repay_allocation_on_due_day_fraction"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5220804715591066,
+          0.5390173797429897
+        ],
+        "delta_KS": [
+          -0.002023696588914928,
+          0.002003199184076686
+        ],
+        "candidate_AUC": [
+          0.8435630132472525,
+          0.8507661536679983
+        ],
+        "delta_AUC": [
+          -0.0002672809809248861,
+          0.0001269282172178365
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V45",
+      "definition": {
+        "id": "V45",
+        "families": [
+          "bureau_latency"
+        ],
+        "label": "Bureau reporting latency and provider delivery gaps",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.00016638644313649031,
+      "delta_mean_fold_KS": 9.062564042363607e-05,
+      "wins": 3,
+      "new_features": [
+        "repay_bureau_reporting_delay",
+        "repay_bureau_reporting_delay_max",
+        "repay_bureau_provider_latency_gap",
+        "repay_bureau_reporting_delay_change"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5208927599972618,
+          0.537850967523778
+        ],
+        "delta_KS": [
+          -0.0022053010275648404,
+          0.0016415146319453552
+        ],
+        "candidate_AUC": [
+          0.8433616445282714,
+          0.8506304766867615
+        ],
+        "delta_AUC": [
+          -0.0003703211630978559,
+          3.1297309080857623e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V46",
+      "definition": {
+        "id": "V46",
+        "families": [
+          "allocation_sequence"
+        ],
+        "label": "Observed cross-loan delayed-allocation event sequence proxy",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0010015650115138275,
+      "delta_mean_fold_KS": -0.0003044169349305292,
+      "wins": 1,
+      "new_features": [
+        "repay_late_after_other_loan_late_allocation_proxy",
+        "repay_allocation_sequence_anchors"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5212904783687791,
+          0.5377007114281949
+        ],
+        "delta_KS": [
+          -0.0025177274809185775,
+          0.0014053363875965864
+        ],
+        "candidate_AUC": [
+          0.8434341050504883,
+          0.8507368392074955
+        ],
+        "delta_AUC": [
+          -0.0003458937066472656,
+          1.652966458412211e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V47",
+      "definition": {
+        "id": "V47",
+        "families": [
+          "competition",
+          "multi_coverage"
+        ],
+        "label": "QUARANTINED competing loan obligations at selected snapshot",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "amount_paid"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0006730452471961357,
+      "delta_mean_fold_KS": 0.00024120442089163862,
+      "wins": 3,
+      "new_features": [
+        "rq_loan_payment_competition",
+        "repay_multi_loan_due_months",
+        "repay_multi_loan_due_month_share"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5222751302652922,
+          0.539420789534154
+        ],
+        "delta_KS": [
+          -0.0009263289186014573,
+          0.002783810380340878
+        ],
+        "candidate_AUC": [
+          0.843475835201651,
+          0.8507589840450389
+        ],
+        "delta_AUC": [
+          -0.00028448365076360894,
+          0.0001088414074828763
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "QUARANTINED_SNAPSHOT_PROVENANCE_UNVERIFIED"
+    },
+    {
+      "id": "V48",
+      "definition": {
+        "id": "V48",
+        "families": [
+          "selective",
+          "multi_coverage"
+        ],
+        "label": "QUARANTINED selective repayment and installment priority inversion",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "amount_paid"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0004400259804893114,
+      "delta_mean_fold_KS": -0.0003713296342379824,
+      "wins": 2,
+      "new_features": [
+        "rq_selective_repayment_index",
+        "repay_multi_loan_due_months",
+        "repay_multi_loan_due_month_share",
+        "rq_installment_priority_inversion",
+        "rq_installment_priority_inversion_severity"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5222951545407422,
+          0.5393672139340914
+        ],
+        "delta_KS": [
+          -0.0009867887164521165,
+          0.002626727858832616
+        ],
+        "candidate_AUC": [
+          0.8435348048853613,
+          0.8507776545722884
+        ],
+        "delta_AUC": [
+          -0.00027186395457077795,
+          0.00015408920870443597
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "QUARANTINED_SNAPSHOT_PROVENANCE_UNVERIFIED"
+    },
+    {
+      "id": "V49",
+      "definition": {
+        "id": "V49",
+        "families": [
+          "synchrony",
+          "multi_coverage"
+        ],
+        "label": "QUARANTINED due-cohort synchrony and current multi-loan DPD",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "days_past_due",
+          "max_days_past_due"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0005075334239873497,
+      "delta_mean_fold_KS": 0.0002912517031889106,
+      "wins": 3,
+      "new_features": [
+        "repay_multi_loan_due_months",
+        "repay_multi_loan_due_month_share",
+        "rq_multi_loan_dpd30_due_cohort_synchrony_proxy",
+        "rq_current_severe_loan_count"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5216574696729757,
+          0.5384391863314482
+        ],
+        "delta_KS": [
+          -0.0019831079210865994,
+          0.0014643963153908196
+        ],
+        "candidate_AUC": [
+          0.8434350439193353,
+          0.8506028113977707
+        ],
+        "delta_AUC": [
+          -0.0003688483935572917,
+          2.8229140635138572e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V50",
+      "definition": {
+        "id": "V50",
+        "families": [
+          "cohort_contagion",
+          "multi_coverage"
+        ],
+        "label": "QUARANTINED next-other-loan due-cohort lateness association",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0007482573445716234,
+      "delta_mean_fold_KS": -0.00029338840367543195,
+      "wins": 3,
+      "new_features": [
+        "repay_multi_loan_due_months",
+        "repay_multi_loan_due_month_share",
+        "rq_next_other_loan_due_late_after_late",
+        "rq_next_other_loan_due_late_after_clean",
+        "rq_cross_loan_due_cohort_lateness_dependency"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5209760461145948,
+          0.53746449945099
+        ],
+        "delta_KS": [
+          -0.0027523068922184007,
+          0.0010135393494836553
+        ],
+        "candidate_AUC": [
+          0.84329882438684,
+          0.8505299562967724
+        ],
+        "delta_AUC": [
+          -0.0004674822214068591,
+          -3.402184579059392e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V51",
+      "definition": {
+        "id": "V51",
+        "families": [
+          "allocation_entropy"
+        ],
+        "label": "QUARANTINED cumulative payment allocation versus due exposure",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "amount_paid"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0009017974814913288,
+      "delta_mean_fold_KS": -0.00011407001764269786,
+      "wins": 2,
+      "new_features": [
+        "rq_repayment_allocation_entropy",
+        "rq_repayment_allocation_concentration",
+        "rq_payment_due_allocation_divergence"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5211370584268943,
+          0.5381109968100525
+        ],
+        "delta_KS": [
+          -0.0021922333712151992,
+          0.0013974792838141567
+        ],
+        "candidate_AUC": [
+          0.8433572929898391,
+          0.8507267573001391
+        ],
+        "delta_AUC": [
+          -0.00032625183832986625,
+          9.331803398774041e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "QUARANTINED_SNAPSHOT_PROVENANCE_UNVERIFIED"
+    },
+    {
+      "id": "V52",
+      "definition": {
+        "id": "V52",
+        "families": [
+          "maturity_exposure"
+        ],
+        "label": "Threshold-specific calendar maturity exposure control",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.00048016634039949047,
+      "delta_mean_fold_KS": -0.0004549718565948657,
+      "wins": 3,
+      "new_features": [
+        "repay_maturity_exposure_ratio_15",
+        "repay_maturity_observation_count_15",
+        "repay_maturity_exposure_ratio_30",
+        "repay_maturity_observation_count_30",
+        "repay_maturity_exposure_ratio_60",
+        "repay_maturity_observation_count_60",
+        "repay_maturity_exposure_ratio_90",
+        "repay_maturity_observation_count_90"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5211058549699219,
+          0.5384614423657
+        ],
+        "delta_KS": [
+          -0.002253348568899477,
+          0.0015980508901899447
+        ],
+        "candidate_AUC": [
+          0.8432808346894768,
+          0.8505974333546179
+        ],
+        "delta_AUC": [
+          -0.0004883433846724711,
+          -4.880500913996009e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V53",
+      "definition": {
+        "id": "V53",
+        "families": [
+          "maturity_exposure",
+          "matured_rates"
+        ],
+        "label": "QUARANTINED opportunity-adjusted DPD15/30/60/90 with Empirical Bayes",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0003362678883704895,
+      "delta_mean_fold_KS": -0.0006117815617445954,
+      "wins": 2,
+      "new_features": [
+        "repay_maturity_exposure_ratio_15",
+        "repay_maturity_observation_count_15",
+        "rq_dpd15_matured_rate",
+        "rq_dpd15_matured_posterior",
+        "rq_dpd15_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_30",
+        "repay_maturity_observation_count_30",
+        "rq_dpd30_matured_rate",
+        "rq_dpd30_matured_posterior",
+        "rq_dpd30_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_60",
+        "repay_maturity_observation_count_60",
+        "rq_dpd60_matured_rate",
+        "rq_dpd60_matured_posterior",
+        "rq_dpd60_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_90",
+        "repay_maturity_observation_count_90",
+        "rq_dpd90_matured_rate",
+        "rq_dpd90_matured_posterior",
+        "rq_dpd90_matured_posterior_sd"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5213103358491663,
+          0.5385375687278035
+        ],
+        "delta_KS": [
+          -0.0019620255380985415,
+          0.001838383840017253
+        ],
+        "candidate_AUC": [
+          0.8433067869057976,
+          0.8505914838960101
+        ],
+        "delta_AUC": [
+          -0.000514067599923712,
+          -4.057897397905117e-06
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V54",
+      "definition": {
+        "id": "V54",
+        "families": [
+          "maturity_exposure",
+          "matured_amount"
+        ],
+        "label": "QUARANTINED matured amount-weighted delinquency versus exposure control",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.0001475395139156621,
+      "delta_mean_fold_KS": -0.0007393624774433283,
+      "wins": 2,
+      "new_features": [
+        "repay_maturity_exposure_ratio_15",
+        "repay_maturity_observation_count_15",
+        "rq_dpd15_matured_amount_weighted",
+        "repay_maturity_exposure_ratio_30",
+        "repay_maturity_observation_count_30",
+        "rq_dpd30_matured_amount_weighted",
+        "repay_maturity_exposure_ratio_60",
+        "repay_maturity_observation_count_60",
+        "rq_dpd60_matured_amount_weighted",
+        "repay_maturity_exposure_ratio_90",
+        "repay_maturity_observation_count_90",
+        "rq_dpd90_matured_amount_weighted"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5218385784212162,
+          0.5391658173072577
+        ],
+        "delta_KS": [
+          -0.001680823016169722,
+          0.0022447365185819424
+        ],
+        "candidate_AUC": [
+          0.8433709358870191,
+          0.8506742240279408
+        ],
+        "delta_AUC": [
+          -0.00046165391417782585,
+          2.8379156210223116e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V55",
+      "definition": {
+        "id": "V55",
+        "families": [
+          "pre_due"
+        ],
+        "label": "Exposure-adjusted pre-due7d versus prior7d spending and order burst",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": 0.00039643408865708274,
+      "delta_mean_fold_KS": -0.00026075286358451244,
+      "wins": 2,
+      "new_features": [
+        "repay_pre_due_spending_spike",
+        "repay_pre_due_order_burst",
+        "repay_pre_due_spend_income_shift"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5223701960176794,
+          0.5389601622551072
+        ],
+        "delta_KS": [
+          -0.0011961146075592454,
+          0.0021208866418309553
+        ],
+        "candidate_AUC": [
+          0.8431619076362025,
+          0.8504759678169843
+        ],
+        "delta_AUC": [
+          -0.0006231446592270068,
+          -0.0002197922921644949
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V56",
+      "definition": {
+        "id": "V56",
+        "families": [
+          "due_outcome"
+        ],
+        "label": "QUARANTINED pre-due spending contrast by eventual-by-cutoff DPD15",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0003021577111836926,
+      "delta_mean_fold_KS": -6.567054196926492e-05,
+      "wins": 2,
+      "new_features": [
+        "rq_pre_due_late_clean_spend_gap",
+        "rq_pre_due_late_clean_order_gap"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5214394026251301,
+          0.538738244358309
+        ],
+        "delta_KS": [
+          -0.0018193373826914188,
+          0.0015152182971963691
+        ],
+        "candidate_AUC": [
+          0.843327012361219,
+          0.8505810456201564
+        ],
+        "delta_AUC": [
+          -0.0004902265996086258,
+          -0.00010613556294853668
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V57",
+      "definition": {
+        "id": "V57",
+        "families": [
+          "crowding",
+          "multi_coverage",
+          "liquidity",
+          "payment_timing",
+          "bureau_latency",
+          "allocation_sequence",
+          "maturity_exposure",
+          "pre_due"
+        ],
+        "label": "Combined incremental-safe cross-loan scheduling and timing",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.001431410276938161,
+      "delta_mean_fold_KS": -0.0021317785542155133,
+      "wins": 0,
+      "new_features": [
+        "repay_maturity_exposure_ratio_15",
+        "repay_maturity_observation_count_15",
+        "repay_maturity_exposure_ratio_30",
+        "repay_maturity_observation_count_30",
+        "repay_maturity_exposure_ratio_60",
+        "repay_maturity_observation_count_60",
+        "repay_maturity_exposure_ratio_90",
+        "repay_maturity_observation_count_90",
+        "repay_multi_loan_due_months",
+        "repay_multi_loan_due_month_share",
+        "repay_due_date_payment_crowding",
+        "repay_due_crowding_income",
+        "repay_crowding_observed_months",
+        "repay_liquidity_mismatch_at_due_month_gross",
+        "repay_due_month_income_burden",
+        "repay_due_month_resource_burden",
+        "repay_due_month_negative_cashflow_share",
+        "repay_payment_delay_dispersion",
+        "repay_payment_delay_tail_spread",
+        "repay_allocation_after_due_fraction",
+        "repay_allocation_on_due_day_fraction",
+        "repay_late_after_other_loan_late_allocation_proxy",
+        "repay_allocation_sequence_anchors",
+        "repay_bureau_reporting_delay",
+        "repay_bureau_reporting_delay_max",
+        "repay_bureau_provider_latency_gap",
+        "repay_bureau_reporting_delay_change",
+        "repay_pre_due_spending_spike",
+        "repay_pre_due_order_burst",
+        "repay_pre_due_spend_income_shift"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5207823851793438,
+          0.5370491417951928
+        ],
+        "delta_KS": [
+          -0.0034858940958965605,
+          0.001266513252419338
+        ],
+        "candidate_AUC": [
+          0.8428732172896307,
+          0.8503033198428512
+        ],
+        "delta_AUC": [
+          -0.0008874537146743994,
+          -0.0001839167911569767
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "INCONCLUSIVE_OR_NEGATIVE"
+    },
+    {
+      "id": "V58",
+      "definition": {
+        "id": "V58",
+        "families": [
+          "competition",
+          "selective",
+          "synchrony",
+          "cohort_contagion",
+          "allocation_entropy",
+          "maturity_exposure",
+          "matured_rates",
+          "matured_amount",
+          "due_outcome",
+          "multi_coverage"
+        ],
+        "label": "QUARANTINED combined cross-loan snapshots and maturity-adjusted DPD",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "quarantined": true,
+        "snapshot_fields": [
+          "amount_paid",
+          "days_past_due",
+          "max_days_past_due"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.0005745887776618108,
+      "delta_mean_fold_KS": -0.0006816446054762615,
+      "wins": 2,
+      "new_features": [
+        "repay_maturity_exposure_ratio_15",
+        "repay_maturity_observation_count_15",
+        "rq_dpd15_matured_rate",
+        "rq_dpd15_matured_amount_weighted",
+        "rq_dpd15_matured_posterior",
+        "rq_dpd15_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_30",
+        "repay_maturity_observation_count_30",
+        "rq_dpd30_matured_rate",
+        "rq_dpd30_matured_amount_weighted",
+        "rq_dpd30_matured_posterior",
+        "rq_dpd30_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_60",
+        "repay_maturity_observation_count_60",
+        "rq_dpd60_matured_rate",
+        "rq_dpd60_matured_amount_weighted",
+        "rq_dpd60_matured_posterior",
+        "rq_dpd60_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_90",
+        "repay_maturity_observation_count_90",
+        "rq_dpd90_matured_rate",
+        "rq_dpd90_matured_amount_weighted",
+        "rq_dpd90_matured_posterior",
+        "rq_dpd90_matured_posterior_sd",
+        "rq_loan_payment_competition",
+        "rq_selective_repayment_index",
+        "repay_multi_loan_due_months",
+        "repay_multi_loan_due_month_share",
+        "rq_installment_priority_inversion",
+        "rq_installment_priority_inversion_severity",
+        "rq_multi_loan_dpd30_due_cohort_synchrony_proxy",
+        "rq_current_severe_loan_count",
+        "rq_next_other_loan_due_late_after_late",
+        "rq_next_other_loan_due_late_after_clean",
+        "rq_cross_loan_due_cohort_lateness_dependency",
+        "rq_repayment_allocation_entropy",
+        "rq_repayment_allocation_concentration",
+        "rq_payment_due_allocation_divergence",
+        "rq_pre_due_late_clean_spend_gap",
+        "rq_pre_due_late_clean_order_gap"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.521590264564547,
+          0.5384720019233432
+        ],
+        "delta_KS": [
+          -0.002232120952055805,
+          0.0016973464645187112
+        ],
+        "candidate_AUC": [
+          0.8437557320968635,
+          0.8511417385042178
+        ],
+        "delta_AUC": [
+          -2.3661685841869227e-05,
+          0.0004260243674224284
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "QUARANTINED_SNAPSHOT_PROVENANCE_UNVERIFIED"
+    },
+    {
+      "id": "V59",
+      "definition": {
+        "id": "V59",
+        "families": [
+          "crowding",
+          "multi_coverage",
+          "liquidity",
+          "payment_timing",
+          "bureau_latency",
+          "allocation_sequence",
+          "maturity_exposure",
+          "pre_due",
+          "competition",
+          "selective",
+          "synchrony",
+          "cohort_contagion",
+          "allocation_entropy",
+          "matured_rates",
+          "matured_amount",
+          "due_outcome"
+        ],
+        "label": "QUARANTINED all repayment mechanisms conservative correction",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "quarantined": true,
+        "snapshot_fields": [
+          "amount_paid",
+          "days_past_due",
+          "max_days_past_due"
+        ],
+        "batch": "repayment",
+        "feature_catalog": "repayment/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/repayment_features.py",
+      "status": "COMPLETE",
+      "delta_KS": -0.00018574284281247522,
+      "delta_mean_fold_KS": -0.00014693041167237463,
+      "wins": 2,
+      "new_features": [
+        "repay_maturity_exposure_ratio_15",
+        "repay_maturity_observation_count_15",
+        "rq_dpd15_matured_rate",
+        "rq_dpd15_matured_amount_weighted",
+        "rq_dpd15_matured_posterior",
+        "rq_dpd15_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_30",
+        "repay_maturity_observation_count_30",
+        "rq_dpd30_matured_rate",
+        "rq_dpd30_matured_amount_weighted",
+        "rq_dpd30_matured_posterior",
+        "rq_dpd30_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_60",
+        "repay_maturity_observation_count_60",
+        "rq_dpd60_matured_rate",
+        "rq_dpd60_matured_amount_weighted",
+        "rq_dpd60_matured_posterior",
+        "rq_dpd60_matured_posterior_sd",
+        "repay_maturity_exposure_ratio_90",
+        "repay_maturity_observation_count_90",
+        "rq_dpd90_matured_rate",
+        "rq_dpd90_matured_amount_weighted",
+        "rq_dpd90_matured_posterior",
+        "rq_dpd90_matured_posterior_sd",
+        "rq_loan_payment_competition",
+        "rq_selective_repayment_index",
+        "repay_multi_loan_due_months",
+        "repay_multi_loan_due_month_share",
+        "rq_installment_priority_inversion",
+        "rq_installment_priority_inversion_severity",
+        "rq_multi_loan_dpd30_due_cohort_synchrony_proxy",
+        "rq_current_severe_loan_count",
+        "rq_next_other_loan_due_late_after_late",
+        "rq_next_other_loan_due_late_after_clean",
+        "rq_cross_loan_due_cohort_lateness_dependency",
+        "rq_repayment_allocation_entropy",
+        "rq_repayment_allocation_concentration",
+        "rq_payment_due_allocation_divergence",
+        "repay_due_date_payment_crowding",
+        "repay_due_crowding_income",
+        "repay_crowding_observed_months",
+        "repay_liquidity_mismatch_at_due_month_gross",
+        "repay_due_month_income_burden",
+        "repay_due_month_resource_burden",
+        "repay_due_month_negative_cashflow_share",
+        "repay_payment_delay_dispersion",
+        "repay_payment_delay_tail_spread",
+        "repay_allocation_after_due_fraction",
+        "repay_allocation_on_due_day_fraction",
+        "repay_late_after_other_loan_late_allocation_proxy",
+        "repay_allocation_sequence_anchors",
+        "repay_bureau_reporting_delay",
+        "repay_bureau_reporting_delay_max",
+        "repay_bureau_provider_latency_gap",
+        "repay_bureau_reporting_delay_change",
+        "repay_pre_due_spending_spike",
+        "repay_pre_due_order_burst",
+        "repay_pre_due_spend_income_shift",
+        "rq_pre_due_late_clean_spend_gap",
+        "rq_pre_due_late_clean_order_gap"
+      ],
+      "uncertainty": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5215005522946635,
+          0.5387457943453026
+        ],
+        "candidate_KS": [
+          0.5217968991301585,
+          0.538462361890319
+        ],
+        "delta_KS": [
+          -0.002224065841624634,
+          0.0019325008558277643
+        ],
+        "candidate_AUC": [
+          0.8436604965499713,
+          0.8510431954420944
+        ],
+        "delta_AUC": [
+          -0.00010363224596119102,
+          0.0004100939826755689
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      },
+      "evidence": "QUARANTINED_SNAPSHOT_PROVENANCE_UNVERIFIED"
+    }
+  ],
+  "queued": [
+    {
+      "id": "V60",
+      "definition": {
+        "id": "V60",
+        "families": [
+          "signature"
+        ],
+        "label": "Depth2 path signatures: cashflow/spending/time",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V61",
+      "definition": {
+        "id": "V61",
+        "families": [
+          "leadlag"
+        ],
+        "label": "Lead-lag lift, variation and trajectory curvature",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V62",
+      "definition": {
+        "id": "V62",
+        "families": [
+          "reconciliation"
+        ],
+        "label": "Payment-channel financial reconciliation",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V63",
+      "definition": {
+        "id": "V63",
+        "families": [
+          "amortization"
+        ],
+        "label": "Annuity contractual schedule residual proxies",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V64",
+      "definition": {
+        "id": "V64",
+        "families": [
+          "amortization_paid"
+        ],
+        "label": "QUARANTINED amortization payment shortfalls",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "amount_paid"
+        ],
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V65",
+      "definition": {
+        "id": "V65",
+        "families": [
+          "joint_tail"
+        ],
+        "label": "Smoothed empirical cross-source tail excess",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V66",
+      "definition": {
+        "id": "V66",
+        "families": [
+          "joint_tail_dpd"
+        ],
+        "label": "QUARANTINED cashflow/spending/due-cohort DPD tails",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "quarantined": true,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V67",
+      "definition": {
+        "id": "V67",
+        "families": [
+          "markov_category"
+        ],
+        "label": "Fold/month-local dominant-category Markov surprisal",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V68",
+      "definition": {
+        "id": "V68",
+        "families": [
+          "markov_payment"
+        ],
+        "label": "Fold/month-local payment-method Markov surprisal",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V69",
+      "definition": {
+        "id": "V69",
+        "families": [
+          "composition"
+        ],
+        "label": "Category/payment ILR balances and composition changes",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V70",
+      "definition": {
+        "id": "V70",
+        "families": [
+          "bureau_latent"
+        ],
+        "label": "Fold/month-local latest-provider latent creditworthiness",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V71",
+      "definition": {
+        "id": "V71",
+        "families": [
+          "bureau_fresh"
+        ],
+        "label": "Freshness-inflated latent bureau measurement uncertainty",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V72",
+      "definition": {
+        "id": "V72",
+        "families": [
+          "signature",
+          "leadlag",
+          "reconciliation"
+        ],
+        "label": "Joint financial path and channel reconciliation",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V73",
+      "definition": {
+        "id": "V73",
+        "families": [
+          "markov_category",
+          "markov_payment",
+          "composition"
+        ],
+        "label": "Sequence rarity plus relative spending composition",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V74",
+      "definition": {
+        "id": "V74",
+        "families": [
+          "signature",
+          "leadlag",
+          "reconciliation",
+          "amortization",
+          "joint_tail",
+          "markov_category",
+          "markov_payment",
+          "composition",
+          "bureau_latent",
+          "bureau_fresh"
+        ],
+        "label": "All new statistical mechanisms conservative offset",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V75",
+      "definition": {
+        "id": "V75",
+        "families": [
+          "signature",
+          "leadlag",
+          "reconciliation",
+          "amortization",
+          "joint_tail",
+          "markov_category",
+          "markov_payment",
+          "composition",
+          "bureau_latent",
+          "bureau_fresh",
+          "amortization_paid",
+          "joint_tail_dpd"
+        ],
+        "label": "QUARANTINED all statistical mechanisms with snapshots",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "quarantined": true,
+        "snapshot_fields": [
+          "amount_paid",
+          "max_days_past_due"
+        ],
+        "batch": "statistical",
+        "feature_catalog": "statistical/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/statistical_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V76",
+      "definition": {
+        "id": "V76",
+        "families": [
+          "mpc"
+        ],
+        "label": "Shrunk marginal income-outflow response and lag1",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V77",
+      "definition": {
+        "id": "V77",
+        "families": [
+          "asymmetric"
+        ],
+        "label": "Shrunk asymmetric upside/downside income response",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V78",
+      "definition": {
+        "id": "V78",
+        "families": [
+          "reapplication"
+        ],
+        "label": "Post-rejection loan-request adaptation",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V79",
+      "definition": {
+        "id": "V79",
+        "families": [
+          "size_elasticity"
+        ],
+        "label": "Loan-normalized DPD15 installment-size response",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "snapshot_dependent": true,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "quarantined": false,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V80",
+      "definition": {
+        "id": "V80",
+        "families": [
+          "spectral"
+        ],
+        "label": "Daily spending/order spectral fingerprint",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V81",
+      "definition": {
+        "id": "V81",
+        "families": [
+          "cancel_recovery"
+        ],
+        "label": "One-to-one cancelled-to-completed recovery",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V82",
+      "definition": {
+        "id": "V82",
+        "families": [
+          "rationing"
+        ],
+        "label": "Historical approved/requested rationing trajectory",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V83",
+      "definition": {
+        "id": "V83",
+        "families": [
+          "friction"
+        ],
+        "label": "Underwriting elapsed-time friction",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V84",
+      "definition": {
+        "id": "V84",
+        "families": [
+          "allan"
+        ],
+        "label": "Multiscale normalized Allan variance",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V85",
+      "definition": {
+        "id": "V85",
+        "families": [
+          "mpc",
+          "asymmetric"
+        ],
+        "label": "Combined income response and asymmetry",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V86",
+      "definition": {
+        "id": "V86",
+        "families": [
+          "spectral",
+          "allan"
+        ],
+        "label": "Combined spectral and multiscale variability",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V87",
+      "definition": {
+        "id": "V87",
+        "families": [
+          "reapplication",
+          "rationing"
+        ],
+        "label": "Combined credit reapplication and rationing",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V88",
+      "definition": {
+        "id": "V88",
+        "families": [
+          "mpc",
+          "asymmetric",
+          "reapplication",
+          "spectral",
+          "cancel_recovery",
+          "rationing",
+          "friction",
+          "allan"
+        ],
+        "label": "All eight non-DPD behavior mechanisms conservative",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V89",
+      "definition": {
+        "id": "V89",
+        "families": [
+          "mpc",
+          "asymmetric",
+          "reapplication",
+          "spectral",
+          "cancel_recovery",
+          "rationing",
+          "friction",
+          "allan",
+          "size_elasticity"
+        ],
+        "label": "All nine behavior mechanisms including allowed DPD",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "snapshot_dependent": true,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "quarantined": false,
+        "batch": "behavior",
+        "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/behavior_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V90",
+      "definition": {
+        "id": "V90",
+        "families": [
+          "coverage_control"
+        ],
+        "label": "Common history-support-only control for lifecycle batch",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "only": [],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V91",
+      "definition": {
+        "id": "V91",
+        "families": [
+          "first_payment"
+        ],
+        "label": "First-observed-payment fragility with maturity exposure",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "snapshot_dependent": true,
+        "quarantined": false,
+        "snapshot_fields": [
+          "max_days_past_due",
+          "amount_paid"
+        ],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V92",
+      "definition": {
+        "id": "V92",
+        "families": [
+          "seasoning"
+        ],
+        "label": "MOB/tenor/vintage/opportunity-adjusted delinquency",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "snapshot_dependent": true,
+        "quarantined": false,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V93",
+      "definition": {
+        "id": "V93",
+        "families": [
+          "repayment_residual"
+        ],
+        "label": "Cross-fitted installment observed-versus-expected risk",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "snapshot_dependent": true,
+        "quarantined": false,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V94",
+      "definition": {
+        "id": "V94",
+        "families": [
+          "lifecycle"
+        ],
+        "label": "Within-contract MOB-normalized lifecycle migration",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "snapshot_dependent": true,
+        "quarantined": false,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V95",
+      "definition": {
+        "id": "V95",
+        "families": [
+          "thin_file"
+        ],
+        "label": "Joint thin-file information signature",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V96",
+      "definition": {
+        "id": "V96",
+        "families": [
+          "bureau_ambiguity"
+        ],
+        "label": "Observed-report debt scenario ambiguity",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V97",
+      "definition": {
+        "id": "V97",
+        "families": [
+          "approval_propensity"
+        ],
+        "label": "Cross-fitted historical approval propensity residual",
+        "penalty": 0.003,
+        "strength": 0.5,
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V98",
+      "definition": {
+        "id": "V98",
+        "families": [
+          "first_payment",
+          "seasoning",
+          "lifecycle"
+        ],
+        "label": "Early payment and lifecycle combined",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "snapshot_dependent": true,
+        "quarantined": false,
+        "snapshot_fields": [
+          "max_days_past_due",
+          "amount_paid"
+        ],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V99",
+      "definition": {
+        "id": "V99",
+        "families": [
+          "repayment_residual",
+          "approval_propensity"
+        ],
+        "label": "Combined historical auxiliary-model residuals",
+        "penalty": 0.01,
+        "strength": 0.5,
+        "snapshot_dependent": true,
+        "quarantined": false,
+        "snapshot_fields": [
+          "max_days_past_due"
+        ],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V100",
+      "definition": {
+        "id": "V100",
+        "families": [
+          "first_payment",
+          "seasoning",
+          "repayment_residual",
+          "lifecycle",
+          "thin_file",
+          "bureau_ambiguity",
+          "approval_propensity"
+        ],
+        "label": "All seven lifecycle mechanisms conservative",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "snapshot_dependent": true,
+        "quarantined": false,
+        "snapshot_fields": [
+          "max_days_past_due",
+          "amount_paid"
+        ],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    },
+    {
+      "id": "V101",
+      "definition": {
+        "id": "V101",
+        "families": [
+          "first_payment",
+          "seasoning",
+          "lifecycle",
+          "thin_file",
+          "bureau_ambiguity"
+        ],
+        "label": "Lifecycle mechanisms excluding auxiliary classifiers",
+        "penalty": 0.03,
+        "strength": 0.25,
+        "snapshot_dependent": true,
+        "quarantined": false,
+        "snapshot_fields": [
+          "max_days_past_due",
+          "amount_paid"
+        ],
+        "batch": "lifecycle",
+        "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv"
+      },
+      "source_code": "v7/scripts/lifecycle_features.py",
+      "status": "QUEUED",
+      "delta_KS": null,
+      "delta_mean_fold_KS": null,
+      "wins": null,
+      "new_features": null,
+      "uncertainty": null,
+      "evidence": null
+    }
+  ]
+}

@@ -3,6 +3,7 @@
 Only predictions/aggregate optimizer evidence are persisted by the caller.
 """
 import numpy as np
+import pandas as pd
 from scipy.special import expit, logit
 from sklearn.preprocessing import SplineTransformer, StandardScaler
 pop_cols = ["pop_A", "pop_B", "pop_C1", "pop_C2"]

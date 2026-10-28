@@ -1,0 +1,213 @@
+1. Ide paling menarik: Shadow Loan Learning
+Aku memeriksa langsung previous_applications.csv, bukan hanya daftar fitur yang sudah dibuat.
+Pinjaman historis approved
+159.323
+
+
+Berumur ≥365 hari saat cutoff
+81.745
+
+
+Nasabah dengan approved history
+66.519
+
+
+
+Angka tersebut adalah hasil pemeriksaan langsung terhadap data mentah, bukan metrik modelling.
+
+Artinya, di luar 70.000 label target kompetisi, ada 159 ribu pinjaman historis yang berpotensi menyediakan sinyal pembelajaran tambahan melalui repayment_history.
+
+Daripada semua histori tersebut hanya diringkas menjadi DPD rate, bayangkan kita melatih model khusus untuk memahami bagaimana suatu pinjaman berkembang menjadi bermasalah.
+159.323 Historical Approved Loans
+
+Kontrak, tenor, bunga, cicilan, dan observasi pembayaran
+
+
+Historical Loan Risk Teacher
+
+Model survival / delinquency progression dengan censoring
+
+
+Learned Loan-Risk Representation
+
+Risiko historis, sensitivitas cicilan, dan pola hazard laten
+
+
+Final Application Risk Model
+
+Kumo champion + auxiliary loan-risk score atau embedding
+
+
+Kenapa ini berpotensi berbeda drastis?
+Karena ini bukan menambah statistik baru ke 90 fitur Kumo. Kita sedang mencoba membuat sumber pembelajaran tambahan dari outcome pinjaman historis.
+
+Tetapi ada batas penting: repayment_history menyediakan snapshot sampai cutoff, bukan label 12-bulan historis yang otomatis sempurna. Sebagian pinjaman belum cukup lama, dan informasi max_days_past_due tidak selalu memungkinkan kita merekonstruksi tanggal pertama mencapai DPD90 secara tepat.
+
+Jadi 81.745 adalah jumlah pinjaman yang berumur cukup lama, bukan jumlah label DPD90 yang sudah tervalidasi. Kita harus membangun aturan event/censoring yang benar sebelum melatih teacher.
+
+Ini menurutku ide berpotensi tinggi yang secara substansial berbeda dari V93 dalam antreanmu: V93 merancang repayment residual feature, sedangkan pendekatan ini menjadikan pinjaman historis sebagai unit training model risiko tersendiri, lalu mentransfer pembelajarannya ke aplikasi target.
+2. Joint Latent Risk Inference — bukan latent feature biasa
+Prioritas kedua · High-risk, high-upside
+
+Menurutku ini kandidat yang paling dekat dengan jenis inovasi yang kamu cari.
+
+Saat ini latent model dalam repository terutama melakukan estimasi noise atau nilai laten pada harga, income, bureau, dan DPD secara terpisah.
+
+Bagaimana kalau kita mengasumsikan ada beberapa faktor finansial tersembunyi yang menghasilkan seluruh pengamatan tersebut secara bersamaan?
+
+Misalnya:
+\[
+z_i =
+\begin{bmatrix}
+\text{Financial Capacity}\\
+\text{Repayment Discipline}\\
+\text{Credit Demand Pressure}\\
+\text{Consumption Propensity}
+\end{bmatrix}
+\]
+
+Faktor laten ini tidak memiliki label langsung. Namun, kita mempunyai banyak indikator yang mungkin dipengaruhinya.
+Bureau scores
+
+
+Repayment behavior
+
+
+Account cashflow
+
+
+E-commerce patterns
+
+
+
+
+Multi-View Latent State Model
+
+Shared latent variables + source-specific measurement noise
+z ∈ ℝ⁸
+
+
+Reconstruct financial observations
+
+
+Predict historical credit outcomes
+
+
+
+
+Latent posterior → Kumo / Credit Risk Head
+
+
+Apa yang membuatnya berbeda?
+Model dilatih untuk merekonstruksi beberapa sumber informasi sekaligus. Jika suatu nasabah memiliki bureau score yang terlihat bagus tetapi perilaku pembayaran dan likuiditasnya buruk, model harus menjelaskan ketidaksesuaian itu melalui faktor laten dan ketidakpastian pengukurannya.
+
+Fungsi objektif konseptual:
+\[
+\mathcal L =
+\mathcal L_{\text{reconstruction}}
++\lambda_1\mathcal L_{\text{historical repayment}}
++\lambda_2\mathcal L_{\text{default}}
+\]
+
+Ini adalah bentuk multi-task latent-variable learning, bukan sekadar menggabungkan skor dari tiga model.
+
+Aku akan memakai posterior mean, posterior uncertainty, dan delapan dimensi representasi laten sebagai input eksperimental.
+
+Namun, nama semantik setiap dimensi laten tidak otomatis dapat diidentifikasi. Kita perlu menginterpretasikannya melalui korelasi dan ablation, bukan menganggap model pasti menemukan faktor psikologis nasabah yang sebenarnya.
+
+Ide ini juga berbeda dari V111 (masked reconstruction) yang masih antre pada snapshot eksperimen: fokusnya bukan hanya merekonstruksi informasi yang disembunyikan, melainkan mengestimasi faktor bersama yang menjelaskan beberapa pengamatan finansial dan outcome historis.
+
+Secara metodologis, pendekatan multitask/representation learning telah dieksplorasi untuk credit risk, meskipun bukti dari dataset lain bukan jaminan peningkatan LOGIKA. 
+
+ScienceDirect
+
+
+
+3. Query-Adaptive Kumo — mengubah konteks, bukan modelnya
+Prioritas ketiga · Model architecture / inference
+
+Ada kelemahan konseptual pada pemakaian Kumo saat ini.
+
+Kumo menggunakan konteks berlabel hingga 50.000 aplikasi. Tetapi apakah setiap nasabah membutuhkan kumpulan contoh yang sama?
+
+Bayangkan kita sedang memprediksi:
+- Nasabah berpenghasilan tetap dengan bureau score tinggi.
+- Nasabah self-employed yang memiliki cashflow sangat volatil.
+- Nasabah tanpa histori pembayaran yang cukup.
+Ketiganya mungkin membutuhkan kelompok pembanding yang berbeda.
+
+Ide: buat beberapa Kumo contextual experts dengan susunan data berbeda, lalu gunakan satu global Kumo sebagai anchor.
+\[
+P(y\mid x)=
+(1-\alpha)P_{\text{global}}(y\mid x)
++\alpha P_{\text{local}}(y\mid x)
+\]
+
+Konteks lokal dipilih berdasarkan kedekatan karakteristik kredit, bukan berdasarkan target validation.
+New Loan Application
+
+
+Financial Similarity Retrieval
+
+Loan pricing · Bureau · Liquidity · Repayment profile
+
+
+Global Kumo
+
+Original context
+
+
+Local Kumo
+
+Relevant labeled context
+
+
+
+
+Conservative Global–Local Blend
+
+
+Ini berbeda dari eksperimen Kumo V09 sebelumnya, yang terutama mengubah class sampling, ukuran konteks, dan jumlah ensemble.
+
+Pendekatan retrieval lokal punya dasar riset: LoCalPFN (NeurIPS 2024) menunjukkan manfaat retrieval dan adaptasi untuk tabular in-context learning. Penelitian yang lebih baru tentang context sampling juga menekankan pentingnya coverage dan diversity, bukan sekadar menambah panjang konteks. 
+
+proceedings.neurips.cc
++1
+
+
+
+
+Tetapi ada kendala praktis: Kumo saat ini meng-cache konteks, sehingga membuat konteks unik bagi setiap query mungkin mahal. Karena itu, versi pertama sebaiknya memakai beberapa kelompok konteks tetap, bukan satu Kumo baru per nasabah.
+
+Ini lebih spekulatif daripada Shadow Loan Learning, tetapi tidak membutuhkan feature engineering transaksi baru.
+4. Risk-Ranking Distillation — model kedua khusus memperbaiki urutan
+Satu ide tambahan yang tetap layak dicoba adalah mengajarkan correction model untuk memperbaiki ranking Kumo, bukan hanya meminimalkan logistic loss.
+
+Kita sudah melihat bahwa beberapa kandidat menaikkan KS tetapi menurunkan AUC. Maka model ranking ini harus mengoptimalkan objektif yang lebih luas.
+
+Misalnya:
+\[
+\mathcal L =
+\mathcal L_{\text{BCE}}
++\lambda\mathcal L_{\text{pairwise AUC}}
++\gamma\mathcal L_{\text{ranking consistency}}
+\]
+
+Kumo menjadi teacher. Student hanya mempelajari residual ranking dari representasi laten atau beberapa fitur yang sudah ada.
+
+Kita juga bisa membandingkannya dengan penalized KS-surrogate, yang telah diteliti untuk credit scoring. 
+
+ScienceDirect
+
+
+
+
+Perbedaannya dengan offset correction saat ini adalah objektif pembelajaran, bukan sekadar jumlah fitur tambahan.
+
+Tetapi aku tidak akan langsung mengoptimalkan KS mentah. Maksimum KS mudah dipengaruhi satu wilayah threshold, sehingga direct KS optimization berisiko memperburuk selection overfitting yang sekarang kita hadapi.
+5. Perbandingan keempat ide
+Ide	Sumber lompatan	Kompleksitas	Potensi konseptual
+Shadow Loan Learning	Additional supervision dari histori pinjaman	Sedang–tinggi	Sangat tinggi
+Joint Latent Risk Inference	Multi-source hidden financial state	Tinggi	Sangat tinggi
+Query-Adaptive Kumo	Context yang lebih relevan	Tinggi	Tinggi
+Risk-Ranking Distillation	Objective ranking dan student correction	Sedang	Menengah–tinggi

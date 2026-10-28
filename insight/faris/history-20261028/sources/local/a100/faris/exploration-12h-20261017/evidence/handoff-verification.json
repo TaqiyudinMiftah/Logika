@@ -1,0 +1,101 @@
+{
+  "time": 1792214838.720622,
+  "model_source_unchanged_since_launch": true,
+  "management_manifest_sha256": "6b19c357901738e33e19d664bbadbdee4c5637313776654a74ce316653545255",
+  "initial_management_manifest_sha256": "d5af7186c506f90ff6076ad776cc4b0ba823075fe08ccad9f8df52dc8fd2fc25",
+  "shared_clock": {
+    "start": 1792212935.17935,
+    "deadline": 1792256135.1793504,
+    "budget_seconds": 43200,
+    "id": "exploration-12h-20261017"
+  },
+  "tests": {
+    "full_suite_passed": 31,
+    "stress_deselected": 1,
+    "targeted_boundaries_passed": 8,
+    "transfer_roundtrip_bytes": 5242880,
+    "final_orchestration_patches": "syntax and targeted live checks; full suite preceded final orchestration edits"
+  },
+  "champion_reproduction": {
+    "complete": true,
+    "passes": true,
+    "maximum_probability_difference": 0.0,
+    "ks": 0.525771438885202,
+    "controls": [
+      {
+        "host": "pc1",
+        "config": "d2f4719a69d44e93a849",
+        "job_id": "job_000245"
+      },
+      {
+        "host": "pc1",
+        "config": "2f361a1d0fadbcad8a20",
+        "job_id": "job_000246"
+      },
+      {
+        "host": "pc1",
+        "config": "f219d9c616b5e09d6ce0",
+        "job_id": "job_000247"
+      },
+      {
+        "host": "pc2",
+        "config": "fd1fd49493df80697827",
+        "job_id": "job_000003"
+      },
+      {
+        "host": "pc2",
+        "config": "8451c60546e93fb6a2b2",
+        "job_id": "job_000070"
+      }
+    ],
+    "reason_for_host_pinning": "PCA/SVD numerical kernels are CPU/BLAS dependent",
+    "clock": {
+      "start": 1792212935.17935,
+      "deadline": 1792256135.1793504,
+      "budget_seconds": 43200,
+      "id": "exploration-12h-20261017"
+    }
+  },
+  "hosts": {
+    "pc1": {
+      "status": "running",
+      "counts": {
+        "running": 11,
+        "pending": 22,
+        "complete": 269
+      }
+    },
+    "pc2": {
+      "status": "running",
+      "counts": {
+        "running": 7,
+        "pending": 26,
+        "complete": 92,
+        "failed": 1
+      }
+    },
+    "pc3": {
+      "status": "running",
+      "counts": {
+        "running": 6,
+        "pending": 30,
+        "complete": 72,
+        "failed": 1
+      }
+    },
+    "node380": {
+      "status": "running",
+      "counts": {
+        "running": 1,
+        "pending": 63,
+        "complete": 2
+      }
+    }
+  },
+  "verified_actuarial_results": 272,
+  "postlaunch_repairs": [
+    "resumable preparation and transient services",
+    "separate A100 bulk/control kernels",
+    "original CPU/BLAS assignment for champion controls; prior trials retained"
+  ]
+}

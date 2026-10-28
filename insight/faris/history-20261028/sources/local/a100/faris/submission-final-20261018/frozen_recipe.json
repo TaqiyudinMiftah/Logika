@@ -1,0 +1,606 @@
+{
+  "id": "without_pc2_job_000853_mean",
+  "ensemble": {
+    "id": "without_pc2_job_000853_mean",
+    "method": "mean",
+    "parents": [
+      "pc2_job_000623",
+      "pc2_job_000855",
+      "pc3_job_000424",
+      "pc3_job_000846"
+    ],
+    "weights": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ]
+  },
+  "stream_configurations": {
+    "pc2_job_000623": "aaf1faad20c743c8877c",
+    "pc3_job_000424": "2f6c6c38fc4c0efb1c4c",
+    "pc3_job_000846": "b8ed3935d1e518adb6fd"
+  },
+  "shared_ridge_base_order": [
+    "fd1fd49493df80697827",
+    "d2f4719a69d44e93a849",
+    "eb3419a4bf925b93ca53"
+  ],
+  "ridge_parameters": {
+    "alpha": 100
+  },
+  "recipes": {
+    "aaf1faad20c743c8877c": {
+      "configuration": {
+        "model": "ebm",
+        "view": "representation_17",
+        "weight": 1,
+        "anchor": false,
+        "strength": 0.05,
+        "l1": 0.25,
+        "dimensions": 128
+      },
+      "representation": {
+        "changes": {
+          "clip": 0.01,
+          "encoding": "target",
+          "feature_count": 128,
+          "indicator": true,
+          "interactions": true,
+          "representation": "income_gap",
+          "select": "gain",
+          "window": 180
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0.01,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "frequency",
+          "feature_count": 128,
+          "half_life": 180,
+          "indicator": false,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "group_pca",
+          "representation": "income_gap",
+          "scale": "none",
+          "select": "true_gain",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "rank",
+          "view": "v3",
+          "weight": 6,
+          "window": 180,
+          "_extra_family": "representation"
+        },
+        "family": "source",
+        "hypothesis": "H_representation",
+        "id": "representation_17",
+        "is_control": false,
+        "matched_parent": null,
+        "resolved_numeric_columns": 508,
+        "semantic_signature": "3a5084adab1e58297714f1a2ed2c7ec16f3259598edd0d315c84bd3300043e0a",
+        "wave": 2
+      }
+    },
+    "2f6c6c38fc4c0efb1c4c": {
+      "configuration": {
+        "model": "elastic",
+        "view": "account_00",
+        "weight": 3,
+        "anchor": false,
+        "strength": 0.005,
+        "l1": 0.75,
+        "dimensions": 128
+      },
+      "representation": {
+        "changes": {
+          "clip": 0.01,
+          "encoding": "target",
+          "feature_count": 128,
+          "indicator": true,
+          "interactions": true,
+          "representation": "income_gap",
+          "select": "gain",
+          "window": 180
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "onehot",
+          "feature_count": "all",
+          "half_life": 90,
+          "indicator": false,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "none",
+          "representation": "income_gap",
+          "scale": "none",
+          "select": "none",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "identity",
+          "view": "v3",
+          "weight": 6,
+          "window": 30,
+          "_extra_family": "account"
+        },
+        "family": "source",
+        "hypothesis": "H_account",
+        "id": "account_00",
+        "is_control": false,
+        "matched_parent": null,
+        "resolved_numeric_columns": 508,
+        "semantic_signature": "3be69c109e9d330fa8dd4c2f88fc49ef35d83bbb3e5086c6be5fff5cce382891",
+        "wave": 2
+      }
+    },
+    "b8ed3935d1e518adb6fd": {
+      "configuration": {
+        "model": "tabm",
+        "view": "bureau_13",
+        "weight": 3,
+        "anchor": false,
+        "width": 256,
+        "blocks": 4,
+        "dropout": 0.1,
+        "lr": 0.0001,
+        "events": 128,
+        "encoding": "plain"
+      },
+      "representation": {
+        "changes": {
+          "clip": 0.01,
+          "encoding": "target",
+          "feature_count": 128,
+          "indicator": true,
+          "interactions": true,
+          "representation": "income_gap",
+          "select": "gain",
+          "window": 180
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0.005,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "target",
+          "feature_count": 128,
+          "half_life": 90,
+          "indicator": true,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "none",
+          "representation": "income_gap",
+          "scale": "none",
+          "select": "true_gain",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "signed_log",
+          "view": "v3",
+          "weight": 6,
+          "window": 365,
+          "_extra_family": "bureau"
+        },
+        "family": "source",
+        "hypothesis": "H_bureau",
+        "id": "bureau_13",
+        "is_control": false,
+        "matched_parent": null,
+        "resolved_numeric_columns": 508,
+        "semantic_signature": "7c359e09451ed78bd2e7ad95ad3ee77ef09649b19be756257d8b578adca98363",
+        "wave": 2
+      }
+    },
+    "fd1fd49493df80697827": {
+      "configuration": {
+        "model": "champion",
+        "view": "w2p_e8dd515dcc04cd2e4959",
+        "weight": 6,
+        "anchor": true
+      },
+      "representation": {
+        "changes": {
+          "clip": 0.01,
+          "encoding": "target",
+          "feature_count": 128,
+          "indicator": true,
+          "interactions": true,
+          "representation": "income_gap",
+          "select": "gain",
+          "window": 180
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0.01,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "target",
+          "feature_count": 128,
+          "half_life": 90,
+          "indicator": true,
+          "interactions": true,
+          "mature": true,
+          "missing": "median",
+          "reducer": "none",
+          "representation": "income_gap",
+          "scale": "none",
+          "select": "gain",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "identity",
+          "view": "v3",
+          "weight": 6,
+          "window": 180,
+          "_extra_family": null
+        },
+        "family": "cross_source",
+        "hypothesis": "Seeded higher-order combination",
+        "id": "w2f_305f821e59f359ca",
+        "is_control": false,
+        "matched_parent": null,
+        "resolved_numeric_columns": 508,
+        "semantic_signature": "305f821e59f359ca0eb0b3921d1fe0645d40747d61bf7afeaded0d2b6a2505bb",
+        "wave": 2
+      },
+      "original_recipe": {
+        "control": "f_7c3c29bc9adf28f1",
+        "id": "w2p_e8dd515dcc04cd2e4959",
+        "kind": "pipeline",
+        "model": "linear",
+        "representation": {
+          "changes": {
+            "clip": 0.01,
+            "encoding": "target",
+            "feature_count": 128,
+            "indicator": true,
+            "interactions": true,
+            "representation": "income_gap",
+            "select": "gain",
+            "window": 180
+          },
+          "config": {
+            "append": true,
+            "category_normalize": false,
+            "clip": 0.01,
+            "cohort_weight": false,
+            "correlation": 0.95,
+            "dimensions": 64,
+            "encoding": "target",
+            "feature_count": 128,
+            "half_life": 90,
+            "indicator": true,
+            "interactions": true,
+            "mature": true,
+            "missing": "median",
+            "reducer": "none",
+            "representation": "income_gap",
+            "scale": "none",
+            "select": "gain",
+            "sources": [
+              "application",
+              "profile",
+              "previous",
+              "repayment",
+              "bureau",
+              "account",
+              "shopping"
+            ],
+            "spline": false,
+            "strength": 6,
+            "threshold": 30,
+            "transform": "identity",
+            "view": "v3",
+            "weight": 6,
+            "window": 180
+          },
+          "family": "cross_source",
+          "hypothesis": "Seeded higher-order combination",
+          "id": "w2f_305f821e59f359ca",
+          "is_control": false,
+          "matched_parent": null,
+          "resolved_numeric_columns": 508,
+          "semantic_signature": "305f821e59f359ca0eb0b3921d1fe0645d40747d61bf7afeaded0d2b6a2505bb",
+          "wave": 2
+        },
+        "seed": 2026
+      }
+    },
+    "d2f4719a69d44e93a849": {
+      "configuration": {
+        "model": "champion",
+        "view": "w2p_c9402cdde8b7041a2de9",
+        "weight": 6,
+        "anchor": true
+      },
+      "representation": {
+        "changes": {
+          "dimensions": 16,
+          "reducer": "svd",
+          "select": "mi"
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 16,
+          "encoding": "onehot",
+          "feature_count": "all",
+          "half_life": 90,
+          "indicator": false,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "svd",
+          "representation": "raw",
+          "scale": "none",
+          "select": "mi",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "identity",
+          "view": "v3",
+          "weight": 6,
+          "window": "all",
+          "_extra_family": null
+        },
+        "family": "reduction",
+        "hypothesis": "Seeded higher-order combination",
+        "id": "w2f_5329e613e444983c",
+        "is_control": false,
+        "matched_parent": null,
+        "resolved_numeric_columns": 384,
+        "semantic_signature": "5329e613e444983c0c77369f034e0efa9eeb88fb38b8a1032867f431182f9e77",
+        "wave": 2
+      },
+      "original_recipe": {
+        "control": "f_7c3c29bc9adf28f1",
+        "id": "w2p_c9402cdde8b7041a2de9",
+        "kind": "pipeline",
+        "model": "lgb",
+        "representation": {
+          "changes": {
+            "dimensions": 16,
+            "reducer": "svd",
+            "select": "mi"
+          },
+          "config": {
+            "append": true,
+            "category_normalize": false,
+            "clip": 0,
+            "cohort_weight": false,
+            "correlation": 0.95,
+            "dimensions": 16,
+            "encoding": "onehot",
+            "feature_count": "all",
+            "half_life": 90,
+            "indicator": false,
+            "interactions": false,
+            "mature": true,
+            "missing": "median",
+            "reducer": "svd",
+            "representation": "raw",
+            "scale": "none",
+            "select": "mi",
+            "sources": [
+              "application",
+              "profile",
+              "previous",
+              "repayment",
+              "bureau",
+              "account",
+              "shopping"
+            ],
+            "spline": false,
+            "strength": 6,
+            "threshold": 30,
+            "transform": "identity",
+            "view": "v3",
+            "weight": 6,
+            "window": "all"
+          },
+          "family": "reduction",
+          "hypothesis": "Seeded higher-order combination",
+          "id": "w2f_5329e613e444983c",
+          "is_control": false,
+          "matched_parent": null,
+          "resolved_numeric_columns": 384,
+          "semantic_signature": "5329e613e444983c0c77369f034e0efa9eeb88fb38b8a1032867f431182f9e77",
+          "wave": 2
+        },
+        "seed": 2026
+      }
+    },
+    "eb3419a4bf925b93ca53": {
+      "configuration": {
+        "model": "elastic",
+        "view": "repayment_09",
+        "weight": 3,
+        "anchor": false,
+        "strength": 0.05,
+        "l1": 0.0,
+        "dimensions": 512
+      },
+      "representation": {
+        "changes": {
+          "clip": 0.01,
+          "encoding": "target",
+          "feature_count": 128,
+          "indicator": true,
+          "interactions": true,
+          "representation": "income_gap",
+          "select": "gain",
+          "window": 180
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "onehot",
+          "feature_count": 128,
+          "half_life": 30,
+          "indicator": false,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "none",
+          "representation": "income_gap",
+          "scale": "none",
+          "select": "true_gain",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "identity",
+          "view": "v3",
+          "weight": 6,
+          "window": "all",
+          "_extra_family": "repayment"
+        },
+        "family": "source",
+        "hypothesis": "H_repayment",
+        "id": "repayment_09",
+        "is_control": false,
+        "matched_parent": null,
+        "resolved_numeric_columns": 508,
+        "semantic_signature": "86c0c1ef30356f2f242301b393737e6e433e5943f09f90ddbf4b425d5ece5ade",
+        "wave": 2
+      }
+    }
+  },
+  "validation": {
+    "spec": {
+      "id": "without_pc2_job_000853_mean",
+      "method": "mean",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000855",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "development": {
+      "screen": {
+        "ks": 0.5263427094743861,
+        "delta": 0.0005712705891841585,
+        "fold_delta": [
+          0.0036517272932234945,
+          0.0010736229612163806,
+          -0.0005976217647010174
+        ]
+      },
+      "reseed": {
+        "ks": 0.5231462663855329,
+        "delta": 0.0015518816747328579,
+        "fold_delta": [
+          0.001820459512767214,
+          0.0026746460906533764,
+          -0.0008846210703122859
+        ]
+      },
+      "repeat": {
+        "ks": 0.5209708435527638,
+        "delta": 0.0018722046316483887,
+        "fold_delta": [
+          0.0004058724595067398,
+          0.0015938607540352256,
+          0.005173030428749281
+        ]
+      }
+    },
+    "eligible": true,
+    "mean_development_delta": 0.001331785631855135,
+    "reused_validation": {
+      "ks": 0.5323161334386715,
+      "baseline_ks": 0.5306943648617997,
+      "delta": 0.001621768576871796
+    }
+  },
+  "confirmation_is_selection_data": true,
+  "training_rows": 70000,
+  "seed": 2026,
+  "inner_seed": 2726,
+  "research_source_manifest_sha256": "6987738afd344fc0f785caff338f1ddabd1a4f19c9f0539f948c1837f3373308"
+}

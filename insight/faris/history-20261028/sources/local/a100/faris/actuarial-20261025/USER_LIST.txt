@@ -1,0 +1,371 @@
+# Comprehensive List of Actuarial Models
+
+Actuarial science covers far more than mortality tables and insurance pricing. It includes financial mathematics (FM), survival analysis, stochastic processes, loss distributions, reserving, risk modeling, investment models, and predictive analytics.
+
+I'll include both classical actuarial mathematics and modern statistical models, including those used in the Society of Actuaries (SOA) examinations.
+
+One distinction: FM (Financial Mathematics) is an examination subject, not a single model. It covers several mathematical models and valuation methods.
+
+## 1. Financial Mathematics Models (Exam FM)
+
+These models calculate interest accumulation, present values, loan payments, bond valuations, and asset-liability risk. The categories below reflect the SOA's December 2026 Exam FM syllabus.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.soa.org\&sz=32)
+
+SOA
+
+
+
+| Model / Method                     | Purpose                                                        |
+| ---------------------------------- | -------------------------------------------------------------- |
+| Simple Interest Model              | Calculates interest without compounding                        |
+| Compound Interest Model            | Models exponential growth of capital                           |
+| Continuous Compounding Model       | Models continuously accumulated interest                       |
+| Variable Force of Interest Model   | Models changing continuous interest rates                      |
+| Discount Factor Model              | Converts future payments into present value                    |
+| Time Value of Money (TVM)          | Values money across different dates                            |
+| Net Present Value (NPV)            | Evaluates the present value of cash flows                      |
+| Annuity-Immediate                  | Values payments made at the end of each period                 |
+| Annuity-Due                        | Values payments made at the beginning of each period           |
+| Deferred Annuity                   | Values payments beginning in the future                        |
+| Perpetuity Model                   | Values indefinitely recurring payments                         |
+| Increasing / Decreasing Annuity    | Models payments changing arithmetically or geometrically       |
+| Continuous Annuity                 | Values a continuous stream of payments                         |
+| Loan Amortization Model            | Calculates loan payments and outstanding balances              |
+| Sinking Fund Model                 | Accumulates funds to repay future obligations                  |
+| Bond Pricing Model                 | Values bonds based on coupons and redemption payments          |
+| Bond Premium/Discount Amortization | Tracks bond book value over time                               |
+| Yield-to-Maturity Model            | Solves for the yield implied by a bond's price                 |
+| Spot Rate Model                    | Discounts cash flows using maturity-specific rates             |
+| Forward Rate Model                 | Determines implied interest rates for future periods           |
+| Yield Curve Model                  | Describes the term structure of interest rates                 |
+| Macaulay Duration                  | Measures present-value-weighted timing of cash flows           |
+| Modified Duration                  | Estimates price sensitivity to yield changes                   |
+| Convexity Model                    | Measures curvature in the price-yield relationship             |
+| Redington Immunization             | Protects an asset-liability surplus against small rate changes |
+| Full Immunization                  | Seeks protection against broader interest-rate shifts          |
+| Cash Flow Matching                 | Matches investment cash flows with liability payments          |
+
+For example, the classical compound interest model is:
+
+\\[ FV=PV(1+i)^n \\]
+
+An annuity-immediate has present value:
+
+\\[ PV=R\frac{1-(1+i)^{-n}}{i} \\]
+
+These are deterministic financial models: their basic versions assume the interest rate or discount structure is known.
+
+## 2. Mortality and Survival Models
+
+SOA: FAM, ALTAM · Life insurance and pension actuarial science
+
+Used to estimate survival probabilities, mortality rates, life expectancy, and future life-insurance liabilities.
+
+| Model                          | Purpose                                                            |
+| ------------------------------ | ------------------------------------------------------------------ |
+| De Moivre's Law                | Simplified model of remaining lifetime                             |
+| Gompertz Mortality Model       | Models mortality increasing exponentially with age                 |
+| Makeham Mortality Model        | Adds an age-independent mortality component                        |
+| Weibull Survival Model         | Models flexible lifetime hazard patterns                           |
+| Exponential Survival Model     | Assumes constant mortality hazard                                  |
+| Life Table Model               | Estimates age-specific survival and death probabilities            |
+| Select and Ultimate Mortality  | Accounts for mortality differences after underwriting              |
+| Kaplan–Meier Estimator         | Estimates survival probabilities from censored data                |
+| Nelson–Aalen Estimator         | Estimates cumulative hazard                                        |
+| Cox Proportional Hazards       | Measures how covariates affect mortality or other event hazards    |
+| Accelerated Failure Time (AFT) | Models covariate effects on survival time                          |
+| Lee–Carter Model               | Forecasts mortality rates over time                                |
+| Cairns–Blake–Dowd (CBD)        | Stochastic mortality forecasting, especially at older ages         |
+| Age–Period–Cohort Model        | Separates age, calendar-period and birth-cohort effects            |
+| Multi-State Markov Model       | Models transitions among states such as healthy, disabled and dead |
+| Joint-Life Model               | Values benefits dependent on multiple lives                        |
+| Last-Survivor Model            | Models benefits payable after the last death                       |
+| Mortality Improvement Model    | Projects changes in mortality across future years                  |
+
+Lee–Carter and CBD are particularly important in stochastic longevity modeling.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.soa.org\&sz=32)
+
+SOA
+
++1
+
+
+
+## 3. Life Insurance and Pension Valuation Models
+
+SOA: FAM, ALTAM · Life contingencies
+
+| Model                          | Purpose                                                          |
+| ------------------------------ | ---------------------------------------------------------------- |
+| Actuarial Present Value (APV)  | Expected discounted value of contingent payments                 |
+| Whole-Life Insurance Model     | Values lifetime death benefits                                   |
+| Term-Life Insurance Model      | Values death benefits within a fixed period                      |
+| Endowment Insurance Model      | Combines survival and death benefits                             |
+| Pure Endowment Model           | Values benefits conditional on survival                          |
+| Life Annuity Model             | Values payments dependent on remaining alive                     |
+| Net Premium Model              | Determines premiums from expected benefits and premiums          |
+| Gross Premium Model            | Includes expenses and other premium loadings                     |
+| Prospective Reserve Model      | Values future benefits and expenses less future premiums         |
+| Retrospective Reserve Model    | Accumulates past premiums and deducts past benefits and expenses |
+| Thiele's Differential Equation | Describes the evolution of policy reserves                       |
+| Projected Unit Credit (PUC)    | Allocates projected pension benefits to service periods          |
+| Entry Age Normal (EAN)         | Pension funding and liability valuation                          |
+| Attained Age Normal            | Allocates pension costs using attained age                       |
+| Aggregate Cost Method          | Pension funding using aggregate assets and liabilities           |
+| Multiple-Decrement Model       | Models competing exits such as death, withdrawal and disability  |
+
+## 4. General Insurance and Loss Distribution Models
+
+SOA: FAM, ASTAM · Property & Casualty · Health insurance
+
+These models generally describe claim frequency, claim size, or total aggregate losses.
+
+| Model                           | Purpose                                                      |
+| ------------------------------- | ------------------------------------------------------------ |
+| Poisson Frequency Model         | Models insurance claim counts                                |
+| Negative Binomial Model         | Models overdispersed claim frequencies                       |
+| Binomial Frequency Model        | Models counts with a finite number of trials                 |
+| Zero-Inflated Poisson           | Models claim counts with excess zeros                        |
+| Hurdle Model                    | Separates zero-claim occurrence from positive counts         |
+| Poisson Process                 | Models arrival times of claims                               |
+| Renewal Process                 | Models repeated events with flexible waiting times           |
+| Exponential Severity Model      | Models certain types of claim amounts                        |
+| Gamma Severity Model            | Models positive, right-skewed losses                         |
+| Lognormal Severity Model        | Models multiplicative, right-skewed claim sizes              |
+| Weibull Severity Model          | Flexible claim severity distribution                         |
+| Pareto Severity Model           | Models heavy-tailed insurance claims                         |
+| Burr Distribution Model         | Flexible heavy-tailed loss modeling                          |
+| Generalized Pareto Distribution | Models losses exceeding a high threshold                     |
+| Compound Poisson Model          | Models total losses from random claim counts and severities  |
+| Collective Risk Model           | Models aggregate losses using frequency and severity         |
+| Individual Risk Model           | Models the sum of losses across individual insured risks     |
+| Tweedie Compound Model          | Models mixed zero and positive continuous losses             |
+| Panjer Recursion                | Computes aggregate loss distributions                        |
+| FFT Aggregate Loss Method       | Numerically calculates compound aggregate-loss distributions |
+
+A central classical actuarial model is:
+
+\\[ S=\sum\_{i=1}^{N}X_i \\]
+
+where \\(N\\) is claim frequency and \\(X_i\\) represents individual claim severity. This is the foundation of collective risk modeling.
+
+## 5. Claims Reserving Models
+
+SOA: ASTAM · CAS: Property & Casualty reserving
+
+These estimate the ultimate cost of incurred claims and future payments.
+
+| Model                        | Purpose                                                                   |
+| ---------------------------- | ------------------------------------------------------------------------- |
+| Chain-Ladder                 | Estimates ultimate claims using historical development factors            |
+| Mack Chain-Ladder            | Estimates reserve uncertainty without specifying a full loss distribution |
+| Bornhuetter–Ferguson         | Combines expected losses with observed claim development                  |
+| Cape Cod                     | Uses exposure and development patterns to estimate expected losses        |
+| Benktander                   | Blends Chain-Ladder and Bornhuetter–Ferguson estimates                    |
+| Expected Loss Ratio          | Estimates ultimate losses using an expected loss ratio                    |
+| Frequency-Severity Reserving | Projects claim counts and average claim amounts                           |
+| Overdispersed Poisson GLM    | Statistical reserving using claim development triangles                   |
+| Bootstrap Chain-Ladder       | Simulates reserve variability                                             |
+| Munich Chain-Ladder          | Models relationships between paid and incurred development                |
+| Clark Reserving Model        | Parametric modeling of claims development                                 |
+| Individual Claims Reserving  | Projects outstanding claims at an individual claim level                  |
+
+Chain-Ladder, Bornhuetter–Ferguson, Cape Cod, and frequency-severity methods are established approaches in property and casualty reserving.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.casact.org\&sz=32)
+
+Casualty Actuarial Society
+
++2
+
+
+
+## 6. Credibility and Insurance Pricing Models
+
+These combine observed insurance experience with historical or collective information.
+
+| Model                            | Purpose                                                         |
+| -------------------------------- | --------------------------------------------------------------- |
+| Limited Fluctuation Credibility  | Assigns credibility based on statistical precision              |
+| Bühlmann Credibility             | Estimates risk-specific premiums using collective experience    |
+| Bühlmann–Straub                  | Extends Bühlmann with varying exposure volumes                  |
+| Bayesian Credibility             | Updates risk estimates using prior distributions                |
+| Empirical Bayes                  | Estimates prior-distribution parameters from observed data      |
+| Hachemeister Regression          | Credibility modeling with time-varying effects                  |
+| Experience Rating                | Adjusts rates using historical claims                           |
+| Bonus–Malus Model                | Adjusts premiums based on claim experience                      |
+| Frequency-Severity Pricing       | Models expected claim frequency multiplied by expected severity |
+| Pure Premium Model               | Estimates expected loss cost per exposure unit                  |
+| Generalized Linear Pricing Model | Relates insurance premiums or losses to risk factors            |
+
+Bühlmann, Bühlmann–Straub and Bayesian methods have dedicated actuarial applications in life, health and pensions.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.soa.org\&sz=32)
+
+SOA
+
+
+
+## 7. Stochastic Financial Models
+
+Advanced financial mathematics · Investment and asset-liability modeling
+
+These extend classical FM by introducing stochastic interest rates, asset prices and other uncertainties.
+
+| Model                             | Purpose                                                   |
+| --------------------------------- | --------------------------------------------------------- |
+| Geometric Brownian Motion (GBM)   | Models stochastic asset-price movements                   |
+| Black–Scholes–Merton              | Prices options under specific financial assumptions       |
+| Binomial Option Pricing           | Prices derivatives using discrete price movements         |
+| Vasicek Interest Rate Model       | Models mean-reverting interest rates                      |
+| Cox–Ingersoll–Ross (CIR)          | Models nonnegative mean-reverting interest rates          |
+| Hull–White Model                  | Models interest-rate dynamics calibrated to a yield curve |
+| Heath–Jarrow–Morton (HJM)         | Models forward interest-rate curves                       |
+| LIBOR Market Model (LMM)          | Models market forward rates                               |
+| Heston Stochastic Volatility      | Models asset prices with changing stochastic volatility   |
+| Merton Jump-Diffusion             | Introduces sudden price jumps                             |
+| GARCH                             | Models changing conditional volatility                    |
+| Economic Scenario Generator (ESG) | Simulates future financial and economic conditions        |
+| Stochastic Asset-Liability Model  | Projects assets and obligations under uncertainty         |
+
+The SOA explicitly discusses Vasicek, CIR and Hull–White models in its interest-rate modeling research.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.soa.org\&sz=32)
+
+SOA
+
++1
+
+
+
+Important: Black–Scholes, binomial option pricing and stochastic interest-rate models are part of broader actuarial and financial mathematics, but they are not part of the current Exam FM syllabus.
+
+## 8. Enterprise Risk and Ruin Models
+
+Used for solvency, reinsurance, capital requirements and extreme-loss analysis.
+
+| Model / Method                   | Purpose                                                      |
+| -------------------------------- | ------------------------------------------------------------ |
+| Cramér–Lundberg Risk Model       | Models an insurer's surplus and potential ruin               |
+| Lundberg Adjustment Coefficient  | Characterizes exponential bounds on ruin probability         |
+| Brownian Surplus Model           | Models surplus dynamics using diffusion                      |
+| Value at Risk (VaR)              | Measures a selected loss quantile                            |
+| Tail Value at Risk (TVaR)        | Measures expected losses beyond a quantile                   |
+| Expected Shortfall (ES)          | Tail-risk measure closely related to TVaR                    |
+| Extreme Value Theory (EVT)       | Models extreme losses                                        |
+| Generalized Extreme Value (GEV)  | Models block maxima of losses                                |
+| Gaussian Copula                  | Models dependence between risks                              |
+| Student-t Copula                 | Captures stronger joint tail behavior than a Gaussian copula |
+| Clayton Copula                   | Models lower-tail dependence                                 |
+| Gumbel Copula                    | Models upper-tail dependence                                 |
+| Monte Carlo Simulation           | Simulates possible financial and insurance outcomes          |
+| Stress Testing                   | Evaluates outcomes under adverse scenarios                   |
+| Dynamic Financial Analysis (DFA) | Simulates an insurer's financial position across scenarios   |
+| Economic Capital Model           | Estimates capital needed for specified risk tolerances       |
+
+VaR, TVaR, Monte Carlo and stress testing are primarily risk measures or analytical methods rather than standalone probabilistic models.
+
+## 9. Predictive Analytics and Machine Learning Models
+
+SOA: SRM, PA · Modern actuarial analytics
+
+The SOA's Statistics for Risk Modeling examination explicitly includes regression, time series, decision trees, principal components, clustering and model validation.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.soa.org\&sz=32)
+
+SOA
+
+
+
+| Model / Method                        | Actuarial Application                                        |
+| ------------------------------------- | ------------------------------------------------------------ |
+| Linear Regression                     | Predicting claim costs or financial quantities               |
+| Logistic Regression                   | Predicting claim occurrence, lapse or other binary outcomes  |
+| Poisson Regression                    | Claim frequency prediction                                   |
+| Negative Binomial Regression          | Overdispersed claim frequency                                |
+| Gamma Regression                      | Positive claim severity                                      |
+| Tweedie GLM                           | Aggregate pure premium prediction                            |
+| Generalized Additive Model (GAM)      | Nonlinear insurance risk factor effects                      |
+| Generalized Linear Mixed Model (GLMM) | Hierarchical insurance data                                  |
+| Bayesian Hierarchical Model           | Portfolio-level and individual-risk estimation               |
+| Decision Tree                         | Insurance risk segmentation                                  |
+| Random Forest                         | Claim severity, frequency and fraud prediction               |
+| Gradient Boosting                     | Predictive risk pricing                                      |
+| XGBoost / LightGBM                    | High-performance tabular insurance modeling                  |
+| Support Vector Machine (SVM)          | Insurance classification and risk prediction                 |
+| Neural Networks                       | Nonlinear relationships in actuarial data                    |
+| LSTM                                  | Longitudinal or time-series forecasting                      |
+| Transformer Models                    | Sequential insurance data, documents and temporal prediction |
+| ARIMA / SARIMA                        | Claim volume and economic forecasting                        |
+| State-Space Models                    | Latent risk and time-series modeling                         |
+| Principal Component Analysis (PCA)    | Dimensionality reduction and factor modeling                 |
+| K-Means Clustering                    | Policyholder segmentation                                    |
+| Regularized Regression (LASSO/Ridge)  | Variable selection and prediction stabilization              |
+
+## 10. Catastrophe and Climate Risk Models
+
+| Model                                | Purpose                                                      |
+| ------------------------------------ | ------------------------------------------------------------ |
+| Catastrophe Event Frequency Model    | Estimates occurrence rates of disasters                      |
+| Hazard–Exposure–Vulnerability Model  | Translates hazard intensity into insured losses              |
+| Spatial Poisson Model                | Models event counts across locations                         |
+| Extreme Value Model                  | Estimates rare catastrophic losses                           |
+| Compound Catastrophe Loss Model      | Aggregates losses from random catastrophe events             |
+| Flood Inundation Model               | Estimates exposure to flood depths and damage                |
+| Tropical Cyclone Model               | Simulates storms, intensity and associated loss              |
+| Climate Scenario Model               | Projects changes under future climate assumptions            |
+| Spatial–Temporal Model               | Models correlated geographical and temporal risk             |
+| State-Space Disaster Frequency Model | Captures changing disaster frequencies and seasonal patterns |
+
+An SOA research report on ASEAN natural catastrophe risk uses dynamic count-mixture and state-space methods for disaster frequency forecasting.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.soa.org\&sz=32)
+
+SOA
+
+
+
+## How these models correspond to actuarial examinations
+
+| Examination                                       | Main modeling focus                                                           |
+| ------------------------------------------------- | ----------------------------------------------------------------------------- |
+| P — Probability                                   | Probability distributions, random variables and foundational risk mathematics |
+| FM — Financial Mathematics                        | Interest, annuities, loans, bonds and immunization                            |
+| FAM — Fundamentals of Actuarial Mathematics       | Loss models, mortality and life contingencies                                 |
+| ALTAM — Advanced Long-Term Actuarial Mathematics  | Advanced life insurance, contingent payments and long-term actuarial modeling |
+| ASTAM — Advanced Short-Term Actuarial Mathematics | Advanced loss modeling, credibility and reserving                             |
+| SRM — Statistics for Risk Modeling                | Regression, statistical learning and time series                              |
+| PA — Predictive Analytics                         | Applied statistical and predictive modeling                                   |
+
+These are broad topic mappings, not exhaustive examination syllabi. Official examination descriptions:&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.soa.org\&sz=32)
+
+SOA
+
++2
+
+## Which models are most useful to implement?
+
+If you're approaching actuarial science from a statistics, Python or machine learning perspective, these are especially valuable starting points:
+
+| Model                              | Difficulty   | Good Project                              |
+| ---------------------------------- | ------------ | ----------------------------------------- |
+| Compound Interest / Annuity        | Beginner     | Financial cash-flow calculator            |
+| Gompertz–Makeham                   | Intermediate | Mortality and life expectancy forecasting |
+| Lee–Carter                         | Advanced     | Population mortality forecasting          |
+| Poisson–Gamma / Frequency-Severity | Intermediate | Insurance claim cost prediction           |
+| Chain-Ladder                       | Intermediate | Claims reserving using runoff triangles   |
+| Bühlmann Credibility               | Intermediate | Insurance premium estimation              |
+| Tweedie GLM                        | Intermediate | Automobile insurance pricing              |
+| Cox Survival Model                 | Intermediate | Policyholder lapse prediction             |
+| Cramér–Lundberg                    | Advanced     | Insurance insolvency simulation           |
+| Vasicek / CIR                      | Advanced     | Interest-rate simulation                  |
+| Monte Carlo Asset-Liability        | Advanced     | Pension fund solvency simulation          |
+| Extreme Value Theory               | Advanced     | Catastrophe loss estimation               |
+
+Across these categories, you have well over 100 named models, methods, distributions and valuation techniques. They aren't all interchangeable: some predict probabilities, some value liabilities, some estimate reserves, and others quantify capital risk.
+
+For a strong technical foundation, the most important progression is FM mathematics → probability and loss distributions → survival/mortality → reserving and credibility → stochastic modeling → predictive analytics.

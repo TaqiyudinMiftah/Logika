@@ -1,0 +1,1 @@
+At metered start verify identity, exact train labels, unique customers, imported original hashes, three disjoint partitions per outer fold, positive support, metric ties, baseline reconstruction. Save label prevalence, decision-month distribution and source coverage. All labels previously exposed; no independent audit. Do not use diagnostics to resplit or alter recipes.

@@ -1,0 +1,426 @@
+{
+  "version": 1,
+  "id": "depth-20261017-amd",
+  "competition_root": "/home/agung/faris/depth-20261017",
+  "adapter": "adapter.py",
+  "metric": "tie-aware KS",
+  "direction": "maximize",
+  "inputs": {
+    "bank": "/home/agung/faris/depth-20261017/bank"
+  },
+  "brief": {
+    "description": "Depth search until 06:00 WIB, supplied data only; all models retained",
+    "rules": "/home/agung/faris/depth-20261017/evidence/rules.md",
+    "compute_access": "pc1; authorized all available resources subject to actual capacity",
+    "external_data_policy": "none",
+    "pretrained_policy": "none"
+  },
+  "evidence": {
+    "research": "/home/agung/faris/depth-20261017/evidence/research.md",
+    "eda": "/home/agung/faris/depth-20261017/evidence/eda.json",
+    "hypotheses": "/home/agung/faris/depth-20261017/evidence/hypotheses.md",
+    "applicability": "/home/agung/faris/depth-20261017/evidence/applicability.md"
+  },
+  "protocols": {
+    "screen": {
+      "split": "/home/agung/faris/depth-20261017/evidence/split.json"
+    }
+  },
+  "families": [
+    {
+      "name": "lgb_depth",
+      "hypothesis": "H1 stronger training on historical promising views; H2 matched removal sensitivity; H3 regularization and weighting",
+      "parameters": {
+        "view": {
+          "type": "categorical",
+          "choices": [
+            "control",
+            "f_efeac13ff4ac2bc3",
+            "f_0fb04121805aa400",
+            "f_b590ccd305838ccc",
+            "f_c55fb7ae7315f045",
+            "f_1e77ef50f0442401",
+            "f_c69fe42a58b98cab",
+            "f_36acaf030ffb7537",
+            "f_ea27efb0127845ba",
+            "w2f_305f821e59f359ca",
+            "w2f_2de5a8a485483a4b",
+            "w2f_5329e613e444983c",
+            "w2f_0b1b6740148d22b7",
+            "w2f_be53863d26b8d62b",
+            "w2f_b5a799fa1b78692c",
+            "w2f_76d9fd9b4c142b75",
+            "w2f_2bf49b5428c3182d"
+          ]
+        },
+        "variant": {
+          "type": "categorical",
+          "choices": [
+            "original",
+            "no_reduction",
+            "no_spline",
+            "indicator",
+            "no_interactions"
+          ]
+        },
+        "weight": {
+          "type": "categorical",
+          "choices": [
+            1,
+            3,
+            6
+          ]
+        },
+        "trees": {
+          "type": "categorical",
+          "choices": [
+            250,
+            500,
+            900
+          ]
+        },
+        "rate": {
+          "type": "categorical",
+          "choices": [
+            0.02,
+            0.035,
+            0.06
+          ]
+        },
+        "strength": {
+          "type": "categorical",
+          "choices": [
+            5,
+            25,
+            50,
+            100
+          ]
+        },
+        "leaves": {
+          "type": "categorical",
+          "choices": [
+            15,
+            31,
+            63
+          ]
+        },
+        "minimum": {
+          "type": "categorical",
+          "choices": [
+            80,
+            200,
+            400
+          ]
+        },
+        "columns": {
+          "type": "categorical",
+          "choices": [
+            0.7,
+            1.0
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 2500,
+        "disk_mb": 70,
+        "timeout_seconds": 900
+      },
+      "anchors": [
+        {
+          "params": {
+            "view": "control",
+            "variant": "original",
+            "weight": 6,
+            "trees": 250,
+            "rate": 0.02,
+            "strength": 25,
+            "leaves": 15,
+            "minimum": 80,
+            "columns": 0.7
+          },
+          "ablation": {
+            "group": "lgb-view",
+            "factor": "view",
+            "control": true
+          }
+        },
+        {
+          "params": {
+            "view": "f_efeac13ff4ac2bc3",
+            "variant": "original",
+            "weight": 6,
+            "trees": 250,
+            "rate": 0.02,
+            "strength": 25,
+            "leaves": 15,
+            "minimum": 80,
+            "columns": 0.7
+          },
+          "ablation": {
+            "group": "lgb-view",
+            "factor": "view",
+            "control": false
+          }
+        },
+        {
+          "params": {
+            "view": "f_0fb04121805aa400",
+            "variant": "original",
+            "weight": 6,
+            "trees": 250,
+            "rate": 0.02,
+            "strength": 25,
+            "leaves": 15,
+            "minimum": 80,
+            "columns": 0.7
+          },
+          "ablation": {
+            "group": "lgb-view",
+            "factor": "view",
+            "control": false
+          }
+        },
+        {
+          "params": {
+            "view": "f_b590ccd305838ccc",
+            "variant": "original",
+            "weight": 6,
+            "trees": 250,
+            "rate": 0.02,
+            "strength": 25,
+            "leaves": 15,
+            "minimum": 80,
+            "columns": 0.7
+          },
+          "ablation": {
+            "group": "lgb-view",
+            "factor": "view",
+            "control": false
+          }
+        },
+        {
+          "params": {
+            "view": "f_c55fb7ae7315f045",
+            "variant": "original",
+            "weight": 6,
+            "trees": 250,
+            "rate": 0.02,
+            "strength": 25,
+            "leaves": 15,
+            "minimum": 80,
+            "columns": 0.7
+          },
+          "ablation": {
+            "group": "lgb-view",
+            "factor": "view",
+            "control": false
+          }
+        }
+      ],
+      "exclude": [
+        {
+          "view": "control",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "control",
+          "variant": "no_spline"
+        },
+        {
+          "view": "control",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "f_efeac13ff4ac2bc3",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "f_efeac13ff4ac2bc3",
+          "variant": "no_spline"
+        },
+        {
+          "view": "f_efeac13ff4ac2bc3",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "f_0fb04121805aa400",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "f_0fb04121805aa400",
+          "variant": "no_spline"
+        },
+        {
+          "view": "f_0fb04121805aa400",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "f_b590ccd305838ccc",
+          "variant": "no_spline"
+        },
+        {
+          "view": "f_b590ccd305838ccc",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "f_c55fb7ae7315f045",
+          "variant": "no_spline"
+        },
+        {
+          "view": "f_c55fb7ae7315f045",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "f_1e77ef50f0442401",
+          "variant": "no_spline"
+        },
+        {
+          "view": "f_1e77ef50f0442401",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "f_c69fe42a58b98cab",
+          "variant": "no_spline"
+        },
+        {
+          "view": "f_c69fe42a58b98cab",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "f_36acaf030ffb7537",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "f_36acaf030ffb7537",
+          "variant": "no_spline"
+        },
+        {
+          "view": "f_36acaf030ffb7537",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "f_ea27efb0127845ba",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "f_ea27efb0127845ba",
+          "variant": "no_spline"
+        },
+        {
+          "view": "f_ea27efb0127845ba",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "w2f_305f821e59f359ca",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "w2f_305f821e59f359ca",
+          "variant": "no_spline"
+        },
+        {
+          "view": "w2f_305f821e59f359ca",
+          "variant": "indicator"
+        },
+        {
+          "view": "w2f_2de5a8a485483a4b",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "w2f_2de5a8a485483a4b",
+          "variant": "no_spline"
+        },
+        {
+          "view": "w2f_2de5a8a485483a4b",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "w2f_2de5a8a485483a4b",
+          "variant": "indicator"
+        },
+        {
+          "view": "w2f_5329e613e444983c",
+          "variant": "no_spline"
+        },
+        {
+          "view": "w2f_5329e613e444983c",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "w2f_0b1b6740148d22b7",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "w2f_0b1b6740148d22b7",
+          "variant": "no_spline"
+        },
+        {
+          "view": "w2f_0b1b6740148d22b7",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "w2f_be53863d26b8d62b",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "w2f_be53863d26b8d62b",
+          "variant": "no_spline"
+        },
+        {
+          "view": "w2f_be53863d26b8d62b",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "w2f_be53863d26b8d62b",
+          "variant": "indicator"
+        },
+        {
+          "view": "w2f_b5a799fa1b78692c",
+          "variant": "no_reduction"
+        },
+        {
+          "view": "w2f_b5a799fa1b78692c",
+          "variant": "no_spline"
+        },
+        {
+          "view": "w2f_b5a799fa1b78692c",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "w2f_76d9fd9b4c142b75",
+          "variant": "no_spline"
+        },
+        {
+          "view": "w2f_76d9fd9b4c142b75",
+          "variant": "no_interactions"
+        },
+        {
+          "view": "w2f_2bf49b5428c3182d",
+          "variant": "no_spline"
+        },
+        {
+          "view": "w2f_2bf49b5428c3182d",
+          "variant": "no_interactions"
+        }
+      ]
+    }
+  ],
+  "budget_seconds": 6201.839782238007,
+  "storage_limit_mb": 3500,
+  "max_trials": 1500,
+  "max_workers": 1,
+  "cpu_limit": 2,
+  "ram_limit_mb": 7000,
+  "seeds": [
+    2026
+  ],
+  "search_seed": 3801,
+  "reserve_fraction": 0.05,
+  "breadth_fraction": 0.3,
+  "coverage_pool_limit": 4096,
+  "disk_headroom_mb": 2048,
+  "max_retries": 0,
+  "family_failure_limit": 3,
+  "poll_seconds": 1
+}

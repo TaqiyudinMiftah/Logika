@@ -1,0 +1,617 @@
+{
+  "experiment": "V101",
+  "description": "Lifecycle mechanisms excluding auxiliary classifiers",
+  "specification": {
+    "id": "V101",
+    "families": [
+      "first_payment",
+      "seasoning",
+      "lifecycle",
+      "thin_file",
+      "bureau_ambiguity"
+    ],
+    "label": "Lifecycle mechanisms excluding auxiliary classifiers",
+    "penalty": 0.03,
+    "strength": 0.25,
+    "snapshot_dependent": true,
+    "quarantined": false,
+    "snapshot_fields": [
+      "max_days_past_due",
+      "amount_paid"
+    ],
+    "fold_feature_root": "lifecycle/data",
+    "feature_catalog": "lifecycle/reports/FEATURE_CATALOG.csv",
+    "lifecycle": true
+  },
+  "model": "Frozen Kumo Large90 + spline logit-offset correction12/new features + fixed spline77",
+  "formula": "p=.75*sigmoid(z+strength*(beta0+beta_z*(z-mean_train)/sd_train+phi(x)@beta_features))+.25*p_spline77; z=logit(clip(p_Kumo,1e-6,1-1e-6)); mean test predictions of five folds",
+  "training_objective": "mean(logaddexp(0,z+Xbeta)-y*(z+Xbeta)) + penalty/2*sum(beta[1:]**2); fit full correction, apply strength only at inference",
+  "preprocessing": "Signed log(sign(x)*log1p(abs(x))), correction-training median imputation, quadratic quantile spline3knots, standardization; missing bits and categorical one-hot; training-fold fit only",
+  "validation": "Original identical5fold StratifiedKFold seed31027; per fold50k Kumo context,6k correction fit,14k validation; no automatic competition submission",
+  "base_feature_definitions": "BASELINE_LOCK.json, README.md, original frozen feature provenance retained",
+  "additional_feature_definitions": [
+    {
+      "feature_name": "life_first_observed_max_dpd",
+      "family": "first_payment",
+      "formula": "mean(maxDPD of earliest observed installment per historical loan), due-age>=30",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_first3_dpd15_rate",
+      "family": "first_payment",
+      "formula": "loan-equal mean(1[maxDPD>=15] among first3 observed installments with due-age>=15)",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_early_failure_frequency",
+      "family": "first_payment",
+      "formula": "share eligible loans with first observed installment maxDPD>=30, due-age>=30",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_early_to_late_dpd_ratio",
+      "family": "first_payment",
+      "formula": "mean(maxDPD first3 observed installments)/mean(maxDPD later observed installments); both due-age>=30; denominator0 -> missing",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_first_payment_shortfall",
+      "family": "first_payment",
+      "formula": "mean(max(amount_due-amount_paid,0)/amount_due on first observed installment), due-age>=30",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_first_payment_eligible_loans",
+      "family": "first_payment",
+      "formula": "number historical loans with first observed installment due-age>=30",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_mob_adjusted_dpd15",
+      "family": "seasoning",
+      "formula": "loan-equal mean(y15-cell_expected15); cell=(MOBbin,tenor,vintage_halfyear,observation_agebin); weighted cell prior20 toward dated population mean",
+      "status": "FOLD_LOCAL",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_mob_adjusted_dpd30",
+      "family": "seasoning",
+      "formula": "same y30-cell_expected30 among due-age>=30",
+      "status": "FOLD_LOCAL",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_mob_delinquency_surprise",
+      "family": "seasoning",
+      "formula": "loan-equal mean(-y15*log(expected15)-(1-y15)*log(1-expected15))",
+      "status": "FOLD_LOCAL",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_mob_early_risk_excess",
+      "family": "seasoning",
+      "formula": "loan-equal mean(y15-expected15), approval-decision-proxy MOB at due<=3",
+      "status": "FOLD_LOCAL",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_mob_expected_vs_actual_severity",
+      "family": "seasoning",
+      "formula": "loan-equal mean(min(maxDPD,90)/90-cell_expected_capped_severity)",
+      "status": "FOLD_LOCAL",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_lifecycle_early_dpd15",
+      "family": "lifecycle",
+      "formula": "loan-equal DPD15 rate in phase MOB/tenor<=1/3; due-age>=15",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_lifecycle_middle_dpd15",
+      "family": "lifecycle",
+      "formula": "loan-equal DPD15 rate in phase1/3<MOB/tenor<=2/3; due-age>=15",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_lifecycle_late_dpd15",
+      "family": "lifecycle",
+      "formula": "loan-equal DPD15 rate in phase MOB/tenor>2/3; due-age>=15",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_lifecycle_late_minus_early",
+      "family": "lifecycle",
+      "formula": "within-loan late-phase DPD15 rate minus early-phase rate; mean only loans with both phases observed",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_lifecycle_severity_slope",
+      "family": "lifecycle",
+      "formula": "mean within-loan OLS slope(min(maxDPD,90)/90 versus MOB/tenor), >=3 eligible installments and distinct MOB; due-age>=30",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Unverified DPD/paid snapshot provenance remains documented; DPD allowed without quarantine",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_thin_source_signature",
+      "family": "thin_file",
+      "formula": "categorical combination(previous yes/no, repayment yes/no, bureau absent/unscored/scored, account yes/no); no ordinal pattern coding",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_thin_oldest_internal_loan_days",
+      "family": "thin_file",
+      "formula": "selected decision minus earliest known approved historical decision; observation-age proxy",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_thin_matured_installment_count",
+      "family": "thin_file",
+      "formula": "count historical installments with due-age>=30",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_thin_repayment_calendar_density",
+      "family": "thin_file",
+      "formula": "number unique observed due months/(last due month-first due month+1)",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_thin_bureau_reports_per_month",
+      "family": "thin_file",
+      "formula": "available bureau report count/max(1,span between first and last available reports in30-day units)",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_thin_account_calendar_coverage",
+      "family": "thin_file",
+      "formula": "complete account months observed/(last observed month-first observed month+1)",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_bureau_observed_debt_low_proxy",
+      "family": "bureau_ambiguity",
+      "formula": "max latest-available provider outstanding_balance; observed-coverage scenario only",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_bureau_observed_debt_high_proxy",
+      "family": "bureau_ambiguity",
+      "formula": "sum latest-available provider outstanding_balance; overlapping-account scenario only, not identified total debt",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_bureau_exposure_ambiguity_gap",
+      "family": "bureau_ambiguity",
+      "formula": "sum latest provider debt minus max latest provider debt",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_bureau_exposure_relative_gap",
+      "family": "bureau_ambiguity",
+      "formula": "(sum latest provider debt-max latest provider debt)/max latest provider debt; zero denominator undefined",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_bureau_affordability_low_proxy",
+      "family": "bureau_ambiguity",
+      "formula": "max latest provider debt/selected declared monthly income",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_bureau_affordability_high_proxy",
+      "family": "bureau_ambiguity",
+      "formula": "sum latest provider debt/selected declared monthly income",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    },
+    {
+      "feature_name": "life_bureau_exposure_provider_count",
+      "family": "bureau_ambiguity",
+      "formula": "number latest-available provider reports contributing to observed debt scenarios",
+      "status": "IMPLEMENTED",
+      "source": "historical applications/loans, repayment, bureau, complete account observations; selected cutoff/application metadata",
+      "cutoff_rule": "Own historical decision/due before selected cutoff; threshold-matured installments; provider available<=cutoff; references from correction customers with selected snapshot before query decision-month start; three inner customer folds",
+      "leakage_risk": "Incrementally low; inherited baseline uncertainty",
+      "caveat": "Earliest observed installment need not be contractual first; historical approval decision is an origination proxy; no causal or identified true debt claim. Auxiliary benchmarks are computed as of selected cutoff, not reconstructed old underwriting scores.",
+      "validation_status": "Unvalidated",
+      "priority": "P1"
+    }
+  ],
+  "metrics": {
+    "KS": 0.5296537356579438,
+    "signed_KS": 0.5296537356579438,
+    "AUC": 0.8474161339079347,
+    "rows": 70000,
+    "logloss": 0.2923135468761243,
+    "brier": 0.08866008617580681
+  },
+  "delta_KS": 0.0003542697573830633,
+  "delta_AUC": 0.00021344551615420926,
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.5215005522946635,
+      0.5387457943453026
+    ],
+    "candidate_KS": [
+      0.5222810276901001,
+      0.5388371533088981
+    ],
+    "delta_KS": [
+      -0.0018817954610323955,
+      0.0021107976923060733
+    ],
+    "candidate_AUC": [
+      0.8437679360008292,
+      0.8511476800947237
+    ],
+    "delta_AUC": [
+      1.751413364505794e-05,
+      0.0004513909100709256
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "per_fold": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5280003012147851,
+        "signed_KS": 0.5280003012147851,
+        "AUC": 0.844154087536373,
+        "rows": 14000,
+        "logloss": 0.2935320657879231,
+        "brier": 0.08877062311598025
+      },
+      "baseline": {
+        "KS": 0.5281879952429978,
+        "signed_KS": 0.5281879952429978,
+        "AUC": 0.8438722638878038,
+        "rows": 14000,
+        "logloss": 0.2938009952553891,
+        "brier": 0.08885289009498412
+      },
+      "delta_KS": -0.00018769402821261494,
+      "delta_AUC": 0.0002818236485692127,
+      "correction_rows": 6000,
+      "parameters": 224,
+      "head_training_KS": 0.5470322011938639,
+      "heldout_corrected_Kumo_KS": 0.5256205391962043,
+      "train_validation_head_KS_gap": 0.021411661997659537,
+      "mean_abs_correction": 0.23670563747972273,
+      "P99_abs_correction": 0.8229143176817778,
+      "optimizer_gradient_max": 6.762549115649653e-07,
+      "optimizer_iterations": 52,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4"
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5368636158321933,
+        "signed_KS": 0.5368636158321933,
+        "AUC": 0.8499587764436299,
+        "rows": 14000,
+        "logloss": 0.29046997450689516,
+        "brier": 0.08828767994663951
+      },
+      "baseline": {
+        "KS": 0.537456002011113,
+        "signed_KS": 0.537456002011113,
+        "AUC": 0.8500167324639234,
+        "rows": 14000,
+        "logloss": 0.29046582596038334,
+        "brier": 0.08830619728235835
+      },
+      "delta_KS": -0.0005923861789196572,
+      "delta_AUC": -5.7956020293459254e-05,
+      "correction_rows": 6000,
+      "parameters": 225,
+      "head_training_KS": 0.5336950026918139,
+      "heldout_corrected_Kumo_KS": 0.5340360316012918,
+      "train_validation_head_KS_gap": -0.00034102890947784736,
+      "mean_abs_correction": 0.21705530561678535,
+      "P99_abs_correction": 0.8161249122454114,
+      "optimizer_gradient_max": 1.1213250107817204e-06,
+      "optimizer_iterations": 49,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf"
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5399668063741535,
+        "signed_KS": 0.5399668063741535,
+        "AUC": 0.8505523800033209,
+        "rows": 14000,
+        "logloss": 0.29047921169550645,
+        "brier": 0.08814852875206865
+      },
+      "baseline": {
+        "KS": 0.5400632838002837,
+        "signed_KS": 0.5400632838002837,
+        "AUC": 0.8503484687241183,
+        "rows": 14000,
+        "logloss": 0.2904761766178404,
+        "brier": 0.08811069663732561
+      },
+      "delta_KS": -9.647742613017041e-05,
+      "delta_AUC": 0.00020391127920260654,
+      "correction_rows": 6000,
+      "parameters": 224,
+      "head_training_KS": 0.5559205116221285,
+      "heldout_corrected_Kumo_KS": 0.5418437466562789,
+      "train_validation_head_KS_gap": 0.014076764965849642,
+      "mean_abs_correction": 0.20997936691002997,
+      "P99_abs_correction": 0.7273134814346724,
+      "optimizer_gradient_max": 5.688374432228391e-07,
+      "optimizer_iterations": 50,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362"
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5270097046569733,
+        "signed_KS": 0.5270097046569733,
+        "AUC": 0.8442644794118276,
+        "rows": 14000,
+        "logloss": 0.2949574810306832,
+        "brier": 0.08940073347365936
+      },
+      "baseline": {
+        "KS": 0.5302198189027256,
+        "signed_KS": 0.5302198189027256,
+        "AUC": 0.8438090765582652,
+        "rows": 14000,
+        "logloss": 0.29536016740485344,
+        "brier": 0.08956306518776644
+      },
+      "delta_KS": -0.003210114245752349,
+      "delta_AUC": 0.0004554028535623811,
+      "correction_rows": 6000,
+      "parameters": 224,
+      "head_training_KS": 0.5235063390738977,
+      "heldout_corrected_Kumo_KS": 0.5271898840854369,
+      "train_validation_head_KS_gap": -0.0036835450115392243,
+      "mean_abs_correction": 0.2220492280548156,
+      "P99_abs_correction": 0.8055860195106709,
+      "optimizer_gradient_max": 5.078572072226986e-07,
+      "optimizer_iterations": 51,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64"
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5269824995623718,
+        "signed_KS": 0.5269824995623718,
+        "AUC": 0.8482982213778503,
+        "rows": 14000,
+        "logloss": 0.2921290013596136,
+        "brier": 0.08869286559068629
+      },
+      "baseline": {
+        "KS": 0.5286058527632467,
+        "signed_KS": 0.5286058527632467,
+        "AUC": 0.8481196933768546,
+        "rows": 14000,
+        "logloss": 0.2923951866281188,
+        "brier": 0.08878619750919714
+      },
+      "delta_KS": -0.0016233532008749219,
+      "delta_AUC": 0.00017852800099571464,
+      "correction_rows": 6000,
+      "parameters": 225,
+      "head_training_KS": 0.547627358295224,
+      "heldout_corrected_Kumo_KS": 0.5280205521017542,
+      "train_validation_head_KS_gap": 0.019606806193469772,
+      "mean_abs_correction": 0.23016081346149642,
+      "P99_abs_correction": 0.8428622958646892,
+      "optimizer_gradient_max": 5.150628151961168e-07,
+      "optimizer_iterations": 50,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f"
+    }
+  ],
+  "overfitting": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "retrained_seeds": 1,
+    "extra_head_features": 33,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY; reduce only with independent time/seed evidence",
+    "diagnostic": "Head training KS includes fitted correction, so it is optimistic; compare heldout evidence and baseline, not in-sample score"
+  },
+  "evidence": "INCONCLUSIVE_OR_NEGATIVE",
+  "feature_policy": {
+    "allow_DPD_without_quarantine": true,
+    "user_instruction": "jangan karantina dpd",
+    "scope": "DPD-only experiments may participate normally; preserve source uncertainty; mixed amount_paid uncertainty remains separately documented",
+    "point_in_time_certified": false,
+    "original_prediction_and_submission_files_unchanged": true
+  },
+  "public_score": null,
+  "submission": "v7/submissions/submission_V101_goal054_offset_v7.csv",
+  "submission_sha256": "8c69c794fcc36639e8a9d67598ac8a248f81f59b21f9cacb4d0d472e2508387d",
+  "point_in_time_certified": false,
+  "new_features_snapshot_dependent": true,
+  "checkpoint_pattern": "v7/runs/V101/foldN_correction.joblib",
+  "OOF": "v7/runs/V101/OOF.csv",
+  "feature_catalog": "v7/lifecycle/reports/FEATURE_CATALOG.csv",
+  "source_files": [
+    "v7/scripts/experiments.py",
+    "v7/scripts/lifecycle_features.py"
+  ],
+  "source_hashes": {
+    "submission_sha256": "8c69c794fcc36639e8a9d67598ac8a248f81f59b21f9cacb4d0d472e2508387d",
+    "source_sha256": "2dd636ff7916010f063ae62a806bf72ff28778c6c52dbee14da5fc2042701fcd",
+    "feature_matrix_sha256": "c90db5d2c2b0d8a5b2937cd6d76041c477f9eae1c88ac03201ba4a8435e037ae",
+    "lifecycle_source_sha256": "1de8c6425ffe98a6f9da2d388af7b7080f51fa6513d7650b164ed7f38be08de5",
+    "lifecycle_feature_matrix_sha256": "baf0119b61843fa34b70f49213da524cc54468a24d3794798f21b6405288b350"
+  }
+}

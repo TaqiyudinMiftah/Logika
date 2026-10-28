@@ -1,0 +1,26 @@
+{
+  "id": "H007-single-rate-core-ablation",
+  "frozen_UTC": "2026-10-24T19:53:49.488888+00:00",
+  "mechanism": "H006 applies >=30-day opportunity rates to both 1-day and 30-day Kumo inputs. Keeping the original 1-day input preserves observed recent 1-29-day delinquency evidence, while aligning the 30-day input to its exposure horizon. This one-column ablation distinguishes that loss from the whole-input-placement mechanism.",
+  "evidence": [
+    "source/maturity_features.py: beta counts use minimum age30 for both thresholds",
+    "H006 fixed two-column intervention; complete H006 metrics not yet exposed",
+    "Original five-fold context-only prior identity verified; no new features or source fields"
+  ],
+  "comparison": "Same 90 fields and original five outer folds, 50kcontext/6kcorrection/14kvalidation, two seeds2026+fold and12026+fold, eight estimators, existing maturity-only18/77 downstream settings.",
+  "replacement": {
+    "v3_repay_all_late_30_posterior_24": "matched_beta_late_30"
+  },
+  "promotion_predicate": "Positive pooled KS on both seeds and two-seed mean vs corresponding maturity controls; two-seed mean exceeds .5314038049246252 and >=3/5fold KS wins vs matched control. Paired uncertainty before any submission. If multiple core variants qualify, select the higher complete pooled two-seed KS; no blend or replacement-subset sweep.",
+  "current_best_local_KS": 0.5314038049246252,
+  "training_deadline_epoch": 1792883400.0,
+  "source_sha256": "040d2a0d597bfde81faba412fd1ebbd0d11789435b4b68fdd4532e474285b713",
+  "checkpoint_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "public_exposure": "B .56818 and A .56656 observed before freezing; no public labels or score-directed prediction perturbations.",
+  "bounded_hypothesis": true,
+  "broad_search": false,
+  "inherited_limitations": [
+    "all70k default labels historically exposed",
+    "maxDPD snapshot provenance unresolved; same source fields retained"
+  ]
+}

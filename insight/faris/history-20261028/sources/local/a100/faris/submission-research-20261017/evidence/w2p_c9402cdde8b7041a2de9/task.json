@@ -1,0 +1,69 @@
+{
+  "device": "cpu",
+  "execution_timeout_seconds": 900,
+  "expected_seconds": 84.695625436306,
+  "id": "w2p_c9402cdde8b7041a2de9",
+  "mode": "cv",
+  "node_executor_revision": "d054c5a50d5713b9825f922e5303c83e13ab5ef3b60d4c48b052f5b4c00297ef",
+  "ownership_policy": "autonomous_static_v1",
+  "ownership_policy_sha256": "4c64dc2f813cddb9e1ac55d04c4ae77995ea9af262f84ad227f44b60c774f426",
+  "recipe": {
+    "control": "f_7c3c29bc9adf28f1",
+    "id": "w2p_c9402cdde8b7041a2de9",
+    "kind": "pipeline",
+    "model": "lgb",
+    "representation": {
+      "changes": {
+        "dimensions": 16,
+        "reducer": "svd",
+        "select": "mi"
+      },
+      "config": {
+        "append": true,
+        "category_normalize": false,
+        "clip": 0,
+        "cohort_weight": false,
+        "correlation": 0.95,
+        "dimensions": 16,
+        "encoding": "onehot",
+        "feature_count": "all",
+        "half_life": 90,
+        "indicator": false,
+        "interactions": false,
+        "mature": true,
+        "missing": "median",
+        "reducer": "svd",
+        "representation": "raw",
+        "scale": "none",
+        "select": "mi",
+        "sources": [
+          "application",
+          "profile",
+          "previous",
+          "repayment",
+          "bureau",
+          "account",
+          "shopping"
+        ],
+        "spline": false,
+        "strength": 6,
+        "threshold": 30,
+        "transform": "identity",
+        "view": "v3",
+        "weight": 6,
+        "window": "all"
+      },
+      "family": "reduction",
+      "hypothesis": "Seeded higher-order combination",
+      "id": "w2f_5329e613e444983c",
+      "is_control": false,
+      "matched_parent": null,
+      "resolved_numeric_columns": 384,
+      "semantic_signature": "5329e613e444983c0c77369f034e0efa9eeb88fb38b8a1032867f431182f9e77",
+      "wave": 2
+    },
+    "seed": 2026
+  },
+  "scheduler_revision": "281080872f9c66fb1e934edaff67039e2beae1cdc28483acd11b28dadf178da5",
+  "until": 1792180779.8887079
+}

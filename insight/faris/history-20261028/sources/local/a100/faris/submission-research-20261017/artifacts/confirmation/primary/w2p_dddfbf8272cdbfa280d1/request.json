@@ -1,0 +1,68 @@
+{
+  "bank_id": "eb7ca7bdcb7c21b6dc1524bdcd88e1983d02334a91742637ec1ac9e814da79da",
+  "fit_rows_sha256": "e15eb07be3708624a26de347067265c87cd24cc5313d8970cb57d4f0fcd65fa3",
+  "mode": "confirmation",
+  "query_rows_sha256": "4077a38cdb2ae1b1fcb2b9d05b8cffde29a9f441d172f3a2d3373f008d7cf6b9",
+  "recipe": {
+    "control": "f_7c3c29bc9adf28f1",
+    "id": "w2p_dddfbf8272cdbfa280d1",
+    "kind": "pipeline",
+    "model": "linear",
+    "representation": {
+      "changes": {
+        "clip": 0.005,
+        "encoding": "target",
+        "feature_count": 128,
+        "indicator": true,
+        "representation": "seasonality",
+        "select": "gain",
+        "transform": "signed_log"
+      },
+      "config": {
+        "append": true,
+        "category_normalize": false,
+        "clip": 0.005,
+        "cohort_weight": false,
+        "correlation": 0.95,
+        "dimensions": 64,
+        "encoding": "target",
+        "feature_count": 128,
+        "half_life": 90,
+        "indicator": true,
+        "interactions": false,
+        "mature": true,
+        "missing": "median",
+        "reducer": "none",
+        "representation": "seasonality",
+        "scale": "none",
+        "select": "gain",
+        "sources": [
+          "application",
+          "profile",
+          "previous",
+          "repayment",
+          "bureau",
+          "account",
+          "shopping"
+        ],
+        "spline": false,
+        "strength": 6,
+        "threshold": 30,
+        "transform": "signed_log",
+        "view": "v3",
+        "weight": 6,
+        "window": "all"
+      },
+      "family": "shopping",
+      "hypothesis": "Seeded higher-order combination",
+      "id": "w2f_2de5a8a485483a4b",
+      "is_control": false,
+      "matched_parent": null,
+      "resolved_numeric_columns": 385,
+      "semantic_signature": "2de5a8a485483a4bf55795eb8f75a8fa35a377d233cc2608d3c13f3fa0ca81d1",
+      "wave": 2
+    },
+    "seed": 2026
+  },
+  "seed": 2026
+}

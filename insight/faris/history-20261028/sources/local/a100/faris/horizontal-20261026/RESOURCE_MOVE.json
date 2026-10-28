@@ -1,0 +1,28 @@
+{
+  "UTC": "2026-10-25T18:48:43.132507+00:00",
+  "request": "Move everything to 2001, 2002 and 2003; do not wait for Faris A100 RAM.",
+  "A100_capacity_wait": "stopped; STOP marker saved",
+  "node2001": {
+    "home": "/mnt/home/faris",
+    "role": "CPU work, experiment coordination, scoring and durable result collection",
+    "GPU_status_at_move": "Both GPUs occupied by unrelated workloads"
+  },
+  "node2002": {
+    "home": "/home/faris",
+    "role": "Two GPU screening and later confirmation workers",
+    "packs": "catalog indices 150 through 289",
+    "portability_gate": "NODE2002_PORTABILITY_GATE.json required before admission"
+  },
+  "node2003": {
+    "home": "/mnt/home/faris",
+    "role": "Two GPU screening and later confirmation workers",
+    "packs": "catalog indices 0 through 149 after node2002 admission"
+  },
+  "active_GPU_worker_limit_after_gate": 4,
+  "scientific_protocol_changed": false,
+  "retention_policy_changed": false,
+  "original_plan_sha256": "b86dfcc1db66f76492fd683f124162976f2bc4c4638a408d0f074dd0db66b0d4",
+  "search_deadline_epoch": 1793020580.849942,
+  "deadline_epoch": 1793034980.849942,
+  "notes": "Resource-only amendment authorized by the user. The prior PLAN resource count of three is superseded. Feature definitions, model parameters, seeds, folds, selection rule and scoring remain fixed."
+}

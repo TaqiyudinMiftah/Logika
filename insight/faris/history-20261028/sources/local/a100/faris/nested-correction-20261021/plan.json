@@ -1,0 +1,278 @@
+{
+  "id": "nested-correction-20261021",
+  "original_deadline": 1792585871.823748,
+  "raw": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw",
+  "bank": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank",
+  "bank_id": "eb7ca7bdcb7c21b6dc1524bdcd88e1983d02334a91742637ec1ac9e814da79da",
+  "input": "/mnt/home/logika-faris-exploration/nested-correction-20261021/input",
+  "preprocessing_only": true,
+  "model_training": false,
+  "model_training_admitted": false,
+  "source_sha256": {
+    "build_features_v3.py": "413acbd10dcff05b0213bc701d6f15ad4676fb0170620111490168403691bdb7",
+    "build_features_v4.py": "d6574b794b39bad7240429509e99ded3ae7c017f5229b968aba2f65464bf5821",
+    "reverse_synthetic_patterns.py": "1b9c7fa44f42e5a0340340655162e6a4229250257f47245d1077025794b31944",
+    "build_features_v5.py": "2cbf071aa4aeff3c0b262fe9adc9718a4521612d43a20ac5686b6e772b306c0d"
+  },
+  "hypothesis": "Reduce correction estimation variance by fitting it on56000 honest inner-OOF probabilities rather than6000 heldout probabilities. Preserve all outer folds and re-fit priors within every44800row inner context; final priors and context use56000. This is one nested recipe, not30 independent experiments.",
+  "shared_fitted_statistics": "Each inner44800 context, final56000 context; no evaluation covariates estimate priors.",
+  "point_in_time_caveat": "Rebuilding cohort statistics does not resolve inherited raw DPD snapshot provenance. Do not certify future deployment availability without evidence.",
+  "historical_metric_recalculation_complete": true,
+  "admission_basis": "All36136 saved prediction files,4096 fixed replays and118 V7 OOF files freshly verified. This admits preprocessing repair only, not new model screening or rank promotion. Unresolved metadata and unavailable PC1 filesystem remain disclosed.",
+  "protocol": "Original70k frozen fivefold seed31027. Each56k outertrain split into5 innerfolds stratified bytarget withseed20261022+outerfold. No outer-label earlystop, featurechoice or weights.",
+  "correction": "Same18features/three quadratic knots/penalty0.003/shrinkage0.5; fit56000 innerOOF once perouterfold. Fixed25percent sharedspline outside learnedhead.",
+  "control": "Same final56k raw Kumo prediction with old6k fitted correction, plus original matched90baseline. Exposes procedure contrast; does not isolate variance causally from changed inner-context/prior distribution.",
+  "retention_gate": "Before FM admission, qualify complete fitted context model serialization or verified cache archive capacity for all30 contexts. No deletion of existing models or produced checkpoints.",
+  "admission_scope": "Preprocessing only. FM training remains refused until all role/hash/retention/resource/preflight checks pass.",
+  "source_urls": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html",
+    "https://huggingface.co/nvidia/Kumo-Tabular"
+  ],
+  "source_support": "Stacking meta models require heldout training predictions; Kumo uses labeled context examples for inference. No claim these sources guarantee performance improvement.",
+  "diagnostic_evidence": "../calibration-capacity-20261021/RESULT.json",
+  "historical_label_reuse": true,
+  "no_submission": true,
+  "jobs": {
+    "0": {
+      "outer_fold": 0,
+      "inner_fold": 0,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "507b12cea8e3a4470d7d97ab0ca7cec6ad50cd248f6f44ba12489837ee788f54"
+    },
+    "1": {
+      "outer_fold": 0,
+      "inner_fold": 1,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "fcdf8e5f8634117fcebb403de6c7a7c215ca14f364e18b845507be9f3c5eb2ac"
+    },
+    "2": {
+      "outer_fold": 0,
+      "inner_fold": 2,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "9dfc85ecec486c34168cc4798820b63a3937b25cc0386a42a05ab62f86022f2d"
+    },
+    "3": {
+      "outer_fold": 0,
+      "inner_fold": 3,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "6671534f6aad7253ea59628dad85749d4b174a94d6237b50d3cd27a98c820fe5"
+    },
+    "4": {
+      "outer_fold": 0,
+      "inner_fold": 4,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "90fb432c4f71a57159ef267d5a49447a25ad43a8ce42a9da8e46e6c751a7043c"
+    },
+    "5": {
+      "outer_fold": 0,
+      "kind": "final",
+      "context_rows": 56000,
+      "query_rows": 14000,
+      "indices_sha256": "c6f873cd384933c08ed7add4c775359fb97ee87128bd3801484cec95b5150a7d"
+    },
+    "6": {
+      "outer_fold": 1,
+      "inner_fold": 0,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "64e02a7a8a0c01cfe09ea0982cfbf5d051b7b8a4d2fff0126e7914cebb92aa0c"
+    },
+    "7": {
+      "outer_fold": 1,
+      "inner_fold": 1,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "42e9627d4e2f80060db0d46d867c75891b60dedaf4bd83917a1f37ec08d71fb2"
+    },
+    "8": {
+      "outer_fold": 1,
+      "inner_fold": 2,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "8c33b57208006d9f4232fbe1f18a43ed66a60b974fb67f8131658f20397147ab"
+    },
+    "9": {
+      "outer_fold": 1,
+      "inner_fold": 3,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "8ba487154c696100e7248241ec65f5f827b9c16209fd731f18090e66fd27a293"
+    },
+    "10": {
+      "outer_fold": 1,
+      "inner_fold": 4,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "d3030230d189a4d6f890c3f4eb52aada17bb1f3be691f4858e3e56a25a98d734"
+    },
+    "11": {
+      "outer_fold": 1,
+      "kind": "final",
+      "context_rows": 56000,
+      "query_rows": 14000,
+      "indices_sha256": "41d967d8e02827ffe4b8436b8265f5b55bf81015f614f0e99a3850618f2e8a4c"
+    },
+    "12": {
+      "outer_fold": 2,
+      "inner_fold": 0,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "04fbcd7c71021f8046445614ff5fb683fd66cc5dfebd67dd008055d0605676fc"
+    },
+    "13": {
+      "outer_fold": 2,
+      "inner_fold": 1,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "5347e72c4a4375dda576b9178fb1987f7cdc574176bb41c23668deb6249709b9"
+    },
+    "14": {
+      "outer_fold": 2,
+      "inner_fold": 2,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "9d719b68b4d2eadd4575ad98d9ebe658e5de756a0806dd09d4a726268c309177"
+    },
+    "15": {
+      "outer_fold": 2,
+      "inner_fold": 3,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "99ac06561b9958e7e40f60df15040f07febd38c8e6200d8e4bf8a318be637e37"
+    },
+    "16": {
+      "outer_fold": 2,
+      "inner_fold": 4,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "8898d7edfe9a4b7dc59cbc1ce254e27f933916db8dbb71279081021575d19edf"
+    },
+    "17": {
+      "outer_fold": 2,
+      "kind": "final",
+      "context_rows": 56000,
+      "query_rows": 14000,
+      "indices_sha256": "bcedcd0ea208ec8a53785f88e3dacb846c5a5d5554dcc521c10345e9f4a7ac8e"
+    },
+    "18": {
+      "outer_fold": 3,
+      "inner_fold": 0,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "eb0b0fbef832f0592b7daa33da918d2466bbdaf018b7cdcaea39b12bf88be30a"
+    },
+    "19": {
+      "outer_fold": 3,
+      "inner_fold": 1,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "7d92de9c12ee4fa44937308a6c91886dc444b5d46e68734f9788a658efc2d9d4"
+    },
+    "20": {
+      "outer_fold": 3,
+      "inner_fold": 2,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "ab774728fd41f71cd13173a97575752a0ceeb2209db64e6f806ea059f60921c8"
+    },
+    "21": {
+      "outer_fold": 3,
+      "inner_fold": 3,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "de1dd340a2549a2f66c01050d7efeea88fa1d8a15c147e360852d019554175ed"
+    },
+    "22": {
+      "outer_fold": 3,
+      "inner_fold": 4,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "328d52aff5e831e8652ffef2500f4f55964418019deab83fdbefb1667c5c92a3"
+    },
+    "23": {
+      "outer_fold": 3,
+      "kind": "final",
+      "context_rows": 56000,
+      "query_rows": 14000,
+      "indices_sha256": "df2432df071bb1c962368720835097fb0640184dfa216410ea61e236b519a4c4"
+    },
+    "24": {
+      "outer_fold": 4,
+      "inner_fold": 0,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "c92271aeb32030ecbc3f7d740dbc07964131f329a8e5f428c654dc31c6185471"
+    },
+    "25": {
+      "outer_fold": 4,
+      "inner_fold": 1,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "cbc597c4ff08df58d5a122dc8459a254e063894c9074fa403357aa1d98401c54"
+    },
+    "26": {
+      "outer_fold": 4,
+      "inner_fold": 2,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "52e5e705328f229f542cb47ee7ce82b1a498969152fad907918c18534bfadede"
+    },
+    "27": {
+      "outer_fold": 4,
+      "inner_fold": 3,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "ae89e906cc98314aa3b24c4ccd3275c544b99376a2c0f216e79ebbd58097a91d"
+    },
+    "28": {
+      "outer_fold": 4,
+      "inner_fold": 4,
+      "kind": "inner",
+      "context_rows": 44800,
+      "query_rows": 11200,
+      "indices_sha256": "96bb7a9d3fd7625ca98c3f2f1c1ab00bc0384054f74cc66081663f91ccb7ff65"
+    },
+    "29": {
+      "outer_fold": 4,
+      "kind": "final",
+      "context_rows": 56000,
+      "query_rows": 14000,
+      "indices_sha256": "6f5b95bf6c5e091e83f86baa3f5858f37675b84ff45bf78b8d3710309f4a4a63"
+    }
+  },
+  "preparation_source_sha256": {
+    "design.py": "d8206e6ab65f5550f2445148eaf3d200c74597ef4f69cac6e649048a0cbfd255",
+    "preprocess.py": "fd924cb5877bd18f2cbbd8d4c0ad2b37d6a0d3a78b4ccc4e760014ba5bf13b8d",
+    "build.py": "d5de83a68db1aca43543f49f8e8efa03ab5affbc18979840d701feec94ee93b7",
+    "entrypoint.py": "86afa3dcc0a2ea6b5ed40409d45b730a3d1c90c79bac6371f7ff722e6f79277c"
+  }
+}

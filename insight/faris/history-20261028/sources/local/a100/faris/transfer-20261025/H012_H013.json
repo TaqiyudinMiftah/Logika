@@ -1,0 +1,30 @@
+{
+  "id": "H012_H013",
+  "frozen_UTC": "2026-10-25T05:48:00.015607+00:00",
+  "mechanism": "Correction currently fits raw Kumo before spline averaging. H012 corrects the final .75Kumo+.25spline mixture. H013 additionally fits equal-class-weight logistic loss with analytical training prior shift, removed at prediction. This may concentrate fit changes nearer the equal-density KS boundary; it is a hypothesis, not a guaranteed effect.",
+  "novelty": "Earlier directKS modifies a raw-Kumo correction, H009 averages Kumo seeds before that correction, H010 averages final contexts, and nested-correction increases Kumo meta rows. This tests correction after component fusion with an honestly predicted spline input.",
+  "fit_scope": "Each original outerfold: Kumo and spline train only on50000 context rows; correction trains on disjoint6000 rows; validation14000 excluded from all fitting. Same18 maturity head fields and77 spline fields. Priors retain original50000context scope.",
+  "matched_control": "Existing per-seed maturity heads plus newly context-only spline, .75/.25. Separately compare against submitted B recipe with56000-row spline.",
+  "candidates": [
+    "H012 final_mixture unweighted correction L2.003 strength.5",
+    "H013 balanced_final_mixture equal class loss and prior_shift=-logit(training prevalence), same L2/strength; inference prior_shift0"
+  ],
+  "seeds": "Original2026+fold and saved repeat12026+fold, no new Kumo fitting. Candidate is equal mean of complete seed predictions.",
+  "promotion": "Both seeds must improve pooledKS over their matched controls; two-seed pooledKS>.5314098055476294, at least3/5foldwins vsB, and four-comparison-adjusted95pct conditional paired bootstrap lowerbound>0 versus both matchedtwo-seed and B. Choose highest pooledKS among passing candidates. Target.54 reported separately.",
+  "uncertainty": "2000 fixedprediction paired multinomial bootstrap resamples within each outerfold/class; seed202610251213; 4contrasts, quantiles .00625/.99375. Excludes prior selection/refit/public uncertainty.",
+  "source_sha256": {
+    "joint_correction.py": "d6d1c4831481458cb981c80a80ea1ae0c8139f0c4eacc3fc237d7c34087d6918",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "robustness.py": "655f4b160bbcdde6a2ad913d283e06d1a4a160ca74ba89a7fde01514df20880a"
+  },
+  "evidence_sha256": {
+    "ROBUSTNESS_RESULT.json": "5bb3298d2dbac266d771ec5e92d8d3d01c08d8b6d7d9d5e73421f2650e43004a",
+    "ROLE_BAG_RESULT.json": "e627132d87acbc07cee2d491538196e509459b9e499d2a985f5fe60d6c41f9ea",
+    "RANK_BAG_RESULT.json": "46f3afa2fb368998fbafc0589299c900aca9629d663015675f7a125d72792e0b",
+    "GATE.json": "784da7367833736c74150385ec14818731031bf6ef6fe32e7e5be29e910caae0"
+  },
+  "broad_search": false,
+  "independent_confirmation": false,
+  "validation_admission": "Bounded paired diagnostic using unchanged existing raw inputs and frozen roles; historical broad gate remains unadmitted."
+}

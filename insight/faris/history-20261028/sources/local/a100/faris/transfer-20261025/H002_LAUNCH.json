@@ -1,0 +1,21 @@
+{
+  "created_UTC": "2026-10-24T19:02:34.008281+00:00",
+  "host": "PC2",
+  "argv": [
+    "systemd-run",
+    "--user",
+    "--unit",
+    "logika-transfer-direct-ks-20261025",
+    "--working-directory",
+    "/mnt/home/logika-faris-exploration/transfer-20261025",
+    "--property",
+    "RuntimeMaxSec=7200",
+    "--property",
+    "MemoryMax=8G",
+    "--property",
+    "CPUQuota=200%",
+    "/bin/bash",
+    "-c",
+    "for fold in 0 1 2 3 4; do\nwhile [ ! -f \"robustness/fold${fold}/complete.json\" ]; do sleep 10; done\n/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python -u source/direct_ks.py run --fold \"$fold\" > \"direct_ks_fold${fold}.log\" 2>&1 || exit $?\ndone\n/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python source/direct_ks.py report > direct_ks_report.log 2>&1"
+  ]
+}

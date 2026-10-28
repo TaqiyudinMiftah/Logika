@@ -1,0 +1,36 @@
+{
+  "id": "heldout-margin-fusion-20261021",
+  "training_admitted": true,
+  "original_deadline": 1792585871.823748,
+  "kind": "Calibration-stage heldout fusion; exactly two new linear prediction contrasts",
+  "main_model": "Repaired Kumo90 offset pipeline",
+  "component_context_rows": 50000,
+  "meta_training_rows": 6000,
+  "outer_evaluation_rows": 14000,
+  "folds": 5,
+  "base_penalty": 0.003,
+  "contrast_penalty": 0.03,
+  "shrinkage": 0.5,
+  "spline_weight": 0.25,
+  "contrast_sd_floor": 0.1,
+  "hypothesis": "Different pretrained task priors may supply residual information. Strongly regularized two-dimensional log-odds contrasts constrain flexibility versus a generic stack.",
+  "sources": [
+    "kumo-coverage-placement-20261021/control90",
+    "tabicl-compact-a100-20261021",
+    "tabicl-conditional-mean-20261021"
+  ],
+  "admission_gate": "Both complete new backbone recipes, all input/row-role hashes and IDs aligned, and proof that every meta-training prediction excludes all6k meta labels from backbone fitting. Shared spline remains outside the learned fusion.",
+  "method_limit": "Honest heldout meta fit within each outertraining partition, not global OOF stacking. No spline predictions enter meta fit because spline was trained on those6k labels.",
+  "predeclared_recipe_count": 1,
+  "no_weight_grid": true,
+  "no_submission": true,
+  "historical_label_reuse": true,
+  "source_sha256": {
+    "preflight.py": "5435a41c743076da9b7455c792ec6bb03e70c98c86177d6a465d4aa866ef333a",
+    "fusion.py": "da0f3fabdefc65c82aa0ba1653ff2d1eff6379d0a13f9126be5b1e4b16573c94",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "export_node_inputs.py": "b878de5ec2a28d68007d211433d802d9d3569930f5cd70e8978007728335ca42",
+    "run.py": "c39964326f11e09d6e3ac2ecde746a7f94144b1a1bc1772acd343db7b5fd8416"
+  },
+  "gate": "SCIENTIFIC_GATE.json: passed_for_bounded_heldout_fusion"
+}

@@ -1,0 +1,1654 @@
+[
+  {
+    "name": "e061-kumo-large-lora-cuda-pilot-20261015T072921Z-48d13a",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e061-kumo-large-lora-cuda-pilot-20261015T072921Z-48d13a"
+    ],
+    "status.json": {
+      "error": "[Errno 2] No such file or directory: '/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/a100_runs/e014-kumo-credit_v2-120-20261014T181236Z-9ea222/identity.json'",
+      "pilot": true,
+      "state": "failed"
+    },
+    "config.json": {
+      "adapter_layers": 4,
+      "device": "cuda",
+      "estimators": 2,
+      "evaluation_every": 20,
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "final_context_rows": 16384,
+      "gpu_budget_gib": 16,
+      "inner_context_rows": 4096,
+      "learning_rate": 0.0001,
+      "max_steps": 200,
+      "model": "kumo_lora",
+      "n_splits": 5,
+      "name": "e061-kumo-large-lora-cuda",
+      "patience_evaluations": 3,
+      "process_budget_gib": 2.25,
+      "query_batch_size": 256,
+      "rank": 8,
+      "seed": 2026,
+      "selection_run": "artifacts/a100_runs/e014-kumo-credit_v2-120-20261014T181236Z-9ea222",
+      "size": "large",
+      "threads": 4,
+      "training_context_rows": 1024,
+      "training_query_rows": 256,
+      "weight_decay": 0.01
+    }
+  },
+  {
+    "name": "e039-kumo-large-nested32k-rss3g-20261015T004256Z-2ffc0b",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e039-kumo-large-nested32k-rss3g-20261015T004256Z-2ffc0b"
+    ],
+    "status.json": {
+      "folds": [
+        {
+          "auc": 0.8390879357174257,
+          "directional_ks": 0.5186056868464486,
+          "fold": 1,
+          "ks": 0.5186056868464486,
+          "log_loss": 0.2965886143352552
+        },
+        {
+          "auc": 0.8368965416342702,
+          "directional_ks": 0.5130663869473477,
+          "fold": 2,
+          "ks": 0.5130663869473477,
+          "log_loss": 0.3001428356566601
+        },
+        {
+          "auc": 0.8341698248044058,
+          "directional_ks": 0.5153128177368178,
+          "fold": 3,
+          "ks": 0.5153128177368178,
+          "log_loss": 0.3027757440940277
+        },
+        {
+          "auc": 0.8347100822910271,
+          "directional_ks": 0.5017710933718442,
+          "fold": 4,
+          "ks": 0.5017710933718442,
+          "log_loss": 0.29981352650002663
+        },
+        {
+          "auc": 0.843362843473011,
+          "directional_ks": 0.5239093668792141,
+          "fold": 5,
+          "ks": 0.5239093668792141,
+          "log_loss": 0.2960751469841775
+        }
+      ],
+      "mean_fold_ks": 0.5145330703563344,
+      "pilot": false,
+      "pooled": {
+        "auc": 0.8375804477104989,
+        "directional_ks": 0.5112832256482325,
+        "ks": 0.5112832256482325,
+        "log_loss": 0.2990791735140294
+      },
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e039-kumo-large-nested32k-rss3g-20261015T004256Z-2ffc0b",
+      "state": "complete",
+      "std_fold_ks": 0.008217791131331156
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 32768,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 16,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e039-kumo-large-nested32k-rss3g",
+      "nested_context_rows": 16384,
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.0,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e014-kumo-credit_v2-120-20261013T123116Z-f8f5cc",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-20261013T123116Z-f8f5cc"
+    ],
+    "status.json": {
+      "error": "Own process RSS exceeded 4 GiB. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-20261013T123116Z-f8f5cc/fold_1/worker.log",
+      "pilot": false,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e014-kumo-credit_v2-120",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e052-kumo-large-all56k-est8-pilot-20261015T065619Z-4d5315",
+    "state": "verified_runtime_only",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e052-kumo-large-all56k-est8-pilot-20261015T065619Z-4d5315"
+    ],
+    "status.json": {
+      "folds": [],
+      "pilot": true,
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e052-kumo-large-all56k-est8-pilot-20261015T065619Z-4d5315",
+      "state": "complete"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 56000,
+      "estimators": 8,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 32,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e052-kumo-large-all56k-est8",
+      "nested_context_rows": 16384,
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.0,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e037-kumo-large-cuda-cache-pilot-20261014T183031Z-dcb363",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e037-kumo-large-cuda-cache-pilot-20261014T183031Z-dcb363"
+    ],
+    "status.json": {
+      "error": "Own process RSS exceeded 2.25 GiB. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e037-kumo-large-cuda-cache-pilot-20261014T183031Z-dcb363/fold_1/worker_memory.jsonl",
+      "pilot": true,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e037-kumo-large-cuda-cache",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 2.25,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e014-kumo-credit_v2-120-20261014T173721Z-477a18",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-20261014T173721Z-477a18"
+    ],
+    "status.json": {
+      "error": "Kumo worker exited -9. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-20261014T173721Z-477a18/fold_3/worker.log",
+      "pilot": false,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e014-kumo-credit_v2-120",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e014-kumo-credit_v2-120-20261014T181236Z-9ea222",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-20261014T181236Z-9ea222"
+    ],
+    "status.json": {
+      "folds": [
+        {
+          "auc": 0.8355124883919484,
+          "directional_ks": 0.5101202385248927,
+          "fold": 1,
+          "ks": 0.5101202385248927,
+          "log_loss": 0.29885080250168816
+        },
+        {
+          "auc": 0.8355198361544611,
+          "directional_ks": 0.5116010517995953,
+          "fold": 2,
+          "ks": 0.5116010517995953,
+          "log_loss": 0.3010523382664142
+        },
+        {
+          "auc": 0.8401221995484127,
+          "directional_ks": 0.5174647146446327,
+          "fold": 3,
+          "ks": 0.5174647146446327,
+          "log_loss": 0.29868501186612934
+        },
+        {
+          "auc": 0.8337539818677221,
+          "directional_ks": 0.5107117986240032,
+          "fold": 4,
+          "ks": 0.5107117986240032,
+          "log_loss": 0.3006626518191722
+        },
+        {
+          "auc": 0.8408732948359515,
+          "directional_ks": 0.5223416407088344,
+          "fold": 5,
+          "ks": 0.5223416407088344,
+          "log_loss": 0.2977170138294547
+        }
+      ],
+      "mean_fold_ks": 0.5144478888603916,
+      "pilot": false,
+      "pooled": {
+        "auc": 0.8371222468496995,
+        "directional_ks": 0.5101117791914846,
+        "ks": 0.5101117791914846,
+        "log_loss": 0.2993935636565717
+      },
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-20261014T181236Z-9ea222",
+      "state": "complete",
+      "std_fold_ks": 0.005296318650458064
+    },
+    "config.json": {
+      "backend": "kumo",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e014-kumo-credit_v2-120",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e039-kumo-large-nested32k-pilot-20261015T001356Z-bc6361",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e039-kumo-large-nested32k-pilot-20261015T001356Z-bc6361"
+    ],
+    "status.json": {
+      "state": "stopped_before_worker",
+      "pilot": true,
+      "reason": "Resource-only follow-up measures identical 32k model under stricter 3 GiB combined RSS cap",
+      "previous_pid": 3069292,
+      "previous_create_time": 1792023167.88,
+      "worker_started": false,
+      "process_terminal": {
+        "status": "zombie",
+        "children": []
+      }
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 32768,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 16,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e039-kumo-large-nested32k",
+      "nested_context_rows": 16384,
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.5,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e041-fixed-catboost-contract-blend-20261014T173313Z-11ec39",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e041-fixed-catboost-contract-blend-20261014T173313Z-11ec39"
+    ],
+    "status.json": {
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "c9bad52a647fbf4093358db496a22086dfc35a5dc6d3e8e27533d12f4d4a06d0",
+        "oof.csv": "f4d9781f4df4eacc169ef8faa721fa0a02594fc55e4c85e63a8e4db0ca5dd8db",
+        "submission.csv": "bc1405912ea8b83dfccebb16d36b05fc4743b6df4f7f718da96be4d83f3e5c1d"
+      },
+      "fold_ks_std": 0.011621202480878234,
+      "mean_fold_ks": 0.5142305735927089,
+      "model": "fixed_blend",
+      "pooled_oof": {
+        "auc": 0.8368497271040635,
+        "directional_ks": 0.5113838817086389,
+        "ks": 0.5113838817086389,
+        "log_loss": 0.30016649489413194
+      },
+      "run_id": "e041-fixed-catboost-contract-blend-20261014T173313Z-11ec39"
+    },
+    "config.json": {
+      "base_directories": [
+        "/home/giptarch/Projects/logika-ui-26/artifacts/a100_runs/e011-catboost-credit-20261013T110907Z-1e2930",
+        "/home/giptarch/Projects/logika-ui-26/artifacts/experiments/e030-lgbm-contract-credit-20261013T120201Z-9a615c"
+      ],
+      "feature_view": "base_models",
+      "model": "fixed_blend",
+      "n_splits": 5,
+      "name": "e041-fixed-catboost-contract-blend",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    }
+  },
+  {
+    "name": "e005-kumo-large-pilot-20261013T085811Z-4e37b6",
+    "state": "verified_runtime_only",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e005-kumo-large-pilot-20261013T085811Z-4e37b6"
+    ],
+    "status.json": {
+      "folds": [],
+      "pilot": true,
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e005-kumo-large-pilot-20261013T085811Z-4e37b6",
+      "state": "complete"
+    },
+    "config.json": {
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "768MB",
+      "n_splits": 5,
+      "name": "e005-kumo-large",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e037-kumo-large-cuda-cache-pilot-20261014T185017Z-75498b",
+    "state": "verified_runtime_only",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e037-kumo-large-cuda-cache-pilot-20261014T185017Z-75498b"
+    ],
+    "status.json": {
+      "folds": [],
+      "pilot": true,
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e037-kumo-large-cuda-cache-pilot-20261014T185017Z-75498b",
+      "state": "complete"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e037-kumo-large-cuda-cache",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.0,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e037-kumo-large-cuda-cache-20261014T192205Z-e2459d",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e037-kumo-large-cuda-cache-20261014T192205Z-e2459d"
+    ],
+    "status.json": {
+      "folds": [
+        {
+          "auc": 0.8355124883919484,
+          "directional_ks": 0.5101202385248927,
+          "fold": 1,
+          "ks": 0.5101202385248927,
+          "log_loss": 0.29885080250168816
+        },
+        {
+          "auc": 0.8355198361544611,
+          "directional_ks": 0.5116010517995953,
+          "fold": 2,
+          "ks": 0.5116010517995953,
+          "log_loss": 0.3010523382664142
+        },
+        {
+          "auc": 0.8401221995484127,
+          "directional_ks": 0.5174647146446327,
+          "fold": 3,
+          "ks": 0.5174647146446327,
+          "log_loss": 0.29868501186612934
+        },
+        {
+          "auc": 0.8337539818677221,
+          "directional_ks": 0.5107117986240032,
+          "fold": 4,
+          "ks": 0.5107117986240032,
+          "log_loss": 0.3006626518191722
+        },
+        {
+          "auc": 0.8408732948359515,
+          "directional_ks": 0.5223416407088344,
+          "fold": 5,
+          "ks": 0.5223416407088344,
+          "log_loss": 0.2977170138294547
+        }
+      ],
+      "mean_fold_ks": 0.5144478888603916,
+      "pilot": false,
+      "pooled": {
+        "auc": 0.8371222468496995,
+        "directional_ks": 0.5101117791914846,
+        "ks": 0.5101117791914846,
+        "log_loss": 0.2993935636565717
+      },
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e037-kumo-large-cuda-cache-20261014T192205Z-e2459d",
+      "state": "complete",
+      "std_fold_ks": 0.005296318650458064
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e037-kumo-large-cuda-cache",
+      "nested_context_rows": null,
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.0,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "setup-catboost-smoke-20261013T082247Z-192df3",
+    "state": "verified_runtime_only",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/setup-catboost-smoke-20261013T082247Z-192df3"
+    ],
+    "status.json": {
+      "folds": 2,
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "73c399e3c8b3914262406b45b5df8dc6598b991d465c3346d8108a2ad4e2640c",
+        "oof.csv": "d32bb6ed41af1179a253b88e787e5429fe903293f53c7272cbe046f4d37e9307",
+        "submission.csv": "8735067ba701c9cf8ac110dda20a1bfca2a47b07139de6091a702586a4b8a6b4"
+      },
+      "elapsed_seconds_this_invocation": 16.41627866809722,
+      "feature_count": 81,
+      "fold_ks_std": 0.005084769886483239,
+      "folds": 2,
+      "mean_fold_ks": 0.38514857224573273,
+      "model": "catboost",
+      "output": "/home/fariselhakim/Projects/logika-ui-26/artifacts/experiments/setup-catboost-smoke-20261013T082247Z-192df3",
+      "pooled_oof": {
+        "auc": 0.759928532840842,
+        "directional_ks": 0.3839607426341123,
+        "ks": 0.3839607426341123,
+        "log_loss": 0.3844447736175524
+      },
+      "run_id": "setup-catboost-smoke-20261013T082247Z-192df3",
+      "submission_rows": 30000
+    },
+    "config.json": {
+      "device": "gpu",
+      "early_stopping_rounds": 5,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "gpu_devices": "0",
+      "gpu_min_free_gib": 3,
+      "gpu_ram_part": 0.02,
+      "inner_fraction": 0.2,
+      "max_iterations": 20,
+      "memory_limit": "768MB",
+      "model": "catboost",
+      "n_splits": 2,
+      "name": "setup-catboost-smoke",
+      "parameters": {
+        "depth": 4,
+        "l2_leaf_reg": 5.0,
+        "learning_rate": 0.05
+      },
+      "seed": 2026,
+      "threads": 4
+    }
+  },
+  {
+    "name": "e043-fixed-trees-kumo-blend-20261014T183511Z-e021c1",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e043-fixed-trees-kumo-blend-20261014T183511Z-e021c1"
+    ],
+    "status.json": {
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "6313922675a642ef20beaf489b9c09e455e207ced5cc280b3339875de8620232",
+        "oof.csv": "363302b88adcc6eaed4b32d2539ad0bce8575df7171aaada255e5d88e1a37062",
+        "submission.csv": "14709d1822dacd010825ee04224e9f897ab9083d6ba1888b7f1e51ba61e2f78b"
+      },
+      "fold_ks_std": 0.008342490963478956,
+      "mean_fold_ks": 0.5176930144237943,
+      "model": "fixed_blend",
+      "pooled_oof": {
+        "auc": 0.8398233966050603,
+        "directional_ks": 0.5151791583892715,
+        "ks": 0.5151791583892715,
+        "log_loss": 0.297755011283611
+      },
+      "run_id": "e043-fixed-trees-kumo-blend-20261014T183511Z-e021c1"
+    },
+    "config.json": {
+      "base_directories": [
+        "/home/giptarch/Projects/logika-ui-26/artifacts/experiments/e042-fixed-tree-diversity-blend-20261014T181830Z-b820c0",
+        "/home/giptarch/Projects/logika-ui-26/artifacts/a100_runs/e014-kumo-credit_v2-120-20261014T181236Z-9ea222"
+      ],
+      "feature_view": "base_models",
+      "model": "fixed_blend",
+      "n_splits": 5,
+      "name": "e043-fixed-trees-kumo-blend",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    }
+  },
+  {
+    "name": "e017-tabiclv2-credit120-20261014T182248Z-5c2b32",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e017-tabiclv2-credit120-20261014T182248Z-5c2b32"
+    ],
+    "status.json": {
+      "folds": [
+        {
+          "auc": 0.8256116610121503,
+          "directional_ks": 0.49038201799906167,
+          "fold": 1,
+          "ks": 0.49038201799906167,
+          "log_loss": 0.3079573109855268
+        },
+        {
+          "auc": 0.8094481704266994,
+          "directional_ks": 0.4645096331557827,
+          "fold": 2,
+          "ks": 0.4645096331557827,
+          "log_loss": 0.3225810288338097
+        },
+        {
+          "auc": 0.8139751484502918,
+          "directional_ks": 0.47733068131465445,
+          "fold": 3,
+          "ks": 0.47733068131465445,
+          "log_loss": 0.3246368617067784
+        },
+        {
+          "auc": 0.7911703503087082,
+          "directional_ks": 0.44156461428877203,
+          "fold": 4,
+          "ks": 0.44156461428877203,
+          "log_loss": 0.34830064049418435
+        },
+        {
+          "auc": 0.7404700249400314,
+          "directional_ks": 0.3969124216723606,
+          "fold": 5,
+          "ks": 0.3969124216723606,
+          "log_loss": 0.5638047600866855
+        }
+      ],
+      "mean_fold_ks": 0.4541398736861263,
+      "pilot": false,
+      "pooled": {
+        "auc": 0.7927979225554517,
+        "directional_ks": 0.45173779163729844,
+        "ks": 0.45173779163729844,
+        "log_loss": 0.373456120421397
+      },
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e017-tabiclv2-credit120-20261014T182248Z-5c2b32",
+      "state": "complete",
+      "std_fold_ks": 0.03671497278774751
+    },
+    "config.json": {
+      "backend": "tabiclv2",
+      "cache_storage": "cpu",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e017-tabiclv2-credit120",
+      "positive_fraction": null,
+      "pretrained_revision": "4dcd344ece2c00be9e831fdd35bed57b5ad83e19",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e036-xgb-credit-depth5-20261014T180008Z-8f20e1",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e036-xgb-credit-depth5-20261014T180008Z-8f20e1"
+    ],
+    "status.json": {
+      "folds": 5,
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "c71089c2964662bb847baa774e41be8001858213dba23fcfe8464d69cb36def3",
+        "oof.csv": "ba3a644eaa224120fc25a6b3505131e81b10865e4cb56b2d06943cf04dce7f8a",
+        "submission.csv": "d28abf0c0db6d47c29b1ce497ad5a8cd60e3a0cddb41cd9b4b711fa8ae7b28c9"
+      },
+      "elapsed_seconds_this_invocation": 689.068375587005,
+      "feature_count": 683,
+      "fold_ks_std": 0.01044373832658723,
+      "folds": 5,
+      "mean_fold_ks": 0.5108887676427838,
+      "model": "xgboost",
+      "output": "/home/giptarch/Projects/logika-ui-26/artifacts/experiments/e036-xgb-credit-depth5-20261014T180008Z-8f20e1",
+      "pooled_oof": {
+        "auc": 0.8360122959112,
+        "directional_ks": 0.5076549909409807,
+        "ks": 0.5076549909409807,
+        "log_loss": 0.3007288690081471
+      },
+      "run_id": "e036-xgb-credit-depth5-20261014T180008Z-8f20e1",
+      "submission_rows": 30000
+    },
+    "config.json": {
+      "device": "cpu",
+      "early_stopping_rounds": 150,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_view": "credit_v4",
+      "gpu_devices": "0",
+      "gpu_min_free_gib": 8,
+      "gpu_ram_part": 0.08,
+      "inner_fraction": 0.2,
+      "max_iterations": 3000,
+      "memory_limit": "1536MB",
+      "model": "xgboost",
+      "n_splits": 5,
+      "name": "e036-xgb-credit-depth5",
+      "parameters": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.03,
+        "max_bin": 256,
+        "max_depth": 5,
+        "min_child_weight": 10.0,
+        "reg_alpha": 0.1,
+        "reg_lambda": 5.0,
+        "subsample": 0.85
+      },
+      "seed": 2026,
+      "stopping_metric": "auc",
+      "threads": 2
+    }
+  },
+  {
+    "name": "e030-lgbm-contract-credit-20261013T120201Z-9a615c",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e030-lgbm-contract-credit-20261013T120201Z-9a615c"
+    ],
+    "status.json": {
+      "folds": 5,
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "f1f40488cd646e13cf23ec9504192081fbf7f0115546128aadc9f9aced01ed47",
+        "oof.csv": "dcf0f37fc645bf2271329d9779af8de5826581fc5e510ad90bbc318e96c701cc",
+        "submission.csv": "a634630f6ee4e2dd559208aecdfdc0d8aaef1ddd30734af61b0c6fab7d528ff9"
+      },
+      "elapsed_seconds_this_invocation": 411.1734982779999,
+      "feature_count": 683,
+      "fold_ks_std": 0.012998284949235873,
+      "folds": 5,
+      "mean_fold_ks": 0.5111472353518718,
+      "model": "lightgbm",
+      "output": "/home/giptarch/Projects/logika-ui-26/artifacts/experiments/e030-lgbm-contract-credit-20261013T120201Z-9a615c",
+      "pooled_oof": {
+        "auc": 0.8346746568882976,
+        "directional_ks": 0.5089375071733397,
+        "ks": 0.5089375071733397,
+        "log_loss": 0.30180211944625884
+      },
+      "run_id": "e030-lgbm-contract-credit-20261013T120201Z-9a615c",
+      "submission_rows": 30000
+    },
+    "config.json": {
+      "device": "cpu",
+      "early_stopping_rounds": 150,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_view": "credit_v4",
+      "gpu_devices": "0",
+      "gpu_min_free_gib": 8,
+      "gpu_ram_part": 0.08,
+      "inner_fraction": 0.2,
+      "max_iterations": 3000,
+      "memory_limit": "1536MB",
+      "model": "lightgbm",
+      "n_splits": 5,
+      "name": "e030-lgbm-contract-credit",
+      "parameters": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.03,
+        "min_child_samples": 70,
+        "num_leaves": 31,
+        "reg_lambda": 5.0,
+        "subsample": 0.85,
+        "subsample_freq": 1
+      },
+      "seed": 2026,
+      "threads": 4
+    }
+  },
+  {
+    "name": "e052-kumo-large-all56k-est8-20261015T074419Z-caf146",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e052-kumo-large-all56k-est8-20261015T074419Z-caf146"
+    ],
+    "status.json": {
+      "error": "Account host RAM reserve dropped below 0.25 GiB. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e052-kumo-large-all56k-est8-20261015T074419Z-caf146/fold_1/worker_memory.jsonl",
+      "pilot": false,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 56000,
+      "estimators": 8,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 32,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e052-kumo-large-all56k-est8",
+      "nested_context_rows": 16384,
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.0,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e028-kumo-credit-positive40-20261014T181839Z-51225d",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e028-kumo-credit-positive40-20261014T181839Z-51225d"
+    ],
+    "status.json": {
+      "error": "Kumo worker exited 1. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e028-kumo-credit-positive40-20261014T181839Z-51225d/fold_4/worker.log",
+      "pilot": false,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e028-kumo-credit-positive40",
+      "positive_fraction": 0.4,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e034-kumo-small-credit120-pilot-20261014T175909Z-da619f",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e034-kumo-small-credit120-pilot-20261014T175909Z-da619f"
+    ],
+    "status.json": {
+      "error": "Own process RSS exceeded 2.25 GiB. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e034-kumo-small-credit120-pilot-20261014T175909Z-da619f/fold_1/worker_memory.jsonl",
+      "pilot": true,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e034-kumo-small-credit120",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 2.25,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "small",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e039-kumo-large-nested32k-rss3g-pilot-20261015T003851Z-378eec",
+    "state": "verified_runtime_only",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e039-kumo-large-nested32k-rss3g-pilot-20261015T003851Z-378eec"
+    ],
+    "status.json": {
+      "folds": [],
+      "pilot": true,
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e039-kumo-large-nested32k-rss3g-pilot-20261015T003851Z-378eec",
+      "state": "complete"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 32768,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 16,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e039-kumo-large-nested32k-rss3g",
+      "nested_context_rows": 16384,
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.0,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e014-kumo-credit_v2-120-pilot-20261014T173252Z-816070",
+    "state": "verified_runtime_only",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-pilot-20261014T173252Z-816070"
+    ],
+    "status.json": {
+      "folds": [],
+      "pilot": true,
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-pilot-20261014T173252Z-816070",
+      "state": "complete"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e014-kumo-credit_v2-120",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e001-lgbm-all-20261013T082101Z-0b5b92",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e001-lgbm-all-20261013T082101Z-0b5b92"
+    ],
+    "status.json": {
+      "folds": 5,
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "897179290e9cde92bb0949af292aa261ec997a45f415d5b71ed8f8547e3d8d2b",
+        "oof.csv": "b8355ed7419e3982964ff7024c94e0990b9413206742738fab6d2a19f7ef1d14",
+        "submission.csv": "d3ddfaa4b1891b4e0f0ce33d31c8ff345e9f6776e16bb58aa539b5f641c3dde5"
+      },
+      "elapsed_seconds_this_invocation": 50.13349654502235,
+      "feature_count": 81,
+      "fold_ks_std": 0.010656839699842826,
+      "folds": 5,
+      "mean_fold_ks": 0.4234041564035119,
+      "model": "lightgbm",
+      "output": "/home/fariselhakim/Projects/logika-ui-26/artifacts/experiments/e001-lgbm-all-20261013T082101Z-0b5b92",
+      "pooled_oof": {
+        "auc": 0.7815638990598811,
+        "directional_ks": 0.42089667944215126,
+        "ks": 0.42089667944215126,
+        "log_loss": 0.33365265445578357
+      },
+      "run_id": "e001-lgbm-all-20261013T082101Z-0b5b92",
+      "submission_rows": 30000
+    },
+    "config.json": {
+      "device": "cpu",
+      "early_stopping_rounds": 100,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "gpu_devices": "0",
+      "gpu_min_free_gib": 8,
+      "gpu_ram_part": 0.08,
+      "inner_fraction": 0.2,
+      "max_iterations": 2000,
+      "memory_limit": "768MB",
+      "model": "lightgbm",
+      "n_splits": 5,
+      "name": "e001-lgbm-all",
+      "parameters": {
+        "colsample_bytree": 0.85,
+        "learning_rate": 0.03,
+        "min_child_samples": 40,
+        "num_leaves": 31,
+        "reg_lambda": 2.0,
+        "subsample": 0.8,
+        "subsample_freq": 1
+      },
+      "seed": 2026,
+      "threads": 4
+    }
+  },
+  {
+    "name": "e017-tabiclv2-credit120-20261013T123939Z-ad6b9a",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e017-tabiclv2-credit120-20261013T123939Z-ad6b9a"
+    ],
+    "status.json": {
+      "error": "Own process RSS exceeded 4 GiB. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e017-tabiclv2-credit120-20261013T123939Z-ad6b9a/fold_1/worker.log",
+      "pilot": false,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "tabiclv2",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e017-tabiclv2-credit120",
+      "positive_fraction": null,
+      "pretrained_revision": "4dcd344ece2c00be9e831fdd35bed57b5ad83e19",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e051-kumo-large-all56k-20261015T005556Z-5146a6",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e051-kumo-large-all56k-20261015T005556Z-5146a6"
+    ],
+    "status.json": {
+      "folds": [
+        {
+          "auc": 0.8397576690532114,
+          "directional_ks": 0.5173194805836245,
+          "fold": 1,
+          "ks": 0.5173194805836245,
+          "log_loss": 0.2961355765241479
+        },
+        {
+          "auc": 0.8384394195893696,
+          "directional_ks": 0.5199314145064571,
+          "fold": 2,
+          "ks": 0.5199314145064571,
+          "log_loss": 0.2988908608080588
+        },
+        {
+          "auc": 0.8410250305992126,
+          "directional_ks": 0.5254634470436754,
+          "fold": 3,
+          "ks": 0.5254634470436754,
+          "log_loss": 0.2979751888669176
+        },
+        {
+          "auc": 0.8353882285975004,
+          "directional_ks": 0.5063857490972143,
+          "fold": 4,
+          "ks": 0.5063857490972143,
+          "log_loss": 0.2994080564450798
+        },
+        {
+          "auc": 0.8440580292490403,
+          "directional_ks": 0.5235164140591062,
+          "fold": 5,
+          "ks": 0.5235164140591062,
+          "log_loss": 0.2953960604403067
+        }
+      ],
+      "mean_fold_ks": 0.5185233010580156,
+      "pilot": false,
+      "pooled": {
+        "auc": 0.8397308859861095,
+        "directional_ks": 0.5131673917118069,
+        "ks": 0.5131673917118069,
+        "log_loss": 0.29756114861690214
+      },
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e051-kumo-large-all56k-20261015T005556Z-5146a6",
+      "state": "complete",
+      "std_fold_ks": 0.007480791043788844
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 56000,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 16,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e051-kumo-large-all56k",
+      "nested_context_rows": 16384,
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.0,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e042-fixed-tree-diversity-blend-20261014T181830Z-b820c0",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e042-fixed-tree-diversity-blend-20261014T181830Z-b820c0"
+    ],
+    "status.json": {
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "2555029b1db4ef7934c0714fd716d104267b57c4156d7277e9ad015a87eef478",
+        "oof.csv": "a353b7147feca86afcc27678b8dd59166ae0d3b5f3bfa5fb94d91fcd9c658d68",
+        "submission.csv": "11be0ce673ac00cb46a576df1a1ea7364f7f9fc0b28ff9487422c09947f33e68"
+      },
+      "fold_ks_std": 0.012256352451633359,
+      "mean_fold_ks": 0.5128060999377251,
+      "model": "fixed_blend",
+      "pooled_oof": {
+        "auc": 0.8372840828348812,
+        "directional_ks": 0.5118427111481738,
+        "ks": 0.5118427111481738,
+        "log_loss": 0.29983637346502323
+      },
+      "run_id": "e042-fixed-tree-diversity-blend-20261014T181830Z-b820c0"
+    },
+    "config.json": {
+      "base_directories": [
+        "/home/giptarch/Projects/logika-ui-26/artifacts/experiments/e041-fixed-catboost-contract-blend-20261014T173313Z-11ec39",
+        "/home/giptarch/Projects/logika-ui-26/artifacts/experiments/e036-xgb-credit-depth5-20261014T180008Z-8f20e1"
+      ],
+      "feature_view": "base_models",
+      "model": "fixed_blend",
+      "n_splits": 5,
+      "name": "e042-fixed-tree-diversity-blend",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    }
+  },
+  {
+    "name": "e051-kumo-large-all56k-pilot-20261015T005345Z-ee1545",
+    "state": "verified_runtime_only",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e051-kumo-large-all56k-pilot-20261015T005345Z-ee1545"
+    ],
+    "status.json": {
+      "folds": [],
+      "pilot": true,
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e051-kumo-large-all56k-pilot-20261015T005345Z-ee1545",
+      "state": "complete"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cuda",
+      "context_rows": 56000,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 16,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e051-kumo-large-all56k",
+      "nested_context_rows": 16384,
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 3.0,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e011-catboost-credit-20261013T110907Z-1e2930",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e011-catboost-credit-20261013T110907Z-1e2930"
+    ],
+    "status.json": {
+      "folds": 5,
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "c3ffc42679df97c0e1a78d26a1c7978dc7bda35e849ed406cba88ff1b9f5ad70",
+        "oof.csv": "60dec80ae4bc3e55047ff51260984d9e63410955bd925a00748367ee4ce23e91",
+        "submission.csv": "992993360de523e2a26e2e0c6f58a1c7f0cb5e9523e8eafc2df2dc404b045d00"
+      },
+      "elapsed_seconds_this_invocation": 4911.682318447041,
+      "feature_count": 633,
+      "fold_ks_std": 0.012776194395179017,
+      "folds": 5,
+      "mean_fold_ks": 0.513561964102532,
+      "model": "catboost",
+      "output": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e011-catboost-credit-20261013T110907Z-1e2930",
+      "pooled_oof": {
+        "auc": 0.8351251487482022,
+        "directional_ks": 0.5107802079060595,
+        "ks": 0.5107802079060595,
+        "log_loss": 0.3013953357283643
+      },
+      "run_id": "e011-catboost-credit-20261013T110907Z-1e2930",
+      "submission_rows": 30000
+    },
+    "config.json": {
+      "device": "gpu",
+      "early_stopping_rounds": 150,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_view": "credit_v2",
+      "gpu_devices": "0",
+      "gpu_min_free_gib": 8,
+      "gpu_ram_part": 0.08,
+      "inner_fraction": 0.2,
+      "max_iterations": 3000,
+      "memory_limit": "1536MB",
+      "model": "catboost",
+      "n_splits": 5,
+      "name": "e011-catboost-credit",
+      "parameters": {
+        "depth": 6,
+        "l2_leaf_reg": 5.0,
+        "learning_rate": 0.04
+      },
+      "seed": 2026,
+      "threads": 4
+    }
+  },
+  {
+    "name": "e061-kumo-large-lora-cuda-pilot-20261015T074229Z-bc4324",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e061-kumo-large-lora-cuda-pilot-20261015T074229Z-bc4324"
+    ],
+    "status.json": {
+      "state": "failed",
+      "pilot": true,
+      "error": "Worker received SIGKILL during shared memory pressure",
+      "worker_return_code": -9,
+      "supervisor": "artifacts/e061_lora_gpu_pilot_retry2_supervisor_20261015.json",
+      "supervisor_sha256": "c75cb9b38f17df489d23db96baa112bf3504c5727e1c186da074bf157a817477",
+      "cgroup_oom_kill_delta": 2,
+      "no_model_quality_score": true
+    },
+    "config.json": {
+      "adapter_layers": 4,
+      "device": "cuda",
+      "estimators": 2,
+      "evaluation_every": 20,
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "final_context_rows": 16384,
+      "gpu_budget_gib": 16,
+      "inner_context_rows": 4096,
+      "learning_rate": 0.0001,
+      "max_steps": 200,
+      "model": "kumo_lora",
+      "n_splits": 5,
+      "name": "e061-kumo-large-lora-cuda",
+      "patience_evaluations": 3,
+      "process_budget_gib": 2.25,
+      "query_batch_size": 256,
+      "rank": 8,
+      "seed": 2026,
+      "selection_identity_sha256": "3c03fbca7004ff5301035cacd53abeb92f4685545519e7a3bc718303461e0d41",
+      "selection_run": "artifacts/a100_runs/e014-kumo-credit_v2-120-20261014T181236Z-9ea222",
+      "size": "large",
+      "threads": 4,
+      "training_context_rows": 1024,
+      "training_query_rows": 256,
+      "weight_decay": 0.01
+    }
+  },
+  {
+    "name": "e002-catboost-all-20261013T100323Z-5e1835",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e002-catboost-all-20261013T100323Z-5e1835"
+    ],
+    "status.json": {
+      "folds": 5,
+      "state": "completed"
+    },
+    "result.json": {
+      "checksums": {
+        "fold_metrics.json": "30595a08f0fa2223d92f1c2893f6985c3f327742bdabe4da5e3b08e22001711e",
+        "oof.csv": "1f96d53ee95d395ad41fc38eec5abf546198877abfa000ab0198e2fafa0b2207",
+        "submission.csv": "1f29dd88e2c78aa988c6f83a04d740501b80f279096d1abc07c57f1b33170c0c"
+      },
+      "elapsed_seconds_this_invocation": 1282.68905413209,
+      "feature_count": 81,
+      "fold_ks_std": 0.00773477028642748,
+      "folds": 5,
+      "mean_fold_ks": 0.42189204135299085,
+      "model": "catboost",
+      "output": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e002-catboost-all-20261013T100323Z-5e1835",
+      "pooled_oof": {
+        "auc": 0.7812649111938834,
+        "directional_ks": 0.41961806683153785,
+        "ks": 0.41961806683153785,
+        "log_loss": 0.333854550816665
+      },
+      "run_id": "e002-catboost-all-20261013T100323Z-5e1835",
+      "submission_rows": 30000
+    },
+    "config.json": {
+      "device": "gpu",
+      "early_stopping_rounds": 100,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "gpu_devices": "0",
+      "gpu_min_free_gib": 8,
+      "gpu_ram_part": 0.08,
+      "inner_fraction": 0.2,
+      "max_iterations": 2000,
+      "memory_limit": "768MB",
+      "model": "catboost",
+      "n_splits": 5,
+      "name": "e002-catboost-all",
+      "parameters": {
+        "depth": 6,
+        "l2_leaf_reg": 5.0,
+        "learning_rate": 0.04
+      },
+      "seed": 2026,
+      "threads": 4
+    }
+  },
+  {
+    "name": "e005-kumo-large-20261013T090703Z-5eda51",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e005-kumo-large-20261013T090703Z-5eda51"
+    ],
+    "status.json": {
+      "folds": [
+        {
+          "auc": 0.767243100809693,
+          "directional_ks": 0.38999475613232737,
+          "fold": 1,
+          "ks": 0.38999475613232737,
+          "log_loss": 0.34142298463633053
+        },
+        {
+          "auc": 0.7588478690988716,
+          "directional_ks": 0.37883215706090195,
+          "fold": 2,
+          "ks": 0.37883215706090195,
+          "log_loss": 0.3474653671588763
+        },
+        {
+          "auc": 0.779418767934285,
+          "directional_ks": 0.4242870048824887,
+          "fold": 3,
+          "ks": 0.4242870048824887,
+          "log_loss": 0.33635952376194783
+        },
+        {
+          "auc": 0.7556558532384872,
+          "directional_ks": 0.3893521095187046,
+          "fold": 4,
+          "ks": 0.3893521095187046,
+          "log_loss": 0.3528858164765202
+        },
+        {
+          "auc": 0.7597287113181364,
+          "directional_ks": 0.37764452206732996,
+          "fold": 5,
+          "ks": 0.37764452206732996,
+          "log_loss": 0.35129840898959397
+        }
+      ],
+      "mean_fold_ks": 0.3920221099323505,
+      "pilot": false,
+      "pooled": {
+        "auc": 0.7634956050113886,
+        "directional_ks": 0.3888580212969814,
+        "ks": 0.3888580212969814,
+        "log_loss": 0.34588642020465377
+      },
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e005-kumo-large-20261013T090703Z-5eda51",
+      "state": "complete",
+      "std_fold_ks": 0.018927178879525417
+    },
+    "config.json": {
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "768MB",
+      "n_splits": 5,
+      "name": "e005-kumo-large",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e015-kumo-smooth_v3-120-20261013T123915Z-5c135d",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e015-kumo-smooth_v3-120-20261013T123915Z-5c135d"
+    ],
+    "status.json": {
+      "error": "Own process RSS exceeded 4 GiB. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e015-kumo-smooth_v3-120-20261013T123915Z-5c135d/fold_1/worker.log",
+      "pilot": false,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "smooth_v3",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e015-kumo-smooth_v3-120",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e014-kumo-credit_v2-120-pilot-20261013T124414Z-c51949",
+    "state": "failed",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-pilot-20261013T124414Z-c51949"
+    ],
+    "status.json": {
+      "error": "Own process RSS exceeded 4 GiB. See /home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e014-kumo-credit_v2-120-pilot-20261013T124414Z-c51949/fold_1/worker.log",
+      "pilot": true,
+      "state": "failed"
+    },
+    "config.json": {
+      "backend": "kumo",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e014-kumo-credit_v2-120",
+      "positive_fraction": null,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  },
+  {
+    "name": "e028-kumo-credit-positive40-20261014T192504Z-d2fd8e",
+    "state": "reported_but_unverified",
+    "references": [
+      "Projects/logika-ui-26/artifacts/experiments/e028-kumo-credit-positive40-20261014T192504Z-d2fd8e"
+    ],
+    "status.json": {
+      "folds": [
+        {
+          "auc": 0.8367561515446018,
+          "directional_ks": 0.5077042594283641,
+          "fold": 1,
+          "ks": 0.5077042594283641,
+          "log_loss": 0.2979912297326721
+        },
+        {
+          "auc": 0.8348544506071448,
+          "directional_ks": 0.5126669556206884,
+          "fold": 2,
+          "ks": 0.5126669556206884,
+          "log_loss": 0.3013530301090259
+        },
+        {
+          "auc": 0.8407446138693138,
+          "directional_ks": 0.5195893195406112,
+          "fold": 3,
+          "ks": 0.5195893195406112,
+          "log_loss": 0.29851847222580136
+        },
+        {
+          "auc": 0.8356121397036609,
+          "directional_ks": 0.5082073855100123,
+          "fold": 4,
+          "ks": 0.5082073855100123,
+          "log_loss": 0.2992059048459718
+        },
+        {
+          "auc": 0.8424617942255317,
+          "directional_ks": 0.521608493830354,
+          "fold": 5,
+          "ks": 0.521608493830354,
+          "log_loss": 0.29687963376430604
+        }
+      ],
+      "mean_fold_ks": 0.513955282786006,
+      "pilot": false,
+      "pooled": {
+        "auc": 0.8380514470603225,
+        "directional_ks": 0.5114663463700684,
+        "ks": 0.5114663463700684,
+        "log_loss": 0.29878965413555547
+      },
+      "run_directory": "/home/fariselhakim/gipta/projects/logika-ui-26/artifacts/experiments/e028-kumo-credit-positive40-20261014T192504Z-d2fd8e",
+      "state": "complete",
+      "std_fold_ks": 0.006404830451300568
+    },
+    "config.json": {
+      "backend": "kumo",
+      "cache_storage": "cpu",
+      "context_rows": 16384,
+      "estimators": 2,
+      "exclude_features": [],
+      "exclude_prefixes": [],
+      "feature_limit": 120,
+      "feature_view": "credit_v2",
+      "gpu_budget_gib": 8,
+      "gpu_index": 0,
+      "memory_limit": "1536MB",
+      "n_splits": 5,
+      "name": "e028-kumo-credit-positive40",
+      "nested_context_rows": null,
+      "positive_fraction": 0.4,
+      "pretrained_revision": "v1.0.1",
+      "process_budget_gib": 4,
+      "query_batch_size": 256,
+      "seed": 2026,
+      "size": "large",
+      "threads": 4
+    }
+  }
+]

@@ -1,0 +1,103 @@
+{
+  "status": "complete",
+  "diagnostic": "NO_AVERAGING_SCALE_MISMATCH",
+  "context_customers": 50000,
+  "default_labels_opened": false,
+  "classification_fit_admitted": false,
+  "provider_groups": {
+    "Bureau_A": {
+      "groups": 143500,
+      "reports": 143500,
+      "report_count_histogram": {
+        "1": 143500
+      },
+      "multireport_groups": 0,
+      "span_days_quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "Bureau_B": {
+      "groups": 117231,
+      "reports": 117231,
+      "report_count_histogram": {
+        "1": 117231
+      },
+      "multireport_groups": 0,
+      "span_days_quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "Bureau_C": {
+      "groups": 116949,
+      "reports": 116949,
+      "report_count_histogram": {
+        "1": 116949
+      },
+      "multireport_groups": 0,
+      "span_days_quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "paired_noise_units": [
+    {
+      "providers": [
+        "Bureau_A",
+        "Bureau_B"
+      ],
+      "paired_groups": 111193,
+      "any_averaged": 0,
+      "score_difference_variance": 1057.4148328564502,
+      "mean_inverse_counts": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "providers": [
+        "Bureau_A",
+        "Bureau_C"
+      ],
+      "paired_groups": 110844,
+      "any_averaged": 0,
+      "score_difference_variance": 1056.3867785980651,
+      "mean_inverse_counts": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "providers": [
+        "Bureau_B",
+        "Bureau_C"
+      ],
+      "paired_groups": 90756,
+      "any_averaged": 0,
+      "score_difference_variance": 1058.159716102381,
+      "mean_inverse_counts": [
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "source_hashes": {
+    "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/bureau_observations.csv": "e37b8a76fe4f97ee6f1fd78ab26ffb0e78e464714f77d961062e03d757d057a0",
+    "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/train_applications.csv": "b60df5704bcd3713314a31c5382db22f41d38971bd76906b15f45a38edff509b",
+    "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/input/artifacts/fold0/indices.npz": "46d3d1b836817853408f925af8019b3b277d055fc73d532cfc471606dd711c04",
+    "/mnt/home/logika-faris-exploration/bureau-noise-scale-audit-20261021/audit.py": "5ad63c83746d76be445dbb67d1557e72f198ba9f53ef40148d516aefa5c08727"
+  },
+  "seconds": 2.4994373321533203,
+  "qualification": "Checks whether inherited paired means average multiple finite reports. Does not establish independent/unbiased/time-stationary provider errors or snapshot semantics."
+}

@@ -1,0 +1,11 @@
+{
+  "hypothesis": "A different regression pretraining prior may give complementary conditional-mean estimates. For binaryY, E[(Y-p)^2|X] is minimized atP(Y=1|X), so the population target is a probability. This is a theoretical motivation, not evidence that TabICL regression improves this competition.",
+  "primary_source": "https://github.com/soda-inria/tabicl",
+  "retrieved": "2026-10-21",
+  "source_support": "Official implementation supplies a separate TabICLv2 regression checkpoint and sklearn-compatible regressor. No source claim about binary-target superiority is made.",
+  "novelty": "Earlier39archived TabICL jobs use TabICLClassifier in the executed foundation.py. This branch changes pretrained target/task prior, not seed or filename.",
+  "protocol": "Identical frozen70k5fold context50000/head6000/evaluation14000; compact90 feature view and unchanged correction18/spline77 pipeline.",
+  "falsification": "Full OOF KS/AUC/logloss/Brier and allfold stability against repairedKumo90 and classificationTabICL; reject degradation. No partial-fold outcome selection.",
+  "search": "One preregistered pipeline and one fixed20percent blend; no hyperparameter or clip-level tuning.",
+  "limitations": "Historical labels reused; binary targets differ from typical continuous regression pretraining; clipping may create ties and poor calibration. Retain unclipped predictions and clipping counts."
+}

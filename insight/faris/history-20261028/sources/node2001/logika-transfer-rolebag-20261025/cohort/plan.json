@@ -1,0 +1,22 @@
+{
+  "id": "H010-train56k-cohort-priors",
+  "original_deadline": 1792880100.0,
+  "raw": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw",
+  "bank": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank",
+  "bank_id": "eb7ca7bdcb7c21b6dc1524bdcd88e1983d02334a91742637ec1ac9e814da79da",
+  "input": "/home/faris/logika-transfer-rolebag-20261025/cohort/input",
+  "preprocessing_only": true,
+  "model_training": false,
+  "model_training_admitted": false,
+  "source_sha256": {
+    "build_features_v3.py": "413acbd10dcff05b0213bc701d6f15ad4676fb0170620111490168403691bdb7",
+    "build_features_v4.py": "d6574b794b39bad7240429509e99ded3ae7c017f5229b968aba2f65464bf5821",
+    "reverse_synthetic_patterns.py": "1b9c7fa44f42e5a0340340655162e6a4229250257f47245d1077025794b31944",
+    "build_features_v5.py": "2cbf071aa4aeff3c0b262fe9adc9718a4521612d43a20ac5686b6e772b306c0d"
+  },
+  "hypothesis": "Inherited unsupervised cohort estimates must be fitted on the frozen context rows before a new Kumo feature-placement comparison. Re-estimate all relevant v3/v4/v5 priors and latent price/bureau/repayment effects; keep targets unavailable.",
+  "shared_fitted_statistics": "All56k outer-training covariates; no outer-validation or test covariates fit shared statistics.",
+  "point_in_time_caveat": "Rebuilding cohort statistics does not resolve inherited raw DPD snapshot provenance. Do not certify future deployment availability without evidence.",
+  "historical_metric_recalculation_complete": true,
+  "admission_basis": "All36136 saved prediction files,4096 fixed replays and118 V7 OOF files freshly verified. This admits preprocessing repair only, not new model screening or rank promotion. Unresolved metadata and unavailable PC1 filesystem remain disclosed."
+}

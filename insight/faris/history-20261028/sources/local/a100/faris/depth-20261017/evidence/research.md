@@ -1,0 +1,8 @@
+# Research evidence (retrieved 2026-10-17)
+Consensus discovery attempted using available tool metadata: no Consensus search or fetch connection exposed. Primary-source fallback used; no Consensus retrieval claimed.
+
+1. Bergstra and Bengio (2012), Random Search for Hyper-Parameter Optimization. https://www.jmlr.org/papers/v13/bergstra12a.html . Read abstract. Motivates finite random/adaptive conditional search instead of exhaustive Cartesian claims. External benchmark conclusions are not evidence for Logika. H1/H3.
+2. Prokhorenkova et al. (2018), CatBoost: unbiased boosting with categorical features. https://proceedings.neurips.cc/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html . Read abstract. Identifies target leakage/prediction shift in categorical handling. Here use inherited fold-local encodings (target encoding inner cross-fit); no claim of reproducing ordered categorical treatment. H2.
+3. Historical campaign: 19,056 verified full-CV pipelines; best wave2 displayed pooled development KS 0.5180936 (linear cross-source), wave1 0.5176475 (LGB reduction), fresh v3 0.5169466. Selection JSON records top two distinct feature representations per model per wave. These are reused-development discovery findings, not independent confirmations.
+
+Latest scope change: user explicitly authorizes GPU foundation models on node380 and all compatible PC accelerators. The Kumo FM campaign has its own frozen FM brief/evidence; it uses cached official weights. PC1 AMD queue uses validated gfx1030 OpenCL and overrides the initial applicability exclusion. New search ends by 06:00 WIB; previous original campaign deadline remains 05:29 WIB.

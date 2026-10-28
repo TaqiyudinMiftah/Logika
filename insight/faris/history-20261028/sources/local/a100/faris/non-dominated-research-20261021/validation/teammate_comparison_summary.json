@@ -1,0 +1,77 @@
+{
+  "verified": 118,
+  "target": 0.54,
+  "target_reached": false,
+  "best_pooled": {
+    "id": "V80",
+    "KS": 0.5307369202706784,
+    "AUC": 0.8470688524159395,
+    "logloss": 0.2926488230466559,
+    "delta_KS_vs_original": 0.0014374543701176634,
+    "delta_AUC_vs_original": -0.00013383597584104567,
+    "fold_wins_vs_original": 2,
+    "fold_delta_vs_original": [
+      -0.0009779915382471804,
+      -0.0022282850683160715,
+      -0.0009970783296266994,
+      0.0022209091925232682,
+      0.002256197589993736
+    ],
+    "fold_wins_vs_V25": 2,
+    "delta_KS_vs_V25": 0.00045226022663724663,
+    "delta_AUC_vs_V25": 3.957350882366484e-05,
+    "new_feature_count": 27,
+    "recipe": {
+      "id": "V80",
+      "families": [
+        "spectral"
+      ],
+      "label": "Daily spending/order spectral fingerprint",
+      "penalty": 0.003,
+      "strength": 0.5,
+      "fold_feature_root": "behavior/data",
+      "feature_catalog": "behavior/reports/FEATURE_CATALOG.csv",
+      "behavior": true
+    },
+    "rank_eligible": false
+  },
+  "V25": {
+    "id": "V25",
+    "KS": 0.5302846600440412,
+    "AUC": 0.8470292789071159,
+    "logloss": 0.29259872368613593,
+    "delta_KS_vs_original": 0.0009851941434804168,
+    "delta_AUC_vs_original": -0.0001734094846647105,
+    "fold_wins_vs_original": 5,
+    "fold_delta_vs_original": [
+      0.00029191051781773947,
+      0.0005431692134489907,
+      0.00023495448887200787,
+      0.0004322394103951632,
+      0.0006138964318562756
+    ],
+    "fold_wins_vs_V25": 0,
+    "delta_KS_vs_V25": 0.0,
+    "delta_AUC_vs_V25": 0.0,
+    "new_feature_count": 18,
+    "recipe": {
+      "id": "V25",
+      "families": [
+        "conditional_allocation"
+      ],
+      "only": [
+        "risk_conditional_negative_months",
+        "risk_conditional_nonnegative_months"
+      ],
+      "label": "Coverage-only control for conditional Empirical Bayes V14",
+      "penalty": 0.003,
+      "strength": 0.5,
+      "fold_feature_root": "extension/data",
+      "feature_catalog": "extension/reports/FEATURE_CATALOG.csv",
+      "extension": true
+    },
+    "rank_eligible": false
+  },
+  "candidates_with_KS_and_AUC_increase_vs_original": 2,
+  "scientific_note": "Same reused development labels. Correct saved metrics do not establish unbiased selection, PIT certification, or promotion. Highest pooled KS is not automatically best pipeline."
+}

@@ -1,0 +1,97 @@
+{
+  "status": "complete",
+  "target_labels_opened": false,
+  "customers": 70000,
+  "rows": 1084418,
+  "observed_month_count_quantiles": [
+    8.0,
+    9.0,
+    15.0,
+    22.0,
+    23.0
+  ],
+  "minimum_months_for_slope_diagnostic": 6,
+  "source_account_sha256": "2f46be03496583b0231591194e13bea7593e87323056dfead6b9b19c48871924",
+  "summary": {
+    "log_income": {
+      "observed": {
+        "significant_slope_fraction": 0.28704285714285716,
+        "slope_quantiles": [
+          -0.12416007680377705,
+          -0.05196234158632898,
+          5.4441716418013426e-06,
+          0.05243265020629568,
+          0.1260319576287365
+        ],
+        "pooled_demeaned_contiguous_lag_correlation": 0.28866845306087124
+      },
+      "permuted_time_null": {
+        "significant_slope_fraction": 0.050628571428571426,
+        "slope_quantiles": [
+          -0.08724518896042564,
+          -0.03147143511447667,
+          3.367426837206089e-05,
+          0.031342535765133635,
+          0.08747509417505317
+        ],
+        "pooled_demeaned_contiguous_lag_correlation": -0.0671918240291242
+      },
+      "significant_slope_fraction_difference": 0.23641428571428574,
+      "lag_correlation_difference": 0.35586027708999546
+    },
+    "log_outflow": {
+      "observed": {
+        "significant_slope_fraction": 0.41544285714285717,
+        "slope_quantiles": [
+          -0.14017078888030998,
+          -0.05080687886161733,
+          0.022299516148010425,
+          0.08472790442903944,
+          0.15647332932805552
+        ],
+        "pooled_demeaned_contiguous_lag_correlation": 0.3936660194197427
+      },
+      "permuted_time_null": {
+        "significant_slope_fraction": 0.05032857142857143,
+        "slope_quantiles": [
+          -0.09552872835351808,
+          -0.03649003105455077,
+          -9.086900388112951e-05,
+          0.036123847865609814,
+          0.09393964314361596
+        ],
+        "pooled_demeaned_contiguous_lag_correlation": -0.06627754854214138
+      },
+      "significant_slope_fraction_difference": 0.3651142857142857,
+      "lag_correlation_difference": 0.45994356796188407
+    },
+    "low_balance_fraction": {
+      "observed": {
+        "significant_slope_fraction": 0.07321428571428572,
+        "slope_quantiles": [
+          -0.03616233998975934,
+          -0.0038741302972802026,
+          0.0,
+          0.006907068908393907,
+          0.05334119769119759
+        ],
+        "pooled_demeaned_contiguous_lag_correlation": 0.3378215308519423
+      },
+      "permuted_time_null": {
+        "significant_slope_fraction": 0.0091,
+        "slope_quantiles": [
+          -0.028264558022622534,
+          -0.0023652980315939163,
+          0.0,
+          0.0021672181894762106,
+          0.0279120879120878
+        ],
+        "pooled_demeaned_contiguous_lag_correlation": -0.0735268342861096
+      },
+      "significant_slope_fraction_difference": 0.06411428571428572,
+      "lag_correlation_difference": 0.41134836513805184
+    }
+  },
+  "null": "One seeded within-customer multivariate month-order permutation; no target or customer exchange. Preserves customer distribution and coverage; destroys time ordering.",
+  "qualification": "Diagnostic only, not causal or performance evidence. Trend t-test uses iid errors, so permutation comparison is descriptive. Features are per-customer OLS, no shared fit; no new model training admitted."
+}

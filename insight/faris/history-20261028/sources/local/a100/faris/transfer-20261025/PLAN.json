@@ -1,0 +1,42 @@
+{
+  "id": "transfer-20261025",
+  "created_UTC": "2026-10-24T18:54:49.715005+00:00",
+  "request": "User authorizes research, fitting, and up to three Kaggle submissions before the next reset. Primary research target pooled original-five-fold KS >=0.54; practical aim improve Kaggle public reference 0.56822.",
+  "window_start_epoch": 1792868089.7150133,
+  "training_deadline_epoch": 1792883400.0,
+  "submission_deadline_epoch": 1792885500.0,
+  "finalization_reserve_seconds": 2100,
+  "pilots": [
+    "original",
+    "fresh_kumo_seed_12026_plus_fold",
+    "correction_resample_51025_plus_fold",
+    "correction_resample_61025_plus_fold"
+  ],
+  "recipes": [
+    "repaired_V25",
+    "maturity",
+    "periodicity_maturity"
+  ],
+  "fixed_roles": "Original seed31027 five folds, 50k context, 6k correction, 14k validation; existing fold-local statistics unchanged.",
+  "promotion": "Pooled KS primary; paired sensitivity and complete five-fold evidence before candidate selection. No AUC-improvement veto. Full refit follows frozen design and exact schema checks. Public outcomes logged as adaptive selection.",
+  "resource_scope": {
+    "host": "PC2 labkc-comm1 via verified Tailscale IP",
+    "GPU_slots": 2,
+    "CPU_threads_per_worker": 4,
+    "max_new_archive_bytes": 600000000,
+    "minimum_archive_free_bytes": 600000000,
+    "no_new_attention_cache_files": true,
+    "preserve_all_models": true
+  },
+  "limits": [
+    "All 70k labels historically exposed; no independent audit remains.",
+    "Inherited DPD/amount-paid snapshot provenance unresolved; pilot retains original feature definitions. No new future fields admitted.",
+    "Bounded robustness pilots allowed; broad search requires a resolved validation gate."
+  ],
+  "source_sha256": {
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "robustness.py": "655f4b160bbcdde6a2ad913d283e06d1a4a160ca74ba89a7fde01514df20880a",
+    "gpu_backend.py": "f4e03f3b8fbd3ac1bf1c568c57dd91492c92e7ea1d20cbd6eb7368a5ac1ff7b4",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0"
+  }
+}

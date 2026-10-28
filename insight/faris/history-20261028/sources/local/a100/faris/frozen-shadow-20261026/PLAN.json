@@ -1,0 +1,77 @@
+{
+  "protocol_id": "logika-frozen-shadow-v1",
+  "created_UTC": "2026-10-26T10:32:17.382258+00:00",
+  "authorization": "[REDACTED_CREDENTIAL]",
+  "phase_order": [
+    "Review best authenticated submissionV25",
+    "Validate and implement historical shadow supervision and joint latent risk",
+    "Freeze all feature definitions, selected views and fold tables",
+    "24h model-only campaign on available lab CPUs and GPUs",
+    "Freeze within-fold recipe, evaluate and if stable gain plan refit"
+  ],
+  "modelling_hours": 24,
+  "search_hours": 18,
+  "reserve_hours": 6,
+  "clock_policy": "Clock starts after FEATURE_FREEZE passes and the model-only gate is admitted; research and feature preparation reported separately. Absolute deadline saved once in CLOCK.json and never reset.",
+  "target_pooled_KS": 0.54,
+  "data_source": "Supplied competition tables; external research only motivates methods.",
+  "protocol": "Original stratified5fold70k,50kcontext6000correction14000outer per fold; all learned representations fit onlycontext and historicalloan training borrowers excluded from their query predictions.",
+  "evaluation": "tie-aware pooled two-sample KS on class1 probability, AUC reported. All70kouter labels previously exposed; independent audit unavailable.",
+  "feature_policy": "Immutable master116, exact count measured by freeze. Fixed declared views champion90,shadow91,latent99,full100,master. No additions/removals/value regeneration for search. Model preprocessing fitted on context is permitted; context routing never adds source features.",
+  "teacher": "3 customer folds within50kcontext plusfullcontextteacher forcorrection/outer. NeuralWeibull interval likelihood35epochs;CatBoost400iterations onknown12labels. No exact90DPD event reconstruction.",
+  "joint_latent": "Fixed4view productofexperts VAE8latent; reconstruction+KL.005+historicalBCE.25+currentBCE.25,40epochs. Contextlabels only. Same frozenvalues for all model seeds.",
+  "configs_sha256": "fe66f9e4036a3c82381fdc26fcd12e4c9798f01d2912489fb6b9d016aa8b6646",
+  "models": {
+    "configurations": 68,
+    "fivefold_fits": 340,
+    "families": [
+      "Kumo global",
+      "Kumo fixed-cluster localcontext",
+      "LightGBM",
+      "CatBoost",
+      "XGBoost",
+      "ExtraTrees",
+      "LogisticRegression",
+      "MLP",
+      "BCE+pairwise ranking correction with consistency"
+    ]
+  },
+  "model_selection": {
+    "ranking_choice": "Stratified half of6000correction ranksmodels;otherhalfchoosesmixture,seed261026. Treesearlystoprankinghalf only. Rankingstudenttrainrankinghalf only.",
+    "candidate_ranking": "RawKS onrankinghalf; excludeincompletefivefoldconfigs. Stabletieslexicographic.",
+    "ensemble_counts": [
+      1,
+      4,
+      8,
+      "all"
+    ],
+    "blend_weights": [
+      0,
+      0.1,
+      0.2,
+      0.4,
+      0.7,
+      1
+    ],
+    "blend": "(1-w)*originalKumo90raw +w*mean(topKcandidateprobabilities)",
+    "ties": "Prefer smaller weight and smaller ensemble.",
+    "downstream": "Fixed original18correctionfeatures,.003penalty,.5strengthfit6000; .75corrected+.25unchangedmaturespline",
+    "selection_records": "Freeze eachfoldrecipe and source/config/feature hashes before loading outerlabels.",
+    "individual_diagnostics": "Fullfamily ablative scores at terminal reporting only, no live outerselection."
+  },
+  "promotion": "Target separatefromgeneralization. Requirepositivepooledgain,pairedstratifiedbootstrap95%interval>0,atleast3positivefolddeltas and samegain direction onsecondseed whereapplicable. Freeze featuretable neverchanges for repeats.",
+  "uncertainty": {
+    "replicates": 2000,
+    "seed": 261026,
+    "unit": "application, stratified by class",
+    "limits": "conditional adaptively reused development only"
+  },
+  "resources": "All available lab resources: nodes2001,2002,2003; up to6 idle GPU slots plus up to5CPU fits perhost (2threads each), reduced by two reserved hostthreads and two threads for each busyGPU, including other workloads. CPU+GPU quotas stay within this allowance. A100excluded perusermove.",
+  "storage": "Only actual userhome on eachhost. Immutable featurepackets compactcopy. No fitted weights/checkpoints or KV caches; sharedoriginalpretrainedcheckpoints reused. Recipes, params,seeds, source hashes andpredictions retained.",
+  "per_fit_limits": {
+    "seconds": 2400,
+    "CPU_RAM_GiB": 8,
+    "GPU_RAM_GiB": 22
+  },
+  "incomplete_policy": "Failed fits retained; completedfivefoldconfigs alone qualify forselection. No targetclaim ifunfinished."
+}

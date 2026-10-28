@@ -273,3 +273,8 @@ python scripts/report_hybrid_kumo.py
 python scripts/build_hybrid_kumo_notebook.py --execute
 python scripts/build_finetune_pilot_notebook.py --execute
 ```
+
+
+## Shared Faris experiment history
+
+The Faris/Codex/Antigravity archive and future experiment logging live in [insight/faris](insight/faris/README.md). Existing Adit experiments under `insight/adit` remain intact. Read the shared sync protocol before every experiment and fetch peer changes before pushing. Public records contain source, parameters, aggregate results and private-artifact hashes; labelled OOF, raw data and fitted weights stay private.

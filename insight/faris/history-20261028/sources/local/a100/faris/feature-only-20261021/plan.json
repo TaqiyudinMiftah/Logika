@@ -1,0 +1,73 @@
+{
+  "id": "feature-only-20261021",
+  "objective": "Improve frozen V25 procedure through feature engineering only; reach .54 pooled KS",
+  "original_deadline": 1792585871.823748,
+  "primary": "repayment_cashflow",
+  "secondary": [
+    "bureau_trajectory",
+    "shopping_change"
+  ],
+  "recipes": [
+    "baseline",
+    "repayment_cashflow",
+    "bureau_trajectory",
+    "shopping_change"
+  ],
+  "blocks": {
+    "repayment_cashflow": [
+      "fe_due_income_mean",
+      "fe_negative_cashflow_due_share",
+      "fe_due_account_overlap_share",
+      "fe_negative_allocated_due_share",
+      "fe_nonnegative_allocated_due_share",
+      "fe_recent_negative_due_share_change"
+    ],
+    "bureau_trajectory": [
+      "fe_provider_score_slope_mean",
+      "fe_provider_score_slope_min",
+      "fe_provider_logdebt_slope_mean",
+      "fe_provider_score_slope_disagreement",
+      "fe_latest_report_age_median",
+      "fe_latest_reporting_lag_median"
+    ],
+    "shopping_change": [
+      "fe_matched_category_logprice_change",
+      "fe_matched_category_change_SE",
+      "fe_matched_category_count",
+      "fe_category_mix_turnover",
+      "fe_cancellation_share_change",
+      "fe_purchase_gap_logratio"
+    ]
+  },
+  "features_sha256": "eaf59e2dc03d2bb9fa5758b85d7f6eaf802caa6a1ef72879dcb5594a65b28304",
+  "source_sha256": {
+    "features.py": "3d68dac1deede63c336c3864750fa8f88b7ee3a727df147f0e3dfd9d6b3c889a",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "run.py": "1b6455ea62d11d50d66956601f6a78ca7b26023a9fbb95c38d99ed64b40457a6",
+    "verify_features.py": "083d1167df0b65f7e566312fd04d9f8082d0cbca8027df9406eb3f26bae4b6e4",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0"
+  },
+  "research_sha256": "809268ed8da934ac170e5d6c9df5f3034deb6f088e989db560c80559581d59f4",
+  "versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.16.3",
+    "joblib": "1.6.0"
+  },
+  "model_search": false,
+  "ensemble_search": false,
+  "confirmation_opened": false,
+  "all_folds_before_metrics": true,
+  "training_admitted": true,
+  "prior_qualification": "Matched repaired fold-local baseline, not inherited shared-prior historical V25",
+  "resource_limits": {
+    "CPUQuota": "400%",
+    "MemoryMax": "8G",
+    "MemorySwapMax": 0
+  },
+  "minimum_disk_GiB": 5,
+  "created": 1792556525.6942308,
+  "engineering_revision": 2,
+  "incident": "preflight-v1: packet contains context/correction/validation only; derive training union and verify against original indices. No candidate model fitted."
+}

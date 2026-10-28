@@ -1,0 +1,42 @@
+{
+  "id": "H015-balanced-Kumo-context",
+  "frozen_UTC": "2026-10-25T06:02:27.924704+00:00",
+  "mechanism": "Kumo sees50k strongly imbalanced context. Equalclass context can alter its learned density representation before the correction layer. Compare against same-size proportional sampling and existing full50kcontext; this separates context balance from context size.",
+  "primary_research": [
+    {
+      "url": "https://arxiv.org/html/2605.18635v1",
+      "version": "v1 2026-05-18",
+      "usage_limit": "Supports context-construction hypothesis on two credit datasets and fiveTFMs; Kumo is not evaluated and AUC, notKS, is primary. No claimed transfer gain."
+    },
+    {
+      "url": "https://arxiv.org/abs/2605.21742",
+      "version": "v1 2026-05-20",
+      "usage_limit": "Reports PFN class-imbalance interventions; supports a bounded check only."
+    }
+  ],
+  "context_policy": "Within each original50000context: keep all defaults and uniformlysample same number ofnondefaults withoutreplacement. Matchedcontrol selects same totalcount with originalclassratio. Full50000label-free featureprior statistics unchanged forboth. AllselectedIDs frozen beforeanyGPUfit.",
+  "sampling_seeds": "2026102515+fold original;3026102515+fold replicate. Firstbalancedthenproportional selections froma fixedRNG.",
+  "backbone": "Unchanged KumoLargev1.0.1 checkpoint/90features/8estimators; seeds2026+fold and12026+fold; nogradientupdates orpersistentattentioncaches.",
+  "prior_correction": "Probability=expit(logit(clippedraw)+logit(originalcontextprevalence)-logit(selectedcontextprevalence)). Prevalencefromtrainingcontextlabels only; monotone adjustment byitselfcannotincrease standaloneKS.",
+  "downstream": "Same18maturityheadL2.003strength.5 trained ondisjoint6k; retainmatched77maturity spline56k; .75/.25 output.",
+  "primary_candidate": "Balanced context withoriginalseed policy. Freshsampling/backbone replicate verifies sensitivity. Proportional subsets mechanismcontrol only, notpromotioncandidates.",
+  "promotion": "Originalbalanced pooledKS>.5314098055476294 and>=3/5foldwins vsoriginalB. Bothoriginalandfreshbalanced musthavepositiveKSdelta andpositivefour-comparison-adjusted95pct bootstraplowerbound versus fullcontext andsame-sizeproportional controls. AUCreportedwithoutveto.",
+  "uncertainty": "2000 pairedmultinomial bootstrap samples within originalfold/class,seed20261025150; quantiles.00625/.99375 for4KScontrasts. Noindependentconfirmation.",
+  "training_deadline_epoch": 1792914480.015607,
+  "checkpoint_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "source_sha256": {
+    "balanced_context.py": "1b9284b547ca88c269a4a72e439ce1ced296bc2232e9d57cfa6919d41432b5f3",
+    "gpu_backend.py": "f4e03f3b8fbd3ac1bf1c568c57dd91492c92e7ea1d20cbd6eb7368a5ac1ff7b4",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "robustness.py": "655f4b160bbcdde6a2ad913d283e06d1a4a160ca74ba89a7fde01514df20880a",
+    "joint_correction.py": "d6d1c4831481458cb981c80a80ea1ae0c8139f0c4eacc3fc237d7c34087d6918"
+  },
+  "resource_scope": "2GPUs,oneprocessperGPU;20contextfits;maxarchive600MB;preserve allmodelswithindexedoriginalcontext+hash+subset+seed.",
+  "broad_search": false,
+  "inherited_limits": [
+    "All70kdefaultlabels reused",
+    "Existingrawrepaymentsnapshotprovenance unchanged; no newfeatures",
+    "NohiddenlabelorRNGreconstruction"
+  ]
+}

@@ -74,6 +74,12 @@ def finish(fold):
  for name in ['shadow','latent']:
   d=pd.read_parquet(root/f'teachers/{name}.parquet');assert len(d)==100000
   for c in d:frame[c]=d[c].to_numpy()
+ import pyarrow.parquet as pq
+ old_columns=pq.read_schema('/mnt/home/faris/logika-joint-20261028/fold'+str(fold)+'/expanded.parquet').names
+ spectral_columns=[c for c in frame if c.startswith('beh_spectral_')]
+ wanted=['application_id','customer_id']+old_columns+[c for c in spectral_columns if c not in old_columns]
+ assert set(frame.columns)==set(wanted),(set(frame)-set(wanted),set(wanted)-set(frame))
+ frame=frame[wanted]
  assert 'target'not in frame and frame.application_id.is_unique
  frame.to_parquet(root/'expanded.tmp.parquet',index=False);(root/'expanded.tmp.parquet').replace(root/'expanded.parquet')
  # Shadow91requires only this inheritedhistoricalteacher, not any newviewselection.

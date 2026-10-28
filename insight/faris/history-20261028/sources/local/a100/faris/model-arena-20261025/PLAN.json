@@ -1,0 +1,39 @@
+{
+  "created_UTC": "2026-10-25T07:00:43.460277+00:00",
+  "scope": "Every one of 98 pasted model/variant entries; 52 names, no silent omissions.",
+  "upstream_commit": "d89e79626b47ea43cb1c0ad06c6b9a9a0992b66a",
+  "dataset": "original 70k fivefold seed31027, input90 feature packet shared per fold",
+  "training_roles": "50kcontext;6kinner correction/HPO;14kouter per fold; no outer labels in fit or configuration selection",
+  "smoke": "2048 context,128query execution-only check; excluded from score table",
+  "default": "first official manual config; version pinned in registry metadata. Kumo cache execution adjustment recorded.",
+  "tuned": "default plus7 pre-sampled official search-space configurations; select on inner6k KS separately in each fold",
+  "tuned_ensemble": "equal average top3 configs selected on inner6k rawKS; not official 200-config TabArena HPO reproduction",
+  "ranking": "pooled70k raw KS and AUC plus mature-B fixed downstream correction/spline KS reported separately",
+  "foundation_retention": "Recipe, source and checkpoint identity, seed, metrics and small prediction arrays. Shared downloaded foundation cache for execution; no per-fit weight or KV copies.",
+  "classical_retention": "Parameters and predictions only; fitted objects in RAM, library scratch deleted after each task.",
+  "first_compute_window_hours": 12,
+  "per_config_fold_fit_limit_seconds": 1800,
+  "per_task_wall_limit_seconds": 3600,
+  "smoke_wall_limit_seconds": 600,
+  "budget_behavior": "unfinished entries stay pending and explicitly incomplete; no automatic claim of coverage",
+  "resources": {
+    "GPU_workers_max": 2,
+    "CPU_workers_max": 1,
+    "threads_each": 2,
+    "worker_RAM_GiB": 20,
+    "PC2_minimum_free_GB": 2,
+    "PC3_storage_minimum_free_GB": 5,
+    "storage_root": "/mnt/home/faris/logika-model-arena-20261025/storage on PC3; mounted over SSHFS to PC2"
+  },
+  "known_limits": [
+    "reused-development labels, no fresh confirmation",
+    "baseline inherited repayment-snapshot timing ambiguity",
+    "selected engineered90 input may favor incumbent Kumo; model ranking conditional on representation",
+    "different library defaults may internally subsample context; record effective settings",
+    "Nori variants require regression-on-binary adaptation, separately labeled"
+  ],
+  "submission": "Only after full-fold evidence and exact candidate audit; no upload from smoke or partial-fold ranking.",
+  "retention_updated_UTC": "2026-10-25T16:55:00+00:00",
+  "training_deadline_UTC": "2026-10-25T19:03:00+00:00",
+  "remote_home": "/mnt/home/faris"
+}

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/mnt/home/logika-faris-exploration/nested-correction-20261021/source/controller.py", line 41, in <module>
+    j=queue.pop(0);log=(R/f'job{j}.log').open('ab',buffering=0);env=dict(os.environ,CUDA_VISIBLE_DEVICES=str(gpu));child=subprocess.Popen([sys.executable,str(R/'source/worker.py'),'--job',str(j)],stdout=log,stderr=subprocess.STDOUT,env=env,start_new_session=True);active[g]=dict(job=j,process=child,start=time.time(),log=log)
+                                                                                                                                                                                                                                                                               ^
+NameError: name 'g' is not defined

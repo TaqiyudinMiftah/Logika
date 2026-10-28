@@ -1,0 +1,19 @@
+{
+  "id": "H006-Kumo-core-maturity-placement",
+  "frozen_UTC": "2026-10-24T19:32:32.742729+00:00",
+  "mechanism": "Existing maturity treatment enters only the offset and spline branches. Kumo90 still uses raw all-installment1/30-day posterior24 rates whose exposure denominators include loans too young for equal observation time. Replace only those two core inputs with already audited context-local >=30-day opportunity-aligned empirical-Bayes posterior means, allowing nonlinear Kumo interactions to exploit aligned measurements.",
+  "comparison": "Exact90 Kumo fields, identical50k/6k/14k original roles, two original matched seed policies, eight estimators, fixed maturity18 head and maturity77 spline. Only two Kumo input values change.",
+  "replacement": {
+    "v3_repay_all_late_1_posterior_24": "matched_beta_late_1",
+    "v3_repay_all_late_30_posterior_24": "matched_beta_late_30"
+  },
+  "boundary": "Reuse context-only mature priors with exact source hashes. No new snapshot fields, future events, external labels, or validation-fitted transformations. Existing DPD snapshot provenance limitation remains inherited.",
+  "promotion_predicate": "Positive pooled KS on both seeds and two-seed mean vs corresponding maturity controls; two-seed mean exceeds currentbest.5314038049246252 and >=3/5fold KS wins vs matchedcontrol. Paired uncertainty before submission. No per-fold pruning or replacement subsets.",
+  "current_best_local_KS": 0.5314038049246252,
+  "training_deadline_epoch": 1792883400.0,
+  "source_sha256": "da86a2213c7b59a293998f73f3ec9abc00bfe8fc6dcf7de54666d87eb5f2c6b4",
+  "checkpoint_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "public_exposure": "B=.56818 seen before hypothesis. No public result used to set replacement values or fit.",
+  "bounded_hypothesis": true,
+  "broad_search": false
+}

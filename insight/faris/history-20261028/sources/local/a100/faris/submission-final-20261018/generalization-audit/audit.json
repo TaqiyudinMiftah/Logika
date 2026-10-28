@@ -1,0 +1,222 @@
+{
+  "scope": "Post-public-result diagnostics only; no training, new recipes, or submission changes.",
+  "public_result": {
+    "source": "User report in this chat on 2026-10-18; upload identity not independently verified.",
+    "champion": 0.56188,
+    "candidate": 0.55353,
+    "delta": -0.00835000000000008,
+    "candidate_sha256": "e809cc0100b39ce2bd6ddc15ac7f28fc30f840bf483c3e8777af2e37e7f478c7",
+    "champion_sha256": "be059078ade95bc6758522e8d72849e3f793e57380e2c083e05c77c64335e192"
+  },
+  "selection": {
+    "final_candidates": 11,
+    "eligible": 10,
+    "final_ranking_criterion": "Highest reused-validation KS after development gates",
+    "same_development_labels_reused_for_seed_and_partition_checks": true,
+    "no_independent_generalization_gate_for_final_choice": true
+  },
+  "uncertainty": {
+    "development": {
+      "delta_ks": 0.0005712705891841585,
+      "conditional_paired_stratified_bootstrap_95ci": [
+        -0.0027518366666217735,
+        0.004644041446931573
+      ],
+      "samples": 2000,
+      "seed": 20261018,
+      "independent_confirmation": false,
+      "caveat": "Conditional on selected predictions; does not correct adaptive selection or full-refit variance.",
+      "rank_correlation": 0.9932399560471108
+    },
+    "reused_validation": {
+      "delta_ks": 0.001621768576871796,
+      "conditional_paired_stratified_bootstrap_95ci": [
+        -0.0063004041834595625,
+        0.006999314440714061
+      ],
+      "samples": 2000,
+      "seed": 20261018,
+      "independent_confirmation": false,
+      "caveat": "Conditional on selected predictions; does not correct adaptive selection or full-refit variance.",
+      "rank_correlation": 0.9953168098040944
+    }
+  },
+  "full_refit_test_candidate_champion_rank_correlation": 0.9957102382165668,
+  "temporal_coverage": {
+    "train": {
+      "minimum": "2025-01-01 08:00:00",
+      "maximum": "2025-12-28 20:59:00",
+      "months": {
+        "2025-01": 5778,
+        "2025-02": 5898,
+        "2025-03": 5809,
+        "2025-04": 5910,
+        "2025-05": 5864,
+        "2025-06": 5776,
+        "2025-07": 5739,
+        "2025-08": 5809,
+        "2025-09": 5830,
+        "2025-10": 5854,
+        "2025-11": 5821,
+        "2025-12": 5912
+      },
+      "unique_customers": 70000
+    },
+    "test": {
+      "minimum": "2025-01-01 08:07:00",
+      "maximum": "2025-12-28 20:52:00",
+      "months": {
+        "2025-01": 2610,
+        "2025-02": 2477,
+        "2025-03": 2580,
+        "2025-04": 2459,
+        "2025-05": 2439,
+        "2025-06": 2513,
+        "2025-07": 2478,
+        "2025-08": 2496,
+        "2025-09": 2485,
+        "2025-10": 2482,
+        "2025-11": 2535,
+        "2025-12": 2446
+      },
+      "unique_customers": 30000
+    },
+    "train_test_customer_overlap": 0
+  },
+  "artifact_integrity": {
+    "passed": true,
+    "verified_model_files": 31,
+    "submission_sha256": "e809cc0100b39ce2bd6ddc15ac7f28fc30f840bf483c3e8777af2e37e7f478c7",
+    "rows": 30000,
+    "exact_sample_order": true,
+    "independent_stream_reaggregation_max_error": 1.1102230246251565e-16,
+    "independent_tie_aware_ks": {
+      "development": 0.5263427094743861,
+      "reused_validation": 0.5323161334386715
+    },
+    "confirmation_is_selection_data": true,
+    "remote_all_model_replay_rows": 30000,
+    "no_upload": true
+  },
+  "historical_five_stream_uncertainty": [
+    {
+      "id": "ens_fc16b4640eee891e",
+      "spec": {
+        "method": "mean",
+        "parents": [
+          "pc2_job_000623",
+          "pc2_job_000853",
+          "pc2_job_000855",
+          "pc3_job_000424",
+          "pc3_job_000846"
+        ]
+      },
+      "ks": 0.5260334546202516,
+      "delta": 0.0002620157350496921,
+      "fold_delta": [
+        0.003099478611122919,
+        0.00031824902850807746,
+        -0.0006092132499481151
+      ],
+      "eligible": true,
+      "worst_matched_fold_delta": -0.0006092132499481151,
+      "complete_comparisons": true,
+      "additional_scores": [
+        0.532120700346984
+      ],
+      "additional_deltas": [
+        0.001426335485184338
+      ],
+      "mean_matched_delta": 0.001426335485184338,
+      "paired_bootstrap_95ci": [
+        -0.00549507745563429,
+        0.006992132981110354
+      ],
+      "conditional_bootstrap_p": 0.8675662168915542,
+      "uncertainty_caveat": "Conditional on frozen selected predictions; historical selection reuse remains",
+      "holm_adjusted_p": 1.0
+    },
+    {
+      "id": "ens_2894560c54fcdf66",
+      "spec": {
+        "method": "geometric",
+        "parents": [
+          "pc2_job_000623",
+          "pc2_job_000853",
+          "pc2_job_000855",
+          "pc3_job_000424",
+          "pc3_job_000846"
+        ]
+      },
+      "ks": 0.5259730446218632,
+      "delta": 0.00020160573666128112,
+      "fold_delta": [
+        0.0013243062290345664,
+        0.000350834169840164,
+        -0.0008177132567341872
+      ],
+      "eligible": true,
+      "worst_matched_fold_delta": -0.0008177132567341872,
+      "complete_comparisons": true,
+      "additional_scores": [
+        0.5312648816647195
+      ],
+      "additional_deltas": [
+        0.0005705168029198626
+      ],
+      "mean_matched_delta": 0.0005705168029198626,
+      "paired_bootstrap_95ci": [
+        -0.005875360034928295,
+        0.0068370604097816355
+      ],
+      "conditional_bootstrap_p": 0.9145427286356822,
+      "uncertainty_caveat": "Conditional on frozen selected predictions; historical selection reuse remains",
+      "holm_adjusted_p": 1.0
+    },
+    {
+      "id": "ens_e62cfb5b6d636145",
+      "spec": {
+        "method": "logit",
+        "parents": [
+          "pc2_job_000623",
+          "pc2_job_000853",
+          "pc2_job_000855",
+          "pc3_job_000424",
+          "pc3_job_000846"
+        ]
+      },
+      "ks": 0.5260200500991125,
+      "delta": 0.0002486112139105101,
+      "fold_delta": [
+        0.0011608861997006725,
+        0.0004869681924042357,
+        -0.0003161981102210998
+      ],
+      "eligible": true,
+      "worst_matched_fold_delta": -0.0003161981102210998,
+      "complete_comparisons": true,
+      "additional_scores": [
+        0.5311736650626371
+      ],
+      "additional_deltas": [
+        0.0004793002008374181
+      ],
+      "mean_matched_delta": 0.0004793002008374181,
+      "paired_bootstrap_95ci": [
+        -0.00581720727720674,
+        0.006957098501625947
+      ],
+      "conditional_bootstrap_p": 0.9665167416291854,
+      "uncertainty_caveat": "Conditional on frozen selected predictions; historical selection reuse remains",
+      "holm_adjusted_p": 1.0
+    }
+  ],
+  "files": {
+    "evidence/recipe_comparison.json": "d52879763f621cf5e940ed179d073237ce36efe086aa3f38d72d5aea0aff64c6",
+    "evidence/selected_screen.npz": "594db4f546b64457f336af430db608679173a4640dd843e24bd339e57292ae73",
+    "evidence/selected_validation.npz": "07890cfdbc50113774d00f5089a2c733e87a224f00180f45f4ab8127732de53a",
+    "artifacts/submission.csv": "e809cc0100b39ce2bd6ddc15ac7f28fc30f840bf483c3e8777af2e37e7f478c7",
+    "local_verification.json": "e19caf281f93e60c02f212b9926554f4328e243eb157304bad3f108e65806326",
+    "prepare.py": "b3dfa0cc57e498d8be352d1f34ba5bf5ffae64a124abe4581d402d8de1c934e2"
+  }
+}

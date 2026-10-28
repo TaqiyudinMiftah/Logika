@@ -1,0 +1,75 @@
+{
+  "key": "outer1_refit_champion3",
+  "component": {
+    "id": "champion3",
+    "original_id": "w2p_b7592b087e1f55a41563",
+    "kind": "historical",
+    "recipe": {
+      "control": "f_7c3c29bc9adf28f1",
+      "id": "w2p_b7592b087e1f55a41563",
+      "kind": "pipeline",
+      "model": "lgb",
+      "representation": {
+        "changes": {
+          "clip": 0.01,
+          "indicator": true,
+          "interactions": true,
+          "missing": "group",
+          "representation": "ratios",
+          "select": "gain",
+          "transform": "signed_log",
+          "window": 60
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0.01,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "onehot",
+          "feature_count": "all",
+          "half_life": 90,
+          "indicator": true,
+          "interactions": true,
+          "mature": true,
+          "missing": "group",
+          "reducer": "none",
+          "representation": "ratios",
+          "scale": "none",
+          "select": "gain",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "signed_log",
+          "view": "v3",
+          "weight": 6,
+          "window": 60
+        },
+        "family": "cross_source",
+        "hypothesis": "Seeded higher-order combination",
+        "id": "w2f_d7d8a34ee2b985a5",
+        "is_control": false,
+        "matched_parent": null,
+        "resolved_numeric_columns": 508,
+        "semantic_signature": "d7d8a34ee2b985a5ee90c0ea1598fc8979ee53475df73e1141e064677896e97a",
+        "wave": 2
+      },
+      "seed": 2026
+    }
+  },
+  "seed": 2027,
+  "fit_rows": "6e15790bc589c3720bd677c0a2a0fabf3c0840a116e21df1dd7831e6621576aa",
+  "query_rows": "c729710c2be485ce61a9168fe82f162ddb77569006885724fbf5258338926cde",
+  "labels": "8dff01a545d6a753a2c8cc2a0fdbdac83f9c566ad731068085d60f632cda393e",
+  "plan_sha": "8a20ac569da0f9cbeb5a1073ba04d64b3d2d48e8e1bd6a8650191e55b3588472"
+}

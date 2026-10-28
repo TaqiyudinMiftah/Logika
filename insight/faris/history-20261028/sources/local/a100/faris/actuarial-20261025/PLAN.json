@@ -1,0 +1,29 @@
+{
+  "created_UTC": "2026-10-25T16:58:38.154133+00:00",
+  "scope": "First bounded actuarial applicability and binary-risk adaptation batch; not completion of entire method list.",
+  "maximum_wall_seconds": 5400,
+  "resources": {
+    "CPU_threads": 2,
+    "memory_GiB": 8,
+    "GPU": false
+  },
+  "roles": "Original 50k context, 6k correction,14k validation, all five folds; no outer-label fitting.",
+  "experiments": [
+    "Four loan-value/income features",
+    "Four cash/liquidity stress features",
+    "Context-only empirical-Bayes grouped default rates",
+    "Fixed-horizon binomial logit, probit, complementary-log-log corrections"
+  ],
+  "feature_placement": "Correction head only; fixed maturity spline and Kumo raw predictions unchanged. Each feature family tested on original and repeated Kumo seed.",
+  "retention": "Parameters, formula source, source/data hashes, seeds, OOF predictions, metrics; no fitted weights.",
+  "validation_limits": [
+    "Reused development data, no fresh confirmation",
+    "Inherited snapshot timing uncertainty remains",
+    "Survival distributions are not identifiable from binary labels alone"
+  ],
+  "sources": [
+    "https://openstax.org/books/principles-finance-2e/pages/8-3-loan-amortization",
+    "https://www.statsmodels.org/stable/glm.html"
+  ],
+  "feature_eda": "12-month term throughout training; nominal monthly-rate annuity matches installment to within rounding upward by <1 currency unit."
+}

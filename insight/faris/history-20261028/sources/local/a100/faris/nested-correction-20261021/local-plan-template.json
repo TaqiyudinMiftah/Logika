@@ -1,0 +1,40 @@
+{
+  "id": "nested-correction-20261021",
+  "original_deadline": 1792585871.823748,
+  "raw": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw",
+  "bank": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank",
+  "bank_id": "eb7ca7bdcb7c21b6dc1524bdcd88e1983d02334a91742637ec1ac9e814da79da",
+  "input": "/mnt/home/logika-faris-exploration/nested-correction-20261021/input",
+  "preprocessing_only": true,
+  "model_training": false,
+  "model_training_admitted": false,
+  "source_sha256": {
+    "build_features_v3.py": "413acbd10dcff05b0213bc701d6f15ad4676fb0170620111490168403691bdb7",
+    "build_features_v4.py": "d6574b794b39bad7240429509e99ded3ae7c017f5229b968aba2f65464bf5821",
+    "reverse_synthetic_patterns.py": "1b9c7fa44f42e5a0340340655162e6a4229250257f47245d1077025794b31944",
+    "build_features_v5.py": "2cbf071aa4aeff3c0b262fe9adc9718a4521612d43a20ac5686b6e772b306c0d"
+  },
+  "hypothesis": "Reduce correction estimation variance by fitting it on56000 honest inner-OOF probabilities rather than6000 heldout probabilities. Preserve all outer folds and re-fit priors within every44800row inner context; final priors and context use56000. This is one nested recipe, not30 independent experiments.",
+  "shared_fitted_statistics": "Each inner44800 context, final56000 context; no evaluation covariates estimate priors.",
+  "point_in_time_caveat": "Rebuilding cohort statistics does not resolve inherited raw DPD snapshot provenance. Do not certify future deployment availability without evidence.",
+  "historical_metric_recalculation_complete": true,
+  "admission_basis": "All36136 saved prediction files,4096 fixed replays and118 V7 OOF files freshly verified. This admits preprocessing repair only, not new model screening or rank promotion. Unresolved metadata and unavailable PC1 filesystem remain disclosed.",
+  "protocol": "Original70k frozen fivefold seed31027. Each56k outertrain split into5 innerfolds stratified bytarget withseed20261022+outerfold. No outer-label earlystop, featurechoice or weights.",
+  "correction": "Same18features/three quadratic knots/penalty0.003/shrinkage0.5; fit56000 innerOOF once perouterfold. Fixed25percent sharedspline outside learnedhead.",
+  "control": "Same final56k raw Kumo prediction with old6k fitted correction, plus original matched90baseline. Exposes procedure contrast; does not isolate variance causally from changed inner-context/prior distribution.",
+  "retention_gate": "Before FM admission, qualify complete fitted context model serialization or verified cache archive capacity for all30 contexts. No deletion of existing models or produced checkpoints.",
+  "admission_scope": "Preprocessing only. FM training remains refused until all role/hash/retention/resource/preflight checks pass.",
+  "source_urls": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html",
+    "https://huggingface.co/nvidia/Kumo-Tabular"
+  ],
+  "source_support": "Stacking meta models require heldout training predictions; Kumo uses labeled context examples for inference. No claim these sources guarantee performance improvement.",
+  "diagnostic_evidence": "../calibration-capacity-20261021/RESULT.json",
+  "historical_label_reuse": true,
+  "no_submission": true,
+  "preparation_source_sha256": {
+    "design.py": "d8206e6ab65f5550f2445148eaf3d200c74597ef4f69cac6e649048a0cbfd255",
+    "preprocess.py": "af4cf2df0b9c79fc707ffc8a48e89bb28be8017a37a56d63a69fd48a755d5326",
+    "build.py": "d5de83a68db1aca43543f49f8e8efa03ab5affbc18979840d701feec94ee93b7"
+  }
+}

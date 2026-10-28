@@ -1,0 +1,28 @@
+{
+  "id": "H009-average-before-correction",
+  "frozen_UTC": "2026-10-24T20:29:46.003874+00:00",
+  "mechanism": "H008 improves pooledKS separately on both Kumo seeds yet degrades their final mean. A correction optimized before a nonlinear ensemble need not optimize the ensemble. Average the two raw held-out Kumo probabilities first, then fit one shared29field correction on the same6klabels. Keep periodicity88 spline and75/25 mixture fixed.",
+  "comparison": "One placement intervention; logloss anchor and fixedH002 smoothKS objective form a matched two-objective ablation. Same original fivefolds and no newKumo inference.",
+  "parameters": {
+    "raw_weights": [
+      0.5,
+      0.5
+    ],
+    "head_strength": 0.5,
+    "head_penalty": 0.003,
+    "KS_temperature": 0.5,
+    "KS_trust": 1.0,
+    "KS_ridge": 0.003
+  },
+  "promotion": "Candidate must beat A pooledKS, win>=3/5folds and have positive lower95percent paired fixed-prediction bootstrap after two-contrast Bonferroni adjustment. Choose higherKS only among qualifying modes. No hyperparameter/weight/subset sweep. Target.54 reported separately.",
+  "training_deadline_epoch": 1792883400.0,
+  "source_sha256": {
+    "early_average.py": "c4b1b67c512db7196f184a635951af34afb92da28f97ddc2b2a5d9eb447fc469",
+    "direct_ks.py": "86b7c36e84c7c9b24bbfd2c5e05df0f60873450b33c89371fd2ad083f7dae948",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "robustness.py": "655f4b160bbcdde6a2ad913d283e06d1a4a160ca74ba89a7fde01514df20880a"
+  },
+  "exposure": "All70klabels and H001-H008 results are development; no new independent holdout",
+  "broad_search": false
+}

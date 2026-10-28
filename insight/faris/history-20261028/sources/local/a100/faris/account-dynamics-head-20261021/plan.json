@@ -1,0 +1,33 @@
+{
+  "id": "account-dynamics-head-20261021",
+  "original_deadline": 1792585871.823748,
+  "training_admitted": false,
+  "feature_audit_admitted": true,
+  "hypothesis": "Current income noise estimates assume iid month changes. Observedperson-time slopes/lag dependence exceed shuffled-time null. Add six per-customer OLS trend/standarderror features to honest6koffset correction, keeping Kumo90and77spline fixed.",
+  "features": [
+    "dyn_log_income_slope",
+    "dyn_log_income_slope_SE",
+    "dyn_log_outflow_slope",
+    "dyn_log_outflow_slope_SE",
+    "dyn_low_balance_fraction_slope",
+    "dyn_low_balance_fraction_slope_SE"
+  ],
+  "true_and_negative_control": true,
+  "null": "Samecustomer wholemonthly vectors reordered byseed20261023, no borrowingacrosscustomers or labels. OLSsamecode ontrueandnull; mean/covariates preserved.",
+  "source_audit": "../account-dynamics-audit-20261021/RESULT.json",
+  "cohort": "Original70k frozen5foldseed31027",
+  "head": "18original+6dynamic columns; train6000only, samequadratic3knots,0.003L2,0.5shrinkage; nochange to savedKumoraw or shared25percent spline",
+  "model_recipe_count": 1,
+  "matched_negative_control_count": 1,
+  "training_heads": 10,
+  "no_submission": true,
+  "historical_label_reuse": true,
+  "raw_snapshot_certified": false,
+  "admission_gate": "Independenttimeeligibility, noquerytarget, rowlocalnoothercustomerdata; data-source/hash/IDalignment; baselineheadobjective/gradient reproduced before fitting; objectivegradientandcheckpointreplay verified.",
+  "source_sha256": {
+    "features.py": "329b9fe563ef0b964daa3750e6a8ae8c614f2f0a1abc931adc5ca4a9ff4d9241",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "run.py": "91a1d449e0d6237e834e5e5518d7247a86029d8575250d933c06ababde9f8b8c"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "columns": [
+    "application_id",
+    "default_probability"
+  ],
+  "confirmation": {
+    "bootstrap_samples": 500,
+    "caveat": "OOF reused for historical/adaptive selection. Confirmation partition historically used and wave1 results already viewed. No unbiased generalization or leaderboard claim.",
+    "fallback_ks": 0.528014953261926,
+    "paired_bootstrap_95ci": [
+      -0.0039679091472208244,
+      0.013051694683163372
+    ],
+    "primary": {
+      "average_precision": 0.49968126974881605,
+      "directional_ks": 0.5304961491854918,
+      "ks": 0.5304961491854918,
+      "log_loss": 0.293472023278492,
+      "roc_auc": 0.847024714873119
+    },
+    "primary_delta_ks": 0.002642064096923691,
+    "recipe_sha256": "1c9d8316c4ef1d4667fc5866d45fb4713e6786f27eb8b47f65d91da0c7a9e724",
+    "reference_v3_ks": 0.5278540850885681,
+    "rule": "Use known reference-safe frozen wave1 primary only if terminal confirmation KS is more than 0.01 below the existing v3 reference; no retuning on confirmation.",
+    "selected": "primary"
+  },
+  "max_probability": 0.867268357181,
+  "mean_probability": 0.12804605490677845,
+  "min_probability": 0.001183551246,
+  "model_reload_rows": 256,
+  "models": [
+    "w2p_e8dd515dcc04cd2e4959",
+    "w2p_c9402cdde8b7041a2de9",
+    "w2p_dddfbf8272cdbfa280d1",
+    "w2p_b7592b087e1f55a41563",
+    "w2p_03f464270ee3d042b671"
+  ],
+  "recipe_sha256": "1c9d8316c4ef1d4667fc5866d45fb4713e6786f27eb8b47f65d91da0c7a9e724",
+  "rows": 30000,
+  "sample_order_exact": true,
+  "selected": "primary",
+  "sha256": "be059078ade95bc6758522e8d72849e3f793e57380e2c083e05c77c64335e192",
+  "std_probability": 0.15841748023602853,
+  "unique_application_ids": true,
+  "local_independent_validation": {
+    "rows": 30000,
+    "exact_sample_id_order": true,
+    "component_reaggregation_max_absolute_difference": 4.999611835643236e-13,
+    "model_artifact_hashes_verified": true,
+    "root_submission_sha256": "be059078ade95bc6758522e8d72849e3f793e57380e2c083e05c77c64335e192"
+  }
+}

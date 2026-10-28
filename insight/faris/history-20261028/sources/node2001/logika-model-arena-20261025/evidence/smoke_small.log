@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/home/faris/logika-model-arena-20261025/source/worker.py", line 100, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--key',required=True);p.add_argument('--fold',type=int,default=0);p.add_argument('--config',type=int,default=0);p.add_argument('--smoke',action='store_true');run(p.parse_args())
+                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/source/worker.py", line 69, in run
+    model.fit(X=X,y=Y,X_val=Q.iloc[:len(inner_y)],y_val=pd.Series(inner_y),num_cpus=2,num_gpus=gpu,time_limit=120 if args.smoke else 1800,verbosity=2)
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/tabular/models/abstract/abstract_torch_model.py", line 63, in fit
+    return _shared.fit(self, lambda: super(AbstractTorchModel, self).fit(**kwargs), device=device)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/shared_weights.py", line 571, in fit
+    out = run()
+          ^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/tabular/models/abstract/abstract_torch_model.py", line 63, in <lambda>
+    return _shared.fit(self, lambda: super(AbstractTorchModel, self).fit(**kwargs), device=device)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/abstract_model.py", line 1500, in fit
+    out = self._fit(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/vendor/packages/tabarena/src/tabarena/models/kumo_tabular/model.py", line 147, in _fit
+    network = _estimators.load_network(task=task, size=self.size, device=self._resolve_fit_device(num_gpus))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/shared_weights.py", line 486, in wrapped
+    payload = _take(key, build, source_paths=lambda p: iter(p.arguments.values()), place=not spec.copy_per_fit)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/shared_weights.py", line 384, in _take
+    payload = get_or_load(key, loader, stage=stage, source={"loader": key.variant})
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/_shared_weights_registry.py", line 383, in get_or_load
+    return _load_entry(key, loader, stage=stage, source=source).value
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/_shared_weights_registry.py", line 400, in _load_entry
+    value, load_time_s = _run_loader(key, loader)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/_shared_weights_registry.py", line 346, in _run_loader
+    with _rng_guard(cuda=key.device == "cuda" or cuda_initialized):
+  File "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/_shared_weights_registry.py", line 310, in _rng_guard
+    with torch.random.fork_rng(devices=devices):
+  File "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/random.py", line 196, in fork_rng
+    device_rng_states = [device_mod.get_rng_state(device) for device in devices]
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/random.py", line 196, in <listcomp>
+    device_rng_states = [device_mod.get_rng_state(device) for device in devices]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/cuda/random.py", line 34, in get_rng_state
+    _lazy_init()
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/cuda/__init__.py", line 372, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: Unrecognized CachingAllocator option: pinned_max_cached_size_mb

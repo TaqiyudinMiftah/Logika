@@ -1,0 +1,188 @@
+{
+  "purpose": "New user-authorized final-recipe improvement and competition prediction generation",
+  "candidates": [
+    {
+      "id": "full_mean",
+      "method": "mean",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000853",
+        "pc2_job_000855",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    {
+      "id": "full_logit",
+      "method": "logit",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000853",
+        "pc2_job_000855",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    {
+      "id": "full_geometric",
+      "method": "geometric",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000853",
+        "pc2_job_000855",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    {
+      "id": "without_pc2_job_000853_mean",
+      "method": "mean",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000855",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    {
+      "id": "without_pc2_job_000853_logit",
+      "method": "logit",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000855",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    {
+      "id": "without_pc2_job_000853_geometric",
+      "method": "geometric",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000855",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    {
+      "id": "without_pc2_job_000855_mean",
+      "method": "mean",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000853",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    {
+      "id": "without_pc2_job_000855_logit",
+      "method": "logit",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000853",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    {
+      "id": "without_pc2_job_000855_geometric",
+      "method": "geometric",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000853",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    {
+      "id": "without_both_stacks_mean",
+      "method": "mean",
+      "parents": [
+        "pc2_job_000623",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    {
+      "id": "without_both_stacks_logit",
+      "method": "logit",
+      "parents": [
+        "pc2_job_000623",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    }
+  ],
+  "baseline": "existing_champion",
+  "selection": "Require positive KS delta on original, reseed and repeat; at least two improved original folds; original worst-fold delta >= -0.005. Among eligible recipes choose highest reused local confirmation KS, then mean development delta, then fewer streams. No learned weights or confirmation-fitted models.",
+  "confirmation_is_selection_data": true,
+  "not_a_new_unbiased_test": true,
+  "no_upload": true
+}

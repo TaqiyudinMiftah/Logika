@@ -1,0 +1,39 @@
+{
+  "id": "H016-56k-spline-smooth-Youden",
+  "frozen_UTC": "2026-10-25T06:29:07.357345+00:00",
+  "mechanism": "Earlier direct-KS interventions fit a high-variance6000-row correction. Move the same fixed anchored smooth-Youden objective to thespline branch trained on56000 rows; preserve its88 raw inputs and fitted preprocessing. Test whether more supervised rows improve objective transfer.",
+  "evidence": [
+    "H002.json",
+    "H008.json",
+    "H010.json",
+    "H012_H013.json",
+    "H015.json"
+  ],
+  "primary_research": {
+    "url": "https://www.sciencedirect.com/science/article/pii/S0167947318302494",
+    "DOI": "10.1016/j.csda.2018.10.004",
+    "scope": "Prior H002 read abstract/introduction; fresh publisher request returned403. Motivation only, not paper algorithm reproduction."
+  },
+  "fixed_parameters": {
+    "temperature": 0.5,
+    "trust": 1.0,
+    "ridge": 0.003,
+    "displacement_strength": 0.5,
+    "threshold": "logit of56000 training-label prevalence",
+    "optimizer": "L-BFGS-B300iterations, ftol1e-11, gtol1e-7"
+  },
+  "recipe": "Existing periodicity+maturity88-feature spline encoder and fitted linear coefficients; optimize one additive coefficient delta including intercept. Original29-feature correction/Kumo90 unchanged.75/25 mixture unchanged. Both cached Kumo seeds evaluated; primary equalmean.",
+  "training_roles": "Original fivefolds:56000spline rows and14000validation rows disjoint. Existing label-free priors remain50kcontext fitted. No new rawfields or future information.",
+  "promotion": "Primarytwo-seedKS>.5314098055476294 and>=3/5foldwins vsA; positiveKSdelta andpositive three-contrast adjusted95percent lowerbound fororiginal,fresh,andmean comparisons. No parameter search. AUC reported withoutveto.",
+  "uncertainty": "2000 paired class/foldmultinomial draws seed20261025160, quantiles.025/3 and1-.025/3. All70k labels reused; no independentconfirmation.",
+  "resource": "FiveCPU fits sequential;2threads; preserveindexed source-spline+coefficientdelta, branchpredictionsandpooledOOF. Projectednewarchive<=2.5MB; total600MB cap and originalcontinuation deadlines unchanged.",
+  "reference_sha256": "860cd636f2fd6230466c8cd1eeebdd1438aeed5c88450ed7b052be17d0bf035a",
+  "source_sha256": {
+    "spline_direct_ks.py": "e338fad9c7df5bd69128eab03f4ad2e30988b4c5515bf13a59d7aaab8f22e775",
+    "direct_ks.py": "86b7c36e84c7c9b24bbfd2c5e05df0f60873450b33c89371fd2ad083f7dae948",
+    "robustness.py": "655f4b160bbcdde6a2ad913d283e06d1a4a160ca74ba89a7fde01514df20880a",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "joint_correction.py": "d6d1c4831481458cb981c80a80ea1ae0c8139f0c4eacc3fc237d7c34087d6918"
+  },
+  "broad_search": false
+}

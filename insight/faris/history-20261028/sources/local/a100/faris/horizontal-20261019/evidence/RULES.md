@@ -1,0 +1,1 @@
+Authorized local/remote training only using provided competition labels and retained predictions. No external borrower labels, hidden-label reconstruction, ID predictors, test labels, uploads, poweroff/reboot, or interference with other processes. New code under Faris campaign directory; friend checkout read-only.

@@ -1,0 +1,55 @@
+{
+  "submission_sha256": "be059078ade95bc6758522e8d72849e3f793e57380e2c083e05c77c64335e192",
+  "csv_and_model_hash_checks_passed": true,
+  "development_vs_new_kumo_recipe": {
+    "candidate_ks": 0.525771438885202,
+    "reference_ks": 0.5238573851972856,
+    "delta": 0.0019140536879163061,
+    "paired_bootstrap_95ci": [
+      -0.0030156488628799104,
+      0.005833533223885446
+    ],
+    "bootstrap_samples": 1000,
+    "caveat": "Conditional on already-selected predictions; does not correct adaptive selection or historical label reuse."
+  },
+  "confirmation_vs_refitted_v3_recipe": {
+    "candidate_ks": 0.5304961491854918,
+    "reference_ks": 0.5278540850885681,
+    "delta": 0.002642064096923691,
+    "paired_bootstrap_95ci": [
+      -0.004097903674659562,
+      0.013694739119431096
+    ],
+    "bootstrap_samples": 1000,
+    "caveat": "Conditional on already-selected predictions; does not correct adaptive selection or historical label reuse."
+  },
+  "test_prediction_similarity": {
+    "submission_v3.csv": {
+      "spearman": 0.9890677501456308,
+      "mean_absolute_probability_difference": 0.0146111844565011,
+      "interpretation": "Prediction similarity only; test labels are unavailable."
+    },
+    "submission_v5.csv": {
+      "spearman": 0.9880162514533515,
+      "mean_absolute_probability_difference": 0.016160904360048266,
+      "interpretation": "Prediction similarity only; test labels are unavailable."
+    },
+    "submission_ks.csv": {
+      "spearman": 0.9697924571077694,
+      "mean_absolute_probability_difference": 0.0248313085249757,
+      "interpretation": "Prediction similarity only; test labels are unavailable."
+    }
+  },
+  "user_reported_best_public_score": 0.55845,
+  "public_score_of_current_candidate": null,
+  "limitations": [
+    "The new Kumo OOF candidate differs from submission_kumo_large_logika_v3.csv.",
+    "v3 reference refits all four components on campaign partitions, not the original mixed 10-fold/3-fold submission procedure.",
+    "Current submission uses five all-label refits; campaign OOF uses single training-fold models, not repeated-seed final bagging.",
+    "No matched current-protocol comparison against every listed historical model is available.",
+    "Selecting among thousands of pipelines and blends creates optimism; bootstrap intervals do not remove it.",
+    "Confirmation labels were historically used.",
+    "Higher local KS does not establish higher public KS; v5 already illustrates this reversal."
+  ],
+  "conclusion": "Valid research candidate; superiority to the public-best v3 submission is not established."
+}

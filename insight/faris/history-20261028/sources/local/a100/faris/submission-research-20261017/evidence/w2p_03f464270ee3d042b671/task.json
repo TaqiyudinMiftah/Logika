@@ -1,0 +1,70 @@
+{
+  "device": "cpu",
+  "execution_timeout_seconds": 900,
+  "expected_seconds": 84.695625436306,
+  "id": "w2p_03f464270ee3d042b671",
+  "mode": "cv",
+  "node_executor_revision": "d054c5a50d5713b9825f922e5303c83e13ab5ef3b60d4c48b052f5b4c00297ef",
+  "ownership_policy": "autonomous_static_v1",
+  "ownership_policy_sha256": "4c64dc2f813cddb9e1ac55d04c4ae77995ea9af262f84ad227f44b60c774f426",
+  "recipe": {
+    "control": "f_7c3c29bc9adf28f1",
+    "id": "w2p_03f464270ee3d042b671",
+    "kind": "pipeline",
+    "model": "lgb",
+    "representation": {
+      "changes": {
+        "dimensions": 128,
+        "feature_count": 128,
+        "reducer": "pca",
+        "select": "gain"
+      },
+      "config": {
+        "append": true,
+        "category_normalize": false,
+        "clip": 0,
+        "cohort_weight": false,
+        "correlation": 0.95,
+        "dimensions": 128,
+        "encoding": "onehot",
+        "feature_count": 128,
+        "half_life": 90,
+        "indicator": false,
+        "interactions": false,
+        "mature": true,
+        "missing": "median",
+        "reducer": "pca",
+        "representation": "raw",
+        "scale": "none",
+        "select": "gain",
+        "sources": [
+          "application",
+          "profile",
+          "previous",
+          "repayment",
+          "bureau",
+          "account",
+          "shopping"
+        ],
+        "spline": false,
+        "strength": 6,
+        "threshold": 30,
+        "transform": "identity",
+        "view": "v3",
+        "weight": 6,
+        "window": "all"
+      },
+      "family": "reduction",
+      "hypothesis": "Seeded higher-order combination",
+      "id": "w2f_cbb154114d1d1529",
+      "is_control": false,
+      "matched_parent": null,
+      "resolved_numeric_columns": 384,
+      "semantic_signature": "cbb154114d1d1529a54a144b87b18aa366a497044a75a863e5c2563f4938e06b",
+      "wave": 2
+    },
+    "seed": 2026
+  },
+  "scheduler_revision": "281080872f9c66fb1e934edaff67039e2beae1cdc28483acd11b28dadf178da5",
+  "until": 1792180779.8887079
+}

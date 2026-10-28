@@ -1,0 +1,38 @@
+{
+  "id": "heldout-class-margin-20261021",
+  "training_admitted": true,
+  "original_deadline": 1792585871.823748,
+  "kind": "Matched single-classification-contrast anchor for predeclared two-contrast heldout fusion",
+  "main_model": "Repaired Kumo90 offset pipeline",
+  "component_context_rows": 50000,
+  "meta_training_rows": 6000,
+  "outer_evaluation_rows": 14000,
+  "folds": 5,
+  "base_penalty": 0.003,
+  "contrast_penalty": 0.03,
+  "shrinkage": 0.5,
+  "spline_weight": 0.25,
+  "contrast_sd_floor": 0.1,
+  "hypothesis": "Different pretrained task priors may supply residual information. Strongly regularized two-dimensional log-odds contrasts constrain flexibility versus a generic stack.",
+  "sources": [
+    "kumo-coverage-placement-20261021/control90",
+    "tabicl-compact-a100-20261021"
+  ],
+  "admission_gate": "Allfiveclassification source folds and hashes/roles verified; no regressor input is used by this separately registered anchor.",
+  "method_limit": "Honest heldout meta fit within each outertraining partition, not global OOF stacking. No spline predictions enter meta fit because spline was trained on those6k labels.",
+  "predeclared_recipe_count": 1,
+  "no_weight_grid": true,
+  "no_submission": true,
+  "historical_label_reuse": true,
+  "active_contrasts": [
+    0
+  ],
+  "primary": "Single classification log-odds contrast versus repaired Kumo90. Same0.03 new-direction penalty,0.003 main penalty and0.5 shrinkage; no weight grid.",
+  "source_sha256": {
+    "preflight.py": "b9d2a3f4466d5659b6ebd3124754b205098e7ace930d31dd0ae301300dabbefd",
+    "fusion.py": "da0f3fabdefc65c82aa0ba1653ff2d1eff6379d0a13f9126be5b1e4b16573c94",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "run.py": "6801c7f30c867d477a61a804cd0faf7db721176ea4a7dd1b4f2687f713eb5f4a"
+  },
+  "scientific_gate": "SCIENTIFIC_GATE.json: allfive component manifests, disjoint roles, artifact hashes and original correction objectives verified before fitting"
+}

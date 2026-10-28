@@ -1,0 +1,225 @@
+{
+  "ensemble": {
+    "method": "trimmed",
+    "parents": [
+      "p_8ba34bf89aa8f9bb1465",
+      "p_0fe6f7f1d8f4096a8aca",
+      "p_0cefb85f5e18176d13b8",
+      "p_9f0f1a26e14547f45310"
+    ],
+    "weights": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ]
+  },
+  "components": {
+    "p_8ba34bf89aa8f9bb1465": {
+      "control": "f_7c3c29bc9adf28f1",
+      "id": "p_8ba34bf89aa8f9bb1465",
+      "kind": "pipeline",
+      "model": "lgb",
+      "representation": {
+        "changes": {
+          "reducer": "pca"
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "onehot",
+          "feature_count": "all",
+          "half_life": 90,
+          "indicator": false,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "pca",
+          "representation": "raw",
+          "scale": "none",
+          "select": "none",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "identity",
+          "view": "v3",
+          "weight": 6,
+          "window": "all"
+        },
+        "family": "reduction",
+        "hypothesis": "reduction: {'reducer': 'pca'}",
+        "id": "f_b590ccd305838ccc",
+        "is_control": false
+      },
+      "seed": 2026
+    },
+    "p_0fe6f7f1d8f4096a8aca": {
+      "control": "f_7c3c29bc9adf28f1",
+      "id": "p_0fe6f7f1d8f4096a8aca",
+      "kind": "pipeline",
+      "model": "lgb",
+      "representation": {
+        "changes": {
+          "dimensions": 32,
+          "reducer": "svd"
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 32,
+          "encoding": "onehot",
+          "feature_count": "all",
+          "half_life": 90,
+          "indicator": false,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "svd",
+          "representation": "raw",
+          "scale": "none",
+          "select": "none",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "identity",
+          "view": "v3",
+          "weight": 6,
+          "window": "all"
+        },
+        "family": "reduction",
+        "hypothesis": "reduction: {'reducer': 'svd', 'dimensions': 32}",
+        "id": "f_c55fb7ae7315f045",
+        "is_control": false
+      },
+      "seed": 2026
+    },
+    "p_0cefb85f5e18176d13b8": {
+      "control": "f_7c3c29bc9adf28f1",
+      "id": "p_0cefb85f5e18176d13b8",
+      "kind": "pipeline",
+      "model": "lgb",
+      "representation": {
+        "changes": {
+          "cohort_weight": true,
+          "transform": "rank"
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0,
+          "cohort_weight": true,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "onehot",
+          "feature_count": "all",
+          "half_life": 90,
+          "indicator": false,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "none",
+          "representation": "raw",
+          "scale": "none",
+          "select": "none",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "rank",
+          "view": "v3",
+          "weight": 6,
+          "window": "all"
+        },
+        "family": "preprocessing",
+        "hypothesis": "preprocessing: {'transform': 'rank', 'cohort_weight': True}",
+        "id": "f_6175bb65d9376380",
+        "is_control": false
+      },
+      "seed": 2026
+    },
+    "p_9f0f1a26e14547f45310": {
+      "control": "f_7c3c29bc9adf28f1",
+      "id": "p_9f0f1a26e14547f45310",
+      "kind": "pipeline",
+      "model": "lgb",
+      "representation": {
+        "changes": {
+          "representation": "coverage"
+        },
+        "config": {
+          "append": true,
+          "category_normalize": false,
+          "clip": 0,
+          "cohort_weight": false,
+          "correlation": 0.95,
+          "dimensions": 64,
+          "encoding": "onehot",
+          "feature_count": "all",
+          "half_life": 90,
+          "indicator": false,
+          "interactions": false,
+          "mature": true,
+          "missing": "median",
+          "reducer": "none",
+          "representation": "coverage",
+          "scale": "none",
+          "select": "none",
+          "sources": [
+            "application",
+            "profile",
+            "previous",
+            "repayment",
+            "bureau",
+            "account",
+            "shopping"
+          ],
+          "spline": false,
+          "strength": 6,
+          "threshold": 30,
+          "transform": "identity",
+          "view": "v3",
+          "weight": 6,
+          "window": "all"
+        },
+        "family": "account",
+        "hypothesis": "account: {'representation': 'coverage'}",
+        "id": "f_562854e878488f94",
+        "is_control": false
+      },
+      "seed": 2026
+    }
+  }
+}

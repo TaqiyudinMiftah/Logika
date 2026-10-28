@@ -1,0 +1,9 @@
+# Distinguish application-level changes from provider noise
+
+The first audit ruled out an averaging-scale mismatch: all 377,680 finite reports in the 50,000-customer context have one report per customer/application/provider group. Do not change the existing paired-noise estimator on that basis.
+
+A separate assumption remains: the inherited bureau posterior pools every historical application as measurements of one static customer score. A component shared across providers within an application would cancel from same-application provider differences, but could make pooling all occasions as independent measurements misleading. This is different from the previously excluded persistent customer/provider error: that component cancels in a within-provider change.
+
+Before any classifier admission, use only the original fold-zero context covariates. For each provider pair, choose each customer's earliest and latest applications observed by both providers, with at least 90 days between their mean report dates. Calculate each provider's score change, their covariance and correlation. One change pair per customer. Constant customer/provider offsets cancel. Report normal-approximation covariance intervals using the empirical influence-function standard error, with a Bonferroni correction for the three pairs. No default labels, KS, AUC or public scores.
+
+A shared-occasion feature model is not justified unless all three covariance intervals have positive lower bounds. Even then, shared change can reflect economic state, reporting conventions or other common effects; it is not proof of measurement noise or predictive risk change. No classifier is automatically authorized by this diagnostic. If unsupported, close this assumption without a prediction fit. If supported, formulate and freeze one fold-local measurement transform and assess identifiability first. No lag/window grid or label-based selection.

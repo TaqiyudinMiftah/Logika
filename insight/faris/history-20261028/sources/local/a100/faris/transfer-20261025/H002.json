@@ -1,0 +1,31 @@
+{
+  "id": "H002-anchored-smooth-Youden",
+  "created_UTC": "2026-10-24T19:02:13.300413+00:00",
+  "mechanism": "The existing correction raises KS while lowering AUC. Directly target a smooth approximation to TPR-FPR around the prevalence threshold, while a quadratic trust penalty anchors predictions to the existing fitted correction. This differs from the earlier pair-ranking/log-loss intervention.",
+  "engineering_extrapolation": true,
+  "paper_exact_reproduction": false,
+  "paper_reference": {
+    "url": "https://www.sciencedirect.com/science/article/pii/S0167947318302494",
+    "title": "A new approach for credit scoring by directly maximizing the Kolmogorov\u2013Smirnov statistic",
+    "authors": [
+      "Fang Fang",
+      "Yuanyuan Chen"
+    ],
+    "year": 2019,
+    "DOI": "10.1016/j.csda.2018.10.004",
+    "read_scope": "Abstract and available introduction; full algorithm not implemented.",
+    "usage": "Supports investigating criterion mismatch; no external score treated as expected gain."
+  },
+  "fixed_parameters": {
+    "temperature_logit": 0.5,
+    "trust": 1.0,
+    "ridge": 0.003,
+    "inference_strength": 0.5,
+    "threshold": "logit of correction-only class prevalence"
+  },
+  "fit_inputs": "Same 6000 correction rows and out-of-context Kumo probabilities. Same baseline18 basis. No validation labels or spline in-sample probabilities in fitting.",
+  "comparison": "Complete original five-fold pooled KS versus repaired V25 on each of two Kumo seeds; equal two-seed mean fixed before outcomes.",
+  "acceptance": "Positive pooled KS on both seeds and pooled equal-seed mean; examine fold consistency and paired uncertainty. If not supported reject without sweep.",
+  "bounded_pilot": true,
+  "source_sha256": "86b7c36e84c7c9b24bbfd2c5e05df0f60873450b33c89371fd2ad083f7dae948"
+}

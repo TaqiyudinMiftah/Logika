@@ -1,0 +1,27 @@
+{
+  "command": [
+    "systemd-run",
+    "--user",
+    "--unit=metaexp-meta-20261016-v1-coordinator",
+    "--property=CPUQuota=700%",
+    "--property=MemoryMax=20G",
+    "--property=MemorySwapMax=0",
+    "--property=OOMScoreAdjust=1000",
+    "--property=Restart=on-failure",
+    "--property=RestartSec=5",
+    "--property=KillMode=control-group",
+    "--property=WorkingDirectory=/home/faris/faris/logika-meta-experiments/meta-20261016-v1",
+    "--property=ExecCondition=/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.venv/bin/python -c 'import time,sys;sys.exit(0 if time.time()<1792189779.8887079 else 1)'",
+    "--property=RuntimeMaxSec=39860",
+    "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.venv/bin/python",
+    "-u",
+    "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/scheduler_parallel.py",
+    "--root",
+    "/home/faris/faris/logika-meta-experiments/meta-20261016-v1"
+  ],
+  "deadline": 1792189779.8887079,
+  "previous_launch": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/revisions/parallel_aeb202efa7e4/before_launch.json",
+  "scheduler_revision": "aeb202efa7e424c57ac3a3f11b9d6af61184bc8634aec543de7477a20d14bfe2",
+  "started": 1792146579.8887079,
+  "unit": "metaexp-meta-20261016-v1-coordinator"
+}

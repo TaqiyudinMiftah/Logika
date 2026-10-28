@@ -1,0 +1,35 @@
+{
+  "id": "kumo-full-context-20261021",
+  "original_deadline": 1792585871.823748,
+  "checkpoint": "/home/taqiyudinmiftah/faris/kumo-large-node380-20261016/hf_cache/hub/models--nvidia--Kumo-Tabular/snapshots/3c3e10bbdb590ace29e7026847f92db3c603096d/large/classifier.pt",
+  "checkpoint_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "training_admitted": true,
+  "preflight_admitted": true,
+  "minimum_free_VRAM_MiB": 32000,
+  "gpu_memory_fraction": 0.3,
+  "context_sizes": [
+    50000,
+    56000
+  ],
+  "num_estimators": 8,
+  "seed": "2026+fold",
+  "hypothesis": "Recover all outer-training labels in final ICL context; fixed correction fitted on honest50k-context predictions, reused unmodified. Matched50k A100 repeat distinguishes context-size effects from hardware.",
+  "validation": "Frozen original70k fivefold seed31027, complete pooled OOF; no partial-fold selection.",
+  "feature_scope": "Same90 features; cohort priors frozen to original50kcontext for botharms; no broad-bank merge.",
+  "correction_boundary": "Existing18-feature correction fitted on6000 predictions whose Kumo context excluded all6000 labels. New56kcontext is used only for outer14k predictions. It must never predict its included6000 training rows for meta-fitting.",
+  "spline": "Same retained56k-fit spline predictions, fixed25percent",
+  "fixed_secondary": "Equal probability average50k/56k finalpipelines; no weightsearch",
+  "historical_label_reuse": true,
+  "qualification": "Feature-covariate priors still50k. Context refit may shift raw calibration. This is explicitly tested, not assumed harmless.",
+  "research_rationale": "Standard outer-training refit recovers labels reserved for an honest calibration stage. No new labels or external borrower data.",
+  "resource_policy": "A100 only, onefit at a time,30percent VRAM cap, own models retained,2CPUthreads",
+  "no_submission": true,
+  "source_sha256": {
+    "runner.py": "7ab016cb844c203eebfea201ba928fcd8c295252b9c6724a8e3674979bb641b8",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "gpu_backend.py": "2734bd45143451c41da6dc820636b2a26c3b8b13c653c1de1598ad04083831e2",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "experiment.py": "f719773add26fd8754d8f19cef4348589253d61d989f54f9e793dc9ff0212f6c"
+  },
+  "admission_gate": "Actual A100 fit/cache replay exact; all5 data hashes and disjoint roles checked; copied control18-field head checksums pinned; earlier independent control-head objective and source-role audits retained."
+}

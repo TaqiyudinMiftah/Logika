@@ -248,6 +248,15 @@ def fit_splines(home, output, fold, features):
     destination = output / f"splines/fold{fold}"; destination.mkdir(parents=True, exist_ok=True)
     assert not (destination / "complete.json").exists(), "Preserve completed attempt; use a new output directory"
     frame = pd.read_parquet(features)
+    # The compact selected master omits five fixed spline77 covariates retained
+    # by the full legacy feature build. Restore only those declared inputs, in
+    # matching row order, without altering the chosen component definitions.
+    legacy_path = features.with_name("legacy_original.parquet")
+    legacy = pd.read_parquet(legacy_path)
+    required_legacy = ["re_price_log_gls", "re_price_measurement_sd", "re_income_log_mean", "re_late_7_posterior", "re_late_7_posterior_sd"]
+    for name in required_legacy:
+        if name not in frame: frame[name] = legacy[name].to_numpy()
+    del legacy
     train_path = exp / "ranking-pipeline-20261020/input/data/train_features.parquet"
     original = pd.read_parquet(train_path, columns=["application_id", "target"])
     apps_path = exp / "submission-full-periodicity-20261021/applications.parquet"
@@ -263,11 +272,11 @@ def fit_splines(home, output, fold, features):
     for col in frame[mat_columns+SPECTRAL].select_dtypes(include=["object","string","category"]).columns: frame[col] = frame[col].astype(object)
     full_columns = spline200_columns(frozen, joint)
     assert not set(mat_columns + per_columns + full_columns).difference(frame.columns), "Missing required fixed spline inputs"
-    dependencies = [features, train_path, apps_path, metadata_path, Path(__file__), Path(__file__).with_name("spline_models.py")]
+    dependencies = [features, legacy_path, train_path, apps_path, metadata_path, Path(__file__), Path(__file__).with_name("spline_models.py")]
     plan = {"action": "fixed_70k_spline_production_refit", "fold": fold, "fit_rows": 70000, "test_rows": 30000,
             "source_sha256": {str(p): sha(p) for p in dependencies}, "mat77_columns": mat_columns,
             "per88_columns": per_columns, "sp200_columns": full_columns,
-            "sp200_parameters": {"C": .0025, "n_iter": 4, "n_knots": 6, "degree": 2, "top_inter_n": 35},
+            "sp200_parameters": {"C": .0025, "n_iter": 4, "n_knots": 6, "degree": 2, "top_inter_n": 35, "BLAS_threads": 4},
             "fixed_spline_parameters": {"C": .05, "solver": "newton-cholesky", "max_iter": 80, "tol": 1e-5},
             "H016_parameters": {"strength": .5, "temperature": .5, "trust": 1., "ridge": .003,
                                  "maxiter": 300, "ftol": 1e-11, "gtol": 1e-7, "threshold": "logit(training_target_mean)"},
@@ -283,7 +292,7 @@ def fit_splines(home, output, fold, features):
     per_plain = baseline.predict_spline(per, query)
     per_test, h016 = direct_spline_update(per, training, query, baseline.prepare)
     del per; gc.collect()
-    with threadpool_limits(limits=2):
+    with threadpool_limits(limits=4):
         X = make_scaled_spline_matrix(frame, np.arange(70000), full_columns, n_knots=6, degree=2, top_inter_n=35)
         b0, weights = fit_logistic_irls(X[:70000], original.target.to_numpy(int), C=.0025)
         sp200_test, _ = predict_irls(X[70000:], b0, weights)
@@ -314,17 +323,23 @@ def production_raw(root, fold, want, exp, frozen, joint, roles):
             result[name] = np.r_[old["kumo56"][:6000], test]
             files.update({str(p): sha(p) for k,p in old_files.items() if k.startswith("kumo56")})
         elif name == "pop_spec" and path is None:
-            values = np.full(100000, np.nan)
+            values = np.full(100000, np.nan); seen = np.zeros(100000,dtype=bool)
             for sub in ["pop_spec_A", "pop_spec_BC1", "pop_spec_C2"]:
-                part = prediction_file(root, sub, fold); assert part is not None, (sub, fold)
-                with np.load(part, allow_pickle=False) as z: values[z["rows"]] = z["prediction"]
+                part = prediction_file(root, sub, fold)
+                if part is None:
+                    nested = root / "pop_spec" / f"fold{fold}" / sub.removeprefix("pop_spec_") / "prediction.npz"
+                    part = nested if nested.exists() else None
+                assert part is not None, (sub, fold)
+                with np.load(part, allow_pickle=False) as z:
+                    rows=z["rows"];assert len(np.unique(rows))==len(rows) and not seen[rows].any(),(sub,"Overlapping specialist query rows")
+                    values[rows]=z["prediction"];seen[rows]=True
                 files[str(part)] = sha(part)
             result[name] = values[want]
         else:
             assert path is not None, (name, fold, "Missing required backbone predictions")
             result[name] = align_prediction(path, want)
         if path is not None: files[str(path)] = sha(path)
-    assert all(len(v) == 36000 and np.isfinite(v).all() for v in result.values())
+    assert all(len(v) == 36000 and np.isfinite(v).all() and ((v>=0)&(v<=1)).all() for v in result.values())
     return result, files
 
 

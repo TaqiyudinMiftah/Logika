@@ -1,0 +1,73 @@
+{
+  "device": "cpu",
+  "execution_timeout_seconds": 900,
+  "expected_seconds": 12.270056802034379,
+  "id": "w2p_dddfbf8272cdbfa280d1",
+  "mode": "cv",
+  "node_executor_revision": "d054c5a50d5713b9825f922e5303c83e13ab5ef3b60d4c48b052f5b4c00297ef",
+  "ownership_policy": "autonomous_static_v1",
+  "ownership_policy_sha256": "4c64dc2f813cddb9e1ac55d04c4ae77995ea9af262f84ad227f44b60c774f426",
+  "recipe": {
+    "control": "f_7c3c29bc9adf28f1",
+    "id": "w2p_dddfbf8272cdbfa280d1",
+    "kind": "pipeline",
+    "model": "linear",
+    "representation": {
+      "changes": {
+        "clip": 0.005,
+        "encoding": "target",
+        "feature_count": 128,
+        "indicator": true,
+        "representation": "seasonality",
+        "select": "gain",
+        "transform": "signed_log"
+      },
+      "config": {
+        "append": true,
+        "category_normalize": false,
+        "clip": 0.005,
+        "cohort_weight": false,
+        "correlation": 0.95,
+        "dimensions": 64,
+        "encoding": "target",
+        "feature_count": 128,
+        "half_life": 90,
+        "indicator": true,
+        "interactions": false,
+        "mature": true,
+        "missing": "median",
+        "reducer": "none",
+        "representation": "seasonality",
+        "scale": "none",
+        "select": "gain",
+        "sources": [
+          "application",
+          "profile",
+          "previous",
+          "repayment",
+          "bureau",
+          "account",
+          "shopping"
+        ],
+        "spline": false,
+        "strength": 6,
+        "threshold": 30,
+        "transform": "signed_log",
+        "view": "v3",
+        "weight": 6,
+        "window": "all"
+      },
+      "family": "shopping",
+      "hypothesis": "Seeded higher-order combination",
+      "id": "w2f_2de5a8a485483a4b",
+      "is_control": false,
+      "matched_parent": null,
+      "resolved_numeric_columns": 385,
+      "semantic_signature": "2de5a8a485483a4bf55795eb8f75a8fa35a377d233cc2608d3c13f3fa0ca81d1",
+      "wave": 2
+    },
+    "seed": 2026
+  },
+  "scheduler_revision": "281080872f9c66fb1e934edaff67039e2beae1cdc28483acd11b28dadf178da5",
+  "until": 1792180779.8887079
+}

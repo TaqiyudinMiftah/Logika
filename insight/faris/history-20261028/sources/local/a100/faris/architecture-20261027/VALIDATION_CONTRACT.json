@@ -1,0 +1,102 @@
+{
+  "protocol_id": "logika-frozen-architectures-v1",
+  "scope": "New architectural models on exact priorfrozen116columns,original90andmaster116views. No additionalfeatureconstructionorregeneration.",
+  "parent_feature_freeze_sha256": "071c75e0f59cf92429bde9c76a64e27931e1eea03bbbbeac2e2589b5fee68dd6",
+  "created_UTC": "2026-10-27T00:02:04.438052+00:00",
+  "task": "binary default risk atorigination, oneapplicationpercustomer",
+  "permitted_data": "Suppliedcompetitiontables through alreadyfrozen foldpackets;no newdata",
+  "metric": {
+    "name": "two-sampleKS",
+    "direction": "maximize",
+    "aggregation": "pooled70000out-of-foldpositiveclassprobabilities, tie-aware, AUCsecondary",
+    "known_cases": "perfect1;constant0;reversed1 becauseKSabsolute"
+  },
+  "split": {
+    "outer": "Exact original5foldroles50000context6000correction14000outer",
+    "identity": "Manifest/roles hashes inFEATURE_FREEZE;no splits regenerated",
+    "early_stop": "Fixedstratified45000/5000withincontext;seed261027+fold",
+    "final_model": "Refit onall50000contextforselectedepochs",
+    "correction_use": "No correctionlabelsforarchitecturetrainingorcheckpointselection. Use3000rank/3000choiceforfrozenensemble; fixed18headuses6000unchanged.",
+    "outer_use": "Terminal scoringonlyafterrecipefreeze"
+  },
+  "preprocessing": "Context-onlynumericmedian,Gaussianquantilemappingandmissingmask;contextcategoricalvocab/embeddings;originalsourcevaluesandcolumnsetsunchanged. Internalnetworkembeddingsaremodeloperations.",
+  "designs": 16,
+  "configs": 32,
+  "fits": 160,
+  "seeds": [
+    2026,
+    7731
+  ],
+  "configs_sha256": "993ff93bdd82f1b0c2415dac0fe1e53852d259ab2aca1554532b863d6f5f86d1",
+  "selection": {
+    "unit": "pairedseedmeanwithin16designs;requireall10fitsperdesign",
+    "rank": "RawKS on3000correctionrankinghalf,seed261026 originalfixedsplit",
+    "choice": "Independent3000correctionchoicehalf;counts1,2,4,all;weights0,.05,.1,.2,.4,.7,1",
+    "ties": "Preferlowerweightthenfewerdesigns.",
+    "primary": "(1-w)*originalLarge90raw+w*meanselectedpairedseeddesigns",
+    "downstream": "Same original18headpenalty.003strength.5; .75corrected+.25unchangedmaturespline",
+    "control": "OriginalmatchedLarge90baseline0.5306361042400267;embeddedMLPcontroltrainedsamepipeline",
+    "retire_prior_evaluation": "Priorouterresults nowdevelopment;exposureledgerretained."
+  },
+  "promotion": {
+    "target_KS": 0.54,
+    "required": "Positiveprimarydelta;pairedbootstrap95%lower>0;atleast3positivefolds;bothfixedseeddirectionspositive forsamefrozenrecipe;not achievedbyfamilydiagnosticselection",
+    "independent_confirmation_available": false,
+    "uncertainty": "2000paired applicationbootstrapreplicatesstratifiedbyclass,seed271026;conditionalreuseddevelopmentonly"
+  },
+  "required_checks": [
+    {
+      "id": "evaluator",
+      "rule": "KnownKS cases,oldbaselinepredictionreplay,finalsavedoutputrecomputation"
+    },
+    {
+      "id": "boundaries",
+      "rule": "Exactimmutablefeature/rolehashes;context-onlypreprocessingcounterfactual;innercontextsdisjoint;nocorrection/outerlabelstraining"
+    },
+    {
+      "id": "support",
+      "rule": "All5originalfoldscontextminority>1000,correctionminority>100; unchangedpartitionrationaleandsnapshotqualificationfromparentgate"
+    },
+    {
+      "id": "baseline",
+      "rule": "ReuseparentterminalauditedLarge90andlogisticfivefoldpredictions;constantKS0,AUC.5"
+    },
+    {
+      "id": "architecture",
+      "rule": "All6families3syntheticoptimizersteps,finitegradients,paramupdates,repeatedevalpredictionequal"
+    },
+    {
+      "id": "runtime_pilot",
+      "rule": "OfficialTabMfold0 bounded3epochs+contextrefit,produces20000finiteprobabilities;repeatfirst128<1e-6;withinresourceandpilotlimits;nooutermetric"
+    },
+    {
+      "id": "uncertainty",
+      "rule": "16pairedseeddesigns,all5foldcoverage;2000bootstrapconditionalinterval;nofreshindependenceclaim"
+    }
+  ],
+  "compute": {
+    "duration_status": "New duration supplied for this invocation",
+    "recommended_ceiling_hours": 6,
+    "search_fraction": 0.8,
+    "reserve_fraction": 0.2,
+    "CPUthreads_per_fit": 2,
+    "CPU_RAM_GiB": 8,
+    "GPU_RAM_GiB": 16,
+    "per_fit_seconds": 2100,
+    "pilot_seconds": 600,
+    "nodes": [
+      "node2001",
+      "node2003"
+    ],
+    "node2002": false,
+    "A100": false,
+    "ceiling_hours": 6.0
+  },
+  "retention": "Params,seeds,source,preprocessingrecipes,compactpredictionsandmetrics;no fittedweightsorKVcachesserialized. BeststatesinRAMonly.",
+  "source_motivation": "SOURCES.json;officialTabM0.0.3;ResNet/FTTransformerandDCNV2task-specificadaptations",
+  "limitations": [
+    "No untouchedaudit;all70kdevelopmentrowsreused.",
+    "Masterlearnedrepresentationsfromprior50kcontextarefrozen;innerstoppingisintra-trainingonly,not independentvalidation.",
+    "Fixedheadchosenforbaselinecanfavorbaselinefamily;keepitforcompatiblecomparisonanddonotclaimuniversalarchitectureordering."
+  ]
+}

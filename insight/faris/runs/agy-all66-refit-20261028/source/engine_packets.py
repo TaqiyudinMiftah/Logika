@@ -24,7 +24,10 @@ def main():
         assert not dest.exists(),f'Preserve incomplete attempt evidence; use a new output root: {dest}'
         dest.mkdir(parents=True);start=time.time()
         try:
-            meta=json.loads((p/'meta.json').read_text());context=pd.read_parquet(p/'context.parquet');query=pd.read_parquet(p/'query.parquet');rows=np.load(p/'query_rows.npy').astype(np.int64)
+            meta=json.loads((p/'meta.json').read_text())
+            for field,name in [('context_sha256','context.parquet'),('query_sha256','query.parquet'),('query_rows_sha256','query_rows.npy')]:
+                if field in meta:assert sha(p/name)==meta[field],('Changed declared packet',field,str(p))
+            context=pd.read_parquet(p/'context.parquet');query=pd.read_parquet(p/'query.parquet');rows=np.load(p/'query_rows.npy').astype(np.int64)
             assert 'target'in context and'target'not in query and len(query)==len(rows)
             assert len(np.unique(rows))==len(rows)
             assert len(context)==meta['n_context']

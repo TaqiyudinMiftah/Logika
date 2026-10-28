@@ -1,0 +1,54 @@
+{
+  "inspection_date": "2026-10-24 Asia/Jakarta",
+  "scope": "Local retained OOF recomputation; no fitting, new predictions, remote access, or upload.",
+  "source": "/home/parasite/Project/Competition/logika-2026/a100/faris/shopping-periodicity-fe-20261021/OOF.npz",
+  "source_sha256": "14ac572d103658fce2afb7d86c5ad3b60c588546cd03d6ce2afc5df429143068",
+  "submission_sha256": "922788d13cd8ec53b7cbd732496a9200150a499fd4363455414e2cc6230a6b06",
+  "rows": 70000,
+  "positives": 9507,
+  "recipes": [
+    {
+      "recipe": "Repaired V25",
+      "pooled_KS": 0.5302185366909258,
+      "mean_fold_KS": 0.5333607268599077,
+      "AUC_from_retained_result": 0.847025849979685,
+      "fold_KS": [
+        0.5283972543020171,
+        0.537999171224562,
+        0.5407114955831469,
+        0.5304569291202116,
+        0.5292387840696006
+      ]
+    },
+    {
+      "recipe": "Maturity in correction and spline",
+      "pooled_KS": 0.5306361042400268,
+      "mean_fold_KS": 0.5334123436549839,
+      "AUC_from_retained_result": 0.8470560913112664,
+      "fold_KS": [
+        0.5285401661089976,
+        0.5381644741421585,
+        0.5404635412067522,
+        0.5304474551415803,
+        0.5294460816754306
+      ]
+    },
+    {
+      "recipe": "Periodicity plus maturity",
+      "pooled_KS": 0.5309665314756385,
+      "mean_fold_KS": 0.5326348772701952,
+      "AUC_from_retained_result": 0.8469295983174442,
+      "fold_KS": [
+        0.5249905881249114,
+        0.536030188260545,
+        0.5402587168919712,
+        0.5307807827383761,
+        0.531114110335172
+      ]
+    }
+  ],
+  "gap_to_054": 0.009033468524361488,
+  "current_gain_over_baseline": 0.0007479947847127688,
+  "periodicity_vs_maturity_fold_wins": 2,
+  "limitation": "Reused development labels; no independent generalization claim. Mean-fold and pooled KS are different estimands."
+}

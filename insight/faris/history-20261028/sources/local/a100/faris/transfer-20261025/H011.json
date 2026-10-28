@@ -1,0 +1,21 @@
+{
+  "id": "H011-training-CDF-five-context-ensemble",
+  "frozen_UTC": "2026-10-24T21:36:09.183072+00:00",
+  "mechanism": "H010 ordinaryfivebag increasesAUC but decreasesKS vs onebag. Test whether differences in member score scales contribute to the peak-separation loss. Fit a single monotoneCDF/interpolation map perordinarymember using its6000 correction-training modeloutputs, then equal-average transformed validation scores. This is a hypothesis, not a confirmed cause.",
+  "fit_scope": "CDFreceives scorevaluesonly; no validationlabels, no validationdistribution fit. The ordinary head and56k spline remain fixed; no newKumo/head/spline fits.",
+  "mapping": "Unique training probability values and midrank/(n+1); linearinterpolation, fixedhalf-rank endpointcaps; n6000. Same75/25 component beforemapping, all5members weight.2.",
+  "promotion": "PooledKS>.5314098055476294; >=3/5foldwins vsB; two-contrast-adjusted95percent pairedbootstrap lowerbound>0 versusboth ordinaryprobabilityfivebag and previousB. Ifpassed, full70k refit and exactschema/modelreplay before permitted lastslot. No weight/representation grid.",
+  "CV_deadline_epoch": 1792878900.0,
+  "training_deadline_epoch": 1792883400.0,
+  "submission_deadline_epoch": 1792885500.0,
+  "source_sha256": {
+    "rank_bag.py": "0001a01ab89833b644e00f6c2833416bd7dba498d9830e4ddab0bb815e8cabc2",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0"
+  },
+  "inherited_limitations": [
+    "all70k labels reused",
+    "rawsnapshotDPDprovenance unchanged"
+  ],
+  "exposure": "AllH010complete results seen before H011; no H011 validation statistic read before freeze",
+  "broad_search": false
+}

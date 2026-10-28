@@ -1,0 +1,23 @@
+import os
+for k in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS']:os.environ[k]='1'
+from pathlib import Path
+import time,json
+import pandas as pd,numpy as np
+import baseline as b,measurement as m
+R=Path(__file__).resolve().parents[1];A=R.parent;RAW=A/'exploration-12h-20261017/raw';INPUT=A/'ranking-pipeline-20261020/input'
+EXTRA=['re_bureau_score_posterior','re_bureau_posterior_sd']
+def eligible(d,apps):
+ assert'target'not in d and'target'not in apps;cut=apps.set_index('customer_id').decision_datetime;limit=d.customer_id.map(cut);z=d[(d.report_datetime<limit)&(d.available_datetime<limit)&d.score.notna()].copy();z['day']=z.report_datetime.astype('int64')/86400e9;return z
+def main():
+ start=time.time();assert time.time()<1792585871.823748-10800 and not(R/'BUILD_COMPLETE.json').exists();screen=A/'bureau-noise-scale-audit-20261021/SCREEN_RESULT.json';assert json.loads(screen.read_text())['measurement_screen_passed'];m.verify_identity(None)
+ ids=pd.concat([pd.read_parquet(INPUT/f'data/{split}_features.parquet',columns=['application_id'])for split in ['train','test']],ignore_index=True);apps=pd.concat([pd.read_csv(RAW/f'{split}_applications.csv',usecols=['application_id','customer_id','decision_datetime'],parse_dates=['decision_datetime'])for split in ['train','test']],ignore_index=True).set_index('application_id').loc[ids.application_id].reset_index();assert len(apps)==100000 and apps.customer_id.is_unique
+ original=pd.read_csv(RAW/'bureau_observations.csv',parse_dates=['report_datetime','available_datetime']);d=eligible(original,apps);assert not d.duplicated(['customer_id','application_id','bureau_provider']).any();receipts=[]
+ for f in range(5):
+  ix=np.load(INPUT/f'artifacts/fold{f}/indices.npz');context=set(apps.customer_id.iloc[ix['context']]);source=d[d.customer_id.isin(context)].copy();assert len(context)==50000;params={name:m.fit(source,flag)for name,flag in [('static',False),('occasion',True)]};fixed=A/f'fold-local-priors-20261021/fold{f}';assert b.sha(fixed/'features.parquet')==json.loads((fixed/'complete.json').read_text())['feature_table_sha256'];reference=pd.read_parquet(fixed/'features.parquet',columns=['application_id']+EXTRA).set_index('application_id').loc[apps.application_id]
+  old_mean,old_sd=m.transform(d,apps,params['static']);errors={EXTRA[0]:float(np.max(np.abs(old_mean-reference[EXTRA[0]].to_numpy(float)))),EXTRA[1]:float(np.max(np.abs(old_sd-reference[EXTRA[1]].to_numpy(float))))};assert max(errors.values())<1e-8,errors
+  mean,sd=m.transform(d,apps,params['occasion']);out=pd.DataFrame(dict(application_id=apps.application_id,customer_id=apps.customer_id));out[EXTRA[0]]=mean;out[EXTRA[1]]=sd
+  sample=apps.iloc[[0,1,2,3,4]].copy();sm,ss=m.transform(d[d.customer_id.isin(sample.customer_id)],sample,params['occasion']);assert np.max(abs(sm-mean[:5]))<1e-10 and np.max(abs(ss-sd[:5]))<1e-10
+  injected=original.iloc[[0]].copy();injected['report_datetime']=injected.customer_id.map(apps.set_index('customer_id').decision_datetime)+pd.Timedelta(days=1);injected['available_datetime']=injected.report_datetime;future=eligible(pd.concat([original,injected],ignore_index=True),apps);pd.testing.assert_frame_equal(d.reset_index(drop=True),future.reset_index(drop=True))
+  root=R/f'fold{f}';root.mkdir();out.to_parquet(root/'features.parquet',index=False);b.dump(params,root/'parameters.json');again=m.transform(d,apps,json.loads((root/'parameters.json').read_text())['occasion']);assert np.array_equal(again[0],mean)and np.array_equal(again[1],sd);receipt=dict(fold=f,static_reproduction_errors=errors,occasion_variance=params['occasion']['occasion'],context_customers=50000,context_application_ID_sha256=b.sha(INPUT/f'artifacts/fold{f}/indices.npz'),feature_sha256=b.sha(root/'features.parquet'),parameter_sha256=b.sha(root/'parameters.json'),own_history_isolation=True,future_event_invariance=True,serialized_transform_exact=True,default_labels_used=False);b.dump(receipt,root/'complete.json');receipts.append(receipt);print(json.dumps(dict(fold=f,static_max_error=max(errors.values()),occasion_variance=receipt['occasion_variance'])),flush=True)
+ b.dump(dict(status='complete',rows=100000,features=EXTRA,default_labels_opened=False,context_only_fit=True,direct_Gaussian_and_zero_limit_passed=True,reference_errors={str(x['fold']):max(x['static_reproduction_errors'].values())for x in receipts},source_sha256=b.sha(Path(__file__)),measurement_source_sha256=b.sha(R/'source/measurement.py'),screen_sha256=b.sha(screen),raw_source_sha256={n:b.sha(RAW/n)for n in ['bureau_observations.csv','train_applications.csv','test_applications.csv']},folds=receipts,seconds=time.time()-start),R/'BUILD_COMPLETE.json')
+if __name__=='__main__':main()

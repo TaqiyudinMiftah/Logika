@@ -1,0 +1,1 @@
+All5folds complete per view. Stronger budget improves standalone KS+0.00526(full) and+0.00589(compact) over matched300tree prefixes. Compact still better than broad view by0.00156KS. Neither fixed20percent blend beats matchedKumo KS; broad blend improves AUC+0.000118 butKS−0.000935. No promotion; target unmet. Paired bootstrap remains separate.

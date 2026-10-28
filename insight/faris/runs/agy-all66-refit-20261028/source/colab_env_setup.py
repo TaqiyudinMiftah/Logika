@@ -8,7 +8,7 @@ import subprocess,sys,json,hashlib,os
 root=Path('/content/logika-all66');root.mkdir(parents=True,exist_ok=True)
 # Fresh subprocesses avoid stale imports in the notebook kernel after pip changes.
 subprocess.run([sys.executable,'-m','pip','install','--quiet','--index-url','https://download.pytorch.org/whl/cu126','torch==2.7.1'],check=True)
-subprocess.run([sys.executable,'-m','pip','install','--quiet','structured-data-models==0.2.1','numpy==2.2.6','pandas==2.3.3','pyarrow==22.0.0','huggingface-hub==0.35.3'],check=True)
+subprocess.run([sys.executable,'-m','pip','install','--quiet','structured-data-models==0.2.1','numpy==2.2.6','pandas==2.3.3','pyarrow==22.0.0','huggingface-hub==0.35.3','safetensors==0.6.2','typing_extensions==4.16.0'],check=True)
 code=r'''
 from pathlib import Path
 import hashlib,json,sys,importlib.metadata as m

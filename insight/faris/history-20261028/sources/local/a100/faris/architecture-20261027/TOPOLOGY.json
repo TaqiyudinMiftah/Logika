@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "name": "node2001",
+      "local": true,
+      "root": "/mnt/home/faris/logika-architecture-20261027",
+      "ssh": [
+        "ssh",
+        "faris@100.68.29.126"
+      ],
+      "python": "/mnt/home/faris/logika-model-arena-20261025/env311/bin/python",
+      "HF_HOME": "/mnt/home/faris/logika-model-arena-20261025/storage/huggingface"
+    },
+    {
+      "name": "node2003",
+      "ssh": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=15",
+        "-p",
+        "2003",
+        "faris@gpu-labkc.ub.ac.id"
+      ],
+      "root": "/mnt/home/faris/logika-architecture-20261027",
+      "python": "/mnt/home/faris/faris/kumo-coverage-placement-20261021/.venv/bin/python",
+      "HF_HOME": "/mnt/home/faris/logika-model-arena-20261025/storage/huggingface"
+    }
+  ],
+  "node2002_excluded_by_user": true,
+  "A100_excluded_by_user": true,
+  "user_home_only": true
+}

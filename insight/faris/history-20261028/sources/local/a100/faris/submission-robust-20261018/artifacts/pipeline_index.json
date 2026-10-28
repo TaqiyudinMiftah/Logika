@@ -1,0 +1,453 @@
+{
+  "champion": {
+    "champion0": {
+      "component": {
+        "id": "champion0",
+        "original_id": "w2p_e8dd515dcc04cd2e4959",
+        "kind": "historical",
+        "recipe": {
+          "control": "f_7c3c29bc9adf28f1",
+          "id": "w2p_e8dd515dcc04cd2e4959",
+          "kind": "pipeline",
+          "model": "linear",
+          "representation": {
+            "changes": {
+              "clip": 0.01,
+              "encoding": "target",
+              "feature_count": 128,
+              "indicator": true,
+              "interactions": true,
+              "representation": "income_gap",
+              "select": "gain",
+              "window": 180
+            },
+            "config": {
+              "append": true,
+              "category_normalize": false,
+              "clip": 0.01,
+              "cohort_weight": false,
+              "correlation": 0.95,
+              "dimensions": 64,
+              "encoding": "target",
+              "feature_count": 128,
+              "half_life": 90,
+              "indicator": true,
+              "interactions": true,
+              "mature": true,
+              "missing": "median",
+              "reducer": "none",
+              "representation": "income_gap",
+              "scale": "none",
+              "select": "gain",
+              "sources": [
+                "application",
+                "profile",
+                "previous",
+                "repayment",
+                "bureau",
+                "account",
+                "shopping"
+              ],
+              "spline": false,
+              "strength": 6,
+              "threshold": 30,
+              "transform": "identity",
+              "view": "v3",
+              "weight": 6,
+              "window": 180
+            },
+            "family": "cross_source",
+            "hypothesis": "Seeded higher-order combination",
+            "id": "w2f_305f821e59f359ca",
+            "is_control": false,
+            "matched_parent": null,
+            "resolved_numeric_columns": 508,
+            "semantic_signature": "305f821e59f359ca0eb0b3921d1fe0645d40747d61bf7afeaded0d2b6a2505bb",
+            "wave": 2
+          },
+          "seed": 2026
+        }
+      },
+      "model": "artifacts/champion/w2p_e8dd515dcc04cd2e4959/pipeline.joblib",
+      "sha256": "ca2f7b747ca66b9ed512f8b13c6360f04fe73cfce9429e05e8c458b06aca5707"
+    },
+    "champion1": {
+      "component": {
+        "id": "champion1",
+        "original_id": "w2p_c9402cdde8b7041a2de9",
+        "kind": "historical",
+        "recipe": {
+          "control": "f_7c3c29bc9adf28f1",
+          "id": "w2p_c9402cdde8b7041a2de9",
+          "kind": "pipeline",
+          "model": "lgb",
+          "representation": {
+            "changes": {
+              "dimensions": 16,
+              "reducer": "svd",
+              "select": "mi"
+            },
+            "config": {
+              "append": true,
+              "category_normalize": false,
+              "clip": 0,
+              "cohort_weight": false,
+              "correlation": 0.95,
+              "dimensions": 16,
+              "encoding": "onehot",
+              "feature_count": "all",
+              "half_life": 90,
+              "indicator": false,
+              "interactions": false,
+              "mature": true,
+              "missing": "median",
+              "reducer": "svd",
+              "representation": "raw",
+              "scale": "none",
+              "select": "mi",
+              "sources": [
+                "application",
+                "profile",
+                "previous",
+                "repayment",
+                "bureau",
+                "account",
+                "shopping"
+              ],
+              "spline": false,
+              "strength": 6,
+              "threshold": 30,
+              "transform": "identity",
+              "view": "v3",
+              "weight": 6,
+              "window": "all"
+            },
+            "family": "reduction",
+            "hypothesis": "Seeded higher-order combination",
+            "id": "w2f_5329e613e444983c",
+            "is_control": false,
+            "matched_parent": null,
+            "resolved_numeric_columns": 384,
+            "semantic_signature": "5329e613e444983c0c77369f034e0efa9eeb88fb38b8a1032867f431182f9e77",
+            "wave": 2
+          },
+          "seed": 2026
+        }
+      },
+      "model": "artifacts/champion/w2p_c9402cdde8b7041a2de9/pipeline.joblib",
+      "sha256": "30cdc735c7db4dc3cc96af5df26427344648320a4833f14aa2937b7fcc1416ad"
+    },
+    "champion2": {
+      "component": {
+        "id": "champion2",
+        "original_id": "w2p_dddfbf8272cdbfa280d1",
+        "kind": "historical",
+        "recipe": {
+          "control": "f_7c3c29bc9adf28f1",
+          "id": "w2p_dddfbf8272cdbfa280d1",
+          "kind": "pipeline",
+          "model": "linear",
+          "representation": {
+            "changes": {
+              "clip": 0.005,
+              "encoding": "target",
+              "feature_count": 128,
+              "indicator": true,
+              "representation": "seasonality",
+              "select": "gain",
+              "transform": "signed_log"
+            },
+            "config": {
+              "append": true,
+              "category_normalize": false,
+              "clip": 0.005,
+              "cohort_weight": false,
+              "correlation": 0.95,
+              "dimensions": 64,
+              "encoding": "target",
+              "feature_count": 128,
+              "half_life": 90,
+              "indicator": true,
+              "interactions": false,
+              "mature": true,
+              "missing": "median",
+              "reducer": "none",
+              "representation": "seasonality",
+              "scale": "none",
+              "select": "gain",
+              "sources": [
+                "application",
+                "profile",
+                "previous",
+                "repayment",
+                "bureau",
+                "account",
+                "shopping"
+              ],
+              "spline": false,
+              "strength": 6,
+              "threshold": 30,
+              "transform": "signed_log",
+              "view": "v3",
+              "weight": 6,
+              "window": "all"
+            },
+            "family": "shopping",
+            "hypothesis": "Seeded higher-order combination",
+            "id": "w2f_2de5a8a485483a4b",
+            "is_control": false,
+            "matched_parent": null,
+            "resolved_numeric_columns": 385,
+            "semantic_signature": "2de5a8a485483a4bf55795eb8f75a8fa35a377d233cc2608d3c13f3fa0ca81d1",
+            "wave": 2
+          },
+          "seed": 2026
+        }
+      },
+      "model": "artifacts/champion/w2p_dddfbf8272cdbfa280d1/pipeline.joblib",
+      "sha256": "ccbea9e96f07ea2169a914db2b18dcbcae18b4e52f0217dba0795904b69a4fb7"
+    },
+    "champion3": {
+      "component": {
+        "id": "champion3",
+        "original_id": "w2p_b7592b087e1f55a41563",
+        "kind": "historical",
+        "recipe": {
+          "control": "f_7c3c29bc9adf28f1",
+          "id": "w2p_b7592b087e1f55a41563",
+          "kind": "pipeline",
+          "model": "lgb",
+          "representation": {
+            "changes": {
+              "clip": 0.01,
+              "indicator": true,
+              "interactions": true,
+              "missing": "group",
+              "representation": "ratios",
+              "select": "gain",
+              "transform": "signed_log",
+              "window": 60
+            },
+            "config": {
+              "append": true,
+              "category_normalize": false,
+              "clip": 0.01,
+              "cohort_weight": false,
+              "correlation": 0.95,
+              "dimensions": 64,
+              "encoding": "onehot",
+              "feature_count": "all",
+              "half_life": 90,
+              "indicator": true,
+              "interactions": true,
+              "mature": true,
+              "missing": "group",
+              "reducer": "none",
+              "representation": "ratios",
+              "scale": "none",
+              "select": "gain",
+              "sources": [
+                "application",
+                "profile",
+                "previous",
+                "repayment",
+                "bureau",
+                "account",
+                "shopping"
+              ],
+              "spline": false,
+              "strength": 6,
+              "threshold": 30,
+              "transform": "signed_log",
+              "view": "v3",
+              "weight": 6,
+              "window": 60
+            },
+            "family": "cross_source",
+            "hypothesis": "Seeded higher-order combination",
+            "id": "w2f_d7d8a34ee2b985a5",
+            "is_control": false,
+            "matched_parent": null,
+            "resolved_numeric_columns": 508,
+            "semantic_signature": "d7d8a34ee2b985a5ee90c0ea1598fc8979ee53475df73e1141e064677896e97a",
+            "wave": 2
+          },
+          "seed": 2026
+        }
+      },
+      "model": "artifacts/champion/w2p_b7592b087e1f55a41563/pipeline.joblib",
+      "sha256": "8af49a269c6a1d296774cfcf494efa3c1552a099cc59164b01e33a7356e276f2"
+    },
+    "champion4": {
+      "component": {
+        "id": "champion4",
+        "original_id": "w2p_03f464270ee3d042b671",
+        "kind": "historical",
+        "recipe": {
+          "control": "f_7c3c29bc9adf28f1",
+          "id": "w2p_03f464270ee3d042b671",
+          "kind": "pipeline",
+          "model": "lgb",
+          "representation": {
+            "changes": {
+              "dimensions": 128,
+              "feature_count": 128,
+              "reducer": "pca",
+              "select": "gain"
+            },
+            "config": {
+              "append": true,
+              "category_normalize": false,
+              "clip": 0,
+              "cohort_weight": false,
+              "correlation": 0.95,
+              "dimensions": 128,
+              "encoding": "onehot",
+              "feature_count": 128,
+              "half_life": 90,
+              "indicator": false,
+              "interactions": false,
+              "mature": true,
+              "missing": "median",
+              "reducer": "pca",
+              "representation": "raw",
+              "scale": "none",
+              "select": "gain",
+              "sources": [
+                "application",
+                "profile",
+                "previous",
+                "repayment",
+                "bureau",
+                "account",
+                "shopping"
+              ],
+              "spline": false,
+              "strength": 6,
+              "threshold": 30,
+              "transform": "identity",
+              "view": "v3",
+              "weight": 6,
+              "window": "all"
+            },
+            "family": "reduction",
+            "hypothesis": "Seeded higher-order combination",
+            "id": "w2f_cbb154114d1d1529",
+            "is_control": false,
+            "matched_parent": null,
+            "resolved_numeric_columns": 384,
+            "semantic_signature": "cbb154114d1d1529a54a144b87b18aa366a497044a75a863e5c2563f4938e06b",
+            "wave": 2
+          },
+          "seed": 2026
+        }
+      },
+      "model": "artifacts/champion/w2p_03f464270ee3d042b671/pipeline.joblib",
+      "sha256": "84beb234c60459be5e17036db6d6483744e02400cdf523a0bf590def38eaea9b"
+    }
+  },
+  "addition": {
+    "id": "addition2",
+    "original_id": "pc2_job_000312",
+    "kind": "latest",
+    "configuration": {
+      "model": "elastic",
+      "view": "bureau_06",
+      "weight": 6,
+      "trees": 500,
+      "rate": 0.04,
+      "strength": 0.05,
+      "leaves": 31,
+      "depth": 4,
+      "minimum": 200,
+      "columns": 1.0,
+      "width": 128,
+      "blocks": 2,
+      "dropout": 0.1,
+      "lr": 0.0003,
+      "events": 32,
+      "context": 16384,
+      "estimators": 4,
+      "updates": 0,
+      "encoding": "plain",
+      "anchor": true,
+      "l1": 0
+    },
+    "representation": {
+      "changes": {
+        "clip": 0.01,
+        "encoding": "target",
+        "feature_count": 128,
+        "indicator": true,
+        "interactions": true,
+        "representation": "income_gap",
+        "select": "gain",
+        "window": 180
+      },
+      "config": {
+        "append": true,
+        "category_normalize": false,
+        "clip": 0,
+        "cohort_weight": false,
+        "correlation": 0.95,
+        "dimensions": 64,
+        "encoding": "onehot",
+        "feature_count": 128,
+        "half_life": 90,
+        "indicator": false,
+        "interactions": false,
+        "mature": true,
+        "missing": "median",
+        "reducer": "none",
+        "representation": "income_gap",
+        "scale": "none",
+        "select": "split",
+        "sources": [
+          "application",
+          "profile",
+          "previous",
+          "repayment",
+          "bureau",
+          "account",
+          "shopping"
+        ],
+        "spline": false,
+        "strength": 6,
+        "threshold": 30,
+        "transform": "identity",
+        "view": "v3",
+        "weight": 6,
+        "window": "all",
+        "_extra_family": "bureau"
+      },
+      "family": "source",
+      "hypothesis": "H_bureau",
+      "id": "bureau_06",
+      "is_control": false,
+      "matched_parent": null,
+      "resolved_numeric_columns": 508,
+      "semantic_signature": "bb32dbd3710b800eda4ba4c215575b41ead414d06eabb37b048ec3b58e8e7f1c",
+      "wave": 2
+    },
+    "discovery_diagnostic": {
+      "id": "pc2_job_000312",
+      "model": "elastic",
+      "family": "elastic",
+      "weight": 0.1,
+      "delta": -0.0007640903061121307,
+      "fold_delta": [
+        0.0008396948058204678,
+        0.00025681882583195037,
+        0.00038912175791461223
+      ],
+      "mean_fold_delta": 0.0004952117965223435,
+      "worst_fold_delta": 0.00025681882583195037
+    }
+  },
+  "addition_folder": "fits/final_addition2",
+  "addition_weight": 0.05,
+  "benchmark_sha256": "2b83a2b2b1313ff72adce8b2e32e3f2a64a33d07f8a0d7ea5b5abe6d1191599e",
+  "plan_sha256": "8a20ac569da0f9cbeb5a1073ba04d64b3d2d48e8e1bd6a8650191e55b3588472",
+  "decision_type": "fixed_secondary_candidate",
+  "fixed_comparison_sha256": "4937eae25e59d2974c9939e47775449f412813ab669c76602bc7919bc11b7100"
+}

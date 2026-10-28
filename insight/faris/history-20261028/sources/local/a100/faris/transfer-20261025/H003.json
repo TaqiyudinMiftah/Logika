@@ -1,0 +1,33 @@
+{
+  "id": "H003-shallow-interaction-offset",
+  "created_UTC": "2026-10-24T19:10:08.164195+00:00",
+  "mechanism": "The additive correction cannot express interactions among source coverage and latent-risk measurements. A shallow, strongly regularized boosted residual can learn these interactions while retaining frozen Kumo as the offset. Prior standalone CatBoost or fixed prediction blends did not test this exact stage.",
+  "evidence": [
+    "ERROR_ANATOMY_v2.json: heterogeneous correction behavior by history support.",
+    "Original baseline correction improves KS but reduces AUC.",
+    "Correction bootstrap is negative: constrain depth and shrink contribution instead of expanding a large flexible model."
+  ],
+  "comparison": "Same 18 head inputs, 6000 disjoint correction labels, two matched Kumo seeds, unchanged spline77 and .75/.25 probability blend.",
+  "params": {
+    "iterations": 250,
+    "depth": 3,
+    "learning_rate": 0.03,
+    "l2_leaf_reg": 30,
+    "correction_strength": 0.5,
+    "seed": "442025+fold",
+    "no_early_stopping": true,
+    "no_hyperparameter_sweep": true
+  },
+  "acceptance": "Positive pooled KS versus additive head on both Kumo seeds and their fixed mean; inspect fold consistency and conditional uncertainty. Otherwise reject without tuning.",
+  "references": [
+    {
+      "url": "https://catboost.ai/docs/en/concepts/python-reference_pool",
+      "scope": "Official baseline parameter documentation"
+    },
+    {
+      "url": "https://catboost.ai/docs/en/concepts/input-data_baseline",
+      "scope": "Official raw formula baseline documentation"
+    }
+  ],
+  "source_sha256": "a1b9651d5f75d780af7d951f0c6e6f40f8a4bfeb42563ec670c3d8fd6a04f08b"
+}

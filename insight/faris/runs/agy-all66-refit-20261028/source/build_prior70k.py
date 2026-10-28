@@ -27,7 +27,7 @@ def main():
   path=input_root/name
   if not path.exists():path.symlink_to(target)
  np.savez_compressed(input_root/'artifacts/fold0/indices.npz',context=np.arange(70000),validation=np.array([],dtype=np.int64))
- plan=json.loads((F/'feature_build/plan.json').read_text());plan.update(input=str(input_root),full_data_refit=True,preprocessing_only=True,model_training_admitted=False,historical_metric_recalculation_complete=True)
+ plan=json.loads((F/'feature_build/plan.json').read_text());plan.update(input=str(input_root),raw=str(A/'exploration-12h-20261017/raw'),bank='/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank',full_data_refit=True,preprocessing_only=True,model_training_admitted=False,historical_metric_recalculation_complete=True)
  (root/'plan.json').write_text(json.dumps(plan,indent=2)+'\n')
  provenance={'source_original':str(src),'source_original_sha256':sha(src),'wrapper_sha256':sha(__file__),'training_membership':'All70000labeledtrainingapplicants; labels replaced withconstant0 before feature estimation','validation_rows':0,'test_rows':30000,'shared_across_folds_reason':'Identical all70k context membership, inheritedbank, rawsources and deterministic priorfunctions; fold modelseedsremainseparate','old_campaign_modified':False}
  (root/'BUILD_PLAN.json').write_text(json.dumps(provenance,indent=2)+'\n')

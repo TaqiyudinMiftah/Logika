@@ -1,0 +1,40 @@
+{
+  "cpu": {
+    "effective_cgroup": {
+      "cpu.max": "100000 100000",
+      "memory.max": "268435456"
+    },
+    "elapsed_seconds": 2.8223648071289062,
+    "properties": {
+      "CPUQuotaPerSecUSec": "infinity",
+      "CPUUsageNSec": "[not set]",
+      "MemoryMax": "infinity",
+      "MemoryPeak": "[not set]",
+      "Result": "success"
+    },
+    "returncode": 0,
+    "stderr": "Running as unit: metaexp-limitcheck-pc3-cpu-1792146264.service; invocation ID: f18b6451dd054e1dafc67d3707ab3f76\nFinished with result: success\nMain processes terminated with: code=exited/status=0\nService runtime: 2.807s\nCPU time consumed: 2.852s\nMemory peak: 256.0K\nMemory swap peak: 0B\n",
+    "stdout": "{\"cpu.max\": \"100000 100000\", \"memory.max\": \"268435456\"}\n"
+  },
+  "detached_service": {
+    "marker": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/preflight/pc3_disconnect_marker.json",
+    "passed": true
+  },
+  "memory": {
+    "effective_cgroup": {
+      "cpu.max": "100000 100000",
+      "memory.max": "67108864"
+    },
+    "elapsed_seconds": 0.06621289253234863,
+    "properties": {
+      "CPUQuotaPerSecUSec": "1s",
+      "CPUUsageNSec": "70348000",
+      "MemoryMax": "67108864",
+      "MemoryPeak": "67108864",
+      "Result": "oom-kill"
+    },
+    "returncode": 1,
+    "stderr": "Running as unit: metaexp-limitcheck-pc3-memory-1792146263.service; invocation ID: 228cc4d16f1542c7999d2efe093fe515\nFinished with result: oom-kill\nMain processes terminated with: code=killed/status=TERM\nService runtime: 48ms\nCPU time consumed: 70ms\nMemory peak: 64.0M\nMemory swap peak: 0B\n",
+    "stdout": "{\"cpu.max\": \"100000 100000\", \"memory.max\": \"67108864\"}\n"
+  }
+}

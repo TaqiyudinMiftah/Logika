@@ -1,0 +1,56 @@
+{
+  "id": "tabicl-compact-20261021",
+  "original_deadline": 1792585871.823748,
+  "admission_reserve_seconds": 10800,
+  "training_admitted": true,
+  "backbone": "TabICLv2",
+  "library": "tabicl==2.2.0",
+  "features90": "Repaired control90 Kumo feature list; raw mixed DataFrame, context-only built-in normalization and categorical processing",
+  "context_rows": 50000,
+  "correction_rows": 6000,
+  "validation_rows": 14000,
+  "folds": 5,
+  "estimators": 8,
+  "estimator_batch_size": 1,
+  "seed": "2026+fold",
+  "correction_features": "V25 original12 plus6coverage fields",
+  "head_penalty": 0.003,
+  "head_shrinkage": 0.5,
+  "spline_weight": 0.25,
+  "backbone_weight": 0.75,
+  "secondary_blend": {
+    "control90": 0.8,
+    "tabicl90": 0.2
+  },
+  "validation": "Original seed31027 frozen5fold, full pooled70k OOF",
+  "primary": "tabicl90 versus repaired control90",
+  "historical_label_reuse": true,
+  "fresh_confirmation_available": false,
+  "training_recipe_count": 1,
+  "no_performance_pruning": true,
+  "preflight_evidence": "PREFLIGHT_REPR.json required before readmission",
+  "resource_limits": {
+    "CPU_quota_percent": 800,
+    "RAM_GiB": 48,
+    "swap": 0,
+    "GPUs": [
+      0,
+      1
+    ],
+    "one_job_per_GPU": true,
+    "minimum_free_disk_GiB": 20,
+    "local_model_budget_GiB": 30
+  },
+  "source_sha256": {
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "controller.py": "1d0ef394e4465b4e7d84827a231bf897b991a8319fe359c5e837e73a42194069",
+    "report.py": "dea422f66993031eae6130b41942670ab07a85e4c166ca823c49fce4b7eb2e8c",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "experiment.py": "a404066a4781c89b721c570634fdbce3908e087322643ecacd17183130a493fe"
+  },
+  "no_submission": true,
+  "cache_mode": "repr",
+  "cache_change_scope": "Operational memory repair; same full50k context,8estimators and model parameters. Engineering equivalence checked against retained KV preflight.",
+  "prior_attempt": "incidents/kv-cache-OOM",
+  "cache_change_evidence": "CACHE_MODE_EQUIVALENCE.json: FP32 max difference2.682209014892578e-7; AMP max difference0.000787198543548584 documented; repr save/reload check required"
+}

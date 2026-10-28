@@ -1,0 +1,44 @@
+{
+  "id": "ri[REDACTED_CREDENTIAL]",
+  "target": 0.54,
+  "metric": "complete original five-fold 70k pooled OOF KS",
+  "input": "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/input",
+  "bank": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank",
+  "matched_reference": "/mnt/home/logika-faris-exploration/nested-calibration-20261020",
+  "checkpoint": "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/assets/classifier.pt",
+  "checkpoint_sha": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "max_seconds": 86400,
+  "inner_seed": 20261025,
+  "teacher_workers": 3,
+  "teacher_inner_folds": 5,
+  "teacher_components": 5,
+  "teacher_fits": 150,
+  "gpu_variants": [
+    "signal",
+    "null"
+  ],
+  "kumo_context_fits": 10,
+  "features": [
+    "learned_horizontal_risk_logit",
+    "learned_horizontal_disagreement"
+  ],
+  "historical_label_reuse": true,
+  "point_in_time_certified": false,
+  "primary": "signal versus original matched incumbent and same-width null augmentation",
+  "preserve_spline": true,
+  "preserve_correction_inputs": true,
+  "freeze_backbone": true,
+  "bootstrap_repetitions": 2000,
+  "no_automatic_submission": true,
+  "versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.16.3",
+    "scikit-learn": "1.7.2",
+    "joblib": "1.6.0",
+    "lightgbm": "4.6.0",
+    "torch": "2.7.1+cu126",
+    "structured-data-models": "0.2.1",
+    "pyarrow": "22.0.0"
+  }
+}

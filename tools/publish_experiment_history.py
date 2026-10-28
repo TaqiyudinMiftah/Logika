@@ -24,7 +24,7 @@ PATTERNS = [
     re.compile(r'hf_[A-Za-z0-9]{20,}'),
     re.compile(r'AIza[A-Za-z0-9_-]{25,}'),
     re.compile(r'ya29\.[A-Za-z0-9_.-]{20,}'),
-    re.compile(r'sk-(?:proj-)?[A-Za-z0-9_-]{20,}'),
+    re.compile(r'(?<![A-Za-z0-9])sk-(?:proj-)?[A-Za-z0-9_-]{20,}'),
     re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----.*?-----END (?:RSA |EC |OPENSSH )?PRIVATE KEY-----', re.S),
 ]
 CASE_KEYS = {'application_id','customer_id','target','label','prediction','probability','proba','oof','y_true','y_pred'}
@@ -79,7 +79,7 @@ def clean_json(value, key=''):
 
 def public_content(path, logical_name=None):
     name=(logical_name or path.name).lower()
-    if name=='codex-a100.md' or name.startswith('sysinfo') or 'shell_history' in name or 'term_history' in name:
+    if name.endswith('session-index.tsv') or name=='codex-a100.md' or name.startswith('sysinfo') or 'shell_history' in name or 'term_history' in name:
         return None,'private_operational_transcript'
     compressed=name.endswith('.gz')
     logical=Path(name[:-3] if compressed else name)

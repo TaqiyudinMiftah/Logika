@@ -1,0 +1,1 @@
+All5folds complete; supervised90 KS0.52808253/AUC0.84768378/LL0.29217543. ImprovesAUCandLL but losesKS0.002136 versus matchedcontrol. Fixed20percentblend KS0.52964871/AUC0.84734332. No goal attainment or promotion. Retain this featureview as potentially complementary information, not a scoring winner.

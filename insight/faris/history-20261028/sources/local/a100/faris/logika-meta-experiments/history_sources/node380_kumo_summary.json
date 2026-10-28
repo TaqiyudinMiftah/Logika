@@ -1,0 +1,36 @@
+{
+  "state": "completed",
+  "config": {
+    "model": "Kumo Large",
+    "folds": 10,
+    "fold_seed": 9173,
+    "context_rows": 16384,
+    "estimators": 2,
+    "query_batch_size": 256,
+    "gpu_budget_gib": 24,
+    "process_budget_gib": 32,
+    "minimum_headroom_gib": 8,
+    "feature_count": 388,
+    "precision": "bfloat16",
+    "gradient_updates": 0,
+    "pilot": false,
+    "context_sampling": "target-by-decision-month stratified outer-training subset"
+  },
+  "pooled_oof": {
+    "ks": 0.5127016592084279,
+    "directional_ks": 0.5127016592084279,
+    "roc_auc": 0.8379822877501616,
+    "log_loss": 0.29907848345460547
+  },
+  "mean_fold_ks": 0.5178168210112494,
+  "sd_fold_ks": 0.010643040737723842,
+  "submission_sha256": "28e4a2ac5c8b3082a850c61cd701b07cda10123134c7710a2bd7a8f8777932fe",
+  "oof_sha256": "b73bb8f52b9a4857d05350edbb26501d55b573bfcf05fbe6a9115132647b6b3c",
+  "checkpoint_sha256": {
+    "config.json": "de7d618ec4019293e976e37371612ff9b8e71c22336c463a7225b0f130e78318",
+    "large/classifier.pt": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613"
+  },
+  "submission_rows": 30000,
+  "historical_v3_oof_ks": 0.5190088512771253,
+  "caveat": "Historical v3 feature selection reused training labels. Kumo context uses 16384 labels per fold; v3's new trees used 63000. Historical v3 also blends a 3-fold component. No new public score is known."
+}

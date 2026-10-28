@@ -1,0 +1,28 @@
+{
+  "id": "repayment-severity-fe-20261021",
+  "original_deadline": 1792585871.823748,
+  "source_sha256": {
+    "build.py": "1b7652a8a942fc83638a1ae8146c3725356d441961f1878cfce1570e697f09f6",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "run.py": "1ba377058258335a727516f1d56359ac6c1fb1e2cd3253ef9e829d17a01cc918",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0"
+  },
+  "preprocessing_admitted": true,
+  "classifier_training_admitted": true,
+  "primary_contrast": "joint versus matched_maturity; joint versus baseline",
+  "recipes": [
+    "baseline",
+    "matched_maturity",
+    "joint"
+  ],
+  "replace_columns": [
+    "re_late_1_posterior",
+    "re_late_30_posterior"
+  ],
+  "head_features": 18,
+  "architecture_and_hyperparameters_unchanged": true,
+  "created": 1792556908.0098913,
+  "reference": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.dirichlet_multinomial.html",
+  "engineering_revision": 2,
+  "incident": "Prior optimization success at fixed alpha bound: projected gradient is the correct KKT gate; fixed feature formula, optimizer, bounds and budget unchanged. Original evidence retained. No classifier fitted."
+}

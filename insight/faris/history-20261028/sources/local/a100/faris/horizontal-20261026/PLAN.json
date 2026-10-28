@@ -1,0 +1,70 @@
+{
+  "created_UTC": "2026-10-25T17:16:20.849942+00:00",
+  "scope": "User-requested source-backed horizontal Kumo subspace ensemble over all audited existing features and actuarial extensions.",
+  "target_original_fivefold_pooled_KS": 0.54,
+  "deadline_epoch": 1793034980.849942,
+  "search_deadline_epoch": 1793020580.849942,
+  "first_window_hours": 24,
+  "reserve_hours": 4,
+  "maximum_feature_columns_per_model": 100,
+  "catalog_sha256": "b015a313a4759df4071223334dadc3e87938bd93fd911f45e78b6c4fddd49a93",
+  "pilot_packs": [
+    "baseline90",
+    "p0003",
+    "p0027"
+  ],
+  "screening": {
+    "size": "small",
+    "num_estimators": 2,
+    "context_rows": 50000,
+    "correction_rows": 6000,
+    "outer_rows": 14000,
+    "folds": 5,
+    "seed": "2026+fold",
+    "all_catalog_packs": 290
+  },
+  "confirmation": {
+    "sizes": [
+      "medium",
+      "large"
+    ],
+    "num_estimators": 8,
+    "shortlist_per_fold": 6,
+    "selection": "Original inner correction data only; do not choose shortlist using outer KS."
+  },
+  "ensemble_rule": {
+    "inner_roles": "Stratified half of the 6k ranks subspaces; other half selects count and blend weight, seed261026.",
+    "counts": [
+      1,
+      4,
+      16,
+      64,
+      "all"
+    ],
+    "weights": [
+      0,
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.7,
+      1.0
+    ],
+    "baseline": "Original Kumo90 raw predictions; mature correction18 plus spline77 is downstream comparator.",
+    "ties": "Smaller blend weight, then fewer members.",
+    "final_head": "Fit fixed .003/.5 head on original 6k using selected raw mixture; .75 corrected + .25 unchanged mature spline."
+  },
+  "retention": "Recipes, sources, hashes, seeds, prediction arrays and metrics only. Shared original pretrained checkpoint cache; no fitted weights or KV caches. Features generated lazily.",
+  "resources": {
+    "gpu_workers": 3,
+    "CPU_threads_per_worker": 2,
+    "RAM_GiB_per_worker": 18,
+    "per_fit_wall_seconds": 900,
+    "roots": "Only /mnt/home/faris on PC2001 and PC2003"
+  },
+  "timing_policy": "Check raw timestamps and DPD <= elapsed due-date age; inherited snapshot collection semantics remain an assumption and are recorded. All new transforms use only predecision input values.",
+  "boundary_policy": "Context-only preprocessing, posterior priors, vocabulary and duplicate/constant detection; no outer-label fitting, no target columns as features.",
+  "uncertainty": "Paired row-stratified bootstrap2000 for final pooled difference, fold deltas and seed sensitivity. Development evidence only; old outer labels previously exposed.",
+  "success_rule": "Development KS >= .54 reported separately from generalization; promote only with positive paired gain and stability, then evaluate possible submission.",
+  "restart_policy": "Resume same frozen deadline; incomplete models remain incomplete."
+}

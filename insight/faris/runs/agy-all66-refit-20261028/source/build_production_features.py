@@ -43,7 +43,7 @@ def main(fold):
  history=pd.read_csv(A/'exploration-12h-20261017/raw/repayment_history.csv',usecols=['customer_id','installment_id','due_date','max_days_past_due'])
  factory=MaturityFeatures('eligible_denominators').fit(apps,history,apps.application_id.iloc[ctx]);mature=factory.transform(apps,history);factory.save(dest/'MATURITY_PARAMETERS.json')
  gate=json.loads((FRZ/'FEATURE_FREEZE.json').read_text());champ=gate['views']['champion90'];head=json.loads((FRZ/'frozen/fold0/MANIFEST.json').read_text())['head_columns'];master=list(dict.fromkeys(champ+head))
- assert len(champ)==90 and len(master)==106
+ assert len(champ)==90 and len(master)==105
  frozen=small.copy()
  for c in ['re_late_1_posterior','re_late_30_posterior']:frozen[c]=mature[c].to_numpy()
  # Original64k base remains separate. Legacyquery's mature means are applied

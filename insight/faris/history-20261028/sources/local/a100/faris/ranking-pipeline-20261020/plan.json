@@ -1,0 +1,23 @@
+{
+  "id": "ranking-pipeline-20261020",
+  "hypothesis": "mixed ranking and logloss correction, one changed objective",
+  "rank_weight": 0.25,
+  "penalty": 0.003,
+  "correction_strength": 0.5,
+  "spline_weight": 0.25,
+  "pairs": 262144,
+  "ranking_seeds": [
+    20261020,
+    20261021
+  ],
+  "bootstrap_repetitions": 2000,
+  "compute_ceiling_seconds": 7200,
+  "workers": 5,
+  "conditional_gate_only": true,
+  "independent_audit": false,
+  "point_in_time_certified": false,
+  "primary_reference": "teammate locked baseline",
+  "acceptance": "KS and AUC positive each seed, 4/5 KS and 3/5 AUC fold wins, worst KS >=-.003, logloss delta <=.0005, both familywise lower bounds >0",
+  "historical_exposure": "All 70000 labels previously used; new five-fold evaluation is reused development evidence",
+  "frozen_at": 1792478635.3137949
+}

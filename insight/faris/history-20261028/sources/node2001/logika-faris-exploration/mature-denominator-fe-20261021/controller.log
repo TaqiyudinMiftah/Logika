@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/mnt/home/logika-faris-exploration/mature-denominator-fe-20261021/source/controller.py", line 39, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/mnt/home/logika-faris-exploration/mature-denominator-fe-20261021/source/controller.py", line 7, in main
+    lock=(R/'controller.lock').open('a+');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);p=read(R/'training-plan.json');assert p['training_admitted']and read(R/'DATA_READY.json')['status']=='passed'
+                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/mature-denominator-fe-20261021/source/controller.py", line 5, in read
+    def read(p):return json.loads(Path(p).read_text())
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/logika-faris-exploration/mature-denominator-fe-20261021/training-plan.json'

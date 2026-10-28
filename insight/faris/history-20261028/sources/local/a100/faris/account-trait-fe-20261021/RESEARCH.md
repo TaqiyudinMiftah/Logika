@@ -1,0 +1,15 @@
+# Stable borrower account trait versus conditional next observation
+
+The prior correlated-account model improved raw three-month forecasts, yet the frozen default-prediction trial did not improve: KS.5303064195/AUC.8468031384 versus maturity-only.5306361042/.8470560913. The feature trial estimated the next noisy monthly observation. It did not estimate the persistent borrower randomintercept. This distinction follows directly from the existingGaussianmeasurementmodel, not a predictive-model/hyperparameter search.
+
+One newfeaturequantity, samealreadyfittedmeasurementparameters: let y=mu_i*1+epsilon, mu_i~N(mu,tau), epsilon~N(0,sigma*R(phi)). The retainedcontext-only fit provides mu,tau,sigma,phi. With V=tau*11'+sigma*R, compute E[mu_i|y]=mu+tau*1'V^-1(y-mu) and Var[mu_i|y]=tau-tau^2*1'V^-1*1. No refit of those parameters, no alternateprior/correlation/horizon, no default labels or queryshared fitting. The earlier diagonal1e-9numericaljitter is preserved. Missing accountsource remainsmissing.
+
+Replace the samefiveexistingaliases: exp(posteriorlogincometrait), posteriorlogincometrait, logdeclaredincome-minus-trait, exp(posteriorlogoutflowtrait-minus-logincometrait), posteriorlogincometraitSD. The SD is uncertainty about a persistent randomintercept, not a future observationSD. Mean and SD are not claims of the actual data-generating latenttrait. The workingmodel can be misspecified, e.g.realdrift,profileheterogeneity,dependencebetweenincome/outflow,informativereporting.
+
+Allotherfeatures, Kumo90/rawpredictions, original50kcontext/6khead/14kquery,5foldseed31027,18inputheadL2.003/strength.5,77inputsplineC.05/fiveknots/degree3/newton-cholesky/80iterations/tol1e-5,seeds,trainingbudget and75:25probabilityblend stayfixed. The maturity-aligned repaymentmeans remain. Fivehead/fivesplinefits, allretained withpreprocessing andfullalignedOOF. Exact oldmaturitypipeline replay precedes fitting; no fold scores until allfivefinish.
+
+Gate: exacthashes of allfiveoriginalmeasurementparameterfiles; samecontextfittingIDhashes; no new sharedparameters fitted; no defaultlabels infeaturebuild; independent scalarposterior reconstruction on120sampledapplicants acrosscontext/head/validation/test. Positiveposteriorvariance andsourceabsence masks required. Serialize/replay all10predictivemodels and independently verify full70000OOFKS/AUC.
+
+Predeclare contrasts with original baseline, maturity-only, and the completed next-observationfeaturetrial. The latter isolates the estimand under the samefeaturewidth/workingmeasurementmodel. ReportKS/AUC/logloss/folds/timing andconditionalpairedbootstrap1000replications,3contrasts x2metricsBonferroni95percent. Adaptivehypothesisselectionandhistoricaldefaultlabelreuse are disclosed; no untouchedgeneralizationclaim. AUCdisagreementcannotbehidden. Confirmationclosed,nosubmission,target.54unmet.
+
+Absoluteoriginaldeadline1792585871.823748 and16:31WIBadmissionstop preserved. This isone explicitlatent-traitfeaturehypothesis; no moreparameter/architecture/weight variants are admitted alongside it.

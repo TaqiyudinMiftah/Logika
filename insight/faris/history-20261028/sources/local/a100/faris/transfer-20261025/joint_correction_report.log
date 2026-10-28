@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/mnt/home/logika-faris-exploration/transfer-20261025/source/joint_correction.py", line 245, in <module>
+    else: report()
+          ^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/transfer-20261025/source/joint_correction.py", line 181, in report
+    complete = read(root/'complete.json')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/transfer-20261025/source/robustness.py", line 29, in read
+    return json.loads(Path(path).read_text())
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/home/logika-faris-exploration/transfer-20261025/joint_correction/fold4/complete.json'

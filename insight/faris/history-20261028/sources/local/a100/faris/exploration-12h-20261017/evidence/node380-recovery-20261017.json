@@ -1,0 +1,50 @@
+{
+  "verified_at": 1792232208.254495,
+  "clock": {
+    "start": 1792212935.17935,
+    "deadline": 1792256135.1793504,
+    "budget_seconds": 43200,
+    "id": "exploration-12h-20261017"
+  },
+  "status": "running",
+  "controller": {
+    "pid": 6164,
+    "created": 1792232131.76,
+    "campaign": "explore12h-node380"
+  },
+  "controller_alive": true,
+  "state_age_seconds": 0.8061094284057617,
+  "counts": {
+    "interrupted": 7,
+    "pending": 63,
+    "complete": 17,
+    "running": 1,
+    "unschedulable": 1
+  },
+  "workers": [
+    {
+      "id": "job_000025",
+      "family": "tabicl",
+      "identity": {
+        "pid": 6235,
+        "created": 1792232134.82,
+        "command": [
+          "/home/taqiyudinmiftah/faris/exploration-12h-20261017/.venv/bin/python",
+          "-m",
+          "oneshot.worker",
+          "/home/taqiyudinmiftah/faris/exploration-12h-20261017/campaign",
+          "/home/taqiyudinmiftah/faris/exploration-12h-20261017/campaign/runs/job_000025/attempt_001/spec.json",
+          "/home/taqiyudinmiftah/faris/exploration-12h-20261017/campaign/runs/job_000025/attempt_001"
+        ]
+      },
+      "alive": true,
+      "logs": {
+        "stdout.log": "{\"fold\": 0, \"ks\": 0.5240487868575378, \"seconds\": 27.49998903274536}\n{\"fold\": 1, \"ks\": 0.4963627110994036, \"seconds\": 21.897808074951172}\n{\"fold\": 2, \"ks\": 0.5113529427516352, \"seconds\": 22.374656915664673}\n",
+        "stderr.log": ""
+      }
+    }
+  ],
+  "gpu_processes_csv": "6235, 2936",
+  "gpu_csv": "NVIDIA A100-SXM4-80GB, 965 MiB, 80188 MiB, 0 %",
+  "recovery_reason": "Jupyter server restarted; refreshed private API token and resumed existing campaign"
+}

@@ -1,0 +1,53 @@
+{
+  "id": "horizontal-mechanistic-20261019-v1",
+  "outer_folds": 5,
+  "seed": 31027,
+  "rows": 70000,
+  "metric": "tie-aware two-sided KS",
+  "aggregation": "pooled OOF primary; matched per-fold KS stability",
+  "context_rows": 50000,
+  "correction_rows": 6000,
+  "outer_validation_rows": 14000,
+  "training_seeds": [
+    2026,
+    2027
+  ],
+  "independent_audit": false,
+  "historical_label_reuse": true,
+  "trusted_point_in_time": false,
+  "broad_search_allowed": false,
+  "hypotheses": [
+    "H1 independent architectures",
+    "H2 APR residual versus calibration",
+    "H3 constrained specialists and coverage gate"
+  ],
+  "primary_recipe": "horizontal_probability",
+  "comparators": [
+    "friend",
+    "champion"
+  ],
+  "promotion": "none automatic; conditional research support only if pooled delta>0, adjusted lower bound>0, >=4/5 fold gains for both seeds and no fold loss>.003 against both anchors; AUC rule mandatory, KS-only improvement rejected",
+  "uncertainty": "2000 paired fold/class bootstrap;23contrasts x2metrics Bonferroni; historical adaptive selection uncorrected",
+  "baseline_gate": {
+    "ks": [
+      0.35,
+      0.7
+    ],
+    "logloss": [
+      0.1,
+      0.6
+    ],
+    "fold_min": 0.3,
+    "fold_range_max": 0.08,
+    "CI_width_max": 0.04,
+    "auc_above_chance": true
+  },
+  "safety": "Stop on metric/alignment/boundary failure. Bounded declared baseline pilots precede remaining mechanistic training. Persist original24hdeadline, stop owned children only, retain all models.",
+  "AUC_rule": {
+    "both_seed_pooled_deltas_nonnegative": true,
+    "mean_delta_positive": true,
+    "fold_wins_per_seed_min": 3,
+    "familywise_lower_bound_noninferiority_margin": -0.0005,
+    "logloss_max_increase": 0.0005
+  }
+}

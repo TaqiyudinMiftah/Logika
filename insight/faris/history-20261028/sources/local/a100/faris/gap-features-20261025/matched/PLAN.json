@@ -1,0 +1,55 @@
+{
+  "started_UTC": "2026-10-25T06:53:33.931465+00:00",
+  "source_sha256": "40a2593f8ee7aa10591a4202c03a7732456f8d09ba4379657207c3c1e5ddc2df",
+  "cases": {
+    "liquidity": [
+      "liq_shortfall_fraction",
+      "liq_shortfall_income_mean",
+      "liq_lowbuffer_fraction",
+      "liq_surplus_income_p10",
+      "liq_joint_stress_fraction",
+      "liq_longest_shortfall_run_fraction",
+      "liq_recent_shortfall_change",
+      "liq_observed_months"
+    ],
+    "alignment": [
+      "align_spend_outflow_share",
+      "align_spend_income_correlation",
+      "align_lowincome_spend_logratio",
+      "align_lowbuffer_cancel_change",
+      "align_lowbuffer_credit_change",
+      "align_negativeflow_spend_share",
+      "align_spend_outflow_correlation",
+      "align_observed_months"
+    ],
+    "application_path": [
+      "path_reapply_after_nonapproval_fraction",
+      "path_current_last_request_logratio",
+      "path_trailing_nonapproved_count",
+      "path_last_gap_relative_log",
+      "path_nonapproved_request_logchange",
+      "path_recent_nonapproved_request_income",
+      "path_approved_haircut_mean",
+      "path_days_since_nonapproved"
+    ],
+    "alignment_null": [
+      "align_spend_outflow_share",
+      "align_spend_income_correlation",
+      "align_lowincome_spend_logratio",
+      "align_lowbuffer_cancel_change",
+      "align_lowbuffer_credit_change",
+      "align_negativeflow_spend_share",
+      "align_spend_outflow_correlation",
+      "align_observed_months"
+    ]
+  },
+  "seeds": [
+    "original",
+    "fresh"
+  ],
+  "outer_labels_for_fit": false,
+  "models": "B maturity head18 plus 8 fields, spline77 plus8; raw Kumo unchanged",
+  "primary": "mean of two Kumo seeds",
+  "bootstrap": "1000 paired stratified draws, fixed seed251025; per-family 98.333% interval (3 real families)",
+  "status": "running"
+}

@@ -1,0 +1,1 @@
+Matched A100 context50k KS0.53017947/AUC0.84702595; context56k KS0.52980209/AUC0.84689241. Additional context labels did not improve this fixed correction pipeline. Same50k feature priors, correction and sharedspline; not proof that every56k-context or recalibrated recipe fails. All5folds complete, all10fitted caches retained source. No promotion, target unmet.

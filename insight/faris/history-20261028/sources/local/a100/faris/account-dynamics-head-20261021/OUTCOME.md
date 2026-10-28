@@ -1,0 +1,1 @@
+Truehistorydynamics head KS0.52746342/AUC0.84683859; shuffledtime null KS0.52719610/AUC0.84653008; baseline0.53021854/0.84702585. Realordering exceedsnull pointmetrics butbothworsenbaseline; no promotion. Allfive folds andtenheads complete, no performancepruning; conditionalintervals separate. Realtemporalstructure doesnotautomatically imply defaultprediction gain.

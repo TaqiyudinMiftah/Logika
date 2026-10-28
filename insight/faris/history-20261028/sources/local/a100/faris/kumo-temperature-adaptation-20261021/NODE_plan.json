@@ -1,0 +1,48 @@
+{
+  "id": "kumo-temperature-adaptation-20261021",
+  "original_deadline": 1792585871.823748,
+  "checkpoint": "/home/taqiyudinmiftah/faris/kumo-large-node380-20261016/hf_cache/hub/models--nvidia--Kumo-Tabular/snapshots/3c3e10bbdb590ace29e7026847f92db3c603096d/large/classifier.pt",
+  "checkpoint_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "dtype": "float16",
+  "gpu_memory_fraction": 0.3,
+  "minimum_free_VRAM_MiB": 32768,
+  "selection": "Only models.classification.icl_block.layers.*.attn.sdpa.query_scaling.head_scale parameters",
+  "expected_trainable_parameters": 384,
+  "proposed_training": {
+    "episodes": 200,
+    "support_rows": 384,
+    "query_rows": 128,
+    "learning_rate": 0.001,
+    "optimizer": "AdamW",
+    "weight_decay": 0,
+    "penalty_to_pretrained": 0.001,
+    "maximum_parameter_deviation": 0.25
+  },
+  "validation": "Frozen70000row5fold seed31027; adaptation episodes onlycontext50000, correction6000 and validation14000 withheld from adaptation.",
+  "preflight": "Zero-update equality, actual gradients, one optimizer step, frozen nonselected parameter hash, no evaluation labels in staged data.",
+  "model_training_admitted": true,
+  "preflight_admitted": true,
+  "source_hypothesis": "Head-temperature-only similarity adaptation inspired by query-scaling results on other backbones; not exact DiagScale replication or an established Kumo improvement.",
+  "admission_condition": "Both real-gradient and exact-shape checks passed, plus actual fit/adapt/fit/cache replay. Full input-role archive must verify before starting full CV.",
+  "fixed_ensemble": "Predeclared equal probability average of adapted and hardware-matched frozen pipelines; one fixed secondary comparison, no learned weights.",
+  "primary_comparison": "Temperature adaptation versus matched zero-update A100 control; complete original5fold OOF, KS/AUC/logloss and paired uncertainty; no per-fold performance pruning.",
+  "calibration_evidence": [
+    "preflight.json",
+    "full_shape_preflight.json",
+    "pipeline_preflight.json"
+  ],
+  "phenotype_source_sha256": {
+    "admit.py": "e1e8b4625867c4f15fa558b3e61dc99ea9ecc1658fae742f36d9b65d5f27571f",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "calibrate.py": "eff04b7090a191f24b072d2c4262b4a849a71b851d0483baca819a47b39e7c85",
+    "evaluate.py": "2ee4133c7a220e315431d1d7cb8c84262db8bb9bfebd95c31ac64d2cefa2efd7",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "gpu_backend.py": "2734bd45143451c41da6dc820636b2a26c3b8b13c653c1de1598ad04083831e2",
+    "pipeline_preflight.py": "cfceee28e33e5208e4cbbb9534d6f814f1a70c7d0441bc34dd4fdf987523f7da",
+    "preflight.py": "b584ecf8eed92376606aab3269db08742061edbf8839d67a9935ee035fb67bb8",
+    "prepare.py": "9f4cb800b2f97285b6828b4ed5bfc8e24ac08b7e54b865fd5bcae4b6845dc29b",
+    "run.py": "b9e7b97bd2914eb2918dc0374dc921b9f534fbce952ab39728c9aa80d5fe872c",
+    "stage.py": "e3123334d5004be24d837bacf8865ce807f23c267e2eebe4e4edc197ef7a2a4f",
+    "supervise.py": "735ec28deab15b87f8e0b7453503fdd81da5b8edde2a4a4b91b68de604a0cfc0"
+  }
+}

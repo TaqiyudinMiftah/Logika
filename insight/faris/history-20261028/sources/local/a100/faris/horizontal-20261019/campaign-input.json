@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "id": "horizontal-20261019",
+  "competition_root": "/mnt/home/logika-faris-exploration/horizontal-20261019",
+  "adapter": "research.py",
+  "metric": "tie-aware pooled KS with AUC safeguard",
+  "direction": "maximize",
+  "finite_research": true,
+  "inputs": {
+    "bank": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank",
+    "extras": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/extras",
+    "train": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/train_applications.csv",
+    "friend": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/friend_predictions"
+  },
+  "brief": {
+    "description": "Three researched hypotheses: independent champions, bounded conditional underwriting correction, and constrained complementary specialists. Finite panel; no adaptive sweep.",
+    "rules": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/RULES.md",
+    "compute_access": "Existing authorized PC2 Faris-owned directory, CPU-only; archived Kumo outputs read-only",
+    "external_data_policy": "No external borrower data or additional labels",
+    "pretrained_policy": "Reusing preserved Kumo predictions; no new downloads or pretrained models"
+  },
+  "evidence": {
+    "research": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/RESEARCH.md",
+    "eda": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/EDA_PLAN.md",
+    "hypotheses": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/RESEARCH.md",
+    "applicability": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/APPLICABILITY.md",
+    "contract": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/validation_contract.json",
+    "archive": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/full_archive_synthesis.json",
+    "friend": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/research_index.json",
+    "friend_auc": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/friend_KS_AUC_audit.json",
+    "repo_comparison": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/repo_comparison.json"
+  },
+  "protocols": {
+    "screen": {
+      "split": "/mnt/home/logika-faris-exploration/horizontal-20261019/evidence/friend_predictions/artifacts/fold0/indices.npz",
+      "description": "all5 frozen index files fingerprinted as inputs; this reference is firstfold only"
+    }
+  },
+  "families": [
+    {
+      "name": "mechanistic",
+      "hypothesis": "H1-H3 frozen panel; generic search disabled",
+      "parameters": {
+        "design": {
+          "type": "categorical",
+          "choices": [
+            "fixed"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 5120,
+        "disk_mb": 300,
+        "timeout_seconds": 3600
+      }
+    }
+  ],
+  "budget_seconds": 86400,
+  "storage_limit_mb": 30000,
+  "max_trials": 8,
+  "max_workers": 10,
+  "seeds": [
+    2026,
+    2027
+  ],
+  "cpu_limit": 10,
+  "ram_limit_mb": 49152,
+  "contract_sha": "e67538badfea50823ea6aeb8c8cdf1eca55c6574bec4e34beba0eed556131757"
+}

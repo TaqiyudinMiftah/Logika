@@ -1,0 +1,127 @@
+    def fit(
+        self,
+        x: Tensor | TableTensor,  # [..., R, D]
+        y: Tensor | TableTensor,  # [..., R, 1]
+        related_tables: RelatedTables | None = None,
+        *,
+        recipe: Recipe | None = None,
+        num_estimators: int | None = None,
+        estimator_batch_size: int | None = 1,
+        callbacks: Sequence[Callback] | None = None,
+        generator: torch.Generator | None = None,
+        **kwargs: Any,
+    ) -> None:
+        r"""Fit and cache in-context examples.
+
+        Repeated calls to :meth:`predict` can then reuse the same in-context
+        examples while only providing new query examples.
+
+        Args:
+            x: The feature tensor of in-context examples with shape
+                ``[..., R, D]`` with ``R`` rows and ``C`` columns.
+            y: The targets of in-context examples with shape
+                ``[..., R, 1]``.
+            related_tables: Related context for in-context examples.
+            recipe: The custom recipe for pre- and post-processing.
+            num_estimators: The number of estimators ``E`` for ensembling.
+                If ``None``, the leading dimension of higher-rank inputs is
+                used as the estimator dimension, allowing input data to be
+                customized per estimator (*e.g.*, different in-context examples
+                per estimator).
+            estimator_batch_size: Maximum number of consecutive estimators run
+                through the model in one call. ``1`` (default) runs estimators
+                one by one; ``None`` batches as many as possible. Estimators
+                whose preprocessed tables differ in shape or target class
+                set, or that come with related tables, run in separate
+                calls. Device memory grows with the batch size. Estimators
+                fitted together are predicted together.
+            callbacks: Callbacks applied in sequence to this model call.
+            generator: Pseudorandom number generator used for sampling during
+                pre-processing and model execution.
+            kwargs: Additional keyword arguments passed to the model.
+        """
+        callbacks = () if callbacks is None else callbacks
+
+        self.clear()
+
+        recipe_execution = RecipeExecution(
+            self.default_recipe() if recipe is None else copy.deepcopy(recipe)
+        )
+        with (
+            torch.amp.autocast(x.device.type, enabled=False),
+            inference_mode("no_grad"),
+        ):
+            contexts = recipe_execution.fit_transform(
+                x=x,
+                y=y,
+                related_tables=related_tables,
+                num_members=num_estimators,
+                generator=generator,
+            )
+
+        contexts = [
+            self._prepare_context(context, callbacks) for context in contexts
+        ]
+        class_values = _class_values(contexts, estimator_batch_size)
+        batches = _batch_slices(
+            contexts=contexts,
+            queries=None,
+            class_values=class_values,
+            estimator_batch_size=estimator_batch_size,
+        )
+        cache = Cache(
+            recipe_execution=recipe_execution,
+            kwargs=kwargs,
+            num_batches=len(batches),
+        )
+        for i, batch in enumerate(batches):
+            with inference_mode("no_grad"):
+                context = _stack_context(contexts[batch])
+                categorical_mask = _categorical_mask(contexts[batch])
+                batch_cache = Cache(
+                    x_schemas=tuple(
+                        context.x.schema for context in contexts[batch]
+                    ),
+                    y_schema=context.y.schema,
+                    related_tables_schema=context.related_tables.schema
+                    if context.related_tables is not None
+                    else None,
+                    classes=(
+                        context.y.categorical.categories[0]
+                        if context.y.categorical.size(-1) > 0
+                        else None
+                    ),
+                    class_values=class_values[batch],
+                    categorical_mask=categorical_mask,
+                )
+                self._forward(
+                    x_context=context.x,
+                    y_context=context.y,
+                    x_query=None,
+                    related_context_tables=context.related_tables,
+                    related_query_tables=None,
+                    cache=batch_cache,
+                    generator=generator,
+                    categorical_mask=categorical_mask,
+                    **kwargs,
+                )
+
+            if x.is_cuda and len(contexts) > 1:
+                try:  # Copy to pinned CPU memory:
+                    batch_cache = batch_cache._apply_tensor(
+                        lambda tensor: torch.ops.aten._to_copy.default(
+                            tensor,
+                            device="cpu",
+                            pin_memory=True,
+                            non_blocking=True,  # Required for `pin_memory`.
+                        )
+                    )
+                finally:
+                    torch.cuda.current_stream(x.device).synchronize()
+
+            cache[i] = batch_cache
+
+        self._cache = cache.freeze()
+
+(self, x_context: torch.Tensor | sdm.tensor.table.TableTensor, y_context: torch.Tensor | sdm.tensor.table.TableTensor, x_query: torch.Tensor | sdm.tensor.table.TableTensor, related_context_tables: sdm.relational.task.RelatedTables | None = None, related_query_tables: sdm.relational.task.RelatedTables | None = None, *, recipe: sdm.processing.recipe.Recipe | None = None, num_estimators: int | None = None, estimator_batch_size: int | None = 1, callbacks: collections.abc.Sequence[sdm.models.callback.Callback] | None = None, generator: torch._C.Generator | None = None, **kwargs: Any) -> sdm.tensor.table.TableTensor
+ 

@@ -22,3 +22,19 @@ __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 .venv/
+
+# Public experiment receipts can mention Kaggle without containing credentials.
+!insight/faris/**/kaggle*.json
+!insight/faris/**/*kaggle*.json
+
+# Case-level evidence and fitted models remain private.
+insight/faris/**/*.npz
+insight/faris/**/*.npy
+insight/faris/**/*.parquet
+insight/faris/**/*.joblib
+insight/faris/**/*.pkl
+insight/faris/**/*.pt
+insight/faris/**/*.pth
+insight/faris/**/*.ckpt
+insight/faris/**/*.safetensors
+insight/faris/**/__pycache__/

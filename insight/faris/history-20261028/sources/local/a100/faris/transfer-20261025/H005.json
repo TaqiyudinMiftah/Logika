@@ -1,0 +1,30 @@
+{
+  "id": "H005-fixed-V25-maturity-average",
+  "created_UTC": "2026-10-24T19:30:01.478768+00:00",
+  "public_feedback_already_seen": [
+    "V25 0.56822",
+    "B 0.56818"
+  ],
+  "mechanism": "Fixed averaging of five-fold context50k historical V25 with full-data context64k maturity replacement may reduce context-membership sensitivity and feature-treatment sensitivity. Full-data models use every label across context/correction/spline. This is a training-policy hedge, not an assertion that combining top public submissions helps.",
+  "weights": {
+    "historical_V25": 0.5,
+    "maturity_B": 0.5
+  },
+  "comparison": "Aligned original five-fold OOF published_V25 against maturity__original. Exact fixed test-file average only if accepted.",
+  "promotion_predicate": "Pooled KS must exceed both component pooled KS; at least3/5 KS fold changes versus each comparator positive, no fold delta below -0.002; record paired conditional interval. No weight alternatives if rejected.",
+  "limitations": [
+    "Covariate priors differ: historical V25 used globally estimated label-free statistics; maturity uses context-local estimates. Inherited covariate scope disclosure retained.",
+    "This hypothesis was formed after first public result and is adaptive; not independent confirmation.",
+    "Same old development labels, no learned stacking or routing."
+  ],
+  "reference_inputs": [
+    {
+      "path": "../coverage-transfer-20261021/oof.npz",
+      "sha256": "9f87ed54a3df3766d3498b6f02e3794637f20d4b129950487e03bf6245cb966f"
+    },
+    {
+      "path": "ROBUSTNESS_OOF.npz",
+      "sha256": "860cd636f2fd6230466c8cd1eeebdd1438aeed5c88450ed7b052be17d0bf035a"
+    }
+  ]
+}

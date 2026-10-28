@@ -1,0 +1,71 @@
+{
+  "bank_id": "eb7ca7bdcb7c21b6dc1524bdcd88e1983d02334a91742637ec1ac9e814da79da",
+  "bank_root": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1",
+  "fold": 1,
+  "key": "w2p_e8dd515dcc04cd2e4959",
+  "mode": "cv",
+  "recipe": {
+    "control": "f_7c3c29bc9adf28f1",
+    "id": "w2p_e8dd515dcc04cd2e4959",
+    "kind": "pipeline",
+    "model": "linear",
+    "representation": {
+      "changes": {
+        "clip": 0.01,
+        "encoding": "target",
+        "feature_count": 128,
+        "indicator": true,
+        "interactions": true,
+        "representation": "income_gap",
+        "select": "gain",
+        "window": 180
+      },
+      "config": {
+        "append": true,
+        "category_normalize": false,
+        "clip": 0.01,
+        "cohort_weight": false,
+        "correlation": 0.95,
+        "dimensions": 64,
+        "encoding": "target",
+        "feature_count": 128,
+        "half_life": 90,
+        "indicator": true,
+        "interactions": true,
+        "mature": true,
+        "missing": "median",
+        "reducer": "none",
+        "representation": "income_gap",
+        "scale": "none",
+        "select": "gain",
+        "sources": [
+          "application",
+          "profile",
+          "previous",
+          "repayment",
+          "bureau",
+          "account",
+          "shopping"
+        ],
+        "spline": false,
+        "strength": 6,
+        "threshold": 30,
+        "transform": "identity",
+        "view": "v3",
+        "weight": 6,
+        "window": 180
+      },
+      "family": "cross_source",
+      "hypothesis": "Seeded higher-order combination",
+      "id": "w2f_305f821e59f359ca",
+      "is_control": false,
+      "matched_parent": null,
+      "resolved_numeric_columns": 508,
+      "semantic_signature": "305f821e59f359ca0eb0b3921d1fe0645d40747d61bf7afeaded0d2b6a2505bb",
+      "wave": 2
+    },
+    "seed": 2026
+  },
+  "seed": 9173,
+  "source_manifest_sha256": "2d1ee3a54bfe5a8772da3ac125be7fb276e157d51785fffa983d08a63847fa89"
+}

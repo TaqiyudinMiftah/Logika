@@ -1,0 +1,98 @@
+{
+  "stage": "modelling",
+  "UTC": "2026-10-26T14:01:29.338467+00:00",
+  "completed": 242,
+  "expected": 340,
+  "failed": 0,
+  "active": [
+    {
+      "node": "node2002",
+      "kind": "cpu",
+      "task": [
+        "extra_champion90",
+        3
+      ]
+    },
+    {
+      "node": "node2002",
+      "kind": "gpu",
+      "task": [
+        "kumo_medium_champion90",
+        4
+      ]
+    },
+    {
+      "node": "node2002",
+      "kind": "gpu",
+      "task": [
+        "kumo_medium_champion90",
+        3
+      ]
+    },
+    {
+      "node": "node2002",
+      "kind": "cpu",
+      "task": [
+        "extra_champion90",
+        2
+      ]
+    },
+    {
+      "node": "node2002",
+      "kind": "cpu",
+      "task": [
+        "extra_champion90",
+        1
+      ]
+    }
+  ],
+  "pending": {
+    "cpu": 0,
+    "gpu": 93
+  },
+  "failures": [],
+  "node_errors": {
+    "node2002": {
+      "UTC": "2026-10-26T13:59:56.861192+00:00",
+      "error": "Command '['ssh', '-o', 'ConnectTimeout=10', '-o', 'ConnectionAttempts=1', '-o', 'ServerAliveInterval=30', '-o', 'ServerAliveCountMax=3', '-o', 'ControlMaster=auto', '-o', 'ControlPersist=12h', '-o', 'NumberOfPasswordPrompts=1', '-o', 'PreferredAuthentications=password', '-o', 'PubkeyAuthentication=no', '-S', '/mnt/home/faris/logika-frozen-shadow-20261026/runtime/node2002/ssh.sock', '-p', '2002', 'faris@gpu-labkc.ub.ac.id', 'python3 -c \\'from pathlib import Path;import json,os,subprocess;m=dict(l.split(\\'\"\\'\"\\':\\'\"\\'\"\\',1)for l in Path(\\'\"\\'\"\\'/proc/meminfo\\'\"\\'\"\\').read_text().splitlines());g=subprocess.check_output([\\'\"\\'\"\\'nvidia-smi\\'\"\\'\"\\',\\'\"\\'\"\\'--query-gpu=index,memory.used,utilization.gpu\\'\"\\'\"\\',\\'\"\\'\"\\'--format=csv,noheader,nounits\\'\"\\'\"\\'],text=True);print(json.dumps({\\'\"\\'\"\\'cores\\'\"\\'\"\\':os.cpu_count(),\\'\"\\'\"\\'RAM_GiB\\'\"\\'\"\\':int(m[\\'\"\\'\"\\'MemAvailable\\'\"\\'\"\\'].split()[0])/2**20,\\'\"\\'\"\\'GPU\\'\"\\'\"\\':[list(map(int,l.split(\\'\"\\'\"\\',\\'\"\\'\"\\'))) for l in g.strip().splitlines()]}))\\'']' returned non-zero exit status 255.",
+      "retry_seconds": 120
+    }
+  },
+  "unresolved_dispatches": [
+    {
+      "task": [
+        "extra_champion90",
+        3
+      ],
+      "node": "node2002"
+    },
+    {
+      "task": [
+        "kumo_medium_champion90",
+        4
+      ],
+      "node": "node2002"
+    },
+    {
+      "task": [
+        "kumo_medium_champion90",
+        3
+      ],
+      "node": "node2002"
+    },
+    {
+      "task": [
+        "extra_champion90",
+        2
+      ],
+      "node": "node2002"
+    },
+    {
+      "task": [
+        "extra_champion90",
+        1
+      ],
+      "node": "node2002"
+    }
+  ]
+}

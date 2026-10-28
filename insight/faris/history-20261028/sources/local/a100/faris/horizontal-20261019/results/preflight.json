@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "id": "identity",
+      "status": "pass",
+      "details": {
+        "rows": 70000,
+        "unique_applications": 70000,
+        "unique_customers": 70000
+      }
+    },
+    {
+      "id": "friend_artifact_chain",
+      "status": "pass",
+      "details": {
+        "verified_original_import_digests": 27
+      }
+    },
+    {
+      "id": "friend_same_labels",
+      "status": "pass",
+      "details": "ac2885d2d4891cea4381800981a86f879c3895763aabbd10a1e1cac5c454461a"
+    },
+    {
+      "id": "fivefold_boundary_and_support",
+      "status": "pass",
+      "details": [
+        {
+          "fold": 0,
+          "context_positives": 6791,
+          "correction_positives": 815,
+          "validation_positives": 1901
+        },
+        {
+          "fold": 1,
+          "context_positives": 6791,
+          "correction_positives": 815,
+          "validation_positives": 1901
+        },
+        {
+          "fold": 2,
+          "context_positives": 6791,
+          "correction_positives": 815,
+          "validation_positives": 1901
+        },
+        {
+          "fold": 3,
+          "context_positives": 6790,
+          "correction_positives": 815,
+          "validation_positives": 1902
+        },
+        {
+          "fold": 4,
+          "context_positives": 6790,
+          "correction_positives": 815,
+          "validation_positives": 1902
+        }
+      ]
+    },
+    {
+      "id": "known_ks_and_saved_baseline",
+      "status": "pass",
+      "details": {
+        "friend_pooled_ks": 0.5292994659005608,
+        "constant_ks": 0.0
+      }
+    },
+    {
+      "id": "independent_auc_and_saved_baseline",
+      "status": "pass",
+      "details": {
+        "friend_pooled_auc": 0.8472026883917805
+      }
+    },
+    {
+      "id": "named_feature_contrasts_present",
+      "status": "pass",
+      "details": {
+        "account_dynamic": [
+          "new_180_persistent_deficit",
+          "new_180_balance_recovery",
+          "new_180_surplus_last_change",
+          "new_180_income_like_credits_last_change",
+          "new_all_persistent_deficit",
+          "new_all_balance_recovery",
+          "new_all_surplus_last_change",
+          "new_all_income_like_credits_last_change"
+        ],
+        "bureau_dynamic": [
+          "new_180_matched_provider_disagreement",
+          "new_180_score_change",
+          "new_180_score_staleness_product",
+          "new_all_matched_provider_disagreement",
+          "new_all_score_change",
+          "new_all_score_staleness_product"
+        ]
+      }
+    },
+    {
+      "id": "no_identifier_inputs",
+      "status": "pass",
+      "details": "New head has an explicit feature allowlist"
+    }
+  ],
+  "protocol_sha": "e67538badfea50823ea6aeb8c8cdf1eca55c6574bec4e34beba0eed556131757",
+  "pilot_admission": "pass",
+  "broad_search_admission": false,
+  "reason": "Finite preregistered mechanistic pilots only; inherited snapshot provenance and adaptive label reuse prevent independent generalization claims."
+}

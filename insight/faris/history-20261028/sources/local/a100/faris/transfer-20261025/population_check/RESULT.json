@@ -1,0 +1,835 @@
+{
+  "status": "complete",
+  "default_target_values_read": false,
+  "domain_rows": 100000,
+  "domain_train_rows": 70000,
+  "domain_test_rows": 30000,
+  "AUC": 0.5017174290476191,
+  "conditional_95pct_AUC_interval": [
+    0.49814715776190477,
+    0.5055877907142857
+  ],
+  "fold_AUC": [
+    0.49940740476190476,
+    0.5002227619047619,
+    0.49989608333333335,
+    0.5005622857142857,
+    0.5086332738095238
+  ],
+  "logloss": 0.6114528745046922,
+  "constant_logloss": 0.6108643020548935,
+  "material_shift_rule_passed": false,
+  "rule": "OOF domain AUC>=.60 and conditional95pct lowerbound>.55",
+  "interpretation": "Evidence for detectable shift under this fixed classifier only; low AUC does not prove identical distributions or label relationships.",
+  "columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean",
+    "aux_account_months",
+    "aux_allocation_count",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "calendar_year",
+    "calendar_month",
+    "calendar_dayofyear"
+  ],
+  "categorical_columns": [
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status"
+  ],
+  "params": {
+    "iterations": 300,
+    "depth": 4,
+    "learning_rate": 0.05,
+    "l2_leaf_reg": 10,
+    "loss_function": "Logloss",
+    "bootstrap_type": "No",
+    "random_strength": 0,
+    "thread_count": 2,
+    "verbose": false,
+    "allow_writing_files": false
+  },
+  "top_model_importance": [
+    {
+      "column": "employment_tenure_months",
+      "importance": 3.6840470173984685
+    },
+    {
+      "column": "v4_price_all_std",
+      "importance": 3.552438960325221
+    },
+    {
+      "column": "calendar_dayofyear",
+      "importance": 3.4320399133347204
+    },
+    {
+      "column": "v2_installment_disposable_income_ratio",
+      "importance": 3.320565754019708
+    },
+    {
+      "column": "v2_ecom_order_age_days_median",
+      "importance": 3.2613828486880196
+    },
+    {
+      "column": "v2_ecom_completed_per_observed_month",
+      "importance": 2.93550542029575
+    },
+    {
+      "column": "v2_ecom_observed_days",
+      "importance": 2.377839982404168
+    },
+    {
+      "column": "income_per_dependent",
+      "importance": 2.305318489578253
+    },
+    {
+      "column": "age",
+      "importance": 2.2245840767996645
+    },
+    {
+      "column": "bureau_debt_income_ratio",
+      "importance": 2.213387721186104
+    },
+    {
+      "column": "v2_existing_total_burden_declared",
+      "importance": 2.209667092696643
+    },
+    {
+      "column": "v4_bureau_all_equal_provider_mean_std",
+      "importance": 2.0891124769606266
+    },
+    {
+      "column": "bureau_inquiries_max",
+      "importance": 2.0448026220144415
+    },
+    {
+      "column": "v2_bureau_history_score_min",
+      "importance": 1.9571728031578135
+    },
+    {
+      "column": "v3_ecom_category_entropy",
+      "importance": 1.9059620171881295
+    },
+    {
+      "column": "v3_ecom_monthly_spend_cv",
+      "importance": 1.8912335895178334
+    },
+    {
+      "column": "bureau_utilization_max",
+      "importance": 1.7410862240986198
+    },
+    {
+      "column": "v2_existing_total_burden_observed",
+      "importance": 1.6942609136449545
+    },
+    {
+      "column": "v2_account_income_like_credits_recent_prior_ratio",
+      "importance": 1.6542512387953994
+    },
+    {
+      "column": "v2_account_3m_minimum_balance_min",
+      "importance": 1.6403941986869093
+    }
+  ],
+  "numeric_shift": [
+    {
+      "column": "bureau_inquiries_max",
+      "nonmissing_KS": 0.01093333333333335,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "bureau_utilization_max",
+      "nonmissing_KS": 0.010652531899319362,
+      "missing_train": 0.5198857142857143,
+      "missing_test": 0.5206666666666667
+    },
+    {
+      "column": "v2_existing_total_burden_observed",
+      "nonmissing_KS": 0.01054858365801531,
+      "missing_train": 0.3347857142857143,
+      "missing_test": 0.33486666666666665
+    },
+    {
+      "column": "v2_account_3m_minimum_balance_min",
+      "nonmissing_KS": 0.01053741496598637,
+      "missing_train": 0.3,
+      "missing_test": 0.3
+    },
+    {
+      "column": "v2_account_income_like_credits_recent_prior_ratio",
+      "nonmissing_KS": 0.01021768707482995,
+      "missing_train": 0.3,
+      "missing_test": 0.3
+    },
+    {
+      "column": "v3_cash_deficit_monthly_income_share",
+      "nonmissing_KS": 0.010013605442176887,
+      "missing_train": 0.3,
+      "missing_test": 0.3
+    },
+    {
+      "column": "employment_tenure_months",
+      "nonmissing_KS": 0.009876190476190483,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v2_account_3m_average_balance_mean",
+      "nonmissing_KS": 0.00984353741496602,
+      "missing_train": 0.3,
+      "missing_test": 0.3
+    },
+    {
+      "column": "age",
+      "nonmissing_KS": 0.009461904761904782,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v4_loan_late_1_mean",
+      "nonmissing_KS": 0.00869719442771355,
+      "missing_train": 0.33858571428571427,
+      "missing_test": 0.3387
+    },
+    {
+      "column": "v3_repay_all_late_30_posterior_24",
+      "nonmissing_KS": 0.008679996697501191,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "installment_observed_income_ratio",
+      "nonmissing_KS": 0.008462585034013648,
+      "missing_train": 0.3,
+      "missing_test": 0.3
+    },
+    {
+      "column": "v4_weighted_late_1_90d",
+      "nonmissing_KS": 0.008373801246734813,
+      "missing_train": 0.33858571428571427,
+      "missing_test": 0.3387
+    },
+    {
+      "column": "v2_account_3m_outflows_mean",
+      "nonmissing_KS": 0.008272108843537351,
+      "missing_train": 0.3,
+      "missing_test": 0.3
+    },
+    {
+      "column": "v4_weighted_late_30_365d",
+      "nonmissing_KS": 0.008212669375319614,
+      "missing_train": 0.3460142857142857,
+      "missing_test": 0.34696666666666665
+    },
+    {
+      "column": "v4_price_90d_equal_order_mean",
+      "nonmissing_KS": 0.00779530376769344,
+      "missing_train": 0.04897142857142857,
+      "missing_test": 0.04906666666666667
+    },
+    {
+      "column": "v4_price_all_std",
+      "nonmissing_KS": 0.00704761904761908,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v2_existing_total_burden_declared",
+      "nonmissing_KS": 0.007000000000000006,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "repayment_historical_dpd_mean",
+      "nonmissing_KS": 0.006994884478042196,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "v4_price_90d_mean",
+      "nonmissing_KS": 0.0069792992757511385,
+      "missing_train": 0.04897142857142857,
+      "missing_test": 0.04906666666666667
+    },
+    {
+      "column": "v2_latest_loan_age_days",
+      "nonmissing_KS": 0.006888223457278242,
+      "missing_train": 0.3347857142857143,
+      "missing_test": 0.33486666666666665
+    },
+    {
+      "column": "v2_ecom_completed_per_observed_month",
+      "nonmissing_KS": 0.006809523809523821,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v3_income_after_installments_per_dependent",
+      "nonmissing_KS": 0.006789115646258503,
+      "missing_train": 0.3,
+      "missing_test": 0.3
+    },
+    {
+      "column": "v4_price_180d_equal_order_mean",
+      "nonmissing_KS": 0.006751611315345796,
+      "missing_train": 0.0037571428571428573,
+      "missing_test": 0.0033666666666666667
+    },
+    {
+      "column": "v2_bureau_history_score_min",
+      "nonmissing_KS": 0.0067111997552116165,
+      "missing_train": 0.0008714285714285714,
+      "missing_test": 0.0008
+    },
+    {
+      "column": "v2_ecom_order_age_days_median",
+      "nonmissing_KS": 0.006485714285714261,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v3_repay_all_late_1_posterior_24",
+      "nonmissing_KS": 0.006028934033194933,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "calendar_dayofyear",
+      "nonmissing_KS": 0.006023809523809542,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v2_existing_future_scheduled_amount",
+      "nonmissing_KS": 0.005918191460244748,
+      "missing_train": 0.3347857142857143,
+      "missing_test": 0.33486666666666665
+    },
+    {
+      "column": "income_per_dependent",
+      "nonmissing_KS": 0.0058857142857143,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "bureau_debt_income_ratio",
+      "nonmissing_KS": 0.0058714285714285275,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "installment_income_ratio",
+      "nonmissing_KS": 0.005804761904761868,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "calendar_month",
+      "nonmissing_KS": 0.005780952380952387,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "loan_income_ratio",
+      "nonmissing_KS": 0.0057714285714285385,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "declared_monthly_income",
+      "nonmissing_KS": 0.005728571428571416,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v2_account_3m_income_like_credits_mean",
+      "nonmissing_KS": 0.005714285714285672,
+      "missing_train": 0.3,
+      "missing_test": 0.3
+    },
+    {
+      "column": "v3_ecom_monthly_spend_cv",
+      "nonmissing_KS": 0.00559196919988203,
+      "missing_train": 0.0037571428571428573,
+      "missing_test": 0.0033666666666666667
+    },
+    {
+      "column": "v2_repay_365d_paid",
+      "nonmissing_KS": 0.005580505598143326,
+      "missing_train": 0.35441428571428574,
+      "missing_test": 0.3557
+    },
+    {
+      "column": "v2_existing_future_installments",
+      "nonmissing_KS": 0.005494490651810735,
+      "missing_train": 0.3347857142857143,
+      "missing_test": 0.33486666666666665
+    },
+    {
+      "column": "v4_weighted_late_1_365d",
+      "nonmissing_KS": 0.00540268294089985,
+      "missing_train": 0.33858571428571427,
+      "missing_test": 0.3387
+    },
+    {
+      "column": "v4_bureau_all_equal_provider_mean_std",
+      "nonmissing_KS": 0.005359272868415088,
+      "missing_train": 0.02315714285714286,
+      "missing_test": 0.022566666666666665
+    },
+    {
+      "column": "v3_repay_all_late_7_posterior_24",
+      "nonmissing_KS": 0.005277409902561037,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "v4_bureau_history_weighted_90d",
+      "nonmissing_KS": 0.005221788491861001,
+      "missing_train": 0.0008714285714285714,
+      "missing_test": 0.0008
+    },
+    {
+      "column": "v2_bureau_180d_score_mean",
+      "nonmissing_KS": 0.005146821017837366,
+      "missing_train": 0.0017714285714285714,
+      "missing_test": 0.0016666666666666668
+    },
+    {
+      "column": "v2_ecom_30d_spend",
+      "nonmissing_KS": 0.005142214678717713,
+      "missing_train": 0.2569714285714286,
+      "missing_test": 0.2569
+    },
+    {
+      "column": "v2_bureau_history_score_max",
+      "nonmissing_KS": 0.005128366694842901,
+      "missing_train": 0.0008714285714285714,
+      "missing_test": 0.0008
+    },
+    {
+      "column": "v4_bureau_180d_equal_provider_mean_mean",
+      "nonmissing_KS": 0.005070498840254178,
+      "missing_train": 0.0017714285714285714,
+      "missing_test": 0.0016666666666666668
+    },
+    {
+      "column": "v2_bureau_365d_score_mean",
+      "nonmissing_KS": 0.005038254120118768,
+      "missing_train": 0.0013142857142857142,
+      "missing_test": 0.0011
+    },
+    {
+      "column": "v3_repay_180d_late_1_posterior_24",
+      "nonmissing_KS": 0.004953223591688816,
+      "missing_train": 0.4019285714285714,
+      "missing_test": 0.4017
+    },
+    {
+      "column": "v4_price_all_equal_category_mean",
+      "nonmissing_KS": 0.004938095238095241,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "repayment_amount_paid",
+      "nonmissing_KS": 0.004905391329356301,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "v4_bureau_180d_equal_provider_median_mean",
+      "nonmissing_KS": 0.004898787081069278,
+      "missing_train": 0.0017714285714285714,
+      "missing_test": 0.0016666666666666668
+    },
+    {
+      "column": "bureau_score_mean",
+      "nonmissing_KS": 0.004858057545955308,
+      "missing_train": 0.001042857142857143,
+      "missing_test": 0.0010666666666666667
+    },
+    {
+      "column": "v2_installment_disposable_income_ratio",
+      "nonmissing_KS": 0.004843235780931487,
+      "missing_train": 0.02577142857142857,
+      "missing_test": 0.024566666666666667
+    },
+    {
+      "column": "risk_conditional_nonnegative_months",
+      "nonmissing_KS": 0.0048380952380952524,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "ecom_last_purchase_recency_days",
+      "nonmissing_KS": 0.004828571428571404,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v2_bureau_current_score_mean",
+      "nonmissing_KS": 0.004654120303156151,
+      "missing_train": 0.002514285714285714,
+      "missing_test": 0.0023
+    },
+    {
+      "column": "v2_bureau_history_score_mean",
+      "nonmissing_KS": 0.0046193519822506635,
+      "missing_train": 0.0008714285714285714,
+      "missing_test": 0.0008
+    },
+    {
+      "column": "v2_ecom_60d_spend",
+      "nonmissing_KS": 0.004552082446732442,
+      "missing_train": 0.10451428571428571,
+      "missing_test": 0.1031
+    },
+    {
+      "column": "v4_last12_late_1_posterior",
+      "nonmissing_KS": 0.004546320552644756,
+      "missing_train": 0.33858571428571427,
+      "missing_test": 0.3387
+    },
+    {
+      "column": "repayment_installment_count",
+      "nonmissing_KS": 0.004519129968257624,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "v5_price_pooled_all_equal_category_mean",
+      "nonmissing_KS": 0.0044619047619047225,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v5_price_pooled_180d_mean",
+      "nonmissing_KS": 0.004409210219684212,
+      "missing_train": 0.003142857142857143,
+      "missing_test": 0.0028
+    },
+    {
+      "column": "v4_bureau_all_equal_provider_mean_mean",
+      "nonmissing_KS": 0.004404414307694032,
+      "missing_train": 0.0008714285714285714,
+      "missing_test": 0.0008
+    },
+    {
+      "column": "v2_bureau_90d_score_mean",
+      "nonmissing_KS": 0.004402552689893036,
+      "missing_train": 0.04844285714285714,
+      "missing_test": 0.0486
+    },
+    {
+      "column": "v2_ecom_observed_days",
+      "nonmissing_KS": 0.004385714285714326,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "aux_ecommerce_observed_days",
+      "nonmissing_KS": 0.004385714285714326,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "dependents",
+      "nonmissing_KS": 0.00414285714285717,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v2_repay_365d_paid_ratio",
+      "nonmissing_KS": 0.0037677217055160916,
+      "missing_train": 0.35441428571428574,
+      "missing_test": 0.3557
+    },
+    {
+      "column": "v2_ecom_30d_orders",
+      "nonmissing_KS": 0.0037226277802852037,
+      "missing_train": 0.2569714285714286,
+      "missing_test": 0.2569
+    },
+    {
+      "column": "v4_price_180d_mean",
+      "nonmissing_KS": 0.003676395342012917,
+      "missing_train": 0.0037571428571428573,
+      "missing_test": 0.0033666666666666667
+    },
+    {
+      "column": "v5_price_pooled_all_mean",
+      "nonmissing_KS": 0.0036095238095238125,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "loan_amount",
+      "nonmissing_KS": 0.003585714285714303,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v4_price_all_equal_category_median",
+      "nonmissing_KS": 0.0035476190476190217,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v4_price_all_mean",
+      "nonmissing_KS": 0.003542857142857153,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v3_repay_all_fully_paid_share",
+      "nonmissing_KS": 0.0035109157640395017,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "risk_conditional_negative_months",
+      "nonmissing_KS": 0.0034761904761904105,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v3_ecom_category_entropy",
+      "nonmissing_KS": 0.0034523809523809845,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v5_price_pooled_all_equal_order_mean",
+      "nonmissing_KS": 0.0034047619047619104,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v3_repay_all_late_90_posterior_24",
+      "nonmissing_KS": 0.003329324026623448,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "proposed_monthly_installment",
+      "nonmissing_KS": 0.003314285714285714,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v2_ecom_60d_orders",
+      "nonmissing_KS": 0.003292409350758807,
+      "missing_train": 0.10451428571428571,
+      "missing_test": 0.1031
+    },
+    {
+      "column": "aux_orders90",
+      "nonmissing_KS": 0.003257142857142875,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "repayment_paid_ratio",
+      "nonmissing_KS": 0.003158463887144719,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "v4_price_all_equal_order_mean",
+      "nonmissing_KS": 0.0031047619047619435,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "aux_allocation_count",
+      "nonmissing_KS": 0.003071428571428614,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "v2_bureau_history_delinquent_accounts_last_12m_mean",
+      "nonmissing_KS": 0.0028809523809523174,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "annual_interest_rate",
+      "nonmissing_KS": 0.0023095238095237614,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "repayment_loan_count",
+      "nonmissing_KS": 0.0013111057491204114,
+      "missing_train": 0.3384,
+      "missing_test": 0.3385
+    },
+    {
+      "column": "bureau_delinquent_accounts_max",
+      "nonmissing_KS": 0.0006761904761903859,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "has_repayments",
+      "nonmissing_KS": 0.0001000000000000445,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "has_previous",
+      "nonmissing_KS": 0.0,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "has_account",
+      "nonmissing_KS": 0.0,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "aux_account_months",
+      "nonmissing_KS": 0.0,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    },
+    {
+      "column": "calendar_year",
+      "nonmissing_KS": 0.0,
+      "missing_train": 0.0,
+      "missing_test": 0.0
+    }
+  ],
+  "categorical_shift": [
+    {
+      "column": "loan_purpose",
+      "total_variation": 0.006780952380952374
+    },
+    {
+      "column": "region",
+      "total_variation": 0.0032380952380952482
+    },
+    {
+      "column": "employment_type",
+      "total_variation": 0.0070476190476190664
+    },
+    {
+      "column": "housing_status",
+      "total_variation": 0.003495238095238107
+    }
+  ],
+  "source_feature_path": "/mnt/home/logika-faris-exploration/submission-full-periodicity-20261021/feature_build/fold0/features.parquet",
+  "source_feature_sha256": "f5a83530277cdb2758a196f35b454f956b002be1b46eb5508d2ea420be0c4589",
+  "prior_policy": "The same existing64kcontext-fitted label-free feature transformations are applied to train and test. Domain learner sees no default labels.",
+  "source_sha256": "0cf33769391bc17905272056045c05dc10fc44a214fe4398dd99ae1a01e56a21",
+  "plan_sha256": "fc7948ab822caf6384e6f30a43f13843e11132dc1766717facbcc23558809fbf",
+  "seconds": 59.28676247596741,
+  "files": {
+    "domain_fold2.cbm": "f2c41b2c35c86cdadcfe91b9a28709b4ed236973352f8549ac48a17a872e41b2",
+    "roles4.npz": "165ff6232259fdd93a5a85ae3f47e707db2e10f3b6b3df8743ec95941c0db4f5",
+    "bootstrap.npz": "eabfdfbe6e4dc745969d7cb28e5d344210053f31da18084891d4a1b7e86dda40",
+    "domain_fold3.cbm": "34f7add13be9cdb301e3106ccfe571cfb67af97651c0cb55282ce7ddbbbc1053",
+    "roles2.npz": "5a322c997a9426cfe54b72dcafe389fde7ae566214f229e967fa2326adc9625b",
+    "domain_OOF.npz": "216d58b03cac9f0eed08d0156a679b9066d2e3b8a3655448c3980744ce2086d9",
+    "domain_fold4.cbm": "2d7c33ffcaebd3a6761ed8a07b4465f8c39dde1bce068382515aaf363c737b71",
+    "roles0.npz": "991c3ad7611d339e32d3b3f3ff09d2a535b72e51e3f444f026d835aa6a33ee8a",
+    "domain_fold0.cbm": "aed67736fa1e90ce7ff2c65b83c447e853b4548e688e6d7ab6977486b91da48e",
+    "domain_fold1.cbm": "1ffb6082535bad583cdddf85b450bd4afb1e23bf8466d79d7d1500ba78b149da",
+    "roles1.npz": "ad5679b843a7c3b15d3e56975d7675a6e706e0fa157523ec8f5187916cf3e5cb",
+    "roles3.npz": "2477ba2e4fbafd820fdd9fda2357141a7bd8fb0009311a1649e149b7c713c54c"
+  }
+}

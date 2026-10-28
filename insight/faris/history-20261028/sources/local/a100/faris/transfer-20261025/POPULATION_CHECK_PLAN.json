@@ -1,0 +1,11 @@
+{
+  "id": "population-check-20261025",
+  "frozen_UTC": "2026-10-25T05:53:06.573800+00:00",
+  "question": "Can a fixed nonlinear classifier distinguish train applicants from test applicants using permitted model features and decision calendar fields?",
+  "default_labels_used": false,
+  "models": "Five stratified domain-fold CatBoost classifiers:300iterations depth4 lr.05 L2=10, no bootstrap, randomstrength0,2threads. Domain label0train,1test; seed2026102514.",
+  "features": "ExistingKumo90 plus6coverage inputs andyear/month/dayofyear; application/customer IDs,row,split,defaultlabels excluded.",
+  "material_shift_rule": "OOFdomainAUC>=.60 and1000 fixedprediction domain-class bootstrap95pct lower>.55. Otherwise do not initiate test-domain importance weighting on this evidence.",
+  "no_default_score_promotion": "This diagnostic cannot promote a defaultprediction model or estimate hidden-test KS. No public-label reconstruction.",
+  "source_sha256": "0cf33769391bc17905272056045c05dc10fc44a214fe4398dd99ae1a01e56a21"
+}

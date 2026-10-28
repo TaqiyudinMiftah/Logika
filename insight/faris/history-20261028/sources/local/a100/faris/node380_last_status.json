@@ -1,0 +1,108 @@
+{
+  "state": "running",
+  "stage": "full",
+  "pid": 2331445,
+  "updated_utc": "2026-10-16T07:58:46.045904+00:00",
+  "child_pid": 2332563,
+  "remote_root": "/home/taqiyudinmiftah/faris/kumo-large-node380-20261016",
+  "checked_epoch": 1792137528.5664847,
+  "identity_matches": true,
+  "environment": {
+    "hostname": "192740520ab7",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "memory_max": "max",
+    "sdk_revision": "329a707bbcf9ca147aa45a63fef8b2029f4ee37b",
+    "assets": {
+      "config.json": {
+        "path": "/home/taqiyudinmiftah/faris/kumo-large-node380-20261016/hf_cache/hub/models--nvidia--Kumo-Tabular/snapshots/3c3e10bbdb590ace29e7026847f92db3c603096d/config.json",
+        "bytes": 423,
+        "sha256": "de7d618ec4019293e976e37371612ff9b8e71c22336c463a7225b0f130e78318"
+      },
+      "large/classifier.pt": {
+        "path": "/home/taqiyudinmiftah/faris/kumo-large-node380-20261016/hf_cache/hub/models--nvidia--Kumo-Tabular/snapshots/3c3e10bbdb590ace29e7026847f92db3c603096d/large/classifier.pt",
+        "bytes": 854850034,
+        "sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613"
+      }
+    },
+    "versions": {
+      "torch": "2.7.1+cu126",
+      "structured-data-models": "0.2.0rc2.dev13+g329a707bb",
+      "numpy": "1.24.1",
+      "pandas": "1.5.3",
+      "pyarrow": "22.0.0",
+      "scikit-learn": "1.2.1"
+    }
+  },
+  "pilot": {
+    "state": "pilot_completed",
+    "pilot": true,
+    "validation_queries": 512,
+    "test_queries": 128,
+    "config": {
+      "model": "Kumo Large",
+      "folds": 10,
+      "fold_seed": 9173,
+      "context_rows": 16384,
+      "estimators": 2,
+      "query_batch_size": 256,
+      "gpu_budget_gib": 24,
+      "process_budget_gib": 32,
+      "minimum_headroom_gib": 8,
+      "feature_count": 388,
+      "precision": "bfloat16",
+      "gradient_updates": 0,
+      "pilot": true,
+      "context_sampling": "target-by-decision-month stratified outer-training subset"
+    },
+    "model": {
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "checkpoint_repository": "nvidia/Kumo-Tabular",
+      "checkpoint_revision": "v1.0.1",
+      "asset_sha256": {
+        "config.json": "de7d618ec4019293e976e37371612ff9b8e71c22336c463a7225b0f130e78318",
+        "large/classifier.pt": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613"
+      },
+      "sdk_revision": "329a707bbcf9ca147aa45a63fef8b2029f4ee37b",
+      "gradient_updates": 0,
+      "cache": {
+        "storage": "cuda",
+        "native_fit_sha256": "cd88a83747c8fcca8ee4cc8a14b31190236adb0c079aa3efbf4e1368f4cc3eef"
+      },
+      "context_rows": 16384,
+      "feature_count": 388,
+      "seed": 9174,
+      "elapsed_seconds": 12.550037175882608,
+      "peak_cuda_allocated_bytes": 6658910720,
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "structured-data-models": "0.2.0rc2.dev13+g329a707bb",
+        "pandas": "1.5.3",
+        "pyarrow": "22.0.0",
+        "numpy": "1.24.1"
+      }
+    },
+    "full_cv_score": null,
+    "submission": null
+  },
+  "full": {
+    "state": "running",
+    "fold": "fold_01",
+    "worker_pid": 2332583,
+    "rss_bytes": 2325639168,
+    "elapsed_seconds": 64.80475764092989
+  },
+  "worker_memory": [
+    "State:\tR (running)",
+    "VmHWM:\t 2548344 kB",
+    "VmRSS:\t 2271880 kB"
+  ],
+  "gpu_processes": [
+    "1763129, /home/christamaezra/.conda/envs/aitf/bin/python, 4834 MiB",
+    "2321706, /opt/conda/bin/python, 8382 MiB",
+    "2332583, /home/taqiyudinmiftah/faris/kumo-large-node380-20261016/.venv/bin/python, 7298 MiB"
+  ],
+  "feature_sha256": "ca45cb01bb245b75585032b276342b1cd3a6626292ab0de3b854a988dc5e4115",
+  "pilot_worker_log_tail": "GPU NVIDIA A100-SXM4-80GB; fold 1; context 16384; features 388\n/home/taqiyudinmiftah/faris/kumo-large-node380-20261016/.venv/lib/python3.11/site-packages/sdm/tensor/string.py:502: RuntimeWarning: Falling back to a CPU-based string sort because cuDF is not installed. Install cuDF to enable faster CUDA-based string sorting without device synchronization. This warning will be suppressed for the remainder of this process.\n  warn_once(\nContext fit completed in 11.6s\n/home/taqiyudinmiftah/faris/kumo-large-node380-20261016/.venv/lib/python3.11/site-packages/sdm/relational/join.py:73: RuntimeWarning: Falling back to a CPU-based join because cuDF is not installed. Install cuDF to enable faster CUDA-based joins without device synchronization. This warning will be suppressed for the remainder of this process.\n  warn_once(\nCompleted validation: 512 queries\nCompleted test: 128 queries\n",
+  "full_worker_log_tail": "GPU NVIDIA A100-SXM4-80GB; fold 1; context 16384; features 388\n/home/taqiyudinmiftah/faris/kumo-large-node380-20261016/.venv/lib/python3.11/site-packages/sdm/tensor/string.py:502: RuntimeWarning: Falling back to a CPU-based string sort because cuDF is not installed. Install cuDF to enable faster CUDA-based string sorting without device synchronization. This warning will be suppressed for the remainder of this process.\n  warn_once(\nContext fit completed in 10.1s\n/home/taqiyudinmiftah/faris/kumo-large-node380-20261016/.venv/lib/python3.11/site-packages/sdm/relational/join.py:73: RuntimeWarning: Falling back to a CPU-based join because cuDF is not installed. Install cuDF to enable faster CUDA-based joins without device synchronization. This warning will be suppressed for the remainder of this process.\n  warn_once(\nCompleted validation: 7000 queries\n",
+  "completed_folds": 0
+}

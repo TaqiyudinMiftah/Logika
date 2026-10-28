@@ -1,0 +1,52 @@
+{
+  "id": "tabicl-compact-20261021",
+  "original_deadline": 1792585871.823748,
+  "admission_reserve_seconds": 10800,
+  "training_admitted": true,
+  "backbone": "TabICLv2",
+  "library": "tabicl==2.2.0",
+  "features90": "Repaired control90 Kumo feature list; raw mixed DataFrame, context-only built-in normalization and categorical processing",
+  "context_rows": 50000,
+  "correction_rows": 6000,
+  "validation_rows": 14000,
+  "folds": 5,
+  "estimators": 8,
+  "estimator_batch_size": 1,
+  "seed": "2026+fold",
+  "correction_features": "V25 original12 plus6coverage fields",
+  "head_penalty": 0.003,
+  "head_shrinkage": 0.5,
+  "spline_weight": 0.25,
+  "backbone_weight": 0.75,
+  "secondary_blend": {
+    "control90": 0.8,
+    "tabicl90": 0.2
+  },
+  "validation": "Original seed31027 frozen5fold, full pooled70k OOF",
+  "primary": "tabicl90 versus repaired control90",
+  "historical_label_reuse": true,
+  "fresh_confirmation_available": false,
+  "training_recipe_count": 1,
+  "no_performance_pruning": true,
+  "preflight_evidence": "PREFLIGHT.json: actual GPU fit/save/reload32query exact equality",
+  "resource_limits": {
+    "CPU_quota_percent": 800,
+    "RAM_GiB": 48,
+    "swap": 0,
+    "GPUs": [
+      0,
+      1
+    ],
+    "one_job_per_GPU": true,
+    "minimum_free_disk_GiB": 20,
+    "local_model_budget_GiB": 30
+  },
+  "source_sha256": {
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "controller.py": "2c2daa035c819caf5fee9f74b95fc8f24cd8d8f39ada0328b2586823a761cebb",
+    "report.py": "dea422f66993031eae6130b41942670ab07a85e4c166ca823c49fce4b7eb2e8c",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "experiment.py": "abce7d0bb893a9c8b09300b0e50a9eede124de2af25925b7a92b710b580c4ec9"
+  },
+  "no_submission": true
+}

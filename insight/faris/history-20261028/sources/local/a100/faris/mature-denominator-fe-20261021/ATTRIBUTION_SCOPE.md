@@ -1,0 +1,9 @@
+# Scope clarification before full OOF scoring
+
+The frozen trial has two related feature changes: threshold-eligible exposure denominators/context prevalences, and a fitted-prior value when no eligible history exists. The original v3 builder left applicants without any repayment history as NaN. Its all-history fields are missing for33.84% of the70ktraining applicants; the180day field is missing for40.192857%. The replacement fields contain fitted priors instead. This behavior was already specified in RESEARCH.md and the frozen prepare.py before fitting; this note makes its attribution consequence explicit.
+
+The original has_repayments/loan-count features remain. Nonetheless, changing a field's missingness can change a foundation model even when other availability indicators remain. Therefore a positive or negative trial cannot be attributed solely to a mature denominator. It measures the complete predeclared feature recipe. Feature-comparison statistics are in FEATURE_CONTRASTS.json; numeric comparisons exclude missing values and disclose missing fractions separately. No default labels were read for that diagnostic.
+
+For fold0context applicants with both old/new values, correlations are approximately.99992,.99940,.99831,.99672 for all-history thresholds1/7/30/90. Median changes are.000349,.003146,.014610,.010212. These are feature magnitudes, not scoring evidence.
+
+A possible follow-up, if justified after the complete current result, is to preserve the original missingness mask while applying mature denominators. A complementary original-denominator/prior-fill control could distinguish the two mechanisms. Neither follow-up is currently admitted or running, and neither will be chosen using incomplete-fold scores. The current model, features, parameters, seeds, folds and deadline remain frozen.

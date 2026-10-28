@@ -1,0 +1,83 @@
+/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/tensor/string.py:502: RuntimeWarning: Falling back to a CPU-based string sort because cuDF is not installed. Install cuDF to enable faster CUDA-based string sorting without device synchronization. This warning will be suppressed for the remainder of this process.
+  warn_once(
+Traceback (most recent call last):
+  File "/mnt/home/logika-faris-exploration/context-model-retention-20261021/source/crosshost.py", line 6, in <module>
+    model=R/'fitted_context_model.joblib';source=json.loads((R/'PREFLIGHT.json').read_text());assert sha(model)==source['retained_model_sha256'];expected=np.load(R/'predictions.npz');checkpoint=A/'ranking-pipeline-20261020/assets/classifier.pt';start=time.time();p=predict(model,checkpoint,query);err=float(np.max(abs(p-expected['direct'])));assert err<2e-5
+                                                                                                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/context-model-retention-20261021/source/context_model.py", line 26, in predict
+    return engine.fit_predict(np.arange(len(p['context'])),query,p['seed'],cache_path=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/context-model-retention-20261021/source/gpu_backend.py", line 53, in fit_predict
+    self.model.fit(self.x[indices],self.y[indices],num_estimators=8,estimator_batch_size=1,
+  File "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/models/base.py", line 302, in fit
+    self._forward(
+  File "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/models/kumo/tabular/model.py", line 222, in _forward
+    out = self.ecoc(
+          ^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/models/ecoc.py", line 87, in forward
+    return model(x, y, **kwargs)[..., :num_classes]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/models/kumo/tabular/model.py", line 297, in forward
+    x = self.row_embedding(x, y, categorical_mask, cache=cache)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/models/kumo/tabular/row_embedding.py", line 174, in forward
+    result = col_block(
+             ^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/nn/set_transformer.py", line 156, in forward
+    return self.output_block(
+           ^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/nn/attention.py", line 604, in forward
+    result = self._forward(
+             ^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/lib/python3.11/site-packages/sdm/nn/attention.py", line 718, in _forward
+    out = torch.add(tmp, self.mlp(tmp), out=out)
+                         ^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/lib/python3.11/site-packages/torch/nn/modules/activation.py", line 734, in forward
+    return F.gelu(input, approximate=self.approximate)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.00 MiB. GPU 0 has a total capacity of 11.63 GiB of which 15.31 MiB is free. Process 324737 has 3.73 GiB memory in use. Process 324716 has 3.76 GiB memory in use. Including non-PyTorch memory, this process has 4.10 GiB memory in use. 10.47 GiB allowed; Of the allocated memory 3.80 GiB is allocated by PyTorch, and 159.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

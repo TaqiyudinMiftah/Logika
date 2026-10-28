@@ -1,0 +1,29 @@
+{
+  "id": "H008-fixed-objective-periodicity-crossover",
+  "frozen_UTC": "2026-10-24T20:25:44.491003+00:00",
+  "mechanism": "H002 fixed smoothYouden correction helped original and fresh baseline seeds slightly. The periodicity head represents additional interactions with smoothed time-order summaries. Test their compatible crossover once without changing objective parameters, raw Kumo or spline.",
+  "evidence": [
+    "DIRECT_KS_RESULT.json",
+    "ROBUSTNESS_RESULT.json",
+    "H002.json"
+  ],
+  "parameters": {
+    "temperature": 0.5,
+    "trust": 1.0,
+    "ridge": 0.003,
+    "threshold": "logit correction training prevalence",
+    "strength": 0.5
+  },
+  "promotion": "Positive pooledKS on original and fresh seeds and mean versus matchedperiodicity; >=3/5meanfoldwins. Submission additionallyrequires paired conditional95percent lowerbound>0 for meanKS gain. Target.54reportedseparately.",
+  "training_deadline_epoch": 1792883400.0,
+  "source_sha256": {
+    "ks_periodicity.py": "9c32af4e341e77249d5193450ef2ba3864b3db334340f66d3b478b918f27e07c",
+    "direct_ks.py": "86b7c36e84c7c9b24bbfd2c5e05df0f60873450b33c89371fd2ad083f7dae948",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "robustness.py": "655f4b160bbcdde6a2ad913d283e06d1a4a160ca74ba89a7fde01514df20880a",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06"
+  },
+  "raw_predictions": "Already frozen original/fresh Kumo90; no additional Kumo fits",
+  "selection_exposure": "All prior scores including A/B public and H006/H007 results already exposed. Fixed parameters; no grid or threshold tuning.",
+  "broad_search": false
+}

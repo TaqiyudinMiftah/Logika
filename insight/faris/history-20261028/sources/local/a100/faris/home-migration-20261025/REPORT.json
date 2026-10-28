@@ -1,0 +1,604 @@
+{
+  "verified_utc": "2026-10-25T15:22:22Z",
+  "account_home": "/mnt/home/faris",
+  "fresh_login_HOME": "/mnt/home/faris",
+  "fresh_login_cwd": "/mnt/home/faris",
+  "old_home_is_link": true,
+  "old_home_target": "/mnt/home/faris",
+  "old_data_backup": "/home/faris.pre-migration-20261025",
+  "logika_archive": "/mnt/home/faris/logika-faris-exploration",
+  "logika_hub": "/mnt/home/faris/Logika",
+  "old_archive_alias_valid": true,
+  "sshfs_process_preserved": true,
+  "sshfs_new_location_accessible": true,
+  "services": [
+    {
+      "MainPID": "456318",
+      "WorkingDirectory": "/mnt/home/faris/license-plate",
+      "ActiveState": "active",
+      "SubState": "running",
+      "unit": "plate-split-api.service",
+      "cwd": "/mnt/home/faris/license-plate"
+    },
+    {
+      "MainPID": "456319",
+      "WorkingDirectory": "/mnt/home/faris/license-plate",
+      "ActiveState": "active",
+      "SubState": "running",
+      "unit": "plate-split-coordinator.service",
+      "cwd": "/mnt/home/faris/license-plate"
+    }
+  ],
+  "cvat_migrated": [
+    {
+      "name": "/cvat_grafana",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/cvat/components/analytics/grafana/dashboards"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "3000/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_server",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_vector",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/cvat/components/analytics/vector/vector.toml"
+      ],
+      "no_old_home_binds": true,
+      "ports": {}
+    },
+    {
+      "name": "/cvat_worker_annotation",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py",
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_worker_chunks",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py",
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_worker_consensus",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_worker_export",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_worker_import",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py",
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_worker_quality_reports",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_worker_utils",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/cvat_worker_webhooks",
+      "running": true,
+      "recreated": true,
+      "same_image": true,
+      "home_bind_sources": [
+        "/mnt/home/faris/license-plate/cvat-patches/png/frame_provider.py",
+        "/mnt/home/faris/license-plate/cvat-patches/png/task.py",
+        "/mnt/home/faris/license-plate/dataset",
+        "/mnt/home/faris/license-plate/cvat-patches/png/plate_png_chunks.py"
+      ],
+      "no_old_home_binds": true,
+      "ports": {
+        "8080/tcp": null
+      }
+    }
+  ],
+  "other_cvat_containers": [
+    {
+      "name": "cvat_db",
+      "same_container": true,
+      "running": true
+    },
+    {
+      "name": "cvat_redis_inmem",
+      "same_container": true,
+      "running": true
+    },
+    {
+      "name": "cvat_redis_ondisk",
+      "same_container": true,
+      "running": true
+    },
+    {
+      "name": "cvat_clickhouse",
+      "same_container": true,
+      "running": true
+    },
+    {
+      "name": "cvat_ui",
+      "same_container": true,
+      "running": true
+    },
+    {
+      "name": "cvat_opa",
+      "same_container": true,
+      "running": true
+    }
+  ],
+  "environment_checks": [
+    {
+      "environment": "/mnt/home/faris/faris/depth-20261017/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/faris/depth-20261017/.venv/bin/python",
+      "prefix": "/mnt/home/faris/faris/depth-20261017/.venv",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "1.26.4",
+        "pandas": "1.5.3",
+        "scipy": "1.14.1",
+        "sklearn": "1.6.1",
+        "joblib": "1.4.2",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/home/faris/faris/depth-20261017/.venv",
+      "returncode": 0,
+      "executable": "/home/faris/faris/depth-20261017/.venv/bin/python",
+      "prefix": "/home/faris/faris/depth-20261017/.venv",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "1.26.4",
+        "pandas": "1.5.3",
+        "scipy": "1.14.1",
+        "sklearn": "1.6.1",
+        "joblib": "1.4.2",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.venv/bin/python",
+      "prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.venv",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "1.26.4",
+        "pandas": "1.5.3",
+        "scipy": "1.14.1",
+        "sklearn": "1.6.1",
+        "joblib": "1.4.2",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.venv",
+      "returncode": 0,
+      "executable": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.venv/bin/python",
+      "prefix": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.venv",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "1.26.4",
+        "pandas": "1.5.3",
+        "scipy": "1.14.1",
+        "sklearn": "1.6.1",
+        "joblib": "1.4.2",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/license-plate/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/license-plate/.venv/bin/python",
+      "prefix": "/mnt/home/faris/license-plate/.venv",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "2.5.4"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/home/faris/license-plate/.venv",
+      "returncode": 0,
+      "executable": "/home/faris/license-plate/.venv/bin/python",
+      "prefix": "/home/faris/license-plate/.venv",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "2.5.4"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/license-plate/.venv-ocr",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/license-plate/.venv-ocr/bin/python",
+      "prefix": "/mnt/home/faris/license-plate/.venv-ocr",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "2.3.5",
+        "pandas": "3.0.6"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/home/faris/license-plate/.venv-ocr",
+      "returncode": 0,
+      "executable": "/home/faris/license-plate/.venv-ocr/bin/python",
+      "prefix": "/home/faris/license-plate/.venv-ocr",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "2.3.5",
+        "pandas": "3.0.6"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/license-plate/.venv-sam31",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/license-plate/.venv-sam31/bin/python",
+      "prefix": "/mnt/home/faris/license-plate/.venv-sam31",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "1.26.4",
+        "scipy": "1.17.1",
+        "torch": "2.10.0+cu128"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/home/faris/license-plate/.venv-sam31",
+      "returncode": 0,
+      "executable": "/home/faris/license-plate/.venv-sam31/bin/python",
+      "prefix": "/home/faris/license-plate/.venv-sam31",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "1.26.4",
+        "scipy": "1.17.1",
+        "torch": "2.10.0+cu128"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/logika-faris-exploration/exploration-12h-20261017/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/logika-faris-exploration/exploration-12h-20261017/.venv/bin/python",
+      "prefix": "/mnt/home/faris/logika-faris-exploration/exploration-12h-20261017/.venv",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "1.26.4",
+        "pandas": "1.5.3",
+        "scipy": "1.14.1",
+        "sklearn": "1.6.1",
+        "joblib": "1.4.2",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5",
+        "torch": "2.7.1+cu126"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/bin/python",
+      "prefix": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "1.26.4",
+        "pandas": "1.5.3",
+        "scipy": "1.14.1",
+        "sklearn": "1.6.1",
+        "joblib": "1.4.2",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5",
+        "torch": "2.7.1+cu126"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/logika-faris-exploration/ranking-pipeline-20261020/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python",
+      "prefix": "/mnt/home/faris/logika-faris-exploration/ranking-pipeline-20261020/.venv",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "scipy": "1.16.3",
+        "sklearn": "1.7.2",
+        "joblib": "1.6.0",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5",
+        "torch": "2.7.1+cu126"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python",
+      "prefix": "/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "scipy": "1.16.3",
+        "sklearn": "1.7.2",
+        "joblib": "1.6.0",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5",
+        "torch": "2.7.1+cu126"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/logika-faris-exploration/schematics-2026/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/logika-faris-exploration/schematics-2026/.venv/bin/python",
+      "prefix": "/mnt/home/faris/logika-faris-exploration/schematics-2026/.venv",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "2.5.4",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "joblib": "1.6.0"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/logika-faris-exploration/schematics-2026/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/logika-faris-exploration/schematics-2026/.venv/bin/python",
+      "prefix": "/mnt/home/logika-faris-exploration/schematics-2026/.venv",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "2.5.4",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "joblib": "1.6.0"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/logika-model-arena-20261025/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/logika-model-arena-20261025/.venv/bin/python",
+      "prefix": "/mnt/home/faris/logika-model-arena-20261025/.venv",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {},
+      "errors": {}
+    },
+    {
+      "environment": "/home/faris/logika-model-arena-20261025/.venv",
+      "returncode": 0,
+      "executable": "/home/faris/logika-model-arena-20261025/.venv/bin/python",
+      "prefix": "/home/faris/logika-model-arena-20261025/.venv",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {},
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/logika-model-arena-20261025/env311",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/logika-model-arena-20261025/env311/bin/python",
+      "prefix": "/mnt/home/faris/logika-model-arena-20261025/env311",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "scipy": "1.16.3",
+        "sklearn": "1.7.2",
+        "joblib": "1.6.0",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5",
+        "torch": "2.7.1+cu126"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/home/faris/logika-model-arena-20261025/env311",
+      "returncode": 0,
+      "executable": "/home/faris/logika-model-arena-20261025/env311/bin/python",
+      "prefix": "/home/faris/logika-model-arena-20261025/env311",
+      "base_prefix": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu",
+      "python": "3.11.13",
+      "modules": {
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "scipy": "1.16.3",
+        "sklearn": "1.7.2",
+        "joblib": "1.6.0",
+        "lightgbm": "4.6.0",
+        "catboost": "1.2.8",
+        "xgboost": "3.0.5",
+        "torch": "2.7.1+cu126"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/mnt/home/faris/projects/trace-platform-redesign/.venv",
+      "returncode": 0,
+      "executable": "/mnt/home/faris/projects/trace-platform-redesign/.venv/bin/python",
+      "prefix": "/mnt/home/faris/projects/trace-platform-redesign/.venv",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "1.26.4"
+      },
+      "errors": {}
+    },
+    {
+      "environment": "/home/faris/projects/trace-platform-redesign/.venv",
+      "returncode": 0,
+      "executable": "/home/faris/projects/trace-platform-redesign/.venv/bin/python",
+      "prefix": "/home/faris/projects/trace-platform-redesign/.venv",
+      "base_prefix": "/usr",
+      "python": "3.12.3",
+      "modules": {
+        "numpy": "1.26.4"
+      },
+      "errors": {}
+    }
+  ],
+  "success": true,
+  "http_health": {
+    "plate_api": {
+      "http_status": 200,
+      "json_response": true,
+      "tls_certificate_verified": true
+    },
+    "cvat_server": {
+      "http_status": 200,
+      "json_response": true,
+      "version": "2.78.0"
+    }
+  },
+  "backup_remote_storage_mount_absent": true,
+  "coordinator_work_state": {
+    "before": "paused",
+    "after": "paused"
+  }
+}

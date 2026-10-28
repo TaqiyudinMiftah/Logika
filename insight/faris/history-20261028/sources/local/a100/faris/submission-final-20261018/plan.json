@@ -1,0 +1,347 @@
+{
+  "id": "submission-final-20261018",
+  "campaign": "/mnt/home/logika-faris-exploration/exploration-12h-20261017",
+  "bank": "/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank",
+  "extras": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/extras",
+  "train": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/train_applications.csv",
+  "test": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/test_applications.csv",
+  "sample": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/raw/sample_submission(3).csv",
+  "bank_id": "eb7ca7bdcb7c21b6dc1524bdcd88e1983d02334a91742637ec1ac9e814da79da",
+  "selected": {
+    "id": "without_pc2_job_000853_mean",
+    "method": "mean",
+    "parents": [
+      "pc2_job_000623",
+      "pc2_job_000855",
+      "pc3_job_000424",
+      "pc3_job_000846"
+    ],
+    "weights": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ]
+  },
+  "metrics": {
+    "spec": {
+      "id": "without_pc2_job_000853_mean",
+      "method": "mean",
+      "parents": [
+        "pc2_job_000623",
+        "pc2_job_000855",
+        "pc3_job_000424",
+        "pc3_job_000846"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "development": {
+      "screen": {
+        "ks": 0.5263427094743861,
+        "delta": 0.0005712705891841585,
+        "fold_delta": [
+          0.0036517272932234945,
+          0.0010736229612163806,
+          -0.0005976217647010174
+        ]
+      },
+      "reseed": {
+        "ks": 0.5231462663855329,
+        "delta": 0.0015518816747328579,
+        "fold_delta": [
+          0.001820459512767214,
+          0.0026746460906533764,
+          -0.0008846210703122859
+        ]
+      },
+      "repeat": {
+        "ks": 0.5209708435527638,
+        "delta": 0.0018722046316483887,
+        "fold_delta": [
+          0.0004058724595067398,
+          0.0015938607540352256,
+          0.005173030428749281
+        ]
+      }
+    },
+    "eligible": true,
+    "mean_development_delta": 0.001331785631855135,
+    "reused_validation": {
+      "ks": 0.5323161334386715,
+      "baseline_ks": 0.5306943648617997,
+      "delta": 0.001621768576871796
+    }
+  },
+  "references": {
+    "pc2_job_000623": {
+      "folder": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/archive/pc2/campaign/runs/job_001044/attempt_001",
+      "job": {
+        "job_id": "job_001044",
+        "family": "ebm",
+        "params": {
+          "config": "aaf1faad20c743c8877c"
+        },
+        "hypothesis": "H_ebm; matched champion and feature-block exploration",
+        "seed": 2026,
+        "protocol": "confirm",
+        "resources": {
+          "cpus": 1,
+          "ram_mb": 5000,
+          "disk_mb": 180,
+          "timeout_seconds": 1500
+        },
+        "status": "complete",
+        "attempt": 1,
+        "trial_number": null,
+        "fidelity_group": "full",
+        "max_steps": 1,
+        "external_id": "caf6a9f40b562fd39f55",
+        "stage_deadline": 1792254335.17935,
+        "node_id": "local",
+        "directory": "runs/job_001044/attempt_001",
+        "started": 1792250754.6897252,
+        "identity": {
+          "pid": 1017482,
+          "created": 1792250754.77,
+          "command": [
+            "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/bin/python",
+            "-m",
+            "oneshot.worker",
+            "/mnt/home/logika-faris-exploration/exploration-12h-20261017/campaign",
+            "/mnt/home/logika-faris-exploration/exploration-12h-20261017/campaign/runs/job_001044/attempt_001/spec.json",
+            "/mnt/home/logika-faris-exploration/exploration-12h-20261017/campaign/runs/job_001044/attempt_001"
+          ]
+        },
+        "progress_offset": 0,
+        "score": 0.5232985592863784,
+        "peak_ram_mb": 1404.7421875,
+        "cpu_seconds_sampled": 127.81,
+        "peak_vram_mb": 0,
+        "finished": 1792250885.07402,
+        "artifact_mb": 5.524724006652832
+      },
+      "configuration": {
+        "model": "ebm",
+        "view": "representation_17",
+        "weight": 1,
+        "anchor": false,
+        "strength": 0.05,
+        "l1": 0.25,
+        "dimensions": 128
+      },
+      "validation_sha256": "da86078d873b406a3dce5f07d73f8063c5e33105812366c211e0cbf8c841ee3c"
+    },
+    "pc2_job_000855": {
+      "folder": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/archive/pc2/campaign/runs/job_001043/attempt_001",
+      "job": {
+        "job_id": "job_001043",
+        "family": "nested",
+        "params": {
+          "config": "nested_11",
+          "components": [
+            "fd1fd49493df80697827",
+            "d2f4719a69d44e93a849",
+            "eb3419a4bf925b93ca53"
+          ]
+        },
+        "hypothesis": "H7 genuine nested ensembles",
+        "seed": 2026,
+        "protocol": "confirm",
+        "resources": {
+          "cpus": 1,
+          "ram_mb": 6000,
+          "disk_mb": 800,
+          "timeout_seconds": 4500
+        },
+        "status": "complete",
+        "attempt": 1,
+        "trial_number": null,
+        "fidelity_group": "full",
+        "max_steps": 1,
+        "external_id": "ed0b7a03a2618504a055",
+        "stage_deadline": 1792254335.17935,
+        "node_id": "local",
+        "directory": "runs/job_001043/attempt_001",
+        "started": 1792250753.652199,
+        "identity": {
+          "pid": 1017475,
+          "created": 1792250753.73,
+          "command": [
+            "/mnt/home/logika-faris-exploration/exploration-12h-20261017/.venv/bin/python",
+            "-m",
+            "oneshot.worker",
+            "/mnt/home/logika-faris-exploration/exploration-12h-20261017/campaign",
+            "/mnt/home/logika-faris-exploration/exploration-12h-20261017/campaign/runs/job_001043/attempt_001/spec.json",
+            "/mnt/home/logika-faris-exploration/exploration-12h-20261017/campaign/runs/job_001043/attempt_001"
+          ]
+        },
+        "progress_offset": 0,
+        "score": 0.5334577757348969,
+        "peak_ram_mb": 1992.6015625,
+        "cpu_seconds_sampled": 325.90000000000003,
+        "peak_vram_mb": 0,
+        "finished": 1792251083.7644432,
+        "artifact_mb": 4.306005477905273
+      },
+      "configuration": null,
+      "validation_sha256": "6c6f157c2d9217f9292ad34bf1325884b29c7cef2bd50dd68f915b9697bab336"
+    },
+    "pc3_job_000424": {
+      "folder": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/archive/pc3/campaign/runs/job_001085/attempt_001",
+      "job": {
+        "job_id": "job_001085",
+        "family": "elastic",
+        "params": {
+          "config": "2f6c6c38fc4c0efb1c4c"
+        },
+        "hypothesis": "H_elastic; matched champion and feature-block exploration",
+        "seed": 2026,
+        "protocol": "confirm",
+        "resources": {
+          "cpus": 1,
+          "ram_mb": 2800,
+          "disk_mb": 180,
+          "timeout_seconds": 1500
+        },
+        "status": "complete",
+        "attempt": 1,
+        "trial_number": null,
+        "fidelity_group": "full",
+        "max_steps": 1,
+        "external_id": "33e3425602a5ac51ec52",
+        "stage_deadline": 1792254335.17935,
+        "node_id": "local",
+        "directory": "runs/job_001085/attempt_001",
+        "started": 1792250751.9386454,
+        "identity": {
+          "pid": 900415,
+          "created": 1792250751.31,
+          "command": [
+            "/mnt/home/faris/faris/exploration-12h-20261017/.venv/bin/python",
+            "-m",
+            "oneshot.worker",
+            "/mnt/home/faris/faris/exploration-12h-20261017/campaign",
+            "/mnt/home/faris/faris/exploration-12h-20261017/campaign/runs/job_001085/attempt_001/spec.json",
+            "/mnt/home/faris/faris/exploration-12h-20261017/campaign/runs/job_001085/attempt_001"
+          ]
+        },
+        "progress_offset": 0,
+        "score": 0.524590330718443,
+        "peak_ram_mb": 1190.66796875,
+        "cpu_seconds_sampled": 158.66,
+        "peak_vram_mb": 0,
+        "finished": 1792250912.8792667,
+        "artifact_mb": 0.2466564178466797
+      },
+      "configuration": {
+        "model": "elastic",
+        "view": "account_00",
+        "weight": 3,
+        "anchor": false,
+        "strength": 0.005,
+        "l1": 0.75,
+        "dimensions": 128
+      },
+      "validation_sha256": "af0752e8793314e99f5fb9dcaec649db52a8c78a99b34b2e1b5591a03a0242f7"
+    },
+    "pc3_job_000846": {
+      "folder": "/mnt/home/logika-faris-exploration/exploration-12h-20261017/archive/pc3/campaign/runs/job_001086/attempt_001",
+      "job": {
+        "job_id": "job_001086",
+        "family": "tabm",
+        "params": {
+          "config": "b8ed3935d1e518adb6fd"
+        },
+        "hypothesis": "H_tabm; matched champion and feature-block exploration",
+        "seed": 2026,
+        "protocol": "confirm",
+        "resources": {
+          "cpus": 2,
+          "ram_mb": 9000,
+          "disk_mb": 500,
+          "timeout_seconds": 2400,
+          "gpus": 1,
+          "vram_mb": 9500
+        },
+        "status": "complete",
+        "attempt": 1,
+        "trial_number": null,
+        "fidelity_group": "full",
+        "max_steps": 1,
+        "external_id": "d15f7080a8e9ae073427",
+        "stage_deadline": 1792254335.17935,
+        "node_id": "local",
+        "gpu_ids": [
+          "0"
+        ],
+        "directory": "runs/job_001086/attempt_001",
+        "started": 1792250752.8992562,
+        "identity": {
+          "pid": 900422,
+          "created": 1792250752.28,
+          "command": [
+            "/mnt/home/faris/faris/exploration-12h-20261017/.venv/bin/python",
+            "-m",
+            "oneshot.worker",
+            "/mnt/home/faris/faris/exploration-12h-20261017/campaign",
+            "/mnt/home/faris/faris/exploration-12h-20261017/campaign/runs/job_001086/attempt_001/spec.json",
+            "/mnt/home/faris/faris/exploration-12h-20261017/campaign/runs/job_001086/attempt_001"
+          ]
+        },
+        "progress_offset": 0,
+        "score": 0.5302681076802858,
+        "peak_ram_mb": 2955.00390625,
+        "cpu_seconds_sampled": 68.27000000000001,
+        "peak_vram_mb": 376.0,
+        "finished": 1792250824.1156473,
+        "artifact_mb": 11.129375457763672
+      },
+      "configuration": {
+        "model": "tabm",
+        "view": "bureau_13",
+        "weight": 3,
+        "anchor": false,
+        "width": 256,
+        "blocks": 4,
+        "dropout": 0.1,
+        "lr": 0.0001,
+        "events": 128,
+        "encoding": "plain"
+      },
+      "validation_sha256": "4422b9dc8fd951f9c5ad4ff10411094b7e18d807e6d1d78ac3a5e61fd0c6b095"
+    }
+  },
+  "shared_stack_components": [
+    "fd1fd49493df80697827",
+    "d2f4719a69d44e93a849",
+    "eb3419a4bf925b93ca53"
+  ],
+  "seed": 2026,
+  "inner_folds": 3,
+  "inner_seed": 2726,
+  "cpu_workers": 4,
+  "gpu_uuid": "GPU-24a9fffc-77a7-e8dd-d49b-d6f06cb1966a",
+  "gpu_cpus": 2,
+  "gpu_memory_fraction": 0.25,
+  "safety_seconds": 7200,
+  "no_upload": true,
+  "confirmation_is_selection_data": true,
+  "input_sha256": {
+    "train": "b60df5704bcd3713314a31c5382db22f41d38971bd76906b15f45a38edff509b",
+    "test": "113f6ee4ff15e4c8bf14fb9a85fc399b906d1c569f6a715675a5814da2e02dfe",
+    "sample": "e1d1c105de6bc0906025366f9839e5f97e19f8efb2167e6cb5fef710ad91679d",
+    "bank_manifest": "25eea89587f940d13343eb3b4c5a427ee51a9ef347b68e6e84a32cb30536f6b6",
+    "extras_manifest": "bd671b28c3ad3fe0385d926ea92fc0457d56e672814590931ab1d89abcce7d84"
+  },
+  "stream_configs": {
+    "pc2_job_000623": "aaf1faad20c743c8877c",
+    "pc3_job_000424": "2f6c6c38fc4c0efb1c4c",
+    "pc3_job_000846": "b8ed3935d1e518adb6fd"
+  },
+  "tabm_config": "b8ed3935d1e518adb6fd"
+}

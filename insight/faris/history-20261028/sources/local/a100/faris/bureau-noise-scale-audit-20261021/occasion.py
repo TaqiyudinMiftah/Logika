@@ -1,0 +1,16 @@
+"""A predeclared covariance diagnostic, without default labels or prediction fitting."""
+from pathlib import Path
+import time,json,itertools,hashlib
+import numpy as np,pandas as pd
+from scipy.stats import norm
+R=Path(__file__).resolve().parent;A=R.parent;RAW=A/'exploration-12h-20261017/raw';INPUT=A/'ranking-pipeline-20261020/input'
+def main():
+ assert not(R/'OCCASION_RESULT.json').exists();start=time.time();a=pd.read_csv(RAW/'train_applications.csv',usecols=['application_id','customer_id','decision_datetime'],parse_dates=['decision_datetime']);ids=pd.read_parquet(INPUT/'data/train_features.parquet',columns=['application_id']);ix=np.load(INPUT/'artifacts/fold0/indices.npz');a=a.set_index('application_id').loc[ids.application_id.iloc[ix['context']]].reset_index();assert len(a)==50000 and a.customer_id.is_unique
+ d=pd.read_csv(RAW/'bureau_observations.csv',parse_dates=['report_datetime','available_datetime']);d=d[d.customer_id.isin(a.customer_id)].copy();cut=a.set_index('customer_id').decision_datetime;assert(d.report_datetime<d.customer_id.map(cut)).all()and(d.available_datetime<d.customer_id.map(cut)).all();d=d[d.score.notna()].copy();assert not d.duplicated(['customer_id','application_id','bureau_provider']).any();d['day']=d.report_datetime.astype('int64')/86400e9
+ scores=d.pivot(index=['customer_id','application_id'],columns='bureau_provider',values='score');dates=d.pivot(index=['customer_id','application_id'],columns='bureau_provider',values='day');rows=[];critical=float(norm.ppf(1-.05/6))
+ for p,q in itertools.combinations(sorted(scores.columns),2):
+  eligible=scores[[p,q]].dropna().copy();eligible['day']=dates.loc[eligible.index,[p,q]].mean(axis=1);eligible=eligible.reset_index().sort_values(['customer_id','day','application_id'],kind='stable');g=eligible.groupby('customer_id',sort=False);first=g.head(1).set_index('customer_id');last=g.tail(1).set_index('customer_id').reindex(first.index);span=last.day-first.day;good=span>=90;dx=(last.loc[good,p]-first.loc[good,p]).to_numpy(float);dy=(last.loc[good,q]-first.loc[good,q]).to_numpy(float);assert len(dx)>1000;vx=dx-dx.mean();vy=dy-dy.mean();product=vx*vy;cov=float(product.mean());se=float(product.std(ddof=1)/np.sqrt(len(product)));ci=[cov-critical*se,cov+critical*se]
+  rows.append(dict(providers=[str(p),str(q)],customers=len(dx),min_span_days=float(span[good].min()),median_span_days=float(span[good].median()),mean_changes=[float(dx.mean()),float(dy.mean())],change_covariance=cov,change_correlation=float(np.corrcoef(dx,dy)[0,1]),change_covariance_CI=ci,shared_change_supported=ci[0]>0))
+ result=dict(status='complete',default_labels_opened=False,classification_fit_admitted=False,pairs=rows,all_three_shared_change_supported=all(x['shared_change_supported']for x in rows),method='Oneearliest/latestcommonapplicationpairpercontextcustomer; >=90days; empiricalcovarianceinfluenceSE; normalapproximationBonferroni3pairs95percent.',source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),plan_sha256=hashlib.sha256((R/'OCCASION_HYPOTHESIS.md').read_bytes()).hexdigest(),seconds=time.time()-start,qualification='Observationalsharedchangesarenotidentifiedmeasurementerrororproof ofdefaultriskprediction.')
+ (R/'OCCASION_RESULT.json').write_text(json.dumps(result,indent=2));print(json.dumps(result),flush=True)
+if __name__=='__main__':main()

@@ -1,0 +1,7 @@
+{
+  "time": 1792524609.3227143,
+  "defect": "After atomically moving an incoming directory, receipt construction queried the old incoming cache path. Cache was intact but receipt absent.",
+  "repair": "Capture cache byte count before moving; recover and independently verify existing unreceipted destination in place.",
+  "scope": "Only the collector service will restart; training queues and completed caches remain preserved.",
+  "models_retrained": 0
+}

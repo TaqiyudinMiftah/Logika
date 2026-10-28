@@ -1,0 +1,162 @@
+{
+  "status": "prepared_checks_passed_runtime_pilot_pending",
+  "UTC": "2026-10-27T00:12:01.757901+00:00",
+  "contract_sha256": "1e67ef25dc3dc225f7171bf53d8d7f7ce5cdb5ee06c214d11b4f0cb5df751f04",
+  "feature_freeze_sha256": "071c75e0f59cf92429bde9c76a64e27931e1eea03bbbbeac2e2589b5fee68dd6",
+  "configs_sha256": "993ff93bdd82f1b0c2415dac0fe1e53852d259ab2aca1554532b863d6f5f86d1",
+  "source_sha256": "ebc7a2a1b17879b5bc0069b1bdf2b90c8d6c22114c9b97ee65dbff8932e971a2",
+  "architecture_source_sha256": "4747e0c36e3347a505e0a2a7bf0401dc385bfc867ebd1910214e762860be8bba",
+  "fold_checks": [
+    {
+      "fold": 0,
+      "context_class_counts": [
+        43209,
+        6791
+      ],
+      "correction_class_counts": [
+        5185,
+        815
+      ],
+      "manifest_hash_passed": true,
+      "roles_disjoint": true
+    },
+    {
+      "fold": 1,
+      "context_class_counts": [
+        43209,
+        6791
+      ],
+      "correction_class_counts": [
+        5185,
+        815
+      ],
+      "manifest_hash_passed": true,
+      "roles_disjoint": true
+    },
+    {
+      "fold": 2,
+      "context_class_counts": [
+        43209,
+        6791
+      ],
+      "correction_class_counts": [
+        5185,
+        815
+      ],
+      "manifest_hash_passed": true,
+      "roles_disjoint": true
+    },
+    {
+      "fold": 3,
+      "context_class_counts": [
+        43210,
+        6790
+      ],
+      "correction_class_counts": [
+        5185,
+        815
+      ],
+      "manifest_hash_passed": true,
+      "roles_disjoint": true
+    },
+    {
+      "fold": 4,
+      "context_class_counts": [
+        43210,
+        6790
+      ],
+      "correction_class_counts": [
+        5185,
+        815
+      ],
+      "manifest_hash_passed": true,
+      "roles_disjoint": true
+    }
+  ],
+  "preprocessing_counterfactual_passed": true,
+  "unknown_categories_safe": true,
+  "metric_known_cases_passed": true,
+  "architecture_gradient_checks": [
+    {
+      "kind": "dcn_parallel",
+      "loss_values": [
+        0.7762397527694702,
+        0.5601708292961121,
+        0.3958127796649933
+      ],
+      "gradient_finite": true,
+      "parameters_updated": true,
+      "eval_repeat_exact": true,
+      "parameters": 94721
+    },
+    {
+      "kind": "dcn_stacked",
+      "loss_values": [
+        0.7739039063453674,
+        0.694286048412323,
+        0.6290692090988159
+      ],
+      "gradient_finite": true,
+      "parameters_updated": true,
+      "eval_repeat_exact": true,
+      "parameters": 94481
+    },
+    {
+      "kind": "ft_transformer",
+      "loss_values": [
+        0.8305692672729492,
+        0.6314951181411743,
+        0.6108848452568054
+      ],
+      "gradient_finite": true,
+      "parameters_updated": true,
+      "eval_repeat_exact": true,
+      "parameters": 95617
+    },
+    {
+      "kind": "mlp_control",
+      "loss_values": [
+        0.760104775428772,
+        0.7468439936637878,
+        0.7310575842857361
+      ],
+      "gradient_finite": true,
+      "parameters_updated": true,
+      "eval_repeat_exact": true,
+      "parameters": 64193
+    },
+    {
+      "kind": "resnet",
+      "loss_values": [
+        0.8682234287261963,
+        0.5231625437736511,
+        0.34595102071762085
+      ],
+      "gradient_finite": true,
+      "parameters_updated": true,
+      "eval_repeat_exact": true,
+      "parameters": 229953
+    },
+    {
+      "kind": "tabm",
+      "loss_values": [
+        0.7645040154457092,
+        0.7601649165153503,
+        0.7517516016960144
+      ],
+      "gradient_finite": true,
+      "parameters_updated": true,
+      "eval_repeat_exact": true,
+      "parameters": 84624
+    }
+  ],
+  "baseline_reused_verified_KS": 0.5306361042400267,
+  "simple_reference_reused_verified_KS": 0.5241830036583925,
+  "constant_prediction_KS": 0.0,
+  "null_AUC": 0.5,
+  "baseline_prediction_replay_max_abs": 1.1102230246251565e-16,
+  "uncertainty_policy": "5folds,2seeds perdesign;paired class-stratifiedbootstrap2000 conditionaldevelopmentreplicates",
+  "torch_version": "2.7.1+cu126",
+  "tabm_version": "0.0.3",
+  "limits": "All70kouterexamples reused. No untouchedaudit. Historical snapshot completeness inherited assumption. Synthetic architecture tests establish execution/boundaries, not expected score. Runtime pilot additionally required before broad admission."
+}

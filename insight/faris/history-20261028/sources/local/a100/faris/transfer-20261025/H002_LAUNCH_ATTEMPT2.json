@@ -1,0 +1,22 @@
+{
+  "created_UTC": "2026-10-24T19:03:42.141487+00:00",
+  "host": "PC2",
+  "argv": [
+    "systemd-run",
+    "--user",
+    "--unit",
+    "logika-transfer-direct-ks-attempt2-20261025",
+    "--working-directory",
+    "/mnt/home/logika-faris-exploration/transfer-20261025",
+    "--property",
+    "RuntimeMaxSec=7200",
+    "--property",
+    "MemoryMax=8G",
+    "--property",
+    "CPUQuota=200%",
+    "/bin/bash",
+    "-c",
+    "while [ ! -f robustness/fold0/complete.json ]; do sleep 10; done\n/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python -u source/direct_ks.py run --fold 0 > direct_ks_fold0.log 2>&1 || exit 1\nwhile [ ! -f robustness/fold1/complete.json ]; do sleep 10; done\n/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python -u source/direct_ks.py run --fold 1 > direct_ks_fold1.log 2>&1 || exit 1\nwhile [ ! -f robustness/fold2/complete.json ]; do sleep 10; done\n/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python -u source/direct_ks.py run --fold 2 > direct_ks_fold2.log 2>&1 || exit 1\nwhile [ ! -f robustness/fold3/complete.json ]; do sleep 10; done\n/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python -u source/direct_ks.py run --fold 3 > direct_ks_fold3.log 2>&1 || exit 1\nwhile [ ! -f robustness/fold4/complete.json ]; do sleep 10; done\n/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python -u source/direct_ks.py run --fold 4 > direct_ks_fold4.log 2>&1 || exit 1\n/mnt/home/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python source/direct_ks.py report > direct_ks_report.log 2>&1"
+  ],
+  "prior_attempt": "Own waiting service stopped after systemd expanded shell loop variables. No model fitted or scored in attempt1."
+}

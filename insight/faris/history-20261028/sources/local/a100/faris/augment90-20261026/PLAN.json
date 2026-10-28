@@ -1,0 +1,85 @@
+{
+  "created_UTC": "2026-10-26T02:29:29.781516+00:00",
+  "scope": "User-approved test preserving every original baseline90 column and appending up to ten actuarial additions.",
+  "authorized_by": "User: alright do that, replying to baseline90 plus small groups proposal.",
+  "target_pooled_KS": 0.54,
+  "search_deadline_epoch": 1792996169.781516,
+  "deadline_epoch": 1793003369.781516,
+  "maximum_wall_hours": 6,
+  "reserve_hours": 2,
+  "folds": 5,
+  "context_rows": 50000,
+  "correction_rows": 6000,
+  "validation_rows": 14000,
+  "seed": "2026+fold",
+  "sizes": [
+    "medium",
+    "large"
+  ],
+  "num_estimators": 8,
+  "groups": [
+    "amortization",
+    "cashflow_stress",
+    "debt_service",
+    "debt_to_income",
+    "liquidity_expense",
+    "liquidity_income",
+    "liquidity_payment",
+    "net_debt_income",
+    "repayment_credibility",
+    "temporal_change",
+    "volatility",
+    "diverse"
+  ],
+  "max_additions": 10,
+  "max_columns": 100,
+  "expected_main_fits": 130,
+  "pilot": {
+    "pack": "replay89",
+    "size": "medium",
+    "fold": 0,
+    "estimators": 8,
+    "max_abs_cached_prediction_difference": 1e-07,
+    "purpose": "Verify runtime and existing 89-column prediction replay; all new controls explicitly retain 90."
+  },
+  "catalog_sha256": "b015a313a4759df4071223334dadc3e87938bd93fd911f45e78b6c4fddd49a93",
+  "selection": {
+    "roles": "Stratified half of correction rows ranks features; other half selects primary weight; random_state261026.",
+    "feature_score": "Absolute correlation of rank-transformed feature or missingness with y minus frozen original Kumo90 raw probability, ranking half only.",
+    "context_min_nonmissing": 500,
+    "ranking_min_nonmissing": 200,
+    "baseline_rank_correlation_exclusion": 0.995,
+    "within_group_rank_correlation_exclusion": 0.98,
+    "context_exact_duplicate_exclusion": true,
+    "per_family_limit": 10,
+    "diverse": "Top feature from each nonempty family, highest residual score first, prune redundancy, limit10.",
+    "limits": "Heuristic extension inspired by conditional screening; not an implementation of CSIS guarantees. May miss interaction-only signals."
+  },
+  "primary": {
+    "direction": "Mean of (augmented raw - fresh full90 control raw), averaging both sizes and all 11 families equally. Diverse group is diagnostic only.",
+    "prediction": "clip(original raw + weight * mean_paired_increment,1e-6,1-1e-6)",
+    "weights": [
+      0,
+      0.1,
+      0.2,
+      0.4
+    ],
+    "selection": "Correction choice half only. Positive weight requires positive full-choice KS gain and positive gain in at least4 of5 predeclared stratified80% subsamples. Choose highest full-choice gain; ties prefer smaller weight.",
+    "subsample_seed": "261026+fold",
+    "downstream": "Original fixed maturity18 correction penalty.003 strength.5 on6000 plus .25 unchanged spline (.75 corrected).",
+    "baseline": "Matched maturity pooled KS0.5306361042400267, replay verified before broad search.",
+    "diagnostics": "All individual-family fixed weight0.2 paired increments, all full augmented averages, and new90 controls reported only after primary recipe frozen."
+  },
+  "uncertainty": {
+    "bootstrap": 2000,
+    "seed": 261026,
+    "unit": "Application, separately resampled within classes; conditional reused-development interval.",
+    "fold_deltas": true,
+    "seed_replication": "First-stage results use one declared seed per fold. Any favorable candidate needs another paired training seed before promotion."
+  },
+  "retention": "Parameters/configs, sources, seeds, selected feature definitions, hashes, predictions and metrics only. No fitted weights or KV cache. Reuse original shared pretrained checkpoints.",
+  "execution": "Nodes2001/2002/2003 homes only; no A100. Admit only idle GPUs and adequate available host RAM; max4 concurrent fits; CPU2 threads, MemoryMax22G, perfit1200s.",
+  "outer_exposure": "All original outer labels previously exposed; no independent audit. New workers and feature selector do not read outer labels.",
+  "snapshot_semantics": "Inherited raw timestamp/DPD consistency audit passed; exact upstream capture semantics remain an explicit assumption.",
+  "promotion": "Target attainment separate from generalization; positive paired development gain, positive95% interval, at least3 positive fold deltas and another paired seed are required before promotion. No automatic Kaggle upload."
+}

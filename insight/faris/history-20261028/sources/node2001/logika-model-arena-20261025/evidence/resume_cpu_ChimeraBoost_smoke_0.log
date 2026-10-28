@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/mnt/home/faris/logika-model-arena-20261025/source/worker.py", line 108, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--key',required=True);p.add_argument('--fold',type=int,default=0);p.add_argument('--config',type=int,default=0);p.add_argument('--smoke',action='store_true');run(p.parse_args())
+                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/faris/logika-model-arena-20261025/source/worker.py", line 75, in run
+    model.fit(X=X,y=Y,X_val=Q.iloc[:len(inner_y)],y_val=pd.Series(inner_y),num_cpus=2,num_gpus=gpu,time_limit=120 if args.smoke else 1800,verbosity=2)
+  File "/mnt/home/faris/logika-model-arena-20261025/env311/lib/python3.11/site-packages/autogluon/core/models/abstract/abstract_model.py", line 1500, in fit
+    out = self._fit(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/faris/logika-model-arena-20261025/vendor/packages/tabarena/src/tabarena/models/chimeraboost/model.py", line 62, in _fit
+    from chimeraboost import ChimeraBoostClassifier
+  File "/mnt/home/faris/logika-model-arena-20261025/storage/extensions/chimeraboost/__init__.py", line 23, in <module>
+    from .sklearn_api import (
+  File "/mnt/home/faris/logika-model-arena-20261025/storage/extensions/chimeraboost/sklearn_api.py", line 9, in <module>
+    from .booster import (GradientBoosting, LINEAR_LEAVES_MIN_SAMPLES,
+  File "/mnt/home/faris/logika-model-arena-20261025/storage/extensions/chimeraboost/booster.py", line 13, in <module>
+    from .losses import LOSSES, MAE, MultiSoftmax, MultiQuantile, Quantile
+  File "/mnt/home/faris/logika-model-arena-20261025/storage/extensions/chimeraboost/losses.py", line 14, in <module>
+    from numba import njit, prange
+ModuleNotFoundError: No module named 'numba'

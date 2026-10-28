@@ -1,0 +1,30 @@
+{
+  "id": "H010-submission-matched-role-ensemble",
+  "frozen_UTC": "2026-10-24T20:40:13.709915+00:00",
+  "mechanism": "ExistingOOF uses onecontext model perapplicant, while finalCSV averages fivecontext models. Match the training graph inside each outerfold: five50k contexts/6k correction sets contained entirely in56k outertraining. Share label-free priors and a spline fitted only on56k outertraining. Finalrefit uses70kshared priors/spline and five64k/6k context/head pairs.",
+  "feature_scope": "Same90Kumo fields,18maturityhead fields,77spline fields; no spectral features or new raw fields. Cohort-prior scope is now all outertraining56k covariates, explicitly separate from previous50kcontext prior policy.",
+  "roles": "Original seed31027outerfolds and all70000validation rows unchanged. For memberj=outer retain original6kcorrection exactly. Othermembers retain available originalmembercorrection IDs, then fill stratified to trainingprevalence from outertraining only, seed202610250+100*outer+member.",
+  "model": "FrozenKumoLarge num_estimators8 seed2026+member; ordinary headL2.003strength.5, fixedH002 directKS objective as matchedablation; one77field spline peroutertrain. Fivebag and matchedonebag compared after all25contexts finish.",
+  "promotion": "Fivebag mode must exceed currentmaximum.5314098055476294; >=3/5foldwins vs previousmaturityB; paired fourcontrast-adjusted95percent lowerbound>0 vs both matchedonebagordinary and previousB. Choose higher pooledKS only among qualifying modes. Target.54 reportedseparately; no independent holdout exists.",
+  "CV_deadline_epoch": 1792880100.0,
+  "training_deadline_epoch": 1792883400.0,
+  "submission_deadline_epoch": 1792885500.0,
+  "archive_limit_bytes": 600000000,
+  "scratch_root": "/home/faris/logika-transfer-rolebag-20261025",
+  "scratch_min_free_bytes": 3000000000,
+  "inherited_limits": [
+    "All70k labels historicallyexposed",
+    "DPD/amountpaid snapshot provenance unresolved; no new fields admitted"
+  ],
+  "source_sha256": {
+    "role_bag.py": "53f50c3cc51bb38905085bb4211b9a3ebadeef78fa8c5c7890758be903d22a99",
+    "cohort_rolebag.py": "3142405f4e0670d5c08fc7ec9c2fd8bffc366bc9cebe6fd010c8f51861c62fef",
+    "spline_rolebag.py": "e2c4a7af42cf7d01eaf63bb04c777b9351e8167e14d6687a0c0dc87e8f472195",
+    "baseline.py": "57f2aa14ebe401cf40efad63dbcbaabbffebb3d78ec6c96a8b3b177b207894e0",
+    "feature_head.py": "048aa821409cd6872157ff48f02dcd0c6d1d9c51ce103156d8e367b31e501a06",
+    "direct_ks.py": "86b7c36e84c7c9b24bbfd2c5e05df0f60873450b33c89371fd2ad083f7dae948",
+    "gpu_backend.py": "f4e03f3b8fbd3ac1bf1c568c57dd91492c92e7ea1d20cbd6eb7368a5ac1ff7b4",
+    "maturity_features.py": "733cf2873a24207a89170df0a8d32d6cd4f6527c64e057011a21580f21da199f"
+  },
+  "broad_search": false
+}

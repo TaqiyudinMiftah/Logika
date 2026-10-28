@@ -1,0 +1,17 @@
+# Reproduce V80 and test a time-order mechanism under the fixed V25 model
+
+Historical evidence, not a newresult: V80 pooledKS.5307369203/AUC.8470688524, comparedwithV25.5302846600/.8470292789. V80 wononly2folds versusitsownoriginalreference; itsfeaturesandfour supportfields differ fromV25'ssix. Itspublicscoreisnotused/queried. This motivates a matched comparison, not automaticpromotion. Savedsource,100krow-localspectralfeatures,5heads/OOFfiles anddefinition are importedread-only forreproduction.
+
+The11V80fields describe the180fullcalendar days before the incomplete decisionday. Completed unique-order spend andcounts become dailyseries; cancellation doesnotcountasspending. Requirefirstobservedeventpredatethewindow and>=8completedorders for the10spectralfields. The separatewindowsupportedfield depends onlyonfirstevent. This isobservationcoverage,notprovenaccountenrollment.
+
+Frozenfeaturedefinition: lineardetrending,Hannwindow,rFFTpowernormalizedbytotalnonzerofrequency power; bandsperiod6–8,12–16,25–35days; maximumpeakstrength anddominantperiod among3–90days. Twochannels(spend/orders) give10fields pluswindowcoverage. This isatemporalfingerprint,notproof of paycheckcycles orcausalfinancialmechanism.
+
+Firstgate: independentlyrebuild all11fieldsfromraw100kapplicants andcompareteammateartifactusingidenticalmissingmasks, absolutetolerance1e-6 (binary/cycle/supportvalues mustagreeexactly). Replayall5historicalV80correctorsagainstoriginalrawKumo/splineandoriginalunrepairedfeaturetables; maxpredictionerror<=2e-6. That isprovenancereproduction,notmatchedcurrentperformance.
+
+Onefeaturehypothesis with a matchednegativecontrol: append the11truefields to thecurrent18-fieldmaturity-onlycorrection and77-fieldspline. A singlepredeclaredwithin-customer180-daypermutation(seed20261127) moves spend/countvectors together, preserves totals/dailyhistograms/support and destroys calendarordering. Calculate the same11fields from thatpermutedseries; supportflag remainsidentical. This null is an additional same-width featurecontrol, notanothersearchedseed. Neverpermuteacrosscustomers/labelroles. No otherfrequency/window/horizon/shrinkage/model/weight candidate is admitted.
+
+Kumo90andallrawpredictions unchanged. Fixedcreditprocedures: original5foldseed31027,50kcontext/6khead/14kouter, headL2.003/strength.5/3knots, splineC.05/fiveknots/degree3/newton-cholesky/80iterations/tol1e-5 and75:25blend. Inputsbecome29/88becauseofaddedfeatures; newbasiswidth isexplicit,notclaimedidenticalcapacity. Trueandnull get identicalwidth/configuration. Keepmaturity-alignedrepaymentmeans andallV25coveragefeatures inboth. Fitall5folds ofbothbeforeopeningnewdefaultmetrics. Twentyheads/splinesretained; no foundation-model orarchitecturesearch.
+
+Predeclare full70kcomparisons trueversus originalbaseline,maturity-only,andshuffledcontrol. RecordKS,AUC,logloss,foldchanges,lineage/sourcehashes,costandserializedmodelreplay. Conditionalpairedbootstrap1000replications,3contrasts x2metricsBonferroni95percent; doesnotcorrecthistorical/adaptiveselection/retraininguncertainty. Require jointKS/AUCgain andfoldconsistency forprovisionalusefulness. Atrue-nullgapdoesnotestablishcausalperiodicity. Confirmationclosed,nosubmission,target.54unmet.
+
+Originaldeadline1792585871.823748/admissionstop16:31WIBpreserved. OneordinaryCPUcampaignwithfiniteverification; no agents ornewexperimentswhilethiscomparisonruns. Pricefloor/rounding,bureauboundary andcategorynoisevariants wereexcludedbeforeclassifiertrainingbecauseevidencewassmall; theyare notextra completedmodels.

@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "source_sha256": "ff0ebc1d04d05ab5b64c87ca5f40f953ced6ffac000ecc25fbc4f01f6edbd4a0",
+  "target_labels_used": false,
+  "rows": 100000,
+  "future_record_invariance": true,
+  "input_order_invariance": true,
+  "sample_check_customers": 80,
+  "raw_rows": {
+    "account": 1084418,
+    "deduplicated_orders": 2986855,
+    "previous": 201984
+  },
+  "families": {
+    "liquidity": [
+      "liq_shortfall_fraction",
+      "liq_shortfall_income_mean",
+      "liq_lowbuffer_fraction",
+      "liq_surplus_income_p10",
+      "liq_joint_stress_fraction",
+      "liq_longest_shortfall_run_fraction",
+      "liq_recent_shortfall_change",
+      "liq_observed_months"
+    ],
+    "alignment": [
+      "align_spend_outflow_share",
+      "align_spend_income_correlation",
+      "align_lowincome_spend_logratio",
+      "align_lowbuffer_cancel_change",
+      "align_lowbuffer_credit_change",
+      "align_negativeflow_spend_share",
+      "align_spend_outflow_correlation",
+      "align_observed_months"
+    ],
+    "application_path": [
+      "path_reapply_after_nonapproval_fraction",
+      "path_current_last_request_logratio",
+      "path_trailing_nonapproved_count",
+      "path_last_gap_relative_log",
+      "path_nonapproved_request_logchange",
+      "path_recent_nonapproved_request_income",
+      "path_approved_haircut_mean",
+      "path_days_since_nonapproved"
+    ]
+  },
+  "finite_counts": {
+    "liq_shortfall_fraction": 70000,
+    "liq_shortfall_income_mean": 70000,
+    "liq_lowbuffer_fraction": 70000,
+    "liq_surplus_income_p10": 70000,
+    "liq_joint_stress_fraction": 70000,
+    "liq_longest_shortfall_run_fraction": 70000,
+    "liq_recent_shortfall_change": 70000,
+    "liq_observed_months": 100000,
+    "align_spend_outflow_share": 69985,
+    "align_spend_income_correlation": 69875,
+    "align_lowincome_spend_logratio": 69985,
+    "align_lowbuffer_cancel_change": 13918,
+    "align_lowbuffer_credit_change": 13795,
+    "align_negativeflow_spend_share": 69983,
+    "align_spend_outflow_correlation": 69875,
+    "align_observed_months": 100000,
+    "path_reapply_after_nonapproval_fraction": 59429,
+    "path_current_last_request_logratio": 70000,
+    "path_trailing_nonapproved_count": 70000,
+    "path_last_gap_relative_log": 59429,
+    "path_nonapproved_request_logchange": 22314,
+    "path_recent_nonapproved_request_income": 70000,
+    "path_approved_haircut_mean": 66519,
+    "path_days_since_nonapproved": 31875
+  },
+  "files": {
+    "true.parquet": "76f4c4869b662882afbcfd1151559dedf1289ec58a9acc56615bd95c6b8471ba",
+    "alignment_null.parquet": "6993e165f36830588b754a7df7c0e820b4d1dbc5a315f4939e3a01b931564740"
+  },
+  "raw_sha256": {
+    "train_applications.csv": "b60df5704bcd3713314a31c5382db22f41d38971bd76906b15f45a38edff509b",
+    "test_applications.csv": "113f6ee4ff15e4c8bf14fb9a85fc399b906d1c569f6a715675a5814da2e02dfe",
+    "customer_profiles.csv": "bcffa8c5558e81d9b359d2785345af218c459704f1c416b1ecbbe3a0ccf73f5d",
+    "account_behavior.csv": "2f46be03496583b0231591194e13bea7593e87323056dfead6b9b19c48871924",
+    "ecommerce_transactions.csv": "495b3859f2146f87e7f8a383b308770af3d48342e3e1acdb45d7f1bed2bab742",
+    "previous_applications.csv": "faa0bc4552afee73cf58481234a94834bf0b786a195cbb979883c15642c39560"
+  },
+  "seconds": 373.83178329467773,
+  "completed_UTC": "2026-10-25T06:50:55.197711+00:00",
+  "source_boundary": "New fields read no repayment values. All records filtered before decision; account months complete and last12months only."
+}

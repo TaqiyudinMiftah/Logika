@@ -1,0 +1,56 @@
+{
+  "id": "kumo-coverage-placement-20261021",
+  "original_deadline": 1792585871.823748,
+  "target_KS": 0.54,
+  "input": "/mnt/home/faris/faris/kumo-coverage-placement-20261021/input",
+  "checkpoint": "/mnt/home/faris/faris/kumo-coverage-placement-20261021/assets/classifier.pt",
+  "checkpoint_sha": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "feature_parent": "/mnt/home/faris/faris/kumo-coverage-placement-20261021/coverage",
+  "repaired_features": "/mnt/home/faris/faris/kumo-coverage-placement-20261021/repaired",
+  "conditions": [
+    "control90",
+    "coverage96",
+    "null96"
+  ],
+  "Kumo_contexts": 15,
+  "correction_heads": 15,
+  "spline_refits": 5,
+  "scientific_gate_required": true,
+  "model_training_admitted": true,
+  "preflight_admitted": true,
+  "primary": "coverage96 versus repaired90 and same-width shuffled96; historical V25 descriptive only.",
+  "frozen_budget": {
+    "estimators": 8,
+    "context": 50000,
+    "correction": 6000,
+    "validation": 14000,
+    "seed": 2026,
+    "head_penalty": 0.003,
+    "head_strength": 0.5
+  },
+  "validation": {
+    "rows": 70000,
+    "folds": 5,
+    "seed": 31027,
+    "aggregation": "pooled tie-aware OOF KS",
+    "no_performance_elimination_after_one_fold": true
+  },
+  "scope": "Bounded three-recipe hypothesis after historical metric audit. No model hyperparameter sweep or new submission.",
+  "point_in_time_certified": false,
+  "historical_label_reuse": true,
+  "source_frozen_before_main_training": true,
+  "storage": {
+    "project_ceiling_GiB": 125,
+    "min_free_filesystem_GiB": 25,
+    "cache_estimate_GiB_per_condition": 7
+  },
+  "reproduction": "python source/experiment.py condition --fold F --variant V",
+  "assigned_folds": [
+    3,
+    4
+  ],
+  "python": "/mnt/home/faris/faris/kumo-coverage-placement-20261021/.venv/bin/python",
+  "verification_reserve_seconds": 10800,
+  "cache_reservation_GiB": 6.5,
+  "cache_calibration": "Measured full96-input cache5.72GiB;6.5GiB reservation plus2GiB filesystem reserve"
+}

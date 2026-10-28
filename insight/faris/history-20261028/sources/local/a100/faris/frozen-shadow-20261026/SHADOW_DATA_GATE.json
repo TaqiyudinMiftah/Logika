@@ -1,0 +1,51 @@
+{
+  "status": "passed_for_interval_and_censoring_model",
+  "UTC": "2026-10-26T10:25:37.926662+00:00",
+  "historical_approved": 159323,
+  "age_at_least365": 81745,
+  "customers": 66519,
+  "interval_events": 18720,
+  "right_censored": 140603,
+  "schedule_complete": 155901,
+  "target12_counts": {
+    "-1": 73351,
+    "0": 69958,
+    "1": 16014
+  },
+  "invalid_event_bounds": 0,
+  "exact_first_DPD90_dates_available": false,
+  "teacher_features": [
+    "principal",
+    "rate",
+    "term",
+    "installment",
+    "bureau_score",
+    "bureau_active_accounts",
+    "bureau_outstanding_balance",
+    "bureau_utilization",
+    "bureau_inquiries_last_6m",
+    "bureau_delinquent_accounts_last_12m",
+    "account_income_like_credits",
+    "account_outflows",
+    "account_average_balance",
+    "account_low_balance_days"
+  ],
+  "profile_at_historical_origination_used": false,
+  "positive_bound": "first qualifying due+90 <= first loan90 event <= earliest final allocation among paid late installments, or current selected cutoff; conservative interval",
+  "negative_rule": "12 calendar months fully observed and schedule complete; no qualifying event or event lower bound strictly after12m",
+  "censoring_assumptions": "Repayment snapshot contains all originated installments due before selected cutoff and complete lifetime maximum to cutoff. Schedule coverage audited; exact upstream extraction remains an assumption.",
+  "raw_sha256": {
+    "train_applications.csv": "b60df5704bcd3713314a31c5382db22f41d38971bd76906b15f45a38edff509b",
+    "test_applications.csv": "113f6ee4ff15e4c8bf14fb9a85fc399b906d1c569f6a715675a5814da2e02dfe",
+    "previous_applications.csv": "faa0bc4552afee73cf58481234a94834bf0b786a195cbb979883c15642c39560",
+    "repayment_history.csv": "b0b00e18de2c05233653b3627bc7f9d679644e84c56680284766d71c5e279877",
+    "bureau_observations.csv": "e37b8a76fe4f97ee6f1fd78ab26ffb0e78e464714f77d961062e03d757d057a0",
+    "account_behavior.csv": "2f46be03496583b0231591194e13bea7593e87323056dfead6b9b19c48871924"
+  },
+  "prepared_sha256": {
+    "labels_private.parquet": "5ea63093b3f60696d4e38196c8cbd03ba532eeb3b0e3b040765a01c6cb6c0e58",
+    "historical.parquet": "9975e57f55062510e83cf70fdbc8ca5ca79a6dd25cb5ad3dc584ddc8eec2c6c3",
+    "current.parquet": "405aea6d818ee350d9cfcf49a81514dc808c9e601d9e66bd1965d41883bffdec"
+  },
+  "source_sha256": "3ea10e4ed16f14fe9fd6afe19b8560a51cd44d01bffed77066d8f7d25ef0d472"
+}

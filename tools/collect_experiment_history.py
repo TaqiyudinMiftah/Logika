@@ -13,7 +13,7 @@ import sys
 
 PRUNE = {'.git', '.venv', 'venv', 'env', 'env311', 'node_modules', '__pycache__',
          'site-packages', 'vendor', 'storage', '.cache', '.history-publish-20261028',
-         'github-history-20261028', 'logika-history-export-20261028', '.uv-cache', '.uv', '.ruff_cache', '.pytest_cache'}
+         'github-history-20261028', 'logika-history-export-20261028', '.uv-cache', '.uv', '.python', '.ruff_cache', '.pytest_cache', '.mypy_cache'}
 UNRELATED = ('dicefest', 'schematics', 'license-plate')
 TEXT = {'.py', '.md', '.rst', '.txt', '.json', '.jsonl', '.yaml', '.yml', '.toml',
         '.ini', '.csv', '.tsv', '.log', '.sh', '.ipynb', '.html', '.svg', '.sql',
