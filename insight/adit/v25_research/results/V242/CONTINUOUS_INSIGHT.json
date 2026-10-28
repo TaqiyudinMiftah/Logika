@@ -1,0 +1,109 @@
+{
+  "experiment": "V242",
+  "method": "brier_loss",
+  "hypothesis": "Repeated experiments show KS/AUC tradeoffs and weak tail capture: V221 captures6 fewer defaults thanV25 in the top10% despite greater pooledKS. Test another proper scoring objective with unchanged data, without directly optimizing a selected KS threshold. Brier loss is nonconvex in logistic coefficients; stationary convergence does not establish a global optimum or better KS.",
+  "formula": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5296911373968074,
+      "signed_KS": 0.5296911373968074,
+      "AUC": 0.847100368293062,
+      "rows": 70000
+    },
+    "delta_KS": -0.0017683771657283076,
+    "delta_AUC": -7.17605654543263e-06,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.522306567157106,
+        0.5392055561766285
+      ],
+      "delta_KS": [
+        -0.0038189137188849947,
+        0.0007713775659094275
+      ],
+      "candidate_AUC": [
+        0.8433674679668408,
+        0.8508371939761166
+      ],
+      "delta_AUC": [
+        -0.0003208746645804339,
+        0.0002595868033597095
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.008548545980785294,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3853,
+      "net_bad_captured": 12,
+      "new_members": 268,
+      "exited_members": 268,
+      "entrant_bad_rate": 0.3880597014925373,
+      "exit_bad_rate": 0.34328358208955223
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5838,
+      "net_bad_captured": -17,
+      "new_members": 439,
+      "exited_members": 439,
+      "entrant_bad_rate": 0.20273348519362186,
+      "exit_bad_rate": 0.24145785876993167
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7427,
+      "net_bad_captured": 5,
+      "new_members": 513,
+      "exited_members": 513,
+      "entrant_bad_rate": 0.12475633528265107,
+      "exit_bad_rate": 0.11500974658869395
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8016,
+      "net_bad_captured": 1,
+      "new_members": 561,
+      "exited_members": 561,
+      "entrant_bad_rate": 0.08377896613190731,
+      "exit_bad_rate": 0.08199643493761141
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8642,
+      "net_bad_captured": -7,
+      "new_members": 557,
+      "exited_members": 557,
+      "entrant_bad_rate": 0.06283662477558348,
+      "exit_bad_rate": 0.07540394973070018
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

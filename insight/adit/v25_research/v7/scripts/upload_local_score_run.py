@@ -21,6 +21,11 @@ def main(ident):
     if response.status_code==404:c.request('PUT','api/contents/'+BASE+f'v7/runs/{ident}',dict(type='directory'))
     else:response.raise_for_status()
     files=[ROOT/'v7/scripts/upload_local_score_run.py',ROOT/'v7/scripts/sync_completed_experiment.py',ROOT/'v7/scripts/prepare_public_progress.py']
+    if r.get('controller_source')=='v7/scripts/data_fe_worker.py':
+        from summarize_data_research import summarize
+        summarize()
+        files += [ROOT/'v7/scripts/summarize_data_research.py']
+        files += [ROOT/'v7/data_fe/reports'/name for name in ['BATCH_RESULTS.json','BATCH_RESULTS.csv','BATCH_RESULTS.md']]
     if r.get('controller_source')=='v7/scripts/score_fusion_local.py':files += [ROOT/'v7/score_fusion_plan.json',ROOT/'v7/scripts/score_fusion_local.py']
     files += [ROOT/'v7/reports'/name for name in ['BEST_DEVELOPMENT_MODEL.json','DEVELOPMENT_PARETO_FRONTIER.json'] if (ROOT/'v7/reports'/name).exists()]
     files += [p for p in sorted(out.iterdir()) if p.is_file() and p.name not in ['RESULT.json','STATUS.json','adapter.lock'] and '.tmp' not in p.name]

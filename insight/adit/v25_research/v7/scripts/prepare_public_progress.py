@@ -84,7 +84,7 @@ def main():
     audit_files += [V/'scripts'/name for name in ['audit_validation_noise.py','audit_data_segments.py','audit_spectral_coefficients.py','write_noise_audit_report.py']]
     audit_files += [V/'reports/V221_KAGGLE_READONLY_RECEIPT.json']
     audit_files += [V/name for name in ['data_fe_plan.json','DATA_SIGNAL_RESEARCH_PLAN.md','reports/LOCAL_CPU_PREFLIGHT.json','reports/CPU_RUNTIME_RELOCATION.json','reports/DATA_RESEARCH_ACTIVATION.json']]
-    audit_files += [V/'scripts'/name for name in ['item_price_resilience_features.py','data_fe_worker.py','platform_runtime.py','preflight_local_cpu.py','mirror_cpu_training_cache.py','scan_item_price_signals.py','activate_data_research.py']]
+    audit_files += [V/'scripts'/name for name in ['item_price_resilience_features.py','data_fe_worker.py','platform_runtime.py','preflight_local_cpu.py','mirror_cpu_training_cache.py','scan_item_price_signals.py','activate_data_research.py','summarize_data_research.py']]
     audit_files += list((V/'data_fe/reports').glob('*')) if (V/'data_fe/reports').exists() else []
     for source in audit_files:
         if source.is_file() and source.suffix.lower() in ['.py','.md','.json','.csv','.svg']:

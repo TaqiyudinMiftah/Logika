@@ -1,0 +1,680 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V242",
+  "spec": {
+    "id": "V242",
+    "label": "Brier proper-score correction with unchanged representation",
+    "method": "brier_loss",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.",
+    "rationale": "Repeated experiments show KS/AUC tradeoffs and weak tail capture: V221 captures6 fewer defaults thanV25 in the top10% despite greater pooledKS. Test another proper scoring objective with unchanged data, without directly optimizing a selected KS threshold. Brier loss is nonconvex in logistic coefficients; stationary convergence does not establish a global optimum or better KS.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
+    "execution_host": "local_windows"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "OOF": {
+    "KS": 0.5296911373968074,
+    "signed_KS": 0.5296911373968074,
+    "AUC": 0.847100368293062,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": -0.0005935226472336685,
+  "delta_AUC": 7.108938594613257e-05,
+  "mean_fold_KS": 0.5326418433429863,
+  "std_fold_KS": 0.005481833250102792,
+  "delta_mean_fold_KS": -0.0006879812135649921,
+  "fold_wins": 2,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5271790474508502,
+        "signed_KS": 0.5271790474508502,
+        "AUC": 0.8440146104822832,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": -0.0013008583099651805,
+      "delta_AUC": -5.517343567329469e-05,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5480757967473422,
+      "heldout_corrected_Kumo_KS": 0.528461645049245,
+      "train_validation_head_KS_gap": 0.019614151698097215,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "optimization": {
+        "objective": 0.08896569549060748,
+        "gradient_max_abs": 1.6888989596628551e-07,
+        "iterations": 50,
+        "nonconvex_parameterization": true,
+        "initializer": "same-fold BCE head",
+        "loss_before": 0.08923840004904814
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5381705610460152,
+        "signed_KS": 0.5381705610460152,
+        "AUC": 0.8498206037260808,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": 0.00017138982145326054,
+      "delta_AUC": 0.00021565030806913743,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5376682383704765,
+      "heldout_corrected_Kumo_KS": 0.5359182327074647,
+      "train_validation_head_KS_gap": 0.0017500056630117555,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "optimization": {
+        "objective": 0.08781672825641401,
+        "gradient_max_abs": 1.4190584092096058e-07,
+        "iterations": 49,
+        "nonconvex_parameterization": true,
+        "initializer": "same-fold BCE head",
+        "loss_before": 0.08801486366665627
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.538720947588323,
+        "signed_KS": 0.538720947588323,
+        "AUC": 0.8499579938417053,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": -0.0015772907008326786,
+      "delta_AUC": 0.00010108608190728674,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.550762877815312,
+      "heldout_corrected_Kumo_KS": 0.5394020721298978,
+      "train_validation_head_KS_gap": 0.0113608056854142,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "optimization": {
+        "objective": 0.087291506378005,
+        "gradient_max_abs": 3.4777004594035814e-07,
+        "iterations": 53,
+        "nonconvex_parameterization": true,
+        "initializer": "same-fold BCE head",
+        "loss_before": 0.08769834116031805
+      }
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5309759119312853,
+        "signed_KS": 0.5309759119312853,
+        "AUC": 0.8437133372237487,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": 0.0003238536181646712,
+      "delta_AUC": -0.00015001914786705317,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.525896433198644,
+      "heldout_corrected_Kumo_KS": 0.5292008012378404,
+      "train_validation_head_KS_gap": -0.003304368039196426,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "optimization": {
+        "objective": 0.08787499592505202,
+        "gradient_max_abs": 6.00796205013732e-07,
+        "iterations": 49,
+        "nonconvex_parameterization": true,
+        "initializer": "same-fold BCE head",
+        "loss_before": 0.0881519266375177
+      }
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5281627486984579,
+        "signed_KS": 0.5281627486984579,
+        "AUC": 0.8481113927808978,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": -0.001057000496645033,
+      "delta_AUC": 0.00021468557081749662,
+      "parameters": 90,
+      "new_trainable_parameters": 90,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5420378510450745,
+      "heldout_corrected_Kumo_KS": 0.5287157161484748,
+      "train_validation_head_KS_gap": 0.013322134896599724,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "optimization": {
+        "objective": 0.08745850586940408,
+        "gradient_max_abs": 2.1920150097316663e-07,
+        "iterations": 50,
+        "nonconvex_parameterization": true,
+        "initializer": "same-fold BCE head",
+        "loss_before": 0.08776657517224588
+      }
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.522306567157106,
+      0.5392055561766285
+    ],
+    "delta_KS": [
+      -0.0021182686070507577,
+      0.0007866639400086692
+    ],
+    "candidate_AUC": [
+      0.8433674679668408,
+      0.8508371939761166
+    ],
+    "delta_AUC": [
+      -9.480358375984211e-05,
+      0.00022748473092271392
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "modeling_formula": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.; mean5fold test probabilities",
+  "modeling_objective": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.",
+  "controller_source": "v7/scripts/structured_heads.py",
+  "source_sha256": "4282683b1366a145bded6f16792be5a91fbdcf5a208fdb21872bfff3847c953c",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": false,
+  "submission": "v7/submissions/submission_V242_V25_conservative.csv",
+  "submission_sha256": "5afabe14fe5061c6bd332da95e4e6dcc7ce17192d03ca83193f2b6278a26a3ce",
+  "public_score": null,
+  "elapsed_seconds": 15.508733987808228,
+  "peak_RSS_MiB": 325.7109375,
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY",
+    "diagnostic": "Repeated experiments show KS/AUC tradeoffs and weak tail capture: V221 captures6 fewer defaults thanV25 in the top10% despite greater pooledKS. Test another proper scoring objective with unchanged data, without directly optimizing a selected KS threshold. Brier loss is nonconvex in logistic coefficients; stationary convergence does not establish a global optimum or better KS.; all new fitting uses correction rows only; repeated development selection remains.",
+    "inner_crossfit_used": false
+  },
+  "error_analysis": {
+    "json": "v7\\runs\\V242\\ERROR_ANALYSIS.json",
+    "markdown": "v7\\runs\\V242\\ERROR_ANALYSIS.md",
+    "cases": "v7\\runs\\V242\\ERROR_CASES.csv"
+  },
+  "execution_host": "local_windows",
+  "source_data_host": "node480",
+  "packages": {
+    "numpy": "2.2.2",
+    "pandas": "2.2.3",
+    "scipy": "1.15.1",
+    "scikit-learn": "1.7.2",
+    "pyarrow": "22.0.0",
+    "joblib": "1.4.2"
+  },
+  "additional_source_sha256": "f9cd5567555296973152d3691d2202872cb924522197620696e90eb2f854172c",
+  "comparison_to_V185": {
+    "control": "V185",
+    "control_metrics": {
+      "KS": 0.5311516622583823,
+      "signed_KS": 0.5311516622583823,
+      "AUC": 0.8471087754249731,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5296911373968074,
+      "signed_KS": 0.5296911373968074,
+      "AUC": 0.847100368293062,
+      "rows": 70000
+    },
+    "delta_KS": -0.0014605248615748856,
+    "delta_AUC": -8.407131911081223e-06,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5234363951810418,
+        0.5406116770704794
+      ],
+      "candidate_KS": [
+        0.522306567157106,
+        0.5392055561766285
+      ],
+      "delta_KS": [
+        -0.0035432195636946827,
+        0.0008500093750388839
+      ],
+      "candidate_AUC": [
+        0.8433674679668408,
+        0.8508371939761166
+      ],
+      "delta_AUC": [
+        -0.0003258847761692246,
+        0.00026356145537183556
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "generalization_review": {
+    "status": "REVIEWED",
+    "candidate": "V242",
+    "decision": "EXPERIMENT_ONLY_KEEP_V25_PUBLIC_INCUMBENT",
+    "pooled_KS": 0.5296911373968074,
+    "AUC": 0.847100368293062,
+    "delta_AUC_vs_V25": 7.108938594613257e-05,
+    "delta_AUC_vs_V185": -8.407131911081223e-06,
+    "head_gap": 0.008548545980785294,
+    "V25_head_gap": 0.011107666682208906,
+    "flags": [
+      "REUSED_DEVELOPMENT_FOLDS",
+      "MANY_PRIOR_EXPERIMENTS",
+      "NO_INDEPENDENT_GENERALIZATION_TEST",
+      "AUC_DECREASE_VS_V185",
+      "DELTA_KS_V25_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "DELTA_KS_V185_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "FEWER_THAN_FOUR_FOLD_KS_WINS_VS_V185"
+    ],
+    "public_incumbent": {
+      "id": "V25",
+      "KS": 0.56822
+    },
+    "development_incumbent_public_outcome": {
+      "id": "V185",
+      "KS": 0.56699
+    },
+    "causation_note": "Public decline does not uniquely establish overfitting; sample variability, population drift and source instability remain possible.",
+    "selection_caveat": "Intervals condition on fitted predictions and exclude search/retraining uncertainty; operational rules are heuristics, not significance tests.",
+    "top_risk_capture_vs_V185": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3842,
+        "candidate_bad_captured": 3853,
+        "net_bad_captured": 11,
+        "new_members": 270,
+        "exited_members": 270,
+        "entrant_bad_rate": 0.3851851851851852,
+        "exit_bad_rate": 0.34444444444444444
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5838,
+        "net_bad_captured": -17,
+        "new_members": 433,
+        "exited_members": 433,
+        "entrant_bad_rate": 0.20092378752886836,
+        "exit_bad_rate": 0.24018475750577367
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7417,
+        "candidate_bad_captured": 7427,
+        "net_bad_captured": 10,
+        "new_members": 514,
+        "exited_members": 514,
+        "entrant_bad_rate": 0.1264591439688716,
+        "exit_bad_rate": 0.10700389105058365
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8018,
+        "candidate_bad_captured": 8016,
+        "net_bad_captured": -2,
+        "new_members": 558,
+        "exited_members": 558,
+        "entrant_bad_rate": 0.08064516129032258,
+        "exit_bad_rate": 0.08422939068100359
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8642,
+        "net_bad_captured": -7,
+        "new_members": 565,
+        "exited_members": 565,
+        "entrant_bad_rate": 0.06371681415929203,
+        "exit_bad_rate": 0.07610619469026549
+      }
+    ]
+  },
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5296911373968074,
+      "signed_KS": 0.5296911373968074,
+      "AUC": 0.847100368293062,
+      "rows": 70000
+    },
+    "delta_KS": -0.0017683771657283076,
+    "delta_AUC": -7.17605654543263e-06,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.522306567157106,
+        0.5392055561766285
+      ],
+      "delta_KS": [
+        -0.0038189137188849947,
+        0.0007713775659094275
+      ],
+      "candidate_AUC": [
+        0.8433674679668408,
+        0.8508371939761166
+      ],
+      "delta_AUC": [
+        -0.0003208746645804339,
+        0.0002595868033597095
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "continuous_insight": {
+    "experiment": "V242",
+    "method": "brier_loss",
+    "hypothesis": "Repeated experiments show KS/AUC tradeoffs and weak tail capture: V221 captures6 fewer defaults thanV25 in the top10% despite greater pooledKS. Test another proper scoring objective with unchanged data, without directly optimizing a selected KS threshold. Brier loss is nonconvex in logistic coefficients; stationary convergence does not establish a global optimum or better KS.",
+    "formula": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.",
+    "findings": [
+      "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+      "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+    ],
+    "comparison_to_V193": {
+      "control": "V193",
+      "control_metrics": {
+        "KS": 0.5314595145625357,
+        "signed_KS": 0.5314595145625357,
+        "AUC": 0.8471075443496074,
+        "rows": 70000
+      },
+      "candidate_metrics": {
+        "KS": 0.5296911373968074,
+        "signed_KS": 0.5296911373968074,
+        "AUC": 0.847100368293062,
+        "rows": 70000
+      },
+      "delta_KS": -0.0017683771657283076,
+      "delta_AUC": -7.17605654543263e-06,
+      "fold_wins": 2,
+      "confidence_interval": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5237657171439752,
+          0.5406826945132854
+        ],
+        "candidate_KS": [
+          0.522306567157106,
+          0.5392055561766285
+        ],
+        "delta_KS": [
+          -0.0038189137188849947,
+          0.0007713775659094275
+        ],
+        "candidate_AUC": [
+          0.8433674679668408,
+          0.8508371939761166
+        ],
+        "delta_AUC": [
+          -0.0003208746645804339,
+          0.0002595868033597095
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      }
+    },
+    "head_gap": 0.008548545980785294,
+    "top_risk_capture": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3841,
+        "candidate_bad_captured": 3853,
+        "net_bad_captured": 12,
+        "new_members": 268,
+        "exited_members": 268,
+        "entrant_bad_rate": 0.3880597014925373,
+        "exit_bad_rate": 0.34328358208955223
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5838,
+        "net_bad_captured": -17,
+        "new_members": 439,
+        "exited_members": 439,
+        "entrant_bad_rate": 0.20273348519362186,
+        "exit_bad_rate": 0.24145785876993167
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7422,
+        "candidate_bad_captured": 7427,
+        "net_bad_captured": 5,
+        "new_members": 513,
+        "exited_members": 513,
+        "entrant_bad_rate": 0.12475633528265107,
+        "exit_bad_rate": 0.11500974658869395
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8015,
+        "candidate_bad_captured": 8016,
+        "net_bad_captured": 1,
+        "new_members": 561,
+        "exited_members": 561,
+        "entrant_bad_rate": 0.08377896613190731,
+        "exit_bad_rate": 0.08199643493761141
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8642,
+        "net_bad_captured": -7,
+        "new_members": 557,
+        "exited_members": 557,
+        "entrant_bad_rate": 0.06283662477558348,
+        "exit_bad_rate": 0.07540394973070018
+      }
+    ],
+    "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+    "public_incumbent": "V25",
+    "independent_generalization_established": false
+  }
+}

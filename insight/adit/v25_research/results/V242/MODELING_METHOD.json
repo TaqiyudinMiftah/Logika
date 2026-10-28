@@ -1,0 +1,46 @@
+{
+  "method": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.; mean5fold test probabilities",
+  "spec": {
+    "id": "V242",
+    "label": "Brier proper-score correction with unchanged representation",
+    "method": "brier_loss",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.",
+    "rationale": "Repeated experiments show KS/AUC tradeoffs and weak tail capture: V221 captures6 fewer defaults thanV25 in the top10% despite greater pooledKS. Test another proper scoring objective with unchanged data, without directly optimizing a selected KS threshold. Brier loss is nonconvex in logistic coefficients; stationary convergence does not establish a global optimum or better KS.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
+    "execution_host": "local_windows"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "source_sha256": "4282683b1366a145bded6f16792be5a91fbdcf5a208fdb21872bfff3847c953c"
+}
