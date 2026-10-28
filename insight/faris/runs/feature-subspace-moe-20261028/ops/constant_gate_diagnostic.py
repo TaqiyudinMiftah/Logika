@@ -51,10 +51,14 @@ def main():
                     theta=calibrate(raw[:6000][train],y[train]);inner[heldout]=calibrated(theta,raw[:6000][heldout])
                 theta=calibrate(raw[:6000],y);meta.append(inner);query.append(calibrated(theta,raw[6000:]))
             meta=np.column_stack(meta);query=np.column_stack(query)
+            cached=np.load(R/f'composed/kumo/expanded/s{seed}/fold{fold}/prediction.npz')['expert_probabilities']
+            component_error=float(np.max(abs(query-cached)))
+            assert component_error<1e-12,component_error
             beta,fit=fit_gate(np.ones((6000,1)),meta,y,config['gate_prior'],config['gate_penalty'])
             prediction,_=predict_gate(np.ones((14000,1)),query,beta,config['gate_prior'])
             result[roles['validation']]=prediction
             audit.append(dict(seed=seed,fold=fold,fit=fit,correction_rows=6000,outer_labels_loaded=False,
+                              component_probability_replay_max_abs=component_error,
                               source_predictions={p:sha(R/p/'prediction.npz')for p in paths}))
         assert np.isfinite(result).all();seeds.append(result)
     prediction=np.mean(seeds,axis=0)

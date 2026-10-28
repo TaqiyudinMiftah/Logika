@@ -22,7 +22,18 @@ missing files found during a later root/vendor audit. The earlier universal
 completeness claim was too broad; coverage is limited to documented accessible
 roots. Node2002 remains unverified beyond surviving mirrors.
 
-## Current continuation
+## Active MoE campaign — 28 October
+
+The [feature-subspace MoE study](runs/feature-subspace-moe-20261028/README.md)
+qualified and is training260 predeclared expert fits on2001/2003, with2090
+source-backed candidate features,5folds and2seeds. It compares existing/expanded
+views, fixed/conditional gates, wide models and a learned-global-weight control.
+The original12hour clock is **28 October11:28:37–23:28:37 UTC**; never reset it.
+The local matched anchor is0.5306361042; publicV25 remains0.56822. No new scoring
+gain is established by the running queue. Canonical state and safe continuation
+instructions are in the run's RESUME_STATE.json and EXECUTION_POLICY.json.
+
+## Completed Antigravity continuation
 
 The user asked to continue Antigravity conversation
 `73181457-58b8-405a-bb23-a8afbd02f051`, then required the historical import and peer
