@@ -1,0 +1,2119 @@
+{
+  "version": 1,
+  "id": "explore12h-pc3",
+  "competition_root": "/mnt/home/faris/faris/exploration-12h-20261017",
+  "adapter": "adapter.py",
+  "metric": "tie-aware KS",
+  "direction": "maximize",
+  "inputs": {
+    "bank": "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank",
+    "extras": "/mnt/home/faris/faris/exploration-12h-20261017/extras"
+  },
+  "brief": {
+    "description": "12h maximum exploration, full three-fold screening; champion public user report 0.56188",
+    "rules": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/rules.md",
+    "compute_access": "pc3 all authorized compatible hardware, preserve other processes",
+    "external_data_policy": "No external borrower data",
+    "pretrained_policy": "Official permitted frozen weights, offline staged on node380 only"
+  },
+  "evidence": {
+    "research": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/research.md",
+    "eda": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/eda.json",
+    "hypotheses": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/hypotheses.md",
+    "applicability": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/applicability.md"
+  },
+  "protocols": {
+    "screen": {
+      "split": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/screen.json"
+    },
+    "reseed": {
+      "split": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/screen.json"
+    },
+    "repeat": {
+      "split": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/repeat.json"
+    },
+    "temporal": {
+      "split": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/screen.json",
+      "temporal": true
+    },
+    "confirm": {
+      "split": "/mnt/home/faris/faris/exploration-12h-20261017/evidence/confirmation_split.json"
+    }
+  },
+  "families": [
+    {
+      "name": "act_cloglog",
+      "hypothesis": "H_act_cloglog; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "ff59ef1273665b33e8eb",
+            "68bdf051dc1416dc3901",
+            "cf899efd4c1acd183146",
+            "c2abcf5119332ee2a305",
+            "08aba2989e095b7b5e06",
+            "102c01394a3c5f9bf4c6",
+            "1031b9a57113e14183cc",
+            "1397ac92ad8d0e0f9e39",
+            "15c70498a3a17e11b981",
+            "1a9560fac12b2e514b48",
+            "1c09e584da4c320d3312",
+            "1c0f03338d5cbb7159a5",
+            "1fa344b3265a6dc9073d",
+            "21023d10c5b1e90d22f7",
+            "267379c84f6dfa01688f",
+            "2a67d03cd27c8ecca075",
+            "2edfab132d60467502f5",
+            "3648658aacf6504ebbf5",
+            "37a4980036f1be24c19f",
+            "42339e99179bc549c134",
+            "49657d8a4c6b9513e1a8",
+            "4abc6a67a0bed12ecda1",
+            "4e4d71b877278fb48165",
+            "50f17b15f61eddd888c2",
+            "559ed3144f72ed0ebb5b",
+            "56d81e1b0d98df2c6177",
+            "57cb4ec5be35fa279a68",
+            "5bfe3eae65f0712ddf25",
+            "5ce9383c622f29901ece",
+            "6cb435d6e434d09cae87",
+            "6d80701f6e9299bf4fec",
+            "6e150d54f6b0e11c65c3",
+            "75af21c09d0d41f6d2f0",
+            "798191357a5b8161b157",
+            "82136df66fc7f34430bc",
+            "821ba347fbbaf14dc20f",
+            "8a1e8a54caf99ad0beaf",
+            "8b05933c94cefccfa193",
+            "94116027a37dec36246c",
+            "94ea6ae36caeb6330707",
+            "97e0f534075da331fe06",
+            "98a35c6af74b4386e7fd",
+            "9d39117768dcad8f5630",
+            "a615ef71779871d06107",
+            "aa53af74d4779b4a5690",
+            "b10638ed0a7549bd53d4",
+            "b3e6be1de927a833ee0a",
+            "ba87ae07860c07eb11c1",
+            "bc14c0b003a4cfcd029c",
+            "bd4d54c02ede20c4538d",
+            "bfa8bb507630b3479cb5",
+            "cc9c5e0f01036b72c7f9",
+            "d714b64b3d9e64157b6d",
+            "d98701216166cf1c5ff5",
+            "db3e3013c4c9a513e1f0",
+            "db72f3dc2c824daba106",
+            "e035e3a38ba9e6adc5e9",
+            "e88ec66b0bde85523672",
+            "ead1eec27b963c5bce54",
+            "f020bc985ff126c56e44",
+            "f27f26aaf645c8329885",
+            "fa1b153f7b6aafb10395",
+            "fb1b769cec71d35fbdee",
+            "fd8e2f225fc8955b2525"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 2800,
+        "disk_mb": 180,
+        "timeout_seconds": 1500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "ff59ef1273665b33e8eb"
+          }
+        },
+        {
+          "params": {
+            "config": "68bdf051dc1416dc3901"
+          }
+        },
+        {
+          "params": {
+            "config": "cf899efd4c1acd183146"
+          }
+        },
+        {
+          "params": {
+            "config": "c2abcf5119332ee2a305"
+          }
+        }
+      ]
+    },
+    {
+      "name": "act_logit",
+      "hypothesis": "H_act_logit; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "ac94a7c905b9971acd35",
+            "013cbb0eb8ca397d23b5",
+            "020551da1c9d468960ea",
+            "0a6a1e2343076c3b8a75",
+            "0d502427a911c5bb4dc9",
+            "0d8a37c93b6726c9b8cc",
+            "1773a3a4c8fc6f1410c3",
+            "1780ef8344821d7061c5",
+            "1aa202f46f50e1d8f5e6",
+            "1d6dd6f1688a09b3b07e",
+            "1f558a42bb49a346a292",
+            "248ca9e843279ea21fc6",
+            "2506e4435956e26644ef",
+            "278206be788274856a7c",
+            "296e009bd9cb6143ffb7",
+            "2ca74f7fe7926b17c6c5",
+            "2e05b24d3dd5a323cfc1",
+            "30f969d1265a7c6024c6",
+            "31a1ca566b3c317d9cc3",
+            "31f37893e357024e66e1",
+            "3320828a0ebaa588255b",
+            "3670c025fc5d9312b28c",
+            "3acf410a3e2f87986409",
+            "4252f22c67dbcab91a1b",
+            "443463be57503c0dc7cf",
+            "474145bdeb5fdb10a005",
+            "4abe4747f18f6cb16517",
+            "4bb20e3704ab37051989",
+            "4c18e2808a6d641604b1",
+            "4d5b58eddb43f1ecf096",
+            "4dd0afa42ca817db336d",
+            "574a0552a3ffd247a497",
+            "5a8e0482e5f9dab37ab2",
+            "5b028100267c32d7f6c7",
+            "5c13d6c22f2f796eb0fe",
+            "624ce908147a14dd2459",
+            "64efcf88404d6ae1372f",
+            "6f0d9af9757944145005",
+            "6f752fbaf364ac9d46da",
+            "6f9a925c7b1d02ec7d40",
+            "70784f82d5077a7b4d5d",
+            "728e353309da545d8cfd",
+            "73f239eb50544b123b93",
+            "7a90dfa5895a03f1ca7c",
+            "7c757dcbc2c0ddef558c",
+            "7cd029437e1381d2b52e",
+            "824b6eb4d90b153a0391",
+            "8926fff7e43fbbaf7048",
+            "8aca11fe1b28e75596e2",
+            "92bfefefcc14e25c4858",
+            "938ac3692334dd99a51b",
+            "93aef3508d30fb2d028c",
+            "9f998237b088ddff7066",
+            "a3be681250140b0e5042",
+            "a7a9a65f1357eafbd814",
+            "aa7c5073b930391bd353",
+            "b1e3205a2fca8da892b9",
+            "b47fc476dcc8ee0b9f80",
+            "bea04ce2b448078246dc",
+            "c1a6f4b6fbef22fc82ae",
+            "ced1a1d84144480a7efc",
+            "cf1e5f6c2e16801925de",
+            "cfa9d0e3a849df8e4dd4",
+            "cfab1cf1c6edff94c377",
+            "cfab7f687f01989882e2",
+            "d76faff5a4064d35b538",
+            "dc2dabaf0411febbac11",
+            "e0bc2e8d52ad2b56142e",
+            "e7673f37a4fe55610627",
+            "ed64a9d8543b2fb9e54d",
+            "f0c1a278ab12f2e62c31",
+            "f6499fa0b513efe62d69",
+            "f952c380f70152d9c055",
+            "fc896d171efcd7825a90",
+            "ff8c593c2b73b636dae5"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 2800,
+        "disk_mb": 180,
+        "timeout_seconds": 1500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "ac94a7c905b9971acd35"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cat_native",
+      "hypothesis": "H_cat_native; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "6e4e30ffb91a3c297895",
+            "4bf35693bc8d80e71ba5",
+            "2f49673c9a0b8221d331",
+            "18b4e1b4985cd6539bc9",
+            "58cd30a5ca1252bbc3e9",
+            "017891ac8aa335ab9683",
+            "0179de8d98983e40948f",
+            "0191c1da47c5994ae9b1",
+            "01e54b1e646c14876559",
+            "01f2ef3a6e4b3c814cf3",
+            "0379408c0b10ffacfe4f",
+            "037de481b7a878dca1c5",
+            "0b172c9f712bca43af51",
+            "0da138270f3f5c6457db",
+            "0e6778b1987c90a5515f",
+            "0e6af1478dc5f7e32c69",
+            "130db6ef10e45b3ca6eb",
+            "14220ca83eae1db4d7a5",
+            "17ba1f88c14632136705",
+            "17cc51b69b75694b0a61",
+            "18019d13a26b892d3fcd",
+            "1a12923fab6b4b549e8b",
+            "23eb101bb2077d2a1ff7",
+            "24143a4ac2e64ac27c79",
+            "25681b86d5937d3faf35",
+            "282211b8edfe12c357d7",
+            "295997d3c8d6b170a9bd",
+            "30751b9709e8446322ab",
+            "3103bde81372722d6693",
+            "31ff8a0fbed6d99370c3",
+            "32db68348e59bac8ec2d",
+            "350a8e756fddfccdf6c5",
+            "3a104f64ba9f380b3a67",
+            "3c64aaf757cfd4bccdd3",
+            "3f9640c958d3d2641779",
+            "3faacc6bfd1a394cc3f3",
+            "40a4304d58a2feae9e9f",
+            "4607507b78db02e5c2a9",
+            "46eb4459872a21431b35",
+            "477a576747d1ca4df507",
+            "493a7156548ffac1375d",
+            "4b188fb4e6a3e2e53c99",
+            "4cef9807387d403730eb",
+            "502ac9232be914aa53b3",
+            "55b7c5ece648e2440b1f",
+            "56be3ed51e79ac46ea0f",
+            "6560c362f95c4faa0199",
+            "6a9c6be1f0af8111f42b",
+            "6c7895f152f84e0d384b",
+            "7142faffab2a7f26b3d1",
+            "76cf569eda712178f6f9",
+            "79d288358b538471623d",
+            "7a03eb8c6f5e1811413d",
+            "7c3ad0e8030f6c5a5ec5",
+            "7ecd8df3d69156d4fe01",
+            "7f84f616d27856a19615",
+            "808ad4ab4e8034562ebd",
+            "80e1f3082ab1172d9181",
+            "8b9510cb5c73a5a3583b",
+            "8d466ad45e179a17e64d",
+            "924c788c3578e5b8be49",
+            "93e82510532fbd2cf58b",
+            "96da71d12e3f14428735",
+            "98cbc4baec3250db248d",
+            "9cafd4573740d53d310b",
+            "9d7b055e5b23da94426d",
+            "a335ac944cab672e2c11",
+            "a6445ce8a969d17080e3",
+            "a68d9b0dbbbf1b40fdcf",
+            "a69e53802ee434e3e537",
+            "a7b747583cbd8f86f009",
+            "a9e9260eaa5390f339eb",
+            "acad7da3aba384632ee3",
+            "ad6b85c8774a0b12e759",
+            "aef2c64a2a140353aaa1",
+            "afd32247ad10bfe647e7",
+            "b08ae27aa0f7ef603a53",
+            "b4188a3dc5fe7ede20e5",
+            "b461fcceca4eb9dbc98b",
+            "b471db4ae63923fcbe85",
+            "b735ec2c9d894a4b0fb1",
+            "b7ea3130e10751f14763",
+            "bded7f073f2153813b13",
+            "beb11d44de8e10e0d16b",
+            "c48cb418db762ff6b573",
+            "c5eb93e4f51f13379f91",
+            "cc6d95db6f74a3f2bea3",
+            "d1e80d4ad8cae03c9009",
+            "d33f5bd9d55b6688b6f1",
+            "db785731aff762e67a9f",
+            "dc86c6f4e24f5c142b4b",
+            "dfb9d439bd5d78a67f81",
+            "e0a1a21aee34fb993431",
+            "e0c17460f72fac88355d",
+            "e32d14d4a3e06ac8e691",
+            "e5dceaf4f6f542e82b8d",
+            "e8b0ed2588a7c76a2709",
+            "ed5469e4530bf576c6dd",
+            "eeab4769e85cd29be547",
+            "eee8aaeca1478a4e0c11",
+            "ef19e5ddc7fc86276619",
+            "f2032b0860766d360ab1",
+            "f661dcb8c17184680f87",
+            "f66868d74b5eb93688c1",
+            "fc392c2ea666ed3f0149",
+            "fc56e921f94095c0dea5",
+            "ffa29e3206d2622b9305"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 9000,
+        "disk_mb": 180,
+        "timeout_seconds": 2400,
+        "gpus": 1,
+        "vram_mb": 9500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "6e4e30ffb91a3c297895"
+          }
+        },
+        {
+          "params": {
+            "config": "4bf35693bc8d80e71ba5"
+          }
+        },
+        {
+          "params": {
+            "config": "2f49673c9a0b8221d331"
+          }
+        },
+        {
+          "params": {
+            "config": "18b4e1b4985cd6539bc9"
+          }
+        },
+        {
+          "params": {
+            "config": "58cd30a5ca1252bbc3e9"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cred_scorecard",
+      "hypothesis": "H_cred_scorecard; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "076a19a25df3e1f31157",
+            "020b770d32a43bc751cf",
+            "0373b3fbb88c61eab651",
+            "07fcbc4e6bd193c31f1e",
+            "0e3b612aee094dc4e25e",
+            "0eef0cd144b70d42b0b4",
+            "132f0dc5726163d3a11f",
+            "146a18a1b03e1e5c2c25",
+            "14a6e2631e983ad14454",
+            "1bbba8dc022a449b3966",
+            "1fc35ee94b98b9bc829c",
+            "22164d45222e2198e745",
+            "2451b06e900f882ac621",
+            "25fda519963b2bf4bd76",
+            "2b0a36c58874c9b541f4",
+            "2d3f38cbd19ef79f3c3b",
+            "2db5c062dfcb722ff072",
+            "2ddb9207d14bad00d3ea",
+            "2f23c47776f1f4f4c9a2",
+            "2fc28cbdd958a80384f6",
+            "32106461e5abf1555eaa",
+            "34b302218e2d311bb4c7",
+            "34ddeac5d31dc1225200",
+            "397bb377a1043e414cda",
+            "3dcd5c1299ad6c42e171",
+            "44bc3d74d307c0547aed",
+            "466fea862ad0a7ea12c5",
+            "46e2f18a024f915a5779",
+            "4b8f4b0f20b4cba6c87a",
+            "4d2089488495af20df68",
+            "4f4e947c578a116b715c",
+            "4fbb2f241096cd87198b",
+            "50d9931d875941910ceb",
+            "53030941c1473a555798",
+            "5cde1813092bb26212e8",
+            "61a6ac8fb62788885675",
+            "62e0f79249662d8e3de5",
+            "6b654b62ce7498b694d1",
+            "70ea45f2209f1a178a9b",
+            "74241cdd44d1befe1faf",
+            "7a79a5fd5a16639fc85e",
+            "88701470a6ffe9c83079",
+            "89a2c0dcf3c7f30a5bd4",
+            "8e4ee24ed888a1a7578b",
+            "8f095e521614903f4501",
+            "8f1de8fb3c3854f2b2e3",
+            "98a227c622d768c11c62",
+            "9f505937bca3ccc162e7",
+            "9f88599fc5e6abe99b54",
+            "9fd9c92f11062155a772",
+            "a439a4551b7132429809",
+            "aa733a78f6fe2efcd126",
+            "acb726304fd8e5662004",
+            "b5d8376d6592b8884a84",
+            "b6a74fa029f1a7a50156",
+            "ba731348810714dec609",
+            "bb1f6463ebadf6652868",
+            "beeb1935ee440c498fc6",
+            "bfa7a3d884b9d16ea263",
+            "c534033acf6f1461f8a4",
+            "c9bf1ce56bb4919d9240",
+            "c9d4c8092c698c0a8c84",
+            "d099128786add7e2d9e0",
+            "d26136809ef02bc32978",
+            "d4ab6a6ca8e464fdf4bc",
+            "d791c1cea2eca40688b1",
+            "de60bac13d13995253bc",
+            "dfbc6a60553172a9c136",
+            "e7f02f2a7220ee132a83",
+            "e95df5796ea5f2ab9a4f",
+            "ebe89f16db133f698cb6",
+            "eddaf1964805273ff42c",
+            "eed7dd42b310704ec9fb",
+            "f210f4fb1ec048e0477f",
+            "f2d57d3907b40970d661",
+            "f3abb225b3e862637930",
+            "f4c50d025b9221c6c017",
+            "f8157b257cd216717b01",
+            "fc2da72754c55f07d9ab",
+            "fec7d845445871638700"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 2800,
+        "disk_mb": 180,
+        "timeout_seconds": 1500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "076a19a25df3e1f31157"
+          }
+        }
+      ]
+    },
+    {
+      "name": "deepsets",
+      "hypothesis": "H_deepsets; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "01bacfd5279e916b8e3d",
+            "b69b34278d54453e23d3",
+            "583350a6fbf3eab278bd",
+            "48a3bc6e037144096f7f",
+            "857e64cbbfcd87cf8bd3",
+            "742a02be801650c86d15",
+            "09ef53c3a4300429cb19",
+            "0c151b958213bf690c35",
+            "1333ba844d1b126dacf7",
+            "16262426f5ceeb84463f",
+            "1631a2ad0e0901e76039",
+            "2048a2034bc6a670c433",
+            "211b432cc9b8eb86978b",
+            "29a0fe71f35c0fd1af81",
+            "2ae95801fcab0667d0ff",
+            "332f95b4142d7a00679d",
+            "332fa66da747a48ede05",
+            "33f2bb0cc24d6e98425b",
+            "352208580d30abe362a5",
+            "37ecd722e9be0e1229dd",
+            "432e60a67c2a2afc6edd",
+            "48219fcfc149b3e1673f",
+            "4d5944bfb33852adf509",
+            "5471aff2870a85ce1efd",
+            "551693654120d1bd9a3b",
+            "59b1ac744a58ae771e89",
+            "5b492ed4f3f60319a3df",
+            "5fa28575a2d28b1ab097",
+            "620b81869a8372215fb3",
+            "6857e475d19cf92eec35",
+            "72f669e73f6ac21ed157",
+            "754b2e9edf816bfed097",
+            "79c5c3c929f5eb212699",
+            "7c5d62b09cd84e8970ab",
+            "7df61cf77915826f1fd7",
+            "820e2e2b24c0b91b769f",
+            "82c2776b8047d8fecd3d",
+            "82d6c998322441c14983",
+            "82ed93ef5e631b575ae1",
+            "83921aa4c1e271fe2fb3",
+            "852032f1516de2220e69",
+            "8588b5e96ef95da00e8f",
+            "85aa018f94e6fe0e9621",
+            "85f7c6e8eddb2ef225e3",
+            "8787a4fe94820f98e8a7",
+            "882a75536ef04d3aa041",
+            "88c5714da56ba08067b9",
+            "8c5aa18bcff2b4bbd13f",
+            "8d2b00748fb2d83622fb",
+            "93a383ad5c336c7ea835",
+            "945f2f0c8b19ae76fe29",
+            "96c02ed25fdfa18e8937",
+            "977b2e3d43cf58ac0a09",
+            "997fb28fccd4a19bcba1",
+            "9c6091cb8e60bc3cee3b",
+            "9cbeeb77da9b7be034df",
+            "9d68cfa61ac71df55de1",
+            "a3002456b734d2059fc9",
+            "a318338b62756aafff1f",
+            "a4bfd686af415a7b2451",
+            "a4e6baea7cf8c7ca3931",
+            "a5a0f27ea8489acba7fd",
+            "a6ec67a9cee82a651de1",
+            "acd8576c83bf9b45572b",
+            "ad9f6df557f334fe10f5",
+            "adf4c576652024226cb1",
+            "b203dfbc12d983a54d8f",
+            "b2e3284e5ffdd1686ee5",
+            "b5b00f38f9227b518c9f",
+            "b792ccadcbb239a6c853",
+            "b8cbf824fc0114ebe521",
+            "bd23c182b33caad60f2d",
+            "bd950d2c1450e3c23ea3",
+            "c16dd36b93c4f576c9ab",
+            "c23036a71de8a10f6647",
+            "c7444dab85f524c5bfd1",
+            "cbeb0a76d749f414ba01",
+            "cfc494ecddc1b59b5021",
+            "d32d20fe3e7a23e7a35f",
+            "d3cd8ef1d8dd1f873719",
+            "d3e4dc879e2d9b658f19",
+            "d77637aa5aebdb681b4b",
+            "d7aabc07d8806648cb0b",
+            "ddda336d38c01af25fad",
+            "dffa4e7ce169b16d197f",
+            "e0df98d8077c74f692e1",
+            "e176d28e2146f6ac4303",
+            "e1a7ccd39dff3df2d80f",
+            "e71a7c6afab534da0e05",
+            "e916aaab6561fc21233f",
+            "e98aa951daedbe7cd08d",
+            "ea41a7ec4ab342dac231",
+            "eb84824d84a196c8a2ef",
+            "f1cbb3d36a92017c73d7",
+            "f4c48c6b61af0f8db669",
+            "f908c9c17c3811ef7cf7",
+            "f94d9cc5a561c3a6257d",
+            "fa04aca9b334f72acd43",
+            "fb1d861b82a713f24cd5",
+            "fc109ed2ad17c37d6c5d"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 9000,
+        "disk_mb": 500,
+        "timeout_seconds": 2400,
+        "gpus": 1,
+        "vram_mb": 9500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "01bacfd5279e916b8e3d"
+          }
+        },
+        {
+          "params": {
+            "config": "b69b34278d54453e23d3"
+          }
+        },
+        {
+          "params": {
+            "config": "583350a6fbf3eab278bd"
+          }
+        },
+        {
+          "params": {
+            "config": "48a3bc6e037144096f7f"
+          }
+        },
+        {
+          "params": {
+            "config": "857e64cbbfcd87cf8bd3"
+          }
+        },
+        {
+          "params": {
+            "config": "742a02be801650c86d15"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ebm",
+      "hypothesis": "H_ebm; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "09ed274eb07fa2e0823e",
+            "0a70d70668df8931c4cf",
+            "0ba32aa7ccd1537a3840",
+            "122393d05d362c82234b",
+            "12b7c7a9ef4e665a3301",
+            "1be51d4d761399410ab2",
+            "1d2fa450910c918d2524",
+            "237156d71d91d8a9b201",
+            "2441d1fe20d3584684ba",
+            "2616ede8cd9978a2a569",
+            "265372b90c49b4633004",
+            "363909f3e48ee9df826c",
+            "3aa44d6380ec050e20dd",
+            "3e29978f08b0d73b76c1",
+            "45eb601aa2e17d3cd290",
+            "48f0aadd1879c2443461",
+            "4ab6b0758c75bb406bf8",
+            "5af208566f9850d20ef2",
+            "5b1a0d8ac4bb7efdca48",
+            "5e6945f97bf14772000a",
+            "5ece3a2e76b91137b1e1",
+            "5f95a2aa2f994eb9c268",
+            "603c2d4835c78f617763",
+            "61a61a1cdb67a5015f86",
+            "6b6b9ca1e181d97fcb2b",
+            "6d14d22c7233cec33484",
+            "77ecdf3e13c87c95d582",
+            "784917fac0f04a228d0d",
+            "7ca4688c85239981d333",
+            "80775a546b0d74402782",
+            "8a107338d601355b05d8",
+            "8d7fc6433bbc57d08aa6",
+            "8ebc46ec587ccb97443d",
+            "a46556e435a220d9d54e",
+            "b1728d37ad52f46fafd7",
+            "bb072171b9788f8acf87",
+            "be0d8b14e6e9b8b0c350",
+            "be1bed783e8c93b27073",
+            "ccc0009f15f10c0f5548",
+            "cd8603c4539bfa46687d",
+            "d14733ed53fd8c67f202",
+            "d756ba55c66b8c238eef",
+            "d9ec7aefec7457bda8c6",
+            "e14c652eace2d0c6e7d3",
+            "e78a5bac1505fc4faed2",
+            "f816beef63668949967d",
+            "fc049d33a6929a6c0d52",
+            "fc8a62e619558b6ed4ea"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 5000,
+        "disk_mb": 180,
+        "timeout_seconds": 1500
+      },
+      "anchors": []
+    },
+    {
+      "name": "elastic",
+      "hypothesis": "H_elastic; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "e60e21ef55f3aa295dcc",
+            "054f2041bf3676576bc8",
+            "bdf5f77cbcd1d0dfe167",
+            "000c4f457a0087480c6b",
+            "075f62be76d2292540c9",
+            "0a3c0c2d964ec0feeb3d",
+            "0bed845ac9e470466724",
+            "114a7f8f36bb7149eb53",
+            "1b2697090fd10cda0571",
+            "1f0ab82df06839b7615f",
+            "20ab779c1a1505aa600d",
+            "25cb114a8bac85572c62",
+            "29490d2cdfeaec0b1227",
+            "2bbbe744a40c71c54fbd",
+            "2f6c6c38fc4c0efb1c4c",
+            "37ba5b3346349073bc8e",
+            "39661ba3ba5c32b7472e",
+            "3edf5be2d71ea6bce9f5",
+            "459514abda205f67e92e",
+            "466132885fd80934bc28",
+            "4b0669e63ac45866b040",
+            "4b6d97da892e133c82e6",
+            "4dd383137e441346578e",
+            "4fd635251c34ab728374",
+            "53d84b68feb36fefc7d5",
+            "57cecc326abc415056fd",
+            "619657ec3698e7621573",
+            "643263b43716548790de",
+            "6e980d76fe2e9db00cda",
+            "7034cc2e0d6a91c3436a",
+            "712aae783e5df910d66e",
+            "743dc0031e77bada9dc9",
+            "77d42af751dedda3a18e",
+            "7893a967b0cd7129533c",
+            "822265b299f2d85febe5",
+            "841de8f08892066d9337",
+            "925a4a601a5bb9212e76",
+            "9434d0ee574d002518af",
+            "9b339668fc949bf4e96d",
+            "9feef4f468bf0937461a",
+            "a0dfac561e34d96edde7",
+            "a147799e1007f66c86c9",
+            "a4b5ce4b8c49f6e9338b",
+            "a6325f05c1f3196664dc",
+            "a97c28ce43bd5820e900",
+            "af6249c991b6c42ee3b7",
+            "b06ce963e1552588b77c",
+            "b2691ae9faf8be3ad0f3",
+            "b2bf05c25069eff66033",
+            "b3d50a6d0ae66bf6441b",
+            "b43de54635086f5717d7",
+            "b4a009c091b041439a57",
+            "b717b8c26a8c0308b518",
+            "c56a06ebfe13d8c4391e",
+            "c9e2bc5d0356ba8fc7ea",
+            "cd12c6f9d9d91d05a192",
+            "cdadfe49b16a56515207",
+            "d2d96a25f2a5782c60d3",
+            "dc67c90502363854b9cd",
+            "de213dccfa67614dffa4",
+            "e2a06084384ad34c18fc",
+            "e2c8cbb3d74b01bd2734",
+            "e5a4aac2197f5bd41a57",
+            "eb875aef4ecbc11492b5",
+            "ec6cfaac247abbbaef80",
+            "f63d5de6dfecbdb02e11",
+            "f6ca318465b6fb2ef8fc",
+            "fa7e90a5228974e41082",
+            "fbd3dfc1df32661af853",
+            "fd925df53336cd31a40e",
+            "fff744d11ca38efa18ef"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 2800,
+        "disk_mb": 180,
+        "timeout_seconds": 1500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "e60e21ef55f3aa295dcc"
+          }
+        },
+        {
+          "params": {
+            "config": "054f2041bf3676576bc8"
+          }
+        },
+        {
+          "params": {
+            "config": "bdf5f77cbcd1d0dfe167"
+          }
+        }
+      ]
+    },
+    {
+      "name": "extra",
+      "hypothesis": "H_extra; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "d773484d2e2eb5bcb023",
+            "3a99e2405638284c89f0",
+            "913ff344a20d1864d0b3",
+            "18ebd79b8a0cbb01e28d",
+            "000ee34228e8c91e1c58",
+            "04bad1d1a88114c10666",
+            "06a77d020f817189c451",
+            "07b91d15ebd43854c23b",
+            "0ed35a8467ca5236010a",
+            "10507a6dd39b4f8af28c",
+            "10e71bf755028dedd887",
+            "11b829eebdf20bb9b969",
+            "12b6c794cc1dbdc9092f",
+            "13d4c97574ccad3e5ab9",
+            "1651a01443a8887d51ae",
+            "16bf3ea9acee9142a01c",
+            "1ea3adda98af6c485955",
+            "296d6f10665314473208",
+            "314d5667e3c7a7d86fff",
+            "3300672e6f02bfefb0c4",
+            "3453aa0b526f6d54b7e0",
+            "42c1d3f930c039b50aee",
+            "44f71f2fb54604707f96",
+            "4599542c62f0cf861202",
+            "4afecf4a4d2ef12fa844",
+            "4dbe5a8b7a25006ffda5",
+            "53138119a3291f83c28f",
+            "56711745995fe995e8a6",
+            "5932b08357d57d9fd948",
+            "5a7c2e790041ab75f213",
+            "5bb5cfd1c6997ff0d2bd",
+            "5f31e8c8df4585813288",
+            "5ff18b05558fa45e298d",
+            "6074c91b95d014e2e4a2",
+            "63a8c0f0a2b8e355d996",
+            "6a3bfbe4a8bf022288cf",
+            "6a4f3749a3cf10959c42",
+            "6ec7a4ab5d03d5cb9244",
+            "76d53c0556c421677e43",
+            "7e2785da0babdceafcd4",
+            "7fb1bb30d8b8c2b87373",
+            "8991f6561e2c30681cbb",
+            "8ea23df05a363441bcd6",
+            "8ec8336b3cdba9ae8ae3",
+            "8ec8b534451ffcc1a3c3",
+            "9505ad1f1f050489f094",
+            "97038ae856a7016730a5",
+            "9c19e405788ceb33fa9a",
+            "9d6a28c9bec47d60363a",
+            "a1935cf45081be0e86b9",
+            "a3846d9af7d938f3bf26",
+            "a3a831a8d8609a58c70f",
+            "a640f07f2cc190671861",
+            "ad35b248748f6d94c6f6",
+            "b73816e1c30f32ccf7b6",
+            "b7cc54b5dfac1c3f2d01",
+            "bccfc5c3e49c360f5638",
+            "bdf8b5449637b2e08f7e",
+            "beea5839af96db6a280f",
+            "c5d5f0a37015a67dde10",
+            "cbfb1f09942d0554ffa8",
+            "d0704121e1b00df7e1a8",
+            "d93067916a55a06b6582",
+            "da01d79c7bd5a878bebf",
+            "db115e98b2fb6c166575",
+            "dcb0e5ac63b373bde0cd",
+            "e1e22fb19d5f27c3e297",
+            "e2332dcbc940c60b763a",
+            "e383769f41fbd7bd3468",
+            "efe0c5ed25fa32e3bd2f",
+            "fa9e948aa358e415ebbe",
+            "fd965dff3ed927eed218"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 5000,
+        "disk_mb": 500,
+        "timeout_seconds": 1500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "d773484d2e2eb5bcb023"
+          }
+        },
+        {
+          "params": {
+            "config": "3a99e2405638284c89f0"
+          }
+        },
+        {
+          "params": {
+            "config": "913ff344a20d1864d0b3"
+          }
+        },
+        {
+          "params": {
+            "config": "18ebd79b8a0cbb01e28d"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ft",
+      "hypothesis": "H_ft; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "9e1e346c72bdb246620b",
+            "f01161f426ff1639decd",
+            "3577097b433ffc8d56f1",
+            "14fffa00b547eee45eed",
+            "d692291f29aa7342f6fd",
+            "00ec00b158699a8b50f3",
+            "047a18a1e90a0f58e8bf",
+            "04bf9b5028db73ab1f97",
+            "05ffedb403277bfd5d6d",
+            "07fe4264d02c6544c6ad",
+            "128d964214cb93d67677",
+            "135b4b4d02a0456988b5",
+            "14e596e0a42d851516c1",
+            "162e2b93ae2f8f651215",
+            "19ac61384619073c45c3",
+            "1a402c73edaf0bdda313",
+            "1ad10e5ced99205c4439",
+            "1c23147ab37484923f51",
+            "1d303e0ef7ce54cfd14f",
+            "1d7139876e9c77a23627",
+            "1e01619ae05bf82d4285",
+            "2153f0d7fe8f1e69cc57",
+            "22cebf749839968365df",
+            "22df4c1ec34723849cfd",
+            "22f6e84d354e2097b1e7",
+            "2529cb5b09530ac974a1",
+            "2634f96afa089fd234f9",
+            "27289be85491ced0bd27",
+            "295bbd832820718887f7",
+            "2ad3802c8e64c3dc12cb",
+            "2dcd50f268176e02b907",
+            "2fc186b5c1245a0d7ae3",
+            "3023fc6c3941a00086b3",
+            "32528d04ff04657fffa1",
+            "344b9cb8d30affee7d5d",
+            "38c72d6b7115d004117b",
+            "38ec6e28cf9bc24dbccb",
+            "399a5c99712e3eefd701",
+            "39a3d95b986bf6c84597",
+            "3d9d89abf7e9c486f5ab",
+            "3e6899fc43f745c57031",
+            "3ee8b2bb0a7ba4a4c16f",
+            "44c319fcb4a03f53b313",
+            "463f8a5c15563da86333",
+            "4983a75f294864c655f9",
+            "49e43e5eedb553ae2bdf",
+            "4fb6599ee20b211ae699",
+            "4fd9414b51feab3c06b5",
+            "50f88bc7f24f0c6fb597",
+            "51647b5517e0ab71d00f",
+            "5191d1960e54d15fee7d",
+            "5a0842028594ac1a2b3b",
+            "5be9b08f13f0a517aa69",
+            "5cad26c0aaad56a42541",
+            "5df40f608b49d3c8379d",
+            "6190ec7d64e376fe34d9",
+            "63cd9cdfdd37317973c3",
+            "6681e5c4ca3bd1bfe665",
+            "67758d280e441c55dd43",
+            "6d1cc898d83ed12f557f",
+            "6e9d853072cc8d1ce557",
+            "70d893797b7f679f9c67",
+            "7195ef7de4777b63e913",
+            "732439c3213f2798a119",
+            "73532a89f1fa0b1947c7",
+            "75b7f436efb3077ad339",
+            "7c00324e3c76c328f261",
+            "7caee97ce0b70b16947d",
+            "7cb97f62e48a33c87e67",
+            "7fb27d8c14607ee3cb7d",
+            "80fff2f39f3910c6169f",
+            "8167ee2e0fc94af8c565",
+            "81afb240f8d34f103c47",
+            "8459cb4384754d02a783",
+            "8ea4f23ffde99f5e1c3b",
+            "9c4c04f5c99855a3db17",
+            "a06927ca5a4a73c76573",
+            "a2b61f60564f0c3a110d",
+            "a4011ac223a9de932c19",
+            "a65207352b0b85d4da35",
+            "a685005b44ad72867201",
+            "a84597278dc135313b01",
+            "ab0ecee3617ea537b3ab",
+            "ab9e4153828c788dd7d9",
+            "ae8e40cb96b219c6a3df",
+            "b0b47467b087768a68ab",
+            "b250a9f21b8e61360f39",
+            "b5746b748be5b6116043",
+            "b9bd9f9f96e7d191903f",
+            "bc8e6438b0f9d5eced83",
+            "c0a074bd439112b32133",
+            "c1d3ac0f8117e74a78bd",
+            "c2360fcb4f83d634b4cb",
+            "c3620830696a71963e2f",
+            "c3701984172d96f57d3b",
+            "c7591e6da17546282d77",
+            "c869562a0805013cdbaf",
+            "c8b6b36d0644bce1ff61",
+            "cc65084e3776c7fbc9e3",
+            "cdb04a6d688c43ad2421",
+            "cfdba480c5aff761f95f",
+            "d066d42855d9143e1cdf",
+            "d3641799c6568e6e2225",
+            "d67a39275b9a0391d1df",
+            "dc069c9208cfa540df33",
+            "dd90576c48eed268e8bf",
+            "dfc24378706f8800e33b",
+            "e09fd6ab79b92b78e677",
+            "e2bdf68aac745a34f317",
+            "e68cee3b6710c88f0e31",
+            "e755adf82d17afd5df47",
+            "eb7eb18e973499b5815d",
+            "ebaaff8d1f176991473b",
+            "ee3125d889f0597cce81",
+            "ee51684b82e8a3407b43",
+            "f2137477586196e28af9",
+            "f524576cd52aace808d3",
+            "f571c305de2ff39af101"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 9000,
+        "disk_mb": 500,
+        "timeout_seconds": 2400,
+        "gpus": 1,
+        "vram_mb": 9500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "9e1e346c72bdb246620b"
+          }
+        },
+        {
+          "params": {
+            "config": "f01161f426ff1639decd"
+          }
+        },
+        {
+          "params": {
+            "config": "3577097b433ffc8d56f1"
+          }
+        },
+        {
+          "params": {
+            "config": "14fffa00b547eee45eed"
+          }
+        },
+        {
+          "params": {
+            "config": "d692291f29aa7342f6fd"
+          }
+        }
+      ]
+    },
+    {
+      "name": "gru",
+      "hypothesis": "H_gru; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "8b5f7ca3aca780e6c9a3",
+            "01bef451b5bbb70e1ebb",
+            "ba6d8b510b70aa2bc021",
+            "179faaa734d1e873ea21",
+            "00dbfc27b808261653cf",
+            "01a6c439aaf781bdb8df",
+            "042f80bad7bcfb1fb321",
+            "092a7260e08caf06aaad",
+            "0a445d13f15d1b47b0f9",
+            "122268bd7b1f006f4d6f",
+            "157aa40c5a767a0fd405",
+            "16c8368d9849ce3a3507",
+            "1bdc462ad6d74fc9c4df",
+            "1e048dedec673817526b",
+            "1e1bde6b04e9da38706d",
+            "1f0fc07009d54a8b2d37",
+            "21281af882b7543f2f43",
+            "213de4ef915d55b3b893",
+            "2379208326a0b91cb2d5",
+            "24c8d24948d5b3773cff",
+            "25035954af700de473ed",
+            "298a1c54c3a05615e47d",
+            "29dae21a48b8066d1d2b",
+            "2f842f308cf9a49ea153",
+            "2fcdf90c5eca8788d36f",
+            "2fe60abdf7d99971618b",
+            "317c7ab52785e1fff5ed",
+            "31e71985e6f1381746c7",
+            "34047ba065c8733c2781",
+            "389f2966522679c7f5c7",
+            "3a5189eedb740c2296a7",
+            "3b46a3b042144ed7ecef",
+            "3c112f8fc541999fad57",
+            "3c3446abffb2555955f1",
+            "419d3c2be562d647d177",
+            "4245211276432fc61687",
+            "42fd6266f61b1a4554e9",
+            "4a895ed48bdcc2d74249",
+            "52ff86620c765393b67f",
+            "5c221e7cd00f4ae21c59",
+            "5d58fbc5bc8424ea5751",
+            "60314add733c1ca560bf",
+            "61524f66699f228f2169",
+            "62a5759031763dfdd491",
+            "62fbecb2cf572612a627",
+            "637657a8c62a1fdcfd77",
+            "6484ae25fa78a7dd2d8d",
+            "649f96ae320896e53885",
+            "666bddc95067b060f8a3",
+            "66f25a1bbf662a7e5391",
+            "6d99bf26ffbf11a546e9",
+            "72f8bd84a7f2d0fab4c9",
+            "7e64e71b73bb6777238f",
+            "7f415653ee6607ad0103",
+            "7f818fe27ebb3b08ad1f",
+            "7fd2ee1986243598938b",
+            "80c993e0404086cc8b79",
+            "83db9f7346ead74dbbef",
+            "86af709b5f1357a6cc4b",
+            "87bae6df71044c4e6057",
+            "89135de70fe60bb16687",
+            "8913662e442ad91dfc8d",
+            "8a695bd37b604ae40391",
+            "8c3ee0a974b6ca306013",
+            "8e293f6be4866010f897",
+            "929d0c8ce442f24325d3",
+            "94fd7685e762df941e5d",
+            "95368e3162ad5304cdd1",
+            "954a746a929037e18d53",
+            "9b907daec29504ba0d31",
+            "9ed5fd9779f5bea534e9",
+            "a184e2a28e51ddf4190b",
+            "a1b6f1405443a3325031",
+            "a781ac8e352653464033",
+            "a78c9c987a379a131f4f",
+            "a816f36f528c3249049b",
+            "a865ff2d91a392f63df5",
+            "aa0da542c4a54de57101",
+            "aa25730e7577c6348235",
+            "ac7f0de46bfc6cc436d5",
+            "b165e666813225f2e153",
+            "b3852de5b0219427036f",
+            "b4ece7cc169f0896bca3",
+            "b77921a1a8d3809784c5",
+            "b827ed839e98c8c65e8d",
+            "bc0679a8496e1d1514cd",
+            "bcff679e3673e402db27",
+            "bec5aec560d1cab37b07",
+            "c4871360703542767149",
+            "c51ac6ec4a483dd2a1a3",
+            "c734ca588e21462657a5",
+            "c8f2726d797f9e799ee7",
+            "cb5b4b67987fe3fb3751",
+            "cb7c360ddafb739ff3cf",
+            "cc3225477e7fcfbf1665",
+            "ccf7dde523a1c0dc6c1f",
+            "ceec315683aaee1fc9bf",
+            "cfdffb66fbf3602fe6e7",
+            "d1f2343482b5a28cf1a1",
+            "d622656b7ae6a9c06c5f",
+            "d77352aca5ed397df58f",
+            "d7f5c851512d2fbc3709",
+            "d8cb996739afde3b1c15",
+            "dce1fd96f2e213585c15",
+            "ddf9d49dd4922f5e4e39",
+            "e204b1657684fb2a5969",
+            "e43be11394d146013cf7",
+            "e488b56df937a873e973",
+            "e5d4bc6e66b09ac4285b",
+            "e8bf092a66a8d3223201",
+            "e9369d01afbb270a2d87",
+            "e997453bb1ee57652cd9",
+            "eb488fcfa90e7e523505",
+            "f25a846e5ac9f5bc2b93",
+            "f321a29fe41f0cab9b5f",
+            "f5960dce9fb4109d3771",
+            "f8c72bacc4df0ee2d19b",
+            "f919e094f57fb0a345e1",
+            "f91a46372dae89aa3659",
+            "f95cce6d0daa1e4c0a75",
+            "f9dae46ffeef83b98b15",
+            "fb1fa209399ed3ac1713",
+            "fd9107de80fa16e8b09b",
+            "ff5943a9499253bb1837"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 9000,
+        "disk_mb": 500,
+        "timeout_seconds": 2400,
+        "gpus": 1,
+        "vram_mb": 9500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "8b5f7ca3aca780e6c9a3"
+          }
+        },
+        {
+          "params": {
+            "config": "01bef451b5bbb70e1ebb"
+          }
+        },
+        {
+          "params": {
+            "config": "ba6d8b510b70aa2bc021"
+          }
+        },
+        {
+          "params": {
+            "config": "179faaa734d1e873ea21"
+          }
+        }
+      ]
+    },
+    {
+      "name": "resmlp",
+      "hypothesis": "H_resmlp; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "fb414de2e50244e6a94b",
+            "8e0f581b88591528d819",
+            "0a1bb825fb74fd9cafd7",
+            "786dfbb30bf2f609b597",
+            "d307da9ff4131b987011",
+            "01a40744ae5d058ad84d",
+            "03bee9603e98fde78353",
+            "060a7fff639689bf820d",
+            "06883be51152ee0c66f7",
+            "06942186cdee59cc72c7",
+            "07ce042d92be52858439",
+            "091d4069aaaaa55dfbfb",
+            "09612f6ecc45ade798f9",
+            "0a30fc1c4b9173883949",
+            "0bd0e9e0a3113f226c71",
+            "0c4cfd1ced3472761a13",
+            "0f197d54a541882ae8c5",
+            "12360ba823adcfb29701",
+            "13f158ee15083f12228f",
+            "15c1967a5c0f9d50c12f",
+            "18771200547cad794317",
+            "19f8ccd86b62030fef57",
+            "1a90e96de028fb46c30f",
+            "1a978e0c9ff95f82d771",
+            "1ac2e621bebda391bcd9",
+            "21d39e7239b20b784dad",
+            "22324c03e824ac41fb21",
+            "2642186b5f6ba1b6d58d",
+            "279a4a875d66409150cb",
+            "288cc4b8208992b520fb",
+            "2aa973edc5173a6437c9",
+            "2d3d9d6ff3c9c13298bd",
+            "2f23be2ea24236fba49d",
+            "2fc0d4ff82da445decf9",
+            "2fd1c09a495af1ba33db",
+            "3079a6f840e394383265",
+            "309864674622b11ac4c3",
+            "30c1b598f7447c7b2c45",
+            "394992b7c50815d6e2c5",
+            "3d0cb95b8fa365086897",
+            "3e7705d643a814aafb33",
+            "3ff1595d97b86a45bdd3",
+            "41d62f3754e9efbcf8b9",
+            "4210bc69a4697654b4f3",
+            "45f65f075162925f3b8b",
+            "46a5d8841aeeea342155",
+            "49550dabc677194e4a15",
+            "4a7cb16db4865612dddd",
+            "52c472b26cd721e899b1",
+            "5572160c3f30a2d5de3f",
+            "568b4feb5335cbf01af9",
+            "5aac11644f466320dbbd",
+            "5dd11a4baa3856b39111",
+            "5f6fccca2203b7474cdd",
+            "5f9cec1aaa2ae4f2c0a5",
+            "620117210d7126b781b3",
+            "6282c936e7bd44bea32d",
+            "65161129bd6235350d39",
+            "6e0f37c145520ff58821",
+            "76a578d6d2278a35e809",
+            "782443edd555a4e83859",
+            "7913b7c04e2c779de66b",
+            "7dcee26e39bdb26b65bb",
+            "7f2907dd8314f4703e79",
+            "8422e298e07f196f8bb9",
+            "87457dc68bbc8c7ee6a3",
+            "8878b22f6c6155ff578d",
+            "89d65d36aa1177df4e67",
+            "8f4154a83647d30f96e5",
+            "91391826b859dbd1491d",
+            "933a409644b9e536eaef",
+            "9542909e00519e1274b3",
+            "96a559b53040a6446435",
+            "9addbb39994848cbfad9",
+            "9af380cc62625930e9cb",
+            "9b16923cadb66c9d36c9",
+            "9ca8100b10876cef0e83",
+            "9d39bf8d37c04f9b58d1",
+            "9d930bbe9543872e2285",
+            "9fb6d418b0239b5ed165",
+            "a0e2aa566665ad6c2821",
+            "a1deed10c2becbd476ad",
+            "a2f819847d1aa35ac4b1",
+            "a386932dbe09a098dad5",
+            "a6826fed563eb8d21905",
+            "a92d333d63a07f8923bf",
+            "aa2e331435e7e4cf1861",
+            "ad78785579940aa0d309",
+            "ae1cfbe993641aa82a2b",
+            "b100eef9ce7e7a4ee44f",
+            "b18acee78d7a2bf33617",
+            "b617321e2bd7c476eee3",
+            "b6ec7f1d4f4699617267",
+            "b86cfb6095857086322d",
+            "c184e57dc7af33fb45eb",
+            "c423fd4039342771f009",
+            "c6001c3ae8d275d0bc99",
+            "c8bcfbe88995d3636539",
+            "c9b8877af1254839a1a5",
+            "ca2b3f09707235cfd107",
+            "ca9cd65d2add0f8b3719",
+            "cbfdb02a2d69ca3febb1",
+            "d19716e91c392c6cc479",
+            "d6c75cd9c5193b28c423",
+            "e053dabea89dc80736f1",
+            "e1a8af197fbb3611a7c9",
+            "e51760056fd7b26d8491",
+            "e5e6cee552e07a1d9439",
+            "ebddae87e6e62e1857ab",
+            "ec46313ffed20f992f47",
+            "eda9069a5d063e2c1085",
+            "f10675f49268a734825b",
+            "f4020a79c91694a830c3",
+            "f64f46bbb9534f581a3f",
+            "f857c8fac80a31b30dc1",
+            "fa9e8d7f242ad575ae9b",
+            "fb17c7cbdd4182fd8fbb",
+            "fba667a98ed4e4d9c107"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 9000,
+        "disk_mb": 500,
+        "timeout_seconds": 2400,
+        "gpus": 1,
+        "vram_mb": 9500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "fb414de2e50244e6a94b"
+          }
+        },
+        {
+          "params": {
+            "config": "8e0f581b88591528d819"
+          }
+        },
+        {
+          "params": {
+            "config": "0a1bb825fb74fd9cafd7"
+          }
+        },
+        {
+          "params": {
+            "config": "786dfbb30bf2f609b597"
+          }
+        },
+        {
+          "params": {
+            "config": "d307da9ff4131b987011"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rff",
+      "hypothesis": "H_rff; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "7ca799cb2c23bbfa39ff",
+            "0627a1c21587711db520",
+            "0c164b6680b1b3f4d472",
+            "0cc285b941f13191be93",
+            "11c7cadb29c6e3bd1146",
+            "12f0e062b624ec6a65ab",
+            "191bcc2bb148b9a57a71",
+            "1b237c9df230b51b0a8a",
+            "1b268ebe9af0948bb64d",
+            "254cda5af560c82f4483",
+            "2fbbad445a091b022efa",
+            "33540fa3e8599404f476",
+            "39bf66b02b00ef04fe01",
+            "39e69d8f717fc433c94a",
+            "4051517e3dd08e0e35d5",
+            "44e67ec6663ed1c1ad93",
+            "46b84847781c3b0d3eee",
+            "47390dc394529015c1a4",
+            "49a848313fb9eb7a3baa",
+            "4b1e2e0a52f8284fbd64",
+            "4f4ad0a60212d39743d6",
+            "592d1568c7e73c4b3ea0",
+            "5bb4cc647d34437ea73f",
+            "5d361522e99a5bf19e6c",
+            "61e9695582115418147d",
+            "63945cb502bbe3cdb8b7",
+            "64c78d6aa38633aad1d0",
+            "6523d4859166216bec6b",
+            "79cb6c300b1fff8c87c9",
+            "7cd6897cff152f226e3a",
+            "7f2806b9dae3e6fb7997",
+            "84cbd6bd24809cc8aa17",
+            "87e3bf3c44739a4d0286",
+            "8d4b2012167058882e6d",
+            "9267b07ca8c024e12ae3",
+            "92e07ba81400182e6aae",
+            "93f49063401b616919f4",
+            "9b6520d33911ff7cafc9",
+            "9ecaf4defbd85c9dcb36",
+            "a0dd3697e566596b3140",
+            "a9022fb44c5756d18a8b",
+            "a9616ed019608e92f2e1",
+            "aa62a6824ebbdc95a054",
+            "ad66b3327ecc8dd04a68",
+            "b088bd620e6d973a473b",
+            "b1206b72fec3ecb741fa",
+            "baa6ed552ce0ffec3b7c",
+            "bb042d4db6dad056c3c3",
+            "c0a669353b0881ca7f4d",
+            "c8df27a976af489c5711",
+            "cc4667adafc82285e1ec",
+            "cd1554fb35a274b400b2",
+            "d022ef24503971c8cff7",
+            "d0c63ee6afbbf1a4c6cd",
+            "d27482c18a2471166574",
+            "da158cf6a0dc3554b7c9",
+            "dc4be3f4745f7b224f79",
+            "e8c8633055e0b88e613e",
+            "ef2bd863316b62a63431",
+            "ef7f708f28bbbb3c15c8",
+            "f29d44c32bd6fac2d6d8",
+            "f52a5884703d5a04b522",
+            "f5799f5ecb3086b743dd",
+            "fc4f937c854a3b749077"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 2800,
+        "disk_mb": 180,
+        "timeout_seconds": 1500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "7ca799cb2c23bbfa39ff"
+          }
+        }
+      ]
+    },
+    {
+      "name": "spline",
+      "hypothesis": "H_spline; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "294eeec94eaec44539b2",
+            "0a650c1c9ae8d4daf5ec",
+            "127437e97596f0d47e9a",
+            "13041a814b4c1aea12b2",
+            "1b8ef4d71d62581176ec",
+            "265fb2917dd46b0e275a",
+            "33f5063e5ace8df9034d",
+            "3b6e6dec57d5edb1260b",
+            "40a8d8bfeda64cf5f9f4",
+            "47ccd51123f1b0de4a1b",
+            "4855e115078c2727fe5c",
+            "491ffc118c23f0118f41",
+            "4ac6d87f04c8c3bb0ba1",
+            "4d44cd4d9025d416a05f",
+            "54933291be5bfcb4a266",
+            "5b3cc8f56c2d09fd2153",
+            "5c492d0f4c8165f6e25b",
+            "5cb74e86717cf34a1079",
+            "6111cbabae21818cfb77",
+            "6131e99a2efca3eaf28c",
+            "615a600deef57a8da0ed",
+            "61a541045e89d92212d7",
+            "6622097c260b51f5099c",
+            "68891a9d2e67a0067243",
+            "6dd37ee1600a5e45c3e2",
+            "75e4e78d1e4403f60a20",
+            "779b4c0d9eb9899f542c",
+            "8088f6a9feac70655a3d",
+            "85d31dde277375120add",
+            "8769629642967f038b4f",
+            "8786d1ba6b5ac52c8632",
+            "8868b492d81ebe44881d",
+            "894c0123a2f0818dd23b",
+            "8d40cb93c57388a0e52f",
+            "8e8f4ff15606c4ee8d56",
+            "8fcc465c4a4532d5c227",
+            "9311a032bda4ca2cbcb0",
+            "96d6284915057eb65f05",
+            "9c309890119fb414891b",
+            "9e38669db767e03343b9",
+            "a66a56d809ab4bf99253",
+            "ab16f4146168d8b7977b",
+            "af6b0e8178507040ef33",
+            "afa0881e2830ecee021a",
+            "afbb0944134df047af9a",
+            "b1ff3f1e0543e0dc1f9d",
+            "b84f8b0592e5f1f4413e",
+            "bba4b6d9cfce97d2e783",
+            "c0f13c5c48fba6a85a71",
+            "c8dfdc602a03ca061e66",
+            "cc7702631ffa4cd2968e",
+            "d1b286f6935dad06a030",
+            "d52cfb1066cb32e7b1f2",
+            "d56ae7ae299684bceaae",
+            "d5d02b30e8b042bdec88",
+            "da050fd4d563a29551bd",
+            "e20321e3e58a4cf92dae",
+            "e626c309b13283e74380",
+            "ee220e291ce0c71d6f95",
+            "fdc4102a5751f98c1020"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 2800,
+        "disk_mb": 180,
+        "timeout_seconds": 1500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "294eeec94eaec44539b2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tabm",
+      "hypothesis": "H_tabm; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "9ac33dfd1a60669cb7f3",
+            "b1e08b08ba3106ede3af",
+            "777d3121745f7faf9697",
+            "08872ca1209210f38405",
+            "047420a8f56c102e41b5",
+            "09020080254caf0dcbf1",
+            "0949c7676e034fd1dccf",
+            "0a414a4b2a964702a3f1",
+            "0a65c89f16f410912d01",
+            "0be3d16236e7baff7d77",
+            "0fe42bf4ad85b3bb1cff",
+            "12ded011098c3553277d",
+            "135cbc9a0f4984db8001",
+            "165157bf224f62a9c11d",
+            "1875c6cfab5efbaf0547",
+            "19eae180fe32d428dd0b",
+            "1a109c126dd09dff2abf",
+            "1c7dcfc80c083c648121",
+            "1c821e500c6ca3300d61",
+            "1e68bceb9028f320b1c1",
+            "1fe679d97e28935140bb",
+            "265bb9e022e697f4b7d1",
+            "2d88fbec84cd1a7159bb",
+            "2fea37ca1805fad621b9",
+            "383cfb2d0fdfe3419dc5",
+            "3ad6df29f80eee8d1b23",
+            "3c68fe37c883897b02f5",
+            "3ed7c14be6dd6ecf372b",
+            "43bfe3a4896bfd734e0f",
+            "46cdf8ad04d68c668529",
+            "47c5373d65396aae9bad",
+            "48e52c43595886d9e96f",
+            "507674f4f6bacd38edd9",
+            "522167be18a2f2d0009b",
+            "54b2420c74e9dad0ed95",
+            "563c8e66274395397edf",
+            "56f07e12487d260ad825",
+            "5d4969535461b35bc96b",
+            "635ee2778883e6f4bb4b",
+            "64f66cae18a4551108a1",
+            "6799d02749326e71f609",
+            "6a57195a98c991f86823",
+            "6ee4ea5b0d2838029233",
+            "72166600eb531cff174b",
+            "74c77048862c56637087",
+            "7ab16034aa24879cda8f",
+            "7c007bfd7187974280bd",
+            "7ce106b638cb3cddc38d",
+            "7e1f620fedb71b26972b",
+            "83666ad90f31d2cf27f1",
+            "846b7fef59386f8f55b9",
+            "859878e4a81941e88b7f",
+            "859e58062e0116ce6145",
+            "8866b619285a6aadb01f",
+            "8a1fd2a3de7a2e61ad13",
+            "8e73d9e917e439828545",
+            "91c596f81d964f5d4e6f",
+            "929ca74169cc39c25b6f",
+            "92de9b9e9e21d3793991",
+            "a3b61a038faf95bcb69d",
+            "a8e206aa04a4f1314933",
+            "ac2c14c9f64c5d5fde0b",
+            "acab0060ad3135ac4ba7",
+            "ae1502e2f23190bca08f",
+            "af5a8a2deb9acee0bfe7",
+            "b2c82eeb2bcc6ca6dcab",
+            "b3d032ea15bdd01b85a7",
+            "b832fd10f0827aa0e983",
+            "b8ed3935d1e518adb6fd",
+            "c29474f1e03355070969",
+            "c8ab2e9396698780eacd",
+            "c8ff7635aa2eaa182b7b",
+            "cb76f17c7c1fe2812325",
+            "d2ec9176091a9552eab1",
+            "db85fddc63bf7a7b33f5",
+            "dd5586726cc8ba87a4f3",
+            "e3f822c8e75696099da3",
+            "e41fca1f392a2902f88b",
+            "e80d1c3ff25d47a151cf",
+            "e86a97e84fd988c59fa3",
+            "ead662609f5382811d5d",
+            "ef66b9a114b1040bac89",
+            "f39c5a63c49e0517b15b",
+            "f41d3c0c013285a97ad1",
+            "f67e582b780c27eb7e93",
+            "fbbe90572a19879f9a6d",
+            "fce5bb9364bdaa1b2ff9"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 9000,
+        "disk_mb": 500,
+        "timeout_seconds": 2400,
+        "gpus": 1,
+        "vram_mb": 9500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "9ac33dfd1a60669cb7f3"
+          }
+        },
+        {
+          "params": {
+            "config": "b1e08b08ba3106ede3af"
+          }
+        },
+        {
+          "params": {
+            "config": "777d3121745f7faf9697"
+          }
+        },
+        {
+          "params": {
+            "config": "08872ca1209210f38405"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tabr",
+      "hypothesis": "H_tabr; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "547dfe6e72ab8fb219f9",
+            "1fd5a5cf75d78bfe8fb5",
+            "0cf26d83586eec5ca213",
+            "94609eb2c7e61dbc1a41",
+            "179976dd7d6d7f1bc1f5",
+            "28d0557ed3ef2b76d333",
+            "63df96d54534447845bf",
+            "000bec34ba176b303579",
+            "0035b73ba389f79b80db",
+            "09ba36fba9f92aacc3e1",
+            "0b41f63fb13b378f2c53",
+            "0d647c478a293e2d4aef",
+            "10baed515723d69d0f85",
+            "11fcce8dc6163b7f6f91",
+            "1594fc47eeea9072f163",
+            "15ecfe5a235483293e31",
+            "1d7ca69649aadbd0d009",
+            "214d0a55e2cdf29c8017",
+            "2380970efe74b609daed",
+            "255035285a6fd56f1e17",
+            "26b936c2bff2f58ced0d",
+            "2b9e76a7f66a15e4f1cb",
+            "3192c985405a1f299f53",
+            "328bb603d7eb55a630f9",
+            "38acf92b2301b2222729",
+            "392b129f6d433a495873",
+            "3bceffe98f368dfa97a9",
+            "40c4d1ef162cce826103",
+            "4181a3cb1e90f3f20a03",
+            "45b42ec793a12d244be9",
+            "45feb9b1cd7dee5b7813",
+            "47a50c4b40ccff859fc9",
+            "4a6805be0bae81a4d153",
+            "4fa4ff8baffcb331d1e3",
+            "557f0adaac95f4583e1d",
+            "566904897f049ab329c5",
+            "5f56d14b6addaf160c01",
+            "713ff9b47ed34c31f2ad",
+            "77307d61c231de9241ed",
+            "776f1e1daadca53fdbff",
+            "78c163addc5bcc4e21a7",
+            "7c9426a322b6ca799bdf",
+            "7e609bf40f827a5bdcdf",
+            "7e6dfe9a19d648e1e021",
+            "7ee7569e8fa441246159",
+            "802b09c78abf4191106f",
+            "84634b0fcd97c736ecd9",
+            "85ba51dd46a20e45ab55",
+            "8793d0f9e33e7f097757",
+            "88caaa754992e4e6fe47",
+            "8ca54968448845b74847",
+            "902e540bbbccbd083087",
+            "90aa4d37f206797a9211",
+            "911ed1a9d3d866a95b69",
+            "9189558aae40263b8db9",
+            "92d82adda21341b14d11",
+            "92fb3355328d9281b78b",
+            "93065df6a363528196b5",
+            "948f39f25cbce4bd479b",
+            "9fe24c8baf70416712f3",
+            "a1580c72e797a40ad645",
+            "a20f5d74090884b8bcb9",
+            "a62213b0d2fecba46451",
+            "a9e8cf10d60912d04db5",
+            "ab5eab3ed3e0ba083ac7",
+            "abb469b0e0b10889cb35",
+            "ad3edd69682c95d49225",
+            "ae9a845f9689ae359c6b",
+            "b43a7e0242bf143666b3",
+            "c27976e2707653ca20fb",
+            "c2aa9c03f0d24f63c6bb",
+            "c783c483e00f88ade775",
+            "c8711ac418ce306eef99",
+            "c999a217edb8af3c995d",
+            "ca236b80b1be7982ebb5",
+            "cac121794363de33b241",
+            "ccf4877998b6b92ab311",
+            "cd056c6d4eda99e5a46b",
+            "cffaad43d0265d945bbd",
+            "d072f4388fc4f3980f6b",
+            "d35fc6b15a8a05794d7f",
+            "d36091c8db7cd540a2b9",
+            "d414b6393a0b71e604e3",
+            "da8481c357cad613b785",
+            "db7d85d8a9e2a56e19eb",
+            "de9bb3f9651609d63f95",
+            "df0dc944307689c589e1",
+            "e71037a5732ab1c52e15",
+            "e9554fa696bd485cc819",
+            "f0f22e2088d9c31d9cad",
+            "f2b2fc3c74857c821e21",
+            "fc5acac5f765ca72ce6d",
+            "fd60742f65f5b0823427",
+            "fe21efc14582f39f2781"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 9000,
+        "disk_mb": 500,
+        "timeout_seconds": 2400,
+        "gpus": 1,
+        "vram_mb": 9500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "547dfe6e72ab8fb219f9"
+          }
+        },
+        {
+          "params": {
+            "config": "1fd5a5cf75d78bfe8fb5"
+          }
+        },
+        {
+          "params": {
+            "config": "0cf26d83586eec5ca213"
+          }
+        },
+        {
+          "params": {
+            "config": "94609eb2c7e61dbc1a41"
+          }
+        },
+        {
+          "params": {
+            "config": "179976dd7d6d7f1bc1f5"
+          }
+        },
+        {
+          "params": {
+            "config": "28d0557ed3ef2b76d333"
+          }
+        },
+        {
+          "params": {
+            "config": "63df96d54534447845bf"
+          }
+        }
+      ]
+    },
+    {
+      "name": "woe_scorecard",
+      "hypothesis": "H_woe_scorecard; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "b0c8fcfb57b1bd0541d9",
+            "08a4760fafa8170460d4",
+            "0b3a5b0a93eb8bd14d0c",
+            "0d4d9ddf92b02248130f",
+            "0d52970fc31910054c36",
+            "15283c7978789dbb195d",
+            "18a8c4db00c9dc3362d9",
+            "2068cdeda2ed90304fc5",
+            "247ceda1667120661387",
+            "24a02aa6574b3c7fa65b",
+            "262efb67c5e459788239",
+            "309c2fd638705d8d8a9b",
+            "3119927110892fd15b45",
+            "35c40f4e8149e325e656",
+            "45a25ccefee788f09cfa",
+            "495e2c87797df8d868b7",
+            "5414dbfe5740700d711a",
+            "5661abe528fda38bcfc6",
+            "57ac63d83804f51c558a",
+            "5f43c40c8baba8378687",
+            "66e163085e00828e415e",
+            "672d6b1c516ab7baee68",
+            "69462eee21e696df763d",
+            "70381c810eab0edaee75",
+            "70cdfd1bc566dae78125",
+            "72c4149a80274b8ee644",
+            "74076f208fbc190bd03d",
+            "741855ec58aea3a805e9",
+            "7810302bca32007d4237",
+            "7ef6d916c0e0a27801b4",
+            "82dc6d0b2238a91d2a78",
+            "8968d339d039358058c0",
+            "952e76eb01b6f75f997e",
+            "9672ace1b4b951f45cda",
+            "9da9048be99981702545",
+            "a7b252d5396e7ac5d1bc",
+            "aad75fb156c288b9576d",
+            "ae2a7bb7cfab1fb65852",
+            "ae67fbff410da7b560ef",
+            "aff0cc29b6fca50df962",
+            "b0f70b5d7df48002d0bb",
+            "b2bd6e7dd2545134f9d7",
+            "b31dda31e517a3b83407",
+            "bf1e99ac29a508f36c94",
+            "c20a28d87a42187f88d2",
+            "c29db284a48cb368dc31",
+            "c6ee349cc3e0225dc4fe",
+            "c778d29209eba72a8849",
+            "c783ae70bafe1a76d0ca",
+            "cb42efd0db4108c120f5",
+            "cbd5b2d5a030835780de",
+            "cc1d95e141cd95684e66",
+            "d2acfc97e08435a093e8",
+            "db376686f247f25c636c",
+            "dc9598bb02ac3fc7d198",
+            "dcca2362eebec65de12a",
+            "e2e1e127d3a7ad907c61",
+            "e48272b3a3fea05771b0",
+            "e4a9884d3a83f3397f48",
+            "e841d312fccf573761e9",
+            "ed8768ce40e6012eba6e",
+            "f10e71d9d12f6c1d03bc",
+            "f22915a5b644127b257a",
+            "f2592e70fd9bc92b0bd7",
+            "f40b448a0108068b6a0a",
+            "f490113bf3040a501edd",
+            "f93e3b78eab8c71e2b55",
+            "fdad08352e8a8c23287c"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 1,
+        "ram_mb": 2800,
+        "disk_mb": 180,
+        "timeout_seconds": 1500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "b0c8fcfb57b1bd0541d9"
+          }
+        }
+      ]
+    },
+    {
+      "name": "xgb",
+      "hypothesis": "H_xgb; matched champion and feature-block exploration",
+      "parameters": {
+        "config": {
+          "type": "categorical",
+          "choices": [
+            "c7a6ac20b01178a32453",
+            "0dbe1e48a9a31f26383f",
+            "a837ce201aa0fb218c73",
+            "034fccd5e1467887017b",
+            "0c896be6fe1e2e1cd7cf",
+            "0cb484756a6cc9d9ce7d",
+            "0f8df68e123230a780db",
+            "14b473e0b919fa891591",
+            "1666da31eaf31f54fab7",
+            "1737d96681f04c58ecf3",
+            "1983f10eed788540eb11",
+            "19b65e818df188ce74e7",
+            "200fdfef98832ade8c53",
+            "203fcd58802d3de9c3bd",
+            "21719028631f4673b779",
+            "233b780a274672309ac5",
+            "2546b5a21225b1412f4d",
+            "2bc943f10b7d2227af8b",
+            "329d0e095dc89198b5fb",
+            "33d0786cf3e74bb0a039",
+            "34bb8ae2786fa98be521",
+            "3788033bf288d9bf70f7",
+            "3d21332adc56b713b97f",
+            "406d8656be088d47fb0b",
+            "45375bc2a4881317dbfd",
+            "47d657a047847079e4a1",
+            "4fe9652b47b97f90dec1",
+            "5b92c528294d1c689c0d",
+            "62e690cefb4ede8da18d",
+            "657ac1aeb98c969cdf75",
+            "696c33d4102f25285d23",
+            "6c0b8df920516bfbd63b",
+            "6de60eabac473d66f46d",
+            "72c664b9094124544625",
+            "74409ace9047b329850b",
+            "78735c14fe968b704453",
+            "7ad0191d9ba5f758db31",
+            "80e0797e5a48dfda06ef",
+            "839ebd7e767229d2a1e7",
+            "860574f4f58bd90610b1",
+            "863d26b96e2e0468c053",
+            "86411d521b11689bd197",
+            "8868155f344133561f7b",
+            "8b38c76d7ea2dce8f87b",
+            "8de96e02b4181a37dab3",
+            "906faf51440eda589d39",
+            "9174cc7da1f3752fc40f",
+            "974d0a8014f92f190fa1",
+            "976c0aaf720039b7b9f3",
+            "9a8de3c2fe2644497c97",
+            "9f58d0bd2cffe6035571",
+            "a49b55369c064b2309a7",
+            "a60e254d3b6a4d30f15f",
+            "a993b8ea9e964659ee61",
+            "ae6273a938e49469be5d",
+            "aece2c5ccce91f6aab2b",
+            "afb24d475a1b7d277f0f",
+            "b2efa1670a51acf8ec95",
+            "b34c9becc4bd6109d5f5",
+            "b8642b845220d7e17739",
+            "ba45beafc599a6483223",
+            "ba77cf67c7c0e5c39fa3",
+            "bd6eaf7ccd515b6ad7f3",
+            "bfb2d151e4f4d30efffd",
+            "c9c6956af848e0aa4c8d",
+            "cb3a6ac5e33c883ccd59",
+            "cc01fd4c2d6f7c741eb9",
+            "cdb5074bb88164dd90af",
+            "ce7a86f80c5e5a9396bf",
+            "d0a1b2f8712e8aa21b2f",
+            "d330b1c5beb01c316775",
+            "d4f0d907834c0e564537",
+            "dc2819451debef10b807",
+            "dd3bff0a3a2ee7885759",
+            "df6f874158be68e19613",
+            "e21a6339f77db8f6b287",
+            "e30af6e9687e6e5a96c3",
+            "e774b74ab9be4492505d",
+            "e83fae1c0a096ffdbb97",
+            "ea4e5ff2126314c7386d",
+            "ec5093f208c009d8f425",
+            "f4260378320660530cab",
+            "f7f185ddba802ed0dbc7",
+            "f8413db2af0288d833f3",
+            "f9c0362e64aed9116805",
+            "fb36f081d7e2d1dbec4f",
+            "fb651ae3753518b897f9",
+            "fc1d185ceee4dc807bf1",
+            "fd56f3305fc8b54723ef",
+            "ffbca9377a46d3c8c6a9"
+          ]
+        }
+      },
+      "resources": {
+        "cpus": 2,
+        "ram_mb": 9000,
+        "disk_mb": 180,
+        "timeout_seconds": 2400,
+        "gpus": 1,
+        "vram_mb": 9500
+      },
+      "anchors": [
+        {
+          "params": {
+            "config": "c7a6ac20b01178a32453"
+          }
+        },
+        {
+          "params": {
+            "config": "0dbe1e48a9a31f26383f"
+          }
+        },
+        {
+          "params": {
+            "config": "a837ce201aa0fb218c73"
+          }
+        }
+      ]
+    }
+  ],
+  "budget_seconds": 43200,
+  "storage_limit_mb": 22000,
+  "max_trials": 1440,
+  "max_workers": 12,
+  "cpu_limit": 12,
+  "ram_limit_mb": 60210,
+  "seeds": [
+    2026
+  ],
+  "search_seed": 20261019,
+  "reserve_fraction": 0.25,
+  "breadth_fraction": 0.4,
+  "coverage_pool_limit": 4096,
+  "disk_headroom_mb": 2048,
+  "max_retries": 1,
+  "family_failure_limit": 3,
+  "poll_seconds": 1,
+  "external_clock": "/mnt/home/faris/faris/exploration-12h-20261017/clock.json",
+  "exploration_fraction": 0.3,
+  "opencl": false,
+  "stage_tasks": "/mnt/home/faris/faris/exploration-12h-20261017/stage_tasks.json"
+}

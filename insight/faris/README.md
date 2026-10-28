@@ -17,6 +17,11 @@ have been included and which verification/push stages have passed. Coverage is
 bounded by the documented discovered roots, including the retired-node limitation.
 File/source-reference counts are not independent experiment counts.
 
+The [coverage correction](history-completeness-20261028/README.md) adds 1,067
+missing files found during a later root/vendor audit. The earlier universal
+completeness claim was too broad; coverage is limited to documented accessible
+roots. Node2002 remains unverified beyond surviving mirrors.
+
 ## Current continuation
 
 The user asked to continue Antigravity conversation
@@ -32,8 +37,9 @@ Antigravity's full-OOF-selected routing/blend/shift scores are optimistic. Its l
 cross-fitted selection check did not establish an improvement; it also is not a
 fresh untouched audit of the whole historical research process. The user explicitly
 requested the exploratory mix CSV after this was explained. Creating that artifact
-does not establish KS 0.54 or a public gain. No new refit is claimed until logged
-runtime evidence exists.
+does not establish KS 0.54 or a public gain. The ALL66 refit completed; its public KS **0.55983** is below V25 **0.56822**.
+See [the run record](runs/agy-all66-refit-20261028/README.md). It is rejected
+for promotion.
 
 ## Every new experiment
 

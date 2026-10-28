@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 
 PRUNE = {'.git', '.venv', 'venv', 'env', 'env311', 'node_modules', '__pycache__',
-         'site-packages', 'vendor', 'storage', '.cache', '.history-publish-20261028',
+         'site-packages', 'storage', '.cache', '.history-publish-20261028',
          'github-history-20261028', 'logika-history-export-20261028', '.uv-cache', '.uv', '.python', '.ruff_cache', '.pytest_cache', '.mypy_cache'}
 UNRELATED = ('dicefest', 'schematics', 'license-plate')
 TEXT = {'.py', '.md', '.rst', '.txt', '.json', '.jsonl', '.yaml', '.yml', '.toml',
@@ -40,7 +40,7 @@ def category(path):
         return 'data_or_case_level_evidence_private'
     if any(name.endswith(ext+'.gz') for ext in TEXT):
         return 'public_candidate_compressed_text'
-    if path.suffix.lower() in TEXT or name in {'LICENSE', 'NOTICE', 'Dockerfile', 'Makefile'}:
+    if path.suffix.lower() in TEXT or name in {'license', 'notice', 'dockerfile', 'makefile'}:
         return 'public_candidate_text'
     if path.suffix.lower() in IMAGES:
         return 'public_candidate_figure'
@@ -65,8 +65,15 @@ def inventory(roots, base, resume=None):
             kept = []
             for name in sorted(dirs):
                 p = Path(folder)/name
-                if name in PRUNE or name.startswith(UNRELATED) or p.is_symlink():
-                    print(json.dumps({'kind':'excluded_tree','path':str(p),'reason':'environment_dependency_cache_symlink_or_unrelated'}))
+                # Direct vendor files include our own feature-builder snapshots.
+                # Nested vendor packages and the model arena's downloaded model
+                # library remain dependencies, rather than experiment sources.
+                vendor_dependency = (Path(folder).name == 'vendor' or
+                                     name == 'vendor' and 'model-arena-' in str(p))
+                if name in PRUNE or name.startswith(UNRELATED) or p.is_symlink() or vendor_dependency:
+                    reason = ('third_party_nested_vendor_tree' if vendor_dependency else
+                              'environment_dependency_cache_symlink_or_unrelated')
+                    print(json.dumps({'kind':'excluded_tree','path':str(p),'reason':reason}))
                 else:
                     kept.append(name)
             dirs[:] = kept

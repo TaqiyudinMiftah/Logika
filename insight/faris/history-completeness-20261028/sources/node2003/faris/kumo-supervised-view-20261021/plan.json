@@ -1,0 +1,26 @@
+{
+  "id": "kumo-supervised-view-20261021",
+  "original_deadline": 1792585871.823748,
+  "selection_admitted": true,
+  "model_training_admitted": false,
+  "hypothesis": "Supervised fold-local selection may recover informative fields outside the manually curated90 while keeping constant Kumo feature budget. Raw broadCatBoost is weaker than compact, so do not feed all1032 columns to Kumo.",
+  "selector": {
+    "iterations": 1500,
+    "depth": 6,
+    "learning_rate": 0.02,
+    "l2_leaf_reg": 25,
+    "loss_function": "Logloss",
+    "bootstrap_type": "Bayesian",
+    "bagging_temperature": 0.5,
+    "random_strength": 1,
+    "border_count": 254
+  },
+  "selection": "Exactly90 fields, PredictionValuesChange ordered; context50000 Pearson0.95 greedy redundancy filter; no reserved6000 targets or outer labels. Preserve fitted selectors.",
+  "source_url": "https://catboost.ai/docs/en/concepts/output-data_feature-analysis_feature-importance",
+  "source_limitation": "Official importance describes fitted model prediction change, not a guarantee of generalization or feature causality.",
+  "pipeline": "KumoLarge50kcontext8estimators, new90fields; honest6000correction18features same0.003L2/0.5strength; same25percent spline. Complete original70kfivefold OOF, no performancefoldpruning.",
+  "exploration_design_count": 1,
+  "historical_label_reuse": true,
+  "point_in_time_snapshot_certified": false,
+  "no_submission": true
+}

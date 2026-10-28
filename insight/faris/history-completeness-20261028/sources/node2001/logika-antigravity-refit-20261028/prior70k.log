@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/mnt/home/faris/logika-antigravity-refit-20261028/source/build_prior70k.py", line 39, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/mnt/home/faris/logika-antigravity-refit-20261028/source/build_prior70k.py", line 37, in main
+    ns={'__name__':'new_prior70k','__file__':str(src),'ROOT':root,'check':gate};exec(compile(ast.Module(body=nodes,type_ignores=[]),str(src),'exec'),ns);ns['build'](0)
+                                                                                                                                                         ^^^^^^^^^^^^^^
+  File "/mnt/home/faris/logika-faris-exploration/submission-full-periodicity-20261021/feature_build/source/build.py", line 43, in build
+    bank=Path(plan['bank']);manifest=json.loads((bank/'manifest.json').read_text())
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/faris/faris/logika-meta-experiments/meta-20261016-v1/.python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/faris/faris/logika-meta-experiments/meta-20261016-v1/bank/manifest.json'

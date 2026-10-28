@@ -1,0 +1,15 @@
+Oct 28 12:51:21 labkc-comm1 systemd[2172]: Started logika-all66-spline-replay-fold0-retry2-20261028.service - /mnt/home/faris/logika-faris-exploration/ranking-pipeline-20261020/.venv/bin/python source/assembly_spline_pilot.py.
+Oct 28 12:51:38 labkc-comm1 python[1120467]: Traceback (most recent call last):
+Oct 28 12:51:38 labkc-comm1 python[1120467]:   File "/mnt/home/faris/logika-antigravity-refit-20261028/source/assembly_spline_pilot.py", line 77, in <module>
+Oct 28 12:51:38 labkc-comm1 python[1120467]:     if __name__=='__main__':main()
+Oct 28 12:51:38 labkc-comm1 python[1120467]:                             ^^^^^^
+Oct 28 12:51:38 labkc-comm1 python[1120467]:   File "/mnt/home/faris/logika-antigravity-refit-20261028/source/assembly_spline_pilot.py", line 66, in main
+Oct 28 12:51:38 labkc-comm1 python[1120467]:     X=make_scaled_spline_matrix(expanded,rows,feature_cols,n_knots=6,degree=2,top_inter_n=35)
+Oct 28 12:51:38 labkc-comm1 python[1120467]:       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Oct 28 12:51:38 labkc-comm1 python[1120467]:   File "/mnt/home/faris/logika-antigravity-refit-20261028/source/spline_models.py", line 61, in make_scaled_spline_matrix
+Oct 28 12:51:38 labkc-comm1 python[1120467]:     if pd.api.types.is_numeric_dtype(df[c]):
+Oct 28 12:51:38 labkc-comm1 python[1120467]:        ^^
+Oct 28 12:51:38 labkc-comm1 python[1120467]: NameError: name 'pd' is not defined. Did you mean: 'sd'?
+Oct 28 12:51:38 labkc-comm1 systemd[2172]: logika-all66-spline-replay-fold0-retry2-20261028.service: Main process exited, code=exited, status=1/FAILURE
+Oct 28 12:51:38 labkc-comm1 systemd[2172]: logika-all66-spline-replay-fold0-retry2-20261028.service: Failed with result 'exit-code'.
+Oct 28 12:51:38 labkc-comm1 systemd[2172]: logika-all66-spline-replay-fold0-retry2-20261028.service: Consumed 30.117s CPU time.

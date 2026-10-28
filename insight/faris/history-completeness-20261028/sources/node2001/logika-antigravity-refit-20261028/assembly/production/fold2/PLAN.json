@@ -1,0 +1,58 @@
+{
+  "action": "fixed_ALL66_test_assembly",
+  "fold": 2,
+  "source_sha256": {
+    "/mnt/home/faris/logika-antigravity-refit-20261028/source/assembly_runner.py": "dd96c46ff71b07928d6b22f68c8e20779f4347b6325d9a63c415a5d8fe76248f",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/features/fold2/expanded.parquet": "317becb08ee92bb8c9d05738f49256b1aa522f8122898f82eacdde4b3fcfe707",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/features70/expanded.parquet": "959f0a4e78f938addc8ed06001ec4bdba319ea6a02c3bca5129457165553f0de",
+    "/mnt/home/faris/logika-joint-20261028/fold2/expanded.parquet": "5a5408152afbc75943aec2dfcf7c20921973a6e6923de65814ed27d289fa472d",
+    "/mnt/home/faris/logika-frozen-shadow-20261026/frozen/fold2/roles.npz": "0949027682e3be126e14e8248000204e2ef83916bc9ba82f1ff6a50b56b902b1",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/assembly/splines/fold2/prediction.npz": "58e8027af45651bf901eb754ff4a33a097220c358cea92676684728fd07e3c1b",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/assembly/splines/fold2/complete.json": "991bd44bbf22ad896a0d3d4b1d0055d43ea2d7013e9ba829bc03f507ca134f29"
+  },
+  "raw_prediction_sha256": {
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/pop_spec/fold2/A/prediction.npz": "00f58e33ca3e35b11f996cb3562324edca39bf1400e5ec5079a407faf486a6fd",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/pop_spec/fold2/BC1/prediction.npz": "6ef315b752cd4704b217fdc9400e66b9f0a14f86834ae2ba4fe4e999d984beb5",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/pop_spec/fold2/C2/prediction.npz": "b235adb11ee56eb28e5d6a3268d5083c55d7edd50f5db6982cd5e8ee7775dcf4",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/fe_cov/fold2/prediction.npz": "1a10fbfaaac543b3a3e02c811bf31b62b5d1b2d5f9728e0bdc0cc328b4ed230d",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/fe_mat/fold2/prediction.npz": "f73ab897bd5941c69aef66a37255234bb1fc29abde65f7b4e03dddc7c22a1f18",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/champ_s7731/fold2/prediction.npz": "c5272ade21dbd96f4dc6842bd8b2747eadc54e4f927f3e1a9ca45a47e5ff6d4b",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/shadow91/fold2/prediction.npz": "3279a9ec8bea1a665d19c77d2e37c1a48c21808c7f8b50ef5aedc6e713fbf20f",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/tr_mat_orig/fold2/prediction.npz": "f4e9111ec48bf4c33cbcb5d0acdb3fc8ef3a746e70d2eaa2138647c9d7872801",
+    "/mnt/home/faris/logika-faris-exploration/nested-correction-20261021/heads/fold2/meta_inputs.npz": "e9a8370cf9080068f199bac4d2d7591d04076b44b8b8ba4009f9c7be4fdd0c6c",
+    "/mnt/home/faris/logika-faris-exploration/nested-correction-20261021/runs/job17/raw.npz": "0b8caf06f8eba6a816f8dcb2878f43867c906b74194a7c06fe3da67d732c4f9d",
+    "/mnt/home/faris/logika-antigravity-refit-20261028/predictions/kumo56/fold2/prediction.npz": "b4aa6748b69692f003b640fd4c5601b83acff87018c2e53231038098cbd753dd"
+  },
+  "routing": {
+    "pop_A": [
+      "h29_pop_spec",
+      "raw_fe_cov",
+      "h29_pop_spec"
+    ],
+    "pop_B": [
+      "per29_pop_spec"
+    ],
+    "pop_C1": [
+      "per29_champ_s7731",
+      "raw_kumo56",
+      "mat18_kumo56",
+      "raw_tr_mat_orig",
+      "raw_shadow91",
+      "h29_shadow91"
+    ],
+    "pop_C2": [
+      "mat18_fe_mat",
+      "h29_pop_spec",
+      "sp200_56k",
+      "mat18_fe_cov",
+      "per29_fe_cov"
+    ]
+  },
+  "lambda": 0.7,
+  "head_penalty": 0.003,
+  "head_strength": 0.5,
+  "correction_spline_policy": "Original56k innerOOF sp200; new70k test branches.",
+  "Kumo56_policy": "Original nestedOOF correctionraw paired with original correctionheadfeatures; all70k test raw/headfeatures.",
+  "scientific_selection_allowed": false,
+  "weights_saved": false
+}

@@ -53,3 +53,8 @@ for the actual roots. Retired node2002 was not accessed. Third-party uv caches a
 embedded Python runtimes are retained only as environment references;
 `ENVIRONMENT_CACHE_EXCLUSION.json` documents the correction. Every published
 content mapping is checked by `tools/verify_experiment_history.py`.
+
+A later [coverage audit and correction](../history-completeness-20261028/README.md)
+adds omitted legacy roots, a custom feature-builder snapshot and refit logs.
+The initial selected-root verification remains historical evidence; it did not
+prove that every accessible experiment directory had been discovered.
