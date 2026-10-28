@@ -1,0 +1,57 @@
+{
+  "UTC": "2026-10-28T18:39:48.354800+00:00",
+  "design": "cpu_capacity_redundant99_moderate",
+  "design_spec": {
+    "class_balance": "none",
+    "family": "lightgbm",
+    "hypothesis": "Matched capacity controls across globally selected, actuarial-expanded and redundancy-pruned views: compare7/15/63 leaves under shared strong shrinkage, excluding stop/meta/outer from feature selection.",
+    "parameters": {
+      "learning_rate": 0.025,
+      "max_depth": 5,
+      "min_child_samples": 200,
+      "n_estimators": 1800,
+      "num_leaves": 15,
+      "reg_alpha": 1,
+      "reg_lambda": 50
+    },
+    "registration": "Additional matchedCPUcontrols proposed using measured runtime only; candidate predictive results were not consulted. Append-only declaration before dispatch.",
+    "resource": "cpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "stopping_metric": "ks",
+    "view": "redundant99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_capacity_redundant99_moderate/s2026/fold0/RESULT.json": "462707d1150fc632230880d29547ca5fb9eefa05215c4f24b1cb3426916ba155",
+    "composed/cpu_capacity_redundant99_moderate/s2026/fold1/RESULT.json": "217297144cabe8dde7d8c82aee51a9da6d98ca7a92e9e06f825285ac3b38d144",
+    "composed/cpu_capacity_redundant99_moderate/s2026/fold2/RESULT.json": "bbf1ff6bd8dc901373eac2b5e4cfa720d34154a4164f6e4c33f1879ca8f7deb3",
+    "composed/cpu_capacity_redundant99_moderate/s2026/fold3/RESULT.json": "442eaa0677f65523ff5b43a51554b14477101550e102b6f0b5874440860fb6da",
+    "composed/cpu_capacity_redundant99_moderate/s2026/fold4/RESULT.json": "541d2415058a6c92326f1de5bb6a81d535aa5244af4461a88036ecf177862223",
+    "composed/cpu_capacity_redundant99_moderate/s7731/fold0/RESULT.json": "2bf0c54c419c288ddd1c96943adc3507e2a4a78d74baaf40d327272bf1f59a77",
+    "composed/cpu_capacity_redundant99_moderate/s7731/fold1/RESULT.json": "ec078f5e0f76905325831ab86e93047bc5d81fe313b3c01fda2eef06aa0f91ec",
+    "composed/cpu_capacity_redundant99_moderate/s7731/fold2/RESULT.json": "8cd89f0b46ba569f366915c5d17f8f7ac2d3195109eeb5daa8a3383e20a992c4",
+    "composed/cpu_capacity_redundant99_moderate/s7731/fold3/RESULT.json": "69ebd3701b2ff656970b41d9d5c21671d0eb03ca9d0576f72b05179284619896",
+    "composed/cpu_capacity_redundant99_moderate/s7731/fold4/RESULT.json": "cd9e85e47e514d7f250457da5269c74489f8015066ebcf6b7b1d2e31b1ddeca7"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
