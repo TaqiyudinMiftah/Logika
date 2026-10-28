@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T19:10:08.730401+00:00",
+  "design": "cat_top256_depth8",
+  "design_spec": {
+    "family": "catboost",
+    "view": "global256",
+    "hypothesis": "Deeper symmetric trees test interactions across selected financial and behavior domains.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "gpu",
+    "parameters": {
+      "iterations": 1200,
+      "depth": 8,
+      "l2_leaf_reg": 25,
+      "learning_rate": 0.035
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cat_top256_depth8/s2026/fold0/RESULT.json": "62122223f879e88898093ed9e86f79429155956f692a59feff71142f4b67799c",
+    "composed/cat_top256_depth8/s2026/fold1/RESULT.json": "b6005374671745a9a233ce75878c91831b38140bd094a6b0b81593a008911c70",
+    "composed/cat_top256_depth8/s2026/fold2/RESULT.json": "603eee8e6f2bce7933855ab15e6e6e54286700754ae780daf44355fbe2ad3a78",
+    "composed/cat_top256_depth8/s2026/fold3/RESULT.json": "aa6a56dc3791a5d7e90f8e62f9abd9bd17e6ee60be735134f2b447f37479aa21",
+    "composed/cat_top256_depth8/s2026/fold4/RESULT.json": "1d212fef98867211613a79f87233f3e61fa3a4c57760fd0a5ffcc3c887acefe8",
+    "composed/cat_top256_depth8/s7731/fold0/RESULT.json": "72ce4d7c15a9e3ed89bef139a11f3c8b75b0ecaf8caff0c41773f4b151494a8c",
+    "composed/cat_top256_depth8/s7731/fold1/RESULT.json": "f599031ff1824eaae63a846ab9dfd0734b3e1deae275dad17742d66bbce0561c",
+    "composed/cat_top256_depth8/s7731/fold2/RESULT.json": "f832b952b2348b417ae45421a17d000bc06c30860f4e586756e10eaf33c7e4d4",
+    "composed/cat_top256_depth8/s7731/fold3/RESULT.json": "95736045fb5fac493e49bed86a649b44b0e087ef1f0a6b30dc5ba5b594474908",
+    "composed/cat_top256_depth8/s7731/fold4/RESULT.json": "189acd9694510a498f88b35bb02eba03801d4bb2615fce0fc3256d1d65d36fa7"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
