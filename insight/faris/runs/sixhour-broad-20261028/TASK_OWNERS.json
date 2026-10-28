@@ -23,9 +23,9 @@
     "tabm_global99_bce": 5,
     "tabm_augmented256_bce": 5,
     "tabm_actuarial99_bce": 5,
-    "resnet_global64_smoothks": 4,
-    "resnet_global99_smoothks": 4,
-    "resnet_actuarial99_smoothks": 4,
+    "resnet_global64_smoothks": -1,
+    "resnet_global99_smoothks": -1,
+    "resnet_actuarial99_smoothks": -1,
     "kumo_large_global32_e8": 6,
     "kumo_large_global48_e8": 6,
     "kumo_large_global64_e8": 6,
@@ -58,5 +58,22 @@
     5,
     6
   ],
-  "policy": "Complete design/fold/seed cohorts assigned without predictive scores: retainedTabM andKumo onA100, otherneural/treeCUDA onL4. Actual backends recorded."
+  "policy": "Complete design/fold/seed cohorts assigned without predictive scores: retainedTabM andKumo onA100, otherneural/treeCUDA onL4. Actual backends recorded.",
+  "numerical_admission_blocks": {
+    "resnet_global64_smoothks": {
+      "previous_owner": 4,
+      "observed_replay_failures": 5,
+      "reason": "At least2strict5e-6 batch-replay rejections onsource-defaultTF32; stop newadmission, never interrupthealthyfit. SeparatepredeclaredFP32replicas areadmitted; this is not negativepredictive evidence."
+    },
+    "resnet_global99_smoothks": {
+      "previous_owner": 4,
+      "observed_replay_failures": 4,
+      "reason": "At least2strict5e-6 batch-replay rejections onsource-defaultTF32; stop newadmission, never interrupthealthyfit. SeparatepredeclaredFP32replicas areadmitted; this is not negativepredictive evidence."
+    },
+    "resnet_actuarial99_smoothks": {
+      "previous_owner": 4,
+      "observed_replay_failures": 8,
+      "reason": "At least2strict5e-6 batch-replay rejections onsource-defaultTF32; stop newadmission, never interrupthealthyfit. SeparatepredeclaredFP32replicas areadmitted; this is not negativepredictive evidence."
+    }
+  }
 }

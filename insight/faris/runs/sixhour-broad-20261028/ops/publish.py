@@ -255,6 +255,17 @@ def publish(local, repo, once=False):
             terminal = completion.exists()
             collection = collect_terminal(local, private, sha(completion)) if terminal else None
             exported = []
+            # Operational repairs are versioned too; scientific sources remain
+            # preregistered and sealed. Scan exactly what will be published.
+            for path in sorted((local / 'ops').glob('*.py')):
+                payload = safe_payload(path, public_content)
+                if payload is None:
+                    continue
+                target = destination / 'ops' / path.name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                if not target.exists() or target.read_bytes() != payload:
+                    target.write_bytes(payload)
+                exported.append(str(target.relative_to(repo)))
             for path in sorted(mirror.rglob('*')):
                 if not path.is_file():
                     continue

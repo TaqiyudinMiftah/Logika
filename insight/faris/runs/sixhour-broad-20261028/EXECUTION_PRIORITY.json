@@ -1,6 +1,14 @@
 {
   "UTC": "2026-10-28T17:35:36.489942+00:00",
   "order": [
+    "resnet_global64_bce_fp32",
+    "resnet_global128_bce_fp32",
+    "resnet_global256_bce_fp32",
+    "resnet_global128_smoothks_fp32",
+    "resnet_global256_smoothks_fp32",
+    "resnet_global64_smoothks_fp32",
+    "resnet_global99_smoothks_fp32",
+    "resnet_actuarial99_smoothks_fp32",
     "kumo_large_global99_e2",
     "kumo_large_actuarial99_e2",
     "kumo_large_global64_e2",
@@ -100,18 +108,14 @@
     "cpu_actuarial_actuarial99_logit_linear",
     "cpu_actuarial_actuarial99_logit_spline",
     "cpu_actuarial_actuarial99_cloglog_linear",
-    "cpu_actuarial_actuarial99_cloglog_spline",
-    "resnet_global64_bce_fp32",
-    "resnet_global128_bce_fp32",
-    "resnet_global256_bce_fp32",
-    "resnet_global128_smoothks_fp32",
-    "resnet_global256_smoothks_fp32",
-    "resnet_global64_smoothks_fp32",
-    "resnet_global99_smoothks_fp32",
-    "resnet_actuarial99_smoothks_fp32"
+    "cpu_actuarial_actuarial99_cloglog_spline"
   ],
   "reason": "Execution ordering fixed before any candidate scores: complete cheaper2-estimator controls and matched actuarial/control neural pairs early, then full8-estimator widths, before expensive16-estimator variants. No scientific configuration changes or stopped healthy workers.",
   "candidate_scores_seen": false,
   "append_before_scores_UTC": "2026-10-28T17:45:00.429549+00:00",
-  "added_matched_CPU_designs": 36
+  "added_matched_CPU_designs": 36,
+  "runtime_stability_priority_update": {
+    "UTC": "2026-10-28T18:16:26.034677+00:00",
+    "criterion": "After TF32 batch-replay failures, run separate preregisteredFP32 recipes sooner. No fit stopped, no numerical check relaxed, no predictive-score scheduling."
+  }
 }

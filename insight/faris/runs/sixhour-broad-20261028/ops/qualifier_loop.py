@@ -14,7 +14,7 @@ while time.time()<C['deadline_epoch']-600:
   if not completed or not(R/'GPU_BACKENDS.json').exists():continue
   p=completed[0];start=json.loads((p.parent/'START.json').read_text());bindings=load('GPU_BACKENDS.json')
   if start['host']not in bindings:continue
-  identity=sha(p)
+  identity=(sha(p),sha(g)if g.exists()else None)
   if tried.get(family)==identity:continue
   with(R/'logs'/('qualified_'+family+'.log')).open('ab')as log:
    code=subprocess.run([str(R/'env311/bin/python'),'ops/qualify_gpu.py','--family',family],stdout=log,stderr=subprocess.STDOUT,timeout=180).returncode

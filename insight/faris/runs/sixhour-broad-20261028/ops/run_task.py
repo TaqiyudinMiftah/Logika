@@ -48,3 +48,5 @@ with (R / f'logs/{a.task}_a{a.attempt}.log').open('ab') as log:
         status = {'returncode': 124, 'execution_timeout': True,
                   'scientific_conclusion': 'none; bounded execution limit'}
 dump(dict(status, UTC=utc(), task=a.task, attempt=a.attempt), root / 'STATUS.json')
+
+raise SystemExit(status['returncode'])
