@@ -1,0 +1,54 @@
+{
+  "UTC": "2026-10-28T18:18:40.212984+00:00",
+  "design": "xgb_top99_binary",
+  "design_spec": {
+    "family": "xgboost",
+    "view": "global99",
+    "hypothesis": "Histogram boosting with native categorical splits tests another backbone on globally selected99 predictors.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+      "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "gpu",
+    "max_iterations": 1400,
+    "parameters": {
+      "max_depth": 4,
+      "min_child_weight": 25,
+      "reg_lambda": 25
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/xgb_top99_binary/s2026/fold0/RESULT.json": "178d649145ebc48088c289f90ebe574c4a8a8495e516f9493481f1bd64466805",
+    "composed/xgb_top99_binary/s2026/fold1/RESULT.json": "d15bdd43bbff01a056f4792922a599fd90e5e0d2b95160e30a765676ee35669a",
+    "composed/xgb_top99_binary/s2026/fold2/RESULT.json": "11702d38628ef126ed53c9c67036f3b1249f82664aadcaf7d5f7b9994cdd3487",
+    "composed/xgb_top99_binary/s2026/fold3/RESULT.json": "cf49a3b99ae1f14ee28da30b4e5295fcabc442852abff6b89737a4659b6c7e11",
+    "composed/xgb_top99_binary/s2026/fold4/RESULT.json": "c0dbbc032949790482d3ccfbe8e0cc3829e50546ae868f745bea0e03cd13322e",
+    "composed/xgb_top99_binary/s7731/fold0/RESULT.json": "0665297fa5827edaf2b1f885f02f8c3b5812020a3ed16be283177bebc0cb9031",
+    "composed/xgb_top99_binary/s7731/fold1/RESULT.json": "d7344df76a23861d0161e8c05df13ef0be121abd71cb21d77a2df33cf91fa537",
+    "composed/xgb_top99_binary/s7731/fold2/RESULT.json": "90e34d60b35947ff6e873a670939b43c01a6dc3bf327aca5735d0e68b0f3b41a",
+    "composed/xgb_top99_binary/s7731/fold3/RESULT.json": "af498611c44a61c0c981c35b989c8faa5846db758b5643cf6a7d271823a3eb81",
+    "composed/xgb_top99_binary/s7731/fold4/RESULT.json": "bd444bee37b4e9673d67ded1c4c8f4379c7d207135cec25c611c6e2c363a68d0"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
