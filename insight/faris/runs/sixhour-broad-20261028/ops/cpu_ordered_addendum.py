@@ -43,12 +43,16 @@ def retire_flag(name):
 
 
 def pilot(task):
-    folder = R / 'runs' / task / 'attempt1'
+    attempt = int(load('APPROVED_RETRIES.json').get(task, 1))
+    assert attempt in {1, 2}
+    folder = R / 'runs' / task / ('attempt' + str(attempt))
     if not (folder / 'RESULT.json').exists():
         assert not folder.exists(), 'Existing failed/interrupted attempt requires explicit reconciliation'
         with (R / 'logs' / ('ordered_pilot_' + task + '.log')).open('ab') as log:
+            # These are full ordinary fits after the existing data/family gate;
+            # "pilot" here is a runtime role, not CONFIG's sealed pre-gate exemption.
             p = subprocess.run([PYTHON, str(R / 'ops/run_task.py'), '--task', task,
-                                '--attempt', '1', '--pilot'], stdout=log,
+                                '--attempt', str(attempt)], stdout=log,
                                stderr=subprocess.STDOUT, timeout=min(
                                    960, max(1, C['model_deadline_epoch'] - time.time())))
             assert p.returncode == 0, 'Full-size CPU pilot failed; do not admit broad jobs'
