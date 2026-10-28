@@ -46,9 +46,9 @@ guarantee a public improvement. Source snapshot completeness remains inherited.
 
 The original lab backends are2001 and2003, under /mnt/home/faris. After all180
 CPU fits completed and unrelated users occupied every lab GPU, the separately
-preregistered EXECUTION_SPILLOVER_PLAN.json admitted user-authorized Colab A100
+preregistered EXECUTION_SPILLOVER_PLAN.json permits user-authorized Colab A100
 account2 as an execution-only fallback, gated by label-free prediction replay.
-All80 Kumo fits use that consistent replacement cohort; old lab attempts are
+On admission, all80 Kumo fits use one consistent replacement cohort; old lab attempts are
 retired with hashes. Original source, config, contract and clock remain sealed.
 GPU admission on shared lab nodes still requires idle capacity; CPU Kumo is forbidden. Unrelated workloads are never stopped. Source,
 hyperparameters, seeds, preprocessing recipes, compact predictions, errors and

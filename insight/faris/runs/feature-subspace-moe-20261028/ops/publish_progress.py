@@ -117,9 +117,11 @@ def publish(local,repo,once=False):
             terminal=state['stage']in{'complete','failed'}
             if state['stage']=='complete' and not(mirror/'diagnostics/constant_gate/RESULT.json').exists():
                 terminal=False
+            if state['stage']=='complete' and not(mirror/'ARTIFACT_CONSISTENCY_AUDIT.json').exists():
+                terminal=False
             if terminal:
                 # Terminal compact prediction evidence is collected privately.
-                command="from pathlib import Path;import json;p=Path('/mnt/home/faris/logika-feature-subspace-moe-20261028');print(json.dumps([n for n in ['evaluation','composed','runs','logs','failures','diagnostics']if(p/n).is_dir()]))"
+                command="from pathlib import Path;import json;p=Path('/mnt/home/faris/logika-feature-subspace-moe-20261028');print(json.dumps([n for n in ['evaluation','composed','runs','logs','failures','diagnostics','retired_lab_runs','retired_lab_dispatch']if(p/n).is_dir()]))"
                 import shlex
                 present=json.loads(run(['ssh','-o','BatchMode=yes','faris@100.68.29.126','python3 -c '+shlex.quote(command)],timeout=30).stdout)
                 for name in present:
