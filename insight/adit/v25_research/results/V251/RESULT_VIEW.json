@@ -1,0 +1,918 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V251",
+  "spec": {
+    "id": "V251",
+    "label": "Fixed V25 with orthogonalized item-history support",
+    "method": "item_information_residual",
+    "worker": "data_residual_worker.py",
+    "source_script": "v7/scripts/data_residual_worker.py",
+    "research_ready": true,
+    "input_features": [
+      "ip_price_comparable_categories",
+      "ip_multicat_price_orders180",
+      "ip_valid_price_items180",
+      "ip_price_change_observed",
+      "ip_order_coherence_observed",
+      "ip_affordability_cross_observed",
+      "ip_debt_cross_observed",
+      "ip_liquidity_cross_observed"
+    ],
+    "project": true,
+    "penalty": 0.01,
+    "strength": 0.25,
+    "replaces_base_head": false,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "execution_host": "local_windows",
+    "families": [
+      "support",
+      "price_change",
+      "order_coherence",
+      "cross_capacity"
+    ],
+    "depends_on": [],
+    "no_outer_validation_tuning": true,
+    "formula": "Keep the original V25 head beta0 fixed. On identical6k correction rows fit signedlog standardization for U; missing values are0 in centered basis with explicit shared support flags. Fit A=lstsq(Xbase,U,rcond=1e-6); R=U-Xbase*A. Do not rescale residuals. eta0=logit(frozenKumo)+.5*Xbase*beta0. Fit gamma minimizing meanBCE(eta0+R*gamma)+.01/2||gamma||^2. Inference eta=eta0+.25*R*gamma; final=.75sigmoid(eta)+.25original_spline77; mean5fold test. Projection is training-only; query targets are unused.",
+    "rationale": "V243 shared coverage-only augmentation lowered KS to0.52934705 and AUC to0.84692008, although counts have strong marginal risk associations. V25 already includes observation depth and posterior uncertainty. Preserve its learned correction; test residual information without refitting its90 coefficients. V251 is the matched support control, V252 adds value information, V253 diagnoses the projection choice. Coefficients use the same6k as the original head, so training optimism and repeated development selection remain; no improvement is assumed.",
+    "priority": "P1",
+    "preflight_receipt": "v7/data_residual/reports/PREFLIGHT.json"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count",
+    "ip_price_comparable_categories",
+    "ip_multicat_price_orders180",
+    "ip_valid_price_items180",
+    "ip_price_change_observed",
+    "ip_order_coherence_observed",
+    "ip_affordability_cross_observed",
+    "ip_debt_cross_observed",
+    "ip_liquidity_cross_observed"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "ip_price_comparable_categories",
+    "ip_multicat_price_orders180",
+    "ip_valid_price_items180",
+    "ip_price_change_observed",
+    "ip_order_coherence_observed",
+    "ip_affordability_cross_observed",
+    "ip_debt_cross_observed",
+    "ip_liquidity_cross_observed"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "OOF": {
+    "KS": 0.5301166425999257,
+    "signed_KS": 0.5301166425999257,
+    "AUC": 0.8469813747738897,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": -0.00016801744411532038,
+  "delta_AUC": -4.7904133226195356e-05,
+  "mean_fold_KS": 0.5331007072595972,
+  "std_fold_KS": 0.005214135306158468,
+  "delta_mean_fold_KS": -0.00022911729695405115,
+  "fold_wins": 2,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5279383887069846,
+        "signed_KS": 0.5279383887069846,
+        "AUC": 0.8439422198042722,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": -0.0005415170538307645,
+      "delta_AUC": -0.00012756411368430864,
+      "parameters": 98,
+      "new_trainable_parameters": 8,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5487277481645378,
+      "heldout_corrected_Kumo_KS": 0.5255475833056923,
+      "train_validation_head_KS_gap": 0.023180164858845553,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "optimization": {
+        "objective": 0.29119915054021944,
+        "gradient_max_abs": 2.712698712143899e-09,
+        "iterations": 3,
+        "solver": "Analytic Newton with Armijo backtracking",
+        "base_coefficients_preserved_exactly": true,
+        "training_only_projection": true,
+        "projection_rcond": 1e-06,
+        "residual_sd": [
+          0.6105683010985348,
+          0.6852972726989465,
+          0.4546712883865991,
+          0.7158922364937921,
+          0.7854304637103953,
+          0.7360809006321459,
+          0.6832752500194567,
+          0.6905405904757792
+        ],
+        "input_names": [
+          "ip_price_comparable_categories",
+          "ip_multicat_price_orders180",
+          "ip_valid_price_items180",
+          "ip_price_change_observed",
+          "ip_order_coherence_observed",
+          "ip_affordability_cross_observed",
+          "ip_debt_cross_observed",
+          "ip_liquidity_cross_observed"
+        ],
+        "residual_base_cross_moment_max": 9.36140054363932e-16,
+        "residual_rescaled_after_projection": false,
+        "undefined_values_neutral_before_projection": true
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5379087807022886,
+        "signed_KS": 0.5379087807022886,
+        "AUC": 0.8495476060881039,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": -9.039052227333144e-05,
+      "delta_AUC": -5.7347329907808664e-05,
+      "parameters": 98,
+      "new_trainable_parameters": 8,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5379143470724306,
+      "heldout_corrected_Kumo_KS": 0.5367146171213563,
+      "train_validation_head_KS_gap": 0.0011997299510743131,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "optimization": {
+        "objective": 0.2925210105562423,
+        "gradient_max_abs": 7.867754749568343e-11,
+        "iterations": 3,
+        "solver": "Analytic Newton with Armijo backtracking",
+        "base_coefficients_preserved_exactly": true,
+        "training_only_projection": true,
+        "projection_rcond": 1e-06,
+        "residual_sd": [
+          0.6194878217032456,
+          0.6921155543427022,
+          0.46591219081240975,
+          0.7250209276387405,
+          0.7989207531093795,
+          0.7394834205597043,
+          0.7009431071642239,
+          0.7081986269813352
+        ],
+        "input_names": [
+          "ip_price_comparable_categories",
+          "ip_multicat_price_orders180",
+          "ip_valid_price_items180",
+          "ip_price_change_observed",
+          "ip_order_coherence_observed",
+          "ip_affordability_cross_observed",
+          "ip_debt_cross_observed",
+          "ip_liquidity_cross_observed"
+        ],
+        "residual_base_cross_moment_max": 1.1117773368596317e-15,
+        "residual_rescaled_after_projection": false,
+        "undefined_values_neutral_before_projection": true
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5394200284962752,
+        "signed_KS": 0.5394200284962752,
+        "AUC": 0.8498173863626136,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": -0.0008782097928804466,
+      "delta_AUC": -3.952139718443881e-05,
+      "parameters": 98,
+      "new_trainable_parameters": 8,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5622116653158296,
+      "heldout_corrected_Kumo_KS": 0.5397404170285657,
+      "train_validation_head_KS_gap": 0.02247124828726388,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "optimization": {
+        "objective": 0.28506855064051323,
+        "gradient_max_abs": 2.5461802384378618e-09,
+        "iterations": 3,
+        "solver": "Analytic Newton with Armijo backtracking",
+        "base_coefficients_preserved_exactly": true,
+        "training_only_projection": true,
+        "projection_rcond": 1e-06,
+        "residual_sd": [
+          0.6157022139281969,
+          0.6828828357374122,
+          0.45352289387276995,
+          0.7255351940010605,
+          0.7815468781076285,
+          0.7432691351730586,
+          0.695792722717373,
+          0.7039313034037171
+        ],
+        "input_names": [
+          "ip_price_comparable_categories",
+          "ip_multicat_price_orders180",
+          "ip_valid_price_items180",
+          "ip_price_change_observed",
+          "ip_order_coherence_observed",
+          "ip_affordability_cross_observed",
+          "ip_debt_cross_observed",
+          "ip_liquidity_cross_observed"
+        ],
+        "residual_base_cross_moment_max": 2.091660178393795e-15,
+        "residual_rescaled_after_projection": false,
+        "undefined_values_neutral_before_projection": true
+      }
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5309108978393939,
+        "signed_KS": 0.5309108978393939,
+        "AUC": 0.8438157691853717,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": 0.0002588395262732579,
+      "delta_AUC": -4.7587186244091306e-05,
+      "parameters": 98,
+      "new_trainable_parameters": 8,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5289159976572345,
+      "heldout_corrected_Kumo_KS": 0.5291913272592093,
+      "train_validation_head_KS_gap": -0.00027532960197473866,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "optimization": {
+        "objective": 0.2908560424127597,
+        "gradient_max_abs": 2.3828314430103525e-11,
+        "iterations": 3,
+        "solver": "Analytic Newton with Armijo backtracking",
+        "base_coefficients_preserved_exactly": true,
+        "training_only_projection": true,
+        "projection_rcond": 1e-06,
+        "residual_sd": [
+          0.6103141288606727,
+          0.6932537420570811,
+          0.46788898151743946,
+          0.7163751941128018,
+          0.7898540112592333,
+          0.7341958524946757,
+          0.6915828049924091,
+          0.6991720307115815
+        ],
+        "input_names": [
+          "ip_price_comparable_categories",
+          "ip_multicat_price_orders180",
+          "ip_valid_price_items180",
+          "ip_price_change_observed",
+          "ip_order_coherence_observed",
+          "ip_affordability_cross_observed",
+          "ip_debt_cross_observed",
+          "ip_liquidity_cross_observed"
+        ],
+        "residual_base_cross_moment_max": 5.000444502911705e-16,
+        "residual_rescaled_after_projection": false,
+        "undefined_values_neutral_before_projection": true
+      }
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.529325440553044,
+        "signed_KS": 0.529325440553044,
+        "AUC": 0.8479227823806248,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": 0.00010569135794102902,
+      "delta_AUC": 2.607517054453723e-05,
+      "parameters": 98,
+      "new_trainable_parameters": 8,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5505936780827185,
+      "heldout_corrected_Kumo_KS": 0.5307157686464848,
+      "train_validation_head_KS_gap": 0.019877909436233687,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "optimization": {
+        "objective": 0.2889652059339634,
+        "gradient_max_abs": 3.033133352771042e-11,
+        "iterations": 3,
+        "solver": "Analytic Newton with Armijo backtracking",
+        "base_coefficients_preserved_exactly": true,
+        "training_only_projection": true,
+        "projection_rcond": 1e-06,
+        "residual_sd": [
+          0.6141004424690583,
+          0.6884064753436638,
+          0.46127395383343595,
+          0.7168898631363878,
+          0.793942550549068,
+          0.7329236022503425,
+          0.693896371149658,
+          0.7028498141973659
+        ],
+        "input_names": [
+          "ip_price_comparable_categories",
+          "ip_multicat_price_orders180",
+          "ip_valid_price_items180",
+          "ip_price_change_observed",
+          "ip_order_coherence_observed",
+          "ip_affordability_cross_observed",
+          "ip_debt_cross_observed",
+          "ip_liquidity_cross_observed"
+        ],
+        "residual_base_cross_moment_max": 9.402848869891992e-16,
+        "residual_rescaled_after_projection": false,
+        "undefined_values_neutral_before_projection": true
+      }
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5223208624112073,
+      0.539220732093012
+    ],
+    "delta_KS": [
+      -0.001104132977172001,
+      0.0007584250185840384
+    ],
+    "candidate_AUC": [
+      0.8432981475562099,
+      0.850727547370576
+    ],
+    "delta_AUC": [
+      -9.409419396846919e-05,
+      -3.10894347023972e-06
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "modeling_formula": "Keep the original V25 head beta0 fixed. On identical6k correction rows fit signedlog standardization for U; missing values are0 in centered basis with explicit shared support flags. Fit A=lstsq(Xbase,U,rcond=1e-6); R=U-Xbase*A. Do not rescale residuals. eta0=logit(frozenKumo)+.5*Xbase*beta0. Fit gamma minimizing meanBCE(eta0+R*gamma)+.01/2||gamma||^2. Inference eta=eta0+.25*R*gamma; final=.75sigmoid(eta)+.25original_spline77; mean5fold test. Projection is training-only; query targets are unused.; mean5fold test probabilities",
+  "modeling_objective": "Keep the original V25 head beta0 fixed. On identical6k correction rows fit signedlog standardization for U; missing values are0 in centered basis with explicit shared support flags. Fit A=lstsq(Xbase,U,rcond=1e-6); R=U-Xbase*A. Do not rescale residuals. eta0=logit(frozenKumo)+.5*Xbase*beta0. Fit gamma minimizing meanBCE(eta0+R*gamma)+.01/2||gamma||^2. Inference eta=eta0+.25*R*gamma; final=.75sigmoid(eta)+.25original_spline77; mean5fold test. Projection is training-only; query targets are unused.",
+  "controller_source": "v7/scripts/data_residual_worker.py",
+  "source_sha256": "4282683b1366a145bded6f16792be5a91fbdcf5a208fdb21872bfff3847c953c",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": true,
+  "submission": "v7/submissions/submission_V251_V25_conservative.csv",
+  "submission_sha256": "0a9c4a5d9c5c990a097dbc11223946a272022311109c82ae9e76758ace9ec778",
+  "public_score": null,
+  "elapsed_seconds": 14.815035104751587,
+  "peak_RSS_MiB": 414.0234375,
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY",
+    "diagnostic": "V243 shared coverage-only augmentation lowered KS to0.52934705 and AUC to0.84692008, although counts have strong marginal risk associations. V25 already includes observation depth and posterior uncertainty. Preserve its learned correction; test residual information without refitting its90 coefficients. V251 is the matched support control, V252 adds value information, V253 diagnoses the projection choice. Coefficients use the same6k as the original head, so training optimism and repeated development selection remain; no improvement is assumed.; all new fitting uses correction rows only; repeated development selection remains.; V25 teacher was fitted on the same correction rows. Projection removes linear overlap in the encoded training basis only; it does not prove statistical independence or create an independent validation set.",
+    "inner_crossfit_used": false
+  },
+  "error_analysis": {
+    "json": "v7\\runs\\V251\\ERROR_ANALYSIS.json",
+    "markdown": "v7\\runs\\V251\\ERROR_ANALYSIS.md",
+    "cases": "v7\\runs\\V251\\ERROR_CASES.csv"
+  },
+  "execution_host": "local_windows",
+  "source_data_host": "node480",
+  "packages": {
+    "numpy": "2.2.2",
+    "pandas": "2.2.3",
+    "scipy": "1.15.1",
+    "scikit-learn": "1.7.2",
+    "pyarrow": "22.0.0",
+    "joblib": "1.4.2"
+  },
+  "engineered_feature_cache": {
+    "file": "v7/data_fe/data/item_price_resilience.parquet",
+    "sha256": "a565c1c9e435b76e9837c8cf412f1efe3cf412095c32f6213ea79aa66c8cc6af"
+  },
+  "additional_source_sha256": "3aca4c4f2f5e64f36a77f682fef3907a990602b49a487c0d889440a5c711009e",
+  "comparison_to_V185": {
+    "control": "V185",
+    "control_metrics": {
+      "KS": 0.5311516622583823,
+      "signed_KS": 0.5311516622583823,
+      "AUC": 0.8471087754249731,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5301166425999257,
+      "signed_KS": 0.5301166425999257,
+      "AUC": 0.8469813747738897,
+      "rows": 70000
+    },
+    "delta_KS": -0.0010350196584565374,
+    "delta_AUC": -0.00012740065108340914,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5234363951810418,
+        0.5406116770704794
+      ],
+      "candidate_KS": [
+        0.5223208624112073,
+        0.539220732093012
+      ],
+      "delta_KS": [
+        -0.003407915208800849,
+        0.0009684283923739308
+      ],
+      "candidate_AUC": [
+        0.8432981475562099,
+        0.850727547370576
+      ],
+      "delta_AUC": [
+        -0.0003917091848886195,
+        9.782071821978202e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "generalization_review": {
+    "status": "REVIEWED",
+    "candidate": "V251",
+    "decision": "EXPERIMENT_ONLY_KEEP_V25_PUBLIC_INCUMBENT",
+    "pooled_KS": 0.5301166425999257,
+    "AUC": 0.8469813747738897,
+    "delta_AUC_vs_V25": -4.7904133226195356e-05,
+    "delta_AUC_vs_V185": -0.00012740065108340914,
+    "head_gap": 0.013290744586288539,
+    "V25_head_gap": 0.011107666682208906,
+    "flags": [
+      "REUSED_DEVELOPMENT_FOLDS",
+      "MANY_PRIOR_EXPERIMENTS",
+      "NO_INDEPENDENT_GENERALIZATION_TEST",
+      "AUC_DECREASE_VS_V25",
+      "AUC_DECREASE_VS_V185",
+      "DELTA_KS_V25_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "DELTA_KS_V185_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "FEWER_THAN_FOUR_FOLD_KS_WINS_VS_V185"
+    ],
+    "public_incumbent": {
+      "id": "V25",
+      "KS": 0.56822
+    },
+    "development_incumbent_public_outcome": {
+      "id": "V185",
+      "KS": 0.56699
+    },
+    "causation_note": "Public decline does not uniquely establish overfitting; sample variability, population drift and source instability remain possible.",
+    "selection_caveat": "Intervals condition on fitted predictions and exclude search/retraining uncertainty; operational rules are heuristics, not significance tests.",
+    "top_risk_capture_vs_V185": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3842,
+        "candidate_bad_captured": 3854,
+        "net_bad_captured": 12,
+        "new_members": 244,
+        "exited_members": 244,
+        "entrant_bad_rate": 0.38934426229508196,
+        "exit_bad_rate": 0.3401639344262295
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5856,
+        "net_bad_captured": 1,
+        "new_members": 370,
+        "exited_members": 370,
+        "entrant_bad_rate": 0.22432432432432434,
+        "exit_bad_rate": 0.22162162162162163
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7417,
+        "candidate_bad_captured": 7426,
+        "net_bad_captured": 9,
+        "new_members": 444,
+        "exited_members": 444,
+        "entrant_bad_rate": 0.13063063063063063,
+        "exit_bad_rate": 0.11036036036036036
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8018,
+        "candidate_bad_captured": 8022,
+        "net_bad_captured": 4,
+        "new_members": 474,
+        "exited_members": 474,
+        "entrant_bad_rate": 0.08438818565400844,
+        "exit_bad_rate": 0.0759493670886076
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8649,
+        "net_bad_captured": 0,
+        "new_members": 455,
+        "exited_members": 455,
+        "entrant_bad_rate": 0.07032967032967033,
+        "exit_bad_rate": 0.07032967032967033
+      }
+    ]
+  },
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5301166425999257,
+      "signed_KS": 0.5301166425999257,
+      "AUC": 0.8469813747738897,
+      "rows": 70000
+    },
+    "delta_KS": -0.0013428719626099594,
+    "delta_AUC": -0.00012616957571776055,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5223208624112073,
+        0.539220732093012
+      ],
+      "delta_KS": [
+        -0.003623795880707395,
+        0.000749870001136515
+      ],
+      "candidate_AUC": [
+        0.8432981475562099,
+        0.850727547370576
+      ],
+      "delta_AUC": [
+        -0.0003926977836163248,
+        9.868647023180965e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "continuous_insight": {
+    "experiment": "V251",
+    "method": "item_information_residual",
+    "hypothesis": "V243 shared coverage-only augmentation lowered KS to0.52934705 and AUC to0.84692008, although counts have strong marginal risk associations. V25 already includes observation depth and posterior uncertainty. Preserve its learned correction; test residual information without refitting its90 coefficients. V251 is the matched support control, V252 adds value information, V253 diagnoses the projection choice. Coefficients use the same6k as the original head, so training optimism and repeated development selection remain; no improvement is assumed.",
+    "formula": "Keep the original V25 head beta0 fixed. On identical6k correction rows fit signedlog standardization for U; missing values are0 in centered basis with explicit shared support flags. Fit A=lstsq(Xbase,U,rcond=1e-6); R=U-Xbase*A. Do not rescale residuals. eta0=logit(frozenKumo)+.5*Xbase*beta0. Fit gamma minimizing meanBCE(eta0+R*gamma)+.01/2||gamma||^2. Inference eta=eta0+.25*R*gamma; final=.75sigmoid(eta)+.25original_spline77; mean5fold test. Projection is training-only; query targets are unused.",
+    "findings": [
+      "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+      "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+    ],
+    "comparison_to_V193": {
+      "control": "V193",
+      "control_metrics": {
+        "KS": 0.5314595145625357,
+        "signed_KS": 0.5314595145625357,
+        "AUC": 0.8471075443496074,
+        "rows": 70000
+      },
+      "candidate_metrics": {
+        "KS": 0.5301166425999257,
+        "signed_KS": 0.5301166425999257,
+        "AUC": 0.8469813747738897,
+        "rows": 70000
+      },
+      "delta_KS": -0.0013428719626099594,
+      "delta_AUC": -0.00012616957571776055,
+      "fold_wins": 2,
+      "confidence_interval": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5237657171439752,
+          0.5406826945132854
+        ],
+        "candidate_KS": [
+          0.5223208624112073,
+          0.539220732093012
+        ],
+        "delta_KS": [
+          -0.003623795880707395,
+          0.000749870001136515
+        ],
+        "candidate_AUC": [
+          0.8432981475562099,
+          0.850727547370576
+        ],
+        "delta_AUC": [
+          -0.0003926977836163248,
+          9.868647023180965e-05
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      }
+    },
+    "head_gap": 0.013290744586288539,
+    "top_risk_capture": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3841,
+        "candidate_bad_captured": 3854,
+        "net_bad_captured": 13,
+        "new_members": 243,
+        "exited_members": 243,
+        "entrant_bad_rate": 0.39094650205761317,
+        "exit_bad_rate": 0.3374485596707819
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5856,
+        "net_bad_captured": 1,
+        "new_members": 374,
+        "exited_members": 374,
+        "entrant_bad_rate": 0.22459893048128343,
+        "exit_bad_rate": 0.22192513368983957
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7422,
+        "candidate_bad_captured": 7426,
+        "net_bad_captured": 4,
+        "new_members": 441,
+        "exited_members": 441,
+        "entrant_bad_rate": 0.12471655328798185,
+        "exit_bad_rate": 0.11564625850340136
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8015,
+        "candidate_bad_captured": 8022,
+        "net_bad_captured": 7,
+        "new_members": 477,
+        "exited_members": 477,
+        "entrant_bad_rate": 0.09014675052410902,
+        "exit_bad_rate": 0.07547169811320754
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8649,
+        "net_bad_captured": 0,
+        "new_members": 452,
+        "exited_members": 452,
+        "entrant_bad_rate": 0.06858407079646017,
+        "exit_bad_rate": 0.06858407079646017
+      }
+    ],
+    "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+    "public_incumbent": "V25",
+    "independent_generalization_established": false
+  },
+  "raw_item_feature_build": {
+    "status": "COMPLETE",
+    "rows": 100000,
+    "features": [
+      "ip_price_comparable_categories",
+      "ip_multicat_price_orders180",
+      "ip_valid_price_items180",
+      "ip_price_change_observed",
+      "ip_order_coherence_observed",
+      "ip_affordability_cross_observed",
+      "ip_debt_cross_observed",
+      "ip_liquidity_cross_observed",
+      "ip_category_price_change_shrunk",
+      "ip_category_price_change_breadth",
+      "ip_category_price_change_dispersion",
+      "ip_within_order_price_covariance_shrunk",
+      "ip_within_order_price_dispersion",
+      "ip_price_upgrade_x_installment_burden",
+      "ip_order_covariance_x_total_burden",
+      "ip_price_dispersion_x_liquidity_shortfall"
+    ],
+    "groups": {
+      "support": [
+        "ip_price_comparable_categories",
+        "ip_multicat_price_orders180",
+        "ip_valid_price_items180",
+        "ip_price_change_observed",
+        "ip_order_coherence_observed",
+        "ip_affordability_cross_observed",
+        "ip_debt_cross_observed",
+        "ip_liquidity_cross_observed"
+      ],
+      "price_change": [
+        "ip_category_price_change_shrunk",
+        "ip_category_price_change_breadth",
+        "ip_category_price_change_dispersion"
+      ],
+      "order_coherence": [
+        "ip_within_order_price_covariance_shrunk",
+        "ip_within_order_price_dispersion"
+      ],
+      "cross_capacity": [
+        "ip_price_upgrade_x_installment_burden",
+        "ip_order_covariance_x_total_burden",
+        "ip_price_dispersion_x_liquidity_shortfall"
+      ]
+    },
+    "raw_ecommerce_sha256": "495b3859f2146f87e7f8a383b308770af3d48342e3e1acdb45d7f1bed2bab742",
+    "feature_sha256": "a565c1c9e435b76e9837c8cf412f1efe3cf412095c32f6213ea79aa66c8cc6af",
+    "checks": {
+      "rows": 4359817,
+      "future_events": 0,
+      "nonpositive_price_rows": 0,
+      "cancelled_items": 262868,
+      "completed_orders180": 1184357
+    },
+    "customers_with_items": 100000,
+    "customers_without_items": 0,
+    "customer_block_continuity_verified": true,
+    "target_used": false,
+    "population_reference_used": false,
+    "source_sha256": "26a8c509d399ab4a1fcae218062e064b07c86a76a2bff818bf6559064a901dc7",
+    "finite_feature_counts": {
+      "ip_price_comparable_categories": 100000,
+      "ip_multicat_price_orders180": 100000,
+      "ip_valid_price_items180": 100000,
+      "ip_price_change_observed": 100000,
+      "ip_order_coherence_observed": 100000,
+      "ip_affordability_cross_observed": 100000,
+      "ip_debt_cross_observed": 100000,
+      "ip_liquidity_cross_observed": 100000,
+      "ip_category_price_change_shrunk": 41221,
+      "ip_category_price_change_breadth": 41221,
+      "ip_category_price_change_dispersion": 41221,
+      "ip_within_order_price_covariance_shrunk": 62350,
+      "ip_within_order_price_dispersion": 62350,
+      "ip_price_upgrade_x_installment_burden": 28840,
+      "ip_order_covariance_x_total_burden": 41479,
+      "ip_price_dispersion_x_liquidity_shortfall": 43673
+    },
+    "elapsed_seconds": 46.48902487754822
+  }
+}

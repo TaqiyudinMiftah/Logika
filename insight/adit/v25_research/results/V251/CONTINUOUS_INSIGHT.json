@@ -1,0 +1,109 @@
+{
+  "experiment": "V251",
+  "method": "item_information_residual",
+  "hypothesis": "V243 shared coverage-only augmentation lowered KS to0.52934705 and AUC to0.84692008, although counts have strong marginal risk associations. V25 already includes observation depth and posterior uncertainty. Preserve its learned correction; test residual information without refitting its90 coefficients. V251 is the matched support control, V252 adds value information, V253 diagnoses the projection choice. Coefficients use the same6k as the original head, so training optimism and repeated development selection remain; no improvement is assumed.",
+  "formula": "Keep the original V25 head beta0 fixed. On identical6k correction rows fit signedlog standardization for U; missing values are0 in centered basis with explicit shared support flags. Fit A=lstsq(Xbase,U,rcond=1e-6); R=U-Xbase*A. Do not rescale residuals. eta0=logit(frozenKumo)+.5*Xbase*beta0. Fit gamma minimizing meanBCE(eta0+R*gamma)+.01/2||gamma||^2. Inference eta=eta0+.25*R*gamma; final=.75sigmoid(eta)+.25original_spline77; mean5fold test. Projection is training-only; query targets are unused.",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5301166425999257,
+      "signed_KS": 0.5301166425999257,
+      "AUC": 0.8469813747738897,
+      "rows": 70000
+    },
+    "delta_KS": -0.0013428719626099594,
+    "delta_AUC": -0.00012616957571776055,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5223208624112073,
+        0.539220732093012
+      ],
+      "delta_KS": [
+        -0.003623795880707395,
+        0.000749870001136515
+      ],
+      "candidate_AUC": [
+        0.8432981475562099,
+        0.850727547370576
+      ],
+      "delta_AUC": [
+        -0.0003926977836163248,
+        9.868647023180965e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.013290744586288539,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3854,
+      "net_bad_captured": 13,
+      "new_members": 243,
+      "exited_members": 243,
+      "entrant_bad_rate": 0.39094650205761317,
+      "exit_bad_rate": 0.3374485596707819
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5856,
+      "net_bad_captured": 1,
+      "new_members": 374,
+      "exited_members": 374,
+      "entrant_bad_rate": 0.22459893048128343,
+      "exit_bad_rate": 0.22192513368983957
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7426,
+      "net_bad_captured": 4,
+      "new_members": 441,
+      "exited_members": 441,
+      "entrant_bad_rate": 0.12471655328798185,
+      "exit_bad_rate": 0.11564625850340136
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8022,
+      "net_bad_captured": 7,
+      "new_members": 477,
+      "exited_members": 477,
+      "entrant_bad_rate": 0.09014675052410902,
+      "exit_bad_rate": 0.07547169811320754
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8649,
+      "net_bad_captured": 0,
+      "new_members": 452,
+      "exited_members": 452,
+      "entrant_bad_rate": 0.06858407079646017,
+      "exit_bad_rate": 0.06858407079646017
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
