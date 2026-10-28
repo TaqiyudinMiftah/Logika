@@ -1,44 +1,5 @@
 [
   {
-    "id": "V237",
-    "status": "QUEUED",
-    "definition": {
-      "method": "population_raw_fusion",
-      "worker": "population_fusion.py",
-      "source_script": "v7/scripts/population_fusion.py",
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "replaces_base_head": true,
-      "Kumo_frozen_fraction": 1.0,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "id": "V237",
-      "label": "Five-view conservative raw context/capacity fusion",
-      "research_ready": true,
-      "raw_sources": [
-        "V168",
-        "V178",
-        "V222",
-        "V223",
-        "V207"
-      ],
-      "depends_on": [
-        "V178",
-        "V222",
-        "V223",
-        "V207"
-      ],
-      "formula": "raw=mean(globalLarge,coverageRaw,employmentRaw,APRRaw,globalSmall)=.71globalLarge+.03each local view+.20Small; refit18-input6k correction L2.003/shrink.5; same75:25spline77; mean5foldtest",
-      "rationale": "Test all prepared contextual views with Small capped at an implicit20%equal-vote contribution before correction. Shared context examples and global components overlap, so this is fixed score fusion, not formal independent Bayesian evidence.",
-      "priority": "P1",
-      "batch": "population_fusion",
-      "feature_catalog": "population_fusion/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V238",
     "status": "QUEUED",
     "definition": {
