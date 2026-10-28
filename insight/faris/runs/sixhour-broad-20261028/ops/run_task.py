@@ -27,7 +27,10 @@ dump({'pid': os.getpid(), 'task': a.task, 'attempt': a.attempt, 'UTC': utc(),
 from common import tasks, catalog
 import socket
 spec = catalog()[tasks()[a.task]['design']]
-backend = dict(host=socket.gethostname(), device=spec['resource'], UTC=utc())
+precision=spec.get('execution_precision','source_default_TF32')
+if precision=='ieee_fp32_no_tf32':
+    os.environ['NVIDIA_TF32_OVERRIDE']='0'
+backend = dict(host=socket.gethostname(), device=spec['resource'], UTC=utc(), execution_precision=precision, NVIDIA_TF32_OVERRIDE=os.environ.get('NVIDIA_TF32_OVERRIDE'))
 if spec['resource'] == 'gpu':
     import torch
     assert torch.cuda.is_available()

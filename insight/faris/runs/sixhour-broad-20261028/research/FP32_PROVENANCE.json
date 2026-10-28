@@ -1,0 +1,8 @@
+{
+  "source": "https://docs.pytorch.org/docs/stable/cuda_environment_variables.html",
+  "retrieved_UTC": "2026-10-28T18:10:00Z",
+  "setting": "NVIDIA_TF32_OVERRIDE=0",
+  "scope": "Official documented globalTF32 disable for debugging;8 separate numerical-stability recipes; no originalparameter/source/replaythreshold changed.",
+  "reason": "SeveralL4TF32ResNet predictions differed by more than5e-6 across batchshapes; failed attempts retained and never scored.",
+  "implementation": "ops/run_task.py sets documented variable beforetorchimport; explicitexecution_precision in newdesign/STARTspec andBACKEND.json."
+}

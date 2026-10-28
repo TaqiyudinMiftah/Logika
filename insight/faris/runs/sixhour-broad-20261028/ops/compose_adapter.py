@@ -1,6 +1,6 @@
 """Run sealed composition, resolving only explicitly approved retry folders."""
 from pathlib import Path
-import inspect,sys
+import inspect,sys,fcntl
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'source'))
 import compose
 from common import check_seal,load,sha,dump,utc
@@ -14,5 +14,9 @@ new="""    attempt = int(load('APPROVED_RETRIES.json').get(task_id,1)) if (R/'AP
     root = R / 'runs' / task_id / f'attempt{attempt}'"""
 assert source.count(old)==1;source=source.replace(old,new)
 exec(compile(source,str(Path(__file__)),'exec'),compose.__dict__)
-compose.main()
+# Coordinate with sealed evaluate.py without modifying its numerical code.
+lock=(R/'evaluate.lock').open('a+')
+fcntl.flock(lock,fcntl.LOCK_EX)
+if not(R/'COMPOSITION_FINAL_BARRIER.json').exists():
+    compose.main()
 dump(dict(UTC=utc(),source_sha256=sha(__file__),sealed_composition_sha256=sha(R/'source/compose.py'),change='Resolve only explicit approved attempt1/2 folder; reject multiple successful attempts. Every original prediction/source/label-boundary predicate and numerical composition remains unchanged.',scientific_source_or_selection_changed=False),R/'COMPOSITION_EXECUTION_ADAPTER.json')
