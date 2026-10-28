@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T19:47:20.216582+00:00",
+  "design": "kumo_large_redundant99_e8",
+  "design_spec": {
+    "family": "kumo_large",
+    "view": "redundant99",
+    "resource": "gpu",
+    "hypothesis": "Matched99-or-fewer-input foundation comparison for redundant99.",
+    "parameters": {
+      "size": "large",
+      "estimators": 8,
+      "prediction_batch": 256,
+      "memory_fraction": 0.7,
+      "engine": "concat_context_vocab"
+    },
+    "sources": [
+      "https://huggingface.co/nvidia/Kumo-Tabular"
+    ],
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/kumo_large_redundant99_e8/s2026/fold0/RESULT.json": "46acc14a7c028c5ddabbc51a661ec80b22408ed8bc710aadba35298b468afaf3",
+    "composed/kumo_large_redundant99_e8/s2026/fold1/RESULT.json": "b4f496d907ae1ea63d17962d90d389664542f73433ec3d290b691d66c6207891",
+    "composed/kumo_large_redundant99_e8/s2026/fold2/RESULT.json": "de6fe726be4ca4b8c93197e0ca49d5860b960b8b2f70ff49e606c8c5c23e9263",
+    "composed/kumo_large_redundant99_e8/s2026/fold3/RESULT.json": "93c9f7593c49a126a4550fb66677d6d09a415a5760eea157cf0091dada32c244",
+    "composed/kumo_large_redundant99_e8/s2026/fold4/RESULT.json": "72ce2adb3f2001e84209e0d3724e61680230085ec396b488908b7fb654140077",
+    "composed/kumo_large_redundant99_e8/s7731/fold0/RESULT.json": "44a9537b936e3dce5ef3f42b29cf41ef90d413552e3fd6a7446916519717732d",
+    "composed/kumo_large_redundant99_e8/s7731/fold1/RESULT.json": "7452b5b8a729df88ccf87d409ffdd329ada475d946df17b9141dcc0d270e1762",
+    "composed/kumo_large_redundant99_e8/s7731/fold2/RESULT.json": "19e6e95faa1f0657b225697e9d87d78e8d0713a0ffeaa0c1f8e564734a651613",
+    "composed/kumo_large_redundant99_e8/s7731/fold3/RESULT.json": "f134bc5b00da37a9bfb39441c9e147b98b483b3a2ae71f537d2d45813f94633e",
+    "composed/kumo_large_redundant99_e8/s7731/fold4/RESULT.json": "04e1192d0f86e517790ccacec02a69afc775660b67e54bcf5b26a5151dda4f51"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
