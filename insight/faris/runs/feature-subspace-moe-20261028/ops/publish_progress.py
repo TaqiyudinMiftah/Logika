@@ -47,6 +47,16 @@ def publish(local,repo,once=False):
                 target=destination/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
             state=json.loads((mirror/'LIVE_STATE.json').read_text())if(mirror/'LIVE_STATE.json').exists()else{'stage':'launch_pending'}
             clock=json.loads((mirror/'CLOCK.json').read_text())if(mirror/'CLOCK.json').exists()else{}
+            record_path=destination/'RUN.json'
+            if record_path.exists():
+                record=json.loads(record_path.read_text())
+                record.pop('actual_data_training_started',None)
+                record.update(status=state['stage'],computation_clock_started=bool(clock),
+                              completed_expert_fits=state.get('completed',0),clock=clock,
+                              current_state_evidence='LIVE_STATE.json')
+                if(mirror/'evaluation/RESULT.json').exists():
+                    record['new_results']='evaluation/RESULT.json'
+                dump(record,record_path)
             run(['git','fetch','origin','main'],repo)
             head=run(['git','rev-parse','HEAD'],repo).stdout.strip();remote=run(['git','rev-parse','origin/main'],repo).stdout.strip()
             if head!=remote:
@@ -81,7 +91,10 @@ def publish(local,repo,once=False):
             terminal=state['stage']in{'complete','failed'}
             if terminal:
                 # Terminal compact prediction evidence is collected privately.
-                for name in ['evaluation','composed','runs','logs']:
+                command="from pathlib import Path;import json;p=Path('/mnt/home/faris/logika-feature-subspace-moe-20261028');print(json.dumps([n for n in ['evaluation','composed','runs','logs','failures']if(p/n).is_dir()]))"
+                import shlex
+                present=json.loads(run(['ssh','-o','BatchMode=yes','faris@100.68.29.126','python3 -c '+shlex.quote(command)],timeout=30).stdout)
+                for name in present:
                     target=local/'FINAL_EVIDENCE'/name;target.mkdir(parents=True,exist_ok=True)
                     run(['rsync','-az','faris@100.68.29.126:/mnt/home/faris/logika-feature-subspace-moe-20261028/'+name+'/',str(target)+'/'],timeout=300)
                 dump(dict(receipt,compact_evidence_collected=True),private/'FINAL_RECEIPT.json')
