@@ -115,6 +115,8 @@ def publish(local,repo,once=False):
                          findings=0,metadata_files=len(list(mirror.rglob('*.json'))))
             dump(receipt,private/'LATEST_RECEIPT.json');print(json.dumps(receipt),flush=True);errors=0
             terminal=state['stage']in{'complete','failed'}
+            if state['stage']=='complete' and not(mirror/'diagnostics/constant_gate/RESULT.json').exists():
+                terminal=False
             if terminal:
                 # Terminal compact prediction evidence is collected privately.
                 command="from pathlib import Path;import json;p=Path('/mnt/home/faris/logika-feature-subspace-moe-20261028');print(json.dumps([n for n in ['evaluation','composed','runs','logs','failures','diagnostics']if(p/n).is_dir()]))"
