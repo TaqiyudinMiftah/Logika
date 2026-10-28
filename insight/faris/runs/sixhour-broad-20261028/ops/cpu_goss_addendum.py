@@ -112,7 +112,7 @@ if p.exists():
 
 
 def collect_remote():
-    mirror = R / 'private/node2003_ordered'
+    mirror = R / 'private/node2003_goss'
     mirror.mkdir(parents=True, exist_ok=True)
     run(['rsync', '-az', '-e', TRANSPORT, '--include=runs/***', '--include=dispatch/***',
          '--include=CPU2003_QUEUE*.json', '--exclude=*', HOST + ':' + str(R) + '/',

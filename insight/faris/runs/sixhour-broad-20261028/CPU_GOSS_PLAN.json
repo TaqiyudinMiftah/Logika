@@ -1,0 +1,62 @@
+{
+  "registered_UTC": "2026-10-28T22:32:28.015164+00:00",
+  "hypothesis": "Compare gradient-based one-side sampling with the existing random-bagging global99 LightGBM recipe. Retaining large-gradient cases may change regularization and complementarity under binary logistic loss; this is an inference to test, not a published gain guarantee. Two retention profiles isolate aggressive versus higher-retention GOSS.",
+  "sources": [
+    {
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html",
+      "retrieved_UTC": "2026-10-28T22:32:28.015164+00:00",
+      "scope": "Method and supported pinned LightGBM4.6.0 parameters; no imported cases or labels"
+    },
+    {
+      "url": "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html#data_sample_strategy",
+      "retrieved_UTC": "2026-10-28T22:32:28.015164+00:00",
+      "scope": "Method and supported pinned LightGBM4.6.0 parameters; no imported cases or labels"
+    }
+  ],
+  "paper_sha256": "32ddfe0c7a8e1acb87c97cff904a16e0a556a8d79ebfecf772159843e736affc",
+  "peer_HEAD_inspected": "cbe00ee42e7d2ecfa9c9db5f715cfce59e34960d",
+  "peer_registry_entries": 254,
+  "duplicate_check": "Current112design catalog and scoped peer registry/configuration search contain no GOSS strategy; different older protocol results are not claimed universally absent.",
+  "designs": 2,
+  "planned_fits": 20,
+  "views": [
+    "global99"
+  ],
+  "profiles": {
+    "a20_b10": {
+      "top_rate": 0.2,
+      "other_rate": 0.1
+    },
+    "a40_b20": {
+      "top_rate": 0.4,
+      "other_rate": 0.2
+    }
+  },
+  "matched_comparator": "lgb_global99_unweighted",
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "clock_sha256": "67493c438f7f1baeee5db30ba8539cd4dce0641dec23127ffd3b1a93c779cb8d",
+  "resource": "CPU node2001/2003 only,2slots2threads each; no paid allocation",
+  "source_and_features_unchanged": true,
+  "counterevidence": "All current tree standalone designs underperform matched anchor; CatBoost Ordered/Plain effects differ across views and neither improved incumbent. Best reused-development .5312029153 remains below .54, without untouched confirmation.",
+  "exposure": "All70000rows reused development; new designs are adaptive development only.",
+  "gate": {
+    "pilots": [
+      "cpu_goss_global99_a20_b10__s2026__f0",
+      "cpu_goss_global99_a40_b20__s2026__f0"
+    ],
+    "same_full_recipe": true,
+    "max_pilot_seconds_each": 90,
+    "runtime_safety_factor": 1.5,
+    "remaining_node2001_fits_per_scheme_after_pilots": 5,
+    "remaining_node2003_fits_per_scheme": 4,
+    "queue_and_collection_overhead_seconds": 120,
+    "latest_projected_finish_epoch": 1793227225.6909878,
+    "admit_only_if_all_complete_finite_boundary_checks_and_conservative_projected_finish_fit": true
+  },
+  "reject_rule": "Do not broaden if runtime or structural gate fails. Full2seed5fold designs only scored; unchanged final support/uncertainty/target policy; no claim of public improvement or independent validation.",
+  "new_fit_source": "Unchanged sealed source/models_classical.py _lightgbm; data_sample_strategy=goss,bagging disabled explicitly"
+}
