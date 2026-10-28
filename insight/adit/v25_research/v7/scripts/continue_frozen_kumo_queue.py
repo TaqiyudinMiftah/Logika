@@ -94,7 +94,7 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
             c=client();gate=dict(status='REVIEWED_FOR_NEXT_RUN',experiment=ident,reviewed_head=expected,UTC=time.time(),peer_new_commits=False,redundancy_review=('Fresh shared HEAD unchanged; distinct correction/calibration or robust-objective specification in the current vetted experiment plan. Original Kumo/context scores frozen.' if worker_file in ['adaptive_adapters.py','joint_followups.py','stability_worker.py'] else 'Fresh shared HEAD unchanged since prior synced result; distinct frozen-Kumo specification. No backbone optimization or unfreezing.'))
             c.request('PUT','api/contents/'+BASE+'v7/modeling/reports/REPO_REVIEW_GATE.json',dict(type='file',format='text',content=json.dumps(gate,indent=2)))
             if execution_host=='local_windows':
-                assert worker_file in ['structured_heads.py','data_fe_worker.py','data_residual_worker.py'] and os.name=='nt'
+                assert worker_file in ['structured_heads.py','data_fe_worker.py','data_residual_worker.py','anchored_spline_worker.py'] and os.name=='nt'
                 pre=json.loads((V/'reports/LOCAL_CPU_PREFLIGHT.json').read_text());assert pre['status']=='PASS'
                 persistent_status(V/'modeling/reports/REPO_REVIEW_GATE.json',gate)
                 import ctypes
@@ -102,8 +102,9 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
                     _fields_=[('length',ctypes.c_ulong),('load',ctypes.c_ulong)]+[(k,ctypes.c_ulonglong) for k in ['total','available','page_total','page_available','virtual_total','virtual_available','extended']]
                 while True:
                     memory=Memory();memory.length=ctypes.sizeof(memory);assert ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(memory))
-                    if memory.available>=600*2**20:break
-                    state('WAITING_FOR_LOCAL_CPU_RAM',experiment=ident,available_MiB=memory.available/2**20,required_MiB=600,execution_host=execution_host);time.sleep(15)
+                    required=900 if worker_file=='anchored_spline_worker.py' else 600
+                    if memory.available>=required*2**20:break
+                    state('WAITING_FOR_LOCAL_CPU_RAM',experiment=ident,available_MiB=memory.available/2**20,required_MiB=required,execution_host=execution_host);time.sleep(15)
                 state('FITTING_LOCAL_CPU_CORRECTION',experiment=ident,execution_host=execution_host,reviewed_head=expected,note='Existing frozen node480 Kumo/spline caches; no new backbone fitting')
                 py=pre['python_executable'];assert Path(py).resolve().is_relative_to(ROOT.resolve()) and Path(py).is_file()
                 with (V/'logs'/f'{ident}_local_cpu.log').open('a',encoding='utf-8') as log:

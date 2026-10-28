@@ -88,6 +88,8 @@ def main():
     audit_files += list((V/'data_fe/reports').glob('*')) if (V/'data_fe/reports').exists() else []
     audit_files += [V/'data_residual_plan.json',V/'DATA_RESIDUAL_PLAN.md',V/'scripts/data_residual_worker.py']
     audit_files += list((V/'data_residual/reports').glob('*')) if (V/'data_residual/reports').exists() else []
+    audit_files += [V/'anchored_spline_plan.json',V/'ANCHORED_SPLINE_PLAN.md',V/'scripts/anchored_spline_worker.py',V/'scripts/build_anchored_spline_inputs.py',V/'reports/PEER_REVIEW_ALL66_20261028.md',V/'reports/ALL66_KAGGLE_READONLY_RECEIPT.json',V/'reports/MASTER_WATCH_RELOAD.json']
+    audit_files += list((V/'anchored_spline/reports').glob('*')) if (V/'anchored_spline/reports').exists() else []
     for source in audit_files:
         if source.is_file() and source.suffix.lower() in ['.py','.md','.json','.csv','.svg']:
             target=DEST/source.relative_to(ROOT);target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target)
