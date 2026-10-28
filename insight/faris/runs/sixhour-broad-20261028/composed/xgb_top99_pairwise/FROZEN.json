@@ -1,0 +1,57 @@
+{
+  "UTC": "2026-10-28T18:25:03.736750+00:00",
+  "design": "xgb_top99_pairwise",
+  "design_spec": {
+    "family": "xgboost",
+    "view": "global99",
+    "hypothesis": "Pairwise RankNet loss on one context group directly trains discrimination; sigmoid scores remain uncalibrated.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+      "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "gpu",
+    "objective": "pairwise",
+    "max_iterations": 1200,
+    "stopping_metric": "auc",
+    "pairs_per_sample": 4,
+    "parameters": {
+      "max_depth": 4,
+      "min_child_weight": 25,
+      "reg_lambda": 25
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/xgb_top99_pairwise/s2026/fold0/RESULT.json": "9c24bf0a63f791067ca1924f360937228480c24becec4b7318767fdf55f1da99",
+    "composed/xgb_top99_pairwise/s2026/fold1/RESULT.json": "949f53f7b74365e3950d4c62ff40098c1e62b3a7aeca35ffd1b5d045a15adfe5",
+    "composed/xgb_top99_pairwise/s2026/fold2/RESULT.json": "e10d31fdf26ddb62b3762419726555541a3f7f5f1a4dc5084787693d73a23aa9",
+    "composed/xgb_top99_pairwise/s2026/fold3/RESULT.json": "767e460369d09a7c5a758d84922e0d3036657d02e691c3b0f7c1ae87d4e9b042",
+    "composed/xgb_top99_pairwise/s2026/fold4/RESULT.json": "a2c0c09fa60204fca42247e9b381b8eb5421d8b2d8b1931eb9468608835396a0",
+    "composed/xgb_top99_pairwise/s7731/fold0/RESULT.json": "ae71d711a16f98f9f4e46449f198da8c423735d5a337b923c3ab0796d12bbf0a",
+    "composed/xgb_top99_pairwise/s7731/fold1/RESULT.json": "4131afd35a5d37c879bc1ef22fb5e1f4000b5968e5d7caf053cc16487a38ade5",
+    "composed/xgb_top99_pairwise/s7731/fold2/RESULT.json": "15181f4f2ad6db355304477741cab8693753d9c8e67c40237e91b6fdd142f472",
+    "composed/xgb_top99_pairwise/s7731/fold3/RESULT.json": "2b3de93175cd18e9e62958d66e741702db6c055a90d6e9381c27d3fb81ebbbcb",
+    "composed/xgb_top99_pairwise/s7731/fold4/RESULT.json": "92e36b89714506616f5528a9ebf2c82c3445337a34ef50a81417a6edeac28e09"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

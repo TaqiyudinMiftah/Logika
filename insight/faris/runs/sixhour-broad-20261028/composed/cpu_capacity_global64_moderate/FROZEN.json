@@ -1,0 +1,57 @@
+{
+  "UTC": "2026-10-28T18:25:50.252143+00:00",
+  "design": "cpu_capacity_global64_moderate",
+  "design_spec": {
+    "class_balance": "none",
+    "family": "lightgbm",
+    "hypothesis": "Matched capacity controls across globally selected, actuarial-expanded and redundancy-pruned views: compare7/15/63 leaves under shared strong shrinkage, excluding stop/meta/outer from feature selection.",
+    "parameters": {
+      "learning_rate": 0.025,
+      "max_depth": 5,
+      "min_child_samples": 200,
+      "n_estimators": 1800,
+      "num_leaves": 15,
+      "reg_alpha": 1,
+      "reg_lambda": 50
+    },
+    "registration": "Additional matchedCPUcontrols proposed using measured runtime only; candidate predictive results were not consulted. Append-only declaration before dispatch.",
+    "resource": "cpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "stopping_metric": "ks",
+    "view": "global64"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_capacity_global64_moderate/s2026/fold0/RESULT.json": "f4aa5163fb4b97f2a57bab7e23a8006f12086a72d2f79e22ac4bec8dbd6584b0",
+    "composed/cpu_capacity_global64_moderate/s2026/fold1/RESULT.json": "6ddd5b226b6f8470f7f861d28455aecca8b0f3720a7a1f09966563498bda16f1",
+    "composed/cpu_capacity_global64_moderate/s2026/fold2/RESULT.json": "36145e9256ea139bd661bafc9889bff7a2301d5297b8a32d46d22fd60e8c93c1",
+    "composed/cpu_capacity_global64_moderate/s2026/fold3/RESULT.json": "c5c4c3fb2b995ace961d54750492132852152585859fd2c949416cede7789c73",
+    "composed/cpu_capacity_global64_moderate/s2026/fold4/RESULT.json": "dd42906838e1ed6d05fde0f4d595c73c2937cd2c124e2ea58db89a344363fb9e",
+    "composed/cpu_capacity_global64_moderate/s7731/fold0/RESULT.json": "99d65b97fd2848b6aa32e2814288de23bfd7da0c8ec6ec95461f99cf3bc086e5",
+    "composed/cpu_capacity_global64_moderate/s7731/fold1/RESULT.json": "c0e77c2b41dc1d600f1796f60d2da57e1bb52f974682009a02d9e586ef0532e4",
+    "composed/cpu_capacity_global64_moderate/s7731/fold2/RESULT.json": "3731fabde3c4ad136525aabddd426890a4a3538b66b8d9d9674f0c36efb8af41",
+    "composed/cpu_capacity_global64_moderate/s7731/fold3/RESULT.json": "f6ebd2368f035c75f2b67515f9e4eb691a9a79ca232f56bbd70224fadb1731fa",
+    "composed/cpu_capacity_global64_moderate/s7731/fold4/RESULT.json": "b3a86a356a259ac54920d0426791cb14f4f75185f7a70240f9601ee2289f7f6e"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

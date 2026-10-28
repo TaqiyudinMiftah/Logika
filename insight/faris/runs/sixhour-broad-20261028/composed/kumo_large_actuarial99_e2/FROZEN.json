@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T18:25:43.933293+00:00",
+  "design": "kumo_large_actuarial99_e2",
+  "design_spec": {
+    "family": "kumo_large",
+    "view": "actuarial99",
+    "resource": "gpu",
+    "hypothesis": "Matched ensemble-budget curve at fixed representation.",
+    "parameters": {
+      "size": "large",
+      "estimators": 2,
+      "prediction_batch": 256,
+      "memory_fraction": 0.7,
+      "engine": "concat_context_vocab"
+    },
+    "sources": [
+      "https://huggingface.co/nvidia/Kumo-Tabular"
+    ],
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/kumo_large_actuarial99_e2/s2026/fold0/RESULT.json": "964a7e33cf01eab4a5fcf1600b8eb464b044d465b8766f4ce2327d2ec8b36044",
+    "composed/kumo_large_actuarial99_e2/s2026/fold1/RESULT.json": "a8ea7e00f0c7ab86ebe679b759ab0365375972e82d82d517b6c4e425a095b4e0",
+    "composed/kumo_large_actuarial99_e2/s2026/fold2/RESULT.json": "eec2d556d56caa057b08ff32aad3806f2eebaad67160ec336f8af25e33b297f9",
+    "composed/kumo_large_actuarial99_e2/s2026/fold3/RESULT.json": "c4058acac09404a6540a032dc9785c73bbaf1ede8e453f5361a73df2225214ce",
+    "composed/kumo_large_actuarial99_e2/s2026/fold4/RESULT.json": "dbb6964e2d1d3d50be3aaaff46db2b8477f532bd799c17b80516bace070bdb84",
+    "composed/kumo_large_actuarial99_e2/s7731/fold0/RESULT.json": "c81905ff92e59678f8ab9280e6031339f34bb05047b51f05c326fcf766584d35",
+    "composed/kumo_large_actuarial99_e2/s7731/fold1/RESULT.json": "b1e8f129331b119ae654a7b04e7f0a3b2bd57d3b56efa915991071578cc43e0c",
+    "composed/kumo_large_actuarial99_e2/s7731/fold2/RESULT.json": "7c0956db91ba0106b5dc5f8f942026cdb9c35d28980f187e1e3ac525102d6669",
+    "composed/kumo_large_actuarial99_e2/s7731/fold3/RESULT.json": "769ca9c6d6db568762f61529677a10683fa56de265eadaa2afd352a2e239642b",
+    "composed/kumo_large_actuarial99_e2/s7731/fold4/RESULT.json": "c41bb88bb783c15a9aba552ce9fd02c24a356ae25e492cdb9d84b13af5b9aeb3"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

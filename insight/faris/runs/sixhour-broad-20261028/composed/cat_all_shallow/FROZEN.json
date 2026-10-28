@@ -1,0 +1,52 @@
+{
+  "UTC": "2026-10-28T18:24:59.476336+00:00",
+  "design": "cat_all_shallow",
+  "design_spec": {
+    "family": "catboost",
+    "view": "all",
+    "hypothesis": "A shallow full-bank control tests broad feature access under a restricted interaction order.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "iterations": 1500,
+      "depth": 4,
+      "l2_leaf_reg": 30
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cat_all_shallow/s2026/fold0/RESULT.json": "8c4c73c61ecc72dadf77b3aa34e7a7d8b86e9885694d57ce3e471c40fe51001a",
+    "composed/cat_all_shallow/s2026/fold1/RESULT.json": "b3ccaead1abafd75bd9f9971de0a1096631213aa54a23a61a83526937ffca894",
+    "composed/cat_all_shallow/s2026/fold2/RESULT.json": "8f516726fc0a94a6e8839c31c47f2024f1316875e2dcfafce765a66ee1f4999f",
+    "composed/cat_all_shallow/s2026/fold3/RESULT.json": "6e8586ee4fdeecdb44d54687211af2e02dbe6f82522b47fb4ffd19d1083098e1",
+    "composed/cat_all_shallow/s2026/fold4/RESULT.json": "bb0f2b78105531d1426844ed866aab9ec476d930d4dc37bafdc9dd79affa38b0",
+    "composed/cat_all_shallow/s7731/fold0/RESULT.json": "87cd1757a01cc9babf58c6e38790e7b84ad8ef24a464f33a948afda71d4acc87",
+    "composed/cat_all_shallow/s7731/fold1/RESULT.json": "b853a70d6180fddf532c6045a50ac1ae580ce06f609fafe27bd9f697b4941a6b",
+    "composed/cat_all_shallow/s7731/fold2/RESULT.json": "fa06083d96b99bea4581329fe2bbb4d855bf0397dcf0f0376e910f1291d3f800",
+    "composed/cat_all_shallow/s7731/fold3/RESULT.json": "45337c94372fa4fad8e9fd17e7d8dadee303e831e374603a7de0decf6276f9a3",
+    "composed/cat_all_shallow/s7731/fold4/RESULT.json": "0ad736b870cb8276ddc3caa333890e92f5107081990732027d7574b71ebaafe6"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

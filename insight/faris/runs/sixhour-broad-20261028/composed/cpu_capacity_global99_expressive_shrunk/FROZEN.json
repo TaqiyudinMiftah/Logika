@@ -1,0 +1,57 @@
+{
+  "UTC": "2026-10-28T18:28:24.499247+00:00",
+  "design": "cpu_capacity_global99_expressive_shrunk",
+  "design_spec": {
+    "class_balance": "none",
+    "family": "lightgbm",
+    "hypothesis": "Matched capacity controls across globally selected, actuarial-expanded and redundancy-pruned views: compare7/15/63 leaves under shared strong shrinkage, excluding stop/meta/outer from feature selection.",
+    "parameters": {
+      "learning_rate": 0.025,
+      "max_depth": 9,
+      "min_child_samples": 200,
+      "n_estimators": 1800,
+      "num_leaves": 63,
+      "reg_alpha": 1,
+      "reg_lambda": 50
+    },
+    "registration": "Additional matchedCPUcontrols proposed using measured runtime only; candidate predictive results were not consulted. Append-only declaration before dispatch.",
+    "resource": "cpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "stopping_metric": "ks",
+    "view": "global99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_capacity_global99_expressive_shrunk/s2026/fold0/RESULT.json": "94ddbd82392ea06b447554491d3616639be4f0d3e11835431cd00c8e034e254c",
+    "composed/cpu_capacity_global99_expressive_shrunk/s2026/fold1/RESULT.json": "c647e68c3747c417ae3099f59076ea6401ec4e776018c5e81ab0fc1388555eae",
+    "composed/cpu_capacity_global99_expressive_shrunk/s2026/fold2/RESULT.json": "68a7d11f7446b9caba7ebe10bb3786ff88fe7a96d33494c73770561ef23cd850",
+    "composed/cpu_capacity_global99_expressive_shrunk/s2026/fold3/RESULT.json": "4e61149bebdbc70619477b55fe57466ca8476f696096f10497ac698855b4dcf8",
+    "composed/cpu_capacity_global99_expressive_shrunk/s2026/fold4/RESULT.json": "90059fafe261f64cbe57468cbe4e5a9bded7e10c715e7612488589744287b2de",
+    "composed/cpu_capacity_global99_expressive_shrunk/s7731/fold0/RESULT.json": "57e910e15b8f780d8c686321f9bf275af0b3ff0520060e5050063dea56db4619",
+    "composed/cpu_capacity_global99_expressive_shrunk/s7731/fold1/RESULT.json": "ca05b5c29fd7950e79c5991541b013844992f4da8449081944f4a82be219d697",
+    "composed/cpu_capacity_global99_expressive_shrunk/s7731/fold2/RESULT.json": "9824a30ea97ddaad4e04bd00a4785ad531cd22a086301723b9f0c7445f797c2c",
+    "composed/cpu_capacity_global99_expressive_shrunk/s7731/fold3/RESULT.json": "833e101681af0bef3655ee8f387913182d36bcf1371510f6afc0bd3c9cbaec6b",
+    "composed/cpu_capacity_global99_expressive_shrunk/s7731/fold4/RESULT.json": "fe7ad4e46535b4683fab92856dd82e64ff794268bf56acd9f97b14dd9a8f082c"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
