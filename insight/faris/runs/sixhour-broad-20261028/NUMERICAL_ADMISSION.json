@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-28T18:20:41.706957+00:00",
+  "UTC": "2026-10-28T19:35:00.203518+00:00",
   "decision": "Execution quality block, not outer-score-based selection",
   "blocks": {
     "resnet_global64_smoothks": {
@@ -16,10 +16,55 @@
       "previous_owner": 4,
       "observed_replay_failures": 8,
       "reason": "At least2strict5e-6 batch-replay rejections onsource-defaultTF32; stop newadmission, never interrupthealthyfit. SeparatepredeclaredFP32replicas areadmitted; this is not negativepredictive evidence."
+    },
+    "resnet_global64_bce": {
+      "previous_owner": 4,
+      "observed_replay_failures": 4,
+      "evidence": {
+        "resnet_global64_bce__s2026__f1": {
+          "path": "runs/resnet_global64_bce__s2026__f1/attempt1/FAILURE.json",
+          "sha256": "4699da16cdb6268f711f0b7c5cdd752088697a2c97af7c79fc43d9078fc8559a"
+        },
+        "resnet_global64_bce__s2026__f2": {
+          "path": "runs/resnet_global64_bce__s2026__f2/attempt1/FAILURE.json",
+          "sha256": "d45ee31433e345bed01eeb97c52ca6b2b6470c883427a63e671cd099b5057d8f"
+        },
+        "resnet_global64_bce__s7731__f1": {
+          "path": "runs/resnet_global64_bce__s7731__f1/attempt1/FAILURE.json",
+          "sha256": "689e373fab7803d77cec22182b2956018f5caedb8e7caf0947f24f737dbbb8ba"
+        },
+        "resnet_global64_bce__s7731__f2": {
+          "path": "runs/resnet_global64_bce__s7731__f2/attempt1/FAILURE.json",
+          "sha256": "bc087360e7fd2486c868734ce88fffb7e4d6a49496cd9b96240e71c6fb65e992"
+        }
+      },
+      "counterpart": "resnet_global64_bce_fp32",
+      "reason": "Existing >=2 strict5e-6 replay-failure rule; block future admission only, preserve active fits and every attempt. Separately registered FP32 counterpart is unchanged. Numerical validation limit, not negative predictive evidence."
+    },
+    "resnet_global128_bce": {
+      "previous_owner": 4,
+      "observed_replay_failures": 3,
+      "evidence": {
+        "resnet_global128_bce__s2026__f0": {
+          "path": "runs/resnet_global128_bce__s2026__f0/attempt1/FAILURE.json",
+          "sha256": "ff65efcc084ff1828af4460b1826797ef0fc890765ddbce9e85e037a99712873"
+        },
+        "resnet_global128_bce__s2026__f2": {
+          "path": "runs/resnet_global128_bce__s2026__f2/attempt1/FAILURE.json",
+          "sha256": "b82b9d383ccbee73d714c0227e58b08aa9b5a0bf07186177f57ab9a21e6bf3ac"
+        },
+        "resnet_global128_bce__s2026__f3": {
+          "path": "runs/resnet_global128_bce__s2026__f3/attempt1/FAILURE.json",
+          "sha256": "ecb6721842c1c756cfcfca2c927eb23882f72d4533c8ddb0661336f6cd801686"
+        }
+      },
+      "counterpart": "resnet_global128_bce_fp32",
+      "reason": "Existing >=2 strict5e-6 replay-failure rule; block future admission only, preserve active fits and every attempt. Separately registered FP32 counterpart is unchanged. Numerical validation limit, not negative predictive evidence."
     }
   },
   "originalstrict_replay_threshold": 5e-06,
   "firstFP32_replication_passed": true,
   "original_attempts_retained": true,
-  "healthy_workers_unchanged": true
+  "healthy_workers_unchanged": true,
+  "execution_rule_unchanged": true
 }

@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-28T19:30:40.204033+00:00",
+  "design": "mlp_global64_bce",
+  "design_spec": {
+    "family": "neural",
+    "parameters": {
+      "kind": "mlp",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "max_seconds": 900,
+      "ensemble_members": 16,
+      "loss": "bce",
+      "inner_split_seed": 20261029
+    },
+    "view": "global64",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "hypothesis": "Small-view nonlinear capacity control; new source bank and strict inner preprocessing differ from the frozen116-column campaign.",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/mlp_global64_bce/s2026/fold0/RESULT.json": "d428c670ca5d29d136e758613e2e21125939891727f9da37e40a0c943e35506e",
+    "composed/mlp_global64_bce/s2026/fold1/RESULT.json": "801e00902b4a58934c74b72692697a195e9cc64e0c861725482992bf12bbc5be",
+    "composed/mlp_global64_bce/s2026/fold2/RESULT.json": "e80ebe6561d16a83743cef72f106391f4eaaef287f5685d07398c277800ecb02",
+    "composed/mlp_global64_bce/s2026/fold3/RESULT.json": "e32a623a3f282fd220804bb519b2f72ac054943b428bfd4cf4c28d45c2ee1085",
+    "composed/mlp_global64_bce/s2026/fold4/RESULT.json": "b5ea30e355757c6efc49c642268f8ff8ee0d6828c1736b6488fee9590e94d7ad",
+    "composed/mlp_global64_bce/s7731/fold0/RESULT.json": "0a60f7788541e694f8152f3158df4910d7f4821aee7e5a2234f6c81bf65d010f",
+    "composed/mlp_global64_bce/s7731/fold1/RESULT.json": "09ccec9701bfc62fc4386cce973e6737950533a4107d3a6d38e292ed9ada260b",
+    "composed/mlp_global64_bce/s7731/fold2/RESULT.json": "7a85317ff0c179561d29cc7ddb57653517a981bbd2085d75f759d7da0e8efd94",
+    "composed/mlp_global64_bce/s7731/fold3/RESULT.json": "92451ec6ff80c876c947c505532bfc94afeb0d8891e3e2859cb3299eb6afa2a0",
+    "composed/mlp_global64_bce/s7731/fold4/RESULT.json": "e05607f20df05974602b89661ee942b6709f558839e18950987ab6802c5bef94"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
