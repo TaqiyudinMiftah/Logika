@@ -1,0 +1,109 @@
+{
+  "experiment": "V238",
+  "method": "natural_cubic",
+  "hypothesis": "Global coefficient roughness smoothing V200 increased AUC to.84731949 but reduced pooledKS to.52956578; stable9 reduced-knots V198 also traded KS for AUC. Test a different nonlinear boundary/shape restriction rather than further averaging weak population contexts. Linear tails can extrapolate badly and must be assessed; constant/repeated-knot coverage variables remain explicit.",
+  "formula": "Original18 V25 inputs, signedlog and training-median imputation; per numeric input restricted cubic basis with correction-training quantile knots(.05,.35,.65,.95), linear tails, standardized basis plus missing and employment indicators. Repeated knots use linear-only fallback. eta=logit(globalKumo)+.5Xbeta; fit meanBCE+.003/2||beta_nonintercept||^2 on6k; final=.75sigmoid(eta)+.25spline77, mean5foldtest.",
+  "findings": [
+    "BROAD_RANKING_GAIN_WITHOUT_KS_GAIN",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.528798122629542,
+      "signed_KS": 0.528798122629542,
+      "AUC": 0.8471927545873115,
+      "rows": 70000
+    },
+    "delta_KS": -0.0026613919329937508,
+    "delta_AUC": 8.521023770402536e-05,
+    "fold_wins": 1,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5216969370276312,
+        0.5385709419985779
+      ],
+      "delta_KS": [
+        -0.004922584086451021,
+        0.000164353777737693
+      ],
+      "candidate_AUC": [
+        0.8435112419637578,
+        0.8509541816509882
+      ],
+      "delta_AUC": [
+        -0.00027972179734623014,
+        0.0004015427906034652
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.00946123492632851,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3852,
+      "net_bad_captured": 11,
+      "new_members": 289,
+      "exited_members": 289,
+      "entrant_bad_rate": 0.39100346020761245,
+      "exit_bad_rate": 0.35294117647058826
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5870,
+      "net_bad_captured": 15,
+      "new_members": 490,
+      "exited_members": 490,
+      "entrant_bad_rate": 0.24285714285714285,
+      "exit_bad_rate": 0.21224489795918366
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7415,
+      "net_bad_captured": -7,
+      "new_members": 585,
+      "exited_members": 585,
+      "entrant_bad_rate": 0.11452991452991453,
+      "exit_bad_rate": 0.1264957264957265
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8014,
+      "net_bad_captured": -1,
+      "new_members": 597,
+      "exited_members": 597,
+      "entrant_bad_rate": 0.08542713567839195,
+      "exit_bad_rate": 0.08710217755443886
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8645,
+      "net_bad_captured": -4,
+      "new_members": 609,
+      "exited_members": 609,
+      "entrant_bad_rate": 0.06896551724137931,
+      "exit_bad_rate": 0.0755336617405583
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

@@ -1,32 +1,5 @@
 [
   {
-    "id": "V238",
-    "status": "QUEUED",
-    "definition": {
-      "id": "V238",
-      "label": "Natural cubic offset correction with linear tails",
-      "method": "natural_cubic",
-      "worker": "structured_heads.py",
-      "source_script": "v7/scripts/structured_heads.py",
-      "research_ready": true,
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "strength": 0.5,
-      "replaces_base_head": true,
-      "Kumo_frozen_fraction": 1.0,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "formula": "Original18 V25 inputs, signedlog and training-median imputation; per numeric input restricted cubic basis with correction-training quantile knots(.05,.35,.65,.95), linear tails, standardized basis plus missing and employment indicators. Repeated knots use linear-only fallback. eta=logit(globalKumo)+.5Xbeta; fit meanBCE+.003/2||beta_nonintercept||^2 on6k; final=.75sigmoid(eta)+.25spline77, mean5foldtest.",
-      "rationale": "Global coefficient roughness smoothing V200 increased AUC to.84731949 but reduced pooledKS to.52956578; stable9 reduced-knots V198 also traded KS for AUC. Test a different nonlinear boundary/shape restriction rather than further averaging weak population contexts. Linear tails can extrapolate badly and must be assessed; constant/repeated-knot coverage variables remain explicit.",
-      "priority": "P1",
-      "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
-      "batch": "structured_head",
-      "feature_catalog": "structured_head/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V239",
     "status": "QUEUED",
     "definition": {
