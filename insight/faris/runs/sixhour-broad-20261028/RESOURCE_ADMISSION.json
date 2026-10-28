@@ -19,5 +19,36 @@
       "backend": "A100"
     }
   ],
-  "policy": "No repeated allocation churn or account rotation to circumvent quota. Other profiles have zero paid balance. Use the granted VM efficiently and available noninterfering lab CPUs."
+  "policy": "3granted currentruntimes; fourth L4 and additionalA100requests refused. No more allocation churn or zero-credit rotation; no purchase. OriginalCLOCK unchanged.",
+  "active_owned": [
+    {
+      "number": 4,
+      "session": "logika-sixhour-20261028-4",
+      "GPU": "L4"
+    },
+    {
+      "number": 5,
+      "session": "logika-sixhour-20261028-5",
+      "GPU": "L4"
+    },
+    {
+      "number": 6,
+      "session": "logika-sixhour-20261028-6",
+      "GPU": "A100 80GB"
+    }
+  ],
+  "retired_owned": [
+    {
+      "number": 1,
+      "session": "logika-sixhour-20261028-1",
+      "released": true,
+      "reason": "SSH backgroundacktimeout inoldcontroller; completedTabMpreserved;2Kumo interruption attempts retained and explicitlyretry2."
+    }
+  ],
+  "additional_refusal": {
+    "number": 7,
+    "request": "L4",
+    "reason": "precondition failed; current active-session/usage/capacity limit, no exact cause returned"
+  },
+  "updated_UTC": "2026-10-28T18:01:40.679010+00:00"
 }
