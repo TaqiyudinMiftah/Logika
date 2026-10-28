@@ -1,0 +1,58 @@
+{
+  "UTC": "2026-10-28T21:38:09.498097+00:00",
+  "design": "cpu_ordercontrast_actuarial99_ordered",
+  "design_spec": {
+    "allow_gpu": false,
+    "class_balance": "none",
+    "family": "catboost",
+    "hypothesis": "At fixed CPU backend, feature view, capacity, seeds and data boundaries, explicit Ordered versus Plain CatBoost tests prediction-shift mitigation. Original GPU defaults may already select Ordered; no claim that Ordered was universally untried. ExistingCPUCatboost defaults Plain; this adds a matched control.",
+    "inner_split_seed": 20261029,
+    "parameters": {
+      "boost_from_average": false,
+      "boosting_type": "Ordered",
+      "depth": 4,
+      "iterations": 400,
+      "l2_leaf_reg": 30,
+      "learning_rate": 0.08
+    },
+    "registration": "Append-only predeclared CPUmatchedcomparison; full-sizepilot gate and original clock. PriorGPU/default andreuseddevelopment exposures explicit inCPU_ORDERED_PLAN.json.",
+    "resource": "cpu",
+    "sources": [
+      "https://proceedings.neurips.cc/paper_files/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html",
+      "https://catboost.ai/docs/en/references/training-parameters/common#boosting_type"
+    ],
+    "view": "actuarial99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_ordercontrast_actuarial99_ordered/s2026/fold0/RESULT.json": "764f529b6d446c7ea2268e0f7cc0c8e3c4a43b604d0410969ac5c2c79db6b341",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s2026/fold1/RESULT.json": "651c71e91153e56653fb9a7070b4b453c1bd891413c2648ba2191b7ac43cbf0d",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s2026/fold2/RESULT.json": "55a38071bbc39a373c9ada5f1d8fbeceba7b880f14c50c8d6819c1ccd24e9eee",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s2026/fold3/RESULT.json": "3419dbc7a5d5ad192aa20576bfa602dca9061e3c437c67a0a9037336f1838d79",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s2026/fold4/RESULT.json": "f850117f4a77d0859b56078f08981fa818dbdfc017103f37a052df382db22f0c",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s7731/fold0/RESULT.json": "5bd819aed0e13a987b12da85c859ad996fa683077c7eda231ad01580db33b279",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s7731/fold1/RESULT.json": "60dae8f0213d00d3106cf650e8ccbcf1bebd80128c9121254aa8e2e5b74bdc66",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s7731/fold2/RESULT.json": "35855ff6cddb9bf25bc020aaa090e379e87bbdecf67ead77fa6bba473b43ba30",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s7731/fold3/RESULT.json": "4fc136a73dd70f251b4a4d113533a766c330210c4977b38b6ff19ebb72602018",
+    "composed/cpu_ordercontrast_actuarial99_ordered/s7731/fold4/RESULT.json": "05e1aed79d1bd90e083e0ac72d2fabf9a41a3c7b3e64dafcd993ab3b039cef69"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
