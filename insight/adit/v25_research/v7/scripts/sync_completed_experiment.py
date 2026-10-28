@@ -57,7 +57,7 @@ def main(ident,expected,resume=False):
     files += [result['submission']]
     for name in files:
         download(name)
-    for name in ['GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json','MATCHED_V193.json','ERROR_ANALYSIS_V193.md','ERROR_ANALYSIS_V193.json','CONTINUOUS_INSIGHT.json','MATCHED_SUPPORT_CONTROL.json']:
+    for name in ['GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json','MATCHED_V193.json','ERROR_ANALYSIS_V193.md','ERROR_ANALYSIS_V193.json','CONTINUOUS_INSIGHT.json','MATCHED_SUPPORT_CONTROL.json','MATCHED_PROJECTION_CONTROL.json']:
         download(f'v7/runs/{ident}/{name}',optional=True)
     download('v7/kumo_gpu/WEIGHTS_MANIFEST.json',optional=True)
     for name in ['v7/reports/BEST_DEVELOPMENT_MODEL.json','v7/reports/DEVELOPMENT_PARETO_FRONTIER.json','v7/reports/V25_TEST_CACHE_REPLAY.json','v7/KUMO_QUEUE_10.json','v7/KUMO_QUEUE_10.md','v7/KUMO_QUEUE_15.json','v7/KUMO_QUEUE_15.md','v7/conservative/reports/LIGHTGBM_OFFSET_CHECK.json']:

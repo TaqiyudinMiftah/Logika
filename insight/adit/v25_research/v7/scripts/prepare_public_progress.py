@@ -29,7 +29,7 @@ def main():
         if int(x['id'][1:])>=120 or x['id'] in ['V00','V25','V118','V119']:
             folder=DEST/'results'/x['id'];folder.mkdir(parents=True,exist_ok=True)
             (folder/'RESULT_VIEW.json').write_text(json.dumps(r,indent=2),encoding='utf-8')
-            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json','MATCHED_V193.json','ERROR_ANALYSIS_V193.md','ERROR_ANALYSIS_V193.json','CONTINUOUS_INSIGHT.json','MATCHED_SUPPORT_CONTROL.json']:
+            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json','MATCHED_V193.json','ERROR_ANALYSIS_V193.md','ERROR_ANALYSIS_V193.json','CONTINUOUS_INSIGHT.json','MATCHED_SUPPORT_CONTROL.json','MATCHED_PROJECTION_CONTROL.json']:
                 source=V/'runs'/x['id']/name
                 if source.exists():shutil.copyfile(source,folder/name)
     (DEST/'EXPERIMENT_REGISTRY.json').write_text(json.dumps(registry,indent=2),encoding='utf-8')

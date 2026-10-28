@@ -122,7 +122,8 @@
       "cross_capacity"
     ],
     "depends_on": [
-      "V251"
+      "V251",
+      "V252"
     ],
     "no_outer_validation_tuning": true,
     "formula": "Keep the original V25 head beta0 fixed. On identical6k correction rows fit signedlog standardization for U; missing values are0 in centered basis with explicit shared support flags. R=U, without projecting out base features. eta0=logit(frozenKumo)+.5*Xbase*beta0. Fit gamma minimizing meanBCE(eta0+R*gamma)+.01/2||gamma||^2. Inference eta=eta0+.25*R*gamma; final=.75sigmoid(eta)+.25original_spline77; mean5fold test. Projection is training-only; query targets are unused.",

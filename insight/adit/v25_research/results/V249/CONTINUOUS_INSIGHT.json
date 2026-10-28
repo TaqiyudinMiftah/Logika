@@ -1,0 +1,109 @@
+{
+  "experiment": "V249",
+  "method": "item_price_data",
+  "hypothesis": "Audit found weak spectral values, duplicated missing indicators and thin-file errors. Test price_change,cross_capacity beyond exactly the same8 support/availability variables. Own-category prices remove category-level composition without a population reference; cross-category within-order covariance measures a different structure than category entropy or mean price. No SKU/quality information; estimates are finite-history proxies and raw price changes are not causal risk evidence. New inputs are linear with stronger shrinkage to avoid repeating the145-parameter spectral head; repeated development selection remains.",
+  "formula": "V25 original18-input quadratic offset design plus standardized signedlog linear inputs ip_price_comparable_categories,ip_multicat_price_orders180,ip_valid_price_items180,ip_price_change_observed,ip_order_coherence_observed,ip_affordability_cross_observed,ip_debt_cross_observed,ip_liquidity_cross_observed,ip_category_price_change_shrunk,ip_category_price_change_breadth,ip_category_price_change_dispersion,ip_price_upgrade_x_installment_burden,ip_order_covariance_x_total_burden,ip_price_dispersion_x_liquidity_shortfall; all new value-availability masks are explicit shared support features. Fit meanBCE(KumoLogit+Xbeta)+.003/2||base_beta_nonintercept||^2+.01/2||new_beta||^2 on identical6k; new means/scales fit only6k; undefined additional values contribute0 in centered basis and retainNaN in raw cache; inference eta=KumoLogit+.5Xbeta; final75:25original_spline77; mean5foldtest.",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5293803430311869,
+      "signed_KS": 0.5293803430311869,
+      "AUC": 0.8469143368082853,
+      "rows": 70000
+    },
+    "delta_KS": -0.0020791715313488446,
+    "delta_AUC": -0.0001932075413221268,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5216609565026802,
+        0.5386836848542976
+      ],
+      "delta_KS": [
+        -0.004318453021097304,
+        0.00019847221425775273
+      ],
+      "candidate_AUC": [
+        0.8431859517291768,
+        0.8506892618830476
+      ],
+      "delta_AUC": [
+        -0.0004823797547875458,
+        5.4859317810670776e-05
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.01507543920524359,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3854,
+      "net_bad_captured": 13,
+      "new_members": 270,
+      "exited_members": 270,
+      "entrant_bad_rate": 0.3962962962962963,
+      "exit_bad_rate": 0.34814814814814815
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5852,
+      "net_bad_captured": -3,
+      "new_members": 410,
+      "exited_members": 410,
+      "entrant_bad_rate": 0.23170731707317074,
+      "exit_bad_rate": 0.23902439024390243
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7422,
+      "net_bad_captured": 0,
+      "new_members": 478,
+      "exited_members": 478,
+      "entrant_bad_rate": 0.11715481171548117,
+      "exit_bad_rate": 0.11715481171548117
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8020,
+      "net_bad_captured": 5,
+      "new_members": 522,
+      "exited_members": 522,
+      "entrant_bad_rate": 0.09961685823754789,
+      "exit_bad_rate": 0.09003831417624521
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8654,
+      "net_bad_captured": 5,
+      "new_members": 504,
+      "exited_members": 504,
+      "entrant_bad_rate": 0.07738095238095238,
+      "exit_bad_rate": 0.06746031746031746
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

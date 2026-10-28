@@ -1,55 +1,5 @@
 [
   {
-    "id": "V249",
-    "status": "QUEUED",
-    "definition": {
-      "id": "V249",
-      "label": "Joint data representation without order coherence",
-      "method": "item_price_data",
-      "worker": "data_fe_worker.py",
-      "source_script": "v7/scripts/data_fe_worker.py",
-      "research_ready": true,
-      "families": [
-        "item_price_data",
-        "price_change",
-        "cross_capacity"
-      ],
-      "input_features": [
-        "ip_price_comparable_categories",
-        "ip_multicat_price_orders180",
-        "ip_valid_price_items180",
-        "ip_price_change_observed",
-        "ip_order_coherence_observed",
-        "ip_affordability_cross_observed",
-        "ip_debt_cross_observed",
-        "ip_liquidity_cross_observed",
-        "ip_category_price_change_shrunk",
-        "ip_category_price_change_breadth",
-        "ip_category_price_change_dispersion",
-        "ip_price_upgrade_x_installment_burden",
-        "ip_order_covariance_x_total_burden",
-        "ip_price_dispersion_x_liquidity_shortfall"
-      ],
-      "new_penalty": 0.01,
-      "penalty": 0.003,
-      "strength": 0.5,
-      "replaces_base_head": true,
-      "Kumo_frozen_fraction": 1.0,
-      "comparison_baseline": "V25",
-      "depends_on": [
-        "V243"
-      ],
-      "no_outer_validation_tuning": true,
-      "formula": "V25 original18-input quadratic offset design plus standardized signedlog linear inputs ip_price_comparable_categories,ip_multicat_price_orders180,ip_valid_price_items180,ip_price_change_observed,ip_order_coherence_observed,ip_affordability_cross_observed,ip_debt_cross_observed,ip_liquidity_cross_observed,ip_category_price_change_shrunk,ip_category_price_change_breadth,ip_category_price_change_dispersion,ip_price_upgrade_x_installment_burden,ip_order_covariance_x_total_burden,ip_price_dispersion_x_liquidity_shortfall; all new value-availability masks are explicit shared support features. Fit meanBCE(KumoLogit+Xbeta)+.003/2||base_beta_nonintercept||^2+.01/2||new_beta||^2 on identical6k; new means/scales fit only6k; undefined additional values contribute0 in centered basis and retainNaN in raw cache; inference eta=KumoLogit+.5Xbeta; final75:25original_spline77; mean5foldtest.",
-      "rationale": "Audit found weak spectral values, duplicated missing indicators and thin-file errors. Test price_change,cross_capacity beyond exactly the same8 support/availability variables. Own-category prices remove category-level composition without a population reference; cross-category within-order covariance measures a different structure than category entropy or mean price. No SKU/quality information; estimates are finite-history proxies and raw price changes are not causal risk evidence. New inputs are linear with stronger shrinkage to avoid repeating the145-parameter spectral head; repeated development selection remains.",
-      "priority": "P1",
-      "execution_host": "local_windows",
-      "preflight_receipt": "v7/data_fe/reports/PREFLIGHT.json",
-      "batch": "data_fe",
-      "feature_catalog": "data_fe/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V250",
     "status": "QUEUED",
     "definition": {
@@ -236,7 +186,8 @@
         "cross_capacity"
       ],
       "depends_on": [
-        "V251"
+        "V251",
+        "V252"
       ],
       "no_outer_validation_tuning": true,
       "formula": "Keep the original V25 head beta0 fixed. On identical6k correction rows fit signedlog standardization for U; missing values are0 in centered basis with explicit shared support flags. R=U, without projecting out base features. eta0=logit(frozenKumo)+.5*Xbase*beta0. Fit gamma minimizing meanBCE(eta0+R*gamma)+.01/2||gamma||^2. Inference eta=eta0+.25*R*gamma; final=.75sigmoid(eta)+.25original_spline77; mean5fold test. Projection is training-only; query targets are unused.",

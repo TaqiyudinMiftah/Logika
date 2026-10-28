@@ -74,6 +74,17 @@ def postprocess(out, result, tr, y, folds, reference, prediction, frames):
             caveat='V252 isolates added values with the same projection; V253 also changes projection and cannot attribute its difference to values alone.')
         result['comparison_to_support_control'] = comparison
         dump(comparison, out/'MATCHED_SUPPORT_CONTROL.json')
+    if result['experiment'] == 'V253':
+        d = pd.read_csv(V/'runs/V252/OOF.csv', float_precision='round_trip')
+        assert d.application_id.tolist() == tr.application_id.tolist()
+        control = d.prediction.to_numpy(); metrics = scores(y, control)
+        comparison = dict(control='V252', control_metrics=metrics, candidate_metrics=result['OOF'],
+            delta_KS=result['OOF']['KS']-metrics['KS'], delta_AUC=result['OOF']['AUC']-metrics['AUC'],
+            fold_wins=sum(scores(y[folds==i],prediction[folds==i])['KS'] > scores(y[folds==i],control[folds==i])['KS'] for i in range(5)),
+            confidence_interval=bootstrap(y, control, prediction, folds),
+            interpretation='Matched16 inputs and fixed V25 head; this contrast removes the training-only projection.')
+        result['comparison_to_projection_control'] = comparison
+        dump(comparison, out/'MATCHED_PROJECTION_CONTROL.json')
 
 
 def preflight():
@@ -95,6 +106,9 @@ def preflight():
         query=h.iloc[:100].copy(); query.employment_type='unseen'; query['target']=1-query.target
         before=joblib.hash(model)
         p,_=probability(model,query,k[:100],head)
+        query['target']=1-query.target
+        label_check,_=probability(model,query,k[:100],head)
+        assert np.array_equal(p,label_check)
         assert np.isfinite(p).all() and before==joblib.hash(model)
         if spec['project']:
             assert audit['residual_base_cross_moment_max'] < 1e-7

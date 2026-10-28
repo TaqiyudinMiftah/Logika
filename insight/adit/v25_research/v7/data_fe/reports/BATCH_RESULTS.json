@@ -1,6 +1,6 @@
 {
-  "updated_UTC": "2026-10-28T04:07:18.816099+00:00",
-  "completed": 6,
+  "updated_UTC": "2026-10-28T04:09:12.510057+00:00",
+  "completed": 7,
   "planned": 8,
   "public_incumbent": "V25",
   "public_KS": 0.56822,
@@ -126,6 +126,26 @@
       "decision": "UNIQUE_VALUE_NOT_ESTABLISHED",
       "submission": "v7/submissions/submission_V248_V25_conservative.csv",
       "submission_sha256": "bc8404f9ffaf08bd40f38518a69f32e7b3d3d84003ae2a36f61ffb3473fb90f1"
+    },
+    {
+      "experiment": "V249",
+      "label": "Joint data representation without order coherence",
+      "KS": 0.5293803430311869,
+      "AUC": 0.8469143368082853,
+      "delta_KS_V25": -0.0009043170128542055,
+      "delta_AUC_V25": -0.00011494209883056161,
+      "fold_wins_V25": 1,
+      "delta_KS_V25_CI_low": -0.0020936484038426737,
+      "delta_KS_V25_CI_high": 0.0005364029672456689,
+      "delta_KS_support": 3.329467669732633e-05,
+      "delta_AUC_support": -5.741540759052199e-06,
+      "fold_wins_support": 2,
+      "delta_KS_support_CI_low": -0.001015017465855647,
+      "delta_KS_support_CI_high": 0.0012003583399568683,
+      "parameters": 104,
+      "decision": "UNIQUE_VALUE_NOT_ESTABLISHED",
+      "submission": "v7/submissions/submission_V249_V25_conservative.csv",
+      "submission_sha256": "68cb0b5c75df34091a9058fd27cf7004cf619d11bed841eb884ad5212c3dede4"
     }
   ],
   "analysis": [
@@ -3685,6 +3705,619 @@
           "delta_AUC": [
             -9.22411473339907e-05,
             6.906024163145785e-05
+          ],
+          "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+        }
+      }
+    },
+    {
+      "experiment": "V249",
+      "formula": "V25 original18-input quadratic offset design plus standardized signedlog linear inputs ip_price_comparable_categories,ip_multicat_price_orders180,ip_valid_price_items180,ip_price_change_observed,ip_order_coherence_observed,ip_affordability_cross_observed,ip_debt_cross_observed,ip_liquidity_cross_observed,ip_category_price_change_shrunk,ip_category_price_change_breadth,ip_category_price_change_dispersion,ip_price_upgrade_x_installment_burden,ip_order_covariance_x_total_burden,ip_price_dispersion_x_liquidity_shortfall; all new value-availability masks are explicit shared support features. Fit meanBCE(KumoLogit+Xbeta)+.003/2||base_beta_nonintercept||^2+.01/2||new_beta||^2 on identical6k; new means/scales fit only6k; undefined additional values contribute0 in centered basis and retainNaN in raw cache; inference eta=KumoLogit+.5Xbeta; final75:25original_spline77; mean5foldtest.",
+      "uncertainty": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty",
+      "error_segments": [
+        {
+          "segment": "aux_account_months",
+          "value": "1_to_3",
+          "n": "49000",
+          "events": "7046",
+          "event_rate": "0.14379591836734693",
+          "reference_KS": "0.5430455704625252",
+          "KS": "0.5408617924412328",
+          "delta_KS": "-0.0021837780212924374",
+          "reference_AUC": "0.8528554806745277",
+          "AUC": "0.8527182279076156",
+          "delta_AUC": "-0.0001372527669120105"
+        },
+        {
+          "segment": "aux_account_months",
+          "value": "zero",
+          "n": "21000",
+          "events": "2461",
+          "event_rate": "0.11719047619047619",
+          "reference_KS": "0.5014612660015252",
+          "KS": "0.49932169088440437",
+          "delta_KS": "-0.0021395751171208177",
+          "reference_AUC": "0.8293413498486195",
+          "AUC": "0.8293051631340274",
+          "delta_AUC": "-3.618671459215683e-05"
+        },
+        {
+          "segment": "aux_allocation_count",
+          "value": "1_to_3",
+          "n": "1854",
+          "events": "347",
+          "event_rate": "0.1871628910463862",
+          "reference_KS": "0.5138269248789031",
+          "KS": "0.5213537593057567",
+          "delta_KS": "0.007526834426853535",
+          "reference_AUC": "0.8379512323852761",
+          "AUC": "0.8376949834489958",
+          "delta_AUC": "-0.00025624893628029"
+        },
+        {
+          "segment": "aux_allocation_count",
+          "value": "over3",
+          "n": "44414",
+          "events": "6265",
+          "event_rate": "0.14105912550096816",
+          "reference_KS": "0.5458653835110396",
+          "KS": "0.5436316294718464",
+          "delta_KS": "-0.0022337540391932365",
+          "reference_AUC": "0.8542959907049054",
+          "AUC": "0.8541820634958522",
+          "delta_AUC": "-0.00011392720905312181"
+        },
+        {
+          "segment": "aux_allocation_count",
+          "value": "zero",
+          "n": "23732",
+          "events": "2895",
+          "event_rate": "0.12198719029158941",
+          "reference_KS": "0.5034007776289404",
+          "KS": "0.5021630597159978",
+          "delta_KS": "-0.001237717912942582",
+          "reference_AUC": "0.8312474579603524",
+          "AUC": "0.8311590175673123",
+          "delta_AUC": "-8.844039304012341e-05"
+        },
+        {
+          "segment": "risk_conditional_negative_months",
+          "value": "1_to_3",
+          "n": "17621",
+          "events": "2792",
+          "event_rate": "0.15844730719028433",
+          "reference_KS": "0.5366807440543302",
+          "KS": "0.5354566170871333",
+          "delta_KS": "-0.0012241269671968702",
+          "reference_AUC": "0.849199426470358",
+          "AUC": "0.8490470204650108",
+          "delta_AUC": "-0.00015240600534716098"
+        },
+        {
+          "segment": "risk_conditional_negative_months",
+          "value": "over3",
+          "n": "16936",
+          "events": "2238",
+          "event_rate": "0.13214454416627303",
+          "reference_KS": "0.5439471803535488",
+          "KS": "0.5407694699515329",
+          "delta_KS": "-0.0031777104020159763",
+          "reference_AUC": "0.8515585640766722",
+          "AUC": "0.8515002253897991",
+          "delta_AUC": "-5.833868687310506e-05"
+        },
+        {
+          "segment": "risk_conditional_negative_months",
+          "value": "zero",
+          "n": "35443",
+          "events": "4477",
+          "event_rate": "0.1263154924808848",
+          "reference_KS": "0.5232319043860147",
+          "KS": "0.5213507458755913",
+          "delta_KS": "-0.0018811585104234751",
+          "reference_AUC": "0.8424829564055577",
+          "AUC": "0.8423577353048386",
+          "delta_AUC": "-0.00012522110071910841"
+        },
+        {
+          "segment": "risk_conditional_nonnegative_months",
+          "value": "1_to_3",
+          "n": "7613",
+          "events": "1200",
+          "event_rate": "0.15762511493497963",
+          "reference_KS": "0.538027054420708",
+          "KS": "0.5378174541296326",
+          "delta_KS": "-0.000209600291075418",
+          "reference_AUC": "0.8488026924476323",
+          "AUC": "0.8487077031030719",
+          "delta_AUC": "-9.498934456042551e-05"
+        },
+        {
+          "segment": "risk_conditional_nonnegative_months",
+          "value": "over3",
+          "n": "36801",
+          "events": "5132",
+          "event_rate": "0.13945273226271027",
+          "reference_KS": "0.5484190683705703",
+          "KS": "0.5467217265633485",
+          "delta_KS": "-0.0016973418072218083",
+          "reference_AUC": "0.8559735509007618",
+          "AUC": "0.8558601285653309",
+          "delta_AUC": "-0.00011342233543087943"
+        },
+        {
+          "segment": "risk_conditional_nonnegative_months",
+          "value": "zero",
+          "n": "25586",
+          "events": "3175",
+          "event_rate": "0.12409129992964903",
+          "reference_KS": "0.5036047048043406",
+          "KS": "0.5026598229145769",
+          "delta_KS": "-0.0009448818897637157",
+          "reference_AUC": "0.8311254350981326",
+          "AUC": "0.8310153373079938",
+          "delta_AUC": "-0.00011009779013881893"
+        },
+        {
+          "segment": "employment_type",
+          "value": "salaried",
+          "n": "33473",
+          "events": "4432",
+          "event_rate": "0.13240522211932004",
+          "reference_KS": "0.5300512209987697",
+          "KS": "0.5301489758597238",
+          "delta_KS": "9.775486095409125e-05",
+          "reference_AUC": "0.8473121437797949",
+          "AUC": "0.8471965192494564",
+          "delta_AUC": "-0.0001156245303385317"
+        },
+        {
+          "segment": "employment_type",
+          "value": "self_employed",
+          "n": "20987",
+          "events": "2895",
+          "event_rate": "0.13794253585552962",
+          "reference_KS": "0.5281411797769757",
+          "KS": "0.5269673291413642",
+          "delta_KS": "-0.0011738506356114842",
+          "reference_AUC": "0.8441075302321621",
+          "AUC": "0.84392481414318",
+          "delta_AUC": "-0.00018271608898212666"
+        },
+        {
+          "segment": "employment_type",
+          "value": "variable_income",
+          "n": "15540",
+          "events": "2180",
+          "event_rate": "0.1402831402831403",
+          "reference_KS": "0.5347909685216723",
+          "KS": "0.5344304510245564",
+          "delta_KS": "-0.0003605174971158531",
+          "reference_AUC": "0.8501934433884526",
+          "AUC": "0.8501693745536449",
+          "delta_AUC": "-2.4068834807655648e-05"
+        },
+        {
+          "segment": "baseline_risk_band",
+          "value": "005_to015",
+          "n": "19504",
+          "events": "1855",
+          "event_rate": "0.09510869565217392",
+          "reference_KS": "0.12950956347182763",
+          "KS": "0.1297863901637486",
+          "delta_KS": "0.00027682669192097276",
+          "reference_AUC": "0.5899363433005298",
+          "AUC": "0.589475851277204",
+          "delta_AUC": "-0.0004604920233257648"
+        },
+        {
+          "segment": "baseline_risk_band",
+          "value": "015_to04",
+          "n": "14563",
+          "events": "3624",
+          "event_rate": "0.24884982489871593",
+          "reference_KS": "0.16838795693638842",
+          "KS": "0.16837105606910646",
+          "delta_KS": "-1.6900867281954834e-05",
+          "reference_AUC": "0.6058415804520634",
+          "AUC": "0.6051440539116477",
+          "delta_AUC": "-0.0006975265404156605"
+        },
+        {
+          "segment": "baseline_risk_band",
+          "value": "over04",
+          "n": "6080",
+          "events": "3493",
+          "event_rate": "0.5745065789473685",
+          "reference_KS": "0.22952061281987468",
+          "KS": "0.22998208023535055",
+          "delta_KS": "0.0004614674154758691",
+          "reference_AUC": "0.6537065516531988",
+          "AUC": "0.6529468457042198",
+          "delta_AUC": "-0.0007597059489790059"
+        },
+        {
+          "segment": "baseline_risk_band",
+          "value": "under005",
+          "n": "29853",
+          "events": "535",
+          "event_rate": "0.017921146953405017",
+          "reference_KS": "0.3253632580667167",
+          "KS": "0.3226345589740091",
+          "delta_KS": "-0.002728699092707565",
+          "reference_AUC": "0.7035401682995295",
+          "AUC": "0.7025016687780082",
+          "delta_AUC": "-0.0010384995215212411"
+        },
+        {
+          "segment": "orders90_exposure_band",
+          "value": "1_to3",
+          "n": "18715",
+          "events": "1163",
+          "event_rate": "0.06214266631044617",
+          "reference_KS": "0.532048046301529",
+          "KS": "0.530452100663813",
+          "delta_KS": "-0.0015959456377160341",
+          "reference_AUC": "0.840377904720997",
+          "AUC": "0.8403563987926111",
+          "delta_AUC": "-2.150592838590093e-05"
+        },
+        {
+          "segment": "orders90_exposure_band",
+          "value": "4_to10",
+          "n": "36368",
+          "events": "5141",
+          "event_rate": "0.14136053673559174",
+          "reference_KS": "0.4919932449391875",
+          "KS": "0.4917252834713465",
+          "delta_KS": "-0.0002679614678410269",
+          "reference_AUC": "0.8250396991660672",
+          "AUC": "0.8249438900783166",
+          "delta_AUC": "-9.580908775064234e-05"
+        },
+        {
+          "segment": "orders90_exposure_band",
+          "value": "over10",
+          "n": "11489",
+          "events": "3097",
+          "event_rate": "0.2695621899207938",
+          "reference_KS": "0.4554675286179036",
+          "KS": "0.45540612044067375",
+          "delta_KS": "-6.140817722988245e-05",
+          "reference_AUC": "0.802579635940313",
+          "AUC": "0.8023821755608997",
+          "delta_AUC": "-0.00019746037941326122"
+        },
+        {
+          "segment": "orders90_exposure_band",
+          "value": "zero",
+          "n": "3428",
+          "events": "106",
+          "event_rate": "0.030921820303383897",
+          "reference_KS": "0.5118080719730101",
+          "KS": "0.5130121658923359",
+          "delta_KS": "0.0012040939193257438",
+          "reference_AUC": "0.8304414253745754",
+          "AUC": "0.8305124214783093",
+          "delta_AUC": "7.099610373384468e-05"
+        }
+      ],
+      "per_fold": [
+        {
+          "fold": 0,
+          "metrics": {
+            "KS": 0.5279831709282168,
+            "signed_KS": 0.5279831709282168,
+            "AUC": 0.8437999601655621,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.5284799057608154,
+            "signed_KS": 0.5284799057608154,
+            "AUC": 0.8440697839179565,
+            "rows": 14000
+          },
+          "delta_KS": -0.0004967348325985999,
+          "delta_AUC": -0.0002698237523943714,
+          "parameters": 104,
+          "new_trainable_parameters": 104,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5527210984967255,
+          "heldout_corrected_Kumo_KS": 0.5261200566134232,
+          "train_validation_head_KS_gap": 0.026601041883302257,
+          "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+          "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+          "optimization": {
+            "objective": 0.28961736009797584,
+            "gradient_max_abs": 4.813554580699719e-10,
+            "iterations": 4,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 14,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion",
+              "ip_price_upgrade_x_installment_burden",
+              "ip_order_covariance_x_total_burden",
+              "ip_price_dispersion_x_liquidity_shortfall"
+            ],
+            "training_only_scaling": true
+          }
+        },
+        {
+          "fold": 1,
+          "metrics": {
+            "KS": 0.5367895295166794,
+            "signed_KS": 0.5367895295166794,
+            "AUC": 0.8494981282553251,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.537999171224562,
+            "signed_KS": 0.537999171224562,
+            "AUC": 0.8496049534180117,
+            "rows": 14000
+          },
+          "delta_KS": -0.001209641707882625,
+          "delta_AUC": -0.0001068251626865635,
+          "parameters": 104,
+          "new_trainable_parameters": 104,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5378445373925493,
+          "heldout_corrected_Kumo_KS": 0.5343951154509576,
+          "train_validation_head_KS_gap": 0.0034494219415917016,
+          "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+          "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+          "optimization": {
+            "objective": 0.29150534413669593,
+            "gradient_max_abs": 9.882854452699282e-08,
+            "iterations": 3,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 14,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion",
+              "ip_price_upgrade_x_installment_burden",
+              "ip_order_covariance_x_total_burden",
+              "ip_price_dispersion_x_liquidity_shortfall"
+            ],
+            "training_only_scaling": true
+          }
+        },
+        {
+          "fold": 2,
+          "metrics": {
+            "KS": 0.5404358892720885,
+            "signed_KS": 0.5404358892720885,
+            "AUC": 0.8497575173153937,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.5402982382891557,
+            "signed_KS": 0.5402982382891557,
+            "AUC": 0.849856907759798,
+            "rows": 14000
+          },
+          "delta_KS": 0.0001376509829328354,
+          "delta_AUC": -9.939044440432365e-05,
+          "parameters": 104,
+          "new_trainable_parameters": 104,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5626139583863315,
+          "heldout_corrected_Kumo_KS": 0.5391101616120799,
+          "train_validation_head_KS_gap": 0.02350379677425163,
+          "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+          "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+          "optimization": {
+            "objective": 0.2838902324527307,
+            "gradient_max_abs": 4.907953673101891e-13,
+            "iterations": 4,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 14,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion",
+              "ip_price_upgrade_x_installment_burden",
+              "ip_order_covariance_x_total_burden",
+              "ip_price_dispersion_x_liquidity_shortfall"
+            ],
+            "training_only_scaling": true
+          }
+        },
+        {
+          "fold": 3,
+          "metrics": {
+            "KS": 0.5291276169258452,
+            "signed_KS": 0.5291276169258452,
+            "AUC": 0.8437988203245178,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.5306520583131207,
+            "signed_KS": 0.5306520583131207,
+            "AUC": 0.8438633563716158,
+            "rows": 14000
+          },
+          "delta_KS": -0.001524441387275477,
+          "delta_AUC": -6.45360470979961e-05,
+          "parameters": 104,
+          "new_trainable_parameters": 104,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5289893569818553,
+          "heldout_corrected_Kumo_KS": 0.5289297932986463,
+          "train_validation_head_KS_gap": 5.9563683209029605e-05,
+          "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+          "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+          "optimization": {
+            "objective": 0.29003581075587453,
+            "gradient_max_abs": 1.973139127130555e-12,
+            "iterations": 4,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 14,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion",
+              "ip_price_upgrade_x_installment_burden",
+              "ip_order_covariance_x_total_burden",
+              "ip_price_dispersion_x_liquidity_shortfall"
+            ],
+            "training_only_scaling": true
+          }
+        },
+        {
+          "fold": 4,
+          "metrics": {
+            "KS": 0.5283091173224486,
+            "signed_KS": 0.5283091173224486,
+            "AUC": 0.8478607669333461,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.529219749195103,
+            "signed_KS": 0.529219749195103,
+            "AUC": 0.8478967072100803,
+            "rows": 14000
+          },
+          "delta_KS": -0.0009106318726543883,
+          "delta_AUC": -3.594027673414768e-05,
+          "parameters": 104,
+          "new_trainable_parameters": 104,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5523625843780136,
+          "heldout_corrected_Kumo_KS": 0.5305992126341502,
+          "train_validation_head_KS_gap": 0.021763371743863336,
+          "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+          "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+          "optimization": {
+            "objective": 0.28786055581405096,
+            "gradient_max_abs": 6.849953981353611e-08,
+            "iterations": 3,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 14,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion",
+              "ip_price_upgrade_x_installment_burden",
+              "ip_order_covariance_x_total_burden",
+              "ip_price_dispersion_x_liquidity_shortfall"
+            ],
+            "training_only_scaling": true
+          }
+        }
+      ],
+      "overfitting_assessment": {
+        "development_folds_reused": true,
+        "independent_holdout": false,
+        "hyperparameters_prespecified": true,
+        "selection_corrected_CI": false,
+        "public_score_unknown": true,
+        "risk": "HIGH_SEARCH_MULTIPLICITY",
+        "diagnostic": "Audit found weak spectral values, duplicated missing indicators and thin-file errors. Test price_change,cross_capacity beyond exactly the same8 support/availability variables. Own-category prices remove category-level composition without a population reference; cross-category within-order covariance measures a different structure than category entropy or mean price. No SKU/quality information; estimates are finite-history proxies and raw price changes are not causal risk evidence. New inputs are linear with stronger shrinkage to avoid repeating the145-parameter spectral head; repeated development selection remains.; all new fitting uses correction rows only; repeated development selection remains.; repeated feature search remains; finite-value contribution and source availability are separated with a shared support control and no repeated missing indicators for new values.",
+        "inner_crossfit_used": false
+      },
+      "support_comparison": {
+        "control": "V243",
+        "control_metrics": {
+          "KS": 0.5293470483544895,
+          "signed_KS": 0.5293470483544895,
+          "AUC": 0.8469200783490444,
+          "rows": 70000
+        },
+        "candidate_metrics": {
+          "KS": 0.5293803430311869,
+          "signed_KS": 0.5293803430311869,
+          "AUC": 0.8469143368082853,
+          "rows": 70000
+        },
+        "delta_KS": 3.329467669732633e-05,
+        "delta_AUC": -5.741540759052199e-06,
+        "fold_wins": 2,
+        "confidence_interval": {
+          "repetitions": 300,
+          "seed": 192026,
+          "baseline_KS": [
+            0.5215654124914237,
+            0.5384191354087807
+          ],
+          "candidate_KS": [
+            0.5216609565026802,
+            0.5386836848542976
+          ],
+          "delta_KS": [
+            -0.001015017465855647,
+            0.0012003583399568683
+          ],
+          "candidate_AUC": [
+            0.8431859517291768,
+            0.8506892618830476
+          ],
+          "delta_AUC": [
+            -7.394437665211862e-05,
+            7.256871948330411e-05
           ],
           "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
         }
