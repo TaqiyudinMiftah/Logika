@@ -1,5 +1,7 @@
 # Next mechanisms to implement during the rolling research goal
 
+Status update: the three population ideas below were implemented as V222-V224 and completed; they are retained as design history. The latest executable research batch is V238-V242 in STRUCTURED_HEAD_RESEARCH.md and structured_head_plan.json. These test five different correction mechanisms after the population mixtures failed to beat the development incumbent. Readiness requires the batch preflight PASS, not this document alone.
+
 DRAFT hypotheses only: not executable queue entries, not counted toward the3-job reserve. Build and preflight code before marking readiness. User explicitly requested continuous research until they stop; do not mark the goal complete just because a numerical score rises.
 
 1. Frozen Large population context by employment. Adapt extra_frozen_context.local_predictions, using3 actual employment categories rather than binary allocation coverage. Each expert context stays within the original50k context pool; cap24k,8estimators, fixed15%local+85%cachedglobalV168 before6k correction and25%spline77. Query groups use only attributes at decision. Fallbackglobal for missing/unsupported category. This tests different cashflow/reliability mechanisms under salaried/self-employed/variable income. No outer target may choose the groups or weight.

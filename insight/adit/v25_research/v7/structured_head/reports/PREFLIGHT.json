@@ -1,0 +1,91 @@
+{
+  "status": "PASS",
+  "synthetic_only": true,
+  "gradient_checks": [
+    {
+      "method": "weighted_BCE",
+      "gradient_error": 2.3051451384478718e-08
+    },
+    {
+      "method": "Brier",
+      "gradient_error": 5.30691949831155e-09
+    }
+  ],
+  "natural_cubic_linear_tail_check": true,
+  "branches": [
+    {
+      "method": "natural_cubic",
+      "parameters": 21,
+      "checkpoint_replay_exact": true,
+      "training_only_preprocessing": true,
+      "optimization": {
+        "gradient_max_abs": 7.349009144247236e-07,
+        "iterations": 44
+      }
+    },
+    {
+      "method": "group_sparse",
+      "parameters": 25,
+      "checkpoint_replay_exact": true,
+      "training_only_preprocessing": true,
+      "optimization": {
+        "objective": 0.4736891573462066,
+        "gradient_max_abs": 1.8963865405059279e-07,
+        "proximal_gradient_max_abs": 1.8963865405059279e-07,
+        "raw_smooth_gradient_max_abs": 0.002148511895478776,
+        "gradient_diagnostic": "proximal KKT mapping, not smooth gradient",
+        "iterations": 319,
+        "active_groups": 3,
+        "total_groups": 5,
+        "group_lambda": 0.001
+      }
+    },
+    {
+      "method": "spline_pca",
+      "parameters": 9,
+      "checkpoint_replay_exact": true,
+      "training_only_preprocessing": true,
+      "optimization": {
+        "objective": 0.4732198036083332,
+        "gradient_max_abs": 1.012790779229692e-06,
+        "iterations": 14,
+        "retained_components": 7,
+        "total_basis_columns": 23,
+        "explained_variance": 0.9595943829652388,
+        "labels_used_for_PCA": false
+      }
+    },
+    {
+      "method": "leverage_weighted",
+      "parameters": 25,
+      "checkpoint_replay_exact": true,
+      "training_only_preprocessing": true,
+      "optimization": {
+        "objective": 0.4722665402891235,
+        "gradient_max_abs": 5.46105994799368e-07,
+        "iterations": 24,
+        "weight_min": 0.31248794545013203,
+        "downweighted_rows": 50,
+        "weight_definition": "clip(sqrt(training_p95_d2/max(d2,1e-12)),.25,1)",
+        "query_downweighting": false,
+        "class_balance_changed": true,
+        "weighted_event_rate": 0.22170775733453235
+      }
+    },
+    {
+      "method": "brier_loss",
+      "parameters": 25,
+      "checkpoint_replay_exact": true,
+      "training_only_preprocessing": true,
+      "optimization": {
+        "objective": 0.1537878639731536,
+        "gradient_max_abs": 2.3745965598080373e-07,
+        "iterations": 23,
+        "nonconvex_parameterization": true,
+        "initializer": "same-fold BCE head",
+        "loss_before": 0.15390080199796913
+      }
+    }
+  ],
+  "source_sha256": "f9cd5567555296973152d3691d2202872cb924522197620696e90eb2f854172c"
+}

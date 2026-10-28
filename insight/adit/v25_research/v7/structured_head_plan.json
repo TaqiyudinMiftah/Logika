@@ -1,0 +1,109 @@
+[
+  {
+    "id": "V238",
+    "label": "Natural cubic offset correction with linear tails",
+    "method": "natural_cubic",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Original18 V25 inputs, signedlog and training-median imputation; per numeric input restricted cubic basis with correction-training quantile knots(.05,.35,.65,.95), linear tails, standardized basis plus missing and employment indicators. Repeated knots use linear-only fallback. eta=logit(globalKumo)+.5Xbeta; fit meanBCE+.003/2||beta_nonintercept||^2 on6k; final=.75sigmoid(eta)+.25spline77, mean5foldtest.",
+    "rationale": "Global coefficient roughness smoothing V200 increased AUC to.84731949 but reduced pooledKS to.52956578; stable9 reduced-knots V198 also traded KS for AUC. Test a different nonlinear boundary/shape restriction rather than further averaging weak population contexts. Linear tails can extrapolate badly and must be assessed; constant/repeated-knot coverage variables remain explicit.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json"
+  },
+  {
+    "id": "V239",
+    "label": "Group-sparse selection of complete risk-feature effects",
+    "method": "group_sparse",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "group_lambda": 0.001,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Same original18 V25 spline design. Minimize meanBCE(offset+Xbeta)+.003/2||beta_nonintercept||^2+.001*sum_g sqrt(dim_g)||beta_g||_2. Each numeric spline block and its missing indicator is one group; employment dummies one group; intercept/logit not group-penalized. Convex proximal solver, KKT mapping checked. eta=offset+.5Xbeta; final75:25 original spline77; mean5foldtest.",
+    "rationale": "V221's segment improvements are uneven and simple across-source mixtures V224-V234 fail against the development incumbent. Shared coverage, uncertainty and risk-level predictors may allow redundant weak correction effects. Remove entire feature effects within correction training rather than selecting individual coefficients by outer importance. Group sparsity is a hypothesis, not proof that any particular source is redundant.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json"
+  },
+  {
+    "id": "V240",
+    "label": "Training-only principal-component compression of correction basis",
+    "method": "spline_pca",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "retained_variance": 0.95,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Fit original18 V25 spline encoder on6k; center its basis/missing/employment columns and retain PCA components explaining95%training variance, whiten=False. Preserve separate intercept and standardizedKumo logit. Fit meanBCE(offset+XPCA*beta)+.003/2||beta_nonintercept||^2. Inference eta=offset+.5XPCA*beta; final75:25spline77, mean5foldtest. No target used in PCA or component-count selection.",
+    "rationale": "Reduced-knot and roughness controls improve some AUC measures but lose KS, suggesting the correction needs a different capacity constraint. Compress correlated basis directions instead of smoothing every input equally. Low-variance directions may contain important risk or thin-file information, so inspect those segments and reject if lost; PCA is not assigned semantic creditworthiness labels.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json"
+  },
+  {
+    "id": "V241",
+    "label": "Feature-leverage weighted offset correction",
+    "method": "leverage_weighted",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Original18 spline design. On6k only, b=encoded covariates excluding intercept/Kumo; S=cov(b)+.1I; d2=(b-mean)'inv(S)(b-mean); t=training95th percentile(d2); w=clip(sqrt(max(t,1e-12)/max(d2,1e-12)),.25,1). Fit sum w*BCE/sum w+.003/2||beta_nonintercept||^2. No query-time weight/gate. eta=Kumo logit+.5Xbeta; final75:25spline77, mean5foldtest.",
+    "rationale": "Current best has weaker KS in zero-order(3428 rows), no-allocation(23732) and high-conditional-stress groups thanV25, while support-sensitive bootstrap corrections yielded only tiny gains. Test whether a small number of high-leverage feature combinations dominates correction coefficients. Weighting can suppress genuine high-risk or minority borrowers and change effective class balance; report weights/event rates and segment errors, no causal or robustness guarantee.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json"
+  },
+  {
+    "id": "V242",
+    "label": "Brier proper-score correction with unchanged representation",
+    "method": "brier_loss",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.",
+    "rationale": "Repeated experiments show KS/AUC tradeoffs and weak tail capture: V221 captures6 fewer defaults thanV25 in the top10% despite greater pooledKS. Test another proper scoring objective with unchanged data, without directly optimizing a selected KS threshold. Brier loss is nonconvex in logistic coefficients; stationary convergence does not establish a global optimum or better KS.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json"
+  }
+]

@@ -2,7 +2,7 @@
 
 Baseline public tetap **V25:0.56822**, verified terhadap hash CSV. Pooled OOF V25 **0.5302846600**, AUC **0.8470292789**. Target pooled0.531 tercapai pada fold pengembangan; generalisasi belum terbukti. Tidak ada submission otomatis ke Kaggle.
 
-**235 eksperimen aktif tercatat**, termasuk115 eksperimen modeling baru. Semuanya memiliki lima fold, OOF, checkpoint dan submission di workspace node480. Hasil terbaik baru **V221: KS0.5316293525, AUC0.8471248959**, deltaKS vsV25 **+0.0013446925**, dengan3/5 fold menang. Paired95% deltaKS CI **[-0.00109414,+0.00334117]**. Kandidat tidak otomatis menggantikan incumbent public.
+**236 eksperimen aktif tercatat**, termasuk116 eksperimen modeling baru. Semuanya memiliki lima fold, OOF, checkpoint dan submission di workspace node480. Hasil terbaik baru **V221: KS0.5316293525, AUC0.8471248959**, deltaKS vsV25 **+0.0013446925**, dengan3/5 fold menang. Paired95% deltaKS CI **[-0.00109414,+0.00334117]**. Kandidat tidak otomatis menggantikan incumbent public.
 
 ## Hasil dan arah penelitian
 
@@ -26,4 +26,4 @@ Kumo Large100% frozen,90 input,50k context,8 estimators. Koreksi V25 memakai18 i
 Baca `SYNC_PROTOCOL.md` sebelum setiap eksperimen. Fetch main terbaru, periksa hasil teman, bandingkan signature, jalankan satu eksperimen, catat hasil/error analysis/submission hash, lalu push fast-forward. Jangan menimpa hasil teman atau memakai force push.
 
 
-Latest completed: **V234**, pooledKS **0.5302485398**, AUC **0.8470116126**. See its results directory.
+Latest completed: **V235**, pooledKS **0.5303567840**, AUC **0.8470355664**. See its results directory.
