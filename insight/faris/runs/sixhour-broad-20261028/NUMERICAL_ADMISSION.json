@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-28T19:35:00.203518+00:00",
+  "UTC": "2026-10-28T19:39:50.310956+00:00",
   "decision": "Execution quality block, not outer-score-based selection",
   "blocks": {
     "resnet_global64_smoothks": {
@@ -59,6 +59,54 @@
         }
       },
       "counterpart": "resnet_global128_bce_fp32",
+      "reason": "Existing >=2 strict5e-6 replay-failure rule; block future admission only, preserve active fits and every attempt. Separately registered FP32 counterpart is unchanged. Numerical validation limit, not negative predictive evidence."
+    },
+    "resnet_global256_bce": {
+      "previous_owner": 4,
+      "observed_replay_failures": 2,
+      "evidence": {
+        "resnet_global256_bce__s2026__f0": {
+          "path": "runs/resnet_global256_bce__s2026__f0/attempt1/FAILURE.json",
+          "sha256": "40c0f428ce293ff84382e45ed8721fbdb66938cb5e844b94a83e42ddb82921b4"
+        },
+        "resnet_global256_bce__s2026__f1": {
+          "path": "runs/resnet_global256_bce__s2026__f1/attempt1/FAILURE.json",
+          "sha256": "49d6e376f80420664f2fac5cdf59d86b2d263ab2fb99d72849779a0cb56bc229"
+        }
+      },
+      "counterpart": "resnet_global256_bce_fp32",
+      "reason": "Existing >=2 strict5e-6 replay-failure rule; block future admission only, preserve active fits and every attempt. Separately registered FP32 counterpart is unchanged. Numerical validation limit, not negative predictive evidence."
+    },
+    "resnet_global128_smoothks": {
+      "previous_owner": 4,
+      "observed_replay_failures": 2,
+      "evidence": {
+        "resnet_global128_smoothks__s2026__f0": {
+          "path": "runs/resnet_global128_smoothks__s2026__f0/attempt1/FAILURE.json",
+          "sha256": "1c58efd6446d7727bdea183d25fe3324ee56fe20beda23d0057be8e31339c683"
+        },
+        "resnet_global128_smoothks__s2026__f1": {
+          "path": "runs/resnet_global128_smoothks__s2026__f1/attempt1/FAILURE.json",
+          "sha256": "b4adc26702d4277b521f593ff32c4ce70268d480e66f8484207f508e91117544"
+        }
+      },
+      "counterpart": "resnet_global128_smoothks_fp32",
+      "reason": "Existing >=2 strict5e-6 replay-failure rule; block future admission only, preserve active fits and every attempt. Separately registered FP32 counterpart is unchanged. Numerical validation limit, not negative predictive evidence."
+    },
+    "resnet_global256_smoothks": {
+      "previous_owner": 4,
+      "observed_replay_failures": 2,
+      "evidence": {
+        "resnet_global256_smoothks__s2026__f0": {
+          "path": "runs/resnet_global256_smoothks__s2026__f0/attempt1/FAILURE.json",
+          "sha256": "dc6aef87a4a9c0df719c1bd13012e52798ae9720bf20629e803b16dd19b58ae3"
+        },
+        "resnet_global256_smoothks__s2026__f1": {
+          "path": "runs/resnet_global256_smoothks__s2026__f1/attempt1/FAILURE.json",
+          "sha256": "fa3898397861f629fd37b4c347d63c1864191e7d8fe15134859a446dcffb1ea2"
+        }
+      },
+      "counterpart": "resnet_global256_smoothks_fp32",
       "reason": "Existing >=2 strict5e-6 replay-failure rule; block future admission only, preserve active fits and every attempt. Separately registered FP32 counterpart is unchanged. Numerical validation limit, not negative predictive evidence."
     }
   },

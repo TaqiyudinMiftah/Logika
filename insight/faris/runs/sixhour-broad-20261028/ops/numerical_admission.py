@@ -8,6 +8,7 @@ from pathlib import Path
 import argparse
 import fcntl
 import json
+import os
 import socket
 import sys
 import time
@@ -85,6 +86,11 @@ if __name__ == '__main__':
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         while time.time() < clock['model_deadline_epoch']:
             result = reconcile(arguments.dry_run)
+            if not arguments.dry_run:
+                dump(dict(UTC=utc(), pid=os.getpid(), host=socket.gethostname(),
+                          stage='running', rule='unchanged >=2 strict replay failures',
+                          model_deadline_epoch=clock['model_deadline_epoch']),
+                     R / ('NUMERICAL_ADMISSION_WATCHER_' + socket.gethostname() + '_STATE.json'))
             if result:
                 print(json.dumps(dict(UTC=utc(), dry_run=arguments.dry_run,
                                       blocked=[c['design'] for c in result])), flush=True)
