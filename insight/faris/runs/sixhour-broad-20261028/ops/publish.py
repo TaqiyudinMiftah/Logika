@@ -79,6 +79,11 @@ def redact_diagnostics(value):
         result = {}
         for key, item in value.items():
             normalized = str(key).lower()
+            if normalized in {'categorical_vocabulary','vocabularies','category_levels','category_maps','raw_value_preview','sample_cases'}:
+                raw = json.dumps(item, sort_keys=True, default=str).encode()
+                result[key + '_private_sha256'] = hashlib.sha256(raw).hexdigest()
+                result[key + '_policy'] = 'Raw category levels and case previews remain private; recipe identity retained.'
+                continue
             diagnostic = any(token in normalized for token in ['error', 'traceback', 'exception', 'stderr', 'stdout', 'log_tail', 'log_excerpt'])
             if diagnostic and isinstance(item, (str, dict, list)):
                 raw = item.encode() if isinstance(item, str) else json.dumps(item, sort_keys=True, default=str).encode()

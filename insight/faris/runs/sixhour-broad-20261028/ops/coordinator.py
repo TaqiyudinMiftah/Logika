@@ -3,7 +3,7 @@ from pathlib import Path
 import json,os,subprocess,sys,time,traceback
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'source'))
 from common import check_seal,load,dump,utc,sha,tasks,catalog
-clock=check_seal();cpu=None;last_eval=0;data_tried=False;family_tried={};last_count=-1
+clock=check_seal();cpu=None;last_eval=0;data_tried=(R/'GATE.json').exists()and load('GATE.json')['status']=='PASS';family_tried={};last_count=-1
 (R/'logs').mkdir(exist_ok=True)
 def command(args,name,timeout=900):
  with (R/'logs'/name).open('ab')as log:return subprocess.run([sys.executable,*args],stdout=log,stderr=subprocess.STDOUT,timeout=timeout).returncode
