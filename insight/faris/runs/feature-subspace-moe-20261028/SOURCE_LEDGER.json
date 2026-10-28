@@ -1,0 +1,77 @@
+{
+  "created_UTC": "2026-10-25T18:35:28.108420+00:00",
+  "sources": [
+    {
+      "family": "debt_service",
+      "url": "https://www.federalreserve.gov/releases/dsr/about.htm",
+      "title": "Household Debt Service Ratios",
+      "institution": "Federal Reserve",
+      "supports": "Required debt payments divided by disposable income.",
+      "extension": "Observed credits and declared income are imperfect individual-income proxies; historical installments are historical burden proxies, not current aggregate obligations.",
+      "retrieved_UTC_date": "2026-10-25",
+      "retrieval_route": "official webpage via web tool",
+      "usage": "Mechanism and hypothesis provenance; no external training records or labels used."
+    },
+    {
+      "family": "liquidity",
+      "url": "https://www.rba.gov.au/publications/bulletin/2022/jun/household-liquidity-buffers-and-financial-stress.html",
+      "title": "Household Liquidity Buffers and Financial Stress",
+      "author": "Lydia Wang",
+      "year": 2022,
+      "supports": "Liquidity relative to income, debt net of liquid assets, and buffers against adverse cash-flow shocks.",
+      "extension": "Window-specific bank balances approximate liquid assets. Stress sizes and historical-window combinations are hypotheses, not calibrated forecasts.",
+      "retrieved_UTC_date": "2026-10-25",
+      "retrieval_route": "official webpage via web tool",
+      "usage": "Mechanism and hypothesis provenance; no external training records or labels used."
+    },
+    {
+      "family": "amortization",
+      "url": "https://openstax.org/books/principles-finance-2e/pages/8-3-loan-amortization",
+      "title": "Principles of Finance, 8.3 Loan Amortization",
+      "supports": "Level-payment annuity and outstanding principal under fixed monthly interest.",
+      "extension": "Normalize scheduled remaining principal and interest by observed income; hypothetical rate shifts do not imply the fixed loan reprices.",
+      "retrieved_UTC_date": "2026-10-25",
+      "retrieval_route": "official webpage via web tool",
+      "usage": "Mechanism and hypothesis provenance; no external training records or labels used."
+    },
+    {
+      "family": "credibility",
+      "url": "https://consensus.app/papers/credibility-theory-norberg/ed0a431b4423584f8b8d5bd02159f1c5/?utm_source=chatgpt",
+      "title": "Credibility Theory",
+      "author": "R. Norberg",
+      "year": 2015,
+      "citations_at_retrieval": 57,
+      "supports": "Combine individual experience and collective risk with exposure-dependent credibility.",
+      "extension": "Beta-binomial late-payment posterior, uncertainty and exposure weight; concentration grid is predeclared. Cohort rates use context rows only.",
+      "retrieved_UTC_date": "2026-10-25",
+      "retrieval_route": "Consensus search and paper fetch",
+      "usage": "Mechanism and hypothesis provenance; no external training records or labels used."
+    },
+    {
+      "family": "volatility",
+      "url": "https://consensus.app/papers/explainable-ai-for-credit-assessment-in-banks-lange-melsom/a63842785f4e506d8834a644131e80a6/?utm_source=chatgpt",
+      "title": "Explainable AI for Credit Assessment in Banks",
+      "authors": "P. D. de Lange; B. Melsom; Christian Bakke Vennerod; Sjur Westgaard",
+      "year": 2022,
+      "journal": "Journal of Risk and Financial Management",
+      "citations_at_retrieval": 100,
+      "supports": "Credit-balance volatility and available credit contributed to default prediction in one unsecured-consumer-loan dataset.",
+      "extension": "Temporal changes and normalized dispersion of account and bureau measures are proposed extensions, not results established for this competition.",
+      "retrieved_UTC_date": "2026-10-25",
+      "retrieval_route": "Consensus search and paper fetch",
+      "usage": "Mechanism and hypothesis provenance; no external training records or labels used."
+    },
+    {
+      "family": "subspaces",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html",
+      "title": "BaggingClassifier documentation",
+      "supports": "Feature-subset ensembles (random subspaces).",
+      "extension": "Semantic blocks with shared anchors and inner-only ensemble selection for Kumo; improvement is unproven.",
+      "retrieved_UTC_date": "2026-10-25",
+      "retrieval_route": "official webpage via web tool",
+      "usage": "Mechanism and hypothesis provenance; no external training records or labels used."
+    }
+  ],
+  "catalog_sha256": "b015a313a4759df4071223334dadc3e87938bd93fd911f45e78b6c4fddd49a93",
+  "limits": "Source evidence motivates mechanisms. Grid sizes, feature windows and stress sizes are our hypotheses; none of the sources establishes an improvement in this competition."
+}

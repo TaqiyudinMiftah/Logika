@@ -1,0 +1,55 @@
+{
+  "protocol_id": "logika-domain-moe-fivefold-context50000-meta6000-20261028-v1",
+  "task": "Predict future loan default for one unique applicant; official pooled binary KS maximized",
+  "duration_authorization": "User selected12hours in this chat; no old campaign clock reused",
+  "inputs": "INPUT_REFERENCES.json and BANK_MANIFEST.json; verified before admission",
+  "data_roles": {
+    "context": 50000,
+    "correction_and_gate": 6000,
+    "outer_validation": 14000,
+    "folds": 5,
+    "train_total": 70000,
+    "customer_grouping": "Original applicant/customer unique; checked against source metadata.",
+    "test_labels_used": false
+  },
+  "feature_boundary": "Source-backed historical features at application cutoff; unsupervised priors recomputed from context; supervised view selection uses context labels only; historical upstream capture completeness remains inherited assumption.",
+  "meta_boundary": "Fixed-context experts never see any6k gate labels. For gate inputs, anchor heads train4000 and splines54000, each excluding2000 query correction rows; expert calibration is also3fold OOF on6k. Final heads/calibrators use all6k for outer14k inference.",
+  "preprocessing": "All learned transforms, selection, calibration, and gating fit inside outer-training roles. Gate uses only inference-available coverage/stability/employment and heldout expert logits.",
+  "primary": "kumo__expanded__gated",
+  "reference": "Audited maturity-adjusted fold-local anchor, expected pooledKS0.5306361042400267; compare exact rows and aggregation. PublicV25KS0.56822 is a different artifact, not a numeric conversion.",
+  "comparison": "Within each backbone: existing versus expanded domain views crossed with fixed versus learned soft gate; lightgbm/catboost wide-union controls; predefined hybrid secondary.",
+  "success_rule": {
+    "minimum_delta_KS": 0.0005,
+    "paired_conditional_CI_replicates": 2000,
+    "paired_conditional_CI_low_must_exceed": 0,
+    "positive_folds_minimum": 4,
+    "both_seeds_positive": true,
+    "local_target_secondary": 0.54,
+    "public_improvement_requires_actual_public_evidence": true
+  },
+  "audit": {
+    "all70000previously_exposed": true,
+    "untouched_audit_available": false,
+    "status": "Reused development; no independent confirmation is claimed even with correct nested training."
+  },
+  "required_checks": [
+    "evaluator",
+    "gate_boundary_and_solver",
+    "boundaries_and_support",
+    "actual_runtime_pilots",
+    "baseline_and_uncertainty"
+  ],
+  "time": "Clock persisted once immediately before actual-data qualification fits; all qualification, expert fits, calibration, evaluation and any refit share its12hour deadline.",
+  "source_policy": "Immutable source seal and config/contract identities; preserve failures. A resource failure is not negative predictive evidence.",
+  "prediction_retention": "Case-level predictions/labels remain private; aggregate reports, hyperparameters, source, seeds and hashes are published.",
+  "immutable_input_metadata": {
+    "INPUT_REFERENCES.json": "752d84609d0abd082b658d9a7bfdbdf947bb7f55e801fdb4095ed1058971eedb",
+    "BANK_MANIFEST.json": "25eea89587f940d13343eb3b4c5a427ee51a9ef347b68e6e84a32cb30536f6b6",
+    "FEATURE_SCHEMA.json": "d554f7cf22176ba74540b696676f24bbfae76671c3852736549cc6f5e27cf531",
+    "ANCHOR_SOURCE.json": "2eb98e9a2814552d62bd3ee015fab7d5d57706504dc5c834cb5fee51c7f40de9",
+    "REPAYMENT_TIMING_AUDIT.json": "c20e58e4d56e55b24931ed234e04726f1df5071a8fc1b1b965721dae1920bba5",
+    "SOURCE_LEDGER.json": "0d3f607d55bd597384129f99d5375db245e7801a8cd51f83f64c00b52aefb0f1",
+    "PATHS.json": "9a20fcb718e795ff9b8a5f867afe3cd40196d1f94d2c555b2d5071f563c3aae1",
+    "TOPOLOGY.json": "a735dbc8cf6c27c9acb5f14288987f28f7c6e7c06d5da733e79b789ec0115394"
+  }
+}
