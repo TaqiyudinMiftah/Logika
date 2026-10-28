@@ -1,0 +1,654 @@
+{
+  "status": "PASS",
+  "scope": "Adaptive reused-development admission; not untouched statistical confirmation.",
+  "kind": "data",
+  "attempt": 1,
+  "UTC": "2026-10-28T17:37:12.542206+00:00",
+  "checks": [
+    {
+      "id": "evaluator",
+      "category": "evaluator",
+      "required": true,
+      "acceptance_rule": "Four known KS cases including reversed ranking/ties match SciPy, ROC and campaign evaluator within1e-12; invalid arrays rejected.",
+      "evidence": [
+        {
+          "path": "source/common.py",
+          "sha256": "cde168a070e7c1e886915819de052cd5d01d2aebcd3375f168dc1817ed6d64a0"
+        },
+        {
+          "path": "source/gate.py",
+          "sha256": "db1de743013bc435dc7f5162ed402dae1cf8987b5c58d5eeb19a332dfdfde323"
+        }
+      ],
+      "observed": {
+        "known_cases": [
+          1.0,
+          1.0,
+          0.0,
+          0.5
+        ],
+        "SciPy_ROC_and_campaign_KS_match": true,
+        "tied_scores_and_joint_permutation_verified": true,
+        "invalid_outputs_rejected": 4
+      },
+      "status": "pass"
+    },
+    {
+      "id": "parent_identity_availability",
+      "category": "boundaries",
+      "required": true,
+      "acceptance_rule": "Original source/parent seal and prior gate match;70000 unique nonmissing application IDs; customer IDs unique when supplied.",
+      "evidence": [
+        {
+          "path": "INPUTS.json",
+          "sha256": "9f0e6accaa2c0880e7da358cb0e8b946e96576001a3b3893797f27e72619dcf9"
+        },
+        {
+          "path": "INPUT_REFERENCES.json",
+          "sha256": "752d84609d0abd082b658d9a7bfdbdf947bb7f55e801fdb4095ed1058971eedb"
+        }
+      ],
+      "observed": {
+        "application_IDs": 70000,
+        "application_IDs_unique": true,
+        "customer_identity": "Verified unique within the original70000 applicant rows.",
+        "source_file_sha256": "ac2885d2d4891cea4381800981a86f879c3895763aabbd10a1e1cac5c454461a",
+        "parent_gate_sha256": "23cb5559f27997190ec53ca0e544fb725cedb1c5416f0ce6b9c0bc41478a851c",
+        "parent_scope_retained": true,
+        "availability_limit": "Historical capture/cutoff completeness is inherited from the matched parent; no new external rows or labels."
+      },
+      "status": "pass"
+    },
+    {
+      "id": "preparation_source_and_scope",
+      "category": "boundaries",
+      "required": true,
+      "acceptance_rule": "Preparation PASS belongs to this clock/schema/bank and excludes query/stopping labels from feature fitting; no forbidden identifiers/targets are feature inputs.",
+      "evidence": [
+        {
+          "path": "PREPARATION_AUDIT.json",
+          "sha256": "235b4b581020522886ae2c496c63d97f05c507fea2460a790fbeb8973af83369"
+        },
+        {
+          "path": "FEATURE_SCHEMA.json",
+          "sha256": "d554f7cf22176ba74540b696676f24bbfae76671c3852736549cc6f5e27cf531"
+        },
+        {
+          "path": "BANK_MANIFEST.json",
+          "sha256": "25eea89587f940d13343eb3b4c5a427ee51a9ef347b68e6e84a32cb30536f6b6"
+        }
+      ],
+      "observed": {
+        "preparation_status": "PASS",
+        "immutable_source_bank_hashes_match": true,
+        "selector_and_PCA_boundary_statements_verified": [
+          "roles_disjoint",
+          "outer_rows_cover70000_once",
+          "inner_training42500_excludes7500_stoppers",
+          "features_and_PCA_fit_only_inner_training"
+        ],
+        "schema_definitions": 2090,
+        "forbidden_source_inputs": 0
+      },
+      "status": "pass"
+    },
+    {
+      "id": "fold_0_roles_features_support",
+      "category": "boundaries_and_support",
+      "required": true,
+      "acceptance_rule": "Exact sealed tables/roles,50000+6000+14000 exhaustive/disjoint;42500+7500 shared split and label hashes match selectors/PCA; adequate class support.",
+      "evidence": [
+        {
+          "path": "packets/fold0/MANIFEST.json",
+          "sha256": "3a318d671bad1032e6b729ea8e53c8f468ca7cf39389311836a69fc1085578fb"
+        }
+      ],
+      "observed": {
+        "fold": 0,
+        "roles": [
+          50000,
+          6000,
+          14000
+        ],
+        "inner_roles": [
+          42500,
+          7500
+        ],
+        "selector_training": {
+          "base": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261029,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          },
+          "augmented": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261029,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          }
+        },
+        "class_support": {
+          "context": [
+            43209,
+            6791
+          ],
+          "inner_train": [
+            36728,
+            5772
+          ],
+          "inner_stop": [
+            6481,
+            1019
+          ],
+          "meta": [
+            5185,
+            815
+          ],
+          "outer_anchor_only": [
+            12099,
+            1901
+          ]
+        },
+        "view_sizes": {
+          "global32": 32,
+          "global48": 48,
+          "global64": 64,
+          "global80": 80,
+          "global99": 99,
+          "global128": 128,
+          "global256": 256,
+          "global512": 512,
+          "augmented99": 99,
+          "augmented256": 256,
+          "augmented512": 512,
+          "core99": 99,
+          "actuarial99": 99,
+          "redundant99": 99,
+          "pca64_core": 84,
+          "all": 2129
+        },
+        "PCA_and_prior_fit_boundary": "42500 inner-training rows; stopping/meta/outer excluded."
+      },
+      "status": "pass"
+    },
+    {
+      "id": "fold_1_roles_features_support",
+      "category": "boundaries_and_support",
+      "required": true,
+      "acceptance_rule": "Exact sealed tables/roles,50000+6000+14000 exhaustive/disjoint;42500+7500 shared split and label hashes match selectors/PCA; adequate class support.",
+      "evidence": [
+        {
+          "path": "packets/fold1/MANIFEST.json",
+          "sha256": "a7a106cab1c6447d4b80ea52d1a0a104662f004ebc41ea73b323ccfc315cf0e4"
+        }
+      ],
+      "observed": {
+        "fold": 1,
+        "roles": [
+          50000,
+          6000,
+          14000
+        ],
+        "inner_roles": [
+          42500,
+          7500
+        ],
+        "selector_training": {
+          "base": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261030,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          },
+          "augmented": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261030,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          }
+        },
+        "class_support": {
+          "context": [
+            43209,
+            6791
+          ],
+          "inner_train": [
+            36728,
+            5772
+          ],
+          "inner_stop": [
+            6481,
+            1019
+          ],
+          "meta": [
+            5185,
+            815
+          ],
+          "outer_anchor_only": [
+            12099,
+            1901
+          ]
+        },
+        "view_sizes": {
+          "global32": 32,
+          "global48": 48,
+          "global64": 64,
+          "global80": 80,
+          "global99": 99,
+          "global128": 128,
+          "global256": 256,
+          "global512": 512,
+          "augmented99": 99,
+          "augmented256": 256,
+          "augmented512": 512,
+          "core99": 99,
+          "actuarial99": 99,
+          "redundant99": 99,
+          "pca64_core": 84,
+          "all": 2129
+        },
+        "PCA_and_prior_fit_boundary": "42500 inner-training rows; stopping/meta/outer excluded."
+      },
+      "status": "pass"
+    },
+    {
+      "id": "fold_2_roles_features_support",
+      "category": "boundaries_and_support",
+      "required": true,
+      "acceptance_rule": "Exact sealed tables/roles,50000+6000+14000 exhaustive/disjoint;42500+7500 shared split and label hashes match selectors/PCA; adequate class support.",
+      "evidence": [
+        {
+          "path": "packets/fold2/MANIFEST.json",
+          "sha256": "a74f0d9e1b8eef5a2ecbb01859dbe3de4cfa8dbd1ba140d48ce8da7e0a199047"
+        }
+      ],
+      "observed": {
+        "fold": 2,
+        "roles": [
+          50000,
+          6000,
+          14000
+        ],
+        "inner_roles": [
+          42500,
+          7500
+        ],
+        "selector_training": {
+          "base": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261031,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          },
+          "augmented": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261031,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          }
+        },
+        "class_support": {
+          "context": [
+            43209,
+            6791
+          ],
+          "inner_train": [
+            36728,
+            5772
+          ],
+          "inner_stop": [
+            6481,
+            1019
+          ],
+          "meta": [
+            5185,
+            815
+          ],
+          "outer_anchor_only": [
+            12099,
+            1901
+          ]
+        },
+        "view_sizes": {
+          "global32": 32,
+          "global48": 48,
+          "global64": 64,
+          "global80": 80,
+          "global99": 99,
+          "global128": 128,
+          "global256": 256,
+          "global512": 512,
+          "augmented99": 99,
+          "augmented256": 256,
+          "augmented512": 512,
+          "core99": 99,
+          "actuarial99": 99,
+          "redundant99": 99,
+          "pca64_core": 84,
+          "all": 2129
+        },
+        "PCA_and_prior_fit_boundary": "42500 inner-training rows; stopping/meta/outer excluded."
+      },
+      "status": "pass"
+    },
+    {
+      "id": "fold_3_roles_features_support",
+      "category": "boundaries_and_support",
+      "required": true,
+      "acceptance_rule": "Exact sealed tables/roles,50000+6000+14000 exhaustive/disjoint;42500+7500 shared split and label hashes match selectors/PCA; adequate class support.",
+      "evidence": [
+        {
+          "path": "packets/fold3/MANIFEST.json",
+          "sha256": "66578e0552a680c51430660cc8a20f3369f21e00806f3bd687b90dc3c314bbc1"
+        }
+      ],
+      "observed": {
+        "fold": 3,
+        "roles": [
+          50000,
+          6000,
+          14000
+        ],
+        "inner_roles": [
+          42500,
+          7500
+        ],
+        "selector_training": {
+          "base": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261032,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          },
+          "augmented": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261032,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          }
+        },
+        "class_support": {
+          "context": [
+            43210,
+            6790
+          ],
+          "inner_train": [
+            36728,
+            5772
+          ],
+          "inner_stop": [
+            6482,
+            1018
+          ],
+          "meta": [
+            5185,
+            815
+          ],
+          "outer_anchor_only": [
+            12098,
+            1902
+          ]
+        },
+        "view_sizes": {
+          "global32": 32,
+          "global48": 48,
+          "global64": 64,
+          "global80": 80,
+          "global99": 99,
+          "global128": 128,
+          "global256": 256,
+          "global512": 512,
+          "augmented99": 99,
+          "augmented256": 256,
+          "augmented512": 512,
+          "core99": 99,
+          "actuarial99": 99,
+          "redundant99": 99,
+          "pca64_core": 84,
+          "all": 2129
+        },
+        "PCA_and_prior_fit_boundary": "42500 inner-training rows; stopping/meta/outer excluded."
+      },
+      "status": "pass"
+    },
+    {
+      "id": "fold_4_roles_features_support",
+      "category": "boundaries_and_support",
+      "required": true,
+      "acceptance_rule": "Exact sealed tables/roles,50000+6000+14000 exhaustive/disjoint;42500+7500 shared split and label hashes match selectors/PCA; adequate class support.",
+      "evidence": [
+        {
+          "path": "packets/fold4/MANIFEST.json",
+          "sha256": "2385877624a55c5adc32c0a26952fe1be60bdb522eebb93bbcbf3ea20b2e30f0"
+        }
+      ],
+      "observed": {
+        "fold": 4,
+        "roles": [
+          50000,
+          6000,
+          14000
+        ],
+        "inner_roles": [
+          42500,
+          7500
+        ],
+        "selector_training": {
+          "base": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261033,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          },
+          "augmented": {
+            "training_rows": 42500,
+            "parameters": {
+              "n_estimators": 200,
+              "num_leaves": 15,
+              "max_depth": 5,
+              "learning_rate": 0.04,
+              "min_child_samples": 150,
+              "reg_lambda": 15,
+              "colsample_bytree": 0.85,
+              "random_state": 20261033,
+              "n_jobs": 2,
+              "verbosity": -1,
+              "importance_type": "gain"
+            }
+          }
+        },
+        "class_support": {
+          "context": [
+            43210,
+            6790
+          ],
+          "inner_train": [
+            36729,
+            5771
+          ],
+          "inner_stop": [
+            6481,
+            1019
+          ],
+          "meta": [
+            5185,
+            815
+          ],
+          "outer_anchor_only": [
+            12098,
+            1902
+          ]
+        },
+        "view_sizes": {
+          "global32": 32,
+          "global48": 48,
+          "global64": 64,
+          "global80": 80,
+          "global99": 99,
+          "global128": 128,
+          "global256": 256,
+          "global512": 512,
+          "augmented99": 99,
+          "augmented256": 256,
+          "augmented512": 512,
+          "core99": 99,
+          "actuarial99": 99,
+          "redundant99": 99,
+          "pca64_core": 84,
+          "all": 2129
+        },
+        "PCA_and_prior_fit_boundary": "42500 inner-training rows; stopping/meta/outer excluded."
+      },
+      "status": "pass"
+    },
+    {
+      "id": "matched_baseline_and_uncertainty",
+      "category": "baseline_and_uncertainty",
+      "required": true,
+      "acceptance_rule": "Same original70000 rows/folds reproduce matched anchor KS0.5306361042400267 within1e-12; constant KS0; fold/conditional uncertainty finite.",
+      "evidence": [
+        {
+          "path": "evaluation_inputs/target.npy",
+          "sha256": "2622211602fd1842a07cec35cff4c21ff14254f8791c0b00d202cf43247cb561"
+        },
+        {
+          "path": "evaluation_inputs/baseline.npz",
+          "sha256": "42911254ebc0692ed247235d556ded8b89014270bbf5ca1b1d60bb207dc46426"
+        }
+      ],
+      "observed": {
+        "reference_KS": 0.5306361042400268,
+        "pooled_rows": 70000,
+        "trivial_constant_KS": 0.0,
+        "fold_KS": [
+          0.5285401661089976,
+          0.5381644741421585,
+          0.5404635412067522,
+          0.5304474551415803,
+          0.5294460816754306
+        ],
+        "fold_KS_std": 0.005490037411260825,
+        "conditional_baseline_KS_95pct": [
+          0.5229006939093437,
+          0.5391224672399599
+        ],
+        "bootstrap_repetitions": 200,
+        "bootstrap_seed": 20261029,
+        "sampling_unit": "Applications within original fold and class.",
+        "precision_limitation": "Conditional prediction uncertainty; overlapping-fold training and historical adaptive selection are not independent replications."
+      },
+      "status": "pass"
+    }
+  ],
+  "clock_sha256": "67493c438f7f1baeee5db30ba8539cd4dce0641dec23127ffd3b1a93c779cb8d",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "source_seal_sha256": "4929f7c9afca958614b320c9ea1ced24017ce80fb8be97836f85af2fee120ef0",
+  "gate_source_sha256": "db1de743013bc435dc7f5162ed402dae1cf8987b5c58d5eeb19a332dfdfde323",
+  "independent_audit_available": false,
+  "candidate_meta_or_outer_scores_computed": false,
+  "packet_manifests": {
+    "0": "3a318d671bad1032e6b729ea8e53c8f468ca7cf39389311836a69fc1085578fb",
+    "1": "a7a106cab1c6447d4b80ea52d1a0a104662f004ebc41ea73b323ccfc315cf0e4",
+    "2": "a74f0d9e1b8eef5a2ecbb01859dbe3de4cfa8dbd1ba140d48ce8da7e0a199047",
+    "3": "66578e0552a680c51430660cc8a20f3369f21e00806f3bd687b90dc3c314bbc1",
+    "4": "2385877624a55c5adc32c0a26952fe1be60bdb522eebb93bbcbf3ea20b2e30f0"
+  },
+  "new_candidate_outer_scores_opened": false,
+  "representativeness": "Inherited applicant unit and cutoff assumptions; all70000 rows previously exposed development.",
+  "attempt_result": {
+    "path": "gate_attempts/data/attempt1/RESULT.json",
+    "sha256": "0f23463cecd23f2bc14cd39454f950d2b4ffaffef1871e409bcbbf6246c70871"
+  }
+}
