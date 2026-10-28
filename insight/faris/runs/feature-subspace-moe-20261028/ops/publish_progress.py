@@ -54,6 +54,25 @@ def publish(local,repo,once=False):
                 target=destination/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
             state=json.loads((mirror/'LIVE_STATE.json').read_text())if(mirror/'LIVE_STATE.json').exists()else{'stage':'launch_pending'}
             clock=json.loads((mirror/'CLOCK.json').read_text())if(mirror/'CLOCK.json').exists()else{}
+            if state['stage']in{'complete','refit_required'} and clock and time.time()<clock['deadline_epoch']-600:
+                import shlex
+                check="from pathlib import Path;import json;p=Path('/mnt/home/faris/logika-feature-subspace-moe-20261028');print(json.dumps({'done':(p/'diagnostics/constant_gate/RESULT.json').exists(),'dispatched':(p/'ADDITIONAL_DIAGNOSTIC_DISPATCH.json').exists()}))"
+                status=json.loads(run(['ssh','-o','BatchMode=yes','faris@100.68.29.126','python3 -c '+shlex.quote(check)],timeout=30).stdout)
+                if not status['done'] and not status['dispatched']:
+                    dispatch="from pathlib import Path;import json,time;p=Path('/mnt/home/faris/logika-feature-subspace-moe-20261028/ADDITIONAL_DIAGNOSTIC_DISPATCH.json');f=p.open('x');json.dump({'started_epoch':time.time(),'attempt':1,'primary_model_change':False},f);f.close()"
+                    run(['ssh','-o','BatchMode=yes','faris@100.68.29.126','python3 -c '+shlex.quote(dispatch)],timeout=30)
+                    args=['systemd-run','--user','--quiet','--wait','--pipe','--collect','--unit=logika-moe28-constant-gate',
+                          '-p','MemoryMax=3G','-p','MemorySwapMax=0','-p','CPUQuota=200%','-p','RuntimeMaxSec=540',
+                          '/mnt/home/faris/logika-model-arena-20261025/env311/bin/python',
+                          '/mnt/home/faris/logika-feature-subspace-moe-20261028/ops/constant_gate_diagnostic.py']
+                    run(['ssh','-o','BatchMode=yes','faris@100.68.29.126',shlex.join(args)],timeout=570)
+                    run(['rsync','-az','--include=*/','--include=*.json','--exclude=*',
+                         'faris@100.68.29.126:/mnt/home/faris/logika-feature-subspace-moe-20261028/diagnostics/',str(mirror/'diagnostics')+'/'],timeout=90)
+                    for diagnostic in (mirror/'diagnostics').rglob('*.json'):
+                        content,policy=public_content(diagnostic)
+                        if content is None:continue
+                        target=destination/diagnostic.relative_to(mirror)
+                        target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
             record_path=destination/'RUN.json'
             if record_path.exists():
                 record=json.loads(record_path.read_text())
@@ -98,7 +117,7 @@ def publish(local,repo,once=False):
             terminal=state['stage']in{'complete','failed'}
             if terminal:
                 # Terminal compact prediction evidence is collected privately.
-                command="from pathlib import Path;import json;p=Path('/mnt/home/faris/logika-feature-subspace-moe-20261028');print(json.dumps([n for n in ['evaluation','composed','runs','logs','failures']if(p/n).is_dir()]))"
+                command="from pathlib import Path;import json;p=Path('/mnt/home/faris/logika-feature-subspace-moe-20261028');print(json.dumps([n for n in ['evaluation','composed','runs','logs','failures','diagnostics']if(p/n).is_dir()]))"
                 import shlex
                 present=json.loads(run(['ssh','-o','BatchMode=yes','faris@100.68.29.126','python3 -c '+shlex.quote(command)],timeout=30).stdout)
                 for name in present:
