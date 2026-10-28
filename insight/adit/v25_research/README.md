@@ -27,3 +27,6 @@ Baca `SYNC_PROTOCOL.md` sebelum setiap eksperimen. Fetch main terbaru, periksa h
 
 
 Latest completed: **V239**, pooledKS **0.5297967456**, AUC **0.8473498662**. See its results directory.
+
+
+**Public feedback: V221 = 0.56614, exact CSV verified. V25 remains the public incumbent at0.56822. Highest pooled OOF has not translated into a public improvement.** Read the [data and validation-noise audit](v7/audit_noise/reports/VALIDATION_NOISE_AUDIT.md), including coverage subgroups, shared spectral missing indicators, fold/threshold sensitivity and selection uncertainty.

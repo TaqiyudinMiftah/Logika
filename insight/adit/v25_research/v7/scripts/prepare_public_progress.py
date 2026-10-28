@@ -80,6 +80,12 @@ def main():
     for name in ['v7/structured_head_plan.json','v7/STRUCTURED_HEAD_RESEARCH.md','v7/scripts/structured_heads.py','v7/structured_head/reports/PREFLIGHT.json']:
         if (ROOT/name).exists():
             target=DEST/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
+    audit_files=list((V/'audit_noise/reports').glob('*')) if (V/'audit_noise/reports').exists() else []
+    audit_files += [V/'scripts'/name for name in ['audit_validation_noise.py','audit_data_segments.py','audit_spectral_coefficients.py','write_noise_audit_report.py']]
+    audit_files += [V/'reports/V221_KAGGLE_READONLY_RECEIPT.json']
+    for source in audit_files:
+        if source.is_file() and source.suffix.lower() in ['.py','.md','.json','.csv','.svg']:
+            target=DEST/source.relative_to(ROOT);target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target)
     best_result=max(modeling,key=lambda x:x['result']['OOF']['KS'])['result']
     for name in ['v7/fusion_plan.json','v7/score_fusion_plan.json','v7/scripts/score_fusion_local.py','v7/scripts/upload_local_score_run.py','v7/scripts/mirror_score_sources.py']:
         if (ROOT/name).exists():
@@ -126,6 +132,11 @@ Baca `SYNC_PROTOCOL.md` sebelum setiap eksperimen. Fetch main terbaru, periksa h
     (DEST/'README.md').write_text(report,encoding='utf-8')
     with (DEST/'README.md').open('a',encoding='utf-8') as f:
         f.write(f"\n\nLatest completed: **{latest_result['experiment']}**, pooledKS **{latest_result['OOF']['KS']:.10f}**, AUC **{latest_result['OOF']['AUC']:.10f}**. See its results directory.\n")
+        if (V/'reports/V221_KAGGLE_READONLY_RECEIPT.json').exists():
+            feedback=json.loads((V/'reports/V221_KAGGLE_READONLY_RECEIPT.json').read_text())
+            verified=feedback.get('records',[])
+            if feedback.get('status')=='VERIFIED' and verified:
+                f.write(f"\n\n**Public feedback: V221 = {float(verified[-1]['public_KS']):.5f}, exact CSV verified. V25 remains the public incumbent at0.56822. Highest pooled OOF has not translated into a public improvement.** Read the [data and validation-noise audit](v7/audit_noise/reports/VALIDATION_NOISE_AUDIT.md), including coverage subgroups, shared spectral missing indicators, fold/threshold sensitivity and selection uncertainty.\n")
     protocol='''# Protokol eksperimen bersama
 
 1. Sebelum SETIAP eksperimen, baca HEAD terbaru main dan perubahan sejak receipt terakhir. Jika ada commit teman, baca konfigurasi, definisi fitur, folds, hasil, AUC dan error analysis terlebih dahulu.

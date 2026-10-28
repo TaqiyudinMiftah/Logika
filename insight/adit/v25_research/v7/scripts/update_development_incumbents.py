@@ -5,6 +5,8 @@ ROOT=Path(__file__).resolve().parents[2];V=ROOT/'v7'
 
 
 def update():
+    observations_path=ROOT/'reports/LEADERBOARD_OBSERVATIONS.json'
+    observations=json.loads(observations_path.read_text()) if observations_path.exists() else []
     records=[]
     for path in (V/'runs').glob('V*/RESULT.json'):
         ident=path.parent.name
@@ -15,7 +17,10 @@ def update():
         if r.get('status')!='COMPLETE' or a.get('status')!='PASS':continue
         if r.get('frozen_Kumo_fraction')!=1. or not r.get('all_outer_indices_identical'):continue
         assert abs(a['measured_OOF']['KS']-r['OOF']['KS'])<1e-12 and a['submission_sha256']==r['submission_sha256']
-        records.append(dict(id=ident,pooled_KS=r['OOF']['KS'],AUC=r['OOF']['AUC'],submission=r['submission'],submission_sha256=r['submission_sha256'],comparison_to_V193=r.get('comparison_to_V193'),comparison_to_V185=r.get('comparison_to_V185'),confidence_interval=r['confidence_interval'],overfitting_assessment=r['overfitting_assessment'],public_score=None,public_promotion=False))
+        matching=[o for o in observations if o.get('submission_sha256')==r['submission_sha256'] and o.get('public_score') is not None]
+        public=max(matching,key=lambda o:(bool(o.get('downloaded_csv_sha_verified')),bool(o.get('independently_verified_competition_receipt')),o.get('recorded_UTC',o.get('UTC','')))) if matching else None
+        assessment=dict(r['overfitting_assessment'],public_score_unknown=public is None,training_snapshot_public_score_unknown=r['overfitting_assessment'].get('public_score_unknown'),public_feedback_attached=public is not None)
+        records.append(dict(id=ident,pooled_KS=r['OOF']['KS'],AUC=r['OOF']['AUC'],submission=r['submission'],submission_sha256=r['submission_sha256'],comparison_to_V193=r.get('comparison_to_V193'),comparison_to_V185=r.get('comparison_to_V185'),confidence_interval=r['confidence_interval'],overfitting_assessment=assessment,public_score=public['public_score'] if public else None,public_observation=public,public_decision='FAILED_TO_IMPROVE_ON_V25' if public and public['public_score']<.56822 else 'NOT_ESTABLISHED',public_promotion=False))
     assert records
     best=max(records,key=lambda r:r['pooled_KS']);assert hashlib.sha256((ROOT/best['submission']).read_bytes()).hexdigest()==best['submission_sha256']
     pareto=[a for a in records if not any(b['pooled_KS']>=a['pooled_KS'] and b['AUC']>=a['AUC'] and (b['pooled_KS']>a['pooled_KS'] or b['AUC']>a['AUC']) for b in records)]
