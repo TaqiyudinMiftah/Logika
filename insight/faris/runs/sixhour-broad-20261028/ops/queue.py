@@ -18,7 +18,8 @@ def eligible():
   if not pilot and (not g.exists()or json.loads(g.read_text())['status']!='PASS'):continue
   # Queue CPU pilots first. For GPUs declared pilot first; complete designs in
   # catalog order across all5folds before spending on later architectures.
-  output.append((0 if pilot else 1,list(designs).index(t['design']),config['seeds'].index(t['seed']),t['fold'],key,pilot))
+  order=load('EXECUTION_PRIORITY.json')['order']if(R/'EXECUTION_PRIORITY.json').exists()else list(designs)
+  output.append((0 if pilot else 1,order.index(t['design']),config['seeds'].index(t['seed']),t['fold'],key,pilot))
  return sorted(output)
 try:
  while time.time()<clock['model_deadline_epoch']:
