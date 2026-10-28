@@ -22,16 +22,21 @@ missing files found during a later root/vendor audit. The earlier universal
 completeness claim was too broad; coverage is limited to documented accessible
 roots. Node2002 remains unverified beyond surviving mirrors.
 
-## Active MoE campaign — 28 October
+## Completed MoE campaign — 28 October
 
-The [feature-subspace MoE study](runs/feature-subspace-moe-20261028/README.md)
-qualified and is training260 predeclared expert fits on2001/2003, with2090
-source-backed candidate features,5folds and2seeds. It compares existing/expanded
-views, fixed/conditional gates, wide models and a learned-global-weight control.
-The original12hour clock is **28 October11:28:37–23:28:37 UTC**; never reset it.
-The local matched anchor is0.5306361042; publicV25 remains0.56822. No new scoring
-gain is established by the running queue. Canonical state and safe continuation
-instructions are in the run's RESUME_STATE.json and EXECUTION_POLICY.json.
+The [feature-subspace MoE study](runs/feature-subspace-moe-20261028/RESULTS.md)
+completed all260 planned expert fits across5folds and2seeds. Frozen primary KS
+was0.5295070116 versus matched anchor0.5306361042. The best secondary point was
+0.5306791136, inconsistent across folds/seeds and not promoted. Target0.54 was
+not reached; retained publicV25 remains0.56822. No refit or submission was made.
+
+All260 outputs and3 superseded lab attempts were saved and hash-verified. Source,
+seeds,row boundaries,baseline/cohort KS and conditional uncertainty audits passed;
+all70k cases still constitute reused development, not an independent audit. The
+A100 account2 runtime was released at28October14:46:27 UTC after collection,
+with about15.18CU observed consumption. No paid runtime or campaign worker remains
+active. The original12hour clock and scientific seals are unchanged. See the
+[current handoff](runs/feature-subspace-moe-20261028/CURRENT_HANDOFF.md).
 
 ## Completed Antigravity continuation
 

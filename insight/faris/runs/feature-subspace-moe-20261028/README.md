@@ -1,5 +1,9 @@
 # Feature-subspace mixture of experts — 28 October 2026
 
+**Completion: all260 expert fits audited; no supported gain.** PrimaryKS0.5295070116
+versus anchor0.5306361042. A100 released21:46 WIB; no refit/submission. Read
+[RESULTS.md](RESULTS.md) and [CURRENT_HANDOFF.md](CURRENT_HANDOFF.md).
+
 The user authorized a fresh **12-hour ceiling**. Its immutable clock starts before
 the first actual-data qualification fit, including feature selection and nested
 anchor calibration. Admission closes after7.5hours, leaving evaluation and refit
