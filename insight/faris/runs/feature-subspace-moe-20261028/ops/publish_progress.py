@@ -44,6 +44,13 @@ def publish(local,repo,once=False):
                 if any(part in {'source','publication_private','evaluation_inputs','failures'}for part in relative.parts):continue
                 content,policy=public_content(p)
                 if content is None:continue
+                if p.suffix=='.json':
+                    obj=json.loads(content)
+                    if isinstance(obj,dict) and isinstance(obj.get('error'),str):
+                        text=obj.pop('error')
+                        obj['private_error_trace_sha256']=hashlib.sha256(text.encode()).hexdigest()
+                        obj['error_trace_policy']='Full diagnostic retained privately; no potentially case-bearing exception text published.'
+                        content=(json.dumps(obj,indent=2)+'\n').encode()
                 target=destination/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
             state=json.loads((mirror/'LIVE_STATE.json').read_text())if(mirror/'LIVE_STATE.json').exists()else{'stage':'launch_pending'}
             clock=json.loads((mirror/'CLOCK.json').read_text())if(mirror/'CLOCK.json').exists()else{}
