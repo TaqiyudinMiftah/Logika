@@ -1,0 +1,60 @@
+{
+  "registered_UTC": "2026-10-28T21:10:15.358397+00:00",
+  "hypothesis": "At fixed CPU backend, feature view, capacity, seeds and data boundaries, explicit Ordered versus Plain CatBoost tests prediction-shift mitigation. Original GPU defaults may already select Ordered; no claim that Ordered was universally untried. ExistingCPUCatboost defaults Plain; this adds a matched control.",
+  "sources": [
+    {
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html",
+      "year": 2018,
+      "scope": "Ordering principle and prediction shift; motivates comparison, no imported dataset or expected gain"
+    },
+    {
+      "url": "https://catboost.ai/docs/en/references/training-parameters/common#boosting_type",
+      "retrieved_UTC": "2026-10-28T21:10:15.358397+00:00",
+      "scope": "Explicit CPU Plain/Ordered; GPU/CPU defaults differ; slower Ordered possible"
+    }
+  ],
+  "counterevidence": "All4currentCatBooststandalone designs score .51809-.52019 below .530636 baseline; orderedmode or backend alone is not assumed to bridge thatgap. Bestoverallreuseddevelopment .5312029153, no supportedgain, no untouched audit.",
+  "views": [
+    "global99",
+    "actuarial99"
+  ],
+  "schemes": [
+    "Plain",
+    "Ordered"
+  ],
+  "parameters": {
+    "iterations": 400,
+    "depth": 4,
+    "learning_rate": 0.08,
+    "l2_leaf_reg": 30,
+    "boost_from_average": false
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "designs": 4,
+  "planned_fits": 40,
+  "resource": "CPU only node2001 and2003; no Colab allocations",
+  "gate": {
+    "pilots": [
+      "cpu_ordercontrast_global99_plain__s2026__f0",
+      "cpu_ordercontrast_global99_ordered__s2026__f0"
+    ],
+    "same_full_recipe": true,
+    "max_pilot_seconds_each": 700,
+    "runtime_safety_factor": 1.5,
+    "remaining_node2001_fits_per_scheme_after_pilots": 11,
+    "remaining_node2003_fits_per_scheme": 8,
+    "latest_projected_finish_epoch": 1793226940.6909878,
+    "admit_only_if_all_complete_finite_boundary_checks_and_conservative_projected_finish_fit": true
+  },
+  "reject_rule": "No target or gain claim unless unchanged final predeclared support and target rule pass. Ordered-versusPlain estimates are reuseddevelopment comparisons only. Execution limits do not count as predictive negatives.",
+  "source_and_features_unchanged": true,
+  "clock_sha256": "67493c438f7f1baeee5db30ba8539cd4dce0641dec23127ffd3b1a93c779cb8d",
+  "peer_HEAD_inspected": "943448d112ea1765c6c8fbae33e1100b0645e9a8",
+  "peer_registry_entries": 254,
+  "duplicate_check": "No existing same-backend explicit Plain/Ordered pair at same400trees/depth4/global99oractuarial99 in currentcatalog or scopedpeerregistry; olddata/protocol feature fingerprints differ.",
+  "new_fit_source": "Unchanged sealed source/models_classical.py _catboost"
+}
