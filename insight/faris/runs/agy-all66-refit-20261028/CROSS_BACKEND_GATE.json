@@ -1,0 +1,19 @@
+{
+  "declared_UTC": "2026-10-28T05:49:15.746525+00:00",
+  "before_A100_inference": true,
+  "purpose": "Check portable fp16 Engine execution on A100; notmodelselection orindependentgainassessment",
+  "required_patterns": [
+    "legacy_separate",
+    "concat_context_vocab"
+  ],
+  "original_reference": "Exactoriginalfold0context/query/features/labels/rows perpattern; knownpretrainedLargehash",
+  "acceptance": {
+    "maximum_absolute_prediction_error_lte": 0.002,
+    "mean_absolute_prediction_error_lte": 0.0002,
+    "absolute_KS_difference_lte": 0.001,
+    "exact_query_row_identity": true,
+    "exact_feature_and_seed_identity": true,
+    "all_predictions_finite": true
+  },
+  "interpretation": "DifferentCUDAhardwarebackend recorded explicitly; tolerance is anexecutioncomparison, notbitwiseGPUreproduction or predictivegain. Failuresstopdependentproductionuntilresolved."
+}

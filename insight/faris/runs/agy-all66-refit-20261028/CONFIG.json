@@ -1,0 +1,47 @@
+{
+  "conversation": "73181457-58b8-405a-bb23-a8afbd02f051",
+  "user_selection": "step891 full rebuild of ALL66 shifted exploratory 0.534013 mix",
+  "populations": {
+    "A": [
+      "h29_pop_spec",
+      "raw_fe_cov",
+      "h29_pop_spec"
+    ],
+    "B": [
+      "per29_pop_spec"
+    ],
+    "C1": [
+      "per29_champ_s7731",
+      "raw_kumo56",
+      "mat18_kumo56",
+      "raw_tr_mat_orig",
+      "raw_shadow91",
+      "h29_shadow91"
+    ],
+    "C2": [
+      "mat18_fe_mat",
+      "h29_pop_spec",
+      "sp200_56k",
+      "mat18_fe_cov",
+      "per29_fe_cov"
+    ]
+  },
+  "lambda": 0.7,
+  "shift": "For each fold and population: expit(logit(raw_mix)-0.70*(logit(mean(correction_mix))-logit(mean(y_correction)))). Uses 6000 correction rows. Lambda and routes were chosen on all OOF outcomes.",
+  "important_recipe_asymmetry": "Correction spline inputs use inner-OOF sp200, while validation mat/per splines use their historical distinct spline models. Correction head predictions are in-sample on correction rows. Preserve exact recipe; no independent-generalization claim.",
+  "seed_policy": "Exact historical per-backbone and fold seeds; source manifests required before dispatch",
+  "backbones": [
+    "pop_specialist",
+    "fe_cov",
+    "fe_mat",
+    "champion90_s7731",
+    "shadow91",
+    "tr_mat_orig",
+    "kumo56"
+  ],
+  "resource_scope": [
+    "node2001 or2003 under actual home",
+    "Colab account2 A100 explicitly allowed; no allocation until packets ready"
+  ],
+  "weights_policy": "No serialized fitted weights or KV caches"
+}

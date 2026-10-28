@@ -1,0 +1,77 @@
+{
+  "id": "agy-all66-refit-20261028",
+  "owner": "faris",
+  "status": "planned",
+  "created_UTC": "2026-10-28T05:40:54.948660+00:00",
+  "hypothesis": "Reconstruct the exact user-selected ALL66 exploratory routed mix with its historical correction shift and produce test predictions; verify engine replay before production.",
+  "source_commit": "56b056b98692d05425d8ce917ca6410148b35a4b",
+  "signature_sha256": "4d2bc6dbd5c62a1c3e905ba50e496374722788ce1373e78c8a674e02e7bf8e77",
+  "configuration_source_sha256": "763ff996f6f7402e2a1424640cb625fd3ed2d7b5b21730a1c81202aa36222723",
+  "protocol_source_sha256": "a6538cea2d8988a2ad33010654f0615e53b4d57da2cd17c5cfba3b0ec15320cc",
+  "replication_reason": null,
+  "duplicate_signatures": [],
+  "configuration": {
+    "conversation": "73181457-58b8-405a-bb23-a8afbd02f051",
+    "user_selection": "step891 full rebuild of ALL66 shifted exploratory 0.534013 mix",
+    "populations": {
+      "A": [
+        "h29_pop_spec",
+        "raw_fe_cov",
+        "h29_pop_spec"
+      ],
+      "B": [
+        "per29_pop_spec"
+      ],
+      "C1": [
+        "per29_champ_s7731",
+        "raw_kumo56",
+        "mat18_kumo56",
+        "raw_tr_mat_orig",
+        "raw_shadow91",
+        "h29_shadow91"
+      ],
+      "C2": [
+        "mat18_fe_mat",
+        "h29_pop_spec",
+        "sp200_56k",
+        "mat18_fe_cov",
+        "per29_fe_cov"
+      ]
+    },
+    "lambda": 0.7,
+    "shift": "For each fold and population: expit(logit(raw_mix)-0.70*(logit(mean(correction_mix))-logit(mean(y_correction)))). Uses 6000 correction rows. Lambda and routes were chosen on all OOF outcomes.",
+    "important_recipe_asymmetry": "Correction spline inputs use inner-OOF sp200, while validation mat/per splines use their historical distinct spline models. Correction head predictions are in-sample on correction rows. Preserve exact recipe; no independent-generalization claim.",
+    "seed_policy": "Exact historical per-backbone and fold seeds; source manifests required before dispatch",
+    "backbones": [
+      "pop_specialist",
+      "fe_cov",
+      "fe_mat",
+      "champion90_s7731",
+      "shadow91",
+      "tr_mat_orig",
+      "kumo56"
+    ],
+    "resource_scope": [
+      "node2001 or2003 under actual home",
+      "Colab account2 A100 explicitly allowed; no allocation until packets ready"
+    ],
+    "weights_policy": "No serialized fitted weights or KV caches"
+  },
+  "protocol": {
+    "purpose": "Requested exploratory ALL66 test-prediction reconstruction and refit, not new model selection or independent-gain claim",
+    "pre_execution_requirement": "Check exact fold row identities, model/feature hashes and disjoint context/correction/validation roles",
+    "replay_gate": {
+      "rows": "Original fold0 correction+validation in exact order",
+      "same_backend_max_absolute_prediction_error": 1e-05,
+      "same_backend_max_absolute_KS_error": 1e-05,
+      "cross_hardware": "Record as distinct backend and inspect deviations; no bitwise reproduction claim or silent acceptance of incompatible Engine"
+    },
+    "outer_labels": "No new recipe,feature or lambda selection; replay labels used solely for metric recomputation",
+    "feature_scope": "User explicitly reopened features in Agy step20; reconstruction preserves exact existing selected features for chosen artifact",
+    "production_gate": "All component feature and preprocessing provenance resolved plus each Engine pattern replay passed before dependent production fits",
+    "test_file_gate": "30000 unique application IDs in sample submission order; finite bounded probabilities; complete source/parameter/prediction provenance",
+    "success_boundary": "Verified requested CSV artifact; any Kaggle or0.54gain must be measured separately"
+  },
+  "private_artifacts": [],
+  "independent_confirmation_claimed": false
+}

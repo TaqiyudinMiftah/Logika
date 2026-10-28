@@ -1,0 +1,27 @@
+{
+  "decided_UTC": "2026-10-28T05:46:40.896632+00:00",
+  "purpose": "Exact selected exploratory recipe with explicit full-training extension; no new selection",
+  "standard_Kumo_backbones": {
+    "context": "64k labels: original50k context plus retired14k validation",
+    "correction": "Original6k correction IDs, excluded from Kumo context",
+    "query": "Same6kcorrection plus30ktest; correction heads fit on6k"
+  },
+  "kumo56_exception": {
+    "historical": "Outer Kumo trainedall56k; correction raw came from nested44800 innerOOF",
+    "production": "All70k training labels ->30ktest; separate70k featurepriorbank",
+    "correction_raw": "Preserve exact cached originalnested innerOOF raw",
+    "correction_head_features": "Preserve originalfold-expanded CVfeaturetable pairedwithcachedOOFraw",
+    "test_head_features": "New70kpriorframe",
+    "limitation": "Production70kcontext differsfrom historical56kcontext and44800OOFcorrectioncontext; no new measured generalizationgain implied"
+  },
+  "splines": {
+    "spline77_maturity_and88_periodicity": "Refit fixed historicalsettings onall70k labels for test",
+    "H016": "Refit fixed historicalanchored smoothYouden rule onall70k; no new strength/thresholdrecipe selection",
+    "sp200_test": "Fixed spline200 all70k fit",
+    "sp200_correction_shift": "Exact cached innerOOF from original56k models, preserving historicalcorrection/test splineasymmetry"
+  },
+  "feature_models": "Requiredhistoricalshadow andlatentteacher features refit with historicalcrossfit,params,seeds; no newfeature/teacher selection",
+  "routing_and_shift": "Fixedrecoveredpopulationrecipesandlambda0.70; perpopulationcorrectionmean comparedwithentirefold6kcorrectionprevalence",
+  "retention": "Source,params,seeds,preprocessing,compactpredictions,hashes,logs only; no serializedfittedweights/KVcaches",
+  "pilot_gate": "Originalfold0 componentandassemblyreplays beforeproduction; failurespreserved"
+}
