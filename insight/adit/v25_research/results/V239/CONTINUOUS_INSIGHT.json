@@ -1,0 +1,109 @@
+{
+  "experiment": "V239",
+  "method": "group_sparse",
+  "hypothesis": "V221's segment improvements are uneven and simple across-source mixtures V224-V234 fail against the development incumbent. Shared coverage, uncertainty and risk-level predictors may allow redundant weak correction effects. Remove entire feature effects within correction training rather than selecting individual coefficients by outer importance. Group sparsity is a hypothesis, not proof that any particular source is redundant.",
+  "formula": "Same original18 V25 spline design. Minimize meanBCE(offset+Xbeta)+.003/2||beta_nonintercept||^2+.001*sum_g sqrt(dim_g)||beta_g||_2. Each numeric spline block and its missing indicator is one group; employment dummies one group; intercept/logit not group-penalized. Convex proximal solver, KKT mapping checked. eta=offset+.5Xbeta; final75:25 original spline77; mean5foldtest.",
+  "findings": [
+    "BROAD_RANKING_GAIN_WITHOUT_KS_GAIN",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5297967455795887,
+      "signed_KS": 0.5297967455795887,
+      "AUC": 0.8473498662338373,
+      "rows": 70000
+    },
+    "delta_KS": -0.0016627689829470382,
+    "delta_AUC": 0.0002423218842299013,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5223639671327847,
+        0.5392935047310878
+      ],
+      "delta_KS": [
+        -0.0043952232199676675,
+        0.0013238492399999524
+      ],
+      "candidate_AUC": [
+        0.8436721674661171,
+        0.8510825029134451
+      ],
+      "delta_AUC": [
+        -8.907799655518412e-05,
+        0.0005578901010361348
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.007324765064552663,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3847,
+      "net_bad_captured": 6,
+      "new_members": 294,
+      "exited_members": 294,
+      "entrant_bad_rate": 0.36394557823129253,
+      "exit_bad_rate": 0.3435374149659864
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5861,
+      "net_bad_captured": 6,
+      "new_members": 480,
+      "exited_members": 480,
+      "entrant_bad_rate": 0.23958333333333334,
+      "exit_bad_rate": 0.22708333333333333
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7422,
+      "net_bad_captured": 0,
+      "new_members": 566,
+      "exited_members": 566,
+      "entrant_bad_rate": 0.13074204946996468,
+      "exit_bad_rate": 0.13074204946996468
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8015,
+      "net_bad_captured": 0,
+      "new_members": 592,
+      "exited_members": 592,
+      "entrant_bad_rate": 0.08614864864864864,
+      "exit_bad_rate": 0.08614864864864864
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8647,
+      "net_bad_captured": -2,
+      "new_members": 586,
+      "exited_members": 586,
+      "entrant_bad_rate": 0.07337883959044368,
+      "exit_bad_rate": 0.07679180887372014
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

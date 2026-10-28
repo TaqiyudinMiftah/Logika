@@ -1,33 +1,5 @@
 [
   {
-    "id": "V239",
-    "status": "QUEUED",
-    "definition": {
-      "id": "V239",
-      "label": "Group-sparse selection of complete risk-feature effects",
-      "method": "group_sparse",
-      "worker": "structured_heads.py",
-      "source_script": "v7/scripts/structured_heads.py",
-      "research_ready": true,
-      "families": [
-        "conditional_allocation"
-      ],
-      "penalty": 0.003,
-      "group_lambda": 0.001,
-      "strength": 0.5,
-      "replaces_base_head": true,
-      "Kumo_frozen_fraction": 1.0,
-      "comparison_baseline": "V25",
-      "no_outer_validation_tuning": true,
-      "formula": "Same original18 V25 spline design. Minimize meanBCE(offset+Xbeta)+.003/2||beta_nonintercept||^2+.001*sum_g sqrt(dim_g)||beta_g||_2. Each numeric spline block and its missing indicator is one group; employment dummies one group; intercept/logit not group-penalized. Convex proximal solver, KKT mapping checked. eta=offset+.5Xbeta; final75:25 original spline77; mean5foldtest.",
-      "rationale": "V221's segment improvements are uneven and simple across-source mixtures V224-V234 fail against the development incumbent. Shared coverage, uncertainty and risk-level predictors may allow redundant weak correction effects. Remove entire feature effects within correction training rather than selecting individual coefficients by outer importance. Group sparsity is a hypothesis, not proof that any particular source is redundant.",
-      "priority": "P1",
-      "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
-      "batch": "structured_head",
-      "feature_catalog": "structured_head/reports/FEATURE_CATALOG.csv"
-    }
-  },
-  {
     "id": "V240",
     "status": "QUEUED",
     "definition": {
