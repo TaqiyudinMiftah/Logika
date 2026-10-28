@@ -7,7 +7,7 @@ import os
 for key in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS']:
     os.environ[key] = '2'
 import argparse
-import fcntl
+from platform_runtime import fcntl
 import gc
 import json
 from pathlib import Path

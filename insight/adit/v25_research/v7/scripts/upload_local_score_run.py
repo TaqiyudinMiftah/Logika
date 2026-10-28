@@ -20,8 +20,10 @@ def main(ident):
     response=s.get(directory+'?content=0',timeout=20)
     if response.status_code==404:c.request('PUT','api/contents/'+BASE+f'v7/runs/{ident}',dict(type='directory'))
     else:response.raise_for_status()
-    files=[ROOT/'v7/score_fusion_plan.json',ROOT/'v7/scripts/score_fusion_local.py',ROOT/'v7/scripts/upload_local_score_run.py',ROOT/'v7/scripts/sync_completed_experiment.py',ROOT/'v7/scripts/prepare_public_progress.py']
-    files += [p for p in sorted(out.iterdir()) if p.is_file() and p.name not in ['RESULT.json','STATUS.json']]
+    files=[ROOT/'v7/scripts/upload_local_score_run.py',ROOT/'v7/scripts/sync_completed_experiment.py',ROOT/'v7/scripts/prepare_public_progress.py']
+    if r.get('controller_source')=='v7/scripts/score_fusion_local.py':files += [ROOT/'v7/score_fusion_plan.json',ROOT/'v7/scripts/score_fusion_local.py']
+    files += [ROOT/'v7/reports'/name for name in ['BEST_DEVELOPMENT_MODEL.json','DEVELOPMENT_PARETO_FRONTIER.json'] if (ROOT/'v7/reports'/name).exists()]
+    files += [p for p in sorted(out.iterdir()) if p.is_file() and p.name not in ['RESULT.json','STATUS.json','adapter.lock'] and '.tmp' not in p.name]
     files += [ROOT/r['submission'],out/'RESULT.json',out/'STATUS.json'];manifest=[]
     for path in files:
         rel=path.relative_to(ROOT).as_posix();payload=path.read_bytes();digest=hashlib.sha256(payload).hexdigest()
@@ -34,6 +36,10 @@ def main(ident):
         manifest.append(dict(path=rel,sha256=digest,bytes=len(payload)));print('UPLOADED_VERIFIED',rel,flush=True)
     result=dict(status='PASS',experiment=ident,UTC=time.time(),all_uploaded_bytes_verified=True,files=manifest)
     (ROOT/'v7/reports'/f'LOCAL_UPLOAD_{ident}.json').write_bytes(json.dumps(result,indent=2).encode())
+    # Metadata-only merge retains the node's complete archive; it loads no ML
+    # stack and does not start another model in the saturated RAM cgroup.
+    command="python - <<'PY'\nimport subprocess,sys\np=subprocess.run([sys.executable,'/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019/v7/scripts/master_log.py'],timeout=120);raise SystemExit(p.returncode)\nPY"
+    assert c.execute(command,'python3')==0,'Uploaded result must enter the authoritative node ledger'
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('experiment');args=p.parse_args();main(args.experiment)

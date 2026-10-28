@@ -31,7 +31,7 @@ def persistent_status(path,value):
     path.with_name(path.stem+f'.{os.getpid()}.json').write_text(text,encoding='utf-8')
     with path.with_suffix('.events.jsonl').open('a',encoding='utf-8') as f:f.write(json.dumps(value)+'\n')
 
-def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experiment_v2.py',status_override=None):
+def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experiment_v2.py',status_override=None,execution_host='node480'):
     if status_override:assert Path(status_override).name==status_override and status_override.endswith('.json')
     from node380_remote import protect
     vault=json.loads(protect((Path.home()/'.codex/private/node480_session.dpapi').read_bytes(),decrypt=True))
@@ -93,8 +93,26 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
             peer_check(expected)
             c=client();gate=dict(status='REVIEWED_FOR_NEXT_RUN',experiment=ident,reviewed_head=expected,UTC=time.time(),peer_new_commits=False,redundancy_review=('Fresh shared HEAD unchanged; distinct correction/calibration or robust-objective specification in the current vetted experiment plan. Original Kumo/context scores frozen.' if worker_file in ['adaptive_adapters.py','joint_followups.py','stability_worker.py'] else 'Fresh shared HEAD unchanged since prior synced result; distinct frozen-Kumo specification. No backbone optimization or unfreezing.'))
             c.request('PUT','api/contents/'+BASE+'v7/modeling/reports/REPO_REVIEW_GATE.json',dict(type='file',format='text',content=json.dumps(gate,indent=2)))
-            command="python - <<'PY'\nfrom pathlib import Path\nimport subprocess,sys\nr=Path('/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019')\np=subprocess.Popen([sys.executable,'-u',str(r/'v7/scripts/supervise_kumo.py'),'--run',"+repr(ident)+",'--worker',"+repr(worker_file)+",'--max-rss-gib','5.5'],stdout=(r/'v7/logs'/"+repr(ident+'_supervisor.log')+").open('a'),stderr=subprocess.STDOUT,start_new_session=True);print('SUPERVISOR_PID',p.pid)\nPY"
-            c.execute(command,'python3');state('LAUNCHED_FROZEN_KUMO',experiment=ident,reviewed_head=expected)
+            if execution_host=='local_windows':
+                assert worker_file in ['structured_heads.py','data_fe_worker.py'] and os.name=='nt'
+                pre=json.loads((V/'reports/LOCAL_CPU_PREFLIGHT.json').read_text());assert pre['status']=='PASS'
+                persistent_status(V/'modeling/reports/REPO_REVIEW_GATE.json',gate)
+                import ctypes
+                class Memory(ctypes.Structure):
+                    _fields_=[('length',ctypes.c_ulong),('load',ctypes.c_ulong)]+[(k,ctypes.c_ulonglong) for k in ['total','available','page_total','page_available','virtual_total','virtual_available','extended']]
+                while True:
+                    memory=Memory();memory.length=ctypes.sizeof(memory);assert ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(memory))
+                    if memory.available>=600*2**20:break
+                    state('WAITING_FOR_LOCAL_CPU_RAM',experiment=ident,available_MiB=memory.available/2**20,required_MiB=600,execution_host=execution_host);time.sleep(15)
+                state('FITTING_LOCAL_CPU_CORRECTION',experiment=ident,execution_host=execution_host,reviewed_head=expected,note='Existing frozen node480 Kumo/spline caches; no new backbone fitting')
+                py=pre['python_executable'];assert Path(py).resolve().is_relative_to(ROOT.resolve()) and Path(py).is_file()
+                with (V/'logs'/f'{ident}_local_cpu.log').open('a',encoding='utf-8') as log:
+                    subprocess.run([py,'-u',str(V/'scripts'/worker_file),'--run',ident],cwd=ROOT,stdout=log,stderr=subprocess.STDOUT,check=True)
+                subprocess.run([py,str(V/'scripts/audit_frozen_result.py'),ident],cwd=ROOT,check=True)
+                subprocess.run([sys.executable,str(V/'scripts/upload_local_score_run.py'),ident],cwd=ROOT,check=True)
+            else:
+                command="python - <<'PY'\nfrom pathlib import Path\nimport subprocess,sys\nr=Path('/home/fariselhakim/adit/Logika/insight/goal054_offset_baseline_20261019')\np=subprocess.Popen([sys.executable,'-u',str(r/'v7/scripts/supervise_kumo.py'),'--run',"+repr(ident)+",'--worker',"+repr(worker_file)+",'--max-rss-gib','5.5'],stdout=(r/'v7/logs'/"+repr(ident+'_supervisor.log')+").open('a'),stderr=subprocess.STDOUT,start_new_session=True);print('SUPERVISOR_PID',p.pid)\nPY"
+                c.execute(command,'python3');state('LAUNCHED_FROZEN_KUMO',experiment=ident,reviewed_head=expected)
         result=wait_result(ident)
         # Master ledger is written just after RESULT by the GPU worker.
         for attempt in range(12):
@@ -112,8 +130,8 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
     state('COMPLETE',last_commit=expected)
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--expected-head',required=True);parser.add_argument('--runs',nargs='+');parser.add_argument('--status-file');parser.add_argument('--after');parser.add_argument('--worker',default='kumo_gpu_experiment_v2.py');args=parser.parse_args()
-    try:main(args.expected_head,args.runs,args.after,args.worker,args.status_file)
+    parser=argparse.ArgumentParser();parser.add_argument('--expected-head',required=True);parser.add_argument('--runs',nargs='+');parser.add_argument('--status-file');parser.add_argument('--after');parser.add_argument('--worker',default='kumo_gpu_experiment_v2.py');parser.add_argument('--execution-host',choices=['node480','local_windows'],default='node480');args=parser.parse_args()
+    try:main(args.expected_head,args.runs,args.after,args.worker,args.status_file,args.execution_host)
     except Exception:
         value=dict(status='STOPPED_FOR_FAILURE_OR_PEER_REVIEW',pid=os.getpid(),UTC=time.time(),traceback=traceback.format_exc())
         persistent_status(V/'reports'/(args.status_file or status_name(args.after)),value);raise

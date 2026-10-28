@@ -38,7 +38,7 @@ def main(expected):
             time.sleep(15);continue
         spec=pending[0];remaining=[r['id'] for r in pending[1:]];assert len(remaining)>=3
         state('RUNNING_NEXT_EXPERIMENT',experiment=spec['id'],hypothesis=spec['rationale'],queued=remaining,queued_count=len(remaining),last_commit=expected)
-        subprocess.run([sys.executable,str(V/'scripts/continue_frozen_kumo_queue.py'),'--expected-head',expected,'--runs',spec['id'],'--worker',spec['worker'],'--status-file','CONTINUOUS_CURRENT.json'],cwd=ROOT,check=True)
+        subprocess.run([sys.executable,str(V/'scripts/continue_frozen_kumo_queue.py'),'--expected-head',expected,'--runs',spec['id'],'--worker',spec['worker'],'--status-file','CONTINUOUS_CURRENT.json','--execution-host',spec.get('execution_host','node480')],cwd=ROOT,check=True)
         receipt=json.loads((V/'modeling/reports'/f"GITHUB_SYNC_{spec['id']}.json").read_text());expected=receipt['commit']
         result=json.loads((V/'runs'/spec['id']/'RESULT.json').read_text());insight=result['continuous_insight']
         with (V/'reports/CONTINUOUS_RESEARCH_EVENTS.jsonl').open('a',encoding='utf-8') as stream:stream.write(json.dumps(dict(UTC=time.time(),commit=expected,**insight))+'\n')

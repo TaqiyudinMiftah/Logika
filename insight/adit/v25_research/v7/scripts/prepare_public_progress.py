@@ -29,7 +29,7 @@ def main():
         if int(x['id'][1:])>=120 or x['id'] in ['V00','V25','V118','V119']:
             folder=DEST/'results'/x['id'];folder.mkdir(parents=True,exist_ok=True)
             (folder/'RESULT_VIEW.json').write_text(json.dumps(r,indent=2),encoding='utf-8')
-            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json','MATCHED_V193.json','ERROR_ANALYSIS_V193.md','ERROR_ANALYSIS_V193.json','CONTINUOUS_INSIGHT.json']:
+            for name in ['ERROR_ANALYSIS.json','ERROR_ANALYSIS.md','ERROR_SEGMENTS.csv','REPORT.md','MATCHED_CONTROL.json','MODELING_METHOD.json','GPU_CACHE_PARITY.json','PROCESS_ATTEMPTS.json','PREVIOUS_ATTEMPT_FAILURE.json','CONTEXT_INPUT_AUDIT.json','REQUIREMENTS_AUDIT.json','GENERALIZATION_REVIEW.json','MATCHED_V185.json','ERROR_ANALYSIS_V185.md','ERROR_ANALYSIS_V185.json','MATCHED_V193.json','ERROR_ANALYSIS_V193.md','ERROR_ANALYSIS_V193.json','CONTINUOUS_INSIGHT.json','MATCHED_SUPPORT_CONTROL.json']:
                 source=V/'runs'/x['id']/name
                 if source.exists():shutil.copyfile(source,folder/name)
     (DEST/'EXPERIMENT_REGISTRY.json').write_text(json.dumps(registry,indent=2),encoding='utf-8')
@@ -83,6 +83,9 @@ def main():
     audit_files=list((V/'audit_noise/reports').glob('*')) if (V/'audit_noise/reports').exists() else []
     audit_files += [V/'scripts'/name for name in ['audit_validation_noise.py','audit_data_segments.py','audit_spectral_coefficients.py','write_noise_audit_report.py']]
     audit_files += [V/'reports/V221_KAGGLE_READONLY_RECEIPT.json']
+    audit_files += [V/name for name in ['data_fe_plan.json','DATA_SIGNAL_RESEARCH_PLAN.md','reports/LOCAL_CPU_PREFLIGHT.json','reports/CPU_RUNTIME_RELOCATION.json','reports/DATA_RESEARCH_ACTIVATION.json']]
+    audit_files += [V/'scripts'/name for name in ['item_price_resilience_features.py','data_fe_worker.py','platform_runtime.py','preflight_local_cpu.py','mirror_cpu_training_cache.py','scan_item_price_signals.py','activate_data_research.py']]
+    audit_files += list((V/'data_fe/reports').glob('*')) if (V/'data_fe/reports').exists() else []
     for source in audit_files:
         if source.is_file() and source.suffix.lower() in ['.py','.md','.json','.csv','.svg']:
             target=DEST/source.relative_to(ROOT);target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target)

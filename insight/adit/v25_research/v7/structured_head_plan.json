@@ -62,7 +62,8 @@
     "formula": "Fit original18 V25 spline encoder on6k; center its basis/missing/employment columns and retain PCA components explaining95%training variance, whiten=False. Preserve separate intercept and standardizedKumo logit. Fit meanBCE(offset+XPCA*beta)+.003/2||beta_nonintercept||^2. Inference eta=offset+.5XPCA*beta; final75:25spline77, mean5foldtest. No target used in PCA or component-count selection.",
     "rationale": "Reduced-knot and roughness controls improve some AUC measures but lose KS, suggesting the correction needs a different capacity constraint. Compress correlated basis directions instead of smoothing every input equally. Low-variance directions may contain important risk or thin-file information, so inspect those segments and reject if lost; PCA is not assigned semantic creditworthiness labels.",
     "priority": "P1",
-    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json"
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
+    "execution_host": "local_windows"
   },
   {
     "id": "V241",
@@ -83,7 +84,8 @@
     "formula": "Original18 spline design. On6k only, b=encoded covariates excluding intercept/Kumo; S=cov(b)+.1I; d2=(b-mean)'inv(S)(b-mean); t=training95th percentile(d2); w=clip(sqrt(max(t,1e-12)/max(d2,1e-12)),.25,1). Fit sum w*BCE/sum w+.003/2||beta_nonintercept||^2. No query-time weight/gate. eta=Kumo logit+.5Xbeta; final75:25spline77, mean5foldtest.",
     "rationale": "Current best has weaker KS in zero-order(3428 rows), no-allocation(23732) and high-conditional-stress groups thanV25, while support-sensitive bootstrap corrections yielded only tiny gains. Test whether a small number of high-leverage feature combinations dominates correction coefficients. Weighting can suppress genuine high-risk or minority borrowers and change effective class balance; report weights/event rates and segment errors, no causal or robustness guarantee.",
     "priority": "P1",
-    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json"
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
+    "execution_host": "local_windows"
   },
   {
     "id": "V242",
@@ -104,6 +106,7 @@
     "formula": "Same18-input V25 design and frozen globalKumo. Initialize beta with same-foldBCE head then minimize mean((sigmoid(KumoLogit+Xbeta)-y)^2)+.003/2||beta_nonintercept||^2 on6k. One fixed local optimization, no outer tuning. Inference eta=KumoLogit+.5Xbeta; final75:25spline77, mean5foldtest. Ridge scale held numerically fixed, not equal effective regularization across scoring losses.",
     "rationale": "Repeated experiments show KS/AUC tradeoffs and weak tail capture: V221 captures6 fewer defaults thanV25 in the top10% despite greater pooledKS. Test another proper scoring objective with unchanged data, without directly optimizing a selected KS threshold. Brier loss is nonconvex in logistic coefficients; stationary convergence does not establish a global optimum or better KS.",
     "priority": "P1",
-    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json"
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
+    "execution_host": "local_windows"
   }
 ]
