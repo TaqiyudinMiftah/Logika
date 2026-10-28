@@ -1,0 +1,36 @@
+{
+  "metric": "absolute two-sample KS, higher",
+  "matched_baseline_KS": 0.5306361042400267,
+  "public_V25_KS": 0.56822,
+  "independent_audit_available": false,
+  "validation_scope": "Adaptive reused development, all70000 applications previously exposed; no untouched generalization claims.",
+  "roles": {
+    "context": 50000,
+    "inner_train": 42500,
+    "inner_stop": 7500,
+    "meta": 6000,
+    "outer": 14000,
+    "folds": 5
+  },
+  "feature_fit_boundary": "All selectors, priors, PCA fitted on42500 inner training rows; model stopping uses7500 disjoint inner rows, final refit50000 context.",
+  "selection": "Complete10-fit cohort only; all adaptive scores exposed and recorded; terminal choice frozen before conditional bootstrap; no scientific change after final evaluation.",
+  "meaningful_delta": 0.0005,
+  "requirements": [
+    "gate.py --data PASS before broad fitting",
+    "One predeclared actual runtime pilot PASS per family",
+    "Exact row and seed coverage before candidate scoring",
+    "Baseline KS replay and SciPy ROC equality",
+    "2000 paired conditional bootstrap, 4/5 folds and bothseeds positive for supportive development evidence"
+  ],
+  "immutable_input_metadata": {
+    "INPUTS.json": "9f0e6accaa2c0880e7da358cb0e8b946e96576001a3b3893797f27e72619dcf9",
+    "PATHS.json": "9a20fcb718e795ff9b8a5f867afe3cd40196d1f94d2c555b2d5071f563c3aae1",
+    "BANK_MANIFEST.json": "25eea89587f940d13343eb3b4c5a427ee51a9ef347b68e6e84a32cb30536f6b6",
+    "FEATURE_SCHEMA.json": "d554f7cf22176ba74540b696676f24bbfae76671c3852736549cc6f5e27cf531",
+    "ANCHOR_SOURCE.json": "2eb98e9a2814552d62bd3ee015fab7d5d57706504dc5c834cb5fee51c7f40de9",
+    "INPUT_REFERENCES.json": "752d84609d0abd082b658d9a7bfdbdf947bb7f55e801fdb4095ed1058971eedb",
+    "CHECKPOINTS.json": "0a6352c87257d8553d4316cb1d68bcf7bbb8547df1d6cfd5223a0f61219f381d",
+    "research/FEATURE_HYPOTHESES.json": "7066b9a9079c80c964c1946a77d5f2dfa0aef955ae4fbded1f0a6c4af7af696f"
+  },
+  "artifact_policy": "Private compact predictions, no fitted weights or KV caches; sanitized source/params/metrics public."
+}

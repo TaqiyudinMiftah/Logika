@@ -1,0 +1,338 @@
+{
+  "status": "proposals; root must map and hash actual view identities before admission",
+  "designs": [
+    {
+      "id": "mlp_global64_bce",
+      "family": "neural",
+      "proposed_view": "global64",
+      "reason": "Small-view nonlinear capacity control; new source bank and strict inner preprocessing differ from the frozen116-column campaign.",
+      "parameters": {
+        "kind": "mlp",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      }
+    },
+    {
+      "id": "resnet_global64_bce",
+      "family": "neural",
+      "proposed_view": "global64",
+      "reason": "Residual network on reduced feature set tests whether correlated low-value inputs overwhelm representation learning.",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      }
+    },
+    {
+      "id": "resnet_global128_bce",
+      "family": "neural",
+      "proposed_view": "global128",
+      "reason": "Matched64to128 dimension expansion with the same model/training hyperparameters.",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      }
+    },
+    {
+      "id": "resnet_global256_bce",
+      "family": "neural",
+      "proposed_view": "global256",
+      "reason": "Matched128to256 expansion permits actuarial context absent from a99-predictor foundation view.",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      }
+    },
+    {
+      "id": "resnet_global128_smoothks",
+      "family": "neural",
+      "proposed_view": "global128",
+      "reason": "Matched objective contrast against128-feature BCE; train-only smooth KS gap targets the competition metric.",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      }
+    },
+    {
+      "id": "resnet_global256_smoothks",
+      "family": "neural",
+      "proposed_view": "global256",
+      "reason": "Checks whether a KS-directed objective changes the effect of expanded inputs, rather than conflating architecture and dimension.",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      }
+    },
+    {
+      "id": "tabm_global64_bce",
+      "family": "neural",
+      "proposed_view": "global64",
+      "reason": "Official efficient16-member ensemble with reduced inputs; controls feature dimensionality without changing TabM hyperparameters.",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      }
+    },
+    {
+      "id": "tabm_global128_bce",
+      "family": "neural",
+      "proposed_view": "global128",
+      "reason": "Matched TabM feature expansion beyond Kumo input capacity.",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      }
+    },
+    {
+      "id": "tabm_global256_bce",
+      "family": "neural",
+      "proposed_view": "global256",
+      "reason": "Tests regularized efficient ensembling on a broad selected actuarial bank.",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      }
+    },
+    {
+      "id": "tabm_global512_bce",
+      "family": "neural",
+      "proposed_view": "global512",
+      "reason": "Wide-input stress test with the same16-member sharing and regularization; context-only selection still excludes stopping/meta/outer labels.",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      }
+    },
+    {
+      "id": "tabm_global128_pair",
+      "family": "neural",
+      "proposed_view": "global128",
+      "reason": "Pairwise-ranking objective control separates generic ranking pressure from KS-specific optimization.",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "bce_pair",
+        "inner_split_seed": 20261029,
+        "pair_weight": 0.1
+      }
+    },
+    {
+      "id": "tabm_global128_smoothks",
+      "family": "neural",
+      "proposed_view": "global128",
+      "reason": "Matched TabM objective comparison at fixed128 inputs; adapted smooth threshold/CDF objective, not exact DMKS.",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900.0,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      }
+    }
+  ],
+  "dependency_pins": {
+    "torch": "2.7.1+cu126",
+    "tabm": "0.0.3",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "rtdl-num-embeddings": "0.0.12"
+  },
+  "sources": [
+    {
+      "id": "TABM",
+      "url": "https://arxiv.org/abs/2410.24210v3",
+      "implementation": "https://github.com/yandex-research/tabm",
+      "use": "Official TabM.make, per-member BCE, mean member probabilities."
+    },
+    {
+      "id": "RESNET",
+      "url": "https://arxiv.org/abs/2106.11959",
+      "use": "Task-specific residual MLP and context-only numerical transforms."
+    },
+    {
+      "id": "DMKS_MOTIVATION",
+      "url": "https://doi.org/10.1016/j.csda.2018.10.004",
+      "use": "Objective mismatch motivates a distinct smooth KS surrogate; not exact DMKS."
+    }
+  ],
+  "seeds_planned": [
+    2026,
+    7731
+  ],
+  "folds_planned": 5,
+  "counting": "12pipeline designs;120expert fits if every fivefold/twoseed cohort completes. No scores are claimed.",
+  "boundary": "Feature selection on shared42500inner-train subset; neural stopping7500disjoint; full-context50000refit for selected epochs.",
+  "neural_module": "models_neural.py",
+  "synthetic_verification": {
+    "status": "PASS",
+    "preprocessing_and_gradients": {
+      "preprocessing_excludes_changed_query": true,
+      "unknown_categories_mapped_to_zero": true,
+      "losses_and_gradients_finite": {
+        "bce": 0.7985882759094238,
+        "bce_pair": 0.888573944568634,
+        "smooth_ks": 0.7976593375205994
+      },
+      "known_case_KS_passed": true,
+      "competition_rows_loaded": false,
+      "weights_or_KV_serialized": false
+    },
+    "full_interface_synthetic_resnet_and_TabM": true,
+    "synthetic_query_rows": 80,
+    "actual_competition_rows_loaded": false,
+    "fitted_weights_serialized": false,
+    "verification_environment": {
+      "torch": "2.14.0+cpu",
+      "numpy": "2.4.3",
+      "pandas": "3.0.1"
+    },
+    "limitation": "CPU synthetic interface checks; actual pinned CUDA runtime requires root qualification pilot before broad admission."
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "status": "proposed; not actual-data trained",
+  "designs": [
+    {
+      "id": "lgb_reduced32_shallow",
+      "family": "lightgbm",
+      "view": "top32",
+      "hypothesis": "Context-only top32 selection plus shallow boosted trees tests whether capacity reduction limits selection noise.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 15,
+        "max_depth": 5,
+        "min_child_samples": 200,
+        "reg_lambda": 30
+      },
+      "stopping_metric": "logloss"
+    },
+    {
+      "id": "lgb_reduced64_ksstop",
+      "family": "lightgbm",
+      "view": "top64",
+      "hypothesis": "At fixed reduced inputs, inner-context KS stopping tests metric alignment without outer-based epoch selection.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1600,
+        "num_leaves": 15,
+        "max_depth": 6,
+        "min_child_samples": 180,
+        "reg_lambda": 25
+      },
+      "stopping_metric": "ks"
+    },
+    {
+      "id": "lgb_top99_balanced",
+      "family": "lightgbm",
+      "view": "top99",
+      "hypothesis": "Balanced class weights alter finite-model splits toward default discrimination; evaluate ranking after held-out calibration.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25
+      },
+      "class_balance": "balanced"
+    },
+    {
+      "id": "lgb_top256_wide",
+      "family": "lightgbm",
+      "view": "top256",
+      "hypothesis": "A wider globally selected set tests cross-domain interactions discarded by99-feature specialists.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1600,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25,
+        "colsample_bytree": 0.7
+      }
+    },
+    {
+      "id": "lgb_top512_extratrees",
+      "family": "lightgbm",
+      "view": "top512",
+      "hypothesis": "Additional split randomization regularizes a512-feature view while preserving nonlinear interactions.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1800,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 180,
+        "reg_lambda": 30,
+        "extra_trees": true,
+        "colsample_bytree": 0.65
+      }
+    },
+    {
+      "id": "lgb_all_regularized",
+      "family": "lightgbm",
+      "view": "all",
+      "hypothesis": "The full permissible bank with strong leaf support and shrinkage tests whether selection discards weak complementary features.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 250,
+        "reg_lambda": 40,
+        "reg_alpha": 1,
+        "colsample_bytree": 0.55
+      }
+    },
+    {
+      "id": "cat_top99_depth6",
+      "family": "catboost",
+      "view": "top99",
+      "hypothesis": "CatBoost on a global99-feature view tests a distinct inductive bias versus the old domain-specific expert views.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "parameters": {
+        "iterations": 1400,
+        "depth": 6,
+        "l2_leaf_reg": 20
+      }
+    },
+    {
+      "id": "cat_top256_depth8",
+      "family": "catboost",
+      "view": "top256",
+      "hypothesis": "Deeper symmetric trees test interactions across selected financial and behavior domains.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "parameters": {
+        "iterations": 1200,
+        "depth": 8,
+        "l2_leaf_reg": 25,
+        "learning_rate": 0.035
+      }
+    },
+    {
+      "id": "cat_top512_balanced",
+      "family": "catboost",
+      "view": "top512",
+      "hypothesis": "Square-root class reweighting tests discrimination in a wider bank without full inverse-frequency emphasis.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "class_balance": "sqrt",
+      "parameters": {
+        "iterations": 1400,
+        "depth": 6,
+        "l2_leaf_reg": 30
+      }
+    },
+    {
+      "id": "cat_all_shallow",
+      "family": "catboost",
+      "view": "all",
+      "hypothesis": "A shallow full-bank control tests broad feature access under a restricted interaction order.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "parameters": {
+        "iterations": 1500,
+        "depth": 4,
+        "l2_leaf_reg": 30
+      }
+    },
+    {
+      "id": "xgb_top99_binary",
+      "family": "xgboost",
+      "view": "top99",
+      "hypothesis": "Histogram boosting with native categorical splits tests another backbone on globally selected99 predictors.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "max_iterations": 1400,
+      "parameters": {
+        "max_depth": 4,
+        "min_child_weight": 25,
+        "reg_lambda": 25
+      }
+    },
+    {
+      "id": "xgb_top256_ksstop",
+      "family": "xgboost",
+      "view": "top256",
+      "hypothesis": "A wider XGBoost classifier with inner KS stopping tests representation and metric alignment jointly.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "max_iterations": 1500,
+      "stopping_metric": "ks",
+      "parameters": {
+        "max_depth": 5,
+        "min_child_weight": 30,
+        "reg_lambda": 30
+      }
+    },
+    {
+      "id": "xgb_top99_pairwise",
+      "family": "xgboost",
+      "view": "top99",
+      "hypothesis": "Pairwise RankNet loss on one context group directly trains discrimination; sigmoid scores remain uncalibrated.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "objective": "pairwise",
+      "max_iterations": 1200,
+      "stopping_metric": "auc",
+      "pairs_per_sample": 4,
+      "parameters": {
+        "max_depth": 4,
+        "min_child_weight": 25,
+        "reg_lambda": 25
+      }
+    },
+    {
+      "id": "xgb_top256_pairwise",
+      "family": "xgboost",
+      "view": "top256",
+      "hypothesis": "A wider pairwise model tests whether feature interactions improve the order of defaults and nondefaults.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "objective": "pairwise",
+      "max_iterations": 1200,
+      "stopping_metric": "ks",
+      "pairs_per_sample": 4,
+      "parameters": {
+        "max_depth": 5,
+        "min_child_weight": 30,
+        "reg_lambda": 30
+      }
+    },
+    {
+      "id": "glm_top32_logit_ridge",
+      "family": "glm",
+      "view": "top32",
+      "hypothesis": "A strongly regularized Bernoulli GLM is the low-complexity actuarial reference for reduced inputs.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "logit",
+      "spline": false,
+      "ridge": 0.03,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25
+    },
+    {
+      "id": "glm_top64_logit_spline",
+      "family": "glm",
+      "view": "top64",
+      "hypothesis": "Additive smooth nonlinearities model risk relativities without arbitrary high-order feature crosses.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "logit",
+      "spline": true,
+      "ridge": 0.03,
+      "knots": 4,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25
+    },
+    {
+      "id": "glm_top64_cloglog_spline",
+      "family": "glm",
+      "view": "top64",
+      "hypothesis": "The complementary-log-log Bernoulli link tests asymmetric probability response at the fixed supplied horizon.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "cloglog",
+      "spline": true,
+      "ridge": 0.03,
+      "knots": 4,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25
+    },
+    {
+      "id": "glm_top99_logit_shrink",
+      "family": "glm",
+      "view": "top99",
+      "hypothesis": "Stronger ridge on a broader additive spline bank tests whether dimension can expand while effective flexibility stays constrained.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "logit",
+      "spline": true,
+      "ridge": 0.1,
+      "knots": 4,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25
+    }
+  ],
+  "required_dependencies": {
+    "lightgbm": "4.6.0",
+    "catboost": "1.2.8",
+    "xgboost": "3.2.0"
+  },
+  "stopping_policy": "The root injects inner_split_seed20261029+fold; all inner fitting excludes7500 context stopper rows, then preprocessing and a selected-length model refit50000context rows.",
+  "sources": {
+    "actuarial": "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+    "direct_KS_motivation_only": "https://doi.org/10.1016/j.csda.2018.10.004",
+    "ranking": "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html",
+    "categorical": "https://xgboost.readthedocs.io/en/release_3.0.0/tutorials/categorical.html"
+  },
+  "not_exact_DMKS_reproduction": true
+}

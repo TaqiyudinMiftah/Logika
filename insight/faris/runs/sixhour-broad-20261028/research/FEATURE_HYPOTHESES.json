@@ -1,0 +1,822 @@
+{
+  "created_UTC": "2026-10-28T16:54:45.626682+00:00",
+  "status": "prepared; no competition-label fits or scores",
+  "module": "source/features_actuarial.py",
+  "module_sha256": "42c486db59e4395209882b6db9b8839cea96f0a0daf91d3d4696a3247974d5e1",
+  "book": {
+    "title": "Statistical Foundations of Actuarial Learning and its Applications",
+    "authors": [
+      "MarioV.Wuthrich",
+      "MichaelMerz"
+    ],
+    "year": 2023,
+    "official_url": "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+    "downloaded_pdf_sha256": "ccf7901fd434ac70477719dfc47b6d6dedf24c0fde33e1da2c870ff63964487d",
+    "bytes": 25201123,
+    "license": "CC-BY-4.0; publisher marks open access",
+    "read_locations": [
+      "Bernoulli exponential family",
+      "Chapter5 credibility/mixed-model discussion p155\u2013157",
+      "Chapter6 Bayesian estimation and regularization pp207\u2013219"
+    ],
+    "usage_scope": "Conceptual and mathematical inspiration; exact borrower feature equations are explicit adaptations, not a reproduction of a claimed credit-default model."
+  },
+  "sources": {
+    "bernoulli_link": {
+      "url": "https://doi.org/10.1007/978-3-031-12409-9",
+      "location": "Chapter2(single-parameter Bernoulli exponential family);Chapter5(GLMs)",
+      "use": "Canonical log-odds and nonlinear feature maps are representations, not additional raw information."
+    },
+    "credibility": {
+      "url": "https://doi.org/10.1007/978-3-031-12409-9",
+      "location": "Section5.2(mixed models and credibility);Chapter6(Bayesian estimation and regularization)",
+      "use": "Exposure-aware shrinkage motivates beta-binomial historical-rate features. Beta conjugacy formulas below are an explicit Bernoulli adaptation."
+    },
+    "risk_functionals": {
+      "url": "https://doi.org/10.1007/978-3-031-12409-9",
+      "location": "Chapter3(decision theory);Chapter4(prediction);Section5.8(regression of risk functionals)",
+      "credit_mechanism_url": "https://www.bis.org/publications/qr-201509/how-much-income-used-debt-payments-new-database-debt-service-ratios",
+      "use": "Liquidity stress features are deterministic borrower cash-flow scenarios, not calibrated ruin or survival probabilities."
+    },
+    "regularization": {
+      "url": "https://doi.org/10.1007/978-3-031-12409-9",
+      "location": "Section6.2(regularization, ridge,LASSO,elastic net)",
+      "use": "Motivates context-only selection/reduction and matched comparisons against unreduced inputs."
+    }
+  },
+  "Consensus_status": "Parent attempted selected Consensus connector; reauthentication required. Primary open-access textbook and BIS paper used as fallback.",
+  "candidate_derived_definitions": 39,
+  "new_raw_sources": 0,
+  "required_inputs_and_IDs": {
+    "employment_tenure_months": "fc45dc5fac38ed265",
+    "loan_amount": "fbdf1bdab7c2db382",
+    "m_repayment_180_t1_m1_k": "fee604570285b9150",
+    "m_repayment_180_t1_m1_n": "fce3f230f2d4213ff",
+    "m_repayment_365_t1_m1_k": "f807101da00f79fdc",
+    "m_repayment_365_t1_m1_n": "f0290476bcfc7810b",
+    "m_repayment_365_t30_m1_k": "fb09001404b976d58",
+    "m_repayment_365_t30_m1_n": "f0156bce57a16313b",
+    "m_repayment_all_t1_m1_k": "f1b8fa728b0eb3ea1",
+    "m_repayment_all_t1_m1_n": "f15ee5355abcfb3cd",
+    "proposed_monthly_installment": "fae0bc4cb23400cf7",
+    "term_months": "f3402dcf29cf4fa5a",
+    "v2_account_12m_income_like_credits_mean": "f6695a46cb37b4b2b",
+    "v2_account_12m_outflows_mean": "f6639741f710872e9",
+    "v2_account_3m_average_balance_mean": "fe2c32ba625ff0bb8",
+    "v2_account_3m_income_like_credits_mean": "f8a15251e4cd790fe",
+    "v2_account_3m_income_like_credits_std": "f236614d46820ad94",
+    "v2_account_3m_minimum_balance_min": "f1a4d6778fe14fc73",
+    "v2_account_3m_outflows_mean": "f70ebcaea9cdde7d4",
+    "v2_account_3m_outflows_std": "f75ddcf53e1a2efd1",
+    "v2_existing_active_installment": "f22fa54908216d37e"
+  },
+  "definitions": [
+    {
+      "name": "a6_all_t1_logodds",
+      "op": "beta_logodds",
+      "inputs": [
+        "m_repayment_all_t1_m1_k",
+        "m_repayment_all_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "logit((k+24*mu_context)/(n+24))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_all_t1_lower05",
+      "op": "beta_lower05",
+      "inputs": [
+        "m_repayment_all_t1_m1_k",
+        "m_repayment_all_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "BetaQuantile(.05,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_all_t1_upper95",
+      "op": "beta_upper95",
+      "inputs": [
+        "m_repayment_all_t1_m1_k",
+        "m_repayment_all_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "BetaQuantile(.95,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_all_t1_above_cohort",
+      "op": "beta_above_cohort",
+      "inputs": [
+        "m_repayment_all_t1_m1_k",
+        "m_repayment_all_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "1-BetaCDF(mu_context,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_365_t1_logodds",
+      "op": "beta_logodds",
+      "inputs": [
+        "m_repayment_365_t1_m1_k",
+        "m_repayment_365_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "logit((k+24*mu_context)/(n+24))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_365_t1_lower05",
+      "op": "beta_lower05",
+      "inputs": [
+        "m_repayment_365_t1_m1_k",
+        "m_repayment_365_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "BetaQuantile(.05,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_365_t1_upper95",
+      "op": "beta_upper95",
+      "inputs": [
+        "m_repayment_365_t1_m1_k",
+        "m_repayment_365_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "BetaQuantile(.95,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_365_t1_above_cohort",
+      "op": "beta_above_cohort",
+      "inputs": [
+        "m_repayment_365_t1_m1_k",
+        "m_repayment_365_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "1-BetaCDF(mu_context,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_180_t1_logodds",
+      "op": "beta_logodds",
+      "inputs": [
+        "m_repayment_180_t1_m1_k",
+        "m_repayment_180_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "logit((k+24*mu_context)/(n+24))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_180_t1_lower05",
+      "op": "beta_lower05",
+      "inputs": [
+        "m_repayment_180_t1_m1_k",
+        "m_repayment_180_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "BetaQuantile(.05,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_180_t1_upper95",
+      "op": "beta_upper95",
+      "inputs": [
+        "m_repayment_180_t1_m1_k",
+        "m_repayment_180_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "BetaQuantile(.95,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_180_t1_above_cohort",
+      "op": "beta_above_cohort",
+      "inputs": [
+        "m_repayment_180_t1_m1_k",
+        "m_repayment_180_t1_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "1-BetaCDF(mu_context,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_365_t30_logodds",
+      "op": "beta_logodds",
+      "inputs": [
+        "m_repayment_365_t30_m1_k",
+        "m_repayment_365_t30_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "logit((k+24*mu_context)/(n+24))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_365_t30_lower05",
+      "op": "beta_lower05",
+      "inputs": [
+        "m_repayment_365_t30_m1_k",
+        "m_repayment_365_t30_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "BetaQuantile(.05,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_365_t30_upper95",
+      "op": "beta_upper95",
+      "inputs": [
+        "m_repayment_365_t30_m1_k",
+        "m_repayment_365_t30_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "BetaQuantile(.95,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_365_t30_above_cohort",
+      "op": "beta_above_cohort",
+      "inputs": [
+        "m_repayment_365_t30_m1_k",
+        "m_repayment_365_t30_m1_n"
+      ],
+      "group": "historical_credibility",
+      "source": "credibility",
+      "formula": "1-BetaCDF(mu_context,k+24*mu_context,n-k+24*(1-mu_context))",
+      "units": "dimensionless",
+      "assumption": "Historical late-event counts use their recorded maturity-adjusted eligible opportunity counts; not current default labels."
+    },
+    {
+      "name": "a6_recent_older_logodds",
+      "op": "recent_logodds",
+      "inputs": [
+        "m_repayment_180_t1_m1_k",
+        "m_repayment_180_t1_m1_n",
+        "m_repayment_all_t1_m1_k",
+        "m_repayment_all_t1_m1_n"
+      ],
+      "formula": "logit(p_recent180)-logit(p_older);older=(all-180),common context-all prior strength24",
+      "group": "historical_drift",
+      "source": "credibility",
+      "units": "dimensionless",
+      "assumption": "180day and all-history counts must be nested with the same1day maturity definition."
+    },
+    {
+      "name": "a6_recent_older_trust_logodds",
+      "op": "recent_trust_logodds",
+      "inputs": [
+        "m_repayment_180_t1_m1_k",
+        "m_repayment_180_t1_m1_n",
+        "m_repayment_all_t1_m1_k",
+        "m_repayment_all_t1_m1_n"
+      ],
+      "formula": "recent_older_logodds*(n180/(n180+24))*(nolder/(nolder+24))",
+      "group": "historical_drift",
+      "source": "credibility",
+      "units": "dimensionless",
+      "assumption": "Reliability attenuates a rate change supported by little history."
+    },
+    {
+      "name": "a6_recent_opportunity_share",
+      "op": "recent_share",
+      "inputs": [
+        "m_repayment_180_t1_m1_k",
+        "m_repayment_180_t1_m1_n",
+        "m_repayment_all_t1_m1_k",
+        "m_repayment_all_t1_m1_n"
+      ],
+      "formula": "n180/nall",
+      "group": "historical_drift",
+      "source": "credibility",
+      "units": "dimensionless",
+      "assumption": "Opportunity concentration proxy; zero all-history exposures remains missing."
+    },
+    {
+      "name": "a6_severity_opportunity_coverage",
+      "op": "severity_coverage",
+      "inputs": [
+        "m_repayment_365_t30_m1_n",
+        "m_repayment_365_t1_m1_n"
+      ],
+      "formula": "n_365_t30_mature/n_365_t1_mature",
+      "group": "historical_credibility",
+      "source": "credibility",
+      "units": "dimensionless",
+      "assumption": "Coverage of sufficiently old repayments; not a severe-given-late probability."
+    },
+    {
+      "name": "a6_net_margin",
+      "op": "net_margin",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_outflows_mean",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment"
+      ],
+      "formula": "(income-outflow-proposed-active)/income",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_runway_deficit_months",
+      "op": "runway",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_outflows_mean",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment",
+        "v2_account_3m_average_balance_mean"
+      ],
+      "formula": "max(cash,0)/max(outflow+proposed+active-income,0),defined only for positive deficit",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "months",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_runway_term_share",
+      "op": "runway_term",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_outflows_mean",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment",
+        "v2_account_3m_average_balance_mean",
+        "term_months"
+      ],
+      "formula": "runway_deficit_months/term_months",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_cash_floor_due_shortfall",
+      "op": "cash_floor_shortfall",
+      "inputs": [
+        "proposed_monthly_installment",
+        "v2_existing_active_installment",
+        "v2_account_3m_minimum_balance_min"
+      ],
+      "formula": "max(proposed+active-minimum_cash,0)/(proposed+active)",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_cash_floor_income_buffer",
+      "op": "cash_floor_buffer",
+      "inputs": [
+        "v2_account_3m_minimum_balance_min",
+        "v2_account_3m_income_like_credits_mean"
+      ],
+      "formula": "minimum_cash/income",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "months",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_cash_drawdown_fraction",
+      "op": "drawdown",
+      "inputs": [
+        "v2_account_3m_average_balance_mean",
+        "v2_account_3m_minimum_balance_min"
+      ],
+      "formula": "(mean_cash-minimum_cash)/max(abs(mean_cash),context_cash_floor)",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_surplus_to_buffer",
+      "op": "surplus_buffer",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_outflows_mean",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment",
+        "v2_account_3m_average_balance_mean"
+      ],
+      "formula": "(income-outflow-proposed-active)/max(abs(mean_cash),context_cash_floor)",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "per_month",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_one_sd_income_service",
+      "op": "stress_income",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_income_like_credits_std",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment"
+      ],
+      "formula": "(proposed+active)/(income-income_sd),defined only for positive stressed income",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_one_sd_outflow_margin",
+      "op": "stress_outflow",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_outflows_mean",
+        "v2_account_3m_outflows_std",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment"
+      ],
+      "formula": "(income-outflow-outflow_sd-proposed-active)/income",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_cashflow_noise_margin",
+      "op": "noise_margin",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_income_like_credits_std",
+        "v2_account_3m_outflows_mean",
+        "v2_account_3m_outflows_std",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment"
+      ],
+      "formula": "(income-outflow-proposed-active)/sqrt(income_sd^2+outflow_sd^2)",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_income_volatility_leverage",
+      "op": "vol_leverage",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_income_like_credits_std",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment"
+      ],
+      "formula": "(income_sd/income)*((proposed+active)/income)",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_overdraft_service_pressure",
+      "op": "overdraft_service",
+      "inputs": [
+        "v2_account_3m_minimum_balance_min",
+        "v2_account_3m_income_like_credits_mean",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment"
+      ],
+      "formula": "max(-minimum_cash,0)*(proposed+active)/income^2",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_term_liquid_obligation_load",
+      "op": "term_load",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "proposed_monthly_installment",
+        "v2_existing_active_installment",
+        "v2_account_3m_average_balance_mean",
+        "term_months"
+      ],
+      "formula": "term*(proposed+active)/(max(cash,0)+term*income)",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_tenure_term_coverage",
+      "op": "tenure_term",
+      "inputs": [
+        "employment_tenure_months",
+        "term_months"
+      ],
+      "formula": "employment_tenure_months/term_months",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_contractual_cost_ratio",
+      "op": "contract_cost",
+      "inputs": [
+        "proposed_monthly_installment",
+        "term_months",
+        "loan_amount"
+      ],
+      "formula": "(proposed_installment*term-principal)/principal",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_principal_resource_share",
+      "op": "principal_resources",
+      "inputs": [
+        "loan_amount",
+        "v2_account_3m_average_balance_mean",
+        "v2_account_3m_income_like_credits_mean",
+        "term_months"
+      ],
+      "formula": "principal/(max(cash,0)+term*income)",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_income_outflow_trend_gap",
+      "op": "trend_gap",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_12m_income_like_credits_mean",
+        "v2_account_3m_outflows_mean",
+        "v2_account_12m_outflows_mean"
+      ],
+      "formula": "log(income3m/income12m)-log(outflow3m/outflow12m)",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_surplus_3m12m_shift",
+      "op": "surplus_shift",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_12m_income_like_credits_mean",
+        "v2_account_3m_outflows_mean",
+        "v2_account_12m_outflows_mean"
+      ],
+      "formula": "((income3m-outflow3m)-(income12m-outflow12m))/income12m",
+      "group": "cashflow_stress",
+      "source": "risk_functionals",
+      "units": "dimensionless",
+      "assumption": "Monthly amounts are aligned as recorded. Constant-flow term scenarios are proxies, not forecasts. One-SD scenarios do not assume or claim a Gaussian tail probability; noise-margin covariance is unavailable."
+    },
+    {
+      "name": "a6_cashflow_joint_missing",
+      "op": "missing_fraction",
+      "inputs": [
+        "v2_account_3m_income_like_credits_mean",
+        "v2_account_3m_income_like_credits_std",
+        "v2_account_3m_outflows_mean",
+        "v2_account_3m_outflows_std",
+        "v2_account_3m_average_balance_mean",
+        "v2_account_3m_minimum_balance_min"
+      ],
+      "formula": "fraction of missing financial inputs",
+      "group": "evidence_quality",
+      "source": "regularization",
+      "units": "dimensionless",
+      "assumption": "Missingness is observable at inference and does not replace absent values with zero."
+    }
+  ],
+  "proposed_featureviews": [
+    {
+      "id": "core20",
+      "predictors_max": 20,
+      "recipe": "Existing fixed20 core IDs from prior FEATURE_SCHEMA.core, unchanged.",
+      "hypothesis": "A minimal stable financial core may reduce variance relative to100predictors.",
+      "matched_control": "prior core+expert views",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "global_gain32_base",
+      "predictors_max": 32,
+      "recipe": "Preserve available fixed20 core; select remaining slots by gain from one fixed LightGBM selector trained on50000context only; existing fullbank only.",
+      "hypothesis": "Test whether a global feature budget outperforms semantic partitions or a wider bank.",
+      "matched_control": "same backbone with nearest feature budget",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "global_gain64_base",
+      "predictors_max": 64,
+      "recipe": "Preserve available fixed20 core; select remaining slots by gain from one fixed LightGBM selector trained on50000context only; existing fullbank only.",
+      "hypothesis": "Test whether a global feature budget outperforms semantic partitions or a wider bank.",
+      "matched_control": "same backbone with nearest feature budget",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "global_gain99_base",
+      "predictors_max": 99,
+      "recipe": "Preserve available fixed20 core; select remaining slots by gain from one fixed LightGBM selector trained on50000context only; existing fullbank only.",
+      "hypothesis": "Test whether a global feature budget outperforms semantic partitions or a wider bank.",
+      "matched_control": "same backbone with nearest feature budget",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "global_gain256_base",
+      "predictors_max": 256,
+      "recipe": "Preserve available fixed20 core; select remaining slots by gain from one fixed LightGBM selector trained on50000context only; existing fullbank only.",
+      "hypothesis": "Test whether a global feature budget outperforms semantic partitions or a wider bank.",
+      "matched_control": "same backbone with nearest feature budget",
+      "Kumo_eligible": false,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "global_gain512_base",
+      "predictors_max": 512,
+      "recipe": "Preserve available fixed20 core; select remaining slots by gain from one fixed LightGBM selector trained on50000context only; existing fullbank only.",
+      "hypothesis": "Test whether a global feature budget outperforms semantic partitions or a wider bank.",
+      "matched_control": "same backbone with nearest feature budget",
+      "Kumo_eligible": false,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "all_base",
+      "predictors_max": 2090,
+      "recipe": "All nonconstant, context-deduplicated oldbank columns, no a6 columns.",
+      "hypothesis": "A wide regularized model can use complementary weak historical signals.",
+      "matched_control": "global_gain256_base",
+      "Kumo_eligible": false,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "global_gain64_augmented",
+      "predictors_max": 64,
+      "recipe": "Same fixed selector/core as matched base; candidate universe adds retained a6 columns.",
+      "hypothesis": "Structured exposure-aware risk and active-debt cashflow representations can survive a fixed feature budget.",
+      "matched_control": "global_gain64_base",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "global_gain99_augmented",
+      "predictors_max": 99,
+      "recipe": "Same fixed selector/core as matched base; candidate universe adds retained a6 columns.",
+      "hypothesis": "Structured exposure-aware risk and active-debt cashflow representations can survive a fixed feature budget.",
+      "matched_control": "global_gain99_base",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "global_gain256_augmented",
+      "predictors_max": 256,
+      "recipe": "Same fixed selector/core as matched base; candidate universe adds retained a6 columns.",
+      "hypothesis": "Structured exposure-aware risk and active-debt cashflow representations can survive a fixed feature budget.",
+      "matched_control": "global_gain256_base",
+      "Kumo_eligible": false,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "gain256_corr_pruned99_augmented",
+      "predictors_max": 99,
+      "recipe": "Gain-preselect256 usingcontextlabels; Spearman prune|rho|>.98 on fixed random10000context subset, retaining higher-gain input in each conflict; preserve fixed core; truncate99.",
+      "hypothesis": "Removing correlated representations may improve a small foundation model under its predictor cap.",
+      "matched_control": "global_gain99_augmented",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "pca64_plus_core20",
+      "predictors_max": 84,
+      "recipe": "Select context top256 noncore numeric candidates; fit context-only median/scaling and PCA64, then append fixed20core unchanged. All transforms refit within inner-training role when used for stopping.",
+      "hypothesis": "An unsupervised low-rank summary can retain variation discarded by hard feature selection.",
+      "matched_control": "global_gain99_augmented",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "elasticnet99_augmented",
+      "predictors_max": 99,
+      "recipe": "Context-only imputation/scaling and logistic elastic-net feature ranking, preserving fixed20 core; take up to99 features. Fit selector inside stopping role for strict inner control.",
+      "hypothesis": "Sparse supervised selection may prefer complementary signals over split-gain duplicates.",
+      "matched_control": "global_gain99_augmented",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    },
+    {
+      "id": "core20_plus_a6_mechanisms",
+      "predictors_max": 59,
+      "recipe": "Fixed20 core plus all retained a6 definitions; no outcome-based selection among a6 definitions.",
+      "hypothesis": "A compact mechanism-based feature pack may be easier to learn than fullbank selection.",
+      "matched_control": "core20",
+      "Kumo_eligible": true,
+      "source_keys": [
+        "regularization"
+      ],
+      "scope": "Context-only feature construction/selection; no meta/outer labels."
+    }
+  ],
+  "synthetic_checks": {
+    "status": "PASS",
+    "candidate_definitions": 39,
+    "synthetic_retained_features": 38,
+    "heldout_mutation_preserves_fitted_recipes": true,
+    "heldout_mutation_preserves_context_values": true,
+    "missing_exposure_remains_missing": true,
+    "actual_competition_data_used": false,
+    "models_trained": 0
+  },
+  "prior_bank_limit": "The previousfoldfeatures.parquet saves only~306\u2013315 selected columns. Materialize the fullBank(specs) before top512/allbank experiments; expand skips missing inputs honestly.",
+  "alias_policy": {
+    "representational_aliases": "Beta logodds are monotonic transforms of existing posterior rates, not new independent information. Other a6 predictors remain deterministic functions of existing inputs.",
+    "algebraic_overlap": "Existing stress formulas use proposed payment only; new structured scenarios include active+proposed installments. Existing net_ratio is(principal-cash)/income, distinct from current net cashflow margin.",
+    "automatic_dedup": "Exact float32 context-value aliases and context constants are removed and logged per fold; query values do not choose what is retained."
+  },
+  "limitations": [
+    "Historical opportunity counts for different lateness thresholds do not define identical eligible sets; no severe-given-late rate is fabricated.",
+    "Recent-versus-older rates require nested windows and identical maturity definitions; invalid nesting becomes missing.",
+    "Monthly income/outflow volatility does not identify covariance or a full distribution; standardized scenarios are stress proxies, not calibrated ruin probabilities.",
+    "Loan term projections assume constant scheduled payment and income; contractual-cost feature is a nominal scenario, not a realized interest/fee or loss measure.",
+    "All current70000rows have prior development exposure; no independent statistical audit is created.",
+    "For a strict inner-stopping boundary, regenerate a6 priors and denominator floors with inner-training ctx; never fit these learned quantities on query/outer rows."
+  ]
+}

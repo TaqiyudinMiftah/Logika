@@ -1,0 +1,4562 @@
+{
+  "campaign": "sixhour-broad-20261028",
+  "user_hours_ceiling": 6,
+  "absolute_stop_UTC": "2026-10-28T23:30:00+00:00",
+  "scope": "Adaptive reused-development research; no untouched audit and no Kaggle submissions.",
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "designs": {
+    "lgb_reduced32_shallow": {
+      "family": "lightgbm",
+      "view": "global32",
+      "hypothesis": "Context-only top32 selection plus shallow boosted trees tests whether capacity reduction limits selection noise.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 15,
+        "max_depth": 5,
+        "min_child_samples": 200,
+        "reg_lambda": 30
+      },
+      "stopping_metric": "logloss",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_reduced64_ksstop": {
+      "family": "lightgbm",
+      "view": "global64",
+      "hypothesis": "At fixed reduced inputs, inner-context KS stopping tests metric alignment without outer-based epoch selection.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1600,
+        "num_leaves": 15,
+        "max_depth": 6,
+        "min_child_samples": 180,
+        "reg_lambda": 25
+      },
+      "stopping_metric": "ks",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_top99_balanced": {
+      "family": "lightgbm",
+      "view": "global99",
+      "hypothesis": "Balanced class weights alter finite-model splits toward default discrimination; evaluate ranking after held-out calibration.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25
+      },
+      "class_balance": "balanced",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_top256_wide": {
+      "family": "lightgbm",
+      "view": "global256",
+      "hypothesis": "A wider globally selected set tests cross-domain interactions discarded by99-feature specialists.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1600,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25,
+        "colsample_bytree": 0.7
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_top512_extratrees": {
+      "family": "lightgbm",
+      "view": "global512",
+      "hypothesis": "Additional split randomization regularizes a512-feature view while preserving nonlinear interactions.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1800,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 180,
+        "reg_lambda": 30,
+        "extra_trees": true,
+        "colsample_bytree": 0.65
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_all_regularized": {
+      "family": "lightgbm",
+      "view": "all",
+      "hypothesis": "The full permissible bank with strong leaf support and shrinkage tests whether selection discards weak complementary features.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 250,
+        "reg_lambda": 40,
+        "reg_alpha": 1,
+        "colsample_bytree": 0.55
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "cat_top99_depth6": {
+      "family": "catboost",
+      "view": "global99",
+      "hypothesis": "CatBoost on a global99-feature view tests a distinct inductive bias versus the old domain-specific expert views.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "parameters": {
+        "iterations": 1400,
+        "depth": 6,
+        "l2_leaf_reg": 20
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "cat_top256_depth8": {
+      "family": "catboost",
+      "view": "global256",
+      "hypothesis": "Deeper symmetric trees test interactions across selected financial and behavior domains.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "parameters": {
+        "iterations": 1200,
+        "depth": 8,
+        "l2_leaf_reg": 25,
+        "learning_rate": 0.035
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "cat_top512_balanced": {
+      "family": "catboost",
+      "view": "global512",
+      "hypothesis": "Square-root class reweighting tests discrimination in a wider bank without full inverse-frequency emphasis.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "class_balance": "sqrt",
+      "parameters": {
+        "iterations": 1400,
+        "depth": 6,
+        "l2_leaf_reg": 30
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "cat_all_shallow": {
+      "family": "catboost",
+      "view": "all",
+      "hypothesis": "A shallow full-bank control tests broad feature access under a restricted interaction order.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "iterations": 1500,
+        "depth": 4,
+        "l2_leaf_reg": 30
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "xgb_top99_binary": {
+      "family": "xgboost",
+      "view": "global99",
+      "hypothesis": "Histogram boosting with native categorical splits tests another backbone on globally selected99 predictors.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "max_iterations": 1400,
+      "parameters": {
+        "max_depth": 4,
+        "min_child_weight": 25,
+        "reg_lambda": 25
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "xgb_top256_ksstop": {
+      "family": "xgboost",
+      "view": "global256",
+      "hypothesis": "A wider XGBoost classifier with inner KS stopping tests representation and metric alignment jointly.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "max_iterations": 1500,
+      "stopping_metric": "ks",
+      "parameters": {
+        "max_depth": 5,
+        "min_child_weight": 30,
+        "reg_lambda": 30
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "xgb_top99_pairwise": {
+      "family": "xgboost",
+      "view": "global99",
+      "hypothesis": "Pairwise RankNet loss on one context group directly trains discrimination; sigmoid scores remain uncalibrated.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "objective": "pairwise",
+      "max_iterations": 1200,
+      "stopping_metric": "auc",
+      "pairs_per_sample": 4,
+      "parameters": {
+        "max_depth": 4,
+        "min_child_weight": 25,
+        "reg_lambda": 25
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "xgb_top256_pairwise": {
+      "family": "xgboost",
+      "view": "global256",
+      "hypothesis": "A wider pairwise model tests whether feature interactions improve the order of defaults and nondefaults.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "gpu",
+      "objective": "pairwise",
+      "max_iterations": 1200,
+      "stopping_metric": "ks",
+      "pairs_per_sample": 4,
+      "parameters": {
+        "max_depth": 5,
+        "min_child_weight": 30,
+        "reg_lambda": 30
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "glm_top32_logit_ridge": {
+      "family": "glm",
+      "view": "global32",
+      "hypothesis": "A strongly regularized Bernoulli GLM is the low-complexity actuarial reference for reduced inputs.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "logit",
+      "spline": false,
+      "ridge": 0.03,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25,
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "glm_top64_logit_spline": {
+      "family": "glm",
+      "view": "global64",
+      "hypothesis": "Additive smooth nonlinearities model risk relativities without arbitrary high-order feature crosses.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "logit",
+      "spline": true,
+      "ridge": 0.03,
+      "knots": 4,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25,
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "glm_top64_cloglog_spline": {
+      "family": "glm",
+      "view": "global64",
+      "hypothesis": "The complementary-log-log Bernoulli link tests asymmetric probability response at the fixed supplied horizon.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "cloglog",
+      "spline": true,
+      "ridge": 0.03,
+      "knots": 4,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25,
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "glm_top99_logit_shrink": {
+      "family": "glm",
+      "view": "global99",
+      "hypothesis": "Stronger ridge on a broader additive spline bank tests whether dimension can expand while effective flexibility stays constrained.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "logit",
+      "spline": true,
+      "ridge": 0.1,
+      "knots": 4,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25,
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "mlp_global64_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "mlp",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global64",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Small-view nonlinear capacity control; new source bank and strict inner preprocessing differ from the frozen116-column campaign.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global64_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global64",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Residual network on reduced feature set tests whether correlated low-value inputs overwhelm representation learning.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global128_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global128",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched64to128 dimension expansion with the same model/training hyperparameters.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global256_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global256",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched128to256 expansion permits actuarial context absent from a99-predictor foundation view.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global128_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global128",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched objective contrast against128-feature BCE; train-only smooth KS gap targets the competition metric.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global256_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global256",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Checks whether a KS-directed objective changes the effect of expanded inputs, rather than conflating architecture and dimension.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_global64_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global64",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Official efficient16-member ensemble with reduced inputs; controls feature dimensionality without changing TabM hyperparameters.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_global128_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global128",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched TabM feature expansion beyond Kumo input capacity.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_global256_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global256",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Tests regularized efficient ensembling on a broad selected actuarial bank.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_global512_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global512",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Wide-input stress test with the same16-member sharing and regularization; context-only selection still excludes stopping/meta/outer labels.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_global128_pair": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce_pair",
+        "inner_split_seed": 20261029,
+        "pair_weight": 0.1
+      },
+      "view": "global128",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Pairwise-ranking objective control separates generic ranking pressure from KS-specific optimization.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_global128_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global128",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched TabM objective comparison at fixed128 inputs; adapted smooth threshold/CDF objective, not exact DMKS.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_global99_unweighted": {
+      "family": "lightgbm",
+      "view": "global99",
+      "hypothesis": "Matched class-weight control for the99-feature global view.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25
+      },
+      "class_balance": "none",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_augmented99": {
+      "family": "lightgbm",
+      "view": "augmented99",
+      "hypothesis": "Same regularized boosting recipe; isolate augmented99 representation.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25
+      },
+      "class_balance": "none",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_actuarial99": {
+      "family": "lightgbm",
+      "view": "actuarial99",
+      "hypothesis": "Same regularized boosting recipe; isolate actuarial99 representation.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25
+      },
+      "class_balance": "none",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_redundant99": {
+      "family": "lightgbm",
+      "view": "redundant99",
+      "hypothesis": "Same regularized boosting recipe; isolate redundant99 representation.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25
+      },
+      "class_balance": "none",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_core99": {
+      "family": "lightgbm",
+      "view": "core99",
+      "hypothesis": "Same regularized boosting recipe; isolate core99 representation.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25
+      },
+      "class_balance": "none",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_pca64_core": {
+      "family": "lightgbm",
+      "view": "pca64_core",
+      "hypothesis": "Same regularized boosting recipe; isolate pca64_core representation.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25
+      },
+      "class_balance": "none",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_augmented256": {
+      "family": "lightgbm",
+      "view": "augmented256",
+      "hypothesis": "Expanded financial/reliability features under the same tree shrinkage.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1600,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25,
+        "colsample_bytree": 0.7
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "lgb_augmented512": {
+      "family": "lightgbm",
+      "view": "augmented512",
+      "hypothesis": "Expanded financial/reliability features under the same tree shrinkage.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "parameters": {
+        "n_estimators": 1600,
+        "num_leaves": 31,
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "reg_lambda": 25,
+        "colsample_bytree": 0.7
+      },
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_global32_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global32",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched TabM feature-width/book-expansion control.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_global99_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global99",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched TabM feature-width/book-expansion control.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_augmented256_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "augmented256",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched TabM feature-width/book-expansion control.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "tabm_actuarial99_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "actuarial99",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched TabM feature-width/book-expansion control.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global64_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global64",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "KS-directed objective at a reduced or actuarial-focused dimension.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global99_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global99",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "KS-directed objective at a reduced or actuarial-focused dimension.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_actuarial99_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "actuarial99",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "KS-directed objective at a reduced or actuarial-focused dimension.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "glm_actuarial99_logit": {
+      "family": "glm",
+      "view": "actuarial99",
+      "hypothesis": "Strongly regularized Bernoulli risk relativity on actuarial transforms.",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "inner_split_seed": 20261029,
+      "resource": "cpu",
+      "link": "logit",
+      "spline": true,
+      "ridge": 0.1,
+      "knots": 4,
+      "optimization_blocks": 8,
+      "iterations_per_block": 25,
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_global32_e8": {
+      "family": "kumo_large",
+      "view": "global32",
+      "resource": "gpu",
+      "hypothesis": "Matched foundation-model input-width curve; reduction and expansion use only inner-context feature selection.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_global48_e8": {
+      "family": "kumo_large",
+      "view": "global48",
+      "resource": "gpu",
+      "hypothesis": "Matched foundation-model input-width curve; reduction and expansion use only inner-context feature selection.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_global64_e8": {
+      "family": "kumo_large",
+      "view": "global64",
+      "resource": "gpu",
+      "hypothesis": "Matched foundation-model input-width curve; reduction and expansion use only inner-context feature selection.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_global80_e8": {
+      "family": "kumo_large",
+      "view": "global80",
+      "resource": "gpu",
+      "hypothesis": "Matched foundation-model input-width curve; reduction and expansion use only inner-context feature selection.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_global99_e8": {
+      "family": "kumo_large",
+      "view": "global99",
+      "resource": "gpu",
+      "hypothesis": "Matched foundation-model input-width curve; reduction and expansion use only inner-context feature selection.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_medium_global32_e8": {
+      "family": "kumo_medium",
+      "view": "global32",
+      "resource": "gpu",
+      "hypothesis": "Matched foundation-model input-width curve; reduction and expansion use only inner-context feature selection.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_medium_global64_e8": {
+      "family": "kumo_medium",
+      "view": "global64",
+      "resource": "gpu",
+      "hypothesis": "Matched foundation-model input-width curve; reduction and expansion use only inner-context feature selection.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_medium_global99_e8": {
+      "family": "kumo_medium",
+      "view": "global99",
+      "resource": "gpu",
+      "hypothesis": "Matched foundation-model input-width curve; reduction and expansion use only inner-context feature selection.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_core99_e8": {
+      "family": "kumo_large",
+      "view": "core99",
+      "resource": "gpu",
+      "hypothesis": "Matched99-or-fewer-input foundation comparison for core99.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_augmented99_e8": {
+      "family": "kumo_large",
+      "view": "augmented99",
+      "resource": "gpu",
+      "hypothesis": "Matched99-or-fewer-input foundation comparison for augmented99.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_actuarial99_e8": {
+      "family": "kumo_large",
+      "view": "actuarial99",
+      "resource": "gpu",
+      "hypothesis": "Matched99-or-fewer-input foundation comparison for actuarial99.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_redundant99_e8": {
+      "family": "kumo_large",
+      "view": "redundant99",
+      "resource": "gpu",
+      "hypothesis": "Matched99-or-fewer-input foundation comparison for redundant99.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_pca64_core_e8": {
+      "family": "kumo_large",
+      "view": "pca64_core",
+      "resource": "gpu",
+      "hypothesis": "Matched99-or-fewer-input foundation comparison for pca64_core.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_global99_e16": {
+      "family": "kumo_large",
+      "view": "global99",
+      "resource": "gpu",
+      "hypothesis": "Increase context ensemble stability at fixed inputs and model size.",
+      "parameters": {
+        "size": "large",
+        "estimators": 16,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_medium_global99_e16": {
+      "family": "kumo_medium",
+      "view": "global99",
+      "resource": "gpu",
+      "hypothesis": "Increase context ensemble stability at fixed inputs and model size.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 16,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_global64_e2": {
+      "family": "kumo_large",
+      "view": "global64",
+      "resource": "gpu",
+      "hypothesis": "Matched ensemble-budget curve at fixed representation.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_global99_e2": {
+      "family": "kumo_large",
+      "view": "global99",
+      "resource": "gpu",
+      "hypothesis": "Matched ensemble-budget curve at fixed representation.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "kumo_large_actuarial99_e2": {
+      "family": "kumo_large",
+      "view": "actuarial99",
+      "resource": "gpu",
+      "hypothesis": "Matched ensemble-budget curve at fixed representation.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab"
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular"
+      ],
+      "registration": "Before any actual-data fitting in this campaign."
+    }
+  },
+  "tasks": {
+    "lgb_reduced32_shallow__s2026__f0": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_reduced32_shallow__s2026__f1": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_reduced32_shallow__s2026__f2": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_reduced32_shallow__s2026__f3": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_reduced32_shallow__s2026__f4": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_reduced32_shallow__s7731__f0": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_reduced32_shallow__s7731__f1": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_reduced32_shallow__s7731__f2": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_reduced32_shallow__s7731__f3": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_reduced32_shallow__s7731__f4": {
+      "design": "lgb_reduced32_shallow",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_reduced64_ksstop__s2026__f0": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_reduced64_ksstop__s2026__f1": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_reduced64_ksstop__s2026__f2": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_reduced64_ksstop__s2026__f3": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_reduced64_ksstop__s2026__f4": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_reduced64_ksstop__s7731__f0": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_reduced64_ksstop__s7731__f1": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_reduced64_ksstop__s7731__f2": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_reduced64_ksstop__s7731__f3": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_reduced64_ksstop__s7731__f4": {
+      "design": "lgb_reduced64_ksstop",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_top99_balanced__s2026__f0": {
+      "design": "lgb_top99_balanced",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_top99_balanced__s2026__f1": {
+      "design": "lgb_top99_balanced",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_top99_balanced__s2026__f2": {
+      "design": "lgb_top99_balanced",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_top99_balanced__s2026__f3": {
+      "design": "lgb_top99_balanced",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_top99_balanced__s2026__f4": {
+      "design": "lgb_top99_balanced",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_top99_balanced__s7731__f0": {
+      "design": "lgb_top99_balanced",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_top99_balanced__s7731__f1": {
+      "design": "lgb_top99_balanced",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_top99_balanced__s7731__f2": {
+      "design": "lgb_top99_balanced",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_top99_balanced__s7731__f3": {
+      "design": "lgb_top99_balanced",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_top99_balanced__s7731__f4": {
+      "design": "lgb_top99_balanced",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_top256_wide__s2026__f0": {
+      "design": "lgb_top256_wide",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_top256_wide__s2026__f1": {
+      "design": "lgb_top256_wide",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_top256_wide__s2026__f2": {
+      "design": "lgb_top256_wide",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_top256_wide__s2026__f3": {
+      "design": "lgb_top256_wide",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_top256_wide__s2026__f4": {
+      "design": "lgb_top256_wide",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_top256_wide__s7731__f0": {
+      "design": "lgb_top256_wide",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_top256_wide__s7731__f1": {
+      "design": "lgb_top256_wide",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_top256_wide__s7731__f2": {
+      "design": "lgb_top256_wide",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_top256_wide__s7731__f3": {
+      "design": "lgb_top256_wide",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_top256_wide__s7731__f4": {
+      "design": "lgb_top256_wide",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_top512_extratrees__s2026__f0": {
+      "design": "lgb_top512_extratrees",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_top512_extratrees__s2026__f1": {
+      "design": "lgb_top512_extratrees",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_top512_extratrees__s2026__f2": {
+      "design": "lgb_top512_extratrees",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_top512_extratrees__s2026__f3": {
+      "design": "lgb_top512_extratrees",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_top512_extratrees__s2026__f4": {
+      "design": "lgb_top512_extratrees",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_top512_extratrees__s7731__f0": {
+      "design": "lgb_top512_extratrees",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_top512_extratrees__s7731__f1": {
+      "design": "lgb_top512_extratrees",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_top512_extratrees__s7731__f2": {
+      "design": "lgb_top512_extratrees",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_top512_extratrees__s7731__f3": {
+      "design": "lgb_top512_extratrees",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_top512_extratrees__s7731__f4": {
+      "design": "lgb_top512_extratrees",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_all_regularized__s2026__f0": {
+      "design": "lgb_all_regularized",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_all_regularized__s2026__f1": {
+      "design": "lgb_all_regularized",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_all_regularized__s2026__f2": {
+      "design": "lgb_all_regularized",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_all_regularized__s2026__f3": {
+      "design": "lgb_all_regularized",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_all_regularized__s2026__f4": {
+      "design": "lgb_all_regularized",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_all_regularized__s7731__f0": {
+      "design": "lgb_all_regularized",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_all_regularized__s7731__f1": {
+      "design": "lgb_all_regularized",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_all_regularized__s7731__f2": {
+      "design": "lgb_all_regularized",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_all_regularized__s7731__f3": {
+      "design": "lgb_all_regularized",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_all_regularized__s7731__f4": {
+      "design": "lgb_all_regularized",
+      "seed": 7731,
+      "fold": 4
+    },
+    "cat_top99_depth6__s2026__f0": {
+      "design": "cat_top99_depth6",
+      "seed": 2026,
+      "fold": 0
+    },
+    "cat_top99_depth6__s2026__f1": {
+      "design": "cat_top99_depth6",
+      "seed": 2026,
+      "fold": 1
+    },
+    "cat_top99_depth6__s2026__f2": {
+      "design": "cat_top99_depth6",
+      "seed": 2026,
+      "fold": 2
+    },
+    "cat_top99_depth6__s2026__f3": {
+      "design": "cat_top99_depth6",
+      "seed": 2026,
+      "fold": 3
+    },
+    "cat_top99_depth6__s2026__f4": {
+      "design": "cat_top99_depth6",
+      "seed": 2026,
+      "fold": 4
+    },
+    "cat_top99_depth6__s7731__f0": {
+      "design": "cat_top99_depth6",
+      "seed": 7731,
+      "fold": 0
+    },
+    "cat_top99_depth6__s7731__f1": {
+      "design": "cat_top99_depth6",
+      "seed": 7731,
+      "fold": 1
+    },
+    "cat_top99_depth6__s7731__f2": {
+      "design": "cat_top99_depth6",
+      "seed": 7731,
+      "fold": 2
+    },
+    "cat_top99_depth6__s7731__f3": {
+      "design": "cat_top99_depth6",
+      "seed": 7731,
+      "fold": 3
+    },
+    "cat_top99_depth6__s7731__f4": {
+      "design": "cat_top99_depth6",
+      "seed": 7731,
+      "fold": 4
+    },
+    "cat_top256_depth8__s2026__f0": {
+      "design": "cat_top256_depth8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "cat_top256_depth8__s2026__f1": {
+      "design": "cat_top256_depth8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "cat_top256_depth8__s2026__f2": {
+      "design": "cat_top256_depth8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "cat_top256_depth8__s2026__f3": {
+      "design": "cat_top256_depth8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "cat_top256_depth8__s2026__f4": {
+      "design": "cat_top256_depth8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "cat_top256_depth8__s7731__f0": {
+      "design": "cat_top256_depth8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "cat_top256_depth8__s7731__f1": {
+      "design": "cat_top256_depth8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "cat_top256_depth8__s7731__f2": {
+      "design": "cat_top256_depth8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "cat_top256_depth8__s7731__f3": {
+      "design": "cat_top256_depth8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "cat_top256_depth8__s7731__f4": {
+      "design": "cat_top256_depth8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "cat_top512_balanced__s2026__f0": {
+      "design": "cat_top512_balanced",
+      "seed": 2026,
+      "fold": 0
+    },
+    "cat_top512_balanced__s2026__f1": {
+      "design": "cat_top512_balanced",
+      "seed": 2026,
+      "fold": 1
+    },
+    "cat_top512_balanced__s2026__f2": {
+      "design": "cat_top512_balanced",
+      "seed": 2026,
+      "fold": 2
+    },
+    "cat_top512_balanced__s2026__f3": {
+      "design": "cat_top512_balanced",
+      "seed": 2026,
+      "fold": 3
+    },
+    "cat_top512_balanced__s2026__f4": {
+      "design": "cat_top512_balanced",
+      "seed": 2026,
+      "fold": 4
+    },
+    "cat_top512_balanced__s7731__f0": {
+      "design": "cat_top512_balanced",
+      "seed": 7731,
+      "fold": 0
+    },
+    "cat_top512_balanced__s7731__f1": {
+      "design": "cat_top512_balanced",
+      "seed": 7731,
+      "fold": 1
+    },
+    "cat_top512_balanced__s7731__f2": {
+      "design": "cat_top512_balanced",
+      "seed": 7731,
+      "fold": 2
+    },
+    "cat_top512_balanced__s7731__f3": {
+      "design": "cat_top512_balanced",
+      "seed": 7731,
+      "fold": 3
+    },
+    "cat_top512_balanced__s7731__f4": {
+      "design": "cat_top512_balanced",
+      "seed": 7731,
+      "fold": 4
+    },
+    "cat_all_shallow__s2026__f0": {
+      "design": "cat_all_shallow",
+      "seed": 2026,
+      "fold": 0
+    },
+    "cat_all_shallow__s2026__f1": {
+      "design": "cat_all_shallow",
+      "seed": 2026,
+      "fold": 1
+    },
+    "cat_all_shallow__s2026__f2": {
+      "design": "cat_all_shallow",
+      "seed": 2026,
+      "fold": 2
+    },
+    "cat_all_shallow__s2026__f3": {
+      "design": "cat_all_shallow",
+      "seed": 2026,
+      "fold": 3
+    },
+    "cat_all_shallow__s2026__f4": {
+      "design": "cat_all_shallow",
+      "seed": 2026,
+      "fold": 4
+    },
+    "cat_all_shallow__s7731__f0": {
+      "design": "cat_all_shallow",
+      "seed": 7731,
+      "fold": 0
+    },
+    "cat_all_shallow__s7731__f1": {
+      "design": "cat_all_shallow",
+      "seed": 7731,
+      "fold": 1
+    },
+    "cat_all_shallow__s7731__f2": {
+      "design": "cat_all_shallow",
+      "seed": 7731,
+      "fold": 2
+    },
+    "cat_all_shallow__s7731__f3": {
+      "design": "cat_all_shallow",
+      "seed": 7731,
+      "fold": 3
+    },
+    "cat_all_shallow__s7731__f4": {
+      "design": "cat_all_shallow",
+      "seed": 7731,
+      "fold": 4
+    },
+    "xgb_top99_binary__s2026__f0": {
+      "design": "xgb_top99_binary",
+      "seed": 2026,
+      "fold": 0
+    },
+    "xgb_top99_binary__s2026__f1": {
+      "design": "xgb_top99_binary",
+      "seed": 2026,
+      "fold": 1
+    },
+    "xgb_top99_binary__s2026__f2": {
+      "design": "xgb_top99_binary",
+      "seed": 2026,
+      "fold": 2
+    },
+    "xgb_top99_binary__s2026__f3": {
+      "design": "xgb_top99_binary",
+      "seed": 2026,
+      "fold": 3
+    },
+    "xgb_top99_binary__s2026__f4": {
+      "design": "xgb_top99_binary",
+      "seed": 2026,
+      "fold": 4
+    },
+    "xgb_top99_binary__s7731__f0": {
+      "design": "xgb_top99_binary",
+      "seed": 7731,
+      "fold": 0
+    },
+    "xgb_top99_binary__s7731__f1": {
+      "design": "xgb_top99_binary",
+      "seed": 7731,
+      "fold": 1
+    },
+    "xgb_top99_binary__s7731__f2": {
+      "design": "xgb_top99_binary",
+      "seed": 7731,
+      "fold": 2
+    },
+    "xgb_top99_binary__s7731__f3": {
+      "design": "xgb_top99_binary",
+      "seed": 7731,
+      "fold": 3
+    },
+    "xgb_top99_binary__s7731__f4": {
+      "design": "xgb_top99_binary",
+      "seed": 7731,
+      "fold": 4
+    },
+    "xgb_top256_ksstop__s2026__f0": {
+      "design": "xgb_top256_ksstop",
+      "seed": 2026,
+      "fold": 0
+    },
+    "xgb_top256_ksstop__s2026__f1": {
+      "design": "xgb_top256_ksstop",
+      "seed": 2026,
+      "fold": 1
+    },
+    "xgb_top256_ksstop__s2026__f2": {
+      "design": "xgb_top256_ksstop",
+      "seed": 2026,
+      "fold": 2
+    },
+    "xgb_top256_ksstop__s2026__f3": {
+      "design": "xgb_top256_ksstop",
+      "seed": 2026,
+      "fold": 3
+    },
+    "xgb_top256_ksstop__s2026__f4": {
+      "design": "xgb_top256_ksstop",
+      "seed": 2026,
+      "fold": 4
+    },
+    "xgb_top256_ksstop__s7731__f0": {
+      "design": "xgb_top256_ksstop",
+      "seed": 7731,
+      "fold": 0
+    },
+    "xgb_top256_ksstop__s7731__f1": {
+      "design": "xgb_top256_ksstop",
+      "seed": 7731,
+      "fold": 1
+    },
+    "xgb_top256_ksstop__s7731__f2": {
+      "design": "xgb_top256_ksstop",
+      "seed": 7731,
+      "fold": 2
+    },
+    "xgb_top256_ksstop__s7731__f3": {
+      "design": "xgb_top256_ksstop",
+      "seed": 7731,
+      "fold": 3
+    },
+    "xgb_top256_ksstop__s7731__f4": {
+      "design": "xgb_top256_ksstop",
+      "seed": 7731,
+      "fold": 4
+    },
+    "xgb_top99_pairwise__s2026__f0": {
+      "design": "xgb_top99_pairwise",
+      "seed": 2026,
+      "fold": 0
+    },
+    "xgb_top99_pairwise__s2026__f1": {
+      "design": "xgb_top99_pairwise",
+      "seed": 2026,
+      "fold": 1
+    },
+    "xgb_top99_pairwise__s2026__f2": {
+      "design": "xgb_top99_pairwise",
+      "seed": 2026,
+      "fold": 2
+    },
+    "xgb_top99_pairwise__s2026__f3": {
+      "design": "xgb_top99_pairwise",
+      "seed": 2026,
+      "fold": 3
+    },
+    "xgb_top99_pairwise__s2026__f4": {
+      "design": "xgb_top99_pairwise",
+      "seed": 2026,
+      "fold": 4
+    },
+    "xgb_top99_pairwise__s7731__f0": {
+      "design": "xgb_top99_pairwise",
+      "seed": 7731,
+      "fold": 0
+    },
+    "xgb_top99_pairwise__s7731__f1": {
+      "design": "xgb_top99_pairwise",
+      "seed": 7731,
+      "fold": 1
+    },
+    "xgb_top99_pairwise__s7731__f2": {
+      "design": "xgb_top99_pairwise",
+      "seed": 7731,
+      "fold": 2
+    },
+    "xgb_top99_pairwise__s7731__f3": {
+      "design": "xgb_top99_pairwise",
+      "seed": 7731,
+      "fold": 3
+    },
+    "xgb_top99_pairwise__s7731__f4": {
+      "design": "xgb_top99_pairwise",
+      "seed": 7731,
+      "fold": 4
+    },
+    "xgb_top256_pairwise__s2026__f0": {
+      "design": "xgb_top256_pairwise",
+      "seed": 2026,
+      "fold": 0
+    },
+    "xgb_top256_pairwise__s2026__f1": {
+      "design": "xgb_top256_pairwise",
+      "seed": 2026,
+      "fold": 1
+    },
+    "xgb_top256_pairwise__s2026__f2": {
+      "design": "xgb_top256_pairwise",
+      "seed": 2026,
+      "fold": 2
+    },
+    "xgb_top256_pairwise__s2026__f3": {
+      "design": "xgb_top256_pairwise",
+      "seed": 2026,
+      "fold": 3
+    },
+    "xgb_top256_pairwise__s2026__f4": {
+      "design": "xgb_top256_pairwise",
+      "seed": 2026,
+      "fold": 4
+    },
+    "xgb_top256_pairwise__s7731__f0": {
+      "design": "xgb_top256_pairwise",
+      "seed": 7731,
+      "fold": 0
+    },
+    "xgb_top256_pairwise__s7731__f1": {
+      "design": "xgb_top256_pairwise",
+      "seed": 7731,
+      "fold": 1
+    },
+    "xgb_top256_pairwise__s7731__f2": {
+      "design": "xgb_top256_pairwise",
+      "seed": 7731,
+      "fold": 2
+    },
+    "xgb_top256_pairwise__s7731__f3": {
+      "design": "xgb_top256_pairwise",
+      "seed": 7731,
+      "fold": 3
+    },
+    "xgb_top256_pairwise__s7731__f4": {
+      "design": "xgb_top256_pairwise",
+      "seed": 7731,
+      "fold": 4
+    },
+    "glm_top32_logit_ridge__s2026__f0": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 2026,
+      "fold": 0
+    },
+    "glm_top32_logit_ridge__s2026__f1": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 2026,
+      "fold": 1
+    },
+    "glm_top32_logit_ridge__s2026__f2": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 2026,
+      "fold": 2
+    },
+    "glm_top32_logit_ridge__s2026__f3": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 2026,
+      "fold": 3
+    },
+    "glm_top32_logit_ridge__s2026__f4": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 2026,
+      "fold": 4
+    },
+    "glm_top32_logit_ridge__s7731__f0": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 7731,
+      "fold": 0
+    },
+    "glm_top32_logit_ridge__s7731__f1": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 7731,
+      "fold": 1
+    },
+    "glm_top32_logit_ridge__s7731__f2": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 7731,
+      "fold": 2
+    },
+    "glm_top32_logit_ridge__s7731__f3": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 7731,
+      "fold": 3
+    },
+    "glm_top32_logit_ridge__s7731__f4": {
+      "design": "glm_top32_logit_ridge",
+      "seed": 7731,
+      "fold": 4
+    },
+    "glm_top64_logit_spline__s2026__f0": {
+      "design": "glm_top64_logit_spline",
+      "seed": 2026,
+      "fold": 0
+    },
+    "glm_top64_logit_spline__s2026__f1": {
+      "design": "glm_top64_logit_spline",
+      "seed": 2026,
+      "fold": 1
+    },
+    "glm_top64_logit_spline__s2026__f2": {
+      "design": "glm_top64_logit_spline",
+      "seed": 2026,
+      "fold": 2
+    },
+    "glm_top64_logit_spline__s2026__f3": {
+      "design": "glm_top64_logit_spline",
+      "seed": 2026,
+      "fold": 3
+    },
+    "glm_top64_logit_spline__s2026__f4": {
+      "design": "glm_top64_logit_spline",
+      "seed": 2026,
+      "fold": 4
+    },
+    "glm_top64_logit_spline__s7731__f0": {
+      "design": "glm_top64_logit_spline",
+      "seed": 7731,
+      "fold": 0
+    },
+    "glm_top64_logit_spline__s7731__f1": {
+      "design": "glm_top64_logit_spline",
+      "seed": 7731,
+      "fold": 1
+    },
+    "glm_top64_logit_spline__s7731__f2": {
+      "design": "glm_top64_logit_spline",
+      "seed": 7731,
+      "fold": 2
+    },
+    "glm_top64_logit_spline__s7731__f3": {
+      "design": "glm_top64_logit_spline",
+      "seed": 7731,
+      "fold": 3
+    },
+    "glm_top64_logit_spline__s7731__f4": {
+      "design": "glm_top64_logit_spline",
+      "seed": 7731,
+      "fold": 4
+    },
+    "glm_top64_cloglog_spline__s2026__f0": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 2026,
+      "fold": 0
+    },
+    "glm_top64_cloglog_spline__s2026__f1": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 2026,
+      "fold": 1
+    },
+    "glm_top64_cloglog_spline__s2026__f2": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 2026,
+      "fold": 2
+    },
+    "glm_top64_cloglog_spline__s2026__f3": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 2026,
+      "fold": 3
+    },
+    "glm_top64_cloglog_spline__s2026__f4": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 2026,
+      "fold": 4
+    },
+    "glm_top64_cloglog_spline__s7731__f0": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 7731,
+      "fold": 0
+    },
+    "glm_top64_cloglog_spline__s7731__f1": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 7731,
+      "fold": 1
+    },
+    "glm_top64_cloglog_spline__s7731__f2": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 7731,
+      "fold": 2
+    },
+    "glm_top64_cloglog_spline__s7731__f3": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 7731,
+      "fold": 3
+    },
+    "glm_top64_cloglog_spline__s7731__f4": {
+      "design": "glm_top64_cloglog_spline",
+      "seed": 7731,
+      "fold": 4
+    },
+    "glm_top99_logit_shrink__s2026__f0": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 2026,
+      "fold": 0
+    },
+    "glm_top99_logit_shrink__s2026__f1": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 2026,
+      "fold": 1
+    },
+    "glm_top99_logit_shrink__s2026__f2": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 2026,
+      "fold": 2
+    },
+    "glm_top99_logit_shrink__s2026__f3": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 2026,
+      "fold": 3
+    },
+    "glm_top99_logit_shrink__s2026__f4": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 2026,
+      "fold": 4
+    },
+    "glm_top99_logit_shrink__s7731__f0": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 7731,
+      "fold": 0
+    },
+    "glm_top99_logit_shrink__s7731__f1": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 7731,
+      "fold": 1
+    },
+    "glm_top99_logit_shrink__s7731__f2": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 7731,
+      "fold": 2
+    },
+    "glm_top99_logit_shrink__s7731__f3": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 7731,
+      "fold": 3
+    },
+    "glm_top99_logit_shrink__s7731__f4": {
+      "design": "glm_top99_logit_shrink",
+      "seed": 7731,
+      "fold": 4
+    },
+    "mlp_global64_bce__s2026__f0": {
+      "design": "mlp_global64_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "mlp_global64_bce__s2026__f1": {
+      "design": "mlp_global64_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "mlp_global64_bce__s2026__f2": {
+      "design": "mlp_global64_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "mlp_global64_bce__s2026__f3": {
+      "design": "mlp_global64_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "mlp_global64_bce__s2026__f4": {
+      "design": "mlp_global64_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "mlp_global64_bce__s7731__f0": {
+      "design": "mlp_global64_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "mlp_global64_bce__s7731__f1": {
+      "design": "mlp_global64_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "mlp_global64_bce__s7731__f2": {
+      "design": "mlp_global64_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "mlp_global64_bce__s7731__f3": {
+      "design": "mlp_global64_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "mlp_global64_bce__s7731__f4": {
+      "design": "mlp_global64_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "resnet_global64_bce__s2026__f0": {
+      "design": "resnet_global64_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "resnet_global64_bce__s2026__f1": {
+      "design": "resnet_global64_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "resnet_global64_bce__s2026__f2": {
+      "design": "resnet_global64_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "resnet_global64_bce__s2026__f3": {
+      "design": "resnet_global64_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "resnet_global64_bce__s2026__f4": {
+      "design": "resnet_global64_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "resnet_global64_bce__s7731__f0": {
+      "design": "resnet_global64_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "resnet_global64_bce__s7731__f1": {
+      "design": "resnet_global64_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "resnet_global64_bce__s7731__f2": {
+      "design": "resnet_global64_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "resnet_global64_bce__s7731__f3": {
+      "design": "resnet_global64_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "resnet_global64_bce__s7731__f4": {
+      "design": "resnet_global64_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "resnet_global128_bce__s2026__f0": {
+      "design": "resnet_global128_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "resnet_global128_bce__s2026__f1": {
+      "design": "resnet_global128_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "resnet_global128_bce__s2026__f2": {
+      "design": "resnet_global128_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "resnet_global128_bce__s2026__f3": {
+      "design": "resnet_global128_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "resnet_global128_bce__s2026__f4": {
+      "design": "resnet_global128_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "resnet_global128_bce__s7731__f0": {
+      "design": "resnet_global128_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "resnet_global128_bce__s7731__f1": {
+      "design": "resnet_global128_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "resnet_global128_bce__s7731__f2": {
+      "design": "resnet_global128_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "resnet_global128_bce__s7731__f3": {
+      "design": "resnet_global128_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "resnet_global128_bce__s7731__f4": {
+      "design": "resnet_global128_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "resnet_global256_bce__s2026__f0": {
+      "design": "resnet_global256_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "resnet_global256_bce__s2026__f1": {
+      "design": "resnet_global256_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "resnet_global256_bce__s2026__f2": {
+      "design": "resnet_global256_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "resnet_global256_bce__s2026__f3": {
+      "design": "resnet_global256_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "resnet_global256_bce__s2026__f4": {
+      "design": "resnet_global256_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "resnet_global256_bce__s7731__f0": {
+      "design": "resnet_global256_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "resnet_global256_bce__s7731__f1": {
+      "design": "resnet_global256_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "resnet_global256_bce__s7731__f2": {
+      "design": "resnet_global256_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "resnet_global256_bce__s7731__f3": {
+      "design": "resnet_global256_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "resnet_global256_bce__s7731__f4": {
+      "design": "resnet_global256_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "resnet_global128_smoothks__s2026__f0": {
+      "design": "resnet_global128_smoothks",
+      "seed": 2026,
+      "fold": 0
+    },
+    "resnet_global128_smoothks__s2026__f1": {
+      "design": "resnet_global128_smoothks",
+      "seed": 2026,
+      "fold": 1
+    },
+    "resnet_global128_smoothks__s2026__f2": {
+      "design": "resnet_global128_smoothks",
+      "seed": 2026,
+      "fold": 2
+    },
+    "resnet_global128_smoothks__s2026__f3": {
+      "design": "resnet_global128_smoothks",
+      "seed": 2026,
+      "fold": 3
+    },
+    "resnet_global128_smoothks__s2026__f4": {
+      "design": "resnet_global128_smoothks",
+      "seed": 2026,
+      "fold": 4
+    },
+    "resnet_global128_smoothks__s7731__f0": {
+      "design": "resnet_global128_smoothks",
+      "seed": 7731,
+      "fold": 0
+    },
+    "resnet_global128_smoothks__s7731__f1": {
+      "design": "resnet_global128_smoothks",
+      "seed": 7731,
+      "fold": 1
+    },
+    "resnet_global128_smoothks__s7731__f2": {
+      "design": "resnet_global128_smoothks",
+      "seed": 7731,
+      "fold": 2
+    },
+    "resnet_global128_smoothks__s7731__f3": {
+      "design": "resnet_global128_smoothks",
+      "seed": 7731,
+      "fold": 3
+    },
+    "resnet_global128_smoothks__s7731__f4": {
+      "design": "resnet_global128_smoothks",
+      "seed": 7731,
+      "fold": 4
+    },
+    "resnet_global256_smoothks__s2026__f0": {
+      "design": "resnet_global256_smoothks",
+      "seed": 2026,
+      "fold": 0
+    },
+    "resnet_global256_smoothks__s2026__f1": {
+      "design": "resnet_global256_smoothks",
+      "seed": 2026,
+      "fold": 1
+    },
+    "resnet_global256_smoothks__s2026__f2": {
+      "design": "resnet_global256_smoothks",
+      "seed": 2026,
+      "fold": 2
+    },
+    "resnet_global256_smoothks__s2026__f3": {
+      "design": "resnet_global256_smoothks",
+      "seed": 2026,
+      "fold": 3
+    },
+    "resnet_global256_smoothks__s2026__f4": {
+      "design": "resnet_global256_smoothks",
+      "seed": 2026,
+      "fold": 4
+    },
+    "resnet_global256_smoothks__s7731__f0": {
+      "design": "resnet_global256_smoothks",
+      "seed": 7731,
+      "fold": 0
+    },
+    "resnet_global256_smoothks__s7731__f1": {
+      "design": "resnet_global256_smoothks",
+      "seed": 7731,
+      "fold": 1
+    },
+    "resnet_global256_smoothks__s7731__f2": {
+      "design": "resnet_global256_smoothks",
+      "seed": 7731,
+      "fold": 2
+    },
+    "resnet_global256_smoothks__s7731__f3": {
+      "design": "resnet_global256_smoothks",
+      "seed": 7731,
+      "fold": 3
+    },
+    "resnet_global256_smoothks__s7731__f4": {
+      "design": "resnet_global256_smoothks",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_global64_bce__s2026__f0": {
+      "design": "tabm_global64_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_global64_bce__s2026__f1": {
+      "design": "tabm_global64_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_global64_bce__s2026__f2": {
+      "design": "tabm_global64_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_global64_bce__s2026__f3": {
+      "design": "tabm_global64_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_global64_bce__s2026__f4": {
+      "design": "tabm_global64_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_global64_bce__s7731__f0": {
+      "design": "tabm_global64_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_global64_bce__s7731__f1": {
+      "design": "tabm_global64_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_global64_bce__s7731__f2": {
+      "design": "tabm_global64_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_global64_bce__s7731__f3": {
+      "design": "tabm_global64_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_global64_bce__s7731__f4": {
+      "design": "tabm_global64_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_global128_bce__s2026__f0": {
+      "design": "tabm_global128_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_global128_bce__s2026__f1": {
+      "design": "tabm_global128_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_global128_bce__s2026__f2": {
+      "design": "tabm_global128_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_global128_bce__s2026__f3": {
+      "design": "tabm_global128_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_global128_bce__s2026__f4": {
+      "design": "tabm_global128_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_global128_bce__s7731__f0": {
+      "design": "tabm_global128_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_global128_bce__s7731__f1": {
+      "design": "tabm_global128_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_global128_bce__s7731__f2": {
+      "design": "tabm_global128_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_global128_bce__s7731__f3": {
+      "design": "tabm_global128_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_global128_bce__s7731__f4": {
+      "design": "tabm_global128_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_global256_bce__s2026__f0": {
+      "design": "tabm_global256_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_global256_bce__s2026__f1": {
+      "design": "tabm_global256_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_global256_bce__s2026__f2": {
+      "design": "tabm_global256_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_global256_bce__s2026__f3": {
+      "design": "tabm_global256_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_global256_bce__s2026__f4": {
+      "design": "tabm_global256_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_global256_bce__s7731__f0": {
+      "design": "tabm_global256_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_global256_bce__s7731__f1": {
+      "design": "tabm_global256_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_global256_bce__s7731__f2": {
+      "design": "tabm_global256_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_global256_bce__s7731__f3": {
+      "design": "tabm_global256_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_global256_bce__s7731__f4": {
+      "design": "tabm_global256_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_global512_bce__s2026__f0": {
+      "design": "tabm_global512_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_global512_bce__s2026__f1": {
+      "design": "tabm_global512_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_global512_bce__s2026__f2": {
+      "design": "tabm_global512_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_global512_bce__s2026__f3": {
+      "design": "tabm_global512_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_global512_bce__s2026__f4": {
+      "design": "tabm_global512_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_global512_bce__s7731__f0": {
+      "design": "tabm_global512_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_global512_bce__s7731__f1": {
+      "design": "tabm_global512_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_global512_bce__s7731__f2": {
+      "design": "tabm_global512_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_global512_bce__s7731__f3": {
+      "design": "tabm_global512_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_global512_bce__s7731__f4": {
+      "design": "tabm_global512_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_global128_pair__s2026__f0": {
+      "design": "tabm_global128_pair",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_global128_pair__s2026__f1": {
+      "design": "tabm_global128_pair",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_global128_pair__s2026__f2": {
+      "design": "tabm_global128_pair",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_global128_pair__s2026__f3": {
+      "design": "tabm_global128_pair",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_global128_pair__s2026__f4": {
+      "design": "tabm_global128_pair",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_global128_pair__s7731__f0": {
+      "design": "tabm_global128_pair",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_global128_pair__s7731__f1": {
+      "design": "tabm_global128_pair",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_global128_pair__s7731__f2": {
+      "design": "tabm_global128_pair",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_global128_pair__s7731__f3": {
+      "design": "tabm_global128_pair",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_global128_pair__s7731__f4": {
+      "design": "tabm_global128_pair",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_global128_smoothks__s2026__f0": {
+      "design": "tabm_global128_smoothks",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_global128_smoothks__s2026__f1": {
+      "design": "tabm_global128_smoothks",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_global128_smoothks__s2026__f2": {
+      "design": "tabm_global128_smoothks",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_global128_smoothks__s2026__f3": {
+      "design": "tabm_global128_smoothks",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_global128_smoothks__s2026__f4": {
+      "design": "tabm_global128_smoothks",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_global128_smoothks__s7731__f0": {
+      "design": "tabm_global128_smoothks",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_global128_smoothks__s7731__f1": {
+      "design": "tabm_global128_smoothks",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_global128_smoothks__s7731__f2": {
+      "design": "tabm_global128_smoothks",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_global128_smoothks__s7731__f3": {
+      "design": "tabm_global128_smoothks",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_global128_smoothks__s7731__f4": {
+      "design": "tabm_global128_smoothks",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_global99_unweighted__s2026__f0": {
+      "design": "lgb_global99_unweighted",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_global99_unweighted__s2026__f1": {
+      "design": "lgb_global99_unweighted",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_global99_unweighted__s2026__f2": {
+      "design": "lgb_global99_unweighted",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_global99_unweighted__s2026__f3": {
+      "design": "lgb_global99_unweighted",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_global99_unweighted__s2026__f4": {
+      "design": "lgb_global99_unweighted",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_global99_unweighted__s7731__f0": {
+      "design": "lgb_global99_unweighted",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_global99_unweighted__s7731__f1": {
+      "design": "lgb_global99_unweighted",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_global99_unweighted__s7731__f2": {
+      "design": "lgb_global99_unweighted",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_global99_unweighted__s7731__f3": {
+      "design": "lgb_global99_unweighted",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_global99_unweighted__s7731__f4": {
+      "design": "lgb_global99_unweighted",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_augmented99__s2026__f0": {
+      "design": "lgb_augmented99",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_augmented99__s2026__f1": {
+      "design": "lgb_augmented99",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_augmented99__s2026__f2": {
+      "design": "lgb_augmented99",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_augmented99__s2026__f3": {
+      "design": "lgb_augmented99",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_augmented99__s2026__f4": {
+      "design": "lgb_augmented99",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_augmented99__s7731__f0": {
+      "design": "lgb_augmented99",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_augmented99__s7731__f1": {
+      "design": "lgb_augmented99",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_augmented99__s7731__f2": {
+      "design": "lgb_augmented99",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_augmented99__s7731__f3": {
+      "design": "lgb_augmented99",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_augmented99__s7731__f4": {
+      "design": "lgb_augmented99",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_actuarial99__s2026__f0": {
+      "design": "lgb_actuarial99",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_actuarial99__s2026__f1": {
+      "design": "lgb_actuarial99",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_actuarial99__s2026__f2": {
+      "design": "lgb_actuarial99",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_actuarial99__s2026__f3": {
+      "design": "lgb_actuarial99",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_actuarial99__s2026__f4": {
+      "design": "lgb_actuarial99",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_actuarial99__s7731__f0": {
+      "design": "lgb_actuarial99",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_actuarial99__s7731__f1": {
+      "design": "lgb_actuarial99",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_actuarial99__s7731__f2": {
+      "design": "lgb_actuarial99",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_actuarial99__s7731__f3": {
+      "design": "lgb_actuarial99",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_actuarial99__s7731__f4": {
+      "design": "lgb_actuarial99",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_redundant99__s2026__f0": {
+      "design": "lgb_redundant99",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_redundant99__s2026__f1": {
+      "design": "lgb_redundant99",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_redundant99__s2026__f2": {
+      "design": "lgb_redundant99",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_redundant99__s2026__f3": {
+      "design": "lgb_redundant99",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_redundant99__s2026__f4": {
+      "design": "lgb_redundant99",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_redundant99__s7731__f0": {
+      "design": "lgb_redundant99",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_redundant99__s7731__f1": {
+      "design": "lgb_redundant99",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_redundant99__s7731__f2": {
+      "design": "lgb_redundant99",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_redundant99__s7731__f3": {
+      "design": "lgb_redundant99",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_redundant99__s7731__f4": {
+      "design": "lgb_redundant99",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_core99__s2026__f0": {
+      "design": "lgb_core99",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_core99__s2026__f1": {
+      "design": "lgb_core99",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_core99__s2026__f2": {
+      "design": "lgb_core99",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_core99__s2026__f3": {
+      "design": "lgb_core99",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_core99__s2026__f4": {
+      "design": "lgb_core99",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_core99__s7731__f0": {
+      "design": "lgb_core99",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_core99__s7731__f1": {
+      "design": "lgb_core99",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_core99__s7731__f2": {
+      "design": "lgb_core99",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_core99__s7731__f3": {
+      "design": "lgb_core99",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_core99__s7731__f4": {
+      "design": "lgb_core99",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_pca64_core__s2026__f0": {
+      "design": "lgb_pca64_core",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_pca64_core__s2026__f1": {
+      "design": "lgb_pca64_core",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_pca64_core__s2026__f2": {
+      "design": "lgb_pca64_core",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_pca64_core__s2026__f3": {
+      "design": "lgb_pca64_core",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_pca64_core__s2026__f4": {
+      "design": "lgb_pca64_core",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_pca64_core__s7731__f0": {
+      "design": "lgb_pca64_core",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_pca64_core__s7731__f1": {
+      "design": "lgb_pca64_core",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_pca64_core__s7731__f2": {
+      "design": "lgb_pca64_core",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_pca64_core__s7731__f3": {
+      "design": "lgb_pca64_core",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_pca64_core__s7731__f4": {
+      "design": "lgb_pca64_core",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_augmented256__s2026__f0": {
+      "design": "lgb_augmented256",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_augmented256__s2026__f1": {
+      "design": "lgb_augmented256",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_augmented256__s2026__f2": {
+      "design": "lgb_augmented256",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_augmented256__s2026__f3": {
+      "design": "lgb_augmented256",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_augmented256__s2026__f4": {
+      "design": "lgb_augmented256",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_augmented256__s7731__f0": {
+      "design": "lgb_augmented256",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_augmented256__s7731__f1": {
+      "design": "lgb_augmented256",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_augmented256__s7731__f2": {
+      "design": "lgb_augmented256",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_augmented256__s7731__f3": {
+      "design": "lgb_augmented256",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_augmented256__s7731__f4": {
+      "design": "lgb_augmented256",
+      "seed": 7731,
+      "fold": 4
+    },
+    "lgb_augmented512__s2026__f0": {
+      "design": "lgb_augmented512",
+      "seed": 2026,
+      "fold": 0
+    },
+    "lgb_augmented512__s2026__f1": {
+      "design": "lgb_augmented512",
+      "seed": 2026,
+      "fold": 1
+    },
+    "lgb_augmented512__s2026__f2": {
+      "design": "lgb_augmented512",
+      "seed": 2026,
+      "fold": 2
+    },
+    "lgb_augmented512__s2026__f3": {
+      "design": "lgb_augmented512",
+      "seed": 2026,
+      "fold": 3
+    },
+    "lgb_augmented512__s2026__f4": {
+      "design": "lgb_augmented512",
+      "seed": 2026,
+      "fold": 4
+    },
+    "lgb_augmented512__s7731__f0": {
+      "design": "lgb_augmented512",
+      "seed": 7731,
+      "fold": 0
+    },
+    "lgb_augmented512__s7731__f1": {
+      "design": "lgb_augmented512",
+      "seed": 7731,
+      "fold": 1
+    },
+    "lgb_augmented512__s7731__f2": {
+      "design": "lgb_augmented512",
+      "seed": 7731,
+      "fold": 2
+    },
+    "lgb_augmented512__s7731__f3": {
+      "design": "lgb_augmented512",
+      "seed": 7731,
+      "fold": 3
+    },
+    "lgb_augmented512__s7731__f4": {
+      "design": "lgb_augmented512",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_global32_bce__s2026__f0": {
+      "design": "tabm_global32_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_global32_bce__s2026__f1": {
+      "design": "tabm_global32_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_global32_bce__s2026__f2": {
+      "design": "tabm_global32_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_global32_bce__s2026__f3": {
+      "design": "tabm_global32_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_global32_bce__s2026__f4": {
+      "design": "tabm_global32_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_global32_bce__s7731__f0": {
+      "design": "tabm_global32_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_global32_bce__s7731__f1": {
+      "design": "tabm_global32_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_global32_bce__s7731__f2": {
+      "design": "tabm_global32_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_global32_bce__s7731__f3": {
+      "design": "tabm_global32_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_global32_bce__s7731__f4": {
+      "design": "tabm_global32_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_global99_bce__s2026__f0": {
+      "design": "tabm_global99_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_global99_bce__s2026__f1": {
+      "design": "tabm_global99_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_global99_bce__s2026__f2": {
+      "design": "tabm_global99_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_global99_bce__s2026__f3": {
+      "design": "tabm_global99_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_global99_bce__s2026__f4": {
+      "design": "tabm_global99_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_global99_bce__s7731__f0": {
+      "design": "tabm_global99_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_global99_bce__s7731__f1": {
+      "design": "tabm_global99_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_global99_bce__s7731__f2": {
+      "design": "tabm_global99_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_global99_bce__s7731__f3": {
+      "design": "tabm_global99_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_global99_bce__s7731__f4": {
+      "design": "tabm_global99_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_augmented256_bce__s2026__f0": {
+      "design": "tabm_augmented256_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_augmented256_bce__s2026__f1": {
+      "design": "tabm_augmented256_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_augmented256_bce__s2026__f2": {
+      "design": "tabm_augmented256_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_augmented256_bce__s2026__f3": {
+      "design": "tabm_augmented256_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_augmented256_bce__s2026__f4": {
+      "design": "tabm_augmented256_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_augmented256_bce__s7731__f0": {
+      "design": "tabm_augmented256_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_augmented256_bce__s7731__f1": {
+      "design": "tabm_augmented256_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_augmented256_bce__s7731__f2": {
+      "design": "tabm_augmented256_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_augmented256_bce__s7731__f3": {
+      "design": "tabm_augmented256_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_augmented256_bce__s7731__f4": {
+      "design": "tabm_augmented256_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "tabm_actuarial99_bce__s2026__f0": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 2026,
+      "fold": 0
+    },
+    "tabm_actuarial99_bce__s2026__f1": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 2026,
+      "fold": 1
+    },
+    "tabm_actuarial99_bce__s2026__f2": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 2026,
+      "fold": 2
+    },
+    "tabm_actuarial99_bce__s2026__f3": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 2026,
+      "fold": 3
+    },
+    "tabm_actuarial99_bce__s2026__f4": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 2026,
+      "fold": 4
+    },
+    "tabm_actuarial99_bce__s7731__f0": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 7731,
+      "fold": 0
+    },
+    "tabm_actuarial99_bce__s7731__f1": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 7731,
+      "fold": 1
+    },
+    "tabm_actuarial99_bce__s7731__f2": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 7731,
+      "fold": 2
+    },
+    "tabm_actuarial99_bce__s7731__f3": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 7731,
+      "fold": 3
+    },
+    "tabm_actuarial99_bce__s7731__f4": {
+      "design": "tabm_actuarial99_bce",
+      "seed": 7731,
+      "fold": 4
+    },
+    "resnet_global64_smoothks__s2026__f0": {
+      "design": "resnet_global64_smoothks",
+      "seed": 2026,
+      "fold": 0
+    },
+    "resnet_global64_smoothks__s2026__f1": {
+      "design": "resnet_global64_smoothks",
+      "seed": 2026,
+      "fold": 1
+    },
+    "resnet_global64_smoothks__s2026__f2": {
+      "design": "resnet_global64_smoothks",
+      "seed": 2026,
+      "fold": 2
+    },
+    "resnet_global64_smoothks__s2026__f3": {
+      "design": "resnet_global64_smoothks",
+      "seed": 2026,
+      "fold": 3
+    },
+    "resnet_global64_smoothks__s2026__f4": {
+      "design": "resnet_global64_smoothks",
+      "seed": 2026,
+      "fold": 4
+    },
+    "resnet_global64_smoothks__s7731__f0": {
+      "design": "resnet_global64_smoothks",
+      "seed": 7731,
+      "fold": 0
+    },
+    "resnet_global64_smoothks__s7731__f1": {
+      "design": "resnet_global64_smoothks",
+      "seed": 7731,
+      "fold": 1
+    },
+    "resnet_global64_smoothks__s7731__f2": {
+      "design": "resnet_global64_smoothks",
+      "seed": 7731,
+      "fold": 2
+    },
+    "resnet_global64_smoothks__s7731__f3": {
+      "design": "resnet_global64_smoothks",
+      "seed": 7731,
+      "fold": 3
+    },
+    "resnet_global64_smoothks__s7731__f4": {
+      "design": "resnet_global64_smoothks",
+      "seed": 7731,
+      "fold": 4
+    },
+    "resnet_global99_smoothks__s2026__f0": {
+      "design": "resnet_global99_smoothks",
+      "seed": 2026,
+      "fold": 0
+    },
+    "resnet_global99_smoothks__s2026__f1": {
+      "design": "resnet_global99_smoothks",
+      "seed": 2026,
+      "fold": 1
+    },
+    "resnet_global99_smoothks__s2026__f2": {
+      "design": "resnet_global99_smoothks",
+      "seed": 2026,
+      "fold": 2
+    },
+    "resnet_global99_smoothks__s2026__f3": {
+      "design": "resnet_global99_smoothks",
+      "seed": 2026,
+      "fold": 3
+    },
+    "resnet_global99_smoothks__s2026__f4": {
+      "design": "resnet_global99_smoothks",
+      "seed": 2026,
+      "fold": 4
+    },
+    "resnet_global99_smoothks__s7731__f0": {
+      "design": "resnet_global99_smoothks",
+      "seed": 7731,
+      "fold": 0
+    },
+    "resnet_global99_smoothks__s7731__f1": {
+      "design": "resnet_global99_smoothks",
+      "seed": 7731,
+      "fold": 1
+    },
+    "resnet_global99_smoothks__s7731__f2": {
+      "design": "resnet_global99_smoothks",
+      "seed": 7731,
+      "fold": 2
+    },
+    "resnet_global99_smoothks__s7731__f3": {
+      "design": "resnet_global99_smoothks",
+      "seed": 7731,
+      "fold": 3
+    },
+    "resnet_global99_smoothks__s7731__f4": {
+      "design": "resnet_global99_smoothks",
+      "seed": 7731,
+      "fold": 4
+    },
+    "resnet_actuarial99_smoothks__s2026__f0": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 2026,
+      "fold": 0
+    },
+    "resnet_actuarial99_smoothks__s2026__f1": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 2026,
+      "fold": 1
+    },
+    "resnet_actuarial99_smoothks__s2026__f2": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 2026,
+      "fold": 2
+    },
+    "resnet_actuarial99_smoothks__s2026__f3": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 2026,
+      "fold": 3
+    },
+    "resnet_actuarial99_smoothks__s2026__f4": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 2026,
+      "fold": 4
+    },
+    "resnet_actuarial99_smoothks__s7731__f0": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 7731,
+      "fold": 0
+    },
+    "resnet_actuarial99_smoothks__s7731__f1": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 7731,
+      "fold": 1
+    },
+    "resnet_actuarial99_smoothks__s7731__f2": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 7731,
+      "fold": 2
+    },
+    "resnet_actuarial99_smoothks__s7731__f3": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 7731,
+      "fold": 3
+    },
+    "resnet_actuarial99_smoothks__s7731__f4": {
+      "design": "resnet_actuarial99_smoothks",
+      "seed": 7731,
+      "fold": 4
+    },
+    "glm_actuarial99_logit__s2026__f0": {
+      "design": "glm_actuarial99_logit",
+      "seed": 2026,
+      "fold": 0
+    },
+    "glm_actuarial99_logit__s2026__f1": {
+      "design": "glm_actuarial99_logit",
+      "seed": 2026,
+      "fold": 1
+    },
+    "glm_actuarial99_logit__s2026__f2": {
+      "design": "glm_actuarial99_logit",
+      "seed": 2026,
+      "fold": 2
+    },
+    "glm_actuarial99_logit__s2026__f3": {
+      "design": "glm_actuarial99_logit",
+      "seed": 2026,
+      "fold": 3
+    },
+    "glm_actuarial99_logit__s2026__f4": {
+      "design": "glm_actuarial99_logit",
+      "seed": 2026,
+      "fold": 4
+    },
+    "glm_actuarial99_logit__s7731__f0": {
+      "design": "glm_actuarial99_logit",
+      "seed": 7731,
+      "fold": 0
+    },
+    "glm_actuarial99_logit__s7731__f1": {
+      "design": "glm_actuarial99_logit",
+      "seed": 7731,
+      "fold": 1
+    },
+    "glm_actuarial99_logit__s7731__f2": {
+      "design": "glm_actuarial99_logit",
+      "seed": 7731,
+      "fold": 2
+    },
+    "glm_actuarial99_logit__s7731__f3": {
+      "design": "glm_actuarial99_logit",
+      "seed": 7731,
+      "fold": 3
+    },
+    "glm_actuarial99_logit__s7731__f4": {
+      "design": "glm_actuarial99_logit",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_global32_e8__s2026__f0": {
+      "design": "kumo_large_global32_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_global32_e8__s2026__f1": {
+      "design": "kumo_large_global32_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_global32_e8__s2026__f2": {
+      "design": "kumo_large_global32_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_global32_e8__s2026__f3": {
+      "design": "kumo_large_global32_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_global32_e8__s2026__f4": {
+      "design": "kumo_large_global32_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_global32_e8__s7731__f0": {
+      "design": "kumo_large_global32_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_global32_e8__s7731__f1": {
+      "design": "kumo_large_global32_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_global32_e8__s7731__f2": {
+      "design": "kumo_large_global32_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_global32_e8__s7731__f3": {
+      "design": "kumo_large_global32_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_global32_e8__s7731__f4": {
+      "design": "kumo_large_global32_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_global48_e8__s2026__f0": {
+      "design": "kumo_large_global48_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_global48_e8__s2026__f1": {
+      "design": "kumo_large_global48_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_global48_e8__s2026__f2": {
+      "design": "kumo_large_global48_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_global48_e8__s2026__f3": {
+      "design": "kumo_large_global48_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_global48_e8__s2026__f4": {
+      "design": "kumo_large_global48_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_global48_e8__s7731__f0": {
+      "design": "kumo_large_global48_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_global48_e8__s7731__f1": {
+      "design": "kumo_large_global48_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_global48_e8__s7731__f2": {
+      "design": "kumo_large_global48_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_global48_e8__s7731__f3": {
+      "design": "kumo_large_global48_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_global48_e8__s7731__f4": {
+      "design": "kumo_large_global48_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_global64_e8__s2026__f0": {
+      "design": "kumo_large_global64_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_global64_e8__s2026__f1": {
+      "design": "kumo_large_global64_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_global64_e8__s2026__f2": {
+      "design": "kumo_large_global64_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_global64_e8__s2026__f3": {
+      "design": "kumo_large_global64_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_global64_e8__s2026__f4": {
+      "design": "kumo_large_global64_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_global64_e8__s7731__f0": {
+      "design": "kumo_large_global64_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_global64_e8__s7731__f1": {
+      "design": "kumo_large_global64_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_global64_e8__s7731__f2": {
+      "design": "kumo_large_global64_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_global64_e8__s7731__f3": {
+      "design": "kumo_large_global64_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_global64_e8__s7731__f4": {
+      "design": "kumo_large_global64_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_global80_e8__s2026__f0": {
+      "design": "kumo_large_global80_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_global80_e8__s2026__f1": {
+      "design": "kumo_large_global80_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_global80_e8__s2026__f2": {
+      "design": "kumo_large_global80_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_global80_e8__s2026__f3": {
+      "design": "kumo_large_global80_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_global80_e8__s2026__f4": {
+      "design": "kumo_large_global80_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_global80_e8__s7731__f0": {
+      "design": "kumo_large_global80_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_global80_e8__s7731__f1": {
+      "design": "kumo_large_global80_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_global80_e8__s7731__f2": {
+      "design": "kumo_large_global80_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_global80_e8__s7731__f3": {
+      "design": "kumo_large_global80_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_global80_e8__s7731__f4": {
+      "design": "kumo_large_global80_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_global99_e8__s2026__f0": {
+      "design": "kumo_large_global99_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_global99_e8__s2026__f1": {
+      "design": "kumo_large_global99_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_global99_e8__s2026__f2": {
+      "design": "kumo_large_global99_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_global99_e8__s2026__f3": {
+      "design": "kumo_large_global99_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_global99_e8__s2026__f4": {
+      "design": "kumo_large_global99_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_global99_e8__s7731__f0": {
+      "design": "kumo_large_global99_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_global99_e8__s7731__f1": {
+      "design": "kumo_large_global99_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_global99_e8__s7731__f2": {
+      "design": "kumo_large_global99_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_global99_e8__s7731__f3": {
+      "design": "kumo_large_global99_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_global99_e8__s7731__f4": {
+      "design": "kumo_large_global99_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_medium_global32_e8__s2026__f0": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_medium_global32_e8__s2026__f1": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_medium_global32_e8__s2026__f2": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_medium_global32_e8__s2026__f3": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_medium_global32_e8__s2026__f4": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_medium_global32_e8__s7731__f0": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_medium_global32_e8__s7731__f1": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_medium_global32_e8__s7731__f2": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_medium_global32_e8__s7731__f3": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_medium_global32_e8__s7731__f4": {
+      "design": "kumo_medium_global32_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_medium_global64_e8__s2026__f0": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_medium_global64_e8__s2026__f1": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_medium_global64_e8__s2026__f2": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_medium_global64_e8__s2026__f3": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_medium_global64_e8__s2026__f4": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_medium_global64_e8__s7731__f0": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_medium_global64_e8__s7731__f1": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_medium_global64_e8__s7731__f2": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_medium_global64_e8__s7731__f3": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_medium_global64_e8__s7731__f4": {
+      "design": "kumo_medium_global64_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_medium_global99_e8__s2026__f0": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_medium_global99_e8__s2026__f1": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_medium_global99_e8__s2026__f2": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_medium_global99_e8__s2026__f3": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_medium_global99_e8__s2026__f4": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_medium_global99_e8__s7731__f0": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_medium_global99_e8__s7731__f1": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_medium_global99_e8__s7731__f2": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_medium_global99_e8__s7731__f3": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_medium_global99_e8__s7731__f4": {
+      "design": "kumo_medium_global99_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_core99_e8__s2026__f0": {
+      "design": "kumo_large_core99_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_core99_e8__s2026__f1": {
+      "design": "kumo_large_core99_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_core99_e8__s2026__f2": {
+      "design": "kumo_large_core99_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_core99_e8__s2026__f3": {
+      "design": "kumo_large_core99_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_core99_e8__s2026__f4": {
+      "design": "kumo_large_core99_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_core99_e8__s7731__f0": {
+      "design": "kumo_large_core99_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_core99_e8__s7731__f1": {
+      "design": "kumo_large_core99_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_core99_e8__s7731__f2": {
+      "design": "kumo_large_core99_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_core99_e8__s7731__f3": {
+      "design": "kumo_large_core99_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_core99_e8__s7731__f4": {
+      "design": "kumo_large_core99_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_augmented99_e8__s2026__f0": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_augmented99_e8__s2026__f1": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_augmented99_e8__s2026__f2": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_augmented99_e8__s2026__f3": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_augmented99_e8__s2026__f4": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_augmented99_e8__s7731__f0": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_augmented99_e8__s7731__f1": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_augmented99_e8__s7731__f2": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_augmented99_e8__s7731__f3": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_augmented99_e8__s7731__f4": {
+      "design": "kumo_large_augmented99_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_actuarial99_e8__s2026__f0": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_actuarial99_e8__s2026__f1": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_actuarial99_e8__s2026__f2": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_actuarial99_e8__s2026__f3": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_actuarial99_e8__s2026__f4": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_actuarial99_e8__s7731__f0": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_actuarial99_e8__s7731__f1": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_actuarial99_e8__s7731__f2": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_actuarial99_e8__s7731__f3": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_actuarial99_e8__s7731__f4": {
+      "design": "kumo_large_actuarial99_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_redundant99_e8__s2026__f0": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_redundant99_e8__s2026__f1": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_redundant99_e8__s2026__f2": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_redundant99_e8__s2026__f3": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_redundant99_e8__s2026__f4": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_redundant99_e8__s7731__f0": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_redundant99_e8__s7731__f1": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_redundant99_e8__s7731__f2": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_redundant99_e8__s7731__f3": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_redundant99_e8__s7731__f4": {
+      "design": "kumo_large_redundant99_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_pca64_core_e8__s2026__f0": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_pca64_core_e8__s2026__f1": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_pca64_core_e8__s2026__f2": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_pca64_core_e8__s2026__f3": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_pca64_core_e8__s2026__f4": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_pca64_core_e8__s7731__f0": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_pca64_core_e8__s7731__f1": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_pca64_core_e8__s7731__f2": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_pca64_core_e8__s7731__f3": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_pca64_core_e8__s7731__f4": {
+      "design": "kumo_large_pca64_core_e8",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_global99_e16__s2026__f0": {
+      "design": "kumo_large_global99_e16",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_global99_e16__s2026__f1": {
+      "design": "kumo_large_global99_e16",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_global99_e16__s2026__f2": {
+      "design": "kumo_large_global99_e16",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_global99_e16__s2026__f3": {
+      "design": "kumo_large_global99_e16",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_global99_e16__s2026__f4": {
+      "design": "kumo_large_global99_e16",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_global99_e16__s7731__f0": {
+      "design": "kumo_large_global99_e16",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_global99_e16__s7731__f1": {
+      "design": "kumo_large_global99_e16",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_global99_e16__s7731__f2": {
+      "design": "kumo_large_global99_e16",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_global99_e16__s7731__f3": {
+      "design": "kumo_large_global99_e16",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_global99_e16__s7731__f4": {
+      "design": "kumo_large_global99_e16",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_medium_global99_e16__s2026__f0": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_medium_global99_e16__s2026__f1": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_medium_global99_e16__s2026__f2": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_medium_global99_e16__s2026__f3": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_medium_global99_e16__s2026__f4": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_medium_global99_e16__s7731__f0": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_medium_global99_e16__s7731__f1": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_medium_global99_e16__s7731__f2": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_medium_global99_e16__s7731__f3": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_medium_global99_e16__s7731__f4": {
+      "design": "kumo_medium_global99_e16",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_global64_e2__s2026__f0": {
+      "design": "kumo_large_global64_e2",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_global64_e2__s2026__f1": {
+      "design": "kumo_large_global64_e2",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_global64_e2__s2026__f2": {
+      "design": "kumo_large_global64_e2",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_global64_e2__s2026__f3": {
+      "design": "kumo_large_global64_e2",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_global64_e2__s2026__f4": {
+      "design": "kumo_large_global64_e2",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_global64_e2__s7731__f0": {
+      "design": "kumo_large_global64_e2",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_global64_e2__s7731__f1": {
+      "design": "kumo_large_global64_e2",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_global64_e2__s7731__f2": {
+      "design": "kumo_large_global64_e2",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_global64_e2__s7731__f3": {
+      "design": "kumo_large_global64_e2",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_global64_e2__s7731__f4": {
+      "design": "kumo_large_global64_e2",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_global99_e2__s2026__f0": {
+      "design": "kumo_large_global99_e2",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_global99_e2__s2026__f1": {
+      "design": "kumo_large_global99_e2",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_global99_e2__s2026__f2": {
+      "design": "kumo_large_global99_e2",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_global99_e2__s2026__f3": {
+      "design": "kumo_large_global99_e2",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_global99_e2__s2026__f4": {
+      "design": "kumo_large_global99_e2",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_global99_e2__s7731__f0": {
+      "design": "kumo_large_global99_e2",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_global99_e2__s7731__f1": {
+      "design": "kumo_large_global99_e2",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_global99_e2__s7731__f2": {
+      "design": "kumo_large_global99_e2",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_global99_e2__s7731__f3": {
+      "design": "kumo_large_global99_e2",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_global99_e2__s7731__f4": {
+      "design": "kumo_large_global99_e2",
+      "seed": 7731,
+      "fold": 4
+    },
+    "kumo_large_actuarial99_e2__s2026__f0": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 2026,
+      "fold": 0
+    },
+    "kumo_large_actuarial99_e2__s2026__f1": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 2026,
+      "fold": 1
+    },
+    "kumo_large_actuarial99_e2__s2026__f2": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 2026,
+      "fold": 2
+    },
+    "kumo_large_actuarial99_e2__s2026__f3": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 2026,
+      "fold": 3
+    },
+    "kumo_large_actuarial99_e2__s2026__f4": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 2026,
+      "fold": 4
+    },
+    "kumo_large_actuarial99_e2__s7731__f0": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 7731,
+      "fold": 0
+    },
+    "kumo_large_actuarial99_e2__s7731__f1": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 7731,
+      "fold": 1
+    },
+    "kumo_large_actuarial99_e2__s7731__f2": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 7731,
+      "fold": 2
+    },
+    "kumo_large_actuarial99_e2__s7731__f3": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 7731,
+      "fold": 3
+    },
+    "kumo_large_actuarial99_e2__s7731__f4": {
+      "design": "kumo_large_actuarial99_e2",
+      "seed": 7731,
+      "fold": 4
+    }
+  },
+  "pilot_tasks": [
+    "lgb_global99_unweighted__s2026__f0",
+    "kumo_large_global99_e8__s2026__f0",
+    "kumo_medium_global64_e8__s2026__f0",
+    "tabm_global64_bce__s2026__f0",
+    "cat_top99_depth6__s2026__f0",
+    "xgb_top99_binary__s2026__f0",
+    "glm_top32_logit_ridge__s2026__f0"
+  ],
+  "adaptive_ledger": "EXTRA_DESIGNS.jsonl; append-only source-supported designs, registered and published before fitting.",
+  "initial_design_count": 64,
+  "initial_expert_fit_count": 640,
+  "promotion": {
+    "minimum_delta_KS": 0.0005,
+    "positive_folds": 4,
+    "both_seeds_positive": true,
+    "conditional_CI_replicates": 2000,
+    "conditional_CI_lower_positive": true,
+    "independent_confirmation_available": false
+  },
+  "target_KS": 0.54,
+  "matched_baseline_KS": 0.5306361042400267,
+  "retained_public_V25_KS": 0.56822,
+  "resource_limits": {
+    "max_fit_seconds": 900,
+    "gpu_slots_per_80GiB_VM": 2,
+    "cpu_threads_per_fit": 2,
+    "max_paid_VMs": 5,
+    "conservative_CU_hour_per_VM": 11,
+    "unrelated_stops": false
+  }
+}
