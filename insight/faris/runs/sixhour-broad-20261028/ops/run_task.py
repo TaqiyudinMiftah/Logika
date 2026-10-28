@@ -23,6 +23,16 @@ limit = min(900, int(clock['model_deadline_epoch'] - time.time() - 10))
 assert limit > 0 and time.time() < clock['admission_end_epoch']
 dump({'pid': os.getpid(), 'task': a.task, 'attempt': a.attempt, 'UTC': utc(),
       'started_epoch': time.time(), 'limit_seconds': limit}, root / 'START.json')
+# Measured execution metadata lives beside dispatch, without altering sealed START.
+from common import tasks, catalog
+import socket
+spec = catalog()[tasks()[a.task]['design']]
+backend = dict(host=socket.gethostname(), device=spec['resource'], UTC=utc())
+if spec['resource'] == 'gpu':
+    import torch
+    assert torch.cuda.is_available()
+    backend.update(GPU_name=torch.cuda.get_device_name(0), GPU_memory_bytes=torch.cuda.get_device_properties(0).total_memory)
+dump(backend, root / 'BACKEND.json')
 command = [sys.executable, str(R / 'source/worker.py'), '--task', a.task, '--attempt', str(a.attempt)]
 if a.pilot:
     command.append('--pilot')

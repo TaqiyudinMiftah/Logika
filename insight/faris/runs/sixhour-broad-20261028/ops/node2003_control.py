@@ -17,7 +17,7 @@ try:
  run(SSH+[setup],timeout=900)
  while not(R/'GATE.json').exists():assert time.time()<C['admission_end_epoch'];time.sleep(10)
  run(['rsync','-az','-e',transport,'--include=GATE*.json','--exclude=*',str(R)+'/',H+':'+T+'/'])
- run(SSH+['systemd-run --user --unit=logika-sixhour-cpu-20261028 --property=MemoryMax=20G --property=CPUQuota=400% --property=RuntimeMaxSec=21600 --working-directory='+T+' /bin/sh -c '+"'exec "+PYTHON+' -u ops/queue.py --resource cpu --slots 2 --folds 3,4 --name CPU2003_QUEUE > CPU2003_QUEUE.log 2>&1'+"'"])
+ run(SSH+['systemd-run --user --unit=logika-sixhour-cpu-20261028 --property=MemoryMax=20G --property=CPUQuota=400% --property=RuntimeMaxSec=21600 --working-directory='+T+' /bin/sh -c '+"'exec "+PYTHON+' -u ops/worker_queue.py --resource cpu --slots 2 --folds 3,4 --name CPU2003_QUEUE > CPU2003_QUEUE.log 2>&1'+"'"])
  while time.time()<C['model_deadline_epoch']+30:
   run(['rsync','-az','-e',transport,'--include=GATE*.json','--exclude=*',str(R)+'/',H+':'+T+'/'])
   mirror=R/'private/node2003';mirror.mkdir(parents=True,exist_ok=True)

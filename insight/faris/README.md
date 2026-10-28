@@ -24,7 +24,7 @@ roots. Node2002 remains unverified beyond surviving mirrors.
 
 ## Active six-hour broad campaign —29October
 
-[New study](runs/sixhour-broad-20261028/README.md) compares expanded/reduced actuarial views and model families under a fresh immutable six-hour clock ending29October06:25WIB.64designs/640planned fits are preregistered, not yet a result. Source and all partial/negative outcomes are retained. Onlyone Colab A100 was granted; node2001/2003 CPU spillover supplements it.
+[New study](runs/sixhour-broad-20261028/README.md) compares expanded/reduced actuarial views and model families under a fresh immutable six-hour clock ending29October06:25WIB.100designs/1000planned fits are preregistered, not yet a result. Source and all partial/negative outcomes are retained. One A10080GB andtwoL4runtimes are currently granted; node2001/2003 CPU spillover supplements them. Startup/transport/metadata repairs are explicitly recorded with preserved attempts.
 
 ## Completed MoE campaign — 28 October
 

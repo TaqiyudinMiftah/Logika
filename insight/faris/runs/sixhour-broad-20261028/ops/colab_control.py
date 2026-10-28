@@ -76,7 +76,7 @@ else:
   if data and data['status']=='PASS':break
   if data and data['status']=='FAIL':raise RuntimeError('Data gate failed; no GPU fits admitted')
   time.sleep(15)
- command='cd '+V.root+' && nohup env OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 '+V.root+'/env311/bin/python -u ops/queue.py --resource gpu --slots 2 --name GPU_QUEUE > GPU_QUEUE.log 2>&1 < /dev/null &'
+ command='cd '+V.root+' && nohup env OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 '+V.root+'/env311/bin/python -u ops/worker_queue.py --resource gpu --slots 2 --name GPU_QUEUE > GPU_QUEUE.log 2>&1 < /dev/null &'
  V.ssh(command,timeout=60)
  dump(dict(stage='GPU_queue_running',epoch=time.time()),'CONTROLLER_STATE.json')
  while time.time()<end+30:

@@ -15,7 +15,7 @@ try:
   gate=R/'GATE.json';admitted=gate.exists()and load('GATE.json')['status']=='PASS'
   if admitted:
    if cpu is None:
-    log=(R/'logs/CPU_QUEUE.log').open('ab');cpu=subprocess.Popen([str(R/'env311/bin/python'),'ops/queue.py','--resource','cpu','--slots','2','--folds','0,1,2','--name','CPU_QUEUE'],stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+    log=(R/'logs/CPU_QUEUE.log').open('ab');cpu=subprocess.Popen([str(R/'env311/bin/python'),'ops/worker_queue.py','--resource','cpu','--slots','2','--folds','0,1,2','--name','CPU_QUEUE'],stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
    for task in load('CONFIG.json')['pilot_tasks']:
     family=catalog()[tasks()[task]['design']]['family'];paths=sorted((R/'runs'/task).glob('attempt*/RESULT.json'))
     if paths and family not in family_tried:
