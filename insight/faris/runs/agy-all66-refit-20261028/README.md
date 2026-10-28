@@ -1,12 +1,9 @@
-# Antigravity ALL66 exploratory refit
+# ALL66 exploratory refit completed
 
-The user requested the full shifted ALL66 mix and authorized continuation in parallel
-with the historical archive import. This run is in progress. No production CSV, new
-public score, independent gain or target attainment is claimed here.
+The requested full rebuild produced a verified 30,000-row CSV in sample order.
+All 45 Kumo component fits, five spline refits and five fold assemblies completed.
+The compact predictions and case-level CSV remain private with hashes in RUN.json.
 
-`RUN.json` records the plan before execution; `REFIT_POLICY.json` documents the
-full-training extension and its Kumo56 exception. `CROSS_BACKEND_GATE.json` fixes
-A100 replay tolerances before inference. `source/` and `SOURCE_SNAPSHOT.json` retain
-the implementation; subsequent commits will preserve changes and aggregate evidence.
-Case-level packets and predictions remain private. No fitted weights or KV caches
-are serialized. The historical bulk archive will be committed separately.
+The historical development replay KS is 0.5340125023110701. Routing and the shift
+were selected on reused OOF results; no independent 0.54 or new public gain is claimed.
+See RESULTS.json, CSV_VERIFICATION.json, REFIT_POLICY.json and source/ for provenance.
