@@ -1,6 +1,6 @@
 # Antrean15 eksperimen Kumo100% frozen
 
-Selesai15/15. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 dan adapterV179â€“V183 tidak memerlukan GPU.
+Selesai15/15. BaselineV25; target pooledKS>=0.531. Auto-start saat resource cukup. Cache-only V172/V177 dan adapterV179–V183 tidak memerlukan GPU.
 
 | ID | Metode | Status | KS | AUC |
 |---|---|---|---:|---:|

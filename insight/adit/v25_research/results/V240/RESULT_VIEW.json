@@ -1,0 +1,686 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V240",
+  "spec": {
+    "id": "V240",
+    "label": "Training-only principal-component compression of correction basis",
+    "method": "spline_pca",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "retained_variance": 0.95,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Fit original18 V25 spline encoder on6k; center its basis/missing/employment columns and retain PCA components explaining95%training variance, whiten=False. Preserve separate intercept and standardizedKumo logit. Fit meanBCE(offset+XPCA*beta)+.003/2||beta_nonintercept||^2. Inference eta=offset+.5XPCA*beta; final75:25spline77, mean5foldtest. No target used in PCA or component-count selection.",
+    "rationale": "Reduced-knot and roughness controls improve some AUC measures but lose KS, suggesting the correction needs a different capacity constraint. Compress correlated basis directions instead of smoothing every input equally. Low-variance directions may contain important risk or thin-file information, so inspect those segments and reject if lost; PCA is not assigned semantic creditworthiness labels.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
+    "execution_host": "local_windows"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "OOF": {
+    "KS": 0.5293251724234507,
+    "signed_KS": 0.5293251724234507,
+    "AUC": 0.8470954144318802,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": -0.0009594876205903935,
+  "delta_AUC": 6.613552476431028e-05,
+  "mean_fold_KS": 0.5326365059388388,
+  "std_fold_KS": 0.005338095783814534,
+  "delta_mean_fold_KS": -0.000693318617712424,
+  "fold_wins": 1,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5274889143350456,
+        "signed_KS": 0.5274889143350456,
+        "AUC": 0.844164957007546,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": -0.0009909914257697494,
+      "delta_AUC": 9.517308958950643e-05,
+      "parameters": 34,
+      "new_trainable_parameters": 34,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5467162828120287,
+      "heldout_corrected_Kumo_KS": 0.524522853041402,
+      "train_validation_head_KS_gap": 0.02219342977062666,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "optimization": {
+        "objective": 0.29242011182678335,
+        "gradient_max_abs": 6.876571374582339e-07,
+        "iterations": 46,
+        "retained_components": 32,
+        "total_basis_columns": 88,
+        "explained_variance": 0.9531645574513693,
+        "labels_used_for_PCA": false
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.5367801382935861,
+        "signed_KS": 0.5367801382935861,
+        "AUC": 0.849883820570422,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": -0.0012190329309759163,
+      "delta_AUC": 0.00027886715241032256,
+      "parameters": 34,
+      "new_trainable_parameters": 34,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5348249729339588,
+      "heldout_corrected_Kumo_KS": 0.5378863895916728,
+      "train_validation_head_KS_gap": -0.003061416657713978,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "optimization": {
+        "objective": 0.29370944772520763,
+        "gradient_max_abs": 1.0955468883306374e-06,
+        "iterations": 38,
+        "retained_components": 32,
+        "total_basis_columns": 88,
+        "explained_variance": 0.9535298311716442,
+        "labels_used_for_PCA": false
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5397937643930819,
+        "signed_KS": 0.5397937643930819,
+        "AUC": 0.8498739945684818,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": -0.000504473896073776,
+      "delta_AUC": 1.708680868373058e-05,
+      "parameters": 35,
+      "new_trainable_parameters": 35,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5564789890611781,
+      "heldout_corrected_Kumo_KS": 0.5385454273678241,
+      "train_validation_head_KS_gap": 0.017933561693354028,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "optimization": {
+        "objective": 0.28558173821677735,
+        "gradient_max_abs": 5.556662430108108e-07,
+        "iterations": 44,
+        "retained_components": 33,
+        "total_basis_columns": 88,
+        "explained_variance": 0.9532465618658882,
+        "labels_used_for_PCA": false
+      }
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5292807650941775,
+        "signed_KS": 0.5292807650941775,
+        "AUC": 0.8438407578904771,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": -0.001371293218943137,
+      "delta_AUC": -2.2598481138724757e-05,
+      "parameters": 34,
+      "new_trainable_parameters": 34,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5271305263531542,
+      "heldout_corrected_Kumo_KS": 0.5270584652258917,
+      "train_validation_head_KS_gap": 7.206112726243497e-05,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "optimization": {
+        "objective": 0.2909940489451476,
+        "gradient_max_abs": 6.129023266273302e-07,
+        "iterations": 37,
+        "retained_components": 32,
+        "total_basis_columns": 88,
+        "explained_variance": 0.9536785836946711,
+        "labels_used_for_PCA": false
+      }
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5298389475783034,
+        "signed_KS": 0.5298389475783034,
+        "AUC": 0.8478299113148684,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": 0.0006191983832004588,
+      "delta_AUC": -6.679589521185747e-05,
+      "parameters": 34,
+      "new_trainable_parameters": 34,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5442291650643964,
+      "heldout_corrected_Kumo_KS": 0.5291031931827683,
+      "train_validation_head_KS_gap": 0.01512597188162812,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "optimization": {
+        "objective": 0.2898286355191873,
+        "gradient_max_abs": 4.283152508714722e-07,
+        "iterations": 38,
+        "retained_components": 32,
+        "total_basis_columns": 88,
+        "explained_variance": 0.9532177908159211,
+        "labels_used_for_PCA": false
+      }
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5218592188864015,
+      0.5389617593058791
+    ],
+    "delta_KS": [
+      -0.0027588851034423406,
+      0.001052995271482969
+    ],
+    "candidate_AUC": [
+      0.843467024449162,
+      0.8507759126788923
+    ],
+    "delta_AUC": [
+      -0.00011031856751114733,
+      0.0002503049211102475
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "modeling_formula": "Fit original18 V25 spline encoder on6k; center its basis/missing/employment columns and retain PCA components explaining95%training variance, whiten=False. Preserve separate intercept and standardizedKumo logit. Fit meanBCE(offset+XPCA*beta)+.003/2||beta_nonintercept||^2. Inference eta=offset+.5XPCA*beta; final75:25spline77, mean5foldtest. No target used in PCA or component-count selection.; mean5fold test probabilities",
+  "modeling_objective": "Fit original18 V25 spline encoder on6k; center its basis/missing/employment columns and retain PCA components explaining95%training variance, whiten=False. Preserve separate intercept and standardizedKumo logit. Fit meanBCE(offset+XPCA*beta)+.003/2||beta_nonintercept||^2. Inference eta=offset+.5XPCA*beta; final75:25spline77, mean5foldtest. No target used in PCA or component-count selection.",
+  "controller_source": "v7/scripts/structured_heads.py",
+  "source_sha256": "4282683b1366a145bded6f16792be5a91fbdcf5a208fdb21872bfff3847c953c",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": false,
+  "submission": "v7/submissions/submission_V240_V25_conservative.csv",
+  "submission_sha256": "d92f4dddc7a1ee77cfe9e9c9d441af3d35ac201ea6c57a87d4819926029b6bb3",
+  "public_score": null,
+  "elapsed_seconds": 16.074872732162476,
+  "peak_RSS_MiB": 370.171875,
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY",
+    "diagnostic": "Reduced-knot and roughness controls improve some AUC measures but lose KS, suggesting the correction needs a different capacity constraint. Compress correlated basis directions instead of smoothing every input equally. Low-variance directions may contain important risk or thin-file information, so inspect those segments and reject if lost; PCA is not assigned semantic creditworthiness labels.; all new fitting uses correction rows only; repeated development selection remains.",
+    "inner_crossfit_used": false
+  },
+  "error_analysis": {
+    "json": "v7\\runs\\V240\\ERROR_ANALYSIS.json",
+    "markdown": "v7\\runs\\V240\\ERROR_ANALYSIS.md",
+    "cases": "v7\\runs\\V240\\ERROR_CASES.csv"
+  },
+  "execution_host": "local_windows",
+  "source_data_host": "node480",
+  "packages": {
+    "numpy": "2.2.2",
+    "pandas": "2.2.3",
+    "scipy": "1.15.1",
+    "scikit-learn": "1.7.2",
+    "pyarrow": "22.0.0",
+    "joblib": "1.4.2"
+  },
+  "additional_source_sha256": "f9cd5567555296973152d3691d2202872cb924522197620696e90eb2f854172c",
+  "comparison_to_V185": {
+    "control": "V185",
+    "control_metrics": {
+      "KS": 0.5311516622583823,
+      "signed_KS": 0.5311516622583823,
+      "AUC": 0.8471087754249731,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5293251724234507,
+      "signed_KS": 0.5293251724234507,
+      "AUC": 0.8470954144318802,
+      "rows": 70000
+    },
+    "delta_KS": -0.0018264898349316105,
+    "delta_AUC": -1.3360993092903506e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5234363951810418,
+        0.5406116770704794
+      ],
+      "candidate_KS": [
+        0.5218592188864015,
+        0.5389617593058791
+      ],
+      "delta_KS": [
+        -0.004466862373221464,
+        0.000789239982599371
+      ],
+      "candidate_AUC": [
+        0.843467024449162,
+        0.8507759126788923
+      ],
+      "delta_AUC": [
+        -0.0003535175494688486,
+        0.00028116931071492374
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "generalization_review": {
+    "status": "REVIEWED",
+    "candidate": "V240",
+    "decision": "EXPERIMENT_ONLY_KEEP_V25_PUBLIC_INCUMBENT",
+    "pooled_KS": 0.5293251724234507,
+    "AUC": 0.8470954144318802,
+    "delta_AUC_vs_V25": 6.613552476431028e-05,
+    "delta_AUC_vs_V185": -1.3360993092903506e-05,
+    "head_gap": 0.010452721563031453,
+    "V25_head_gap": 0.011107666682208906,
+    "flags": [
+      "REUSED_DEVELOPMENT_FOLDS",
+      "MANY_PRIOR_EXPERIMENTS",
+      "NO_INDEPENDENT_GENERALIZATION_TEST",
+      "AUC_DECREASE_VS_V185",
+      "DELTA_KS_V25_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "DELTA_KS_V185_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "FEWER_THAN_FOUR_FOLD_KS_WINS_VS_V185"
+    ],
+    "public_incumbent": {
+      "id": "V25",
+      "KS": 0.56822
+    },
+    "development_incumbent_public_outcome": {
+      "id": "V185",
+      "KS": 0.56699
+    },
+    "causation_note": "Public decline does not uniquely establish overfitting; sample variability, population drift and source instability remain possible.",
+    "selection_caveat": "Intervals condition on fitted predictions and exclude search/retraining uncertainty; operational rules are heuristics, not significance tests.",
+    "top_risk_capture_vs_V185": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3842,
+        "candidate_bad_captured": 3847,
+        "net_bad_captured": 5,
+        "new_members": 308,
+        "exited_members": 308,
+        "entrant_bad_rate": 0.36688311688311687,
+        "exit_bad_rate": 0.35064935064935066
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5862,
+        "net_bad_captured": 7,
+        "new_members": 469,
+        "exited_members": 469,
+        "entrant_bad_rate": 0.21961620469083157,
+        "exit_bad_rate": 0.2046908315565032
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7417,
+        "candidate_bad_captured": 7412,
+        "net_bad_captured": -5,
+        "new_members": 579,
+        "exited_members": 579,
+        "entrant_bad_rate": 0.11917098445595854,
+        "exit_bad_rate": 0.12780656303972365
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8018,
+        "candidate_bad_captured": 8012,
+        "net_bad_captured": -6,
+        "new_members": 595,
+        "exited_members": 595,
+        "entrant_bad_rate": 0.08067226890756303,
+        "exit_bad_rate": 0.0907563025210084
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8643,
+        "net_bad_captured": -6,
+        "new_members": 587,
+        "exited_members": 587,
+        "entrant_bad_rate": 0.059625212947189095,
+        "exit_bad_rate": 0.06984667802385008
+      }
+    ]
+  },
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5293251724234507,
+      "signed_KS": 0.5293251724234507,
+      "AUC": 0.8470954144318802,
+      "rows": 70000
+    },
+    "delta_KS": -0.0021343421390850326,
+    "delta_AUC": -1.2129917727254913e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5218592188864015,
+        0.5389617593058791
+      ],
+      "delta_KS": [
+        -0.004650543903789539,
+        0.0004922038840041878
+      ],
+      "candidate_AUC": [
+        0.843467024449162,
+        0.8507759126788923
+      ],
+      "delta_AUC": [
+        -0.000350578400503479,
+        0.0002798252563635387
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "continuous_insight": {
+    "experiment": "V240",
+    "method": "spline_pca",
+    "hypothesis": "Reduced-knot and roughness controls improve some AUC measures but lose KS, suggesting the correction needs a different capacity constraint. Compress correlated basis directions instead of smoothing every input equally. Low-variance directions may contain important risk or thin-file information, so inspect those segments and reject if lost; PCA is not assigned semantic creditworthiness labels.",
+    "formula": "Fit original18 V25 spline encoder on6k; center its basis/missing/employment columns and retain PCA components explaining95%training variance, whiten=False. Preserve separate intercept and standardizedKumo logit. Fit meanBCE(offset+XPCA*beta)+.003/2||beta_nonintercept||^2. Inference eta=offset+.5XPCA*beta; final75:25spline77, mean5foldtest. No target used in PCA or component-count selection.",
+    "findings": [
+      "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+      "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+    ],
+    "comparison_to_V193": {
+      "control": "V193",
+      "control_metrics": {
+        "KS": 0.5314595145625357,
+        "signed_KS": 0.5314595145625357,
+        "AUC": 0.8471075443496074,
+        "rows": 70000
+      },
+      "candidate_metrics": {
+        "KS": 0.5293251724234507,
+        "signed_KS": 0.5293251724234507,
+        "AUC": 0.8470954144318802,
+        "rows": 70000
+      },
+      "delta_KS": -0.0021343421390850326,
+      "delta_AUC": -1.2129917727254913e-05,
+      "fold_wins": 2,
+      "confidence_interval": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5237657171439752,
+          0.5406826945132854
+        ],
+        "candidate_KS": [
+          0.5218592188864015,
+          0.5389617593058791
+        ],
+        "delta_KS": [
+          -0.004650543903789539,
+          0.0004922038840041878
+        ],
+        "candidate_AUC": [
+          0.843467024449162,
+          0.8507759126788923
+        ],
+        "delta_AUC": [
+          -0.000350578400503479,
+          0.0002798252563635387
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      }
+    },
+    "head_gap": 0.010452721563031453,
+    "top_risk_capture": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3841,
+        "candidate_bad_captured": 3847,
+        "net_bad_captured": 6,
+        "new_members": 307,
+        "exited_members": 307,
+        "entrant_bad_rate": 0.3745928338762215,
+        "exit_bad_rate": 0.3550488599348534
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5862,
+        "net_bad_captured": 7,
+        "new_members": 475,
+        "exited_members": 475,
+        "entrant_bad_rate": 0.2231578947368421,
+        "exit_bad_rate": 0.20842105263157895
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7422,
+        "candidate_bad_captured": 7412,
+        "net_bad_captured": -10,
+        "new_members": 586,
+        "exited_members": 586,
+        "entrant_bad_rate": 0.11774744027303755,
+        "exit_bad_rate": 0.1348122866894198
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8015,
+        "candidate_bad_captured": 8012,
+        "net_bad_captured": -3,
+        "new_members": 601,
+        "exited_members": 601,
+        "entrant_bad_rate": 0.08485856905158069,
+        "exit_bad_rate": 0.08985024958402663
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8643,
+        "net_bad_captured": -6,
+        "new_members": 583,
+        "exited_members": 583,
+        "entrant_bad_rate": 0.058319039451114926,
+        "exit_bad_rate": 0.0686106346483705
+      }
+    ],
+    "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+    "public_incumbent": "V25",
+    "independent_generalization_established": false
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "experiment": "V240",
+  "method": "spline_pca",
+  "hypothesis": "Reduced-knot and roughness controls improve some AUC measures but lose KS, suggesting the correction needs a different capacity constraint. Compress correlated basis directions instead of smoothing every input equally. Low-variance directions may contain important risk or thin-file information, so inspect those segments and reject if lost; PCA is not assigned semantic creditworthiness labels.",
+  "formula": "Fit original18 V25 spline encoder on6k; center its basis/missing/employment columns and retain PCA components explaining95%training variance, whiten=False. Preserve separate intercept and standardizedKumo logit. Fit meanBCE(offset+XPCA*beta)+.003/2||beta_nonintercept||^2. Inference eta=offset+.5XPCA*beta; final75:25spline77, mean5foldtest. No target used in PCA or component-count selection.",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5293251724234507,
+      "signed_KS": 0.5293251724234507,
+      "AUC": 0.8470954144318802,
+      "rows": 70000
+    },
+    "delta_KS": -0.0021343421390850326,
+    "delta_AUC": -1.2129917727254913e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5218592188864015,
+        0.5389617593058791
+      ],
+      "delta_KS": [
+        -0.004650543903789539,
+        0.0004922038840041878
+      ],
+      "candidate_AUC": [
+        0.843467024449162,
+        0.8507759126788923
+      ],
+      "delta_AUC": [
+        -0.000350578400503479,
+        0.0002798252563635387
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.010452721563031453,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3847,
+      "net_bad_captured": 6,
+      "new_members": 307,
+      "exited_members": 307,
+      "entrant_bad_rate": 0.3745928338762215,
+      "exit_bad_rate": 0.3550488599348534
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5862,
+      "net_bad_captured": 7,
+      "new_members": 475,
+      "exited_members": 475,
+      "entrant_bad_rate": 0.2231578947368421,
+      "exit_bad_rate": 0.20842105263157895
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7412,
+      "net_bad_captured": -10,
+      "new_members": 586,
+      "exited_members": 586,
+      "entrant_bad_rate": 0.11774744027303755,
+      "exit_bad_rate": 0.1348122866894198
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8012,
+      "net_bad_captured": -3,
+      "new_members": 601,
+      "exited_members": 601,
+      "entrant_bad_rate": 0.08485856905158069,
+      "exit_bad_rate": 0.08985024958402663
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8643,
+      "net_bad_captured": -6,
+      "new_members": 583,
+      "exited_members": 583,
+      "entrant_bad_rate": 0.058319039451114926,
+      "exit_bad_rate": 0.0686106346483705
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}

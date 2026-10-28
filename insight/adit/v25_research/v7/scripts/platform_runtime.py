@@ -12,6 +12,8 @@ except ImportError:
 
     def flock(fd,operation):
         assert operation==3, 'Only exclusive nonblocking locks are used here'
+        # Native fcntl accepts both an open file object and a descriptor.
+        fd = fd.fileno() if hasattr(fd, 'fileno') else fd
         if os.fstat(fd).st_size==0:os.write(fd,b'0')
         os.lseek(fd,0,os.SEEK_SET)
         msvcrt.locking(fd,msvcrt.LK_NBLCK,1)
