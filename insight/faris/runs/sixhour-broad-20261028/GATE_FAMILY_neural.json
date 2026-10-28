@@ -1,0 +1,82 @@
+{
+  "status": "FAIL",
+  "scope": "Adaptive reused-development admission; not untouched statistical confirmation.",
+  "kind": "neural",
+  "attempt": 1,
+  "UTC": "2026-10-28T17:49:10.850020+00:00",
+  "checks": [
+    {
+      "id": "data_admission",
+      "category": "boundaries",
+      "required": true,
+      "acceptance_rule": "Data gate PASS matches current immutable clock/config/contract/source seal.",
+      "evidence": [
+        {
+          "path": "GATE.json",
+          "sha256": "6945324f8c26c9529b1d51d4c69732baa9f25ede390da2c27c74f24be5cafc5e"
+        }
+      ],
+      "observed": {
+        "data_gate_status": "PASS",
+        "data_gate_sha256": "6945324f8c26c9529b1d51d4c69732baa9f25ede390da2c27c74f24be5cafc5e"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "actual_predeclared_pilot_identity",
+      "category": "runtime",
+      "required": true,
+      "acceptance_rule": "Exactly one successful declared fold0/seed2026 pilot, latest attempt complete within900seconds, exact START/prediction/source lineage; earlier failures explicitly retained.",
+      "evidence": [],
+      "observed": {
+        "task_id": "tabm_global64_bce__s2026__f0",
+        "selected_attempt": "attempt1",
+        "pilot_seconds": 21.805099964141846,
+        "prior_failed_attempts": [],
+        "logical_actual_pilot_configs": 1,
+        "pilot_parameters_changed": false
+      },
+      "status": "pass"
+    },
+    {
+      "id": "runtime_predictions_boundaries_versions",
+      "category": "runtime_and_boundaries",
+      "required": true,
+      "acceptance_rule": "Exact20000query rows,finite bounded predictions,context/label/inner-stop hashes,required package versions and declared CUDA backend; no meta/outer labels or fitted artifacts.",
+      "evidence": [],
+      "status": "fail",
+      "reason": "Measured evidence did not satisfy the declared predicate; inspect private diagnostic.",
+      "private_diagnostic": {
+        "path": "private/gate_errors/neural_runtime_predictions_boundaries_versions_1793209750848372580.txt",
+        "sha256": "7d270ce8d51eba5cbfef811e727366ec565a489ddee30144c2af6f975dd1b5c0"
+      }
+    }
+  ],
+  "clock_sha256": "67493c438f7f1baeee5db30ba8539cd4dce0641dec23127ffd3b1a93c779cb8d",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "source_seal_sha256": "4929f7c9afca958614b320c9ea1ced24017ce80fb8be97836f85af2fee120ef0",
+  "gate_source_sha256": "db1de743013bc435dc7f5162ed402dae1cf8987b5c58d5eeb19a332dfdfde323",
+  "independent_audit_available": false,
+  "candidate_meta_or_outer_scores_computed": false,
+  "family": "neural",
+  "data_gate_sha256": "6945324f8c26c9529b1d51d4c69732baa9f25ede390da2c27c74f24be5cafc5e",
+  "dependency_versions": {},
+  "qualification_scope": "One predeclared actual runtime pilot; this is not predictive evidence for every future design/backend.",
+  "pilot_result": {
+    "path": "runs/tabm_global64_bce__s2026__f0/attempt1/RESULT.json",
+    "sha256": "3ec7db99a05bb455352bf5103bee5136f521c81fe74bd8e6ed58598206ed0036"
+  },
+  "pilot_start": {
+    "path": "runs/tabm_global64_bce__s2026__f0/attempt1/START.json",
+    "sha256": "b17e399102b4076d25c29573058bbd685daa673794b4a169aa39854af4f2edae"
+  },
+  "pilot_prediction": {
+    "path": "runs/tabm_global64_bce__s2026__f0/attempt1/prediction.npz",
+    "sha256": "96e826fbff25604d7ebc29e4166e8302fcfacb5b7cf339cbb3185b44b93eafd1"
+  },
+  "attempt_result": {
+    "path": "gate_attempts/neural/attempt1/RESULT.json",
+    "sha256": "e95d5b74871dfafdec69969dd33540db08146dc1ce84a434a039b55584f2cdaa"
+  }
+}
