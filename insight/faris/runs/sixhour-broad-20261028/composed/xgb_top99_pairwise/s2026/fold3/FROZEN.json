@@ -1,0 +1,115 @@
+{
+  "UTC": "2026-10-28T18:22:58.522846+00:00",
+  "design": "xgb_top99_pairwise",
+  "design_spec": {
+    "family": "xgboost",
+    "view": "global99",
+    "hypothesis": "Pairwise RankNet loss on one context group directly trains discrimination; sigmoid scores remain uncalibrated.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+      "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "gpu",
+    "objective": "pairwise",
+    "max_iterations": 1200,
+    "stopping_metric": "auc",
+    "pairs_per_sample": 4,
+    "parameters": {
+      "max_depth": 4,
+      "min_child_weight": 25,
+      "reg_lambda": 25
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seed": 2026,
+  "fold": 3,
+  "task_id": "xgb_top99_pairwise__s2026__f3",
+  "inputs": {
+    "raw_prediction_sha256": "39c29ca176c0fba8c353ebb1e8b23951175a7126aec67da0589bebc687d0c128",
+    "raw_result_sha256": "f08c646b0bfae59e7cd3c8c2cdb6b391a5b6245537d246e70b0f4ab8c8b7800c",
+    "roles_sha256": "181cbca17ca98d347367acfc5bb3a65a3769f0f8462f9188fe42a4a514281e95",
+    "anchor_sha256": "94cca87de8d921d8dd8bd453aba6fd755725f87e3b5caf2182924ea8669549bd"
+  },
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "prediction_sha256": "a64919bddc41b3c1c53d6bdd3c4a4a64160cef27f0273ab77bad90ee5c31eef5",
+  "correction_rows_sha256": "bd48464240d475910aa6b423b8f8c6a9c82e6072d7f93b0bc99c43c5f77bd4ac",
+  "validation_rows_sha256": "4db03cfd81a2580d6fc360ff85e1db8c9be534464e6955e2c3dd93190f31496a",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "722c38838105c741be0fc31807c8970d54d3ecca96e976a06475a7a1f1e3838c",
+      "heldout_global_rows_sha256": "cae79bc35207a4b8d908f9db35326fc62432bc9d403feccdad20f6933f3df3df"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "7cf38b450fbb30bae6c67954d72b5cf1a20103cad28312bc73b5226a79fd170e",
+      "heldout_global_rows_sha256": "a30b87678453ade85ba586c6b44090c31b67f94aefb93335af5f09cbcc12b182"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "c0c570acaeeab823b565b753cc26e82f87f1f95f88f0595071f9584c5e42580d",
+      "heldout_global_rows_sha256": "25bae715644a989b83d97d0686c2a2728c1bb2ecb41c36f763f679cefc11d81c"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_005": 0.05,
+    "fixed_010": 0.1,
+    "fixed_020": 0.2,
+    "fixed_040": 0.4
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.4,
+  "meta_weight_training_KS": [
+    0.5181392762274375,
+    0.5176967538498854,
+    0.5185380196531997,
+    0.5172980104241234,
+    0.5180032065124149,
+    0.5190373363465872,
+    0.5164401796120238,
+    0.5191106956712083,
+    0.5172282007442421,
+    0.5176730895516206
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 10,
+    "objective": 0.29405979110077873,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}

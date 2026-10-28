@@ -1,0 +1,64 @@
+{
+  "UTC": "2026-10-28T18:22:08.930633+00:00",
+  "design": "resnet_global64_bce_fp32",
+  "design_spec": {
+    "execution_precision": "ieee_fp32_no_tf32",
+    "family": "neural",
+    "hypothesis": "Numerical stability replication: strict5e-6 batch replay rejected severalTF32L4ResNet runs. DisableTF32 via documented NVIDIA override, retain same features/model/loss/seeds and original strict replay check. Distinct recipe, no original model rewritten.",
+    "parameters": {
+      "batch_size": 1024,
+      "blocks": 3,
+      "dropout": 0.15,
+      "ensemble_members": 16,
+      "inner_split_seed": 20261029,
+      "kind": "resnet",
+      "loss": "bce",
+      "lr": 0.001,
+      "max_epochs": 60,
+      "max_seconds": 900,
+      "min_epochs": 8,
+      "patience": 8,
+      "weight_decay": 0.0001,
+      "width": 128
+    },
+    "registration": "Runtime-consistency diagnostic motivates this precision variant; current bestcomplete developmentKS .5310093078669815 was visible but not used to choose numerical repair.",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+      "https://docs.pytorch.org/docs/stable/cuda_environment_variables.html"
+    ],
+    "view": "global64"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/resnet_global64_bce_fp32/s2026/fold0/RESULT.json": "f839fa7b58d1aef2dc27e493e15377d9ff567a006fbf51b91abbbbd681417ec7",
+    "composed/resnet_global64_bce_fp32/s2026/fold1/RESULT.json": "cb9dd0622ef41f1822798675efe7129d28a0f0c460988ceaebdb9dc475439b9e",
+    "composed/resnet_global64_bce_fp32/s2026/fold2/RESULT.json": "8a48f6bba17830cffee897a9bc3a6c0faf238ea5b989fe25003487d818744a7c",
+    "composed/resnet_global64_bce_fp32/s2026/fold3/RESULT.json": "30d8610bf0c1bd7732753c6ddf979a77db85d5e136377937104ef571307eff3a",
+    "composed/resnet_global64_bce_fp32/s2026/fold4/RESULT.json": "2a8ee4c9ec90235a87887d7e1a24392e29481588371d67ae60858d6cf0ad117c",
+    "composed/resnet_global64_bce_fp32/s7731/fold0/RESULT.json": "e6c07cee9e869db756e5faad70d71e30f561dcdfb619ab467365e21fab1b01d1",
+    "composed/resnet_global64_bce_fp32/s7731/fold1/RESULT.json": "e32be233820487317962e01e2a9968204369d131f29d3fef0a4fbf908842a492",
+    "composed/resnet_global64_bce_fp32/s7731/fold2/RESULT.json": "1a5c4f2e477604a9f6a5787eac1de66da392afdbd095b2d4df613f72266194aa",
+    "composed/resnet_global64_bce_fp32/s7731/fold3/RESULT.json": "13b1da9ab376c920e45cc2f4daeea79de345d09e9d6db1f56b79f5230dddaf0f",
+    "composed/resnet_global64_bce_fp32/s7731/fold4/RESULT.json": "508b3e348f4dde7f931978f0bb4bf311a574ca58905584d15d64f3fddb32d8d7"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

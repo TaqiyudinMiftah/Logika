@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T18:21:34.022037+00:00",
+  "design": "kumo_large_global99_e2",
+  "design_spec": {
+    "family": "kumo_large",
+    "view": "global99",
+    "resource": "gpu",
+    "hypothesis": "Matched ensemble-budget curve at fixed representation.",
+    "parameters": {
+      "size": "large",
+      "estimators": 2,
+      "prediction_batch": 256,
+      "memory_fraction": 0.7,
+      "engine": "concat_context_vocab"
+    },
+    "sources": [
+      "https://huggingface.co/nvidia/Kumo-Tabular"
+    ],
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/kumo_large_global99_e2/s2026/fold0/RESULT.json": "c2530851780ec649abb3785f683a91deaf24428629256ce95b47df05c2de5893",
+    "composed/kumo_large_global99_e2/s2026/fold1/RESULT.json": "74518eb118cf0a1c542caf4920579c168090db00fb80ff9dd31e60fea46a661f",
+    "composed/kumo_large_global99_e2/s2026/fold2/RESULT.json": "9553146d5c47365eb6a6a9d8c87b12e8403b36dc5b5f24154762f92681370653",
+    "composed/kumo_large_global99_e2/s2026/fold3/RESULT.json": "038a8ed16e2f2106fb4035d209b6b93ff5628bcd84cd6ae019b5be1421f1cf96",
+    "composed/kumo_large_global99_e2/s2026/fold4/RESULT.json": "a7053cb8443f952a2b6f1974814e32f5f145428b28d714b59db0a16f38c52191",
+    "composed/kumo_large_global99_e2/s7731/fold0/RESULT.json": "2104e74b6e8349b38da846d6d6334367f99505b4db72dfd8439b6a5f5989cd45",
+    "composed/kumo_large_global99_e2/s7731/fold1/RESULT.json": "c61aac67d0211211c6a387632a17004bf562ef370887d1ea62785426e2be4a2f",
+    "composed/kumo_large_global99_e2/s7731/fold2/RESULT.json": "fed1ca3b9cc82d34aa5600bb4f758ab37499e713c88a339f66c09bf142e5b4dd",
+    "composed/kumo_large_global99_e2/s7731/fold3/RESULT.json": "3ece96e2cdcb45777ead0591372855852f92ff38b0719d5a7a8b702517dd295a",
+    "composed/kumo_large_global99_e2/s7731/fold4/RESULT.json": "a73aeb8affd66aa01296d09307f406d3a45f025665048a5a7b0034debc142a10"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

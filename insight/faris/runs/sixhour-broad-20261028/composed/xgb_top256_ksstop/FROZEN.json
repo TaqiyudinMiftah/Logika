@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:20:51.240992+00:00",
+  "design": "xgb_top256_ksstop",
+  "design_spec": {
+    "family": "xgboost",
+    "view": "global256",
+    "hypothesis": "A wider XGBoost classifier with inner KS stopping tests representation and metric alignment jointly.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+      "https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "gpu",
+    "max_iterations": 1500,
+    "stopping_metric": "ks",
+    "parameters": {
+      "max_depth": 5,
+      "min_child_weight": 30,
+      "reg_lambda": 30
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/xgb_top256_ksstop/s2026/fold0/RESULT.json": "e0b5e400417f6d908692dbcfcedf3aa2d6b5927397b2b71e01af413c15190209",
+    "composed/xgb_top256_ksstop/s2026/fold1/RESULT.json": "84d6a0ca7e01b807098b2df893a87a1237304480ab1abcd6b245e3b180b4280c",
+    "composed/xgb_top256_ksstop/s2026/fold2/RESULT.json": "d5902f29b0d6daa50fdb08e345c47908aa2028edd09d86f9ed650eeb9ead0a07",
+    "composed/xgb_top256_ksstop/s2026/fold3/RESULT.json": "7170f5e49f669980189ceb28c9fc3c7bbc366fdc0286b5c4d73d0f20b4f13399",
+    "composed/xgb_top256_ksstop/s2026/fold4/RESULT.json": "c00edf5c8926466ceea300c5ff224a4aa179c71280f6f1e18685ac6bfed0dedd",
+    "composed/xgb_top256_ksstop/s7731/fold0/RESULT.json": "dd6abf2e1c3bfcb45c21bff9661de07f2fa7c147fbdc5d894ff8b966333480e9",
+    "composed/xgb_top256_ksstop/s7731/fold1/RESULT.json": "ac482f6019da60a1f05bb0d8bf6479affa84c4665a0f481e7db39411e46e37f6",
+    "composed/xgb_top256_ksstop/s7731/fold2/RESULT.json": "2cd20d8f8624535c1986adbfb3445c3a7d5c06b34522c8140a70ea5bac164845",
+    "composed/xgb_top256_ksstop/s7731/fold3/RESULT.json": "ddd28f0af3b45219047afdd6b395952e2d5ea95f937f80332d83e8709ae26d3f",
+    "composed/xgb_top256_ksstop/s7731/fold4/RESULT.json": "398270f90192c14c8e281285387f367b518b259e26734e32b87acf4a51f21227"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
