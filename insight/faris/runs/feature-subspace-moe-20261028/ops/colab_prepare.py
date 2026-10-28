@@ -30,8 +30,8 @@ import hashlib,json,os,subprocess,sys,time,traceback
 root=Path.home()/'logika-feature-subspace-moe-20261028'
 try:
  assert time.time()<1793230117.3252351-7200
- subprocess.run([sys.executable,'-m','venv',str(root/'env')],check=True,timeout=120)
- python=str(root/'env/bin/python')
+ subprocess.run(['/usr/local/bin/uv','venv','--python','3.11','--seed',str(root/'env311')],check=True,timeout=300)
+ python=str(root/'env311/bin/python')
  subprocess.run([python,'-m','pip','install','--quiet','--index-url','https://download.pytorch.org/whl/cu126','torch==2.7.1'],check=True,timeout=1200)
  subprocess.run([python,'-m','pip','install','--quiet','structured-data-models==0.2.1','numpy==2.2.6','pandas==2.3.3','pyarrow==24.0.0','scipy==1.16.3','scikit-learn==1.7.2','lightgbm==4.6.0','catboost==1.2.8','huggingface-hub==0.35.3','safetensors==0.6.2','typing_extensions==4.16.0'],check=True,timeout=900)
  inspect=r"""
@@ -54,7 +54,7 @@ except BaseException:
  (root/'COLAB_SETUP_FAILURE.json').write_text(json.dumps({'error':traceback.format_exc(),'epoch':time.time()},indent=2)+'\n')
  raise
 '''
-script = ROOT / 'bootstrap_execution.py'
+script = ROOT / 'bootstrap_execution_v2.py'
 if not script.exists():
     script.write_text(bootstrap)
     with (ROOT / 'bootstrap.log').open('ab') as log:
