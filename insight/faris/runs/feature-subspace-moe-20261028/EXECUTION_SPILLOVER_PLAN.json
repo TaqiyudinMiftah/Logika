@@ -1,0 +1,19 @@
+{
+  "created_UTC": "2026-10-28T12:31:42.602203+00:00",
+  "reason": "All180CPUfits completed,3Kumo fits completed; both lab GPUs occupied by unrelated compute processes and77Kumo fits waiting. No unrelated work may be stopped.",
+  "user_authorization": "Latest projectAGENTS records user-authorized ColabA100account2 in the reopened continuation; the current user supplied a fresh12hour ceiling.",
+  "proposal": "Execution-only A100account2 spillover, with no change to feature packets, model parameters, seeds, folds, gate or scientific selection. Preserve originalCLOCK.json and its deadline.",
+  "source_clock_sha256": "693c430a2cdfe6cfc6c540e7e1e9480a0ae8944763b4cb1598da90b673456bac",
+  "admission": "Verify actual A100, pinned packages, original source/input hashes and a label-free replay before any new broad dispatch.",
+  "replay_acceptance": {
+    "prediction_rows_exact": true,
+    "checkpoint_hash_exact": true,
+    "mean_abs_probability_difference_max": 0.001,
+    "max_abs_probability_difference_max": 0.02,
+    "correlation_min": 0.999
+  },
+  "cohort_policy": "If admitted, run all80Kumo fits on A100 as a consistent backend cohort. Retire the3lab attempts with hashes; never merge their outputs into the replacement cohort. Preserve180CPU fits.",
+  "checkpoint_routing": "Logical canonical checkpoint path may be mapped to an identical-hash file inside the ownedColab home; disclose mapping and adapter source identity.",
+  "budget": "The original12hour clock covers setup, replay, transfer, training, evaluation and collection. Never extend it.",
+  "billing": "Stop only the runtime created for this campaign after verified result collection; add an original-deadline release watchdog."
+}
