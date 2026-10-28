@@ -1,0 +1,116 @@
+{
+  "UTC": "2026-10-28T21:22:44.501606+00:00",
+  "design": "cpu_ordercontrast_actuarial99_ordered",
+  "design_spec": {
+    "allow_gpu": false,
+    "class_balance": "none",
+    "family": "catboost",
+    "hypothesis": "At fixed CPU backend, feature view, capacity, seeds and data boundaries, explicit Ordered versus Plain CatBoost tests prediction-shift mitigation. Original GPU defaults may already select Ordered; no claim that Ordered was universally untried. ExistingCPUCatboost defaults Plain; this adds a matched control.",
+    "inner_split_seed": 20261029,
+    "parameters": {
+      "boost_from_average": false,
+      "boosting_type": "Ordered",
+      "depth": 4,
+      "iterations": 400,
+      "l2_leaf_reg": 30,
+      "learning_rate": 0.08
+    },
+    "registration": "Append-only predeclared CPUmatchedcomparison; full-sizepilot gate and original clock. PriorGPU/default andreuseddevelopment exposures explicit inCPU_ORDERED_PLAN.json.",
+    "resource": "cpu",
+    "sources": [
+      "https://proceedings.neurips.cc/paper_files/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html",
+      "https://catboost.ai/docs/en/references/training-parameters/common#boosting_type"
+    ],
+    "view": "actuarial99"
+  },
+  "seed": 2026,
+  "fold": 1,
+  "task_id": "cpu_ordercontrast_actuarial99_ordered__s2026__f1",
+  "inputs": {
+    "raw_prediction_sha256": "74edc717fd2ef6f2e4187e9700829133eb052c622ff22f22613098e5ba96a991",
+    "raw_result_sha256": "491c083e00fea818c762738eef02bc6597032401fd89c71a37247cf42b05ebdf",
+    "roles_sha256": "e15643ad78b1f23cc965d0ffedc3bb8478d4c4b803cf104dcfdacea82c497110",
+    "anchor_sha256": "13730275c8e2486bb4c2b39e02e96d0d7344e317a1d4d99b7d643ddcffaaeedd"
+  },
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "prediction_sha256": "7136fe42d75a9825fe02d6fb574eb124c7d2da1ac857b69f7f6bd4f0498fbc84",
+  "correction_rows_sha256": "bb705deff9448f216bdc34d21f2dd96c73fdb5f77a2af31610d852e08aa671f7",
+  "validation_rows_sha256": "88b81514185defbda6c0e3c8ce79812f6296cb90aface53516abb683557e4b75",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "12e6076e27300a3deaae501d74d8fbbbbd6dcb6ef8282107d0f6a526102e6c69",
+      "heldout_global_rows_sha256": "830f233dd4da5fa37a6e94a05c5aaf61f0485d9f7aa578ce5924eaa821a92055"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "072396db02476462816b6508005d9a64cebc656d8ccfd4ea5914efc28fd651b7",
+      "heldout_global_rows_sha256": "ac0ad8e42e0e6c267033edb5dc7c7dca7504c27b09081e23d1c58b43ffbb46e9"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "73bf2bdceaee052d14ea3cf9b0530704f905b0df7c9dfa2a767a7726098f563b",
+      "heldout_global_rows_sha256": "752dd8380ae3256fec6867a487a6bfabedd63dba454a3aee1439a024eff8bd4b"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_005": 0.05,
+    "fixed_010": 0.1,
+    "fixed_020": 0.2,
+    "fixed_040": 0.4
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.6,
+  "meta_weight_training_KS": [
+    0.5282214505031622,
+    0.5281185108057103,
+    0.5285539338937828,
+    0.5293620696795263,
+    0.5295714987191699,
+    0.5274499943797292,
+    0.5265755985588443,
+    0.5282486644461667,
+    0.5325413681514042,
+    0.5186255775567795
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 5,
+    "objective": 0.29593053941832986,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}
