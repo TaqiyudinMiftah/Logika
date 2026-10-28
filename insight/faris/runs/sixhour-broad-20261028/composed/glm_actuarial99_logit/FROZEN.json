@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T18:06:58.959359+00:00",
+  "design": "glm_actuarial99_logit",
+  "design_spec": {
+    "family": "glm",
+    "view": "actuarial99",
+    "hypothesis": "Strongly regularized Bernoulli risk relativity on actuarial transforms.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "link": "logit",
+    "spline": true,
+    "ridge": 0.1,
+    "knots": 4,
+    "optimization_blocks": 8,
+    "iterations_per_block": 25,
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/glm_actuarial99_logit/s2026/fold0/RESULT.json": "186fd0a6ecdbb6cb10ef92079715155a5cf482b0ba21abbd02b33392f059e3a2",
+    "composed/glm_actuarial99_logit/s2026/fold1/RESULT.json": "f2a215db8dcec97006b26887f3d0e11a50863af0181b4adba480cb2abed17ba9",
+    "composed/glm_actuarial99_logit/s2026/fold2/RESULT.json": "cca94fc562d155c3dd545fb853e112dc1156a72c9e9625a56ef567c50bdc7cca",
+    "composed/glm_actuarial99_logit/s2026/fold3/RESULT.json": "001342ae1b0ab5b33e9d5b471b1e11a53facb3d20db7aa5c329043e0b2418264",
+    "composed/glm_actuarial99_logit/s2026/fold4/RESULT.json": "0df8ca06449cd2f31b0f021dbf8855456bf3187132e8d52ba925f09846288487",
+    "composed/glm_actuarial99_logit/s7731/fold0/RESULT.json": "38f812fc868d9d3b9cfc584c73b0e83cad65f918e59e6149003463ff4d10e233",
+    "composed/glm_actuarial99_logit/s7731/fold1/RESULT.json": "7778ccb4acd164c1a8e4a4186d61016443570205ba0fb0b88fcd57d2ba9bbd77",
+    "composed/glm_actuarial99_logit/s7731/fold2/RESULT.json": "01175ab03e43e1bbadad1ca02e6de3584320c80865057d98cf263ccb57ecd0ac",
+    "composed/glm_actuarial99_logit/s7731/fold3/RESULT.json": "11c10167dfff2c191d8d8e4e0518bda48a7c2385ad95f270655b06a9e9523dea",
+    "composed/glm_actuarial99_logit/s7731/fold4/RESULT.json": "d5278f4cdad073487ad13daecbef830c5ad55f804f992d40fca67bd83e7f0ac0"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

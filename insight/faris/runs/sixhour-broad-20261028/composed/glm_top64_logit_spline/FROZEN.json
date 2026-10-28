@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T18:04:13.247785+00:00",
+  "design": "glm_top64_logit_spline",
+  "design_spec": {
+    "family": "glm",
+    "view": "global64",
+    "hypothesis": "Additive smooth nonlinearities model risk relativities without arbitrary high-order feature crosses.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "link": "logit",
+    "spline": true,
+    "ridge": 0.03,
+    "knots": 4,
+    "optimization_blocks": 8,
+    "iterations_per_block": 25,
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/glm_top64_logit_spline/s2026/fold0/RESULT.json": "5ebf08b75194f373525fb5f0ce9d7a85cffe4cbb5f37896fe4018e0679bed97c",
+    "composed/glm_top64_logit_spline/s2026/fold1/RESULT.json": "7a58770afa36e38ad4479f531817b863a068e2ba0034b8ed6c550a3e5dc5c1f9",
+    "composed/glm_top64_logit_spline/s2026/fold2/RESULT.json": "beb437176e0568636db7ce2106d00288d5210648b3ef0da9d99fb70e17a78dfc",
+    "composed/glm_top64_logit_spline/s2026/fold3/RESULT.json": "bab128b9cc4dcad8b1831cb3c25007f2060ee90854e36df51989dbc51531e6e9",
+    "composed/glm_top64_logit_spline/s2026/fold4/RESULT.json": "c6be5262cdbd96687031f4ac793caf8e78fefed8714c97cb9753163177c8002a",
+    "composed/glm_top64_logit_spline/s7731/fold0/RESULT.json": "d0aa9a9b30b6c4612324c7a59388026f8887de280954befb98382412a8974b12",
+    "composed/glm_top64_logit_spline/s7731/fold1/RESULT.json": "293ff292797ef08fc87ee714f537e6131fd064c5e914aa1e36a758a80b7688aa",
+    "composed/glm_top64_logit_spline/s7731/fold2/RESULT.json": "500e8c639c9624430b6b3552204c819a2d5e61331dca2f5d1b9ecef8c0768ceb",
+    "composed/glm_top64_logit_spline/s7731/fold3/RESULT.json": "7511b953a3a0c079ddff22abf0f622ca827a780db7002ab7a95371861d3fca78",
+    "composed/glm_top64_logit_spline/s7731/fold4/RESULT.json": "9ccc5126c14d321573021fa17a5f9569c67cbaf1edb25e8be898b64236a16bd1"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

@@ -1,0 +1,56 @@
+{
+  "UTC": "2026-10-28T18:04:00.031573+00:00",
+  "design": "lgb_top512_extratrees",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "global512",
+    "hypothesis": "Additional split randomization regularizes a512-feature view while preserving nonlinear interactions.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1800,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 180,
+      "reg_lambda": 30,
+      "extra_trees": true,
+      "colsample_bytree": 0.65
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_top512_extratrees/s2026/fold0/RESULT.json": "e6b78d3e86b766cdb45f9c72225a52ca7ff0a9d6825a55654a03dfcaafbede1e",
+    "composed/lgb_top512_extratrees/s2026/fold1/RESULT.json": "6f508d8d54ab646e5d1311f67836edfd2714a07e161b656d3743dc119f8d49fc",
+    "composed/lgb_top512_extratrees/s2026/fold2/RESULT.json": "505495d86b4fc60ded879bb1f9a2191d66adcc47f07a44399a0fc418bc8efa39",
+    "composed/lgb_top512_extratrees/s2026/fold3/RESULT.json": "542a9aec6b157db633daa6587cd6c247633d92c3882ab87de2e34e4671c9568f",
+    "composed/lgb_top512_extratrees/s2026/fold4/RESULT.json": "cf67ad2aea9b8b1bb3985b0a15ba3ca275e6d2bbd7320aff2c80a2681e6dfe9d",
+    "composed/lgb_top512_extratrees/s7731/fold0/RESULT.json": "363ceb33b14d3c10545e4e5894376107b2ccaf3947d96206f2f841f131dd34a8",
+    "composed/lgb_top512_extratrees/s7731/fold1/RESULT.json": "235856a76b6495b6b9204290e5568264140b6e57662804fd894ad2277b4d794b",
+    "composed/lgb_top512_extratrees/s7731/fold2/RESULT.json": "fbea69d72f69b41cc8abb2e670aa7ff8006c40a735b02958064fdb90c449aea6",
+    "composed/lgb_top512_extratrees/s7731/fold3/RESULT.json": "dab9baf36f5790382ec52dc44bd5125b0e505b8516512bf6101e1c41c3513253",
+    "composed/lgb_top512_extratrees/s7731/fold4/RESULT.json": "c228de20a7dcddda1b5831efa1996892448613bb83a7dde400927d0fca169efc"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

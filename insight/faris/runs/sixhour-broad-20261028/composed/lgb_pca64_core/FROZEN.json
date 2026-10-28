@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:04:46.423762+00:00",
+  "design": "lgb_pca64_core",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "pca64_core",
+    "hypothesis": "Same regularized boosting recipe; isolate pca64_core representation.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1400,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 150,
+      "reg_lambda": 25
+    },
+    "class_balance": "none",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_pca64_core/s2026/fold0/RESULT.json": "fdf22f4372047915b6de14e42f616c6c24eba587601db2a12368f187a334c747",
+    "composed/lgb_pca64_core/s2026/fold1/RESULT.json": "2315e09daf2e9d92b376cbc1c314a76ae02f126dcfd2d38995619155e45341e6",
+    "composed/lgb_pca64_core/s2026/fold2/RESULT.json": "8dd5b13cf3407c2aa5cb9114d213c87e7fdb3b85584107815a6068f6a2e7ee54",
+    "composed/lgb_pca64_core/s2026/fold3/RESULT.json": "0457187fb0db3d59b1daf87b0d2fff8afb49d3a964bf137b0f2a9c9ebd618a0d",
+    "composed/lgb_pca64_core/s2026/fold4/RESULT.json": "b15a8a87debd25b1694a6e7d4a81428e36d87beca92c81d3bee5419f0e304d13",
+    "composed/lgb_pca64_core/s7731/fold0/RESULT.json": "1e2dfe78cc65e30d64e359d615c3949b24cb29ac25ab445fec1e18097bd94304",
+    "composed/lgb_pca64_core/s7731/fold1/RESULT.json": "c8dee4b04fc6c740ac635d899f015e5e1a21d08c99ed94563f673be4053368fd",
+    "composed/lgb_pca64_core/s7731/fold2/RESULT.json": "e7424584b6129752e78234eef9bee3b8f837e4a1ed462d91721a5e5c77e63013",
+    "composed/lgb_pca64_core/s7731/fold3/RESULT.json": "a45f8badb49147d9ab2a82d152d38aca6005e62977f382e8383a26ae981f63e7",
+    "composed/lgb_pca64_core/s7731/fold4/RESULT.json": "47abde129f345025f503dfc49a89a41c9d0fc8277cda75f1fcf345fe38c1384e"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

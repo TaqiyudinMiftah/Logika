@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-28T18:13:03.305619+00:00",
+  "design": "tabm_actuarial99_bce",
+  "design_spec": {
+    "family": "neural",
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "max_seconds": 900,
+      "ensemble_members": 16,
+      "loss": "bce",
+      "inner_split_seed": 20261029
+    },
+    "view": "actuarial99",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "hypothesis": "Matched TabM feature-width/book-expansion control.",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/tabm_actuarial99_bce/s2026/fold0/RESULT.json": "0bccea7c3bab26bede1d6f4bc29c0ef4faf9b47cab8cd5ad24a0e38512163e94",
+    "composed/tabm_actuarial99_bce/s2026/fold1/RESULT.json": "91e9fbfc0eb4272a4c751596f5da2f75657a2226c26d9900d5d6c09eebc5d4af",
+    "composed/tabm_actuarial99_bce/s2026/fold2/RESULT.json": "73aba1153b68eff540ee68ac420514e5179f9e42ed162cea4de44207d2ad5873",
+    "composed/tabm_actuarial99_bce/s2026/fold3/RESULT.json": "9bd9fecc94680ef47c4cdc1749557db7b24ee03707d768cc9ed933d22df65845",
+    "composed/tabm_actuarial99_bce/s2026/fold4/RESULT.json": "1b7e6d704b3521f2824a515f1141f0ebd82e962a2591d2d67fc1a6014d355804",
+    "composed/tabm_actuarial99_bce/s7731/fold0/RESULT.json": "ebbc664a3fdace012f48e11e37e407feab7b1c7eb67f16b8bb4189c392891a26",
+    "composed/tabm_actuarial99_bce/s7731/fold1/RESULT.json": "e0487d289ad8c1e7b4c7c8bf6df76b283d816c1f089cb32f768926bb2b04e515",
+    "composed/tabm_actuarial99_bce/s7731/fold2/RESULT.json": "adec7dff232ff356d5a2bdbdc4a0f12d4d16a9f4f761220be507ea634de1e48f",
+    "composed/tabm_actuarial99_bce/s7731/fold3/RESULT.json": "a44cc1130e8f00a03e6ea16227a97a3de5076afa8f9d10b989553bf19bd581a9",
+    "composed/tabm_actuarial99_bce/s7731/fold4/RESULT.json": "53d9af1f5575ebc9200d02f0a6cc4c9567bc865d57197a2a67bb6185912d46a1"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

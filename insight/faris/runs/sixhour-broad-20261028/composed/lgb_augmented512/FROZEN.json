@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:06:53.858458+00:00",
+  "design": "lgb_augmented512",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "augmented512",
+    "hypothesis": "Expanded financial/reliability features under the same tree shrinkage.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1600,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 150,
+      "reg_lambda": 25,
+      "colsample_bytree": 0.7
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_augmented512/s2026/fold0/RESULT.json": "7046f4bbee310a35e14877d2bdc8ed78af52a1b562d301a0efdd55c2047b75cb",
+    "composed/lgb_augmented512/s2026/fold1/RESULT.json": "4ebb6c0aa7c11a91b6c35f9eb7dc8b130464f85fb62c57a88f231e34647eebc1",
+    "composed/lgb_augmented512/s2026/fold2/RESULT.json": "ff65a5ee54e31cc3c312375d980d1e501c8e461be332dfcca93e6c0e79316911",
+    "composed/lgb_augmented512/s2026/fold3/RESULT.json": "b084cd7eca56cdb32db9e9cffbb70d13f2b9b2d369559b532b5596e6fe831ece",
+    "composed/lgb_augmented512/s2026/fold4/RESULT.json": "3fc92fd1d148a1b4dbf32240cc33ea166869c42369009220e4f0e28bc161a01d",
+    "composed/lgb_augmented512/s7731/fold0/RESULT.json": "53ab7ab5b0f52f1f386adc59d92956b516cf1fec83b666476a40f7f98cd756b2",
+    "composed/lgb_augmented512/s7731/fold1/RESULT.json": "2ec0c05625afbd5728366d8952fe078f6542c19e0d03c516a5e9f90cf1608ed0",
+    "composed/lgb_augmented512/s7731/fold2/RESULT.json": "66477b6f9abae5687a6fe7b67d046a8be6b76cee64dc57b5c77d741dff93f246",
+    "composed/lgb_augmented512/s7731/fold3/RESULT.json": "0a7d8d7be1391091884ffe8bb09aa28839088788dbcd7c619ff03bcee91534ea",
+    "composed/lgb_augmented512/s7731/fold4/RESULT.json": "fc6bd1de2de94cb7bac43b94477f9369a54ada0dc60223b1e7d0eb65d7847296"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

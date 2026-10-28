@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:03:54.035438+00:00",
+  "design": "lgb_top99_balanced",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "global99",
+    "hypothesis": "Balanced class weights alter finite-model splits toward default discrimination; evaluate ranking after held-out calibration.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1400,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 150,
+      "reg_lambda": 25
+    },
+    "class_balance": "balanced",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_top99_balanced/s2026/fold0/RESULT.json": "c864ff973927e687f0e0a38f7bb9d1c73f9c60ecd6f9c3e7cadb7ad0d573f9cf",
+    "composed/lgb_top99_balanced/s2026/fold1/RESULT.json": "5e53a5f3d059c66ea623e650ab7a99250810b8e04c59bad31b8e2157d37e3ba4",
+    "composed/lgb_top99_balanced/s2026/fold2/RESULT.json": "55e3cf3c2c35a1afe76eeeb314c99b06f9ee8b46a5a79a1bb11677b923ca6749",
+    "composed/lgb_top99_balanced/s2026/fold3/RESULT.json": "0a6faca01ffd366d32b2d5adc738341c7a3f9f95a16d24919dd8900e48a35d31",
+    "composed/lgb_top99_balanced/s2026/fold4/RESULT.json": "e0ec8a97bc60a94f5e9327c7a3eef5cc6b3adebf950d47f7c7300013df5e4bed",
+    "composed/lgb_top99_balanced/s7731/fold0/RESULT.json": "55df33ab3b4bebbee8edb09439a993f1c29301bb84ad26897b81bcba34fa5e59",
+    "composed/lgb_top99_balanced/s7731/fold1/RESULT.json": "1ee60ed98ca987f8c68cfb4dee8ef0e2ac4ab787f819032316ca7d2824a3c0ac",
+    "composed/lgb_top99_balanced/s7731/fold2/RESULT.json": "8e77674ee8d5698dc249a8bc0dd0c73e2e537d5618956e8038beb3372d55eed6",
+    "composed/lgb_top99_balanced/s7731/fold3/RESULT.json": "fbd17c5e6e5e36f62111c36e95924d2f16ea12c184704969b1c56b3853370c01",
+    "composed/lgb_top99_balanced/s7731/fold4/RESULT.json": "6f6647d1f06d97ada088c3023fe543d56ce9efca952eabb9b4caed02421ac732"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

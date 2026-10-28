@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T18:04:17.262142+00:00",
+  "design": "glm_top64_cloglog_spline",
+  "design_spec": {
+    "family": "glm",
+    "view": "global64",
+    "hypothesis": "The complementary-log-log Bernoulli link tests asymmetric probability response at the fixed supplied horizon.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "link": "cloglog",
+    "spline": true,
+    "ridge": 0.03,
+    "knots": 4,
+    "optimization_blocks": 8,
+    "iterations_per_block": 25,
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/glm_top64_cloglog_spline/s2026/fold0/RESULT.json": "f01823ee693dcd1a75597623baffc9c48adb5ba7cef2485d913189701f1c47d2",
+    "composed/glm_top64_cloglog_spline/s2026/fold1/RESULT.json": "b64385aeb9ee2807d1aab3a900f1e7b0df4a1d751785e9fb699364e3f22847b2",
+    "composed/glm_top64_cloglog_spline/s2026/fold2/RESULT.json": "9de95d71ebf77a84d37ee3f6a23997790edb9db7bd783ab9ca7039b1467adacc",
+    "composed/glm_top64_cloglog_spline/s2026/fold3/RESULT.json": "9a2138b078234f2e360631a4103b200a04b8244c9b6c42b351d85ab9938fc599",
+    "composed/glm_top64_cloglog_spline/s2026/fold4/RESULT.json": "09768dd178b35bbddc15adcb194abc7f1d75cd7c86e91af89e8ef1f740395980",
+    "composed/glm_top64_cloglog_spline/s7731/fold0/RESULT.json": "bc0d464f7ffd45b681e79c1c8f1c51039b909a210faf4ef42af3f6775a5c4a36",
+    "composed/glm_top64_cloglog_spline/s7731/fold1/RESULT.json": "3d4f39b329c11aee0c33235886720d2287411951f7916f223bed2e4ead40e7bb",
+    "composed/glm_top64_cloglog_spline/s7731/fold2/RESULT.json": "ce0b46484516680161470772365b95d0a1acd0b6e63dff840b591f738f6029ec",
+    "composed/glm_top64_cloglog_spline/s7731/fold3/RESULT.json": "2c27447f6d025df47879a79a1d420320d00557371f3f9e71bbe78401b87c092a",
+    "composed/glm_top64_cloglog_spline/s7731/fold4/RESULT.json": "1034b949bcda38e4ef2297016b2a8226b4ceb9972647444428c238bd898ca45a"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

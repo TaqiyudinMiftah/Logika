@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:04:30.932431+00:00",
+  "design": "lgb_global99_unweighted",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "global99",
+    "hypothesis": "Matched class-weight control for the99-feature global view.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1400,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 150,
+      "reg_lambda": 25
+    },
+    "class_balance": "none",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_global99_unweighted/s2026/fold0/RESULT.json": "150777b77a3f8b25d7cd8fe4b28f49e855f9a87e2594347c7aee1fff7f55d029",
+    "composed/lgb_global99_unweighted/s2026/fold1/RESULT.json": "61d2a7b547ab5628e9cb38a0762999e25e98f81f0e1bbed6be16d8757e830baa",
+    "composed/lgb_global99_unweighted/s2026/fold2/RESULT.json": "6ef3923b4eb8bfb5a3239a3fa7232caf70f3202c6ae7bdc29037a6fb929308f7",
+    "composed/lgb_global99_unweighted/s2026/fold3/RESULT.json": "4223aced297bd9e2551211c849f4cc29f7f1be0aec5fdfceb857816ee16ad464",
+    "composed/lgb_global99_unweighted/s2026/fold4/RESULT.json": "12e1828cfe3f7bacf1fd6f2ce697186cff3a5d576c042b9db1edd0eb2e8b3154",
+    "composed/lgb_global99_unweighted/s7731/fold0/RESULT.json": "bee5232fa6a4945255f49ed8928c9e9691cd8b81d78f2bd9562ec1ae818a6e1d",
+    "composed/lgb_global99_unweighted/s7731/fold1/RESULT.json": "9dcb35d32a9087c904256778f0cf71e0e82b4a312f3ae6426b68398cd29ed780",
+    "composed/lgb_global99_unweighted/s7731/fold2/RESULT.json": "14dd34edb60ce270393afecf1d06fe9441ed30c771866f87fd6498058a5d0da0",
+    "composed/lgb_global99_unweighted/s7731/fold3/RESULT.json": "7c5674d569f521c2b6c5acb0f16e074dff43155cef41326d655d37d9595dbe76",
+    "composed/lgb_global99_unweighted/s7731/fold4/RESULT.json": "5bd025539ac14153eb0bfbd2690beb39f967e927f171e06139869f138dc9ac24"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

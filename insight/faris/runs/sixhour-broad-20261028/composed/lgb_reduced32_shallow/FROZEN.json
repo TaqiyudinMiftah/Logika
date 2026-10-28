@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:03:48.023950+00:00",
+  "design": "lgb_reduced32_shallow",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "global32",
+    "hypothesis": "Context-only top32 selection plus shallow boosted trees tests whether capacity reduction limits selection noise.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1400,
+      "num_leaves": 15,
+      "max_depth": 5,
+      "min_child_samples": 200,
+      "reg_lambda": 30
+    },
+    "stopping_metric": "logloss",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_reduced32_shallow/s2026/fold0/RESULT.json": "95f10c9464a764937b405258edd7795659ac678bb0443815b87039215c395ce8",
+    "composed/lgb_reduced32_shallow/s2026/fold1/RESULT.json": "07c419292a44186a68d8c0e7fe99cb291f648988e9e9f226d788b1655c07e762",
+    "composed/lgb_reduced32_shallow/s2026/fold2/RESULT.json": "33d2305f434b583a2a22da95ff9cedce3a73a4455e6fde55a78d3f695067437f",
+    "composed/lgb_reduced32_shallow/s2026/fold3/RESULT.json": "e51ee7f08327da4a3022ebc339e16c49e2b39f54ba519d6fd7fe0e8a073af702",
+    "composed/lgb_reduced32_shallow/s2026/fold4/RESULT.json": "673e58faec09b45e9071394204a6dd81d5b68a1660838c5e3551b2c46bd95773",
+    "composed/lgb_reduced32_shallow/s7731/fold0/RESULT.json": "fcc1f86ae9a4edfc90c9c11ebd10f0cffd516271639852ded76d1ec3767e6600",
+    "composed/lgb_reduced32_shallow/s7731/fold1/RESULT.json": "46ec9501741e6fb1497591d8bfad8f7118605a394fd3c1bb3ac2a622df5fdeaf",
+    "composed/lgb_reduced32_shallow/s7731/fold2/RESULT.json": "9e721972a2b2ec0ffcb034ec61c0b29785ad7ba2584f5c0b4b2720331f179202",
+    "composed/lgb_reduced32_shallow/s7731/fold3/RESULT.json": "2cfe15f1e57dc7d0c808d8a2ed9bdd434fd6de9ff9c02a58b673cfc83d1a8f33",
+    "composed/lgb_reduced32_shallow/s7731/fold4/RESULT.json": "0d1d0233fa346f5ed705212a2da7914af835a0d4a1b2534443b62f2a00eeefc9"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

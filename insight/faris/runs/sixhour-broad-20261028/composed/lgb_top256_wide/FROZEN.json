@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:03:57.019641+00:00",
+  "design": "lgb_top256_wide",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "global256",
+    "hypothesis": "A wider globally selected set tests cross-domain interactions discarded by99-feature specialists.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1600,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 150,
+      "reg_lambda": 25,
+      "colsample_bytree": 0.7
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_top256_wide/s2026/fold0/RESULT.json": "6af828a6cbdb91b08526dd5dd6d88dd0c5fdcfcbd28409620222d267f9a12bd7",
+    "composed/lgb_top256_wide/s2026/fold1/RESULT.json": "d292befc985a4ac7b564fe4121d88791799a4f6e167e5bd8999b2021732e9d55",
+    "composed/lgb_top256_wide/s2026/fold2/RESULT.json": "94fcc19d2c0f43d89318627d9bfe56a85440976027f1db6922ad302033e53bd2",
+    "composed/lgb_top256_wide/s2026/fold3/RESULT.json": "1aeb78b8201dec89243786a46fff37d3cb70290a739bc062c3f2c35c126b5a05",
+    "composed/lgb_top256_wide/s2026/fold4/RESULT.json": "b1e11a16b16039b75f829ad63333638a39e25452907b11fe3335a268461cfb24",
+    "composed/lgb_top256_wide/s7731/fold0/RESULT.json": "406f552cc3dafca05f8c5598f701c7d9921a85b471d9f3aa0e96366f2b8e0b40",
+    "composed/lgb_top256_wide/s7731/fold1/RESULT.json": "aa37e64fbf4ae4246c2ef79c424c07453de76ce38345209af53318db58a13749",
+    "composed/lgb_top256_wide/s7731/fold2/RESULT.json": "c3a6f588ac4635aeb173e36960c3a58b932fbd1880f34e138a4dca87a8640cd7",
+    "composed/lgb_top256_wide/s7731/fold3/RESULT.json": "f60f6f9b65f1be001f62d312eb06489816399fe75b6d82db2458699c6b0d97ca",
+    "composed/lgb_top256_wide/s7731/fold4/RESULT.json": "3a520835c46564743417ebc87180c7a75491bd0f377a60c742b1811feb24c669"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

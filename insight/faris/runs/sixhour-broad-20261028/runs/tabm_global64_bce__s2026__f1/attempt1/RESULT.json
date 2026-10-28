@@ -1,0 +1,404 @@
+{
+  "status": "complete",
+  "task_id": "tabm_global64_bce__s2026__f1",
+  "attempt": 1,
+  "pilot": false,
+  "seconds": 12.862977743148804,
+  "UTC": "2026-10-28T18:08:14.404291+00:00",
+  "audit": {
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "cat_embedding_dim": 8,
+      "ensemble_members": 16,
+      "loss": "bce",
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "predict_batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "min_delta": 1e-06,
+      "early_stop_fraction": 0.15,
+      "inner_split_seed": 20261030,
+      "gradient_clip": 5.0,
+      "max_seconds": 900.0,
+      "threads": 2,
+      "pair_weight": 0.1,
+      "ks_weight": 0.15,
+      "ks_bandwidth": 0.03,
+      "ks_softmax_temperature": 0.02,
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global64",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Official efficient16-member ensemble with reduced inputs; controls feature dimensionality without changing TabM hyperparameters.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "seed": 2027,
+    "device": "cuda",
+    "seconds": 9.721497525000132,
+    "selected_epochs": 6,
+    "inner_train_rows": 42500,
+    "inner_stop_rows": 7500,
+    "refit_context_rows": 50000,
+    "inner_train_rows_sha256": "495a8b68851d1affa6859576ba42a68dbd198a307bd98640ee826ae04bf18742",
+    "stopping_rows_sha256": "583a318682e7feecac2ed31a8ae7d9ca80c32ea6342196bb16b1e373ee1f8880",
+    "context_rows_sha256": "45c586ae072ebeff6b4e882a9b98bc04572acfc0e94ad22be3401a4e79284f4d",
+    "prediction_rows_sha256": "cca40b79c6f532d80096c2b01484a85e9f2661723b2aecc08f89de4bd912cbcd",
+    "inner_preprocessing": {
+      "numeric_columns": [
+        "f541e8c044865be3f",
+        "fac53d5a99ac38da8",
+        "f0761de7a1cc1c50b",
+        "fdeb25a5645769dbb",
+        "f2b53d91321d00bb7",
+        "f0edf46d74355b746",
+        "fc4678c080cd39072",
+        "ff93d50b0f1ca3787",
+        "f9de4af5bf8d1c782",
+        "f45d90ac805c90a25",
+        "fad6f540a9f0f409e",
+        "fed101cf813c7531f",
+        "f35c906391f5f70a5",
+        "f36f4d1b71b011ed3",
+        "fa19883b4a168c0a7",
+        "fd7564240b09f7467",
+        "f826f2fc7bcb2d355",
+        "f599e471480205682",
+        "f14e2589d7bf06555",
+        "fada642ded5c724e3",
+        "f5ae1baebbd40dffb",
+        "fbe9a3d591bf52313",
+        "fe18401dfe61469d2",
+        "feed2aafdd84c6d09",
+        "f8dab7e88982a03c3",
+        "f8045b26e9b319e17",
+        "f71786509c0ca0fc3",
+        "f433c5d53360676b9",
+        "f7616800f0a6a1af0",
+        "f0a0ad133bdd2127f",
+        "fdadba54ed0dcba92",
+        "f3a03c557b05c2387",
+        "fb794d1ed4e1001bf",
+        "f35b728df42398b78",
+        "fd65d7c807a1f3079",
+        "f612f3c56649c43f0",
+        "f68e3dfcb24923209",
+        "fe2371b87c5e2a3f0",
+        "f46a93b3c873b6721",
+        "f395035b0cec45a9c",
+        "f08fa6152550fd808",
+        "fd3829644fa2d30b3",
+        "fc3844c9e7c4fb3fb",
+        "f29fa05ec4cb2421c",
+        "fddcf54e20fd9d037",
+        "fa8a3d28371ff6d69",
+        "f499a937d5aa2cd02",
+        "fa994e63f4af400c3",
+        "fddf2fb0df20a5654",
+        "ff807c62b57d5f830",
+        "fa102e02f3c6a35a2",
+        "f7447fd0cc2e116a0",
+        "f1fc73352dfa0504f",
+        "f271e639964e8483c",
+        "fbf4b0734d4d1e2b0",
+        "fcf4ccf84c2c18cd2",
+        "f20e607e5776ee304",
+        "f8d375f8ae2495c6d",
+        "fd3d2e0905f4c89e1",
+        "f8f81105c7eef5d79",
+        "ff8277898c72dc902",
+        "fee723ea3a4e21d54",
+        "f3d53a82b9f1d2627",
+        "f54d7fa1ec149fa41"
+      ],
+      "categorical_columns": [],
+      "fit_rows": 42500,
+      "fit_rows_sha256": "495a8b68851d1affa6859576ba42a68dbd198a307bd98640ee826ae04bf18742",
+      "numeric_transform": "Training-only median; 256-quantile Gaussian mapping; clip[-5,5]; missing masks.",
+      "categorical_transform": "Training-only sorted vocabulary; unknown index0.",
+      "categorical_cardinalities": [],
+      "numeric_median_sha256": "3520ab7ee5853d9a7b79e8a11ce1c1878681cc830deb593aa1860b7ecc5f9a02",
+      "quantile_grid_sha256": "bb0493356b4851bd057c5183adeb1954e08f30c237a29e6962a44c311d38fd48",
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "fitted_preprocessor_serialized": false
+    },
+    "full_context_preprocessing": {
+      "numeric_columns": [
+        "f541e8c044865be3f",
+        "fac53d5a99ac38da8",
+        "f0761de7a1cc1c50b",
+        "fdeb25a5645769dbb",
+        "f2b53d91321d00bb7",
+        "f0edf46d74355b746",
+        "fc4678c080cd39072",
+        "ff93d50b0f1ca3787",
+        "f9de4af5bf8d1c782",
+        "f45d90ac805c90a25",
+        "fad6f540a9f0f409e",
+        "fed101cf813c7531f",
+        "f35c906391f5f70a5",
+        "f36f4d1b71b011ed3",
+        "fa19883b4a168c0a7",
+        "fd7564240b09f7467",
+        "f826f2fc7bcb2d355",
+        "f599e471480205682",
+        "f14e2589d7bf06555",
+        "fada642ded5c724e3",
+        "f5ae1baebbd40dffb",
+        "fbe9a3d591bf52313",
+        "fe18401dfe61469d2",
+        "feed2aafdd84c6d09",
+        "f8dab7e88982a03c3",
+        "f8045b26e9b319e17",
+        "f71786509c0ca0fc3",
+        "f433c5d53360676b9",
+        "f7616800f0a6a1af0",
+        "f0a0ad133bdd2127f",
+        "fdadba54ed0dcba92",
+        "f3a03c557b05c2387",
+        "fb794d1ed4e1001bf",
+        "f35b728df42398b78",
+        "fd65d7c807a1f3079",
+        "f612f3c56649c43f0",
+        "f68e3dfcb24923209",
+        "fe2371b87c5e2a3f0",
+        "f46a93b3c873b6721",
+        "f395035b0cec45a9c",
+        "f08fa6152550fd808",
+        "fd3829644fa2d30b3",
+        "fc3844c9e7c4fb3fb",
+        "f29fa05ec4cb2421c",
+        "fddcf54e20fd9d037",
+        "fa8a3d28371ff6d69",
+        "f499a937d5aa2cd02",
+        "fa994e63f4af400c3",
+        "fddf2fb0df20a5654",
+        "ff807c62b57d5f830",
+        "fa102e02f3c6a35a2",
+        "f7447fd0cc2e116a0",
+        "f1fc73352dfa0504f",
+        "f271e639964e8483c",
+        "fbf4b0734d4d1e2b0",
+        "fcf4ccf84c2c18cd2",
+        "f20e607e5776ee304",
+        "f8d375f8ae2495c6d",
+        "fd3d2e0905f4c89e1",
+        "f8f81105c7eef5d79",
+        "ff8277898c72dc902",
+        "fee723ea3a4e21d54",
+        "f3d53a82b9f1d2627",
+        "f54d7fa1ec149fa41"
+      ],
+      "categorical_columns": [],
+      "fit_rows": 50000,
+      "fit_rows_sha256": "45c586ae072ebeff6b4e882a9b98bc04572acfc0e94ad22be3401a4e79284f4d",
+      "numeric_transform": "Training-only median; 256-quantile Gaussian mapping; clip[-5,5]; missing masks.",
+      "categorical_transform": "Training-only sorted vocabulary; unknown index0.",
+      "categorical_cardinalities": [],
+      "numeric_median_sha256": "7e803cca1887935ec794d9d82eff169e5db5e006efb213bde9168804acb6dad0",
+      "quantile_grid_sha256": "45aa299208dbef06d61b8186c917c6203fc76e22037f9e8ef1afd909595ee72c",
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "fitted_preprocessor_serialized": false
+    },
+    "early_stopping_metric": "Exact tied binary KS; internal context holdout only.",
+    "inner_split_seed": 20261030,
+    "inner_trace": [
+      {
+        "epoch": 1,
+        "training_objective": 0.4381214885403128,
+        "context_inner_stop_KS": 0.47613140789435465
+      },
+      {
+        "epoch": 2,
+        "training_objective": 0.32099861541355357,
+        "context_inner_stop_KS": 0.5042820873394707
+      },
+      {
+        "epoch": 3,
+        "training_objective": 0.3106902461612926,
+        "context_inner_stop_KS": 0.5141931446324549
+      },
+      {
+        "epoch": 4,
+        "training_objective": 0.3067321742141948,
+        "context_inner_stop_KS": 0.5168717678413193
+      },
+      {
+        "epoch": 5,
+        "training_objective": 0.30414895757226384,
+        "context_inner_stop_KS": 0.5199754275310865
+      },
+      {
+        "epoch": 6,
+        "training_objective": 0.30293154526598315,
+        "context_inner_stop_KS": 0.5211548394120393
+      },
+      {
+        "epoch": 7,
+        "training_objective": 0.30194398995848265,
+        "context_inner_stop_KS": 0.5173719087378135
+      },
+      {
+        "epoch": 8,
+        "training_objective": 0.30140807831988614,
+        "context_inner_stop_KS": 0.5200375098101009
+      },
+      {
+        "epoch": 9,
+        "training_objective": 0.3002300381043378,
+        "context_inner_stop_KS": 0.5193275005265235
+      },
+      {
+        "epoch": 10,
+        "training_objective": 0.300052034554762,
+        "context_inner_stop_KS": 0.5198093195797001
+      },
+      {
+        "epoch": 11,
+        "training_objective": 0.2999020046374377,
+        "context_inner_stop_KS": 0.5171123745275157
+      },
+      {
+        "epoch": 12,
+        "training_objective": 0.29927023476993336,
+        "context_inner_stop_KS": 0.5171064691400064
+      },
+      {
+        "epoch": 13,
+        "training_objective": 0.29844612676115595,
+        "context_inner_stop_KS": 0.520062342721702
+      },
+      {
+        "epoch": 14,
+        "training_objective": 0.2981946075130911,
+        "context_inner_stop_KS": 0.5196987828390396
+      }
+    ],
+    "refit_trace": [
+      {
+        "epoch": 1,
+        "training_objective": 0.42264860851287844
+      },
+      {
+        "epoch": 2,
+        "training_objective": 0.3178198828601837
+      },
+      {
+        "epoch": 3,
+        "training_objective": 0.3088197718811035
+      },
+      {
+        "epoch": 4,
+        "training_objective": 0.30517468806266784
+      },
+      {
+        "epoch": 5,
+        "training_objective": 0.3033324180793762
+      },
+      {
+        "epoch": 6,
+        "training_objective": 0.30241116413116453
+      }
+    ],
+    "KS_surrogate": {
+      "used": false,
+      "method": "BCE minus weighted smooth maximum of class-conditional sigmoid CDF gaps.",
+      "threshold_scale": "Training prevalence times fixed multipliers [.35,.6,1,1.5,2.2,3.2], clipped [.015,.75].",
+      "inner_training_thresholds": [
+        0.047534119337797165,
+        0.08148705959320068,
+        0.13581176102161407,
+        0.2037176489830017,
+        0.29878589510917664,
+        0.4345976412296295
+      ],
+      "full_context_thresholds": [
+        0.047536998987197876,
+        0.08149199932813644,
+        0.13582000136375427,
+        0.2037300020456314,
+        0.29880398511886597,
+        0.43462398648262024
+      ],
+      "not_exact_DMKS_reproduction": true
+    },
+    "parameter_count": 69648,
+    "precision": {
+      "model_parameters": "float32",
+      "AMP_used": false,
+      "float32_matmul_precision": "high",
+      "CUDA_TF32_matmul_allowed": true,
+      "CUDA_cuDNN_TF32_allowed": true,
+      "bitwise_backend_equivalence_claimed": false
+    },
+    "peak_CUDA_bytes": 184557056,
+    "prediction_repeat_max_abs": 5.960464477539063e-08,
+    "versions": {
+      "torch": "2.7.1+cu126",
+      "tabm": "0.0.3",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2"
+    },
+    "outer_labels_loaded": false,
+    "correction_used_for_early_stopping": false,
+    "stopping_preprocessing_fit_excludes_stopping_rows": true,
+    "fitted_weights_saved": false,
+    "weights_saved": false,
+    "KV_cache_saved": false,
+    "source_references": [
+      {
+        "id": "TABM",
+        "url": "https://arxiv.org/abs/2410.24210v3",
+        "implementation": "https://github.com/yandex-research/tabm",
+        "use": "Official TabM.make, per-member BCE, mean member probabilities."
+      },
+      {
+        "id": "RESNET",
+        "url": "https://arxiv.org/abs/2106.11959",
+        "use": "Task-specific residual MLP and context-only numerical transforms."
+      },
+      {
+        "id": "DMKS_MOTIVATION",
+        "url": "https://doi.org/10.1016/j.csda.2018.10.004",
+        "use": "Objective mismatch motivates a distinct smooth KS surrogate; not exact DMKS."
+      }
+    ],
+    "limitation": "Seeded GPU execution is not claimed bitwise identical across hardware/backends."
+  },
+  "prediction_sha256": "9e9e626eb8bb387a38ace106f6a0b44a39739e7b9d9d38858bb7c3c61ce14b33",
+  "start_sha256": "f9111e7d050510802038fa662c77fe17c1a9974185e81a65882c530e97698f97",
+  "clock_sha256": "67493c438f7f1baeee5db30ba8539cd4dce0641dec23127ffd3b1a93c779cb8d",
+  "source_seal_sha256": "4929f7c9afca958614b320c9ea1ced24017ce80fb8be97836f85af2fee120ef0",
+  "max_RSS_KiB": 1640348,
+  "peak_torch_CUDA_bytes": 184557056,
+  "GPU_memory_measurement_scope": "PyTorch allocator only; excludes third-party CUDA allocators and parallel processes.",
+  "outer_labels_loaded": false,
+  "correction_labels_used_for_training": false,
+  "weights_saved": false,
+  "fitted_weights_saved": false,
+  "KV_cache_saved": false
+}

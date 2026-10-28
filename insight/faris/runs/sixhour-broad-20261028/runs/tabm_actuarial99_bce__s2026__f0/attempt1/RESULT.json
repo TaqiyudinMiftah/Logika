@@ -1,0 +1,792 @@
+{
+  "status": "complete",
+  "task_id": "tabm_actuarial99_bce__s2026__f0",
+  "attempt": 1,
+  "pilot": false,
+  "seconds": 25.001894235610962,
+  "UTC": "2026-10-28T18:07:34.436932+00:00",
+  "audit": {
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "cat_embedding_dim": 8,
+      "ensemble_members": 16,
+      "loss": "bce",
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "predict_batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "min_delta": 1e-06,
+      "early_stop_fraction": 0.15,
+      "inner_split_seed": 20261029,
+      "gradient_clip": 5.0,
+      "max_seconds": 900.0,
+      "threads": 2,
+      "pair_weight": 0.1,
+      "ks_weight": 0.15,
+      "ks_bandwidth": 0.03,
+      "ks_softmax_temperature": 0.02,
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "actuarial99",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched TabM feature-width/book-expansion control.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "seed": 2026,
+    "device": "cuda",
+    "seconds": 21.902870157000052,
+    "selected_epochs": 40,
+    "inner_train_rows": 42500,
+    "inner_stop_rows": 7500,
+    "refit_context_rows": 50000,
+    "inner_train_rows_sha256": "9d0036fed74c5740918434a2db7bfc731bf5ad314deffcee793e7139d554c2a7",
+    "stopping_rows_sha256": "6092797285d7db1e0db2890ad293ae856794ea903013746363f768d511062f48",
+    "context_rows_sha256": "d725afb81b2bce38ef29971e520832a4a3ee959f30c691b2069b0724b7db95be",
+    "prediction_rows_sha256": "d1b23a9fed573251a53a38aa9272ef320aee6c58a131353ba2638b10502f08b8",
+    "inner_preprocessing": {
+      "numeric_columns": [
+        "fc5fc92dbf888e206",
+        "fc45dc5fac38ed265",
+        "fe06f36795e208fd5",
+        "f0b3965975eebcb1d",
+        "fbdf1bdab7c2db382",
+        "fae0bc4cb23400cf7",
+        "f80ff547f744a7e7e",
+        "f2fe9e2ada3ab537e",
+        "f18f677bd62d08715",
+        "f56b13f848002d1cf",
+        "fb4723f0f4489c970",
+        "f8a15251e4cd790fe",
+        "f1a4d6778fe14fc73",
+        "f70ebcaea9cdde7d4",
+        "fad6f540a9f0f409e",
+        "fdeb25a5645769dbb",
+        "a6_all_t1_logodds",
+        "a6_all_t1_lower05",
+        "a6_all_t1_upper95",
+        "a6_all_t1_above_cohort",
+        "a6_365_t1_logodds",
+        "a6_365_t1_lower05",
+        "a6_365_t1_upper95",
+        "a6_365_t1_above_cohort",
+        "a6_180_t1_logodds",
+        "a6_180_t1_lower05",
+        "a6_180_t1_upper95",
+        "a6_180_t1_above_cohort",
+        "a6_365_t30_logodds",
+        "a6_365_t30_lower05",
+        "a6_365_t30_upper95",
+        "a6_365_t30_above_cohort",
+        "a6_recent_older_logodds",
+        "a6_recent_older_trust_logodds",
+        "a6_recent_opportunity_share",
+        "a6_severity_opportunity_coverage",
+        "a6_net_margin",
+        "a6_runway_deficit_months",
+        "a6_runway_term_share",
+        "a6_cash_floor_due_shortfall",
+        "a6_cash_floor_income_buffer",
+        "a6_cash_drawdown_fraction",
+        "a6_surplus_to_buffer",
+        "a6_one_sd_income_service",
+        "a6_one_sd_outflow_margin",
+        "a6_cashflow_noise_margin",
+        "a6_income_volatility_leverage",
+        "a6_overdraft_service_pressure",
+        "a6_term_liquid_obligation_load",
+        "a6_tenure_term_coverage",
+        "a6_contractual_cost_ratio",
+        "a6_principal_resource_share",
+        "a6_income_outflow_trend_gap",
+        "a6_surplus_3m12m_shift",
+        "a6_cashflow_joint_missing",
+        "f541e8c044865be3f",
+        "f0761de7a1cc1c50b",
+        "f9de4af5bf8d1c782",
+        "fac53d5a99ac38da8",
+        "fc4678c080cd39072",
+        "f36f4d1b71b011ed3",
+        "f0edf46d74355b746",
+        "f14e2589d7bf06555",
+        "fb794d1ed4e1001bf",
+        "f35c906391f5f70a5",
+        "fa994e63f4af400c3",
+        "fed101cf813c7531f",
+        "f7616800f0a6a1af0",
+        "f39cf92355286a9c9",
+        "f8045b26e9b319e17",
+        "fc6ab00dac11314dd",
+        "fa19883b4a168c0a7",
+        "f20e607e5776ee304",
+        "f5ae1baebbd40dffb",
+        "f599e471480205682",
+        "f499a937d5aa2cd02",
+        "f395035b0cec45a9c",
+        "f46a93b3c873b6721",
+        "f71786509c0ca0fc3",
+        "fd7564240b09f7467",
+        "f88278c116382a75b",
+        "f433c5d53360676b9",
+        "f29fa05ec4cb2421c",
+        "fbe9a3d591bf52313",
+        "fee723ea3a4e21d54",
+        "f612f3c56649c43f0",
+        "fada642ded5c724e3",
+        "f0a0ad133bdd2127f",
+        "f45d90ac805c90a25",
+        "fddcf54e20fd9d037",
+        "fa8a3d28371ff6d69",
+        "f9a216a25b0a783b2",
+        "fdadba54ed0dcba92",
+        "f69c509f62a7b3206",
+        "fddf2fb0df20a5654"
+      ],
+      "categorical_columns": [
+        "fbb1ba4bef16dd014",
+        "f0fc9f04abb82de9d",
+        "fbe4d6a29dd0722cd",
+        "fc4574527f43a4c55"
+      ],
+      "fit_rows": 42500,
+      "fit_rows_sha256": "9d0036fed74c5740918434a2db7bfc731bf5ad314deffcee793e7139d554c2a7",
+      "numeric_transform": "Training-only median; 256-quantile Gaussian mapping; clip[-5,5]; missing masks.",
+      "categorical_transform": "Training-only sorted vocabulary; unknown index0.",
+      "categorical_cardinalities": [
+        6,
+        6,
+        4,
+        4
+      ],
+      "numeric_median_sha256": "1b25690476f631a1163b3a95defc63983422f9efece916de7565d447cfb44170",
+      "quantile_grid_sha256": "c5229ee16be94f8d97f0d58496649c44dc5ae023b53124a97adf2cfaea380e96",
+      "vocabulary_sha256": "5e2ef6edecf678ec75f8a9da2b488a61c4c21fb3fe1e4441096ad2c308209c43",
+      "fitted_preprocessor_serialized": false
+    },
+    "full_context_preprocessing": {
+      "numeric_columns": [
+        "fc5fc92dbf888e206",
+        "fc45dc5fac38ed265",
+        "fe06f36795e208fd5",
+        "f0b3965975eebcb1d",
+        "fbdf1bdab7c2db382",
+        "fae0bc4cb23400cf7",
+        "f80ff547f744a7e7e",
+        "f2fe9e2ada3ab537e",
+        "f18f677bd62d08715",
+        "f56b13f848002d1cf",
+        "fb4723f0f4489c970",
+        "f8a15251e4cd790fe",
+        "f1a4d6778fe14fc73",
+        "f70ebcaea9cdde7d4",
+        "fad6f540a9f0f409e",
+        "fdeb25a5645769dbb",
+        "a6_all_t1_logodds",
+        "a6_all_t1_lower05",
+        "a6_all_t1_upper95",
+        "a6_all_t1_above_cohort",
+        "a6_365_t1_logodds",
+        "a6_365_t1_lower05",
+        "a6_365_t1_upper95",
+        "a6_365_t1_above_cohort",
+        "a6_180_t1_logodds",
+        "a6_180_t1_lower05",
+        "a6_180_t1_upper95",
+        "a6_180_t1_above_cohort",
+        "a6_365_t30_logodds",
+        "a6_365_t30_lower05",
+        "a6_365_t30_upper95",
+        "a6_365_t30_above_cohort",
+        "a6_recent_older_logodds",
+        "a6_recent_older_trust_logodds",
+        "a6_recent_opportunity_share",
+        "a6_severity_opportunity_coverage",
+        "a6_net_margin",
+        "a6_runway_deficit_months",
+        "a6_runway_term_share",
+        "a6_cash_floor_due_shortfall",
+        "a6_cash_floor_income_buffer",
+        "a6_cash_drawdown_fraction",
+        "a6_surplus_to_buffer",
+        "a6_one_sd_income_service",
+        "a6_one_sd_outflow_margin",
+        "a6_cashflow_noise_margin",
+        "a6_income_volatility_leverage",
+        "a6_overdraft_service_pressure",
+        "a6_term_liquid_obligation_load",
+        "a6_tenure_term_coverage",
+        "a6_contractual_cost_ratio",
+        "a6_principal_resource_share",
+        "a6_income_outflow_trend_gap",
+        "a6_surplus_3m12m_shift",
+        "a6_cashflow_joint_missing",
+        "f541e8c044865be3f",
+        "f0761de7a1cc1c50b",
+        "f9de4af5bf8d1c782",
+        "fac53d5a99ac38da8",
+        "fc4678c080cd39072",
+        "f36f4d1b71b011ed3",
+        "f0edf46d74355b746",
+        "f14e2589d7bf06555",
+        "fb794d1ed4e1001bf",
+        "f35c906391f5f70a5",
+        "fa994e63f4af400c3",
+        "fed101cf813c7531f",
+        "f7616800f0a6a1af0",
+        "f39cf92355286a9c9",
+        "f8045b26e9b319e17",
+        "fc6ab00dac11314dd",
+        "fa19883b4a168c0a7",
+        "f20e607e5776ee304",
+        "f5ae1baebbd40dffb",
+        "f599e471480205682",
+        "f499a937d5aa2cd02",
+        "f395035b0cec45a9c",
+        "f46a93b3c873b6721",
+        "f71786509c0ca0fc3",
+        "fd7564240b09f7467",
+        "f88278c116382a75b",
+        "f433c5d53360676b9",
+        "f29fa05ec4cb2421c",
+        "fbe9a3d591bf52313",
+        "fee723ea3a4e21d54",
+        "f612f3c56649c43f0",
+        "fada642ded5c724e3",
+        "f0a0ad133bdd2127f",
+        "f45d90ac805c90a25",
+        "fddcf54e20fd9d037",
+        "fa8a3d28371ff6d69",
+        "f9a216a25b0a783b2",
+        "fdadba54ed0dcba92",
+        "f69c509f62a7b3206",
+        "fddf2fb0df20a5654"
+      ],
+      "categorical_columns": [
+        "fbb1ba4bef16dd014",
+        "f0fc9f04abb82de9d",
+        "fbe4d6a29dd0722cd",
+        "fc4574527f43a4c55"
+      ],
+      "fit_rows": 50000,
+      "fit_rows_sha256": "d725afb81b2bce38ef29971e520832a4a3ee959f30c691b2069b0724b7db95be",
+      "numeric_transform": "Training-only median; 256-quantile Gaussian mapping; clip[-5,5]; missing masks.",
+      "categorical_transform": "Training-only sorted vocabulary; unknown index0.",
+      "categorical_cardinalities": [
+        6,
+        6,
+        4,
+        4
+      ],
+      "numeric_median_sha256": "260abf856c0a2d2916b479d7e6cc734ba76f9aae94c35a226e3c8f1a77b154b7",
+      "quantile_grid_sha256": "451ed649b1ad4fd688f6781237d4d05a698574bd2686025be17031e44ba054c8",
+      "vocabulary_sha256": "5e2ef6edecf678ec75f8a9da2b488a61c4c21fb3fe1e4441096ad2c308209c43",
+      "fitted_preprocessor_serialized": false
+    },
+    "early_stopping_metric": "Exact tied binary KS; internal context holdout only.",
+    "inner_split_seed": 20261029,
+    "inner_trace": [
+      {
+        "epoch": 1,
+        "training_objective": 0.42129484240868514,
+        "context_inner_stop_KS": 0.5019971566316221
+      },
+      {
+        "epoch": 2,
+        "training_objective": 0.31863155214926775,
+        "context_inner_stop_KS": 0.5207782573927929
+      },
+      {
+        "epoch": 3,
+        "training_objective": 0.30914473787756525,
+        "context_inner_stop_KS": 0.5358993806762216
+      },
+      {
+        "epoch": 4,
+        "training_objective": 0.3059120565666872,
+        "context_inner_stop_KS": 0.5300727316611108
+      },
+      {
+        "epoch": 5,
+        "training_objective": 0.3040148990210365,
+        "context_inner_stop_KS": 0.534492989926438
+      },
+      {
+        "epoch": 6,
+        "training_objective": 0.30247350438342374,
+        "context_inner_stop_KS": 0.5358987749954441
+      },
+      {
+        "epoch": 7,
+        "training_objective": 0.3010962108724258,
+        "context_inner_stop_KS": 0.5375960439354193
+      },
+      {
+        "epoch": 8,
+        "training_objective": 0.30018376384061923,
+        "context_inner_stop_KS": 0.5350658125153985
+      },
+      {
+        "epoch": 9,
+        "training_objective": 0.3001990187364466,
+        "context_inner_stop_KS": 0.5366034845722892
+      },
+      {
+        "epoch": 10,
+        "training_objective": 0.2991405051287483,
+        "context_inner_stop_KS": 0.5381020902194255
+      },
+      {
+        "epoch": 11,
+        "training_objective": 0.29890732927883373,
+        "context_inner_stop_KS": 0.5386459915516173
+      },
+      {
+        "epoch": 12,
+        "training_objective": 0.2984577232641332,
+        "context_inner_stop_KS": 0.5367938197544979
+      },
+      {
+        "epoch": 13,
+        "training_objective": 0.2976705547136419,
+        "context_inner_stop_KS": 0.5370232213464545
+      },
+      {
+        "epoch": 14,
+        "training_objective": 0.29717434574015,
+        "context_inner_stop_KS": 0.5373057714260074
+      },
+      {
+        "epoch": 15,
+        "training_objective": 0.2973647251802332,
+        "context_inner_stop_KS": 0.537114830563023
+      },
+      {
+        "epoch": 16,
+        "training_objective": 0.29688562569618226,
+        "context_inner_stop_KS": 0.538264109825635
+      },
+      {
+        "epoch": 17,
+        "training_objective": 0.29653784723562354,
+        "context_inner_stop_KS": 0.5357627996623942
+      },
+      {
+        "epoch": 18,
+        "training_objective": 0.2959559147133547,
+        "context_inner_stop_KS": 0.537768662955092
+      },
+      {
+        "epoch": 19,
+        "training_objective": 0.29591211441825416,
+        "context_inner_stop_KS": 0.5388304213463146
+      },
+      {
+        "epoch": 20,
+        "training_objective": 0.29532750670769636,
+        "context_inner_stop_KS": 0.540385809565729
+      },
+      {
+        "epoch": 21,
+        "training_objective": 0.2954605883850771,
+        "context_inner_stop_KS": 0.5393317736043659
+      },
+      {
+        "epoch": 22,
+        "training_objective": 0.2950174755994011,
+        "context_inner_stop_KS": 0.5382753149198781
+      },
+      {
+        "epoch": 23,
+        "training_objective": 0.2949659519391901,
+        "context_inner_stop_KS": 0.5389723020668704
+      },
+      {
+        "epoch": 24,
+        "training_objective": 0.2945567467913908,
+        "context_inner_stop_KS": 0.5392868018071026
+      },
+      {
+        "epoch": 25,
+        "training_objective": 0.2942887331934536,
+        "context_inner_stop_KS": 0.5387500172239843
+      },
+      {
+        "epoch": 26,
+        "training_objective": 0.2934406108800103,
+        "context_inner_stop_KS": 0.5409775596787928
+      },
+      {
+        "epoch": 27,
+        "training_objective": 0.29348867247525384,
+        "context_inner_stop_KS": 0.5418927433234981
+      },
+      {
+        "epoch": 28,
+        "training_objective": 0.293065771335714,
+        "context_inner_stop_KS": 0.5409415216729456
+      },
+      {
+        "epoch": 29,
+        "training_objective": 0.29310964490806357,
+        "context_inner_stop_KS": 0.540263462050042
+      },
+      {
+        "epoch": 30,
+        "training_objective": 0.29308315608641683,
+        "context_inner_stop_KS": 0.5415285777600499
+      },
+      {
+        "epoch": 31,
+        "training_objective": 0.29312486931015463,
+        "context_inner_stop_KS": 0.5421693880155468
+      },
+      {
+        "epoch": 32,
+        "training_objective": 0.29348017838982976,
+        "context_inner_stop_KS": 0.5411194403993459
+      },
+      {
+        "epoch": 33,
+        "training_objective": 0.29260951464316426,
+        "context_inner_stop_KS": 0.5438725623430294
+      },
+      {
+        "epoch": 34,
+        "training_objective": 0.29235540777094227,
+        "context_inner_stop_KS": 0.539539219268325
+      },
+      {
+        "epoch": 35,
+        "training_objective": 0.29214790386873135,
+        "context_inner_stop_KS": 0.5409840707470815
+      },
+      {
+        "epoch": 36,
+        "training_objective": 0.29165148151061115,
+        "context_inner_stop_KS": 0.538818004890506
+      },
+      {
+        "epoch": 37,
+        "training_objective": 0.291667411515292,
+        "context_inner_stop_KS": 0.5410455473453125
+      },
+      {
+        "epoch": 38,
+        "training_objective": 0.2907485533069162,
+        "context_inner_stop_KS": 0.5435835011951844
+      },
+      {
+        "epoch": 39,
+        "training_objective": 0.29075285661641287,
+        "context_inner_stop_KS": 0.5418170332271239
+      },
+      {
+        "epoch": 40,
+        "training_objective": 0.2909352176497964,
+        "context_inner_stop_KS": 0.5445204893475969
+      },
+      {
+        "epoch": 41,
+        "training_objective": 0.29131312204248766,
+        "context_inner_stop_KS": 0.5399837889540973
+      },
+      {
+        "epoch": 42,
+        "training_objective": 0.29021743083000184,
+        "context_inner_stop_KS": 0.5401014424438306
+      },
+      {
+        "epoch": 43,
+        "training_objective": 0.2899848948618945,
+        "context_inner_stop_KS": 0.5418850208936496
+      },
+      {
+        "epoch": 44,
+        "training_objective": 0.2901488000869751,
+        "context_inner_stop_KS": 0.5436514888617101
+      },
+      {
+        "epoch": 45,
+        "training_objective": 0.28956502851598404,
+        "context_inner_stop_KS": 0.5380766516270311
+      },
+      {
+        "epoch": 46,
+        "training_objective": 0.28955366579504577,
+        "context_inner_stop_KS": 0.5426518127495045
+      },
+      {
+        "epoch": 47,
+        "training_objective": 0.2897230715190663,
+        "context_inner_stop_KS": 0.5437241705541832
+      },
+      {
+        "epoch": 48,
+        "training_objective": 0.28954958182783685,
+        "context_inner_stop_KS": 0.5442006899006318
+      }
+    ],
+    "refit_trace": [
+      {
+        "epoch": 1,
+        "training_objective": 0.4054083600997925
+      },
+      {
+        "epoch": 2,
+        "training_objective": 0.3145441869544983
+      },
+      {
+        "epoch": 3,
+        "training_objective": 0.30738859555244447
+      },
+      {
+        "epoch": 4,
+        "training_objective": 0.3038185022354126
+      },
+      {
+        "epoch": 5,
+        "training_objective": 0.30179626346588134
+      },
+      {
+        "epoch": 6,
+        "training_objective": 0.30042306624412535
+      },
+      {
+        "epoch": 7,
+        "training_objective": 0.3001232776737213
+      },
+      {
+        "epoch": 8,
+        "training_objective": 0.29919598284721377
+      },
+      {
+        "epoch": 9,
+        "training_objective": 0.2986898480129242
+      },
+      {
+        "epoch": 10,
+        "training_objective": 0.2982402787685394
+      },
+      {
+        "epoch": 11,
+        "training_objective": 0.29772990434646607
+      },
+      {
+        "epoch": 12,
+        "training_objective": 0.2969180983543396
+      },
+      {
+        "epoch": 13,
+        "training_objective": 0.29735766160964966
+      },
+      {
+        "epoch": 14,
+        "training_objective": 0.29691283858299256
+      },
+      {
+        "epoch": 15,
+        "training_objective": 0.29599921145439145
+      },
+      {
+        "epoch": 16,
+        "training_objective": 0.29534770082473755
+      },
+      {
+        "epoch": 17,
+        "training_objective": 0.295241910905838
+      },
+      {
+        "epoch": 18,
+        "training_objective": 0.2950418156337738
+      },
+      {
+        "epoch": 19,
+        "training_objective": 0.294729093170166
+      },
+      {
+        "epoch": 20,
+        "training_objective": 0.29420761858940125
+      },
+      {
+        "epoch": 21,
+        "training_objective": 0.29379907831192015
+      },
+      {
+        "epoch": 22,
+        "training_objective": 0.2938093665313721
+      },
+      {
+        "epoch": 23,
+        "training_objective": 0.2937987517929077
+      },
+      {
+        "epoch": 24,
+        "training_objective": 0.29322740962028504
+      },
+      {
+        "epoch": 25,
+        "training_objective": 0.29310005988121035
+      },
+      {
+        "epoch": 26,
+        "training_objective": 0.29317586287498476
+      },
+      {
+        "epoch": 27,
+        "training_objective": 0.29266451460838316
+      },
+      {
+        "epoch": 28,
+        "training_objective": 0.2923908741760254
+      },
+      {
+        "epoch": 29,
+        "training_objective": 0.2920238863658905
+      },
+      {
+        "epoch": 30,
+        "training_objective": 0.29165010038375855
+      },
+      {
+        "epoch": 31,
+        "training_objective": 0.29190252086639407
+      },
+      {
+        "epoch": 32,
+        "training_objective": 0.29137694167137146
+      },
+      {
+        "epoch": 33,
+        "training_objective": 0.2908702517700195
+      },
+      {
+        "epoch": 34,
+        "training_objective": 0.29072042508125306
+      },
+      {
+        "epoch": 35,
+        "training_objective": 0.2910340265083313
+      },
+      {
+        "epoch": 36,
+        "training_objective": 0.2904758513736725
+      },
+      {
+        "epoch": 37,
+        "training_objective": 0.2904559695243836
+      },
+      {
+        "epoch": 38,
+        "training_objective": 0.2903114509487152
+      },
+      {
+        "epoch": 39,
+        "training_objective": 0.2909123951148987
+      },
+      {
+        "epoch": 40,
+        "training_objective": 0.29002310296058653
+      }
+    ],
+    "KS_surrogate": {
+      "used": false,
+      "method": "BCE minus weighted smooth maximum of class-conditional sigmoid CDF gaps.",
+      "threshold_scale": "Training prevalence times fixed multipliers [.35,.6,1,1.5,2.2,3.2], clipped [.015,.75].",
+      "inner_training_thresholds": [
+        0.047534119337797165,
+        0.08148705959320068,
+        0.13581176102161407,
+        0.2037176489830017,
+        0.29878589510917664,
+        0.4345976412296295
+      ],
+      "full_context_thresholds": [
+        0.047536998987197876,
+        0.08149199932813644,
+        0.13582000136375427,
+        0.2037300020456314,
+        0.29880398511886597,
+        0.43462398648262024
+      ],
+      "not_exact_DMKS_reproduction": true
+    },
+    "parameter_count": 81456,
+    "precision": {
+      "model_parameters": "float32",
+      "AMP_used": false,
+      "float32_matmul_precision": "high",
+      "CUDA_TF32_matmul_allowed": true,
+      "CUDA_cuDNN_TF32_allowed": true,
+      "bitwise_backend_equivalence_claimed": false
+    },
+    "peak_CUDA_bytes": 210927616,
+    "prediction_repeat_max_abs": 0.0,
+    "versions": {
+      "torch": "2.7.1+cu126",
+      "tabm": "0.0.3",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2"
+    },
+    "outer_labels_loaded": false,
+    "correction_used_for_early_stopping": false,
+    "stopping_preprocessing_fit_excludes_stopping_rows": true,
+    "fitted_weights_saved": false,
+    "weights_saved": false,
+    "KV_cache_saved": false,
+    "source_references": [
+      {
+        "id": "TABM",
+        "url": "https://arxiv.org/abs/2410.24210v3",
+        "implementation": "https://github.com/yandex-research/tabm",
+        "use": "Official TabM.make, per-member BCE, mean member probabilities."
+      },
+      {
+        "id": "RESNET",
+        "url": "https://arxiv.org/abs/2106.11959",
+        "use": "Task-specific residual MLP and context-only numerical transforms."
+      },
+      {
+        "id": "DMKS_MOTIVATION",
+        "url": "https://doi.org/10.1016/j.csda.2018.10.004",
+        "use": "Objective mismatch motivates a distinct smooth KS surrogate; not exact DMKS."
+      }
+    ],
+    "limitation": "Seeded GPU execution is not claimed bitwise identical across hardware/backends."
+  },
+  "prediction_sha256": "24ccf4dce82a8cf7c32d37b49550705269b8d0a5fbbff0872443858ed91b7112",
+  "start_sha256": "b1c06885b286dc4c70ad8e4299351397164747d1f9393f5f1428626ed0150d69",
+  "clock_sha256": "67493c438f7f1baeee5db30ba8539cd4dce0641dec23127ffd3b1a93c779cb8d",
+  "source_seal_sha256": "4929f7c9afca958614b320c9ea1ced24017ce80fb8be97836f85af2fee120ef0",
+  "max_RSS_KiB": 1772128,
+  "peak_torch_CUDA_bytes": 210927616,
+  "GPU_memory_measurement_scope": "PyTorch allocator only; excludes third-party CUDA allocators and parallel processes.",
+  "outer_labels_loaded": false,
+  "correction_labels_used_for_training": false,
+  "weights_saved": false,
+  "fitted_weights_saved": false,
+  "KV_cache_saved": false
+}

@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:04:40.223592+00:00",
+  "design": "lgb_redundant99",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "redundant99",
+    "hypothesis": "Same regularized boosting recipe; isolate redundant99 representation.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1400,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 150,
+      "reg_lambda": 25
+    },
+    "class_balance": "none",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_redundant99/s2026/fold0/RESULT.json": "8a12c72d2ba7ee35af18a8e8646b57a5cd821d953f7b42717249bd6059bd2c45",
+    "composed/lgb_redundant99/s2026/fold1/RESULT.json": "ca0cd2af63b736a77e5545cc8e701e17e6e40aaaf38775eb2d59de44a635de9a",
+    "composed/lgb_redundant99/s2026/fold2/RESULT.json": "52eedd0e3f478ea4068dcdc8e91f31e920234b0ab965275e30f15c3bc20a20d2",
+    "composed/lgb_redundant99/s2026/fold3/RESULT.json": "1e80f7c83c1df834541f260d967bc1e2dbff1a284478b772a6343cb38b8565c0",
+    "composed/lgb_redundant99/s2026/fold4/RESULT.json": "4b3659469e9d15d80eebdba3d7691b4b54393f2051e7c1d9c8fc2616a23e43b8",
+    "composed/lgb_redundant99/s7731/fold0/RESULT.json": "e7c7bb7912d4d4b55e66a1262b838acc4d5c85777d91909aa7154244c7f23d08",
+    "composed/lgb_redundant99/s7731/fold1/RESULT.json": "a0e093f5809bc8883ba503e092352914a46640e744780c7529e1f40f12830362",
+    "composed/lgb_redundant99/s7731/fold2/RESULT.json": "2e87c7183a345588c7f1952126d23f9481efc5260699cedbbd0b825e35f6a2d4",
+    "composed/lgb_redundant99/s7731/fold3/RESULT.json": "9fed2d1cc2bba971e2f43c6593bae52bcbd19daf7010f6d3b843dd78fb7de050",
+    "composed/lgb_redundant99/s7731/fold4/RESULT.json": "b57379406987e75dc60d47d0e294cbc0f11a51af0b71aad2db837de3001e11f0"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

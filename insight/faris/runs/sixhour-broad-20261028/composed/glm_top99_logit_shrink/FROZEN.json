@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T18:04:21.360461+00:00",
+  "design": "glm_top99_logit_shrink",
+  "design_spec": {
+    "family": "glm",
+    "view": "global99",
+    "hypothesis": "Stronger ridge on a broader additive spline bank tests whether dimension can expand while effective flexibility stays constrained.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "link": "logit",
+    "spline": true,
+    "ridge": 0.1,
+    "knots": 4,
+    "optimization_blocks": 8,
+    "iterations_per_block": 25,
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/glm_top99_logit_shrink/s2026/fold0/RESULT.json": "52cacae25a992d6cfcdf0f1bdb6df0bcf940dbbb0153713d943e79e0bd261908",
+    "composed/glm_top99_logit_shrink/s2026/fold1/RESULT.json": "4dd202e352f16da2d5d96a6aa2f20ca6dded406ea7ea624340e5ed78c83c3cbf",
+    "composed/glm_top99_logit_shrink/s2026/fold2/RESULT.json": "6ff5b7b508abc9b2269a200f6ba584ad3921d8d4ac43d671908d4a9b8233a0d6",
+    "composed/glm_top99_logit_shrink/s2026/fold3/RESULT.json": "2f65763ea7d975d46e190e0afa2929c607077a111c48e40069d1ca8c46317d60",
+    "composed/glm_top99_logit_shrink/s2026/fold4/RESULT.json": "a72a4f9978928ad432d51b930e4939577324041ae2ab3469efb2e14c960841c8",
+    "composed/glm_top99_logit_shrink/s7731/fold0/RESULT.json": "1d654717d79e7995ab3933c0640139517e44055297876c99647a0ce0cc589a67",
+    "composed/glm_top99_logit_shrink/s7731/fold1/RESULT.json": "0b92a741e1988c9d283d3440a219c15149787467cb38c991d8880d9a7489d7cb",
+    "composed/glm_top99_logit_shrink/s7731/fold2/RESULT.json": "adf8dcd5b85432b71c72bed2dbd939bde8373eaa343b78eb1ac4d38581ca1fe7",
+    "composed/glm_top99_logit_shrink/s7731/fold3/RESULT.json": "dcdb4acbbde40e518b017357cd1921e70e515111b68a25e63a9688e219ebb6bd",
+    "composed/glm_top99_logit_shrink/s7731/fold4/RESULT.json": "30ab6d324238a54aa93c09d9b65601d821ccd5e154df3a52a0c4ca5609d3a48a"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

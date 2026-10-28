@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-28T18:04:33.956174+00:00",
+  "design": "lgb_augmented99",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "augmented99",
+    "hypothesis": "Same regularized boosting recipe; isolate augmented99 representation.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1400,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 150,
+      "reg_lambda": 25
+    },
+    "class_balance": "none",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_augmented99/s2026/fold0/RESULT.json": "1277069a3eeea23a8682b6073b128c15dd962d0f0204581e5aa8bdbdf03e18c4",
+    "composed/lgb_augmented99/s2026/fold1/RESULT.json": "d52f9314e3dd6e7d4df18d0bbe90389cd41286d1a53283e1f94397f01cd57aaf",
+    "composed/lgb_augmented99/s2026/fold2/RESULT.json": "4f2414106a1291cde1a6370ea1c99c97db92d61dccf156dc916cda6fdee4228e",
+    "composed/lgb_augmented99/s2026/fold3/RESULT.json": "e9846686b763e4942e92286b9d170ea3dc94c7a9df99c53cab3f6d6dae1e0b2a",
+    "composed/lgb_augmented99/s2026/fold4/RESULT.json": "18d0d88144aaa5ff6cfe6dec5d41d62eef776a154f1f83ac1d4127dc5732d152",
+    "composed/lgb_augmented99/s7731/fold0/RESULT.json": "4b62298a8cadd7ee17cb07668289d1df56cfa6f87c285804753b13f6d0bd09e5",
+    "composed/lgb_augmented99/s7731/fold1/RESULT.json": "2f1a6949ed21f3e4c2703f96c2338ded588fd633d5c1e5a9bb72434a08e75261",
+    "composed/lgb_augmented99/s7731/fold2/RESULT.json": "f8980b68bd4e62406ec23e19ea78a7ff75ef37947e2d6a3d7bb3147a0e6d2239",
+    "composed/lgb_augmented99/s7731/fold3/RESULT.json": "6c9e2d3a137e0d2529ddabcda441853cd978b65626eaccf00f7eb21cc5f77918",
+    "composed/lgb_augmented99/s7731/fold4/RESULT.json": "ead0bae16017450584b06818c9548661fa324364fb88a804d6f1e91252e298ef"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

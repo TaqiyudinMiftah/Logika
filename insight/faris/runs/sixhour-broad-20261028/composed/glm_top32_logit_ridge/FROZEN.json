@@ -1,0 +1,52 @@
+{
+  "UTC": "2026-10-28T18:04:10.052251+00:00",
+  "design": "glm_top32_logit_ridge",
+  "design_spec": {
+    "family": "glm",
+    "view": "global32",
+    "hypothesis": "A strongly regularized Bernoulli GLM is the low-complexity actuarial reference for reduced inputs.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "link": "logit",
+    "spline": false,
+    "ridge": 0.03,
+    "optimization_blocks": 8,
+    "iterations_per_block": 25,
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/glm_top32_logit_ridge/s2026/fold0/RESULT.json": "a43df3998b7ab9f743259030c5dce39dd3a1039511b8f39aad8759457b0376ad",
+    "composed/glm_top32_logit_ridge/s2026/fold1/RESULT.json": "fa74784b51b027d7ad68f833ee8a1d4c3718baa1ac983bb3751be3294d6a0f1d",
+    "composed/glm_top32_logit_ridge/s2026/fold2/RESULT.json": "8a5e8e9caa8424854ba1be03577a3937961a5f7ccdaa086f3c6b9b4b15fb5267",
+    "composed/glm_top32_logit_ridge/s2026/fold3/RESULT.json": "40378ca38aeaaa2bb14e0130d129567c8af86c5aa77511bf7b6c84d01a134223",
+    "composed/glm_top32_logit_ridge/s2026/fold4/RESULT.json": "719b5a4bf99698f490b37eb54fb1f04c520c22bb590ed8425da9a209705817a4",
+    "composed/glm_top32_logit_ridge/s7731/fold0/RESULT.json": "eb7106a7e8b1a26c43180925fe1733e46267791662cb14d9f317d3527e618e59",
+    "composed/glm_top32_logit_ridge/s7731/fold1/RESULT.json": "e816cbe882d110f26c1ef819d437e06eb0cb5573f7990a87e5eba2032f59957c",
+    "composed/glm_top32_logit_ridge/s7731/fold2/RESULT.json": "305cf363e0e0aa6cb3a9e21c4745353e0420f5364a91e2a5f6200fa9b074f1a2",
+    "composed/glm_top32_logit_ridge/s7731/fold3/RESULT.json": "e0d16cfa399ab18a544089998c5aaff95a45aa39e7a7279ee7b98abba8c7c30f",
+    "composed/glm_top32_logit_ridge/s7731/fold4/RESULT.json": "0b8d5c499ce9d4fa9d516a3e5468fb0a731db70344ed76c676d8cdbd06db1a23"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

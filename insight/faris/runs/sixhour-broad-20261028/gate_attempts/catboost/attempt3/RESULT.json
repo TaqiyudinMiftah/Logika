@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "scope": "Adaptive reused-development admission; not untouched statistical confirmation.",
+  "kind": "catboost",
+  "attempt": 3,
+  "UTC": "2026-10-28T18:07:57.599807+00:00",
+  "checks": [
+    {
+      "id": "data_admission",
+      "category": "boundaries",
+      "required": true,
+      "acceptance_rule": "Data gate PASS matches current immutable clock/config/contract/source seal.",
+      "evidence": [
+        {
+          "path": "GATE.json",
+          "sha256": "6945324f8c26c9529b1d51d4c69732baa9f25ede390da2c27c74f24be5cafc5e"
+        }
+      ],
+      "observed": {
+        "data_gate_status": "PASS",
+        "data_gate_sha256": "6945324f8c26c9529b1d51d4c69732baa9f25ede390da2c27c74f24be5cafc5e"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "actual_predeclared_pilot_identity",
+      "category": "runtime",
+      "required": true,
+      "acceptance_rule": "Exactly one successful declared fold0/seed2026 pilot, latest attempt complete within900seconds, exact START/prediction/source lineage; earlier failures explicitly retained.",
+      "evidence": [],
+      "observed": {
+        "task_id": "cat_top99_depth6__s2026__f0",
+        "selected_attempt": "attempt1",
+        "pilot_seconds": 20.43027901649475,
+        "prior_failed_attempts": [],
+        "logical_actual_pilot_configs": 1,
+        "pilot_parameters_changed": false
+      },
+      "status": "pass"
+    },
+    {
+      "id": "runtime_predictions_boundaries_versions",
+      "category": "runtime_and_boundaries",
+      "required": true,
+      "acceptance_rule": "Exact20000query rows,finite bounded predictions,context/label/inner-stop hashes,required package versions and declared CUDA backend; no meta/outer labels or fitted artifacts.",
+      "evidence": [],
+      "observed": {
+        "prediction_rows": 20000,
+        "context_rows": 50000,
+        "query_labels_used": false,
+        "inner_stopping_rows": 7500,
+        "all_prediction_rows_exact": true,
+        "versions": {
+          "numpy": "2.2.6",
+          "pandas": "2.3.3",
+          "pyarrow": "24.0.0",
+          "scikit-learn": "1.7.2",
+          "catboost": "1.2.8"
+        },
+        "device": "cuda",
+        "GPU_name": "NVIDIA L4",
+        "pilot_scores_computed": false
+      },
+      "status": "pass"
+    }
+  ],
+  "clock_sha256": "67493c438f7f1baeee5db30ba8539cd4dce0641dec23127ffd3b1a93c779cb8d",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "source_seal_sha256": "4929f7c9afca958614b320c9ea1ced24017ce80fb8be97836f85af2fee120ef0",
+  "gate_source_sha256": "db1de743013bc435dc7f5162ed402dae1cf8987b5c58d5eeb19a332dfdfde323",
+  "independent_audit_available": false,
+  "candidate_meta_or_outer_scores_computed": false,
+  "previous_gate_sha256": "d21d3255a1f4f7083d339a3ceda1c93da65f41ece97663d6b9cbeb6d5a671458",
+  "previous_gate_status": "FAIL",
+  "family": "catboost",
+  "data_gate_sha256": "6945324f8c26c9529b1d51d4c69732baa9f25ede390da2c27c74f24be5cafc5e",
+  "dependency_versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "pyarrow": "24.0.0",
+    "scikit-learn": "1.7.2",
+    "catboost": "1.2.8"
+  },
+  "qualification_scope": "One predeclared actual runtime pilot; this is not predictive evidence for every future design/backend.",
+  "pilot_result": {
+    "path": "runs/cat_top99_depth6__s2026__f0/attempt1/RESULT.json",
+    "sha256": "0e1f9a77a3bd6e5dd4da3ac3410cabc3f6fa4a6adc24ae74e1390b8386d95962"
+  },
+  "pilot_start": {
+    "path": "runs/cat_top99_depth6__s2026__f0/attempt1/START.json",
+    "sha256": "b1c2c0b4faee5dcdea9cf6cccd0814474a8a5503d539e9e15108d085acfd62a4"
+  },
+  "pilot_prediction": {
+    "path": "runs/cat_top99_depth6__s2026__f0/attempt1/prediction.npz",
+    "sha256": "7755f0bb30b1a531230f4e41df449144d1e3a20e21231d2148d4e80a6773be3d"
+  },
+  "execution_metadata_adapter": {
+    "source_sha256": "be1d49e4dafd8ce84b6775a20630ccc32f56b2aaf838d10e3879afd41c98cd0a",
+    "sealed_gate_sha256": "db1de743013bc435dc7f5162ed402dae1cf8987b5c58d5eeb19a332dfdfde323",
+    "fields_resolved": [
+      "GPU_name",
+      "GPU_memory_bytes"
+    ],
+    "backend": {
+      "host": "2fb5ec316e94",
+      "GPU_name": "NVIDIA L4",
+      "GPU_memory_bytes": 23659151360,
+      "evidence_path": "dispatch/resnet_global64_smoothks__s2026__f1/attempt1/BACKEND.json",
+      "evidence_sha256": "c00ed745b024d8ee063b11d127709a8107abc748489b55975ca7cd5144042574",
+      "binding_basis": "prelaunch same-host measured CUDA device"
+    },
+    "all_original_acceptance_predicates_retained": true,
+    "scientific_source_or_selection_changed": false
+  }
+}

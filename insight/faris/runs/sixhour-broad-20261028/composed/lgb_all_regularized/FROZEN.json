@@ -1,0 +1,56 @@
+{
+  "UTC": "2026-10-28T18:04:02.927213+00:00",
+  "design": "lgb_all_regularized",
+  "design_spec": {
+    "family": "lightgbm",
+    "view": "all",
+    "hypothesis": "The full permissible bank with strong leaf support and shrinkage tests whether selection discards weak complementary features.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "cpu",
+    "parameters": {
+      "n_estimators": 1400,
+      "num_leaves": 31,
+      "max_depth": 7,
+      "min_child_samples": 250,
+      "reg_lambda": 40,
+      "reg_alpha": 1,
+      "colsample_bytree": 0.55
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/lgb_all_regularized/s2026/fold0/RESULT.json": "66d345a194b7aa83eab8d531c797e4a5e9f966425de124b9d8250ec2e6d431c3",
+    "composed/lgb_all_regularized/s2026/fold1/RESULT.json": "6c084f7300ff78d16607b64ada13893a89170e8c5e4e5d08ade9aed03eb38de4",
+    "composed/lgb_all_regularized/s2026/fold2/RESULT.json": "cd4af5010c70625024b35b62b0e2032d70712a70ebc7c83d28dcc78a8d248152",
+    "composed/lgb_all_regularized/s2026/fold3/RESULT.json": "c5541a9dd3bec28df80313f6e81a7c9631fb201342c68af789ce92820aae8dd3",
+    "composed/lgb_all_regularized/s2026/fold4/RESULT.json": "7da710437462aa1752ce7dc4bb4847bc5ff499c142ac066fa4adff5c4f147f5b",
+    "composed/lgb_all_regularized/s7731/fold0/RESULT.json": "2b685e38e593bc3c0483dca49b2a30a7f80c84a8cb476ee50352db761a67b867",
+    "composed/lgb_all_regularized/s7731/fold1/RESULT.json": "f6fa92565a2f4d32a37ad9d1f911ed015f9c52018966daf3a7a9eb10005955cf",
+    "composed/lgb_all_regularized/s7731/fold2/RESULT.json": "8ff569dd6d16372503f86db9458d73b16ae98914ae6c023a98b3d0f43f3852e9",
+    "composed/lgb_all_regularized/s7731/fold3/RESULT.json": "cc4c2950c44e8f0249ac50ccb47756c10c1fed1e43e99d7c73b13375f7e1177b",
+    "composed/lgb_all_regularized/s7731/fold4/RESULT.json": "6720aa3565fa5ea77ca2601822f6b281407d3de01b948340a6a5bd0ec100e1c2"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
