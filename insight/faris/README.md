@@ -22,6 +22,10 @@ missing files found during a later root/vendor audit. The earlier universal
 completeness claim was too broad; coverage is limited to documented accessible
 roots. Node2002 remains unverified beyond surviving mirrors.
 
+## Active six-hour broad campaign —29October
+
+[New study](runs/sixhour-broad-20261028/README.md) compares expanded/reduced actuarial views and model families under a fresh immutable six-hour clock ending29October06:25WIB.64designs/640planned fits are preregistered, not yet a result. Source and all partial/negative outcomes are retained. Onlyone Colab A100 was granted; node2001/2003 CPU spillover supplements it.
+
 ## Completed MoE campaign — 28 October
 
 The [feature-subspace MoE study](runs/feature-subspace-moe-20261028/RESULTS.md)
