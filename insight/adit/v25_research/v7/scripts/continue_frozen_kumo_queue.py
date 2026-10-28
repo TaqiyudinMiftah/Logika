@@ -94,7 +94,7 @@ def main(expected,identifiers=None,wait_for=None,worker_file='kumo_gpu_experimen
             c=client();gate=dict(status='REVIEWED_FOR_NEXT_RUN',experiment=ident,reviewed_head=expected,UTC=time.time(),peer_new_commits=False,redundancy_review=('Fresh shared HEAD unchanged; distinct correction/calibration or robust-objective specification in the current vetted experiment plan. Original Kumo/context scores frozen.' if worker_file in ['adaptive_adapters.py','joint_followups.py','stability_worker.py'] else 'Fresh shared HEAD unchanged since prior synced result; distinct frozen-Kumo specification. No backbone optimization or unfreezing.'))
             c.request('PUT','api/contents/'+BASE+'v7/modeling/reports/REPO_REVIEW_GATE.json',dict(type='file',format='text',content=json.dumps(gate,indent=2)))
             if execution_host=='local_windows':
-                assert worker_file in ['structured_heads.py','data_fe_worker.py'] and os.name=='nt'
+                assert worker_file in ['structured_heads.py','data_fe_worker.py','data_residual_worker.py'] and os.name=='nt'
                 pre=json.loads((V/'reports/LOCAL_CPU_PREFLIGHT.json').read_text());assert pre['status']=='PASS'
                 persistent_status(V/'modeling/reports/REPO_REVIEW_GATE.json',gate)
                 import ctypes

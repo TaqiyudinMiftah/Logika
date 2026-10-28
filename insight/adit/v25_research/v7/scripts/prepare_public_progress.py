@@ -86,6 +86,8 @@ def main():
     audit_files += [V/name for name in ['data_fe_plan.json','DATA_SIGNAL_RESEARCH_PLAN.md','reports/LOCAL_CPU_PREFLIGHT.json','reports/CPU_RUNTIME_RELOCATION.json','reports/DATA_RESEARCH_ACTIVATION.json']]
     audit_files += [V/'scripts'/name for name in ['item_price_resilience_features.py','data_fe_worker.py','platform_runtime.py','preflight_local_cpu.py','mirror_cpu_training_cache.py','scan_item_price_signals.py','activate_data_research.py','summarize_data_research.py']]
     audit_files += list((V/'data_fe/reports').glob('*')) if (V/'data_fe/reports').exists() else []
+    audit_files += [V/'data_residual_plan.json',V/'DATA_RESIDUAL_PLAN.md',V/'scripts/data_residual_worker.py']
+    audit_files += list((V/'data_residual/reports').glob('*')) if (V/'data_residual/reports').exists() else []
     for source in audit_files:
         if source.is_file() and source.suffix.lower() in ['.py','.md','.json','.csv','.svg']:
             target=DEST/source.relative_to(ROOT);target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target)
