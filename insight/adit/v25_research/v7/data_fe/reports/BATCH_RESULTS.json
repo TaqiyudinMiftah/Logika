@@ -1,6 +1,6 @@
 {
-  "updated_UTC": "2026-10-28T03:56:56.060156+00:00",
-  "completed": 1,
+  "updated_UTC": "2026-10-28T03:58:47.373958+00:00",
+  "completed": 2,
   "planned": 8,
   "public_incumbent": "V25",
   "public_KS": 0.56822,
@@ -26,6 +26,26 @@
       "decision": "AVAILABILITY_CONTROL_ONLY",
       "submission": "v7/submissions/submission_V243_V25_conservative.csv",
       "submission_sha256": "4d839b8524378fa2a420065e23c3bc925bc5a943c0e2475fd16a9a21d601673d"
+    },
+    {
+      "experiment": "V244",
+      "label": "Own-category price movement under matched coverage",
+      "KS": 0.5295061231141336,
+      "AUC": 0.846900036859405,
+      "delta_KS_V25": -0.0007785369299074807,
+      "delta_AUC_V25": -0.00012924204771092018,
+      "fold_wins_V25": 0,
+      "delta_KS_V25_CI_low": -0.001964607101401561,
+      "delta_KS_V25_CI_high": 0.0005826286735317609,
+      "delta_KS_support": 0.00015907475964405116,
+      "delta_AUC_support": -2.004148963941077e-05,
+      "fold_wins_support": 2,
+      "delta_KS_support_CI_low": -0.0006530257099953835,
+      "delta_KS_support_CI_high": 0.0010830346406298427,
+      "parameters": 101,
+      "decision": "UNIQUE_VALUE_NOT_ESTABLISHED",
+      "submission": "v7/submissions/submission_V244_V25_conservative.csv",
+      "submission_sha256": "8df8e6093cfbb4a3115919b21de135061c5a94a164a295483862a83ec5e637a1"
     }
   ],
   "analysis": [
@@ -569,6 +589,604 @@
         "inner_crossfit_used": false
       },
       "support_comparison": null
+    },
+    {
+      "experiment": "V244",
+      "formula": "V25 original18-input quadratic offset design plus standardized signedlog linear inputs ip_price_comparable_categories,ip_multicat_price_orders180,ip_valid_price_items180,ip_price_change_observed,ip_order_coherence_observed,ip_affordability_cross_observed,ip_debt_cross_observed,ip_liquidity_cross_observed,ip_category_price_change_shrunk,ip_category_price_change_breadth,ip_category_price_change_dispersion; all new value-availability masks are explicit shared support features. Fit meanBCE(KumoLogit+Xbeta)+.003/2||base_beta_nonintercept||^2+.01/2||new_beta||^2 on identical6k; new means/scales fit only6k; undefined additional values contribute0 in centered basis and retainNaN in raw cache; inference eta=KumoLogit+.5Xbeta; final75:25original_spline77; mean5foldtest.",
+      "uncertainty": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty",
+      "error_segments": [
+        {
+          "segment": "aux_account_months",
+          "value": "1_to_3",
+          "n": "49000",
+          "events": "7046",
+          "event_rate": "0.14379591836734693",
+          "reference_KS": "0.5430455704625252",
+          "KS": "0.5412721874495066",
+          "delta_KS": "-0.001773383013018659",
+          "reference_AUC": "0.8528554806745277",
+          "AUC": "0.852687552135788",
+          "delta_AUC": "-0.00016792853873970337"
+        },
+        {
+          "segment": "aux_account_months",
+          "value": "zero",
+          "n": "21000",
+          "events": "2461",
+          "event_rate": "0.11719047619047619",
+          "reference_KS": "0.5014612660015252",
+          "KS": "0.5004040703675761",
+          "delta_KS": "-0.0010571956339491262",
+          "reference_AUC": "0.8293413498486195",
+          "AUC": "0.8293221496293688",
+          "delta_AUC": "-1.920021925072568e-05"
+        },
+        {
+          "segment": "aux_allocation_count",
+          "value": "1_to_3",
+          "n": "1854",
+          "events": "347",
+          "event_rate": "0.1871628910463862",
+          "reference_KS": "0.5138269248789031",
+          "KS": "0.5169172105582212",
+          "delta_KS": "0.0030902856793180167",
+          "reference_AUC": "0.8379512323852761",
+          "AUC": "0.8376567373391033",
+          "delta_AUC": "-0.00029449504617284905"
+        },
+        {
+          "segment": "aux_allocation_count",
+          "value": "over3",
+          "n": "44414",
+          "events": "6265",
+          "event_rate": "0.14105912550096816",
+          "reference_KS": "0.5458653835110396",
+          "KS": "0.5438202836247346",
+          "delta_KS": "-0.0020450998863050796",
+          "reference_AUC": "0.8542959907049054",
+          "AUC": "0.854137369586891",
+          "delta_AUC": "-0.00015862111801434597"
+        },
+        {
+          "segment": "aux_allocation_count",
+          "value": "zero",
+          "n": "23732",
+          "events": "2895",
+          "event_rate": "0.12198719029158941",
+          "reference_KS": "0.5034007776289404",
+          "KS": "0.5031513375925629",
+          "delta_KS": "-0.0002494400363775018",
+          "reference_AUC": "0.8312474579603524",
+          "AUC": "0.831204970101428",
+          "delta_AUC": "-4.2487858924356026e-05"
+        },
+        {
+          "segment": "risk_conditional_negative_months",
+          "value": "1_to_3",
+          "n": "17621",
+          "events": "2792",
+          "event_rate": "0.15844730719028433",
+          "reference_KS": "0.5366807440543302",
+          "KS": "0.5369491332035249",
+          "delta_KS": "0.00026838914919469214",
+          "reference_AUC": "0.849199426470358",
+          "AUC": "0.8490210800450833",
+          "delta_AUC": "-0.00017834642527470024"
+        },
+        {
+          "segment": "risk_conditional_negative_months",
+          "value": "over3",
+          "n": "16936",
+          "events": "2238",
+          "event_rate": "0.13214454416627303",
+          "reference_KS": "0.5439471803535488",
+          "KS": "0.5407843054279238",
+          "delta_KS": "-0.003162874925625059",
+          "reference_AUC": "0.8515585640766722",
+          "AUC": "0.8514184782668175",
+          "delta_AUC": "-0.00014008580985469532"
+        },
+        {
+          "segment": "risk_conditional_negative_months",
+          "value": "zero",
+          "n": "35443",
+          "events": "4477",
+          "event_rate": "0.1263154924808848",
+          "reference_KS": "0.5232319043860147",
+          "KS": "0.5220478075985289",
+          "delta_KS": "-0.0011840967874858777",
+          "reference_AUC": "0.8424829564055577",
+          "AUC": "0.8423780620941141",
+          "delta_AUC": "-0.00010489431144355965"
+        },
+        {
+          "segment": "risk_conditional_nonnegative_months",
+          "value": "1_to_3",
+          "n": "7613",
+          "events": "1200",
+          "event_rate": "0.15762511493497963",
+          "reference_KS": "0.538027054420708",
+          "KS": "0.5374083892094184",
+          "delta_KS": "-0.0006186652112896152",
+          "reference_AUC": "0.8488026924476323",
+          "AUC": "0.8487113415458185",
+          "delta_AUC": "-9.135090181378036e-05"
+        },
+        {
+          "segment": "risk_conditional_nonnegative_months",
+          "value": "over3",
+          "n": "36801",
+          "events": "5132",
+          "event_rate": "0.13945273226271027",
+          "reference_KS": "0.5484190683705703",
+          "KS": "0.5469943241085875",
+          "delta_KS": "-0.0014247442619828021",
+          "reference_AUC": "0.8559735509007618",
+          "AUC": "0.8558216237928926",
+          "delta_AUC": "-0.0001519271078691542"
+        },
+        {
+          "segment": "risk_conditional_nonnegative_months",
+          "value": "zero",
+          "n": "25586",
+          "events": "3175",
+          "event_rate": "0.12409129992964903",
+          "reference_KS": "0.5036047048043406",
+          "KS": "0.5032897441744195",
+          "delta_KS": "-0.00031496062992109053",
+          "reference_AUC": "0.8311254350981326",
+          "AUC": "0.8310345910701191",
+          "delta_AUC": "-9.084402801351477e-05"
+        },
+        {
+          "segment": "employment_type",
+          "value": "salaried",
+          "n": "33473",
+          "events": "4432",
+          "event_rate": "0.13240522211932004",
+          "reference_KS": "0.5300512209987697",
+          "KS": "0.5300673969342733",
+          "delta_KS": "1.617593550362617e-05",
+          "reference_AUC": "0.8473121437797949",
+          "AUC": "0.8471891305296371",
+          "delta_AUC": "-0.00012301325015784403"
+        },
+        {
+          "segment": "employment_type",
+          "value": "self_employed",
+          "n": "20987",
+          "events": "2895",
+          "event_rate": "0.13794253585552962",
+          "reference_KS": "0.5281411797769757",
+          "KS": "0.5268151611968305",
+          "delta_KS": "-0.0013260185801452495",
+          "reference_AUC": "0.8441075302321621",
+          "AUC": "0.84391595518129",
+          "delta_AUC": "-0.0001915750508720837"
+        },
+        {
+          "segment": "employment_type",
+          "value": "variable_income",
+          "n": "15540",
+          "events": "2180",
+          "event_rate": "0.1402831402831403",
+          "reference_KS": "0.5347909685216723",
+          "KS": "0.5344304510245564",
+          "delta_KS": "-0.0003605174971158531",
+          "reference_AUC": "0.8501934433884526",
+          "AUC": "0.8501324987639401",
+          "delta_AUC": "-6.0944624512448975e-05"
+        },
+        {
+          "segment": "baseline_risk_band",
+          "value": "005_to015",
+          "n": "19504",
+          "events": "1855",
+          "event_rate": "0.09510869565217392",
+          "reference_KS": "0.12950956347182763",
+          "KS": "0.13054725884914564",
+          "delta_KS": "0.0010376953773180153",
+          "reference_AUC": "0.5899363433005298",
+          "AUC": "0.5892352200646968",
+          "delta_AUC": "-0.0007011232358330455"
+        },
+        {
+          "segment": "baseline_risk_band",
+          "value": "015_to04",
+          "n": "14563",
+          "events": "3624",
+          "event_rate": "0.24884982489871593",
+          "reference_KS": "0.16838795693638842",
+          "KS": "0.16633962227217475",
+          "delta_KS": "-0.002048334664213669",
+          "reference_AUC": "0.6058415804520634",
+          "AUC": "0.6051483169662307",
+          "delta_AUC": "-0.0006932634858326514"
+        },
+        {
+          "segment": "baseline_risk_band",
+          "value": "over04",
+          "n": "6080",
+          "events": "3493",
+          "event_rate": "0.5745065789473685",
+          "reference_KS": "0.22952061281987468",
+          "KS": "0.23417733916117622",
+          "delta_KS": "0.0046567263413015425",
+          "reference_AUC": "0.6537065516531988",
+          "AUC": "0.653029954104465",
+          "delta_AUC": "-0.0006765975487338372"
+        },
+        {
+          "segment": "baseline_risk_band",
+          "value": "under005",
+          "n": "29853",
+          "events": "535",
+          "event_rate": "0.017921146953405017",
+          "reference_KS": "0.3253632580667167",
+          "KS": "0.323582781908725",
+          "delta_KS": "-0.0017804761579916506",
+          "reference_AUC": "0.7035401682995295",
+          "AUC": "0.7026484319862188",
+          "delta_AUC": "-0.0008917363133106315"
+        },
+        {
+          "segment": "orders90_exposure_band",
+          "value": "1_to3",
+          "n": "18715",
+          "events": "1163",
+          "event_rate": "0.06214266631044617",
+          "reference_KS": "0.532048046301529",
+          "KS": "0.5303832718952886",
+          "delta_KS": "-0.0016647744062404657",
+          "reference_AUC": "0.840377904720997",
+          "AUC": "0.8403483156987985",
+          "delta_AUC": "-2.9589022198517334e-05"
+        },
+        {
+          "segment": "orders90_exposure_band",
+          "value": "4_to10",
+          "n": "36368",
+          "events": "5141",
+          "event_rate": "0.14136053673559174",
+          "reference_KS": "0.4919932449391875",
+          "KS": "0.491543837341895",
+          "delta_KS": "-0.000449407597292506",
+          "reference_AUC": "0.8250396991660672",
+          "AUC": "0.8248892612700742",
+          "delta_AUC": "-0.00015043789599300528"
+        },
+        {
+          "segment": "orders90_exposure_band",
+          "value": "over10",
+          "n": "11489",
+          "events": "3097",
+          "event_rate": "0.2695621899207938",
+          "reference_KS": "0.4554675286179036",
+          "KS": "0.4543912695117172",
+          "delta_KS": "-0.0010762591061864168",
+          "reference_AUC": "0.802579635940313",
+          "AUC": "0.8024211135780405",
+          "delta_AUC": "-0.00015852236227253957"
+        },
+        {
+          "segment": "orders90_exposure_band",
+          "value": "zero",
+          "n": "3428",
+          "events": "106",
+          "event_rate": "0.030921820303383897",
+          "reference_KS": "0.5118080719730101",
+          "KS": "0.5121090954528416",
+          "delta_KS": "0.0003010234798314082",
+          "reference_AUC": "0.8304414253745754",
+          "AUC": "0.8304897027251145",
+          "delta_AUC": "4.827735053902771e-05"
+        }
+      ],
+      "per_fold": [
+        {
+          "fold": 0,
+          "metrics": {
+            "KS": 0.5282242123209455,
+            "signed_KS": 0.5282242123209455,
+            "AUC": 0.8437975254040193,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.5284799057608154,
+            "signed_KS": 0.5284799057608154,
+            "AUC": 0.8440697839179565,
+            "rows": 14000
+          },
+          "delta_KS": -0.00025569343986986404,
+          "delta_AUC": -0.0002722585139371958,
+          "parameters": 101,
+          "new_trainable_parameters": 101,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5509521922014304,
+          "heldout_corrected_Kumo_KS": 0.5249637622700569,
+          "train_validation_head_KS_gap": 0.025988429931373513,
+          "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+          "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+          "optimization": {
+            "objective": 0.29000789624210926,
+            "gradient_max_abs": 3.111510401184366e-12,
+            "iterations": 4,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 11,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion"
+            ],
+            "training_only_scaling": true
+          }
+        },
+        {
+          "fold": 1,
+          "metrics": {
+            "KS": 0.5365415751402847,
+            "signed_KS": 0.5365415751402847,
+            "AUC": 0.849426476701354,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.537999171224562,
+            "signed_KS": 0.537999171224562,
+            "AUC": 0.8496049534180117,
+            "rows": 14000
+          },
+          "delta_KS": -0.0014575960842773128,
+          "delta_AUC": -0.00017847671665771614,
+          "parameters": 101,
+          "new_trainable_parameters": 101,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5386159935159823,
+          "heldout_corrected_Kumo_KS": 0.5346129396532613,
+          "train_validation_head_KS_gap": 0.00400305386272104,
+          "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+          "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+          "optimization": {
+            "objective": 0.29156271009363466,
+            "gradient_max_abs": 7.912225160059775e-08,
+            "iterations": 3,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 11,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion"
+            ],
+            "training_only_scaling": true
+          }
+        },
+        {
+          "fold": 2,
+          "metrics": {
+            "KS": 0.5398271988864096,
+            "signed_KS": 0.5398271988864096,
+            "AUC": 0.8497348218595848,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.5402982382891557,
+            "signed_KS": 0.5402982382891557,
+            "AUC": 0.849856907759798,
+            "rows": 14000
+          },
+          "delta_KS": -0.00047103940274606515,
+          "delta_AUC": -0.0001220859002132313,
+          "parameters": 101,
+          "new_trainable_parameters": 101,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5630162514568333,
+          "heldout_corrected_Kumo_KS": 0.5395010277954552,
+          "train_validation_head_KS_gap": 0.02351522366137815,
+          "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+          "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+          "optimization": {
+            "objective": 0.28401208611562523,
+            "gradient_max_abs": 2.6176357377967937e-13,
+            "iterations": 4,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 11,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion"
+            ],
+            "training_only_scaling": true
+          }
+        },
+        {
+          "fold": 3,
+          "metrics": {
+            "KS": 0.530001656642502,
+            "signed_KS": 0.530001656642502,
+            "AUC": 0.8437897374734447,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.5306520583131207,
+            "signed_KS": 0.5306520583131207,
+            "AUC": 0.8438633563716158,
+            "rows": 14000
+          },
+          "delta_KS": -0.0006504016706186944,
+          "delta_AUC": -7.361889817114609e-05,
+          "parameters": 101,
+          "new_trainable_parameters": 101,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5293881004076175,
+          "heldout_corrected_Kumo_KS": 0.5288105428520222,
+          "train_validation_head_KS_gap": 0.0005775575555952983,
+          "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+          "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+          "optimization": {
+            "objective": 0.29018632189762483,
+            "gradient_max_abs": 2.1827600780917795e-09,
+            "iterations": 3,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 11,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion"
+            ],
+            "training_only_scaling": true
+          }
+        },
+        {
+          "fold": 4,
+          "metrics": {
+            "KS": 0.5284948594539616,
+            "signed_KS": 0.5284948594539616,
+            "AUC": 0.8478698932430366,
+            "rows": 14000
+          },
+          "baseline": {
+            "KS": 0.529219749195103,
+            "signed_KS": 0.529219749195103,
+            "AUC": 0.8478967072100803,
+            "rows": 14000
+          },
+          "delta_KS": -0.0007248897411413768,
+          "delta_AUC": -2.6813967043626263e-05,
+          "parameters": 101,
+          "new_trainable_parameters": 101,
+          "correction_rows": 6000,
+          "head_training_KS": 0.5520667806497033,
+          "heldout_corrected_Kumo_KS": 0.5306588378574623,
+          "train_validation_head_KS_gap": 0.021407942792241008,
+          "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+          "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+          "optimization": {
+            "objective": 0.28801127912213315,
+            "gradient_max_abs": 2.5586334620714134e-08,
+            "iterations": 3,
+            "solver": "Analytic Newton with Armijo backtracking",
+            "base_coefficients": 90,
+            "new_linear_coefficients": 11,
+            "extra_missing_indicator_columns": 0,
+            "availability_features_shared_across_batch": true,
+            "all_missing_training_features": [],
+            "input_feature_names": [
+              "ip_price_comparable_categories",
+              "ip_multicat_price_orders180",
+              "ip_valid_price_items180",
+              "ip_price_change_observed",
+              "ip_order_coherence_observed",
+              "ip_affordability_cross_observed",
+              "ip_debt_cross_observed",
+              "ip_liquidity_cross_observed",
+              "ip_category_price_change_shrunk",
+              "ip_category_price_change_breadth",
+              "ip_category_price_change_dispersion"
+            ],
+            "training_only_scaling": true
+          }
+        }
+      ],
+      "overfitting_assessment": {
+        "development_folds_reused": true,
+        "independent_holdout": false,
+        "hyperparameters_prespecified": true,
+        "selection_corrected_CI": false,
+        "public_score_unknown": true,
+        "risk": "HIGH_SEARCH_MULTIPLICITY",
+        "diagnostic": "Audit found weak spectral values, duplicated missing indicators and thin-file errors. Test price_change beyond exactly the same8 support/availability variables. Own-category prices remove category-level composition without a population reference; cross-category within-order covariance measures a different structure than category entropy or mean price. No SKU/quality information; estimates are finite-history proxies and raw price changes are not causal risk evidence. New inputs are linear with stronger shrinkage to avoid repeating the145-parameter spectral head; repeated development selection remains.; all new fitting uses correction rows only; repeated development selection remains.; repeated feature search remains; finite-value contribution and source availability are separated with a shared support control and no repeated missing indicators for new values.",
+        "inner_crossfit_used": false
+      },
+      "support_comparison": {
+        "control": "V243",
+        "control_metrics": {
+          "KS": 0.5293470483544895,
+          "signed_KS": 0.5293470483544895,
+          "AUC": 0.8469200783490444,
+          "rows": 70000
+        },
+        "candidate_metrics": {
+          "KS": 0.5295061231141336,
+          "signed_KS": 0.5295061231141336,
+          "AUC": 0.846900036859405,
+          "rows": 70000
+        },
+        "delta_KS": 0.00015907475964405116,
+        "delta_AUC": -2.004148963941077e-05,
+        "fold_wins": 2,
+        "confidence_interval": {
+          "repetitions": 300,
+          "seed": 192026,
+          "baseline_KS": [
+            0.5215654124914237,
+            0.5384191354087807
+          ],
+          "candidate_KS": [
+            0.5216842194366035,
+            0.5391584211177444
+          ],
+          "delta_KS": [
+            -0.0006530257099953835,
+            0.0010830346406298427
+          ],
+          "candidate_AUC": [
+            0.8432090966850443,
+            0.8506638992527148
+          ],
+          "delta_AUC": [
+            -5.74829167731522e-05,
+            2.25433286408144e-05
+          ],
+          "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+        }
+      }
     }
   ]
 }

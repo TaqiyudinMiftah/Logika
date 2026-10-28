@@ -2,7 +2,7 @@
 
 Baseline public tetap **V25:0.56822**, verified terhadap hash CSV. Pooled OOF V25 **0.5302846600**, AUC **0.8470292789**. Target pooled0.531 tercapai pada fold pengembangan; generalisasi belum terbukti. Tidak ada submission otomatis ke Kaggle.
 
-**244 eksperimen aktif tercatat**, termasuk124 eksperimen modeling baru. Semuanya memiliki lima fold, OOF, checkpoint dan submission di workspace node480. Hasil terbaik baru **V221: KS0.5316293525, AUC0.8471248959**, deltaKS vsV25 **+0.0013446925**, dengan3/5 fold menang. Paired95% deltaKS CI **[-0.00109414,+0.00334117]**. Kandidat tidak otomatis menggantikan incumbent public.
+**245 eksperimen aktif tercatat**, termasuk125 eksperimen modeling baru. Semuanya memiliki lima fold, OOF, checkpoint dan submission di workspace node480. Hasil terbaik baru **V221: KS0.5316293525, AUC0.8471248959**, deltaKS vsV25 **+0.0013446925**, dengan3/5 fold menang. Paired95% deltaKS CI **[-0.00109414,+0.00334117]**. Kandidat tidak otomatis menggantikan incumbent public.
 
 ## Hasil dan arah penelitian
 
@@ -26,7 +26,7 @@ Kumo Large100% frozen,90 input,50k context,8 estimators. Koreksi V25 memakai18 i
 Baca `SYNC_PROTOCOL.md` sebelum setiap eksperimen. Fetch main terbaru, periksa hasil teman, bandingkan signature, jalankan satu eksperimen, catat hasil/error analysis/submission hash, lalu push fast-forward. Jangan menimpa hasil teman atau memakai force push.
 
 
-Latest completed: **V243**, pooledKS **0.5293470484**, AUC **0.8469200783**. See its results directory.
+Latest completed: **V244**, pooledKS **0.5295061231**, AUC **0.8469000369**. See its results directory.
 
 
 **Public feedback: V221 = 0.56614, exact CSV verified. V25 remains the public incumbent at0.56822. Highest pooled OOF has not translated into a public improvement.** Read the [data and validation-noise audit](v7/audit_noise/reports/VALIDATION_NOISE_AUDIT.md), including coverage subgroups, shared spectral missing indicators, fold/threshold sensitivity and selection uncertainty.
