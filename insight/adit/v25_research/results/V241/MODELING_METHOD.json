@@ -1,0 +1,46 @@
+{
+  "method": "Original18 spline design. On6k only, b=encoded covariates excluding intercept/Kumo; S=cov(b)+.1I; d2=(b-mean)'inv(S)(b-mean); t=training95th percentile(d2); w=clip(sqrt(max(t,1e-12)/max(d2,1e-12)),.25,1). Fit sum w*BCE/sum w+.003/2||beta_nonintercept||^2. No query-time weight/gate. eta=Kumo logit+.5Xbeta; final75:25spline77, mean5foldtest.; mean5fold test probabilities",
+  "spec": {
+    "id": "V241",
+    "label": "Feature-leverage weighted offset correction",
+    "method": "leverage_weighted",
+    "worker": "structured_heads.py",
+    "source_script": "v7/scripts/structured_heads.py",
+    "research_ready": true,
+    "families": [
+      "conditional_allocation"
+    ],
+    "penalty": 0.003,
+    "strength": 0.5,
+    "replaces_base_head": true,
+    "Kumo_frozen_fraction": 1.0,
+    "comparison_baseline": "V25",
+    "no_outer_validation_tuning": true,
+    "formula": "Original18 spline design. On6k only, b=encoded covariates excluding intercept/Kumo; S=cov(b)+.1I; d2=(b-mean)'inv(S)(b-mean); t=training95th percentile(d2); w=clip(sqrt(max(t,1e-12)/max(d2,1e-12)),.25,1). Fit sum w*BCE/sum w+.003/2||beta_nonintercept||^2. No query-time weight/gate. eta=Kumo logit+.5Xbeta; final75:25spline77, mean5foldtest.",
+    "rationale": "Current best has weaker KS in zero-order(3428 rows), no-allocation(23732) and high-conditional-stress groups thanV25, while support-sensitive bootstrap corrections yielded only tiny gains. Test whether a small number of high-leverage feature combinations dominates correction coefficients. Weighting can suppress genuine high-risk or minority borrowers and change effective class balance; report weights/event rates and segment errors, no causal or robustness guarantee.",
+    "priority": "P1",
+    "preflight_receipt": "v7/structured_head/reports/PREFLIGHT.json",
+    "execution_host": "local_windows"
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "source_sha256": "4282683b1366a145bded6f16792be5a91fbdcf5a208fdb21872bfff3847c953c"
+}

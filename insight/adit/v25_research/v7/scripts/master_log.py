@@ -93,6 +93,8 @@ def generate():
   source=V/definition.get('feature_catalog','reports/FEATURE_CATALOG.csv')
   catalog=all_catalogs.get(source.relative_to(ROOT).as_posix(),[])
   features=[x for x in catalog if x.get('family') in definition.get('families',[])]
+  if 'input_features' in definition:
+   features=[x for x in catalog if x.get('feature_name') in definition['input_features']]
   if 'only' in definition:features=[x for x in catalog if x.get('feature_name') in definition['only']]
   if r is not None:features=[x for x in catalog if x.get('feature_name') in r['new_features']]
   record=dict(id=exp,definition=definition,status='COMPLETE' if r else state.get('status','QUEUED'),

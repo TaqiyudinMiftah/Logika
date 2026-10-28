@@ -1,0 +1,109 @@
+{
+  "experiment": "V241",
+  "method": "leverage_weighted",
+  "hypothesis": "Current best has weaker KS in zero-order(3428 rows), no-allocation(23732) and high-conditional-stress groups thanV25, while support-sensitive bootstrap corrections yielded only tiny gains. Test whether a small number of high-leverage feature combinations dominates correction coefficients. Weighting can suppress genuine high-risk or minority borrowers and change effective class balance; report weights/event rates and segment errors, no causal or robustness guarantee.",
+  "formula": "Original18 spline design. On6k only, b=encoded covariates excluding intercept/Kumo; S=cov(b)+.1I; d2=(b-mean)'inv(S)(b-mean); t=training95th percentile(d2); w=clip(sqrt(max(t,1e-12)/max(d2,1e-12)),.25,1). Fit sum w*BCE/sum w+.003/2||beta_nonintercept||^2. No query-time weight/gate. eta=Kumo logit+.5Xbeta; final75:25spline77, mean5foldtest.",
+  "findings": [
+    "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+    "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+  ],
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5302003018217737,
+      "signed_KS": 0.5302003018217737,
+      "AUC": 0.8469968971041006,
+      "rows": 70000
+    },
+    "delta_KS": -0.0012592127407620168,
+    "delta_AUC": -0.00011064724550680083,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5226416691753739,
+        0.5394132119001288
+      ],
+      "delta_KS": [
+        -0.003521745036255028,
+        0.0011928729496436831
+      ],
+      "candidate_AUC": [
+        0.8433098670285416,
+        0.8507591351038982
+      ],
+      "delta_AUC": [
+        -0.0003719436439223622,
+        0.0001218925886361575
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "head_gap": 0.012066591658111836,
+  "top_risk_capture": [
+    {
+      "top_population_fraction": 0.1,
+      "reference_bad_captured": 3841,
+      "candidate_bad_captured": 3851,
+      "net_bad_captured": 10,
+      "new_members": 250,
+      "exited_members": 250,
+      "entrant_bad_rate": 0.372,
+      "exit_bad_rate": 0.332
+    },
+    {
+      "top_population_fraction": 0.2,
+      "reference_bad_captured": 5855,
+      "candidate_bad_captured": 5849,
+      "net_bad_captured": -6,
+      "new_members": 381,
+      "exited_members": 381,
+      "entrant_bad_rate": 0.2178477690288714,
+      "exit_bad_rate": 0.2335958005249344
+    },
+    {
+      "top_population_fraction": 0.3236857142857143,
+      "reference_bad_captured": 7422,
+      "candidate_bad_captured": 7427,
+      "net_bad_captured": 5,
+      "new_members": 437,
+      "exited_members": 437,
+      "entrant_bad_rate": 0.13043478260869565,
+      "exit_bad_rate": 0.11899313501144165
+    },
+    {
+      "top_population_fraction": 0.4,
+      "reference_bad_captured": 8015,
+      "candidate_bad_captured": 8016,
+      "net_bad_captured": 1,
+      "new_members": 474,
+      "exited_members": 474,
+      "entrant_bad_rate": 0.09071729957805907,
+      "exit_bad_rate": 0.08860759493670886
+    },
+    {
+      "top_population_fraction": 0.5,
+      "reference_bad_captured": 8649,
+      "candidate_bad_captured": 8654,
+      "net_bad_captured": 5,
+      "new_members": 448,
+      "exited_members": 448,
+      "entrant_bad_rate": 0.07589285714285714,
+      "exit_bad_rate": 0.06473214285714286
+    }
+  ],
+  "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+  "public_incumbent": "V25",
+  "independent_generalization_established": false
+}
