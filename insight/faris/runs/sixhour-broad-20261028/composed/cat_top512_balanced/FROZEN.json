@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T19:25:56.519309+00:00",
+  "design": "cat_top512_balanced",
+  "design_spec": {
+    "family": "catboost",
+    "view": "global512",
+    "hypothesis": "Square-root class reweighting tests discrimination in a wider bank without full inverse-frequency emphasis.",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "inner_split_seed": 20261029,
+    "resource": "gpu",
+    "class_balance": "sqrt",
+    "parameters": {
+      "iterations": 1400,
+      "depth": 6,
+      "l2_leaf_reg": 30
+    },
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cat_top512_balanced/s2026/fold0/RESULT.json": "3df5cdede99f1bdcae5f6f6ffd38af0c9a8be661f9cf0a997034726fecd1ed64",
+    "composed/cat_top512_balanced/s2026/fold1/RESULT.json": "ed3ea0b3d164f7f45bb2a6e456e38bcaf5daf79e2afef0526bcf17941994b27b",
+    "composed/cat_top512_balanced/s2026/fold2/RESULT.json": "4d0ae21064a63d714cda1ce849e9b5eb0b82c46ed96784b23ea3f9cc21d3bda3",
+    "composed/cat_top512_balanced/s2026/fold3/RESULT.json": "d49772aa6d3538cdbb3184b4f8b4bbbfb127ec0ba4e3d090f43148227f4f4186",
+    "composed/cat_top512_balanced/s2026/fold4/RESULT.json": "4527467aae1da9e70973f7139860fdb474d5e1023101d1be7c5b301b5944be07",
+    "composed/cat_top512_balanced/s7731/fold0/RESULT.json": "0437cd300039d2e8ea617795493299e419e3a437ab4e5d67f31087cc8a1c6782",
+    "composed/cat_top512_balanced/s7731/fold1/RESULT.json": "614cebc184609d5783cecee7f686fcb248f7ea0ccded71c5974c82b84f42e35e",
+    "composed/cat_top512_balanced/s7731/fold2/RESULT.json": "2817768bd7f0c12cf3f8d9cbf8ba05e8c158be412fc976f4ac511f4f29ab6d98",
+    "composed/cat_top512_balanced/s7731/fold3/RESULT.json": "0356020cefeac722fc3b060edd56bf2688ce9268385957d0d7de41085141f2d0",
+    "composed/cat_top512_balanced/s7731/fold4/RESULT.json": "228d508f90da656c731016df49630caa010b0af485d31be1cc44448d8d929d8d"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
