@@ -1,25 +1,40 @@
 {
-  "stage": "modelling",
-  "UTC": "2026-10-28T14:45:25.254690+00:00",
-  "completed": 259,
-  "expected": 260,
-  "failed": [],
-  "active": "kumo__expanded_cross_domain__s7731__f4",
-  "original_clock_sha256": "693c430a2cdfe6cfc6c540e7e1e9480a0ae8944763b4cb1598da90b673456bac",
-  "backend": "Colab account2 A100",
-  "pending": 1,
-  "clock": {
-    "started_UTC": "2026-10-28T11:28:37.325237+00:00",
-    "started_epoch": 1793186917.3252351,
-    "admission_end_epoch": 1793213917.3252351,
-    "deadline_epoch": 1793230117.3252351,
-    "user_hours": 12.0,
-    "config_sha256": "f762f6d010cd3f7d7b3e56b273a8b4ce1f71318fca265bbf704b29f8cb33fa4e",
-    "contract_sha256": "df796e99ffc6956771a41a6fba550097d1ef492251b9b1a713a117bb347c093a",
-    "source_seal_sha256": "1683ed39028ee0c03a350fcab4686d4cb3c90bf04be26e3f3ca4f584fe77bfa6",
-    "previous_campaign_clock_reused": false,
-    "preparation_before_first_actual_fit": true,
-    "accounting": "All actual-data qualification, selection, pilots, modelling, calibration, evaluation and any refit share this clock."
+  "stage": "complete",
+  "UTC": "2026-10-28T14:47:16.420590+00:00",
+  "primary": {
+    "metrics": {
+      "KS": 0.5295070116445175,
+      "AUC": 0.8471311086622565,
+      "logloss": 0.2925926248390996,
+      "rows": 70000
+    },
+    "delta_KS": -0.0011290925955091957,
+    "fold_delta_KS": [
+      0.00030738864476886896,
+      -0.0010976861548023242,
+      -0.0003021278207187006,
+      -0.0015312209316129533,
+      0.00028048191783192067
+    ],
+    "seed_delta_KS": [
+      -0.0010736159577331428,
+      -0.0013004016012968522
+    ],
+    "uncertainty": {
+      "delta_KS": -0.0011290925955045328,
+      "percentile95": [
+        -0.0023074610256237802,
+        0.0008038809115477992
+      ],
+      "replicates": 2000,
+      "seed": 20261028,
+      "unit": "application resampled within fold/class",
+      "limitation": "Conditional on fitted predictions; excludes retraining, previous research selection, and public leaderboard uncertainty."
+    }
   },
-  "canonical_collected_Kumo_fits": 79
+  "supported": false,
+  "local_target_054_point_reached": false,
+  "incomplete_cohorts": [],
+  "deadline_epoch": 1793230117.3252351,
+  "submission_made": false
 }

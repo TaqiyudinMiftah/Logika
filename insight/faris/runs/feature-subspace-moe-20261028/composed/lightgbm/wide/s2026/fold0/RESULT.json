@@ -1,0 +1,93 @@
+{
+  "status": "complete",
+  "family": "lightgbm",
+  "condition": "wide",
+  "seed": 2026,
+  "fold": 0,
+  "source_inputs": [
+    "runs/lightgbm__expanded_union__s2026__f0/attempt1"
+  ],
+  "source_predictions_hashes": {
+    "runs/lightgbm__expanded_union__s2026__f0/attempt1": "a93d9307059795f47d65aa295d5134c7a97e078bf6bcb30a01a7e77e34d894f2"
+  },
+  "prediction_sha256": "3ed9af95089a2f1d148d9f34857ee133e254bbf2407154012e907d9406e28a94",
+  "gate": {
+    "iterations": 4,
+    "objective": 0.29611402464497777,
+    "gradient_max": 1.426050004102973e-09,
+    "parameters": 24,
+    "penalty": 0.01,
+    "prior": [
+      0.9,
+      0.1
+    ],
+    "fitted_weights_saved": false
+  },
+  "preprocessing_recipe": {
+    "numeric": [
+      "aux_account_months",
+      "aux_allocation_count",
+      "aux_orders90",
+      "aux_ecommerce_observed_days",
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "account_income_cv",
+      "employment_tenure_months",
+      "expert_logit_0",
+      "expert_logit_1"
+    ],
+    "categories": {
+      "employment_type": [
+        "salaried",
+        "self_employed",
+        "variable_income"
+      ]
+    },
+    "median": [
+      1.3862943611198906,
+      2.4414009612931853,
+      1.791759469228055,
+      6.096638323589547,
+      0.0,
+      1.6094379124341003,
+      0.2956107652930938,
+      3.8066624897703196,
+      -1.2946790565826236,
+      -1.2941569980594507
+    ],
+    "mean": [
+      0.9625503847375773,
+      1.852798070598032,
+      1.7456003525766328,
+      6.011852258791148,
+      0.7086406099169853,
+      1.257608015073728,
+      0.29750401950655525,
+      3.7463891953281037,
+      -1.178319210431298,
+      -1.1477565871625162
+    ],
+    "sd": [
+      0.6386508651031692,
+      1.4642133271202835,
+      0.7199903466897335,
+      0.42033647375662114,
+      0.8240530677879973,
+      1.0730865388571555,
+      0.0776469239990579,
+      0.6799086435458056,
+      0.5786527234965647,
+      0.5480813470691773
+    ]
+  },
+  "calibration": "3-fold heldout correction-row monotone logistic; final calibration fits all6k",
+  "anchor_crossfit": "Head4000 and spline54000 exclude each2000 correction rows; frozen Kumo context50000 excludes all6000.",
+  "gate_training_rows": 6000,
+  "outer_labels_loaded": false,
+  "weights_saved": false,
+  "mean_routing_probabilities": [
+    0.8981519568573353,
+    0.1018480431426627
+  ],
+  "UTC": "2026-10-28T14:46:53.181450+00:00"
+}

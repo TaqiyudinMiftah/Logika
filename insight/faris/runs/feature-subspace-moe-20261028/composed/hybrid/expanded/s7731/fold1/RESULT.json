@@ -1,0 +1,133 @@
+{
+  "status": "complete",
+  "family": "hybrid",
+  "condition": "expanded",
+  "seed": 7731,
+  "fold": 1,
+  "source_inputs": [
+    "runs/kumo__expanded_cashflow__s7731__f1/attempt2",
+    "runs/lightgbm__expanded_cashflow__s7731__f1/attempt1",
+    "runs/catboost__expanded_cashflow__s7731__f1/attempt1",
+    "runs/kumo__expanded_credit__s7731__f1/attempt2",
+    "runs/lightgbm__expanded_credit__s7731__f1/attempt1",
+    "runs/catboost__expanded_credit__s7731__f1/attempt1",
+    "runs/kumo__expanded_commerce__s7731__f1/attempt2",
+    "runs/lightgbm__expanded_commerce__s7731__f1/attempt1",
+    "runs/catboost__expanded_commerce__s7731__f1/attempt1",
+    "runs/kumo__expanded_cross_domain__s7731__f1/attempt2",
+    "runs/lightgbm__expanded_cross_domain__s7731__f1/attempt1",
+    "runs/catboost__expanded_cross_domain__s7731__f1/attempt1"
+  ],
+  "source_predictions_hashes": {
+    "runs/kumo__expanded_cashflow__s7731__f1/attempt2": "f1f8e96133a52d7951e42be71dd570a0d261acfa9ca3468f1667a5eb4a15de11",
+    "runs/lightgbm__expanded_cashflow__s7731__f1/attempt1": "2389f0a027fa808e6feccd8e429bf0a6aa488f206af3a598eb7ec0e1ea67e380",
+    "runs/catboost__expanded_cashflow__s7731__f1/attempt1": "8280a62d6027b7e6773873f59992914f904573591842b7e438fcb68b4fab1598",
+    "runs/kumo__expanded_credit__s7731__f1/attempt2": "d6b437a3032413f4173e6c3dfaa6da7d181ea8bcc12b477b7898b8fe44016469",
+    "runs/lightgbm__expanded_credit__s7731__f1/attempt1": "6c9f6e815a49d75bf9b2b925c2360b3f86f8c73bf039b2b817c51efb528f7739",
+    "runs/catboost__expanded_credit__s7731__f1/attempt1": "5bc11e17329321427ded508eb600b848159c7d79cbc191b2a3d2c7ca030ab33c",
+    "runs/kumo__expanded_commerce__s7731__f1/attempt2": "111c55e1473fd3dfdd8d98f3c9d21f034b74eaa8b49924e726a25524a125fe71",
+    "runs/lightgbm__expanded_commerce__s7731__f1/attempt1": "28fed7cabd827db545d05f72e5294e4bc25d1fd9da8fda76c504a18343c3163d",
+    "runs/catboost__expanded_commerce__s7731__f1/attempt1": "fc03a02566e82b5e5602510e1805d58443e2c0bccc01d021b4e047abadf91436",
+    "runs/kumo__expanded_cross_domain__s7731__f1/attempt2": "3378d59b08f0923a5c57625927b1a966a58ec62f773d2cef0c87f6545642be68",
+    "runs/lightgbm__expanded_cross_domain__s7731__f1/attempt1": "506b42ffa3d923ee2a1bdb348011566b3cac015012ebf424b2cc6bb163764fca",
+    "runs/catboost__expanded_cross_domain__s7731__f1/attempt1": "0b1c55af965ae4154781a21a06ccbdad2323f423c8140f3f3e5ac828e5829cb6"
+  },
+  "prediction_sha256": "085b43ca9647daa800ed06b7f16d06babaddd8964a83c215893a7bc1a04079af",
+  "gate": {
+    "iterations": 5,
+    "objective": 0.2959081137677286,
+    "gradient_max": 2.856875995781204e-09,
+    "parameters": 120,
+    "penalty": 0.01,
+    "prior": [
+      0.9,
+      0.025,
+      0.025,
+      0.025,
+      0.025
+    ],
+    "fitted_weights_saved": false
+  },
+  "preprocessing_recipe": {
+    "numeric": [
+      "aux_account_months",
+      "aux_allocation_count",
+      "aux_orders90",
+      "aux_ecommerce_observed_days",
+      "risk_conditional_negative_months",
+      "risk_conditional_nonnegative_months",
+      "account_income_cv",
+      "employment_tenure_months",
+      "expert_logit_0",
+      "expert_logit_1",
+      "expert_logit_2",
+      "expert_logit_3",
+      "expert_logit_4"
+    ],
+    "categories": {
+      "employment_type": [
+        "salaried",
+        "self_employed",
+        "variable_income"
+      ]
+    },
+    "median": [
+      1.3862943611198906,
+      2.5649493574615367,
+      1.791759469228055,
+      6.081025902793531,
+      0.0,
+      1.6094379124341003,
+      0.29418254076054073,
+      3.8066624897703196,
+      -1.2891962292688581,
+      -1.2472507200351601,
+      -1.2369353556948979,
+      -1.2825876227941706,
+      -1.252685308172313
+    ],
+    "mean": [
+      0.9831137510941891,
+      1.9129596581419404,
+      1.7500886821287425,
+      6.004512392568504,
+      0.732443025454347,
+      1.3042707481606155,
+      0.2963421092046819,
+      3.7517323841005905,
+      -1.169842229909018,
+      -1.1379206816748724,
+      -1.132722841650595,
+      -1.1516804602626376,
+      -1.138263104166958
+    ],
+    "sd": [
+      0.6295811320956266,
+      1.454957687449651,
+      0.7034710692536538,
+      0.4221462529924394,
+      0.8263578146331222,
+      1.073914382199366,
+      0.07855102717321878,
+      0.6840042392224844,
+      0.579296766759286,
+      0.508916158944097,
+      0.4949038594631497,
+      0.5465158559696603,
+      0.510247088933878
+    ]
+  },
+  "calibration": "3-fold heldout correction-row monotone logistic; final calibration fits all6k",
+  "anchor_crossfit": "Head4000 and spline54000 exclude each2000 correction rows; frozen Kumo context50000 excludes all6000.",
+  "gate_training_rows": 6000,
+  "outer_labels_loaded": false,
+  "weights_saved": false,
+  "mean_routing_probabilities": [
+    0.9001858221440044,
+    0.02504922360462256,
+    0.024732973758848715,
+    0.025192704618590283,
+    0.02483927587393368
+  ],
+  "UTC": "2026-10-28T14:47:04.433222+00:00"
+}
