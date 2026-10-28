@@ -54,6 +54,11 @@ def dump(value, path):
 
 
 def run(args, cwd=None, timeout=180):
+    if args and args[0] == 'git':
+        # Collection/publication cannot spend the storage reserve on an implicit
+        # repack. Objects and peer history remain intact; explicit maintenance
+        # can run after the campaign has been collected and audited.
+        args = ['git', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', *args[1:]]
     return subprocess.run(args, cwd=cwd, text=True, capture_output=True,
                           timeout=timeout, check=True)
 
@@ -166,7 +171,11 @@ def collect_terminal(local, private, completion_hash):
         assert name in TERMINAL_DIRS
         target = destination / name
         target.mkdir(exist_ok=True)
-        run(['rsync', '-az', *filters, REMOTE_HOST + ':' + REMOTE_ROOT + '/' + name + '/',
+        # Reuse already collected identical files on this filesystem. Rsync's
+        # default temporary-file replacement preserves existing linked copies.
+        links = ['--link-dest=' + str((local / 'INCREMENTAL_EVIDENCE' / name).resolve())] \
+            if (local / 'INCREMENTAL_EVIDENCE' / name).is_dir() else []
+        run(['rsync', '-az', *links, *filters, REMOTE_HOST + ':' + REMOTE_ROOT + '/' + name + '/',
              str(target) + '/'], timeout=300)
     manifest = {str(path.relative_to(destination)): dict(bytes=path.stat().st_size, sha256=sha(path))
                 for path in sorted(destination.rglob('*')) if path.is_file()}

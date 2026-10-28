@@ -1,0 +1,63 @@
+{
+  "UTC": "2026-10-28T18:52:27.205118+00:00",
+  "design": "tabm_global128_pair",
+  "design_spec": {
+    "family": "neural",
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "max_seconds": 900,
+      "ensemble_members": 16,
+      "loss": "bce_pair",
+      "inner_split_seed": 20261029,
+      "pair_weight": 0.1
+    },
+    "view": "global128",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "hypothesis": "Pairwise-ranking objective control separates generic ranking pressure from KS-specific optimization.",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/tabm_global128_pair/s2026/fold0/RESULT.json": "1757ee2fb33114c8f3b5f72aa8f3227e37719490a90e341505b37e9c4e5a115c",
+    "composed/tabm_global128_pair/s2026/fold1/RESULT.json": "cc2334a7aa89c0a06e7fe1e3c199965595df45bfe1ac97789d21f09a1a558e18",
+    "composed/tabm_global128_pair/s2026/fold2/RESULT.json": "92e57cfe3dc8101cf1d5703882b7d514a9ccff1a83c2047305bb5641b5d2f617",
+    "composed/tabm_global128_pair/s2026/fold3/RESULT.json": "d2040cd7fd5edd05d956c87576daba0784759832fa620a0be6c8f31509123196",
+    "composed/tabm_global128_pair/s2026/fold4/RESULT.json": "02b6986690ce58418a48afde508ec081baa5050aec7f90e1808ce2b6f6f508c1",
+    "composed/tabm_global128_pair/s7731/fold0/RESULT.json": "a750de6527ab24ac85118a26ad3d33c2e213b2c65ca0c5281de33e05698d8b6c",
+    "composed/tabm_global128_pair/s7731/fold1/RESULT.json": "f5fd779133250d2bf52a15af8aace365291e09eb45bc83594f6c8baf80c4d4f2",
+    "composed/tabm_global128_pair/s7731/fold2/RESULT.json": "d645f768aba9a891494a769d2d98c0d3cac795f1973000dd28b2e342eebb1310",
+    "composed/tabm_global128_pair/s7731/fold3/RESULT.json": "48f5cc79b1091718fb71a1077b7041cf24cb021eb4092255558597896c8d509f",
+    "composed/tabm_global128_pair/s7731/fold4/RESULT.json": "346c1b445ce19584b484083b09faba195d86001bfddf55e4cf83c76c18c0290a"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

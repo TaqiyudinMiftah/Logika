@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-28T18:50:13.621546+00:00",
+  "design": "tabm_global512_bce",
+  "design_spec": {
+    "family": "neural",
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "max_seconds": 900,
+      "ensemble_members": 16,
+      "loss": "bce",
+      "inner_split_seed": 20261029
+    },
+    "view": "global512",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "hypothesis": "Wide-input stress test with the same16-member sharing and regularization; context-only selection still excludes stopping/meta/outer labels.",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/tabm_global512_bce/s2026/fold0/RESULT.json": "0e26262e508465af8014c0e36b2860888804ec79e93e2ddb3019122b019f13d6",
+    "composed/tabm_global512_bce/s2026/fold1/RESULT.json": "b293d7be35fbc47da9bb61c215024c9c8759cbf4b2c03037e68f72c36ac753ba",
+    "composed/tabm_global512_bce/s2026/fold2/RESULT.json": "947be95def5af8257d35ad94fe53f4848981b005eb6b208b119a1cfb802f55d0",
+    "composed/tabm_global512_bce/s2026/fold3/RESULT.json": "6a127916ff5701e2ca70bcf1f9c465b5e22f8fde08768db36672e1d4a31001fb",
+    "composed/tabm_global512_bce/s2026/fold4/RESULT.json": "bb2b38766f14db98154bdae1d7729da5c87f5bbdd37f61c56dbc402b1addbd10",
+    "composed/tabm_global512_bce/s7731/fold0/RESULT.json": "12c78b8c7ca76b78fedf540aa35b4e4ca54a8083bd0d025915c921914e6bba27",
+    "composed/tabm_global512_bce/s7731/fold1/RESULT.json": "5b90e7ce9003010076a6bd4410133b054d53a776c71f9de6f7a039eb82b2c31b",
+    "composed/tabm_global512_bce/s7731/fold2/RESULT.json": "08257945d8e23ce438d41ec91c7c475f888d108a881d4d7a65f4a1963842984b",
+    "composed/tabm_global512_bce/s7731/fold3/RESULT.json": "9397d0ad3e40e6747c990e93bb8dd9cad367a7978ba8809b60ac709f2140a05a",
+    "composed/tabm_global512_bce/s7731/fold4/RESULT.json": "d9cbe8b681a5d8994fe94742ccfe6f98f78d83040b5b6828c1554f1fb57d6d6d"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

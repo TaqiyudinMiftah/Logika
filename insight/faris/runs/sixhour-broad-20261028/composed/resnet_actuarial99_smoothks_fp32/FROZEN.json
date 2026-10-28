@@ -1,0 +1,67 @@
+{
+  "UTC": "2026-10-28T18:51:30.312885+00:00",
+  "design": "resnet_actuarial99_smoothks_fp32",
+  "design_spec": {
+    "execution_precision": "ieee_fp32_no_tf32",
+    "family": "neural",
+    "hypothesis": "Numerical stability replication: strict5e-6 batch replay rejected severalTF32L4ResNet runs. DisableTF32 via documented NVIDIA override, retain same features/model/loss/seeds and original strict replay check. Distinct recipe, no original model rewritten.",
+    "parameters": {
+      "batch_size": 1024,
+      "blocks": 3,
+      "dropout": 0.15,
+      "ensemble_members": 16,
+      "inner_split_seed": 20261029,
+      "kind": "resnet",
+      "ks_bandwidth": 0.03,
+      "ks_softmax_temperature": 0.02,
+      "ks_weight": 0.15,
+      "loss": "smooth_ks",
+      "lr": 0.001,
+      "max_epochs": 60,
+      "max_seconds": 900,
+      "min_epochs": 8,
+      "patience": 8,
+      "weight_decay": 0.0001,
+      "width": 128
+    },
+    "registration": "Runtime-consistency diagnostic motivates this precision variant; current bestcomplete developmentKS .5310093078669815 was visible but not used to choose numerical repair.",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9",
+      "https://docs.pytorch.org/docs/stable/cuda_environment_variables.html"
+    ],
+    "view": "actuarial99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/resnet_actuarial99_smoothks_fp32/s2026/fold0/RESULT.json": "9d8ae9dd0a375d46e0caee58dbb07516b7cd8af7b7cec94b012645665b4c3545",
+    "composed/resnet_actuarial99_smoothks_fp32/s2026/fold1/RESULT.json": "554a78d580d85b6222bd6282862c283a72cf79a00c1666c8fd2d76f36c134ba9",
+    "composed/resnet_actuarial99_smoothks_fp32/s2026/fold2/RESULT.json": "fd6dea97ce034bac9dc4c3a6f1f3aa967d2062907a3ca21c6dd6ae259a8e8773",
+    "composed/resnet_actuarial99_smoothks_fp32/s2026/fold3/RESULT.json": "21b636176b53b66a6d8c8f9308a3ea12e4c9b1fb19bf44d169f5fc169d6a4d0b",
+    "composed/resnet_actuarial99_smoothks_fp32/s2026/fold4/RESULT.json": "83039b596e4044de3802e29f79d7643f8138dbf2a3c602654c41c8bafcbb676f",
+    "composed/resnet_actuarial99_smoothks_fp32/s7731/fold0/RESULT.json": "4b527e82ccb05c4dbd34a2d8ee382af1b4a4f9535a299f9317b5788348b6d515",
+    "composed/resnet_actuarial99_smoothks_fp32/s7731/fold1/RESULT.json": "eca1749c1a45b36706ca78c7d7644aada55085592cff46d8a1286788f4182a47",
+    "composed/resnet_actuarial99_smoothks_fp32/s7731/fold2/RESULT.json": "300de1b4a500e88b443d8b9205f0694220ec75ee9ebd6a6069d63133d148788d",
+    "composed/resnet_actuarial99_smoothks_fp32/s7731/fold3/RESULT.json": "21c0898070770db8e228e99699f639041ee280f7b726f77c57c3fa1444c266d2",
+    "composed/resnet_actuarial99_smoothks_fp32/s7731/fold4/RESULT.json": "1a775096d33ba857db880a997de4f8dec06621c2d8bc3da24a946cbe22e42324"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

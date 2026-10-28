@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-28T18:41:10.931428+00:00",
+  "design": "tabm_global256_bce",
+  "design_spec": {
+    "family": "neural",
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "max_seconds": 900,
+      "ensemble_members": 16,
+      "loss": "bce",
+      "inner_split_seed": 20261029
+    },
+    "view": "global256",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "hypothesis": "Tests regularized efficient ensembling on a broad selected actuarial bank.",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/tabm_global256_bce/s2026/fold0/RESULT.json": "d1bc32cedebed59321e9cf2ba9e18cccf0c2de474cc84033c53c9d579fdeaf75",
+    "composed/tabm_global256_bce/s2026/fold1/RESULT.json": "c9630bde47a7ec97025273295a2cddb7a83a918b0fad70a229a13c8ef6b88c00",
+    "composed/tabm_global256_bce/s2026/fold2/RESULT.json": "4452edc6976c59473a3ef77e6b210e9c80cc3e4414263ab625032c683ec49349",
+    "composed/tabm_global256_bce/s2026/fold3/RESULT.json": "a02db0d4910ba94d8f7f3a7414601deddeb2a8b34f0b73c73d6f31e62399b6db",
+    "composed/tabm_global256_bce/s2026/fold4/RESULT.json": "c2bd1a71c7bdb827ea6cb4818f3baed7baf727bab10ded5b5ecab59f06ec18b1",
+    "composed/tabm_global256_bce/s7731/fold0/RESULT.json": "89c2ee0bfc2da0649d8776ea8238cacaa1501abcf0c6c319eec28b2d1405c1fb",
+    "composed/tabm_global256_bce/s7731/fold1/RESULT.json": "9fab0245aae1d39432fe97275d90c3b2e34533a0d8b2a98f8667ab1a6fa5a252",
+    "composed/tabm_global256_bce/s7731/fold2/RESULT.json": "d7f8b1b08c527ead4b152b02b65f70ba6ff99b51653cafb686fc002f1b3f83ab",
+    "composed/tabm_global256_bce/s7731/fold3/RESULT.json": "cdb026b5cac4cf0e5090b22ecd222982acfa790b56669101a7c514a95bda5311",
+    "composed/tabm_global256_bce/s7731/fold4/RESULT.json": "27d264195b7c9610cebdd17012e28b4cbd5fb286d520a612eb244e1ebd072e79"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

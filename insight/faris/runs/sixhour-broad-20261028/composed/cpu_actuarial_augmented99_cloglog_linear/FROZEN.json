@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-28T18:44:28.827313+00:00",
+  "design": "cpu_actuarial_augmented99_cloglog_linear",
+  "design_spec": {
+    "family": "glm",
+    "hypothesis": "Actuarial Bernoulli link and additive response-shape controls: logit versuscloglog, linear versusridge-penalizedquadratic splines on matched reduced or actuarial views; one observed horizon, no invented survival/exposure outcome.",
+    "iterations_per_block": 25,
+    "knots": 4,
+    "link": "cloglog",
+    "optimization_blocks": 8,
+    "parameters": {},
+    "registration": "Additional matchedCPUcontrols proposed using measured runtime only; candidate predictive results were not consulted. Append-only declaration before dispatch.",
+    "resource": "cpu",
+    "ridge": 0.003,
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "spline": false,
+    "view": "augmented99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s2026/fold0/RESULT.json": "45bc3afc4cf0a6581e3f7cd1f841403c037e1560555f2b66b97de49a97f1e572",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s2026/fold1/RESULT.json": "9613a14a676db182ea4bda6715e037563b506207861a7eb95fcab4689cae61a2",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s2026/fold2/RESULT.json": "87e368e099a1f987c0aadfac825b6adcd2179c5368ef20cd8387b2d059419443",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s2026/fold3/RESULT.json": "892203fb0d503364ea769ef325817d3dac96c00b8aef96430428e2738007f336",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s2026/fold4/RESULT.json": "cf7e75d5dc82195fc1f8d9dafb529ac3199515df6455d569263c5f90ddcacd44",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s7731/fold0/RESULT.json": "00e4d2768a24bc89e0bd025213896ef7d7a2932b1a32f9af05f7b48a73badc9c",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s7731/fold1/RESULT.json": "c1916e02c7be185a1c16b362e8bf2749eaffd9d429edbd0ddfb8f7ab36e177ee",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s7731/fold2/RESULT.json": "110b988e1bb47efba7dd1c71a6bf11c3b32489acefc36e94f05ab136ed7f88dc",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s7731/fold3/RESULT.json": "eb624c86c1b3cdb64cdcd5a6e24bff069cd7bb22a2aa7793bd8ea3b69856a622",
+    "composed/cpu_actuarial_augmented99_cloglog_linear/s7731/fold4/RESULT.json": "b35d885a765e7ecc6170cdee21c3df2a3d6705cb5a155a2ede80193d4288e00d"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

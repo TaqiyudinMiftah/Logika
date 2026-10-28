@@ -1,0 +1,65 @@
+{
+  "UTC": "2026-10-28T18:56:54.286623+00:00",
+  "design": "tabm_global128_smoothks",
+  "design_spec": {
+    "family": "neural",
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "max_seconds": 900,
+      "ensemble_members": 16,
+      "loss": "smooth_ks",
+      "inner_split_seed": 20261029,
+      "ks_weight": 0.15,
+      "ks_bandwidth": 0.03,
+      "ks_softmax_temperature": 0.02
+    },
+    "view": "global128",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "hypothesis": "Matched TabM objective comparison at fixed128 inputs; adapted smooth threshold/CDF objective, not exact DMKS.",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_005",
+    "fixed_010",
+    "fixed_020",
+    "fixed_040",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/tabm_global128_smoothks/s2026/fold0/RESULT.json": "5597e2950e86f6d0f97ad5a71277422dc2e5adca152b6d7fab033548a96bbd27",
+    "composed/tabm_global128_smoothks/s2026/fold1/RESULT.json": "c347179972815f4d68eb63fbb723530c803be1d4fe8afa84c4b5a98eaf0c604e",
+    "composed/tabm_global128_smoothks/s2026/fold2/RESULT.json": "47a3fb504b745024711c41e089e1db2bad49db32a9d61d52ecba61f4c2398cdf",
+    "composed/tabm_global128_smoothks/s2026/fold3/RESULT.json": "2828c8a4caa73786fe90191778c5a55a63435a538ad2b465236b6c2330b8580f",
+    "composed/tabm_global128_smoothks/s2026/fold4/RESULT.json": "597269a2fa4f0e8e6ffd52d083730b459b00d1ae50a2919fa2c04d0df93c731a",
+    "composed/tabm_global128_smoothks/s7731/fold0/RESULT.json": "23f46bcc52baaa1b7a0288fff6438075423166244603942a1c112b29543b7edd",
+    "composed/tabm_global128_smoothks/s7731/fold1/RESULT.json": "170059ae803033061f1fe8d79cbc08bc793c6c2332910fe67bf41e6fa3a4d023",
+    "composed/tabm_global128_smoothks/s7731/fold2/RESULT.json": "a52847e4a6cdef8d73ffb5d3354bae039541aa81f9655fc16b2c875bed4c8889",
+    "composed/tabm_global128_smoothks/s7731/fold3/RESULT.json": "d7bf6d837d327edd729d0c3cbd1ed2224c5d8e4f9396e08e423f471a70838bed",
+    "composed/tabm_global128_smoothks/s7731/fold4/RESULT.json": "b7e4881f85d7cb240c540f4fe5be89901c1d1ff6460bd01c6a7d47b9e502b29d"
+  },
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

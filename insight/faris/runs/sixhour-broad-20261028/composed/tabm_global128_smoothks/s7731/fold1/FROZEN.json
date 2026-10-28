@@ -1,0 +1,123 @@
+{
+  "UTC": "2026-10-28T18:56:53.489133+00:00",
+  "design": "tabm_global128_smoothks",
+  "design_spec": {
+    "family": "neural",
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "max_seconds": 900,
+      "ensemble_members": 16,
+      "loss": "smooth_ks",
+      "inner_split_seed": 20261029,
+      "ks_weight": 0.15,
+      "ks_bandwidth": 0.03,
+      "ks_softmax_temperature": 0.02
+    },
+    "view": "global128",
+    "resource": "gpu",
+    "sources": [
+      "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+    ],
+    "hypothesis": "Matched TabM objective comparison at fixed128 inputs; adapted smooth threshold/CDF objective, not exact DMKS.",
+    "registration": "Before any actual-data fitting in this campaign."
+  },
+  "seed": 7731,
+  "fold": 1,
+  "task_id": "tabm_global128_smoothks__s7731__f1",
+  "inputs": {
+    "raw_prediction_sha256": "0a7670599ea2a17f0283a73877bf470b7322600a395de5e323dfe9c09cf76de1",
+    "raw_result_sha256": "1c4d05f2ac2f70c109520848bd6940a19f537c7b35171ec2dba83331660b6afc",
+    "roles_sha256": "e15643ad78b1f23cc965d0ffedc3bb8478d4c4b803cf104dcfdacea82c497110",
+    "anchor_sha256": "13730275c8e2486bb4c2b39e02e96d0d7344e317a1d4d99b7d643ddcffaaeedd"
+  },
+  "source_sha256": "cf2088943af196adc56584ff0bf60cc3f0baadbcea5b070d2b2d213766df61ac",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "eab82dbf2c0c7ad97518d9d4ef8b199d2281268bb63b1995d3d31b3b1a18c9e4",
+  "config_sha256": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+  "prediction_sha256": "1fe5b9485243ee2c0ce72e4d5ca23a9f4d0a5a1960ccbbc895a76d3b9cca2ae3",
+  "correction_rows_sha256": "bb705deff9448f216bdc34d21f2dd96c73fdb5f77a2af31610d852e08aa671f7",
+  "validation_rows_sha256": "88b81514185defbda6c0e3c8ce79812f6296cb90aface53516abb683557e4b75",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "12e6076e27300a3deaae501d74d8fbbbbd6dcb6ef8282107d0f6a526102e6c69",
+      "heldout_global_rows_sha256": "830f233dd4da5fa37a6e94a05c5aaf61f0485d9f7aa578ce5924eaa821a92055"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "072396db02476462816b6508005d9a64cebc656d8ccfd4ea5914efc28fd651b7",
+      "heldout_global_rows_sha256": "ac0ad8e42e0e6c267033edb5dc7c7dca7504c27b09081e23d1c58b43ffbb46e9"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "73bf2bdceaee052d14ea3cf9b0530704f905b0df7c9dfa2a767a7726098f563b",
+      "heldout_global_rows_sha256": "752dd8380ae3256fec6867a487a6bfabedd63dba454a3aee1439a024eff8bd4b"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_005": 0.05,
+    "fixed_010": 0.1,
+    "fixed_020": 0.2,
+    "fixed_040": 0.4
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.0,
+  "meta_weight_training_KS": [
+    0.5282214505031622,
+    0.5275730487307062,
+    0.5281149611609706,
+    0.5264324295543421,
+    0.5277931267045689,
+    0.5271281599233276,
+    0.5266525075282049,
+    0.5261969697866071,
+    0.5276369423360212,
+    0.527493773331519
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 6,
+    "objective": 0.295921366858114,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}

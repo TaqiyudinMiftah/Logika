@@ -1,0 +1,376 @@
+{
+  "status": "complete",
+  "task_id": "tabm_global32_bce__s2026__f2",
+  "attempt": 1,
+  "pilot": false,
+  "seconds": 10.998157262802124,
+  "UTC": "2026-10-28T18:57:16.824290+00:00",
+  "audit": {
+    "parameters": {
+      "kind": "tabm",
+      "width": 128,
+      "blocks": 3,
+      "dropout": 0.15,
+      "cat_embedding_dim": 8,
+      "ensemble_members": 16,
+      "loss": "bce",
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "predict_batch_size": 1024,
+      "max_epochs": 60,
+      "min_epochs": 8,
+      "patience": 8,
+      "min_delta": 1e-06,
+      "early_stop_fraction": 0.15,
+      "inner_split_seed": 20261031,
+      "gradient_clip": 5.0,
+      "max_seconds": 900.0,
+      "threads": 2,
+      "pair_weight": 0.1,
+      "ks_weight": 0.15,
+      "ks_bandwidth": 0.03,
+      "ks_softmax_temperature": 0.02,
+      "family": "neural",
+      "parameters": {
+        "kind": "tabm",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global32",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched TabM feature-width/book-expansion control.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "seed": 2028,
+    "device": "cuda",
+    "seconds": 7.967797606000204,
+    "selected_epochs": 10,
+    "inner_train_rows": 42500,
+    "inner_stop_rows": 7500,
+    "refit_context_rows": 50000,
+    "inner_train_rows_sha256": "d6e20198e737fae1c4c971d1d993dca137c8a3f1cd1174b3353f6aeff6fdbf41",
+    "stopping_rows_sha256": "09987c369d2cc2f1826cb31c7c4716b7f58d1c380689061f6219cb5ccd9a91dd",
+    "context_rows_sha256": "e3d6ad9abd9c3295e0320a51a8cdd6a8575d4e3f77691ee69ca41d206dcef0cb",
+    "prediction_rows_sha256": "738e836f118d30607f364d1c6935df5687b018d6a231ff5e13d16b097ca99d00",
+    "inner_preprocessing": {
+      "numeric_columns": [
+        "f541e8c044865be3f",
+        "f0761de7a1cc1c50b",
+        "fdeb25a5645769dbb",
+        "f9de4af5bf8d1c782",
+        "fc4678c080cd39072",
+        "f2b53d91321d00bb7",
+        "fac53d5a99ac38da8",
+        "f5ae1baebbd40dffb",
+        "ff93d50b0f1ca3787",
+        "f7616800f0a6a1af0",
+        "f40a490c91e7c81fe",
+        "f1ec94a695e72c3d2",
+        "fb794d1ed4e1001bf",
+        "f35c906391f5f70a5",
+        "f0edf46d74355b746",
+        "f71786509c0ca0fc3",
+        "fa19883b4a168c0a7",
+        "f20e607e5776ee304",
+        "f433c5d53360676b9",
+        "fd7564240b09f7467",
+        "f36f4d1b71b011ed3",
+        "f14e2589d7bf06555",
+        "f599e471480205682",
+        "fa102e02f3c6a35a2",
+        "f8045b26e9b319e17",
+        "f35b728df42398b78",
+        "fad6f540a9f0f409e",
+        "fada642ded5c724e3",
+        "f499a937d5aa2cd02",
+        "f612f3c56649c43f0",
+        "f88278c116382a75b",
+        "fd65d7c807a1f3079"
+      ],
+      "categorical_columns": [],
+      "fit_rows": 42500,
+      "fit_rows_sha256": "d6e20198e737fae1c4c971d1d993dca137c8a3f1cd1174b3353f6aeff6fdbf41",
+      "numeric_transform": "Training-only median; 256-quantile Gaussian mapping; clip[-5,5]; missing masks.",
+      "categorical_transform": "Training-only sorted vocabulary; unknown index0.",
+      "categorical_cardinalities": [],
+      "numeric_median_sha256": "137576a345f0b8c20232f0d92b8b1b6cd571cb7f562bb0cad669bf76d6a6a414",
+      "quantile_grid_sha256": "656d494b862639bab21a8d7b5b5ec386e0f4b3eb5fb2243308e1a34dc01ae03b",
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "fitted_preprocessor_serialized": false
+    },
+    "full_context_preprocessing": {
+      "numeric_columns": [
+        "f541e8c044865be3f",
+        "f0761de7a1cc1c50b",
+        "fdeb25a5645769dbb",
+        "f9de4af5bf8d1c782",
+        "fc4678c080cd39072",
+        "f2b53d91321d00bb7",
+        "fac53d5a99ac38da8",
+        "f5ae1baebbd40dffb",
+        "ff93d50b0f1ca3787",
+        "f7616800f0a6a1af0",
+        "f40a490c91e7c81fe",
+        "f1ec94a695e72c3d2",
+        "fb794d1ed4e1001bf",
+        "f35c906391f5f70a5",
+        "f0edf46d74355b746",
+        "f71786509c0ca0fc3",
+        "fa19883b4a168c0a7",
+        "f20e607e5776ee304",
+        "f433c5d53360676b9",
+        "fd7564240b09f7467",
+        "f36f4d1b71b011ed3",
+        "f14e2589d7bf06555",
+        "f599e471480205682",
+        "fa102e02f3c6a35a2",
+        "f8045b26e9b319e17",
+        "f35b728df42398b78",
+        "fad6f540a9f0f409e",
+        "fada642ded5c724e3",
+        "f499a937d5aa2cd02",
+        "f612f3c56649c43f0",
+        "f88278c116382a75b",
+        "fd65d7c807a1f3079"
+      ],
+      "categorical_columns": [],
+      "fit_rows": 50000,
+      "fit_rows_sha256": "e3d6ad9abd9c3295e0320a51a8cdd6a8575d4e3f77691ee69ca41d206dcef0cb",
+      "numeric_transform": "Training-only median; 256-quantile Gaussian mapping; clip[-5,5]; missing masks.",
+      "categorical_transform": "Training-only sorted vocabulary; unknown index0.",
+      "categorical_cardinalities": [],
+      "numeric_median_sha256": "87d29d16817fb2927e387fa210dc296f9bbb85b7cdc43648135356f8e6eedff4",
+      "quantile_grid_sha256": "ed01d2cd7443bc09aa1415541a533aa6169d11804416bb71259287f8e585e3eb",
+      "vocabulary_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "fitted_preprocessor_serialized": false
+    },
+    "early_stopping_metric": "Exact tied binary KS; internal context holdout only.",
+    "inner_split_seed": 20261031,
+    "inner_trace": [
+      {
+        "epoch": 1,
+        "training_objective": 0.438672099537008,
+        "context_inner_stop_KS": 0.4381618860535817
+      },
+      {
+        "epoch": 2,
+        "training_objective": 0.3329728097691255,
+        "context_inner_stop_KS": 0.4962260788272351
+      },
+      {
+        "epoch": 3,
+        "training_objective": 0.31743048578150135,
+        "context_inner_stop_KS": 0.5066130497858929
+      },
+      {
+        "epoch": 4,
+        "training_objective": 0.3139282132513383,
+        "context_inner_stop_KS": 0.5063978816920716
+      },
+      {
+        "epoch": 5,
+        "training_objective": 0.31136684726827285,
+        "context_inner_stop_KS": 0.5086058909420034
+      },
+      {
+        "epoch": 6,
+        "training_objective": 0.30960289682780995,
+        "context_inner_stop_KS": 0.5121127826049543
+      },
+      {
+        "epoch": 7,
+        "training_objective": 0.3085601124987883,
+        "context_inner_stop_KS": 0.5136610540753043
+      },
+      {
+        "epoch": 8,
+        "training_objective": 0.3077332565532011,
+        "context_inner_stop_KS": 0.5167842469699411
+      },
+      {
+        "epoch": 9,
+        "training_objective": 0.3071023673758787,
+        "context_inner_stop_KS": 0.5155622860148457
+      },
+      {
+        "epoch": 10,
+        "training_objective": 0.3067228622632868,
+        "context_inner_stop_KS": 0.5178028506062347
+      },
+      {
+        "epoch": 11,
+        "training_objective": 0.30626726582751557,
+        "context_inner_stop_KS": 0.5171980783565937
+      },
+      {
+        "epoch": 12,
+        "training_objective": 0.3058125804003547,
+        "context_inner_stop_KS": 0.5153831559268666
+      },
+      {
+        "epoch": 13,
+        "training_objective": 0.30567840086432063,
+        "context_inner_stop_KS": 0.5148345605687245
+      },
+      {
+        "epoch": 14,
+        "training_objective": 0.3052242749045877,
+        "context_inner_stop_KS": 0.5142481101623942
+      },
+      {
+        "epoch": 15,
+        "training_objective": 0.30500226050545187,
+        "context_inner_stop_KS": 0.5161546418086882
+      },
+      {
+        "epoch": 16,
+        "training_objective": 0.30466814889627347,
+        "context_inner_stop_KS": 0.5150621451183448
+      },
+      {
+        "epoch": 17,
+        "training_objective": 0.3043791639468249,
+        "context_inner_stop_KS": 0.5163775323323432
+      },
+      {
+        "epoch": 18,
+        "training_objective": 0.3042398911195643,
+        "context_inner_stop_KS": 0.5156551065929673
+      }
+    ],
+    "refit_trace": [
+      {
+        "epoch": 1,
+        "training_objective": 0.4264934313964844
+      },
+      {
+        "epoch": 2,
+        "training_objective": 0.3267579975986481
+      },
+      {
+        "epoch": 3,
+        "training_objective": 0.31596912872314453
+      },
+      {
+        "epoch": 4,
+        "training_objective": 0.3119287718772888
+      },
+      {
+        "epoch": 5,
+        "training_objective": 0.3099794844818115
+      },
+      {
+        "epoch": 6,
+        "training_objective": 0.3083398457717896
+      },
+      {
+        "epoch": 7,
+        "training_objective": 0.3073557920742035
+      },
+      {
+        "epoch": 8,
+        "training_objective": 0.30676838194847106
+      },
+      {
+        "epoch": 9,
+        "training_objective": 0.3060855840015411
+      },
+      {
+        "epoch": 10,
+        "training_objective": 0.30582733530044554
+      }
+    ],
+    "KS_surrogate": {
+      "used": false,
+      "method": "BCE minus weighted smooth maximum of class-conditional sigmoid CDF gaps.",
+      "threshold_scale": "Training prevalence times fixed multipliers [.35,.6,1,1.5,2.2,3.2], clipped [.015,.75].",
+      "inner_training_thresholds": [
+        0.047534119337797165,
+        0.08148705959320068,
+        0.13581176102161407,
+        0.2037176489830017,
+        0.29878589510917664,
+        0.4345976412296295
+      ],
+      "full_context_thresholds": [
+        0.047536998987197876,
+        0.08149199932813644,
+        0.13582000136375427,
+        0.2037300020456314,
+        0.29880398511886597,
+        0.43462398648262024
+      ],
+      "not_exact_DMKS_reproduction": true
+    },
+    "parameter_count": 60432,
+    "precision": {
+      "model_parameters": "float32",
+      "AMP_used": false,
+      "float32_matmul_precision": "high",
+      "CUDA_TF32_matmul_allowed": true,
+      "CUDA_cuDNN_TF32_allowed": true,
+      "bitwise_backend_equivalence_claimed": false
+    },
+    "peak_CUDA_bytes": 163024384,
+    "prediction_repeat_max_abs": 0.0,
+    "versions": {
+      "torch": "2.7.1+cu126",
+      "tabm": "0.0.3",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2"
+    },
+    "outer_labels_loaded": false,
+    "correction_used_for_early_stopping": false,
+    "stopping_preprocessing_fit_excludes_stopping_rows": true,
+    "fitted_weights_saved": false,
+    "weights_saved": false,
+    "KV_cache_saved": false,
+    "source_references": [
+      {
+        "id": "TABM",
+        "url": "https://arxiv.org/abs/2410.24210v3",
+        "implementation": "https://github.com/yandex-research/tabm",
+        "use": "Official TabM.make, per-member BCE, mean member probabilities."
+      },
+      {
+        "id": "RESNET",
+        "url": "https://arxiv.org/abs/2106.11959",
+        "use": "Task-specific residual MLP and context-only numerical transforms."
+      },
+      {
+        "id": "DMKS_MOTIVATION",
+        "url": "https://doi.org/10.1016/j.csda.2018.10.004",
+        "use": "Objective mismatch motivates a distinct smooth KS surrogate; not exact DMKS."
+      }
+    ],
+    "limitation": "Seeded GPU execution is not claimed bitwise identical across hardware/backends."
+  },
+  "prediction_sha256": "7d35ad54f0bb405a2bf1d9d09160216ba8cc928202be49df85d10fe0a80ee322",
+  "start_sha256": "31d9ac3351cde0b6fcf50668924db2c0efa15305d6118cd0bb6fb7d3ee41c15c",
+  "clock_sha256": "67493c438f7f1baeee5db30ba8539cd4dce0641dec23127ffd3b1a93c779cb8d",
+  "source_seal_sha256": "4929f7c9afca958614b320c9ea1ced24017ce80fb8be97836f85af2fee120ef0",
+  "max_RSS_KiB": 1440940,
+  "peak_torch_CUDA_bytes": 163024384,
+  "GPU_memory_measurement_scope": "PyTorch allocator only; excludes third-party CUDA allocators and parallel processes.",
+  "outer_labels_loaded": false,
+  "correction_labels_used_for_training": false,
+  "weights_saved": false,
+  "fitted_weights_saved": false,
+  "KV_cache_saved": false
+}
