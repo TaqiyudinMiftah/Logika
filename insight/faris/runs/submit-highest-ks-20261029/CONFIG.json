@@ -1,0 +1,25 @@
+{
+  "id": "submit-highest-ks-20261029",
+  "authorized_UTC": "2026-10-28T23:34:55.898067+00:00",
+  "authorization": "Human: submit the highest ks model. Single fixed winner refit and one Kaggle submission; no new model search.",
+  "cohort": "kumo_large_global99_e2__stack",
+  "development_KS": 0.5312029153339166,
+  "supported_gain": false,
+  "model": "KumoTabular Large v1.0.1,concat_context_vocab,2estimators,float16AMP,CUDA RNG",
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "refit_context_rows": 70000,
+  "test_rows": 30000,
+  "feature_policy": "Keep each frozen global99 column list and original feature formulas. Refit label-free cohort statistics on all70k training covariates using previously audited70k prior source; no new selection.",
+  "postprocessing": "Regenerate exact original6k-meta calibrator and ridge-logit stack for each seed/fold from retained raw/metaOOF; apply unchanged to test. Mean ten final probabilities.",
+  "anchor": "Exact hash-verified candidate_B maturity per-fold full-data predictions; pooled CSV sha a3c2884102f5ca5705cfcdc9a0bd025d558055d334edf31a2d543e8f40d58b57, matched development baseline .5306361042400267",
+  "execution": "Use idle lab2001/2003 CUDA only first; no paid Colab allocation admitted by this plan. Fullsize first fit qualifies deployment.",
+  "pretrained_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "old_campaign_clock_unchanged": true,
+  "no_fitted_weights_or_KV_saved": true,
+  "limitations": "Adaptive development point only; conditional delta CI crosses0. Refitting changes training size and preprocessing statistics, so .5312029 is not a score measured on the new fit or test. Public improvement unknown until Kaggle evaluates.",
+  "peer_HEAD_inspected": "d628e2969203fb942ef6b20433e37c181963a968"
+}

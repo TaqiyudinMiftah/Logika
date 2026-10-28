@@ -22,9 +22,11 @@ missing files found during a later root/vendor audit. The earlier universal
 completeness claim was too broad; coverage is limited to documented accessible
 roots. Node2002 remains unverified beyond surviving mirrors.
 
-## Active six-hour broad campaign —29October
+## Completed six-hour broad campaign —29October
 
-[New study](runs/sixhour-broad-20261028/README.md) compares expanded/reduced actuarial views and model families under a fresh immutable six-hour clock ending29October06:25WIB.108designs/1080planned fits (including8precisionreplications) are preregistered, not yet a result. Source and all partial/negative outcomes are retained. One A10080GB andtwoL4runtimes are currently granted; node2001/2003 CPU spillover supplements them. Startup/transport/metadata repairs are explicitly recorded with preserved attempts.
+[Study](runs/sixhour-broad-20261028/README.md) finished 1,058 fits from114registered designs;104designs completed bothseeds andallfivefolds. All728composition cohorts passed artifact/arithmetic replay. The selected KumoLarge global99 two-estimator stack reached developmentKS0.5312029153 versus0.5306361042; conditional delta95%interval[-0.0006740092,0.0014536174] crosseszero, so no supported gain or0.54target attainment. Eight originalTF32ResNets andtwoGOSSdesigns remain incomplete for documented numerical/runtime limits. AllownedColab sessions were released, with28.56CU observed accountbalance decrease and0CU/hour currentusage. Final evidence commitd628e296 is archived; originalclock was neverextended.
+
+The human then explicitly requested submitting the highestKSmodel. [Separate fixed-winner submission refit](runs/submit-highest-ks-20261029/README.md) retains the completedcampaign seals and prepares one exploratory full-data predictionfile. This is a new authorized deployment, not an independent gain claim or more model search.
 
 ## Completed MoE campaign — 28 October
 
