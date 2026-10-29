@@ -1,0 +1,65 @@
+{
+  "UTC": "2026-10-29T01:52:19.337968+00:00",
+  "design": "cpu_goss_complete_global99_a20_b10",
+  "design_spec": {
+    "admission_group": "cpu_goss",
+    "family": "lightgbm",
+    "hypothesis": "Resource-feasibility continuation of prior two pilot-only GOSS designs, now full two-seed/five-fold cohorts plus matched bagging and three views. Allfits are new under42500-frozen encoder; no oldoutputsmerged and priorpartial execution provides no model-quality conclusion.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "objective_kind": "binary_native",
+    "parameters": {
+      "bagging_fraction": 1.0,
+      "bagging_freq": 0,
+      "data_sample_strategy": "goss",
+      "feature_fraction": 0.85,
+      "lambda_l1": 0.1,
+      "lambda_l2": 25.0,
+      "learning_rate": 0.035,
+      "max_depth": 7,
+      "min_data_in_leaf": 150,
+      "n_estimators": 1400,
+      "num_leaves": 31,
+      "other_rate": 0.1,
+      "top_rate": 0.2
+    },
+    "patience": 100,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "sources": [
+      "https://proceedings.neurips.cc/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html",
+      "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html"
+    ],
+    "stopping_metric": "logloss",
+    "view": "global99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_goss_complete_global99_a20_b10/s2026/fold0/RESULT.json": "6863a62bb911e66fa9d2794a295296a2949460535d008cf906fa4fb583e69ac7",
+    "composed/cpu_goss_complete_global99_a20_b10/s2026/fold1/RESULT.json": "f05e786dad6c9d7e945862b4a6f257817e1cc86123b31823687a7a244cc1e88a",
+    "composed/cpu_goss_complete_global99_a20_b10/s2026/fold2/RESULT.json": "c3eddb029db319ab67c8ef53624a0b72c1e4deee704d80275a82d0641a280c68",
+    "composed/cpu_goss_complete_global99_a20_b10/s2026/fold3/RESULT.json": "fef388f1fb0100f3614845cdfa4e3e5f19cf48d1d0a8a93f15ad3b6d2d6d5fa1",
+    "composed/cpu_goss_complete_global99_a20_b10/s2026/fold4/RESULT.json": "d4a2b6e6ce621d03b1fa5c0314a0132aec692d1c961f38b13badc3712b2af246",
+    "composed/cpu_goss_complete_global99_a20_b10/s7731/fold0/RESULT.json": "fabb596de18fc11135c8a4aa544343aa6d8503407956fbe3e5aad4ea863c23a7",
+    "composed/cpu_goss_complete_global99_a20_b10/s7731/fold1/RESULT.json": "f1826977da6358878388f6e3b6e45e278fc5614e2f076639f5c2b6701297cc76",
+    "composed/cpu_goss_complete_global99_a20_b10/s7731/fold2/RESULT.json": "60179902d9589eddc96db9f12e0dfdb9bad5d168cefaeebe28e5f4c56d0c1a95",
+    "composed/cpu_goss_complete_global99_a20_b10/s7731/fold3/RESULT.json": "13856e81951b6d4a35e7b6c595200ac32f9a13625298d6b6385ea4cc3e25b461",
+    "composed/cpu_goss_complete_global99_a20_b10/s7731/fold4/RESULT.json": "60ce652d21b0ff9eaeebdb40414f1232d04012c2116ab6c062b3b1c78f38fcca"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

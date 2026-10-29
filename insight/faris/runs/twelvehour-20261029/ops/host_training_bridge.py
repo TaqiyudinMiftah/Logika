@@ -21,4 +21,4 @@ while time.time()<C['model_deadline_epoch']-150:
  state=call(['systemctl','--user','show',unit,'-p','ActiveState','--value']).stdout.strip()
  if state not in ['active','activating']:break
  time.sleep(20)
-call(['systemctl','--user','stop',unit]);count=collect();p=P/'FINAL_STATE.json';p.write_text(json.dumps(dict(epoch=time.time(),collected=True,verified_fits=count,original_clock_preserved=True))+'\n');call(['scp','-q',str(p),LAB+':'+CANON+'/BACKEND_COLLECTION_host119_COMPLETE.json'])
+subprocess.run(['systemctl','--user','stop',unit],capture_output=True);count=collect();p=P/'FINAL_STATE.json';p.write_text(json.dumps(dict(epoch=time.time(),collected=True,verified_fits=count,original_clock_preserved=True))+'\n');call(['scp','-q',str(p),LAB+':'+CANON+'/BACKEND_COLLECTION_host119_COMPLETE.json'])

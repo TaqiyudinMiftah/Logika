@@ -1,0 +1,63 @@
+{
+  "UTC": "2026-10-29T01:30:21.244806+00:00",
+  "design": "host119_catcontrol_core99_symmetric_plain",
+  "design_spec": {
+    "admission_group": "host119_cpu_lossguide",
+    "family": "catboost",
+    "hypothesis": "Intentionalcore99v2matchedgrowthcontrol forLossguide; existingglobal99/actuarial99v2controls remain primaryreferences.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "parameters": {
+      "boost_from_average": false,
+      "boosting_type": "Plain",
+      "bootstrap_type": "Bernoulli",
+      "border_count": 64,
+      "depth": 8,
+      "grow_policy": "SymmetricTree",
+      "iterations": 1120,
+      "l2_leaf_reg": 30.0,
+      "learning_rate": 0.035,
+      "random_strength": 1.0,
+      "subsample": 0.85
+    },
+    "patience": 100,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "resource_owner": "host119",
+    "sources": [
+      "https://proceedings.neurips.cc/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html",
+      "https://catboost.ai/docs/en/references/training-parameters/common"
+    ],
+    "stopping_metric": "ks",
+    "view": "core99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/host119_catcontrol_core99_symmetric_plain/s2026/fold0/RESULT.json": "7cd87b94a7ee0dc868fa06cb799858f3bc68f093b85d62220cb58296f4878a51",
+    "composed/host119_catcontrol_core99_symmetric_plain/s2026/fold1/RESULT.json": "945db3db364320be53e8b969fbeae486fb4552cb29b3e8d9d12571e0a96cc744",
+    "composed/host119_catcontrol_core99_symmetric_plain/s2026/fold2/RESULT.json": "459a06f94cfb17f72ed6eb53654d2079a38a5156208d8d9fb163ffa3b41a5681",
+    "composed/host119_catcontrol_core99_symmetric_plain/s2026/fold3/RESULT.json": "6683030c6b207930fdffa1dd51dd21a15e509fd1da29543cd0c74ec635f431a5",
+    "composed/host119_catcontrol_core99_symmetric_plain/s2026/fold4/RESULT.json": "5ec708d82040155e1ab4fd5c3c13cf56997b1c61c94d1613e74e968193730536",
+    "composed/host119_catcontrol_core99_symmetric_plain/s7731/fold0/RESULT.json": "a44d9e30d6642f8bf92299daed07792f969adfea39e0140b7d4ace1bdff8ded8",
+    "composed/host119_catcontrol_core99_symmetric_plain/s7731/fold1/RESULT.json": "6824a52fbd317e2739cd5fc9695658338423507184bb09263c318c8f8ec020f8",
+    "composed/host119_catcontrol_core99_symmetric_plain/s7731/fold2/RESULT.json": "6a9802e431c9add6806b93792ee6bff4bd126bb5b860adfa659d26486fda4856",
+    "composed/host119_catcontrol_core99_symmetric_plain/s7731/fold3/RESULT.json": "a857da719b1f92a9a3d47367f6976247a9e9ebd3dddb426c391dfaa79ed80db8",
+    "composed/host119_catcontrol_core99_symmetric_plain/s7731/fold4/RESULT.json": "9222a12cb7d97b999f4bfc06eb86720a213d22e1acad5207bf82c28ab7ca46ba"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

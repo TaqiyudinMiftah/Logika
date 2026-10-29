@@ -1,0 +1,84 @@
+{
+  "status": "complete",
+  "task_id": "kumo_large_actuarial99_sub25k_e2__s7731__f2",
+  "attempt": 1,
+  "pilot": false,
+  "seconds": 91.53758907318115,
+  "UTC": "2026-10-29T02:31:21.022195+00:00",
+  "audit": {
+    "family": "kumo_context",
+    "size": "large",
+    "context_bags": 1,
+    "sampled_context_rows_per_bag": 25000,
+    "available_context_rows": 50000,
+    "estimators_per_bag": 2,
+    "total_internal_estimators": 2,
+    "sampling": "Independent stratified without replacement per bag; sorted offsets; overlap allowed.",
+    "aggregation": "Unweighted arithmetic mean of probabilities; no learned bag weights.",
+    "bag_context_overlap_rows": [
+      [
+        25000
+      ]
+    ],
+    "mean_between_bag_prediction_variance": 0.0,
+    "max_between_bag_prediction_variance": 0.0,
+    "bags": [
+      {
+        "bag": 0,
+        "context_draw_seed": 57732,
+        "model_seed": 7733,
+        "context_rows": 25000,
+        "class_counts": [
+          21605,
+          3395
+        ],
+        "context_rows_sha256": "490510a5d3f1488c4d8b4a06ca1decf9fe9e58dad39a42404c6d4d23b1ea9e83",
+        "context_offsets_sha256": "3e8f1efc7ccaf0419f698a5a58e7c0bcccef614268d4bfef5876a65332be326a",
+        "context_labels_sha256": "dbf39b2faed87edecf757eb5c1020a38868648d6fa3c9737abdc09af66b6e949",
+        "prediction_array_sha256": "f465f8af008806fed6ea4e9b68e5d36640beb4e420fb37cc04aaa6d4e681e5e9",
+        "engine_audit": {
+          "engine": "concat_context_vocab",
+          "size": "large",
+          "seed": 7733,
+          "num_estimators": 2,
+          "estimator_batch_size": 1,
+          "prediction_batch": 256,
+          "precision": "float16 AMP",
+          "generator": "CUDA",
+          "first_batch_replay_error": 0.0,
+          "seconds": 51.26753902435303,
+          "torch": "2.7.1+cu126",
+          "sdm": "0.2.1",
+          "pretrained_checkpoint_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613"
+        }
+      }
+    ],
+    "seconds": 89.85811471939087,
+    "checkpoint_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+    "vendor_inference_source_sha256": "f05ccade0bfead7dae94d80965f6d99b15a7a7c0fe5abe6173d9f1499aa74697",
+    "execution_backend": "CUDA AMP float16",
+    "generator": "CUDA",
+    "context_selection_uses_query_labels": false,
+    "context_selection_uses_query_covariates": false,
+    "query_labels_used_for_early_stopping": false,
+    "correction_labels_loaded": false,
+    "outer_labels_loaded": false,
+    "feature_selection_changed": false,
+    "fitted_weights_saved": false,
+    "KV_caches_saved": false,
+    "same_cache_replay_tolerance": 1e-07,
+    "replay_scope": "Exact original first-query-batch same-cache replay; not a different-batch-size equivalence claim."
+  },
+  "prediction_sha256": "5e3c4a6c317636c01f67545515960cae91b36a73a91eb1ed774bea6965efb58a",
+  "start_sha256": "0bdabe2eb331dfe9db3dea9cf101d39134549852e5938dba67f42a81f129fad9",
+  "clock_sha256": "a295467aeca0f22be33414ca7c2a5dae4e727dc0cc6ba22a0ed4552ad675315b",
+  "source_seal_sha256": "e7e77f3261a113f9b319e4393f7d3642643e184ff562bbb331ee6b2a74fca952",
+  "max_RSS_KiB": 3065644,
+  "peak_torch_CUDA_bytes": 2505837056,
+  "GPU_memory_measurement_scope": "PyTorch allocator only; excludes third-party CUDA allocators and parallel processes.",
+  "outer_labels_loaded": false,
+  "correction_labels_used_for_training": false,
+  "weights_saved": false,
+  "fitted_weights_saved": false,
+  "KV_cache_saved": false
+}

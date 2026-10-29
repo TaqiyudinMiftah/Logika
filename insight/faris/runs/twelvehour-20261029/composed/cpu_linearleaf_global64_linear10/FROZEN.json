@@ -1,0 +1,64 @@
+{
+  "UTC": "2026-10-29T01:31:47.020650+00:00",
+  "design": "cpu_linearleaf_global64_linear10",
+  "design_spec": {
+    "admission_group": "cpu_linear",
+    "family": "lightgbm",
+    "hypothesis": "Compare piecewise constant versus locallylinear leaves with identical inner-only scaled inputs, split capacity and KS stopping; regularization10/100 tests coefficient stabilization. Numeric missingvalues remainNaN; categories may split but have no linear coefficients.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "objective_kind": "binary_native",
+    "parameters": {
+      "bagging_fraction": 0.85,
+      "bagging_freq": 1,
+      "feature_fraction": 0.85,
+      "lambda_l1": 0.1,
+      "lambda_l2": 30.0,
+      "learning_rate": 0.035,
+      "linear_lambda": 10,
+      "linear_tree": true,
+      "max_depth": 5,
+      "min_data_in_leaf": 300,
+      "n_estimators": 1120,
+      "num_leaves": 15
+    },
+    "patience": 100,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "sources": [
+      "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html#linear_tree",
+      "https://arxiv.org/abs/1802.05640v3"
+    ],
+    "stopping_metric": "ks",
+    "view": "global64"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_linearleaf_global64_linear10/s2026/fold0/RESULT.json": "3f82aac965d1691f0bf354ebe3b6843ab6a93f0c946be3523315669f122bc695",
+    "composed/cpu_linearleaf_global64_linear10/s2026/fold1/RESULT.json": "d6ec5e84c97dbafa4ee0d1217f23750afab0f779fdb58ef53ab49d5a8479b57e",
+    "composed/cpu_linearleaf_global64_linear10/s2026/fold2/RESULT.json": "73b3af53747941577a0fa735bede9f972c5b9b24806b58978636d264e220ed17",
+    "composed/cpu_linearleaf_global64_linear10/s2026/fold3/RESULT.json": "5d865bbd00a6c3b5d946302f7468cd465e88b3d8ce029d2044a8802caca98b41",
+    "composed/cpu_linearleaf_global64_linear10/s2026/fold4/RESULT.json": "028ca4a6c80f5225746bdc543d9acf6e43414f21ed89e271a5f8ff901ac993ee",
+    "composed/cpu_linearleaf_global64_linear10/s7731/fold0/RESULT.json": "d2beece65401493c583fafc861d5657857cf087495e545ce67a2482139e8c71d",
+    "composed/cpu_linearleaf_global64_linear10/s7731/fold1/RESULT.json": "f9d01bce3ae78318a86ca225409fd34dd816aa575782cc7334883d3a7d4b54e1",
+    "composed/cpu_linearleaf_global64_linear10/s7731/fold2/RESULT.json": "6f27a91ada989bdf38e4e64c024005a2525de22f0393ae108dd3c0e1c89d318e",
+    "composed/cpu_linearleaf_global64_linear10/s7731/fold3/RESULT.json": "06a480b376f8727de70fb735a7828f325520f570a81652c85e2d92400811dcb6",
+    "composed/cpu_linearleaf_global64_linear10/s7731/fold4/RESULT.json": "a8a3dad9f065e8a9168b4cf7637ff851d49ab7769ad04a78982ce5dae504ecd9"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

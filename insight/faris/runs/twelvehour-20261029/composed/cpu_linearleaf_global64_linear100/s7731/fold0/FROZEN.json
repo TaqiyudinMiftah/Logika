@@ -1,0 +1,122 @@
+{
+  "UTC": "2026-10-29T01:31:48.879106+00:00",
+  "design": "cpu_linearleaf_global64_linear100",
+  "design_spec": {
+    "admission_group": "cpu_linear",
+    "family": "lightgbm",
+    "hypothesis": "Compare piecewise constant versus locallylinear leaves with identical inner-only scaled inputs, split capacity and KS stopping; regularization10/100 tests coefficient stabilization. Numeric missingvalues remainNaN; categories may split but have no linear coefficients.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "objective_kind": "binary_native",
+    "parameters": {
+      "bagging_fraction": 0.85,
+      "bagging_freq": 1,
+      "feature_fraction": 0.85,
+      "lambda_l1": 0.1,
+      "lambda_l2": 30.0,
+      "learning_rate": 0.035,
+      "linear_lambda": 100,
+      "linear_tree": true,
+      "max_depth": 5,
+      "min_data_in_leaf": 300,
+      "n_estimators": 1120,
+      "num_leaves": 15
+    },
+    "patience": 100,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "sources": [
+      "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html#linear_tree",
+      "https://arxiv.org/abs/1802.05640v3"
+    ],
+    "stopping_metric": "ks",
+    "view": "global64"
+  },
+  "seed": 7731,
+  "fold": 0,
+  "task_id": "cpu_linearleaf_global64_linear100__s7731__f0",
+  "inputs": {
+    "raw_prediction_sha256": "f2fdcbcdd0d7aab3f1bf13bf7596b2696f6d0b2757d24bc2f85163a1deb95d47",
+    "raw_result_sha256": "35bfd173f4c352e6de256011bc3027ed5cf5142397fd0c63eefa9038ee9b6b62",
+    "roles_sha256": "5c5f47d3e5b28214991ef3eadccd2284fff18a49b1f25160613be91f56178dd6",
+    "anchor_sha256": "4bb1460ea6ff34395f2bd6cd9f75ceaa8060ff4ba5965b4f95792ba5f139b51d"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "prediction_sha256": "6714da477e15bc3d119e6aa4bc940abcf329208c94842071d5be29fb7fd25820",
+  "correction_rows_sha256": "d1e35ea2e923d88182ca01c9744870825e3218be76fd5901e8bf74882c1d67d1",
+  "validation_rows_sha256": "9df692fa989fb9562578ee5587a17f6bc18522c5c49e5ce8499677be3878db46",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "701fc54568515f1bbe5f65db41b13b95f05a52fb4f749917f3199876b1bed4ee",
+      "heldout_global_rows_sha256": "fb351b39a5a762229093a236a0643524b0deea0c7cfc5d5ed4d1e4717f84589b"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "459b46d2f144092ccf59fb3753e9a0defdcd532dff0f287b1cdb064cc85d357d",
+      "heldout_global_rows_sha256": "311e717adbb45831665b9e7663e1229042256074a9074af288c987c29f7d2d28"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "3e466d61caa2b9f50402813756ec4c13fd84f5b7b4c569227266b5f1c7212bc5",
+      "heldout_global_rows_sha256": "4ff7394d4a625f112f40663da76c4ab62957f49991d6299a5190122d6b111b69"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.15,
+  "meta_weight_training_KS": [
+    0.538103661458549,
+    0.5390147369417444,
+    0.5406274588684916,
+    0.5394170300122463,
+    0.540644023877277,
+    0.5390679816128403,
+    0.5393176399595341,
+    0.53728251030876,
+    0.5328324390200614,
+    0.5264750252912187
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 9,
+    "objective": 0.2962784889689447,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}

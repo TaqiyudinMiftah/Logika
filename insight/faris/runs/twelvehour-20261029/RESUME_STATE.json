@@ -1,16 +1,15 @@
 {
   "campaign": "twelvehour-20261029",
-  "stage": "running_pilots",
+  "stage": "running_external_backends",
   "canonical_root": "faris@100.68.29.126:/mnt/home/faris/logika-twelvehour-20261029",
   "service": "logika-twelvehour-20261029.service",
   "workers": [
-    "logika-twelvehour-cpu2001-20261029.service",
-    "logika-twelvehour-cpu2003-20261029.service",
-    "logika-twelvehour-gpu2001-20261029.service"
+    "lab original queues terminal",
+    "host119 logika-colab-a{1,3,5}-controller-20261029.service"
   ],
-  "next_action": "Leave healthy jobs alone. Inspect LIVE_STATE, familygates andactualworkerunits. Onfailure readprivatecoordinator/workerlogs, reconcileallunits/results beforeexecution-onlyrepair withinoriginalclock; neverresetornewlaunch.",
-  "expected_designs": 99,
-  "planned_fits": 990,
+  "next_action": "Inspect canonical LIVE_STATE, host119 controller states and FINAL_STATE/RELEASED flags. Healthy Colab1/3/5 fits must continue. Profiles2/4/6 released; never recreate. Original clock immutable. External collection barrier waits all7owner flags; host119 terminal receipt repaired after hash-verifying80fits. Resume publication after reconciling real PIDs and disk reserve.",
+  "expected_designs": 137,
+  "planned_fits": 1370,
   "all70000reused_development": true,
   "no_automatic_refit_or_submission": true,
   "laptop_required_for_compute": false,
@@ -25,5 +24,8 @@
   "followup_automation": "logika-twelve-hour-experiment-follow-up",
   "remote_monitor_first_snapshot": "PASS2026-10-29T00:45:57UTC; onecompletedpilotbackedup",
   "monitor_or_backup_requires_laptop": false,
-  "actual_GitHub_push_requires_laptop": true
+  "actual_GitHub_push_requires_laptop": true,
+  "resource_addendum": "COLAB_RESOURCE_ADDENDUM.json",
+  "persistent_control_host": "faris@100.89.211.119:/home/faris/logika-twelvehour-20261029",
+  "original_resource_policy_superseded_by_explicit_human": true
 }

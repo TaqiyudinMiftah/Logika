@@ -1,0 +1,65 @@
+{
+  "UTC": "2026-10-29T01:23:03.305156+00:00",
+  "design": "host119_catlossguide_actuarial99_leaves31",
+  "design_spec": {
+    "admission_group": "host119_cpu_lossguide",
+    "family": "catboost",
+    "hypothesis": "PredeclaredLossguideversuspriorDepthwise/symmetric growth-control study; max_leaves31/63 controls capacity atdepth8. CPUencoder remainsinner42500frozen. No outer-drivenfeatureselection.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "parameters": {
+      "boost_from_average": false,
+      "boosting_type": "Plain",
+      "bootstrap_type": "Bernoulli",
+      "border_count": 64,
+      "depth": 8,
+      "grow_policy": "Lossguide",
+      "iterations": 1120,
+      "l2_leaf_reg": 30.0,
+      "learning_rate": 0.035,
+      "max_leaves": 31,
+      "min_data_in_leaf": 150,
+      "random_strength": 1.0,
+      "subsample": 0.85
+    },
+    "patience": 100,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "resource_owner": "host119",
+    "sources": [
+      "https://proceedings.neurips.cc/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html",
+      "https://catboost.ai/docs/en/references/training-parameters/common"
+    ],
+    "stopping_metric": "ks",
+    "view": "actuarial99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/host119_catlossguide_actuarial99_leaves31/s2026/fold0/RESULT.json": "a2099aa136fc0c3a14e5c45a847aed7f543f59e5087dc32f363ae230fd60f475",
+    "composed/host119_catlossguide_actuarial99_leaves31/s2026/fold1/RESULT.json": "6ec02a8ec83c1f7a62ccc37d3c05c13cf2955a2e83832c71720ebde10f7f4feb",
+    "composed/host119_catlossguide_actuarial99_leaves31/s2026/fold2/RESULT.json": "7641115c1040f802c100f04076c89c8b85136d163c9d408c12da81615ca830eb",
+    "composed/host119_catlossguide_actuarial99_leaves31/s2026/fold3/RESULT.json": "ae408e357f7c7a084d868ff481d119fc25d4e884907fe5dd7395e6140afdc8ad",
+    "composed/host119_catlossguide_actuarial99_leaves31/s2026/fold4/RESULT.json": "d7cd8240cf95c63fc4fa4b0377bbb1bedce53baa3668ca8fcd5bc88b26fa0f82",
+    "composed/host119_catlossguide_actuarial99_leaves31/s7731/fold0/RESULT.json": "0c15ba1ad7130ad90569735a768226354f0d5a177cca257ab5109c23cfa29895",
+    "composed/host119_catlossguide_actuarial99_leaves31/s7731/fold1/RESULT.json": "c90be8743cf510ea64f404c05d218837d1cbd9eb5b221365f94f8fc5c873d905",
+    "composed/host119_catlossguide_actuarial99_leaves31/s7731/fold2/RESULT.json": "3756fa1f607e4b290b531244f3f28b1fb2998404aa0534bddd4dbddc29775e87",
+    "composed/host119_catlossguide_actuarial99_leaves31/s7731/fold3/RESULT.json": "0af25fd223b7666bf38ed7fe7b1c2079e1fefdcb09913b7235796e470b405b55",
+    "composed/host119_catlossguide_actuarial99_leaves31/s7731/fold4/RESULT.json": "6d391cbb4a8c1d174a2ed89576c0be5825a5bc3a651a10209c01d87a4c91abf8"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

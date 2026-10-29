@@ -1,0 +1,69 @@
+{
+  "UTC": "2026-10-29T01:19:19.383673+00:00",
+  "design": "cpu_dropout_global256_280_dart",
+  "design_spec": {
+    "admission_group": "cpu_dart",
+    "family": "lightgbm",
+    "fixed_iterations": true,
+    "hypothesis": "Matched registered280/800-round GBDT versus DART tests tree-dropout regularization. DART early stopping is unsupported: both are fixed length and stopping-row KS is diagnostic only, never used for iteration selection.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "objective_kind": "binary_native",
+    "parameters": {
+      "bagging_fraction": 0.85,
+      "bagging_freq": 1,
+      "boosting": "dart",
+      "drop_rate": 0.1,
+      "feature_fraction": 0.85,
+      "lambda_l1": 0.1,
+      "lambda_l2": 25.0,
+      "learning_rate": 0.035,
+      "max_depth": 7,
+      "max_drop": 50,
+      "min_data_in_leaf": 150,
+      "n_estimators": 280,
+      "num_leaves": 31,
+      "skip_drop": 0.5,
+      "uniform_drop": false,
+      "xgboost_dart_mode": false
+    },
+    "patience": 100,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "sources": [
+      "https://proceedings.mlr.press/v38/korlakaivinayak15.html",
+      "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html"
+    ],
+    "stopping_metric": "ks",
+    "view": "global256"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_dropout_global256_280_dart/s2026/fold0/RESULT.json": "1395f20c7219703acb098e0c32d88465bf9325919924c97daf4114bfac439aa5",
+    "composed/cpu_dropout_global256_280_dart/s2026/fold1/RESULT.json": "d6ee32e1792cc4aa789d5aff186c918cec61c707976f304f2a7b75d0fabcb5be",
+    "composed/cpu_dropout_global256_280_dart/s2026/fold2/RESULT.json": "90fdeed02da7aaf86cc1cf0e7e340dbc581560362869b6050c16810d11480521",
+    "composed/cpu_dropout_global256_280_dart/s2026/fold3/RESULT.json": "a66e976bbb6a6205161da830ede4eca6be8f8b3b44a0c9b58953454443968817",
+    "composed/cpu_dropout_global256_280_dart/s2026/fold4/RESULT.json": "ff95a6f19436472e7931e610356f333b3a5a5fbb4636e32245e91eae846d913f",
+    "composed/cpu_dropout_global256_280_dart/s7731/fold0/RESULT.json": "b951fe53ca2a000caa289654a0addda001b8f3144c0a0be9deb3df37de18399d",
+    "composed/cpu_dropout_global256_280_dart/s7731/fold1/RESULT.json": "6fe700f6e0274379b4021c5b7ee8075e638bb0e0636d1f7874e5ebc380f88a97",
+    "composed/cpu_dropout_global256_280_dart/s7731/fold2/RESULT.json": "11db2dca605ffb61f8dd2e11d0f06d75c2e1e11a7deecd928150d212bc80fdd2",
+    "composed/cpu_dropout_global256_280_dart/s7731/fold3/RESULT.json": "4f187283726deaa160e6f6f531c9c5c612aa9132ce86b7e87bc8459f8d652a9c",
+    "composed/cpu_dropout_global256_280_dart/s7731/fold4/RESULT.json": "5f70bf72cc8789946324144a942d6d67065733c549cf10cda058121b8cb2b204"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

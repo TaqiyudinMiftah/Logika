@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-29T01:28:37.197443+00:00",
+  "design": "cpu_catcapacity_global256_d8_symmetric_ordered",
+  "design_spec": {
+    "admission_group": "cpu_cat",
+    "family": "catboost",
+    "hypothesis": "Replicate Ordered/Plain comparison at1120maximumtrees anddepth6/8, beyond old400/depth4; add PlainDepthwise with declared150-rowleaf support. Ordered supports symmetric only. Growth-policy bundle is not a claim of a one-parameter causal comparison. Allnewmatched controls freeze identical42500-rowencoders.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "parameters": {
+      "boost_from_average": false,
+      "boosting_type": "Ordered",
+      "bootstrap_type": "Bernoulli",
+      "border_count": 64,
+      "depth": 8,
+      "grow_policy": "SymmetricTree",
+      "iterations": 1120,
+      "l2_leaf_reg": 30.0,
+      "learning_rate": 0.035,
+      "random_strength": 1.0,
+      "subsample": 0.85
+    },
+    "patience": 100,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "sources": [
+      "https://proceedings.neurips.cc/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html",
+      "https://catboost.ai/docs/en/references/training-parameters/common"
+    ],
+    "stopping_metric": "ks",
+    "view": "global256"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s2026/fold0/RESULT.json": "d0372b195064a03c483c10ff97bee2fb0080a755b84ed2f189430fa55a3e1c3c",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s2026/fold1/RESULT.json": "70ec010925b4245ac4e896fe30c591a2ef534663536cbf0541e9ef57713f9a2f",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s2026/fold2/RESULT.json": "cd074a5e4dc6a8e083d19bfb30af90815a4b7a692f6aba01c50e178148f0c33c",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s2026/fold3/RESULT.json": "7aba3de5f82600f81dcd6d23309e2c10bb10ef82ac4274034e75af914e9f5538",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s2026/fold4/RESULT.json": "d3320ca5ef1bf26af020f581047d309958317ec75b2b1b2631b86491c95f5048",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s7731/fold0/RESULT.json": "f486a4b824dfdbe6967bc023abc008fd1323846f6e15406afcc6530925821da4",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s7731/fold1/RESULT.json": "41f9f34e14d7a6fa9e55f8a27effdc814e0fd052e7464a0fb8394d93fcab3d4c",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s7731/fold2/RESULT.json": "4b1995676506b917b371785751a88f594b1a5d08030ce3c0adacda95cd029e85",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s7731/fold3/RESULT.json": "7b03982d3b1277dc8be3f1da585d83962215d1824366e0eae9d4a2be84c42ec6",
+    "composed/cpu_catcapacity_global256_d8_symmetric_ordered/s7731/fold4/RESULT.json": "fdf5b298f015414c0dd7e96d18330ed61c541e9f19b2f9260e661aa1e5199bc2"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

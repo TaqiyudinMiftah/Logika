@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-29T02:12:05.482851+00:00",
+  "design": "cpu_objective_global99_moderate_positive4",
+  "design_spec": {
+    "admission_group": "cpu_focal",
+    "family": "lightgbm",
+    "focal_gamma": 0.0,
+    "hessian_floor": 1e-06,
+    "hypothesis": "Fixed-capacity matched loss comparison: class-cost factors2/4 versus focal hard-case exponents1/2 and unweighted logloss; KS versus logloss stopping is a separate matched control. Transfer to credit KS is unproven. Custom objective starts atzero; exact Hessian floor1e-6 is declared and audited.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "objective_kind": "focal_family",
+    "parameters": {
+      "lambda_l1": 0.1,
+      "lambda_l2": 25.0,
+      "learning_rate": 0.035,
+      "max_depth": 7,
+      "min_data_in_leaf": 150,
+      "n_estimators": 1800,
+      "num_leaves": 31
+    },
+    "patience": 100,
+    "positive_weight": 4.0,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "sources": [
+      "https://arxiv.org/abs/1708.02002v2",
+      "https://lightgbm.readthedocs.io/en/v4.6.0/pythonapi/lightgbm.train.html"
+    ],
+    "stopping_metric": "ks",
+    "view": "global99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_objective_global99_moderate_positive4/s2026/fold0/RESULT.json": "e6ba6fb41625c5ad3c5c2051724c56f5a89d7c6464d1c8baae728076760fcfbd",
+    "composed/cpu_objective_global99_moderate_positive4/s2026/fold1/RESULT.json": "4256b88f79a3d184b0a15b829d5fd35167779f1d0c2fe86075ac811b2d43ca69",
+    "composed/cpu_objective_global99_moderate_positive4/s2026/fold2/RESULT.json": "2e406908f4d20d10422c15ec6751513a9c6d87a5eb085f3c488b2b1a76a053ba",
+    "composed/cpu_objective_global99_moderate_positive4/s2026/fold3/RESULT.json": "6fe3d4d3a495477f83b752ab115e82340fd2f5c59b76c33e6cd5fcea9c890cd0",
+    "composed/cpu_objective_global99_moderate_positive4/s2026/fold4/RESULT.json": "6c3c87c463c5394a3a88e0d083fcf985fe1bc114e9242cf4b2a0be607426f07c",
+    "composed/cpu_objective_global99_moderate_positive4/s7731/fold0/RESULT.json": "b7da943454328004205da84db17520039e32390d1b337de750a9c500681831c4",
+    "composed/cpu_objective_global99_moderate_positive4/s7731/fold1/RESULT.json": "50cdf4183c5752a1ae5172d865effb68283fe2dcecc9fb99c5a78da5e8cbc541",
+    "composed/cpu_objective_global99_moderate_positive4/s7731/fold2/RESULT.json": "6bc2a347f9849f377e27d8aaf2fb210b58037c119f0900bbe30c66c7cdcaf424",
+    "composed/cpu_objective_global99_moderate_positive4/s7731/fold3/RESULT.json": "93293f9b89f445b18e2b4b638e8c7b4afdee135691cfb4b34269b9f5be05f82d",
+    "composed/cpu_objective_global99_moderate_positive4/s7731/fold4/RESULT.json": "c5d98667ec28c07ffbab6bb275e91c14c222b1a080dfa2520c07754af59dcb74"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

@@ -1,0 +1,60 @@
+{
+  "UTC": "2026-10-29T02:35:05.437229+00:00",
+  "design": "kumo_large_actuarial99_sub25k_e2",
+  "design_spec": {
+    "family": "kumo_context",
+    "resource": "gpu",
+    "view": "actuarial99",
+    "hypothesis": "Context-size ablation at fixed two internal estimators; stratified sampling is confined to allowed50kcontext.",
+    "parameters": {
+      "size": "large",
+      "estimators": 2,
+      "context_count": 25000,
+      "context_bags": 1,
+      "context_sampling": "stratified_without_replacement_per_bag",
+      "aggregation": "probability_mean",
+      "prediction_batch": 256,
+      "memory_fraction": 0.7,
+      "engine": "concat_context_vocab",
+      "checkpoint_revision": "v1.0.1",
+      "strict_same_cache_replay_tolerance": 1e-07
+    },
+    "sources": [
+      "https://huggingface.co/nvidia/Kumo-Tabular",
+      "https://github.com/NVIDIA/structured-data-models",
+      "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+    ],
+    "novelty": "context_subsample_bagging_new_protocol",
+    "admission_group": "gpu_large",
+    "max_seconds": 1800
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/kumo_large_actuarial99_sub25k_e2/s2026/fold0/RESULT.json": "c63efcbecf395dd620883593bf0226f42f19a479b4ff18655f7a787a7b8f92b2",
+    "composed/kumo_large_actuarial99_sub25k_e2/s2026/fold1/RESULT.json": "c2d8c0860494fee7d5b49f2822f48d28b4d84cc87f2f46e55ed52b166de697eb",
+    "composed/kumo_large_actuarial99_sub25k_e2/s2026/fold2/RESULT.json": "5b5c55c078bb6e4f65ea1e681ee23fea1d80bb5fc015870b1ab6c106245da69c",
+    "composed/kumo_large_actuarial99_sub25k_e2/s2026/fold3/RESULT.json": "5c8c0e68ad36c8297d72fc8c0e47b74df306209af7ad873cea5ffe3db9212f51",
+    "composed/kumo_large_actuarial99_sub25k_e2/s2026/fold4/RESULT.json": "3b8c53c9cdfc31c14fd0427fab41d215671011d19d926c576613ddc4582b3d88",
+    "composed/kumo_large_actuarial99_sub25k_e2/s7731/fold0/RESULT.json": "2daf8dbbeff7020d2e077efe241476bbf99ba931a3d8b7c508ac9ee4420b6cc5",
+    "composed/kumo_large_actuarial99_sub25k_e2/s7731/fold1/RESULT.json": "18ee106609ea212693bf630d544aef7bf3d63b38f8955c8a19c12761120010e5",
+    "composed/kumo_large_actuarial99_sub25k_e2/s7731/fold2/RESULT.json": "d126c84027705e7cd7a2da61f13bc5260e114f65a71941e364f91129caf32184",
+    "composed/kumo_large_actuarial99_sub25k_e2/s7731/fold3/RESULT.json": "9db117034584ffb0534164d960fb58bc91892276b1bfc7a2d03847f33813ace6",
+    "composed/kumo_large_actuarial99_sub25k_e2/s7731/fold4/RESULT.json": "b041fd72bfbdcc65fe964a2fac9d8b7a9ada36ffbc0ddb5d407ec28498c0a5e3"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

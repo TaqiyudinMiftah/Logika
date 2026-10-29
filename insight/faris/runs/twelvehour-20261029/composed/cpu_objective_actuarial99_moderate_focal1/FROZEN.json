@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-29T01:58:47.986584+00:00",
+  "design": "cpu_objective_actuarial99_moderate_focal1",
+  "design_spec": {
+    "admission_group": "cpu_focal",
+    "family": "lightgbm",
+    "focal_gamma": 1.0,
+    "hessian_floor": 1e-06,
+    "hypothesis": "Fixed-capacity matched loss comparison: class-cost factors2/4 versus focal hard-case exponents1/2 and unweighted logloss; KS versus logloss stopping is a separate matched control. Transfer to credit KS is unproven. Custom objective starts atzero; exact Hessian floor1e-6 is declared and audited.",
+    "inner_split_seed": 20261029,
+    "max_seconds": 1800,
+    "objective_kind": "focal_family",
+    "parameters": {
+      "lambda_l1": 0.1,
+      "lambda_l2": 25.0,
+      "learning_rate": 0.035,
+      "max_depth": 7,
+      "min_data_in_leaf": 150,
+      "n_estimators": 1800,
+      "num_leaves": 31
+    },
+    "patience": 100,
+    "positive_weight": 1.0,
+    "preprocessing_protocol": "v2_inner42500_frozen_for_context50000",
+    "resource": "cpu",
+    "sources": [
+      "https://arxiv.org/abs/1708.02002v2",
+      "https://lightgbm.readthedocs.io/en/v4.6.0/pythonapi/lightgbm.train.html"
+    ],
+    "stopping_metric": "ks",
+    "view": "actuarial99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_objective_actuarial99_moderate_focal1/s2026/fold0/RESULT.json": "e0082cd6673a900e02d9af9f058591682a46396b2748871b712ad7c3eb9d1f67",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s2026/fold1/RESULT.json": "c6ad393b150457f8dd8b53e01d3cfcb60a9a1c373d59816ed5b79a47e1f07e02",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s2026/fold2/RESULT.json": "2191a4fc844baa06fca39426692fd062fef85f407f92157a6d2512d124469215",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s2026/fold3/RESULT.json": "0598be5406f44c5e8c1d5c822c3f5ca37e1c04c4934002e6241d284714d9f35e",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s2026/fold4/RESULT.json": "02d5513aad936dcb39b3e1e7fba1a596a38703b067ea7ed5c3b9403dc0d15ad6",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s7731/fold0/RESULT.json": "bf058eb25c84075624b958900eda151d235e472161e1551fdfa95962997a69f4",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s7731/fold1/RESULT.json": "7e67dffa35b91d25b578ef5a4098bf7fc0b067c61af6e09daf5ba73cf7e5c3f8",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s7731/fold2/RESULT.json": "887a0ae022fcd7894ca8729c7d35e2be16fa817041451e802022d22484da46d0",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s7731/fold3/RESULT.json": "21133b0aeea2dbbc74c511002b6f1383c8131ea3aba7697d9f71b1a7021fcd4b",
+    "composed/cpu_objective_actuarial99_moderate_focal1/s7731/fold4/RESULT.json": "0fe02bf38cc816d8dbab2c1a6c31c7d51a07a3358b4b061c280c28ef0e4b48c5"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
