@@ -1,9 +1,9 @@
 """One fixed ten-member refit, idle CUDA slots only, fresh bounded deadline."""
 from pathlib import Path
-import json,subprocess,sys,time,traceback
+import json,subprocess,sys,time,traceback,os
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'source'))
 from common import read,dump,sha,utc
-GPU='/mnt/home/faris/logika-model-arena-20261025/env311/bin/python';CPU='/mnt/home/faris/logika-sixhour-broad-20261028/env311/bin/python';cfg=read(R/'CONFIG.json');clock=read(R/'DEPLOYMENT_CLOCK.json');assert read(R/'PREFLIGHT_AUDIT.json')['status']=='PASS';assert sha(R/'CONFIG.json')==clock['config_sha256'];assert sha(R/'SOURCE_SEAL.json')==clock['source_seal_sha256'];assert len(read(R/'PREPUBLICATION.json')['remote_commit'])==40
+GPU=os.environ.get('LOGIKA_REFIT_GPU_PYTHON','/mnt/home/faris/logika-model-arena-20261025/env311/bin/python');CPU='/mnt/home/faris/logika-sixhour-broad-20261028/env311/bin/python';cfg=read(R/'CONFIG.json');clock=read(R/'DEPLOYMENT_CLOCK.json');assert read(R/'PREFLIGHT_AUDIT.json')['status']=='PASS';assert sha(R/'CONFIG.json')==clock['config_sha256'];assert sha(R/'SOURCE_SEAL.json')==clock['source_seal_sha256'];assert len(read(R/'PREPUBLICATION.json')['remote_commit'])==40
 active={};started=set();tasks=[(s,f)for s in cfg['seeds']for f in range(5)];completed=[];pilot=(2026,0);qualified=False
 try:
  while time.time()<clock['deadline_epoch']-15:
@@ -28,8 +28,10 @@ try:
    if not qualified:break
   dump(dict(stage='refitting_fixed_winner',UTC=utc(),completed=len(completed),expected=10,active={str(k):v for k,v in active.items()},deadline_epoch=clock['deadline_epoch'],no_paid_allocation=True),R/'LIVE_STATE.json');time.sleep(3)
  assert len(completed)==10,'Bounded fixed deployment ended incomplete; no submission'
+ if os.environ.get('LOGIKA_REFIT_RAW_ONLY')=='1':
+  dump(dict(stage='raw_members_complete',UTC=utc(),completed=10),R/'LIVE_STATE.json');sys.exit(0)
  subprocess.run([CPU,str(R/'source/assemble.py')],cwd=R,check=True,timeout=180);dump(dict(stage='audited_CSV_ready',UTC=utc(),completed=10,submission_audit_sha256=sha(R/'SUBMISSION_AUDIT.json')),R/'LIVE_STATE.json')
-except BaseException:
+except Exception:
  dump(dict(stage='needs_execution_review',UTC=utc(),private_diagnostic=traceback.format_exc()),R/'QUEUE_FAILURE.json');raise
 finally:
  for gpu,(seed,fold,unit)in active.items():subprocess.run(['systemctl','--user','stop',unit],capture_output=True)
