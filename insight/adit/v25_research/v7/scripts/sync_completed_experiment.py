@@ -14,8 +14,10 @@ ROOT=Path(__file__).resolve().parents[2]
 V=ROOT/'v7'
 
 
-def main(ident,expected,resume=False):
-    checkout=ROOT.parent/'shared_repo_sync_20261027'
+def main(ident,expected,resume=False,checkout_path=None):
+    checkout=Path(checkout_path).resolve() if checkout_path else ROOT.parent/'shared_repo_sync_20261027'
+    assert checkout.resolve().is_relative_to(ROOT.parent.resolve()), 'Checkout must remain inside the research workspace'
+    assert (checkout/'.git').exists(), 'An existing isolated checkout is required'
     def git(*args):
         return subprocess.run(['git','-C',str(checkout),*args],check=True,capture_output=True,text=True).stdout.strip()
     git('fetch','origin','main')
@@ -94,4 +96,4 @@ def main(ident,expected,resume=False):
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('experiment');parser.add_argument('--expected-head',required=True);parser.add_argument('--resume',action='store_true');args=parser.parse_args();main(args.experiment,args.expected_head,args.resume)
+    parser=argparse.ArgumentParser();parser.add_argument('experiment');parser.add_argument('--expected-head',required=True);parser.add_argument('--resume',action='store_true');parser.add_argument('--checkout');args=parser.parse_args();main(args.experiment,args.expected_head,args.resume,args.checkout)

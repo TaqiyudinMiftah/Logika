@@ -1,0 +1,255 @@
+{
+  "status": "COMPLETE_READ_ONLY",
+  "rows": 70000,
+  "events": 9507,
+  "target_rate": 0.13581428571428572,
+  "test_rows": 30000,
+  "unique_customer_train": 70000,
+  "customer_overlap": 0,
+  "folds": [
+    {
+      "fold": 0,
+      "context": 50000,
+      "correction": 6000,
+      "validation": 14000
+    },
+    {
+      "fold": 1,
+      "context": 50000,
+      "correction": 6000,
+      "validation": 14000
+    },
+    {
+      "fold": 2,
+      "context": 50000,
+      "correction": 6000,
+      "validation": 14000
+    },
+    {
+      "fold": 3,
+      "context": 50000,
+      "correction": 6000,
+      "validation": 14000
+    },
+    {
+      "fold": 4,
+      "context": 50000,
+      "correction": 6000,
+      "validation": 14000
+    }
+  ],
+  "metrics": {
+    "frozen_Kumo_raw": {
+      "KS": 0.5272829070709667,
+      "signed_KS": 0.5272829070709667,
+      "AUC": 0.8471128164124729,
+      "rows": 70000
+    },
+    "raw_Kumo75_spline25": {
+      "KS": 0.5284874447639913,
+      "signed_KS": 0.5284874447639913,
+      "AUC": 0.8473225043666704,
+      "rows": 70000
+    },
+    "original12_input_offset": {
+      "KS": 0.5292994659005608,
+      "signed_KS": 0.5292994659005608,
+      "AUC": 0.8472026883917805,
+      "rows": 70000
+    },
+    "V25_18_input_offset": {
+      "KS": 0.5302846600440411,
+      "signed_KS": 0.5302846600440411,
+      "AUC": 0.8470292789071159,
+      "rows": 70000
+    },
+    "global_monotone_remapping": {
+      "KS": 0.5302846600440411,
+      "signed_KS": 0.5302846600440411,
+      "AUC": 0.8470292789071159,
+      "rows": 70000
+    }
+  },
+  "source_sha256": "ff11730eccba40f6d6aea7cee20cd17f0b05e162fe0c9853f633ee8a0f9161ce",
+  "input_sha256": "9a8465d4c2258b346dece27ef2d3c1faec886b85e38f5ad2042c434de8cb378b",
+  "OOF_sha256": "35a1cbb47f3d57fb8e3dc37e73020f29e230cb6740a6a70bec174fbc2441eeba",
+  "bins": {
+    "bureau_posterior": [
+      637.4178173701569,
+      700.830299681093
+    ],
+    "late30_posterior": [
+      0.12709227490846323,
+      0.2506392515381467
+    ],
+    "installment_observed_income": [
+      0.2646151158661101,
+      0.5635412037341966
+    ],
+    "total_burden_observed": [
+      0.49975810014691097,
+      1.2060799041014272
+    ],
+    "price_posterior": [
+      -0.1346460971051779,
+      0.12811972731274962
+    ],
+    "bureau_uncertainty": [
+      6.862947226515078,
+      12.79396629798593
+    ],
+    "declared_income_gap": [
+      0.2930148322216821,
+      0.888914084890938
+    ]
+  },
+  "contrasts": [
+    {
+      "variable": "bureau_posterior",
+      "high_minus_low_residual": 0.001160260607361515,
+      "diagnostic95": [
+        -0.006168279121161959,
+        0.00848880033588499
+      ],
+      "raw_two_sided_p": 0.7563260960674087,
+      "byfold": [
+        0.0070981336854260965,
+        0.0060462442589495,
+        -0.0007154022438237319,
+        -0.0020945480599603166,
+        -0.004436954092631416
+      ],
+      "cells": 98,
+      "compared_high_rows": 16582,
+      "compared_low_rows": 17474,
+      "bonferroni_p_seven_contrasts": 1
+    },
+    {
+      "variable": "late30_posterior",
+      "high_minus_low_residual": 0.005327916327458998,
+      "diagnostic95": [
+        -0.0044623326200806685,
+        0.015118165274998664
+      ],
+      "raw_two_sided_p": 0.2861323604654782,
+      "byfold": [
+        0.015278050357040404,
+        0.00019969813640362174,
+        -0.0101010049094407,
+        0.006731966803968427,
+        0.013906579571658575
+      ],
+      "cells": 70,
+      "compared_high_rows": 10185,
+      "compared_low_rows": 10492,
+      "bonferroni_p_seven_contrasts": 1
+    },
+    {
+      "variable": "installment_observed_income",
+      "high_minus_low_residual": 0.0009450215415920862,
+      "diagnostic95": [
+        -0.006619009003306399,
+        0.008509052086490571
+      ],
+      "raw_two_sided_p": 0.8065531948128473,
+      "byfold": [
+        0.0018056735055755426,
+        0.006466984950762177,
+        0.014848156225917222,
+        -0.02760042932063238,
+        0.00842729840264942
+      ],
+      "cells": 100,
+      "compared_high_rows": 12250,
+      "compared_low_rows": 12250,
+      "bonferroni_p_seven_contrasts": 1
+    },
+    {
+      "variable": "total_burden_observed",
+      "high_minus_low_residual": 0.00542872524279573,
+      "diagnostic95": [
+        -0.0023569699726944567,
+        0.013214420458285917
+      ],
+      "raw_two_sided_p": 0.1717357978857038,
+      "byfold": [
+        -0.008718159917176452,
+        0.020373644810820317,
+        0.02080886154884306,
+        -0.003416985904586813,
+        -0.0020336238158984365
+      ],
+      "cells": 100,
+      "compared_high_rows": 11641,
+      "compared_low_rows": 11642,
+      "bonferroni_p_seven_contrasts": 1
+    },
+    {
+      "variable": "price_posterior",
+      "high_minus_low_residual": -0.0011948011923421258,
+      "diagnostic95": [
+        -0.011581846461615499,
+        0.009192244076931248
+      ],
+      "raw_two_sided_p": 0.8216254004328716,
+      "byfold": [
+        0.014016853849541525,
+        0.0016682897623743497,
+        -0.02377864634202647,
+        -0.013042536606612382,
+        0.011684645628833795
+      ],
+      "cells": 68,
+      "compared_high_rows": 9790,
+      "compared_low_rows": 9612,
+      "bonferroni_p_seven_contrasts": 1
+    },
+    {
+      "variable": "bureau_uncertainty",
+      "high_minus_low_residual": -0.0025716079163193776,
+      "diagnostic95": [
+        -0.009683142383009102,
+        0.004539926550370348
+      ],
+      "raw_two_sided_p": 0.47847513928429997,
+      "byfold": [
+        -0.007751643891218666,
+        -0.004027373967537656,
+        0.006488957644463252,
+        -0.011057412543924927,
+        0.003430922252407144
+      ],
+      "cells": 100,
+      "compared_high_rows": 9437,
+      "compared_low_rows": 18326,
+      "bonferroni_p_seven_contrasts": 1
+    },
+    {
+      "variable": "declared_income_gap",
+      "high_minus_low_residual": -0.00017748939839543298,
+      "diagnostic95": [
+        -0.007795200240261715,
+        0.007440221443470849
+      ],
+      "raw_two_sided_p": 0.9635755389066983,
+      "byfold": [
+        0.007731538710845442,
+        0.006219099265056285,
+        0.011882932391863082,
+        -0.029064271470675387,
+        0.002530367901360505
+      ],
+      "cells": 100,
+      "compared_high_rows": 12250,
+      "compared_low_rows": 12250,
+      "bonferroni_p_seven_contrasts": 1
+    }
+  ],
+  "caveats": [
+    "Exploratory historically reused development OOF, not independent confirmation",
+    "Score-band conditioning is descriptive, not causal; model errors remain dependent through training and unmeasured confounding",
+    "Intervals are approximate sampling uncertainty conditional on fitted scores; no retraining/search adjustment",
+    "Bonferroni applies only to these seven descriptive contrasts, not the whole research history",
+    "Source snapshot/global-reference uncertainty inherited; no new model, posthoc correction, or submission produced"
+  ]
+}

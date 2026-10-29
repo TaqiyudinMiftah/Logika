@@ -1,0 +1,904 @@
+{
+  "status": "COMPLETE",
+  "experiment": "V262",
+  "spec": {
+    "id": "V262",
+    "label": "V25 credit-aware post-hoc with inner-OOF teacher",
+    "method": "credit_interaction_inner_oof",
+    "worker": "credit_posthoc_worker.py",
+    "source_script": "v7/scripts/credit_posthoc_worker.py",
+    "research_ready": true,
+    "execution_host": "local_windows",
+    "comparison_baseline": "V25",
+    "Kumo_frozen_fraction": 1.0,
+    "priority": "USER_REQUEST",
+    "penalty": 0.03,
+    "teacher_tether": 0.2,
+    "strength": 0.25,
+    "logit_cap": 0.3,
+    "families": [
+      "credit_posthoc",
+      "repayment_reliability",
+      "conditional_cashflow",
+      "affordability"
+    ],
+    "formula": "Fit four credit interactions to inner3fold-OOF corrected-Kumo offset on6000 correction rows: meanBCE(offset+R@gamma)+.03/2||gamma||^2+.2/2 mean((R@gamma)^2). R is support-gated, main-effect-residualized late30*allocation-reliability, installment*conditional-deficit, installment*outflow-pressure, and total-burden*allocation-sparsity. Ridge projection .001, reference fitting on6k only. No intercept. Inference eta=logit(p_V25_corrected)+.25*clip(R@gamma,-.3,.3); final=.75*sigmoid(eta)+.25*original_spline; test mean5folds.",
+    "rationale": "V25 already has credit main effects; audit showed no significant one-dimensional residuals. Test four small conditional effects instead of aggressive rules or outer-label tuning. Honest inner-OOF teacher avoids fitting the new head to in-sample original correction residuals. Identical existing outer folds, no new Kumo inference or backbone gradients. Post-audit choice and repeated outer-fold reuse remain selection risks; not a verified reproduction of an unidentified friend method.",
+    "head_gap_caveat": "The new head training diagnostic reuses its6k fitting labels; utility must be assessed only on14k outer rows. Inner teachers use disjoint4000/2000 partitions; original spline is never a6k training teacher.",
+    "preflight_receipt": "v7/credit_posthoc/reports/PREFLIGHT.json",
+    "no_outer_validation_tuning": true,
+    "raw_features_unchanged": true
+  },
+  "columns": [
+    "re_price_log_posterior",
+    "re_price_posterior_sd",
+    "re_bureau_score_posterior",
+    "re_bureau_posterior_sd",
+    "re_income_geometric_mean",
+    "re_declared_income_log_gap",
+    "re_outflow_income_geometric_ratio",
+    "re_late_1_posterior",
+    "re_late_30_posterior",
+    "installment_observed_income_ratio",
+    "v2_existing_total_burden_observed",
+    "employment_type",
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months",
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "new_features": [
+    "risk_conditional_negative_months",
+    "risk_conditional_nonnegative_months"
+  ],
+  "support_features": [
+    "aux_account_months",
+    "aux_orders90",
+    "aux_ecommerce_observed_days",
+    "aux_allocation_count"
+  ],
+  "context_columns": [
+    "age",
+    "employment_tenure_months",
+    "declared_monthly_income",
+    "dependents",
+    "loan_amount",
+    "proposed_monthly_installment",
+    "annual_interest_rate",
+    "installment_income_ratio",
+    "installment_observed_income_ratio",
+    "bureau_score_mean",
+    "v2_bureau_history_score_mean",
+    "v2_bureau_history_score_min",
+    "v2_bureau_history_score_max",
+    "bureau_utilization_max",
+    "bureau_inquiries_max",
+    "bureau_delinquent_accounts_max",
+    "bureau_debt_income_ratio",
+    "repayment_installment_count",
+    "repayment_loan_count",
+    "repayment_historical_dpd_mean",
+    "v3_repay_all_late_1_posterior_24",
+    "v3_repay_all_late_7_posterior_24",
+    "v3_repay_all_late_30_posterior_24",
+    "v3_repay_all_late_90_posterior_24",
+    "v3_repay_180d_late_1_posterior_24",
+    "v3_repay_all_fully_paid_share",
+    "v2_existing_total_burden_observed",
+    "v2_installment_disposable_income_ratio",
+    "v2_existing_future_installments",
+    "v2_existing_future_scheduled_amount",
+    "v2_account_3m_income_like_credits_mean",
+    "v2_account_3m_minimum_balance_min",
+    "v2_account_3m_average_balance_mean",
+    "v2_account_3m_outflows_mean",
+    "v3_cash_deficit_monthly_income_share",
+    "v3_income_after_installments_per_dependent",
+    "ecom_last_purchase_recency_days",
+    "v2_ecom_30d_orders",
+    "v2_ecom_60d_orders",
+    "v2_ecom_30d_spend",
+    "v2_ecom_60d_spend",
+    "v2_ecom_completed_per_observed_month",
+    "v3_ecom_category_entropy",
+    "v3_ecom_monthly_spend_cv",
+    "v4_price_all_mean",
+    "v4_price_all_equal_category_mean",
+    "v4_price_all_std",
+    "v4_price_180d_mean",
+    "v4_price_90d_mean",
+    "v4_bureau_all_equal_provider_mean_mean",
+    "v4_bureau_all_equal_provider_mean_std",
+    "v4_loan_late_1_mean",
+    "v4_weighted_late_1_365d",
+    "v4_last12_late_1_posterior",
+    "loan_purpose",
+    "region",
+    "employment_type",
+    "housing_status",
+    "loan_income_ratio",
+    "income_per_dependent",
+    "v2_existing_total_burden_declared",
+    "v4_price_all_equal_order_mean",
+    "v4_price_180d_equal_order_mean",
+    "v4_price_90d_equal_order_mean",
+    "v4_bureau_history_weighted_90d",
+    "v4_bureau_180d_equal_provider_mean_mean",
+    "v2_bureau_90d_score_mean",
+    "v2_bureau_180d_score_mean",
+    "v2_bureau_history_delinquent_accounts_last_12m_mean",
+    "v2_repay_365d_paid_ratio",
+    "v2_latest_loan_age_days",
+    "v2_account_income_like_credits_recent_prior_ratio",
+    "has_previous",
+    "has_account",
+    "has_repayments",
+    "v4_price_all_equal_category_median",
+    "v4_weighted_late_30_365d",
+    "v4_weighted_late_1_90d",
+    "v5_price_pooled_all_mean",
+    "v5_price_pooled_180d_mean",
+    "v5_price_pooled_all_equal_order_mean",
+    "v5_price_pooled_all_equal_category_mean",
+    "repayment_amount_paid",
+    "v2_repay_365d_paid",
+    "repayment_paid_ratio",
+    "v2_ecom_order_age_days_median",
+    "v2_ecom_observed_days",
+    "v2_bureau_current_score_mean",
+    "v2_bureau_365d_score_mean",
+    "v4_bureau_180d_equal_provider_median_mean"
+  ],
+  "OOF": {
+    "KS": 0.5303177217205987,
+    "signed_KS": 0.5303177217205987,
+    "AUC": 0.8470283051751881,
+    "rows": 70000
+  },
+  "baseline": {
+    "KS": 0.5302846600440411,
+    "signed_KS": 0.5302846600440411,
+    "AUC": 0.8470292789071159,
+    "rows": 70000
+  },
+  "comparison_baseline": "V25",
+  "delta_KS": 3.3061676557588626e-05,
+  "delta_AUC": -9.737319277558498e-07,
+  "mean_fold_KS": 0.5333854428330143,
+  "std_fold_KS": 0.0055065356415444355,
+  "delta_mean_fold_KS": 5.5618276462854334e-05,
+  "fold_wins": 2,
+  "folds": [
+    {
+      "fold": 0,
+      "metrics": {
+        "KS": 0.5284273844761083,
+        "signed_KS": 0.5284273844761083,
+        "AUC": 0.8440653491737181,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5284799057608154,
+        "signed_KS": 0.5284799057608154,
+        "AUC": 0.8440697839179565,
+        "rows": 14000
+      },
+      "delta_KS": -5.252128470711881e-05,
+      "delta_AUC": -4.434744238390742e-06,
+      "parameters": 94,
+      "new_trainable_parameters": 4,
+      "correction_rows": 6000,
+      "head_training_KS": 0.548624808467086,
+      "heldout_corrected_Kumo_KS": 0.5283956021423988,
+      "train_validation_head_KS_gap": 0.020229206324687166,
+      "train_ids_sha256": "a65ea1b2a5ec1122d832b825ef64530dbf7a000d3e440177fbba2c1a623ff964",
+      "validation_ids_sha256": "5b270c0ed2ffc2e59d154bc04a1af70d46619b1d5c144618abb2ac450ff3d2d4",
+      "optimization": {
+        "objective": 0.2973256057606587,
+        "gradient_max_abs": 4.665065207986848e-08,
+        "iterations": 4,
+        "inner_crossfit_used": true,
+        "inner_blocks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "512d91dcd12ea73b40439eb4200d0f4e79e68d03b9f903fa709d4672e72bf946",
+            "query_ids_sha256": "f3a31c4dbeb732aaf0a986c1bf9290e160d6a3eced8ea90a2d56466ae08ed950"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "2f0aa565ef377fe67815321c2f655f40fac9582473bcfb583daa8c6eb07d8ddf",
+            "query_ids_sha256": "e56832323b4c15d45912922f3fa086bc3b3628c05ad2d11c7784363434d79877"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "8cf33a23eefda5b076d5073ea98c500fccd1a384c740c38c68400e9fcdd8dc67",
+            "query_ids_sha256": "01d1739774d77ddd96d488f4a12a34b13203e9abdc228ec5c906c6fa830a489e"
+          }
+        ],
+        "outer_validation_used_for_fitting": false,
+        "spline_training_scores_used": false,
+        "interaction_coefficients": {
+          "late30_x_allocation_reliability": 0.003942603183719032,
+          "installment_x_conditional_deficit": -0.008047053660924171,
+          "installment_x_outflow_pressure": 0.031916905283049725,
+          "total_burden_x_sparse_allocation": 0.001011226371299598
+        },
+        "supported_training_rows": {
+          "late30_x_allocation_reliability": 3899,
+          "installment_x_conditional_deficit": 3786,
+          "installment_x_outflow_pressure": 4166,
+          "total_burden_x_sparse_allocation": 3934
+        },
+        "teacher": "3-fold inner OOF corrected Kumo; 4000 fit / 2000 query",
+        "allocation_count_is_DPD_denominator": false
+      },
+      "head_gap_caveat": "The new head training diagnostic reuses its6k fitting labels; utility must be assessed only on14k outer rows. Inner teachers use disjoint4000/2000 partitions; original spline is never a6k training teacher."
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.849607301223785,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.537999171224562,
+        "signed_KS": 0.537999171224562,
+        "AUC": 0.8496049534180117,
+        "rows": 14000
+      },
+      "delta_KS": 0.0,
+      "delta_AUC": 2.3478057733505864e-06,
+      "parameters": 94,
+      "new_trainable_parameters": 4,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5365642988564228,
+      "heldout_corrected_Kumo_KS": 0.5375187405987227,
+      "train_validation_head_KS_gap": -0.0009544417422999718,
+      "train_ids_sha256": "6405abbb6a4a9d52db6ec2322ae62baf90c61df31d8aef51c61ed11b712b64a0",
+      "validation_ids_sha256": "d9e353c5c0e5a37e413a1e32860520882b43c9d49b18676b66b8882bf629e2cf",
+      "optimization": {
+        "objective": 0.29721880321032,
+        "gradient_max_abs": 2.400554138717176e-09,
+        "iterations": 5,
+        "inner_crossfit_used": true,
+        "inner_blocks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "1fead41b02dc5ddf2ff6e2aa8ce00c6a5f211d85414f23407708da02460c8f8f",
+            "query_ids_sha256": "425e50006cdefaf61cc6c39ecec979cddb512bc07fe474183c3867bb143da393"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "793fb0974beac8db4be4dffcb09e4bc34c52ad045f3048b116632ea5f4f78fdd",
+            "query_ids_sha256": "79bfbf89f0f308f4cd8ebbb86dc446b8013b84826d6ad24426c85c6dbc1aa7ff"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "0afba27c6df95f401ebce2287fe3c8d1766eb0c536a395b8f9e26ecfb18d1513",
+            "query_ids_sha256": "3da8a4df8351ea8ad548d07d6ff8dba3320162ca3605026f28703a89aadf317d"
+          }
+        ],
+        "outer_validation_used_for_fitting": false,
+        "spline_training_scores_used": false,
+        "interaction_coefficients": {
+          "late30_x_allocation_reliability": 0.026306210793238437,
+          "installment_x_conditional_deficit": 0.002183435540476917,
+          "installment_x_outflow_pressure": -0.024922911954809657,
+          "total_burden_x_sparse_allocation": 0.013134592970223903
+        },
+        "supported_training_rows": {
+          "late30_x_allocation_reliability": 4014,
+          "installment_x_conditional_deficit": 3902,
+          "installment_x_outflow_pressure": 4255,
+          "total_burden_x_sparse_allocation": 4043
+        },
+        "teacher": "3-fold inner OOF corrected Kumo; 4000 fit / 2000 query",
+        "allocation_count_is_DPD_denominator": false
+      },
+      "head_gap_caveat": "The new head training diagnostic reuses its6k fitting labels; utility must be assessed only on14k outer rows. Inner teachers use disjoint4000/2000 partitions; original spline is never a6k training teacher."
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "KS": 0.5405461926655505,
+        "signed_KS": 0.5405461926655505,
+        "AUC": 0.8498590381761479,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5402982382891557,
+        "signed_KS": 0.5402982382891557,
+        "AUC": 0.849856907759798,
+        "rows": 14000
+      },
+      "delta_KS": 0.0002479543763947989,
+      "delta_AUC": 2.130416349888087e-06,
+      "parameters": 94,
+      "new_trainable_parameters": 4,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5593885145328372,
+      "heldout_corrected_Kumo_KS": 0.5413193598890167,
+      "train_validation_head_KS_gap": 0.01806915464382053,
+      "train_ids_sha256": "4fb140755fae6b7d8841f5500b1cc9646d1e2edc1f45065deb464ce197790e07",
+      "validation_ids_sha256": "f07a5374469e5a2da1ebbcfcabc1df48a162f682d10be215157d9a7604fe1362",
+      "optimization": {
+        "objective": 0.29005378708875273,
+        "gradient_max_abs": 2.311939462456788e-08,
+        "iterations": 5,
+        "inner_crossfit_used": true,
+        "inner_blocks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "610384f01622faf983e051c32ca0e0defc8c2bc44cf7f9166cf29f3b029e7dfd",
+            "query_ids_sha256": "934f9ff23f8a92e0db763fa8f5c1e42628a48e39e4f3cef438d7957ef38db22b"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "2d6fbd32c8a53b79f94e3d8ff54377f77244f31ff208e8b2e6ceb97dc2347cbf",
+            "query_ids_sha256": "1a526f03996f67f939d2b34ee4dc95278a64d296a44474d73ebfec85cc1e48f6"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "b53540c7e35a015c5edb5a3f841fe324f683860901cae4cde83ca854e795bb8b",
+            "query_ids_sha256": "a7246e039344b626beae287638aaec177374b14a3588070ee251d62844d0d38d"
+          }
+        ],
+        "outer_validation_used_for_fitting": false,
+        "spline_training_scores_used": false,
+        "interaction_coefficients": {
+          "late30_x_allocation_reliability": -0.02072844788514158,
+          "installment_x_conditional_deficit": 0.007802114419118405,
+          "installment_x_outflow_pressure": -0.012623979494316782,
+          "total_burden_x_sparse_allocation": -0.01944568137887053
+        },
+        "supported_training_rows": {
+          "late30_x_allocation_reliability": 4045,
+          "installment_x_conditional_deficit": 3947,
+          "installment_x_outflow_pressure": 4273,
+          "total_burden_x_sparse_allocation": 4075
+        },
+        "teacher": "3-fold inner OOF corrected Kumo; 4000 fit / 2000 query",
+        "allocation_count_is_DPD_denominator": false
+      },
+      "head_gap_caveat": "The new head training diagnostic reuses its6k fitting labels; utility must be assessed only on14k outer rows. Inner teachers use disjoint4000/2000 partitions; original spline is never a6k training teacher."
+    },
+    {
+      "fold": 3,
+      "metrics": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438636605819387,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.5306520583131207,
+        "signed_KS": 0.5306520583131207,
+        "AUC": 0.8438633563716158,
+        "rows": 14000
+      },
+      "delta_KS": 0.0,
+      "delta_AUC": 3.0421032293226347e-07,
+      "parameters": 94,
+      "new_trainable_parameters": 4,
+      "correction_rows": 6000,
+      "head_training_KS": 0.529301725718951,
+      "heldout_corrected_Kumo_KS": 0.5294284374766953,
+      "train_validation_head_KS_gap": -0.00012671175774436882,
+      "train_ids_sha256": "b73da16b5e9921ba945c4b2698b02dd6a7dc4354c02cd84b0575f99c43a7fc56",
+      "validation_ids_sha256": "6a56edde2772ae8a7dea29e3fcdcc8163e889cbbedd9a5884446cef8ca378b64",
+      "optimization": {
+        "objective": 0.2950276757491437,
+        "gradient_max_abs": 3.882397999456174e-09,
+        "iterations": 4,
+        "inner_crossfit_used": true,
+        "inner_blocks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "851df7aa13bc73c106311c669418ea72a309197f860d3e8aef54cbf82735c24b",
+            "query_ids_sha256": "f1ea68ddd7edbb5ba7c8160bce4eccae64afcedcd98fbc6cac8b33a00fcc3565"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "74ba0ec9cf4b880a66d61a8433cff34593b007ee69e30cf055120730846bdfac",
+            "query_ids_sha256": "9967916cb4d084793e5bedac1a1657b4acb69a4c2ef3acd8a17efc924561db38"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "0d702be938b549b3f0efdc81a30a7e949553a590dc303f33c2e63628eb08d7e5",
+            "query_ids_sha256": "6512255f32e7b079ee9f35364620434238c416b0ef208946af256ccc40c6f8da"
+          }
+        ],
+        "outer_validation_used_for_fitting": false,
+        "spline_training_scores_used": false,
+        "interaction_coefficients": {
+          "late30_x_allocation_reliability": -0.0035027807067849323,
+          "installment_x_conditional_deficit": -0.0011414057855246567,
+          "installment_x_outflow_pressure": 0.010092988745927125,
+          "total_burden_x_sparse_allocation": 0.0010290640055567182
+        },
+        "supported_training_rows": {
+          "late30_x_allocation_reliability": 3950,
+          "installment_x_conditional_deficit": 3870,
+          "installment_x_outflow_pressure": 4170,
+          "total_burden_x_sparse_allocation": 3980
+        },
+        "teacher": "3-fold inner OOF corrected Kumo; 4000 fit / 2000 query",
+        "allocation_count_is_DPD_denominator": false
+      },
+      "head_gap_caveat": "The new head training diagnostic reuses its6k fitting labels; utility must be assessed only on14k outer rows. Inner teachers use disjoint4000/2000 partitions; original spline is never a6k training teacher."
+    },
+    {
+      "fold": 4,
+      "metrics": {
+        "KS": 0.5293024074857295,
+        "signed_KS": 0.5293024074857295,
+        "AUC": 0.8478925786414107,
+        "rows": 14000
+      },
+      "baseline": {
+        "KS": 0.529219749195103,
+        "signed_KS": 0.529219749195103,
+        "AUC": 0.8478967072100803,
+        "rows": 14000
+      },
+      "delta_KS": 8.265829062659158e-05,
+      "delta_AUC": -4.128568669603538e-06,
+      "parameters": 94,
+      "new_trainable_parameters": 4,
+      "correction_rows": 6000,
+      "head_training_KS": 0.5486283581118256,
+      "heldout_corrected_Kumo_KS": 0.5306263308115167,
+      "train_validation_head_KS_gap": 0.018002027300308976,
+      "train_ids_sha256": "1586e4f0787c1dcf7f6b0c27b2132fe4138f515b2500160a55ccb3004c041e89",
+      "validation_ids_sha256": "e7c31972fb6866a90afd9b242c139a35fa6a6732f910d5d489ff169356f42d7f",
+      "optimization": {
+        "objective": 0.2927682487026422,
+        "gradient_max_abs": 1.8800053511435757e-08,
+        "iterations": 5,
+        "inner_crossfit_used": true,
+        "inner_blocks": [
+          {
+            "block": 0,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "78cf4009279e72b3ed24192a860c16b181c9e91cea6a8c82e85f145685ff7fd5",
+            "query_ids_sha256": "9dd933e6769cf3eca5a5a36706efb823f94227fe535cce6b1dfa883731b936ff"
+          },
+          {
+            "block": 1,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "f6054c33cf462799467d60ab9ac9e3c062dbd062ec43ff4b882c071bd6b4257c",
+            "query_ids_sha256": "805d1e8de2c376030d10a9021cbfb9f2b11824627b7d4c80370c3576bffbf021"
+          },
+          {
+            "block": 2,
+            "fit_rows": 4000,
+            "query_rows": 2000,
+            "disjoint": true,
+            "fit_ids_sha256": "1de0652ab35b74e00cca66277a6873dba8cbc13658be5ba06d4054122bc635f8",
+            "query_ids_sha256": "03ba6aa467a95226e6d5be95d27f0f594d316251c07ea3fe8c4fa9dead464f3f"
+          }
+        ],
+        "outer_validation_used_for_fitting": false,
+        "spline_training_scores_used": false,
+        "interaction_coefficients": {
+          "late30_x_allocation_reliability": 0.02205237863079564,
+          "installment_x_conditional_deficit": 0.015504221385384633,
+          "installment_x_outflow_pressure": 0.001965845799478204,
+          "total_burden_x_sparse_allocation": 0.00725182742566735
+        },
+        "supported_training_rows": {
+          "late30_x_allocation_reliability": 3989,
+          "installment_x_conditional_deficit": 3890,
+          "installment_x_outflow_pressure": 4199,
+          "total_burden_x_sparse_allocation": 4009
+        },
+        "teacher": "3-fold inner OOF corrected Kumo; 4000 fit / 2000 query",
+        "allocation_count_is_DPD_denominator": false
+      },
+      "head_gap_caveat": "The new head training diagnostic reuses its6k fitting labels; utility must be assessed only on14k outer rows. Inner teachers use disjoint4000/2000 partitions; original spline is never a6k training teacher."
+    }
+  ],
+  "confidence_interval": {
+    "repetitions": 300,
+    "seed": 192026,
+    "baseline_KS": [
+      0.522650793782529,
+      0.539432023183806
+    ],
+    "candidate_KS": [
+      0.5226273695307849,
+      0.5395139786356017
+    ],
+    "delta_KS": [
+      -0.000188366354834682,
+      0.00025193944317325657
+    ],
+    "candidate_AUC": [
+      0.8433517722775706,
+      0.8507770218638863
+    ],
+    "delta_AUC": [
+      -5.204771034036937e-06,
+      2.5667834433279456e-06
+    ],
+    "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+  },
+  "modeling_formula": "Fit four credit interactions to inner3fold-OOF corrected-Kumo offset on6000 correction rows: meanBCE(offset+R@gamma)+.03/2||gamma||^2+.2/2 mean((R@gamma)^2). R is support-gated, main-effect-residualized late30*allocation-reliability, installment*conditional-deficit, installment*outflow-pressure, and total-burden*allocation-sparsity. Ridge projection .001, reference fitting on6k only. No intercept. Inference eta=logit(p_V25_corrected)+.25*clip(R@gamma,-.3,.3); final=.75*sigmoid(eta)+.25*original_spline; test mean5folds.; mean5fold test probabilities",
+  "modeling_objective": "Fit four credit interactions to inner3fold-OOF corrected-Kumo offset on6000 correction rows: meanBCE(offset+R@gamma)+.03/2||gamma||^2+.2/2 mean((R@gamma)^2). R is support-gated, main-effect-residualized late30*allocation-reliability, installment*conditional-deficit, installment*outflow-pressure, and total-burden*allocation-sparsity. Ridge projection .001, reference fitting on6k only. No intercept. Inference eta=logit(p_V25_corrected)+.25*clip(R@gamma,-.3,.3); final=.75*sigmoid(eta)+.25*original_spline; test mean5folds.",
+  "controller_source": "v7/scripts/credit_posthoc_worker.py",
+  "source_sha256": "4282683b1366a145bded6f16792be5a91fbdcf5a208fdb21872bfff3847c953c",
+  "frozen_Kumo_fraction": 1.0,
+  "backbone_retrained": false,
+  "backbone_gradient_updated": false,
+  "in_context_refitted": false,
+  "original_spline_unchanged": true,
+  "all_outer_indices_identical": true,
+  "point_in_time_certified": false,
+  "inherited_baseline_snapshot_uncertainty": true,
+  "features_changed_vs_V25": true,
+  "submission": "v7/submissions/submission_V262_V25_conservative.csv",
+  "submission_sha256": "eeaa88272c5c6ef3dbeb2e2a07173002d6d972e2b0f8dd90d84ba32e63c889c5",
+  "public_score": null,
+  "elapsed_seconds": 20.604999542236328,
+  "peak_RSS_MiB": 350.74609375,
+  "overfitting_assessment": {
+    "development_folds_reused": true,
+    "independent_holdout": false,
+    "hyperparameters_prespecified": true,
+    "selection_corrected_CI": false,
+    "public_score_unknown": true,
+    "risk": "HIGH_SEARCH_MULTIPLICITY",
+    "diagnostic": "New four-parameter head uses inner-OOF corrected-Kumo teacher. No training predictions from spline are used. Outer labels only evaluate. 6k new-head training scores remain optimistic; development-fold reuse and data-driven choice after prior residual audit remain selection risks.",
+    "inner_crossfit_used": true
+  },
+  "error_analysis": {
+    "json": "v7\\runs\\V262\\ERROR_ANALYSIS.json",
+    "markdown": "v7\\runs\\V262\\ERROR_ANALYSIS.md",
+    "cases": "v7\\runs\\V262\\ERROR_CASES.csv"
+  },
+  "execution_host": "local_windows",
+  "source_data_host": "node480",
+  "packages": {
+    "numpy": "2.2.2",
+    "pandas": "2.2.3",
+    "scipy": "1.15.1",
+    "scikit-learn": "1.7.2",
+    "pyarrow": "22.0.0",
+    "joblib": "1.4.2"
+  },
+  "additional_source_sha256": "fa1b8c804cb7a56a2652512c4405ac1051cf188fa31b1734d863fccc75b1d59c",
+  "engineered_interaction_features": [
+    "late30_x_allocation_reliability",
+    "installment_x_conditional_deficit",
+    "installment_x_outflow_pressure",
+    "total_burden_x_sparse_allocation"
+  ],
+  "raw_sources_changed_vs_V25": false,
+  "Kumo_input_features_unchanged": true,
+  "original_V25_head_unchanged": true,
+  "new_target_fitted_parameters_per_fold": 4,
+  "maximum_added_corrected_Kumo_logit": 0.075,
+  "comparison_to_V185": {
+    "control": "V185",
+    "control_metrics": {
+      "KS": 0.5311516622583823,
+      "signed_KS": 0.5311516622583823,
+      "AUC": 0.8471087754249731,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5303177217205987,
+      "signed_KS": 0.5303177217205987,
+      "AUC": 0.8470283051751881,
+      "rows": 70000
+    },
+    "delta_KS": -0.0008339405377836284,
+    "delta_AUC": -8.047024978496964e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5234363951810418,
+        0.5406116770704794
+      ],
+      "candidate_KS": [
+        0.5226273695307849,
+        0.5395139786356017
+      ],
+      "delta_KS": [
+        -0.003197836935898854,
+        0.001450400136095652
+      ],
+      "candidate_AUC": [
+        0.8433517722775706,
+        0.8507770218638863
+      ],
+      "delta_AUC": [
+        -0.0003343308138871487,
+        0.0001431790206270931
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "generalization_review": {
+    "status": "REVIEWED",
+    "candidate": "V262",
+    "decision": "EXPERIMENT_ONLY_KEEP_V25_PUBLIC_INCUMBENT",
+    "pooled_KS": 0.5303177217205987,
+    "AUC": 0.8470283051751881,
+    "delta_AUC_vs_V25": -9.737319277558498e-07,
+    "delta_AUC_vs_V185": -8.047024978496964e-05,
+    "head_gap": 0.011043846953754466,
+    "V25_head_gap": 0.011107666682208906,
+    "flags": [
+      "REUSED_DEVELOPMENT_FOLDS",
+      "MANY_PRIOR_EXPERIMENTS",
+      "NO_INDEPENDENT_GENERALIZATION_TEST",
+      "AUC_DECREASE_VS_V25",
+      "AUC_DECREASE_VS_V185",
+      "DELTA_KS_V25_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "DELTA_KS_V185_CI_INCLUDES_ZERO_OR_NEGATIVE",
+      "FEWER_THAN_FOUR_FOLD_KS_WINS_VS_V185"
+    ],
+    "public_incumbent": {
+      "id": "V25",
+      "KS": 0.56822
+    },
+    "development_incumbent_public_outcome": {
+      "id": "V185",
+      "KS": 0.56699
+    },
+    "causation_note": "Public decline does not uniquely establish overfitting; sample variability, population drift and source instability remain possible.",
+    "selection_caveat": "Intervals condition on fitted predictions and exclude search/retraining uncertainty; operational rules are heuristics, not significance tests.",
+    "top_risk_capture_vs_V185": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3842,
+        "candidate_bad_captured": 3848,
+        "net_bad_captured": 6,
+        "new_members": 246,
+        "exited_members": 246,
+        "entrant_bad_rate": 0.36585365853658536,
+        "exit_bad_rate": 0.34146341463414637
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5850,
+        "net_bad_captured": -5,
+        "new_members": 359,
+        "exited_members": 359,
+        "entrant_bad_rate": 0.22284122562674094,
+        "exit_bad_rate": 0.23676880222841226
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7417,
+        "candidate_bad_captured": 7434,
+        "net_bad_captured": 17,
+        "new_members": 426,
+        "exited_members": 426,
+        "entrant_bad_rate": 0.1431924882629108,
+        "exit_bad_rate": 0.10328638497652583
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8018,
+        "candidate_bad_captured": 8021,
+        "net_bad_captured": 3,
+        "new_members": 460,
+        "exited_members": 460,
+        "entrant_bad_rate": 0.0891304347826087,
+        "exit_bad_rate": 0.08260869565217391
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8651,
+        "net_bad_captured": 2,
+        "new_members": 445,
+        "exited_members": 445,
+        "entrant_bad_rate": 0.07640449438202247,
+        "exit_bad_rate": 0.07191011235955057
+      }
+    ]
+  },
+  "comparison_to_V193": {
+    "control": "V193",
+    "control_metrics": {
+      "KS": 0.5314595145625357,
+      "signed_KS": 0.5314595145625357,
+      "AUC": 0.8471075443496074,
+      "rows": 70000
+    },
+    "candidate_metrics": {
+      "KS": 0.5303177217205987,
+      "signed_KS": 0.5303177217205987,
+      "AUC": 0.8470283051751881,
+      "rows": 70000
+    },
+    "delta_KS": -0.0011417928419370504,
+    "delta_AUC": -7.923917441932105e-05,
+    "fold_wins": 2,
+    "confidence_interval": {
+      "repetitions": 300,
+      "seed": 192026,
+      "baseline_KS": [
+        0.5237657171439752,
+        0.5406826945132854
+      ],
+      "candidate_KS": [
+        0.5226273695307849,
+        0.5395139786356017
+      ],
+      "delta_KS": [
+        -0.0033479690545420103,
+        0.0012360979966663107
+      ],
+      "candidate_AUC": [
+        0.8433517722775706,
+        0.8507770218638863
+      ],
+      "delta_AUC": [
+        -0.0003366964608292222,
+        0.00014440344505596003
+      ],
+      "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+    }
+  },
+  "continuous_insight": {
+    "experiment": "V262",
+    "method": "credit_interaction_inner_oof",
+    "hypothesis": "V25 already has credit main effects; audit showed no significant one-dimensional residuals. Test four small conditional effects instead of aggressive rules or outer-label tuning. Honest inner-OOF teacher avoids fitting the new head to in-sample original correction residuals. Identical existing outer folds, no new Kumo inference or backbone gradients. Post-audit choice and repeated outer-fold reuse remain selection risks; not a verified reproduction of an unidentified friend method.",
+    "formula": "Fit four credit interactions to inner3fold-OOF corrected-Kumo offset on6000 correction rows: meanBCE(offset+R@gamma)+.03/2||gamma||^2+.2/2 mean((R@gamma)^2). R is support-gated, main-effect-residualized late30*allocation-reliability, installment*conditional-deficit, installment*outflow-pressure, and total-burden*allocation-sparsity. Ridge projection .001, reference fitting on6k only. No intercept. Inference eta=logit(p_V25_corrected)+.25*clip(R@gamma,-.3,.3); final=.75*sigmoid(eta)+.25*original_spline; test mean5folds.",
+    "findings": [
+      "NO_GAIN_AGAINST_DEVELOPMENT_CONTROL",
+      "CONDITIONAL_KS_DELTA_CI_DOES_NOT_ESTABLISH_IMPROVEMENT"
+    ],
+    "comparison_to_V193": {
+      "control": "V193",
+      "control_metrics": {
+        "KS": 0.5314595145625357,
+        "signed_KS": 0.5314595145625357,
+        "AUC": 0.8471075443496074,
+        "rows": 70000
+      },
+      "candidate_metrics": {
+        "KS": 0.5303177217205987,
+        "signed_KS": 0.5303177217205987,
+        "AUC": 0.8470283051751881,
+        "rows": 70000
+      },
+      "delta_KS": -0.0011417928419370504,
+      "delta_AUC": -7.923917441932105e-05,
+      "fold_wins": 2,
+      "confidence_interval": {
+        "repetitions": 300,
+        "seed": 192026,
+        "baseline_KS": [
+          0.5237657171439752,
+          0.5406826945132854
+        ],
+        "candidate_KS": [
+          0.5226273695307849,
+          0.5395139786356017
+        ],
+        "delta_KS": [
+          -0.0033479690545420103,
+          0.0012360979966663107
+        ],
+        "candidate_AUC": [
+          0.8433517722775706,
+          0.8507770218638863
+        ],
+        "delta_AUC": [
+          -0.0003366964608292222,
+          0.00014440344505596003
+        ],
+        "caveat": "Paired fold/class-stratified bootstrap conditional on these fitted OOF predictions; excludes retraining, repeated search and public leaderboard uncertainty"
+      }
+    },
+    "head_gap": 0.011043846953754466,
+    "top_risk_capture": [
+      {
+        "top_population_fraction": 0.1,
+        "reference_bad_captured": 3841,
+        "candidate_bad_captured": 3848,
+        "net_bad_captured": 7,
+        "new_members": 245,
+        "exited_members": 245,
+        "entrant_bad_rate": 0.3673469387755102,
+        "exit_bad_rate": 0.33877551020408164
+      },
+      {
+        "top_population_fraction": 0.2,
+        "reference_bad_captured": 5855,
+        "candidate_bad_captured": 5850,
+        "net_bad_captured": -5,
+        "new_members": 364,
+        "exited_members": 364,
+        "entrant_bad_rate": 0.22527472527472528,
+        "exit_bad_rate": 0.23901098901098902
+      },
+      {
+        "top_population_fraction": 0.3236857142857143,
+        "reference_bad_captured": 7422,
+        "candidate_bad_captured": 7434,
+        "net_bad_captured": 12,
+        "new_members": 425,
+        "exited_members": 425,
+        "entrant_bad_rate": 0.13647058823529412,
+        "exit_bad_rate": 0.10823529411764705
+      },
+      {
+        "top_population_fraction": 0.4,
+        "reference_bad_captured": 8015,
+        "candidate_bad_captured": 8021,
+        "net_bad_captured": 6,
+        "new_members": 465,
+        "exited_members": 465,
+        "entrant_bad_rate": 0.09462365591397849,
+        "exit_bad_rate": 0.08172043010752689
+      },
+      {
+        "top_population_fraction": 0.5,
+        "reference_bad_captured": 8649,
+        "candidate_bad_captured": 8651,
+        "net_bad_captured": 2,
+        "new_members": 441,
+        "exited_members": 441,
+        "entrant_bad_rate": 0.07482993197278912,
+        "exit_bad_rate": 0.07029478458049887
+      }
+    ],
+    "next_action": "Inspect source-specific errors and change one mechanism; do not promote by pooledKS alone or tune on outer labels.",
+    "public_incumbent": "V25",
+    "independent_generalization_established": false
+  },
+  "decision": "KEEP_V25_NO_ESTABLISHED_GAIN"
+}

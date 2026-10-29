@@ -48,6 +48,9 @@ def audit(ident):
         if 'new_spline_training_rows' in f:
             assert f['new_spline_training_rows']==56000
             assert ids_hash(train,np.r_[ci,hi])==f['new_spline_training_ids_sha256']
+        if 'new_expert_training_rows' in f:
+            assert f['new_expert_training_rows']==56000
+            assert ids_hash(train,np.r_[ci,hi])==f['new_expert_training_ids_sha256']
         if 'context_ids_sha256' in f:assert ids_hash(train,ci)==f['context_ids_sha256']
         val=pd.read_parquet(out/f'fold{fold}_validation.parquet');te=pd.read_parquet(out/f'fold{fold}_test.parquet')
         assert val.application_id.tolist()==train.application_id.iloc[vi].tolist()

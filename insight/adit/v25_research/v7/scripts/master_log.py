@@ -96,7 +96,7 @@ def generate():
   if 'input_features' in definition:
    features=[x for x in catalog if x.get('feature_name') in definition['input_features']]
   if 'only' in definition:features=[x for x in catalog if x.get('feature_name') in definition['only']]
-  if r is not None:features=[x for x in catalog if x.get('feature_name') in r['new_features']]
+  if r is not None:features=[x for x in catalog if x.get('feature_name') in r['new_features']+r.get('engineered_interaction_features',[])]
   record=dict(id=exp,definition=definition,status='COMPLETE' if r else state.get('status','QUEUED'),
    method_formula='p_final=.75*sigmoid(logit(p_frozen_Kumo)+strength*X_correction@beta)+.25*p_original_spline77; test mean5fold',
    objective='mean(logaddexp(0,offset+Xbeta)-y*(offset+Xbeta)) + penalty/2*sum(beta[1:]**2); fit full correction, shrink at inference',

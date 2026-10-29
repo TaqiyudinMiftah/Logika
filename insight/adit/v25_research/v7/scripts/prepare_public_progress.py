@@ -90,6 +90,10 @@ def main():
     audit_files += list((V/'data_residual/reports').glob('*')) if (V/'data_residual/reports').exists() else []
     audit_files += [V/'anchored_spline_plan.json',V/'ANCHORED_SPLINE_PLAN.md',V/'scripts/anchored_spline_worker.py',V/'scripts/build_anchored_spline_inputs.py',V/'reports/PEER_REVIEW_ALL66_20261028.md',V/'reports/ALL66_KAGGLE_READONLY_RECEIPT.json',V/'reports/MASTER_WATCH_RELOAD.json']
     audit_files += list((V/'anchored_spline/reports').glob('*')) if (V/'anchored_spline/reports').exists() else []
+    audit_files += [V/'conservative_mechanisms_plan.json',V/'CONSERVATIVE_MECHANISMS_PLAN.md',V/'scripts/conservative_mechanisms.py',V/'scripts/define_conservative_mechanisms.py']
+    audit_files += list((V/'conservative_mechanisms/reports').glob('*')) if (V/'conservative_mechanisms/reports').exists() else []
+    audit_files += [V/'credit_posthoc_plan.json',V/'CREDIT_POSTHOC_PLAN.md',V/'scripts/credit_posthoc_worker.py',V/'scripts/audit_credit_posthoc.py',V/'scripts/audit_credit_posthoc_result.py']
+    audit_files += list((V/'credit_posthoc/reports').glob('*')) if (V/'credit_posthoc/reports').exists() else []
     for source in audit_files:
         if source.is_file() and source.suffix.lower() in ['.py','.md','.json','.csv','.svg']:
             target=DEST/source.relative_to(ROOT);target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target)
@@ -103,6 +107,8 @@ def main():
     latest_result=max(modeling,key=lambda x:int(x['id'][1:]))['result']
     selected=[next(x['result'] for x in experiments if x['id']=='V25'),best_result,latest_result]
     for selected_result in selected:
+        # New credit-posthoc submissions stay private; publish their hashes and metrics.
+        if selected_result.get('experiment')=='V262':continue
         filename=Path(selected_result['submission']).name
         source=V/'submissions'/filename
         if source.exists():

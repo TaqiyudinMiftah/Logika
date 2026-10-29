@@ -1,0 +1,25 @@
+[
+  {
+    "id": "V262",
+    "label": "V25 credit-aware post-hoc with inner-OOF teacher",
+    "method": "credit_interaction_inner_oof",
+    "worker": "credit_posthoc_worker.py",
+    "source_script": "v7/scripts/credit_posthoc_worker.py",
+    "research_ready": true,
+    "execution_host": "local_windows",
+    "comparison_baseline": "V25",
+    "Kumo_frozen_fraction": 1.0,
+    "priority": "USER_REQUEST",
+    "penalty": 0.03,
+    "teacher_tether": 0.2,
+    "strength": 0.25,
+    "logit_cap": 0.3,
+    "families": ["credit_posthoc", "repayment_reliability", "conditional_cashflow", "affordability"],
+    "formula": "Fit four credit interactions to inner3fold-OOF corrected-Kumo offset on6000 correction rows: meanBCE(offset+R@gamma)+.03/2||gamma||^2+.2/2 mean((R@gamma)^2). R is support-gated, main-effect-residualized late30*allocation-reliability, installment*conditional-deficit, installment*outflow-pressure, and total-burden*allocation-sparsity. Ridge projection .001, reference fitting on6k only. No intercept. Inference eta=logit(p_V25_corrected)+.25*clip(R@gamma,-.3,.3); final=.75*sigmoid(eta)+.25*original_spline; test mean5folds.",
+    "rationale": "V25 already has credit main effects; audit showed no significant one-dimensional residuals. Test four small conditional effects instead of aggressive rules or outer-label tuning. Honest inner-OOF teacher avoids fitting the new head to in-sample original correction residuals. Identical existing outer folds, no new Kumo inference or backbone gradients. Post-audit choice and repeated outer-fold reuse remain selection risks; not a verified reproduction of an unidentified friend method.",
+    "head_gap_caveat": "The new head training diagnostic reuses its6k fitting labels; utility must be assessed only on14k outer rows. Inner teachers use disjoint4000/2000 partitions; original spline is never a6k training teacher.",
+    "preflight_receipt": "v7/credit_posthoc/reports/PREFLIGHT.json",
+    "no_outer_validation_tuning": true,
+    "raw_features_unchanged": true
+  }
+]
