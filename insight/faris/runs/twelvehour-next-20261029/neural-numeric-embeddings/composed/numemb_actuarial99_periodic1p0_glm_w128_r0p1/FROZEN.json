@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-29T12:55:21.450914+00:00",
+  "design": "numemb_actuarial99_periodic1p0_glm_w128_r0p1",
+  "design_spec": {
+    "admission_group": "numemb_actuarial99_periodic1p0_glm_w128_r0p1",
+    "encoding": "periodic1p0",
+    "family": "neural_numeric_embedding",
+    "glm_C": 0.1,
+    "hypothesis": "Numerical embedding representation may capture irregular dose/risk relations missed by raw standardized MLPs; compare inner-quantile PLE8/16 and trainable periodic4frequencies at scale.1/1 in same fixedGLMoffset or interceptcontrol MLP. Reuse exact matched existing rawcontrols; newrawcontrols only for views not previously tested. This is embedding+CANN adaptation, no guaranteed KS effect.",
+    "learning_rate": 0.0003,
+    "max_seconds": 1800,
+    "offset_mode": "glm",
+    "parameters": {},
+    "residual_penalty": 0.1,
+    "resource": "cpu",
+    "sources": [
+      "https://arxiv.org/abs/2203.05556v4",
+      "https://github.com/yandex-research/rtdl-num-embeddings",
+      "https://doi.org/10.1017/asb.2018.42"
+    ],
+    "view": "actuarial99",
+    "width": 128
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s2026/fold0/RESULT.json": "f465f22a366dd42a1194a9411e7c3a07aabb9f5862e501c8aa2b641b8c5d97ba",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s2026/fold1/RESULT.json": "214891b42daed24de01c0837ebbc54f2f20b34bbb1fb7bd457d2f56dc94bc6d0",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s2026/fold2/RESULT.json": "915ec7af4aa905939dcda886fe2bd967096f7e383764cdcebf53dc6311251bb4",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s2026/fold3/RESULT.json": "18f252eaea318eccf9f30915c5f45c7a539ce4d5fa6c74375fb0d5afbe988030",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s2026/fold4/RESULT.json": "cc866085ce35a8ca7ea1dffda94f6f76b4ea50dec933c22b5cd91bd92269f12c",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s7731/fold0/RESULT.json": "08bb4b735da97a480451e8bfed73dacd8e8b25a606d2ccd73894ebde0ff8603e",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s7731/fold1/RESULT.json": "cb009fd017099293dbafce30caff3910f12cca9f507744ec1f147e4a7e857333",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s7731/fold2/RESULT.json": "9fe3531e5b27bbb748dd7b537e0ef2f5c37a38783adb1c17777d36a20384d1ef",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s7731/fold3/RESULT.json": "a76fd46f18d9dbf5be4948d1cb6ad61a229adebe1a43a61d51c7ad272c0aae40",
+    "composed/numemb_actuarial99_periodic1p0_glm_w128_r0p1/s7731/fold4/RESULT.json": "ea96e5de93d07ce3a61d6d8dcd36c18f0d1341ada7272d25ed1f6c448129de72"
+  },
+  "config_sha256": "2feeb22d93a36a53d89cfaf53ac196fb946940c53e8c2489ac3a1650ce4202c5",
+  "contract_sha256": "313153c4e30461f1a9e9d2026d1109180cbcf29bd7822931d2f3c06247b9996e",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
