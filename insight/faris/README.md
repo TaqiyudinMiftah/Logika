@@ -63,11 +63,13 @@ does not establish KS 0.54 or a public gain. The ALL66 refit completed; its publ
 See [the run record](runs/agy-all66-refit-20261028/README.md). It is rejected
 for promotion.
 
-## New twelve-hour base-model campaign — 29 October
+## Completed twelve-hour base-model campaign —29October
 
-The preceding four-hour ceiling study finished early after all540fits/54designs. ArtifactauditPASS; bestKS0.5305100912 wasbelowanchor0.5306361042 andprevious0.5312029153. Noimprovement/refit/submission. Fullnegativeevidencepublishedatd2a13340.
+[Final study](runs/twelvehour-20261029/RESULTS_SUMMARY.md) finished all admitted work early:1,272fits,127complete two-seed/five-fold designs and508composition cohorts. Of137registered designs/1,370planned fits,98were not admitted after two Colab blocks failed the conservative runtime gate;12earlier pre-START staging failures and their approved replacements remain preserved separately. Original clock, scientific source, features and initial configuration seals stayed unchanged.
 
-[New campaign](runs/twelvehour-20261029/README.md) is separatelyauthorized for12hours:99designs/990plannedbasefits, includingCPUobjective/linearleaf/deeperOrdered/growth/DART/GOSS andKumocontextbagging. Newimmutableclock, nooldclockextension. Onlylab2001/2003; nopaidallocation. Source/config/protocol preregistered beforepilots; complete/failed/partialresultsallretained. All70krowsremainreuseddevelopment, noindependentaudit. The highestKSdeploymentreturnedpublic0.56754, belowV25incumbent0.56822.
+Best development KS0.5312163876 versus matched baseline0.5306361042; conditional delta95%interval[-0.0005556209,0.0015014716] crosses zero. Versus previous best0.5312029153, delta0.0000134723 also has an interval crossing zero and opposite seed signs. No supported improvement or0.54target attainment. All70k cases remain adaptively reused development, not untouched confirmation. No refit, Kaggle submission or leaderboard probe. PublicV25 remains0.56822.
+
+The human expanded resources to persistent host119 and six Colab profiles after the initial lab-only registration. All six sessions were collected/released and fresh API checks show0assignments/0CUhour. Account2 observed usage was6.06CU. Raw/cohort/source/seed/boundary arithmetic checks passed, and both2000-replicate terminal intervals independently replayed. Compact private evidence was hash-verified locally and retained canonically plus on host119. See FINAL_ROOT_AUDIT.json,FINAL_RESOURCE_AUDIT.json and FINAL_LOCAL_COLLECTION_AUDIT.json in the study directory.
 
 ## Every new experiment
 
