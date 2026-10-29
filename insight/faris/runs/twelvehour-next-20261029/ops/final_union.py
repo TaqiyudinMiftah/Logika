@@ -8,6 +8,12 @@ import numpy as np
 from common import load,dump,sha,utc,check_seal
 from evaluate import paired_interval,metrics
 clock=check_seal();plan=load('UNION_PLAN.json');assert plan['clock_sha256']==sha(R/'CLOCK.json')
+# Execution-only terminal barrier: do not change candidates, ties or scoring.
+while time.time()<clock['deadline_epoch']-900:
+ pending=[n for n in plan['component_studies']if n!='.'and not all((R/n/x).exists()for x in ['COMPLETION.json','FINAL_EVALUATION.json','ARTIFACT_CONSISTENCY_AUDIT.json'])]
+ if not pending:break
+ dump(dict(UTC=utc(),pending_components=pending,original_deadline_epoch=clock['deadline_epoch'],scientific_selection_unchanged=True),R/'UNION_BARRIER_WAIT.json')
+ time.sleep(10)
 candidates={};incomplete=[]
 for namespace in plan['component_studies']:
  root=R if namespace=='.'else R/namespace
