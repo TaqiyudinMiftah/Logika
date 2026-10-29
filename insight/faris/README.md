@@ -87,3 +87,7 @@ The human expanded resources to persistent host119 and six Colab profiles after 
 
 The existing [shared sync protocol](../adit/v25_research/SYNC_PROTOCOL.md) remains
 authoritative for peer coordination and public/private evidence separation.
+
+## Requested latest best-local submission —29October
+
+[Fixed25kcontext refit](runs/submit-best-sub25k-20261029/README.md) completed10frozen seed/fold members with exact context and postprocessing replay. Submission57761141 scored publicKS0.56793; V25 at0.56822 remains incumbent. LocalKS0.5312163876 is adaptively reused development without a supported gain. This separate requested deployment preserved all completed study seals and clocks.
