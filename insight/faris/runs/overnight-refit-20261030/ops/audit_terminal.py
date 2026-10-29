@@ -30,7 +30,7 @@ def audit(terminal=False):
  assert np.isfinite(saved.default_probability).all()and saved.default_probability.between(0,1).all()
  # Rerun frozen meta recipe against saved fresh raw outputs, suppressing ALL writes.
  captures=[];original_to_csv=pd.DataFrame.to_csv;identity=ready['identity'];selected='/'in identity
- path=(R/'final-fusion/source/meta_fusion.py')if identity.startswith('finalfusion_')else R/'source'/('export_selected.py'if selected else'fusion.py');spec=importlib.util.spec_from_file_location('readonly_delivery_replay',path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+ path=(R/'seedbag-localglm/source/seed_ensemble.py')if identity.startswith('seedbag')else (R/'final-fusion/source/meta_fusion.py')if identity.startswith('finalfusion_')else R/'source'/('export_selected.py'if selected else'fusion.py');sys.path.insert(0,str(path.parent));spec=importlib.util.spec_from_file_location('readonly_delivery_replay',path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
  module.dump=lambda *args,**kw:None
  def capture(frame,target,*args,**kwargs):captures.append((str(target),frame.copy()))
  pd.DataFrame.to_csv=capture
@@ -68,6 +68,7 @@ def audit(terminal=False):
  eligible_scores=[ready['local_KS']]
  for f in [R/'CURRENT_SUBMISSION_AUDIT.json',R/'CURRENT_FINAL_FUSION_AUDIT.json',*R.glob('AUDIT_CURRENT_*.json')]:
   if not f.exists():continue
+  if f.name=='CURRENT_FINAL_FUSION_AUDIT.json'and not(R/'final-fusion/ARTIFACT_CONSISTENCY_AUDIT.json').exists():continue
   v=load(f)
   if v.get('status')=='PASS'and v.get('fresh_training')and v.get('campaign')=='overnight-refit-20261030':
    q=v.get('candidate')or v.get('selection')or{}
