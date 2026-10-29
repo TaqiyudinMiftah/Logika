@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-29T08:06:03.882251+00:00",
+  "design": "cann_global48_intercept_c0p1_l7",
+  "design_spec": {
+    "admission_group": "cann_global48_intercept_c0p1_l7",
+    "family": "cann_tree",
+    "glm_C": 0.1,
+    "hypothesis": "Fixed BernoulliGLMlogit offset plus nonlinear tree correction, matched intercept-only tree and GLM-only controls; each offset and correction fits only permitted base rows. Transfer of CANN principle, not exact neural CANN. Full encoder fit42500inner only; GLM/refit50000.",
+    "max_seconds": 1200,
+    "num_leaves": 7,
+    "offset_mode": "intercept",
+    "parameters": {},
+    "resource": "cpu",
+    "sources": [
+      "https://doi.org/10.1017/asb.2018.42",
+      "https://www.mdpi.com/1999-4893/16/2/99",
+      "https://lightgbm.readthedocs.io/en/v4.6.0/pythonapi/lightgbm.Dataset.html"
+    ],
+    "view": "global48"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cann_global48_intercept_c0p1_l7/s2026/fold0/RESULT.json": "0192c122a93708fe40a39c558a5b05f79bc75582328bff501f926f129d9d902e",
+    "composed/cann_global48_intercept_c0p1_l7/s2026/fold1/RESULT.json": "3f3ac62e0b35506d82fdb31566b2fed0c75e633efdf31402ddba8d27514761a1",
+    "composed/cann_global48_intercept_c0p1_l7/s2026/fold2/RESULT.json": "01186e59ff69a980afdd1e1e558fdaaa8bade82e49ee27307b1bcdd9dcdced51",
+    "composed/cann_global48_intercept_c0p1_l7/s2026/fold3/RESULT.json": "afdb398a340c32a0c381e6c3bedf225c85a19a6256224cfaab7e4312fb8841f9",
+    "composed/cann_global48_intercept_c0p1_l7/s2026/fold4/RESULT.json": "a0274f9db419f0353d6f45699878a92b10d4a5524fe5e4365fdbd6dfbbfd432b",
+    "composed/cann_global48_intercept_c0p1_l7/s7731/fold0/RESULT.json": "7abdd783a08cbc613781a493384ffbc63668cd89e394c4b6ec73ed2e60469b43",
+    "composed/cann_global48_intercept_c0p1_l7/s7731/fold1/RESULT.json": "ee8b2207efe204058619dc93e5885e97f04487ba0b720df25efe07ebd9a449e2",
+    "composed/cann_global48_intercept_c0p1_l7/s7731/fold2/RESULT.json": "c07beb737d315fd88bec9cf3a7f5ae8c2ef2fca6a56940b22104b751a2be7596",
+    "composed/cann_global48_intercept_c0p1_l7/s7731/fold3/RESULT.json": "f6172dd28c250457ed34198adf93bef3d6028543ecf9abe192dc3954cb13ed04",
+    "composed/cann_global48_intercept_c0p1_l7/s7731/fold4/RESULT.json": "06f427e2c4aaab5e911bb360ef16f735e13d7f521140830a6b4ce2851fc1584d"
+  },
+  "config_sha256": "e77e37256e84ee44ae2f3314b407e63ad375bd3b2982fe20d6d05cc3894403a2",
+  "contract_sha256": "0505756f9e75bf6078df0cc6d77a64249e35a7109dac1847b4137d18a5e50fa4",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

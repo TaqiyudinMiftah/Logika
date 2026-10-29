@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-29T08:05:21.401312+00:00",
+  "design": "cann_actuarial99_glm_c0p01_l31",
+  "design_spec": {
+    "admission_group": "cann_actuarial99_glm_c0p01_l31",
+    "family": "cann_tree",
+    "glm_C": 0.01,
+    "hypothesis": "Fixed BernoulliGLMlogit offset plus nonlinear tree correction, matched intercept-only tree and GLM-only controls; each offset and correction fits only permitted base rows. Transfer of CANN principle, not exact neural CANN. Full encoder fit42500inner only; GLM/refit50000.",
+    "max_seconds": 1200,
+    "num_leaves": 31,
+    "offset_mode": "glm",
+    "parameters": {},
+    "resource": "cpu",
+    "sources": [
+      "https://doi.org/10.1017/asb.2018.42",
+      "https://www.mdpi.com/1999-4893/16/2/99",
+      "https://lightgbm.readthedocs.io/en/v4.6.0/pythonapi/lightgbm.Dataset.html"
+    ],
+    "view": "actuarial99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cann_actuarial99_glm_c0p01_l31/s2026/fold0/RESULT.json": "869f5ab0256dedb2c7513963b75aea6a6aa3ed8140569a3b46f4a9dfffe03ef8",
+    "composed/cann_actuarial99_glm_c0p01_l31/s2026/fold1/RESULT.json": "6d01a23b31206a28ec0cea89c371b2094e16e8916b5b64212d25a0a867cf16d1",
+    "composed/cann_actuarial99_glm_c0p01_l31/s2026/fold2/RESULT.json": "496743ce65f1edecb9264f43dd33873d3723a299d1c511257b090fb21bd96445",
+    "composed/cann_actuarial99_glm_c0p01_l31/s2026/fold3/RESULT.json": "d69b4782ea272ccf4bbbfc9188650a079f16c6cd67ce3dc0e4dc759c5deb2cab",
+    "composed/cann_actuarial99_glm_c0p01_l31/s2026/fold4/RESULT.json": "c4617fbd3804ff0aadc4b83b768a388e3c1bf9470a8f3f75d9167fe8f65f57e2",
+    "composed/cann_actuarial99_glm_c0p01_l31/s7731/fold0/RESULT.json": "d280c8e3fd59d63f65a3e4819c8695f1eff4b182f09d9e5189b337f94f1ad6d8",
+    "composed/cann_actuarial99_glm_c0p01_l31/s7731/fold1/RESULT.json": "233cce4c5cf0b87df493ac18a1aedbdde0ca83d186d2df1ee3cb199c66790ac6",
+    "composed/cann_actuarial99_glm_c0p01_l31/s7731/fold2/RESULT.json": "4b11c6f61f38d324c021a30db5cbe59005eb7797490b55e8ab07226b067553cf",
+    "composed/cann_actuarial99_glm_c0p01_l31/s7731/fold3/RESULT.json": "63630dd9d6381bf21c49001a5671f2e90ccdbcb596af5de24778ee2eb19faad1",
+    "composed/cann_actuarial99_glm_c0p01_l31/s7731/fold4/RESULT.json": "c34644301b8a969b050ff36829c35ebff3875b0039b0701edcb8737e30d8fa93"
+  },
+  "config_sha256": "e77e37256e84ee44ae2f3314b407e63ad375bd3b2982fe20d6d05cc3894403a2",
+  "contract_sha256": "0505756f9e75bf6078df0cc6d77a64249e35a7109dac1847b4137d18a5e50fa4",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

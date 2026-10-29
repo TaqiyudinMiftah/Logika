@@ -1,0 +1,108 @@
+{
+  "UTC": "2026-10-29T08:09:06.058314+00:00",
+  "design": "cann_augmented256_intercept_c0p1_l31",
+  "design_spec": {
+    "admission_group": "cann_augmented256_intercept_c0p1_l31",
+    "family": "cann_tree",
+    "glm_C": 0.1,
+    "hypothesis": "Fixed BernoulliGLMlogit offset plus nonlinear tree correction, matched intercept-only tree and GLM-only controls; each offset and correction fits only permitted base rows. Transfer of CANN principle, not exact neural CANN. Full encoder fit42500inner only; GLM/refit50000.",
+    "max_seconds": 1200,
+    "num_leaves": 31,
+    "offset_mode": "intercept",
+    "parameters": {},
+    "resource": "cpu",
+    "sources": [
+      "https://doi.org/10.1017/asb.2018.42",
+      "https://www.mdpi.com/1999-4893/16/2/99",
+      "https://lightgbm.readthedocs.io/en/v4.6.0/pythonapi/lightgbm.Dataset.html"
+    ],
+    "view": "augmented256"
+  },
+  "seed": 7731,
+  "fold": 0,
+  "task_id": "cann_augmented256_intercept_c0p1_l31__s7731__f0",
+  "inputs": {
+    "raw_prediction_sha256": "f2bb70d66f8e7559c3a4f41197c4765cc498504505cd0de17787c909a52ae356",
+    "raw_result_sha256": "a99586a5c7cc6b6168e6a3db36fc0ce1b80469af2ab3b46ac6b78317bd52ebce",
+    "roles_sha256": "5c5f47d3e5b28214991ef3eadccd2284fff18a49b1f25160613be91f56178dd6",
+    "anchor_sha256": "4bb1460ea6ff34395f2bd6cd9f75ceaa8060ff4ba5965b4f95792ba5f139b51d"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "0505756f9e75bf6078df0cc6d77a64249e35a7109dac1847b4137d18a5e50fa4",
+  "config_sha256": "e77e37256e84ee44ae2f3314b407e63ad375bd3b2982fe20d6d05cc3894403a2",
+  "prediction_sha256": "990eb203114453c8a3ab50655385c44182c02470fbb5204549b9f2ea2950c7e7",
+  "correction_rows_sha256": "d1e35ea2e923d88182ca01c9744870825e3218be76fd5901e8bf74882c1d67d1",
+  "validation_rows_sha256": "9df692fa989fb9562578ee5587a17f6bc18522c5c49e5ce8499677be3878db46",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "701fc54568515f1bbe5f65db41b13b95f05a52fb4f749917f3199876b1bed4ee",
+      "heldout_global_rows_sha256": "fb351b39a5a762229093a236a0643524b0deea0c7cfc5d5ed4d1e4717f84589b"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "459b46d2f144092ccf59fb3753e9a0defdcd532dff0f287b1cdb064cc85d357d",
+      "heldout_global_rows_sha256": "311e717adbb45831665b9e7663e1229042256074a9074af288c987c29f7d2d28"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "3e466d61caa2b9f50402813756ec4c13fd84f5b7b4c569227266b5f1c7212bc5",
+      "heldout_global_rows_sha256": "4ff7394d4a625f112f40663da76c4ab62957f49991d6299a5190122d6b111b69"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.4,
+  "meta_weight_training_KS": [
+    0.538103661458549,
+    0.5399790570960357,
+    0.541907697404618,
+    0.5426957185368365,
+    0.5427454135631926,
+    0.5445876791831085,
+    0.5449402772272542,
+    0.5452029509379936,
+    0.5359324620927522,
+    0.5263223905674107
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 7,
+    "objective": 0.2962556574572917,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}

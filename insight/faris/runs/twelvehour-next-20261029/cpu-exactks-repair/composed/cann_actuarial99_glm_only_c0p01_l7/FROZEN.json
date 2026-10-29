@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-29T08:05:25.663621+00:00",
+  "design": "cann_actuarial99_glm_only_c0p01_l7",
+  "design_spec": {
+    "admission_group": "cann_actuarial99_glm_only_c0p01_l7",
+    "family": "cann_tree",
+    "glm_C": 0.01,
+    "hypothesis": "Fixed BernoulliGLMlogit offset plus nonlinear tree correction, matched intercept-only tree and GLM-only controls; each offset and correction fits only permitted base rows. Transfer of CANN principle, not exact neural CANN. Full encoder fit42500inner only; GLM/refit50000.",
+    "max_seconds": 1200,
+    "num_leaves": 7,
+    "offset_mode": "glm_only",
+    "parameters": {},
+    "resource": "cpu",
+    "sources": [
+      "https://doi.org/10.1017/asb.2018.42",
+      "https://www.mdpi.com/1999-4893/16/2/99",
+      "https://lightgbm.readthedocs.io/en/v4.6.0/pythonapi/lightgbm.Dataset.html"
+    ],
+    "view": "actuarial99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s2026/fold0/RESULT.json": "7e0deb192d79fc86c12f885cb50fd31a4fcb6c90bf28d424774c4ea1ae45fc51",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s2026/fold1/RESULT.json": "c6e17e9c471b9601de6609d09b2940e53a648f83fa17a58066c3828400836434",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s2026/fold2/RESULT.json": "3cfcb101bec7293a451fadc6a5540539a6876e23df0913f18536697541f414c0",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s2026/fold3/RESULT.json": "aa8ed327ecc4eb34d0d7f692b4287dfe6742f544f6dac1440de48e5e713a11d9",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s2026/fold4/RESULT.json": "d0bcb5ee035af8625774a75a25485d0469f43e692b427dbe50e0fb14522df147",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s7731/fold0/RESULT.json": "973f7db00a973e25b9f5e83a59dbae636eb564082e10e46edfb44ab5ac5245fa",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s7731/fold1/RESULT.json": "0c4f1409dbbb9bf7673909dd09dacc2f63c9f26f38abdff1de76dfdc6155d392",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s7731/fold2/RESULT.json": "dbf286f8c374fd364dc6649f240c8d7c7d1013a0b0dbcc363f1058948815dcef",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s7731/fold3/RESULT.json": "7b67ec150f2651b458e7034a6e8c022a1bb94435dc8b02cfc8269673756c9794",
+    "composed/cann_actuarial99_glm_only_c0p01_l7/s7731/fold4/RESULT.json": "863c39f659ec60e636b1155f6c20f45d1406fdac60a39cd162d6a628fbe7a82b"
+  },
+  "config_sha256": "e77e37256e84ee44ae2f3314b407e63ad375bd3b2982fe20d6d05cc3894403a2",
+  "contract_sha256": "0505756f9e75bf6078df0cc6d77a64249e35a7109dac1847b4137d18a5e50fa4",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

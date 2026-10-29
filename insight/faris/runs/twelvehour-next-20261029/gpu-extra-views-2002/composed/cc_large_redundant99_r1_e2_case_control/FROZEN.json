@@ -1,0 +1,56 @@
+{
+  "UTC": "2026-10-29T08:25:53.030370+00:00",
+  "design": "cc_large_redundant99_r1_e2_case_control",
+  "design_spec": {
+    "admission_group": "cc_large_redundant99_r1_e2_case_control",
+    "aggregation": "single_context",
+    "context_sampling": "case_control",
+    "engine": "concat_context_vocab",
+    "estimators": 2,
+    "family": "kumo_casecontrol",
+    "hypothesis": "New authorized2002GPUcapacity tests exactsame matchedcase-control recipe on4different existing frozenviews: compact32, actuarialaugmented, redundancy, andPCA. This crosses sampling with representation; no newfeatures, selection, probabilitiesfromouterlabels or model/source changes.",
+    "max_seconds": 1800,
+    "memory_fraction": 0.7,
+    "negative_per_positive": 1,
+    "parameters": {},
+    "prediction_batch": 256,
+    "prior_correction": "none",
+    "resource": "gpu",
+    "size": "large",
+    "sources": [
+      "https://arxiv.org/abs/1306.3706",
+      "https://www.stat.berkeley.edu/~wfithian/papers/lcc.pdf",
+      "https://huggingface.co/nvidia/Kumo-Tabular"
+    ],
+    "view": "redundant99"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cc_large_redundant99_r1_e2_case_control/s2026/fold0/RESULT.json": "a83961cef1d861c992b056728648b2eb96818b7c1bc13eb0e750a45e29a0baed",
+    "composed/cc_large_redundant99_r1_e2_case_control/s2026/fold1/RESULT.json": "863a1be5b6ad752100821834e96b04ba260fcd7a1260671c7b3227e4a09046ca",
+    "composed/cc_large_redundant99_r1_e2_case_control/s2026/fold2/RESULT.json": "2212c173853ef8206ffcbf1db1c1b0eb9c4bece7508d6229f7bfce1506a63691",
+    "composed/cc_large_redundant99_r1_e2_case_control/s2026/fold3/RESULT.json": "910090a041e982a3c45e1470143a7cb2bed93b18b7debad946d6bacaba5e6719",
+    "composed/cc_large_redundant99_r1_e2_case_control/s2026/fold4/RESULT.json": "24ca05ad7896e8849382df9d8a7666f52cfdedada0e4d099551288ec2c231975",
+    "composed/cc_large_redundant99_r1_e2_case_control/s7731/fold0/RESULT.json": "bc60af185f313e60264913d6095e08ea82bc8dc081ebc9de5a180abe60f3c214",
+    "composed/cc_large_redundant99_r1_e2_case_control/s7731/fold1/RESULT.json": "ee69c257b2e31c615a9757f8c273a891a9f16be4a0d3bc3c4baf7006e160eecb",
+    "composed/cc_large_redundant99_r1_e2_case_control/s7731/fold2/RESULT.json": "2c96a1afea04826147be07d15459bda0fc6818084319c9619659bd5761d83304",
+    "composed/cc_large_redundant99_r1_e2_case_control/s7731/fold3/RESULT.json": "8d36fd1c58a0aa33f3636906f42374f3bd5a018919fc83cff19f7559f6f377ab",
+    "composed/cc_large_redundant99_r1_e2_case_control/s7731/fold4/RESULT.json": "7aa4d91006dd789eaa916b664d5279053a6b99fb563e4e9d25afc5a57479fafe"
+  },
+  "config_sha256": "568246627821344e502eb814c634ae5ab7aeab12702eecc64574ef19aa7e70a5",
+  "contract_sha256": "d38cc32341f5da3ad1e5139291615d76860741b35dff6a84e7ac5fc61c03570a",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
