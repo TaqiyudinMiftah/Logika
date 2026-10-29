@@ -73,6 +73,7 @@ def upload(v,folder):
  process=subprocess.Popen(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE);offset=0;hasher=hashlib.md5();result=None;bearer=token();last_refresh=time.time()
  try:
   while offset<v['bytes']:
+   assert time.time()<json.load(open(R/'CLOCK.json'))['deadline_epoch']-60,'Original absolute archive deadline reached; retain resumable evidence'
    block=process.stdout.read(min(16*1024**2,v['bytes']-offset));assert block,'Truncated source archive stream';hasher.update(block);end=offset+len(block)-1
    if time.time()-last_refresh>1800:bearer=token();last_refresh=time.time()
    headers={'Authorization':'Bearer '+bearer,'x-goog-user-project':PROJECT,'Content-Type':'application/gzip','Content-Length':str(len(block)),'Content-Range':f'bytes {offset}-{end}/{v["bytes"]}'}
@@ -96,9 +97,13 @@ def upload(v,folder):
 def main():
  C=json.load(open(R/'CLOCK.json'));folder=json.load(open(Path('/home/faris/logika-twelvehour-next-20261029/private/DRIVE_FOLDER.json')))['id']
  about=json.load(request('https://www.googleapis.com/drive/v3/about?fields=user(emailAddress),storageQuota'));assert about['user']['emailAddress']=='helma.eviiii@gmail.com';assert int(about['storageQuota']['limit'])>=5*10**12;dump(about,P/'VERIFIED_ACCOUNT.json')
- while time.time()<C['model_deadline_epoch']+300:time.sleep(30)
+ while time.time()<C['model_deadline_epoch']+300:
+  # An early private snapshot is safe once every registered scientific job is terminal.
+  code="from pathlib import Path;import json;r=Path('/mnt/home/faris/logika-overnight-refit-20261030');p=json.load(open(r/'UNION_PLAN.json'));names=p['component_studies']+p.get('meta_composition_studies',[]);print(all((r/n/'COMPLETION.json').exists()for n in names))"
+  if ssh(code,timeout=60).stdout.strip()=='True':break
+  time.sleep(30)
  current=upload(build('/mnt/home/faris/logika-overnight-refit-20261030'),folder)
- dump(dict(status='CURRENT_ARCHIVE_HASH_VERIFIED',bytes=current['bytes'],source_sha256=current['archive_sha256'],scope='Completed source/parameters/compact predictions snapshot after model cutoff; private machine state excluded'),P/'CURRENT_SUMMARY.json')
+ dump(dict(status='CURRENT_ARCHIVE_HASH_VERIFIED',bytes=current['bytes'],source_sha256=current['archive_sha256'],scope='All registered terminal scientific source/parameters/compact predictions snapshot; later root audit/submission receipts uploaded as a separate delivery archive; private machine state excluded'),P/'CURRENT_SUMMARY.json')
  while time.time()<C['deadline_epoch']-120:
   complete=ssh("from pathlib import Path;print(Path('/mnt/home/faris/logika-overnight-refit-20261030/SUBMITTED.json').exists())").stdout.strip()=='True'
   if complete:
