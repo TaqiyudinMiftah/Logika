@@ -230,7 +230,7 @@ def root_audit(mirror):
 
 
 def counts(mirror, state):
-    complete = len([p for p in (mirror/'predictions').glob('*/s*/fold[0-4]/RESULT.json') if json.loads(p.read_text()).get('status')=='complete'])
+    complete = len([p for p in (mirror/'predictions').glob('*/s*/fold[0-4]/RESULT.json') if p.relative_to(mirror/'predictions').parts[0] in {'cann','kumo25','kumo70'} and json.loads(p.read_text()).get('status')=='complete'])
     config=json.loads((mirror/'CONFIG.json').read_text())if(mirror/'CONFIG.json').exists()else{}
     ledger=mirror/'EXTRA_DESIGNS.jsonl'
     extra=sum(bool(line.strip())for line in ledger.read_text().splitlines())if ledger.exists()else 0
@@ -343,6 +343,7 @@ def publish(local, repo, once=False):
                               expected_fits=expected, computation_clock_started=bool(clock),
                               current_state_evidence='LIVE_STATE.json', clock=clock)
                 if union:record['union_progress']=union
+                record['optional_selected_full_data_fits']=sum(json.loads(p.read_text()).get('status')=='complete' for p in (mirror/'predictions').glob('selected_*/s*/fold[0-4]/RESULT.json'))
                 content = json.dumps(record, indent=2, allow_nan=False) + '\n'
                 if run_record.read_text() != content:
                     run_record.write_text(content)

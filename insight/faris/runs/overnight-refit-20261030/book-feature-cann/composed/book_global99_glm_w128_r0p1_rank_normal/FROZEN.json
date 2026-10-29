@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-29T19:21:51.048226+00:00",
+  "design": "book_global99_glm_w128_r0p1_rank_normal",
+  "design_spec": {
+    "admission_group": "book_global99_glm_w128_r0p1_rank_normal",
+    "view": "global99",
+    "offset_mode": "glm",
+    "width": 128,
+    "glm_C": 0.1,
+    "residual_penalty": 0.1,
+    "learning_rate": 0.0003,
+    "book_transform": "rank_normal",
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "BookFeature_CANN",
+    "resource": "cpu",
+    "hypothesis": "Heavy-tailed financial ratios may be compressed by original mean/SD plus10SD clipping; append training-only robust signed-asinh and/or empirical-normal quantile features. Compare exact raw-feature CANN controls.",
+    "sources": [
+      "user:LDAEd2.pdf#PDFpage51",
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage389",
+      "user:978-3-031-12409-9.pdf#section7.5.1"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s2026/fold0/RESULT.json": "9303f4c7e80d3967c7c146b95f6a22581972448d4d0db3d753f4bc67c09d1911",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s2026/fold1/RESULT.json": "b05e9f692ca59bd5be29a117662f70a7f9b625c46f92cac1a77448ab864ba75a",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s2026/fold2/RESULT.json": "3e440b7b5cb94964f48c80fe66a8327145a8c3403dfe1a37a19b959455c3a269",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s2026/fold3/RESULT.json": "d49b1e54d482239a0b6ab47e94ebb9564c36d9d1b8f2b446e968141c131bfa47",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s2026/fold4/RESULT.json": "705a45f2d4a6a92a411ea54aceac9ae90cc6d3487a476fe9470c1af782827893",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s7731/fold0/RESULT.json": "9eb48976a0f5122f42004cb3996b03de5959c22030a561f5dc2eb63392817c44",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s7731/fold1/RESULT.json": "83b2de836c5fc344d7732b7a3f5924f832b2896b5b82b61d86b59ff21c72f3f1",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s7731/fold2/RESULT.json": "cbdb14cbc547fba2f04461cedb96e385e436e8f97479154bc13401d8fffbad59",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s7731/fold3/RESULT.json": "d51cecc3d5fcf099fc4d57e8e2ce6f67751e9e64cc5b8be7952778f3e61cb767",
+    "composed/book_global99_glm_w128_r0p1_rank_normal/s7731/fold4/RESULT.json": "01563b5b77caec2c6b02c536115572ffee48c439465c24641f789be605d0edab"
+  },
+  "config_sha256": "d08f211f6c933416dd11b816b1bcf9f1f9e4b6745910e2f64e74e5b7d6adf49f",
+  "contract_sha256": "2fd29f5e9d8c3d9a9c917327eed4fe2838897094c9775ee28805f4c02691a7f5",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
