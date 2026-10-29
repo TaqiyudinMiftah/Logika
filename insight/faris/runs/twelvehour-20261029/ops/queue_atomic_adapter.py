@@ -20,9 +20,21 @@ def wrapped(args,*a,**kw):
             count=len([line for line in units.splitlines()if '.service'in line])
             if count<limit:break
             time.sleep(3)
-        args[args.index(old)]=old+'-atomic2'
+        args[args.index(old)]=old+'-atomic3'
         index=next(i for i,x in enumerate(args)if x.startswith('/mnt/home/faris/') and x.endswith('/python'))
         args.insert(index,'--setenv=PYTHONPATH='+str(R/'ops/runtime_hooks'))
     return original(args,*a,**kw)
+# External owner designs must never be dispatched on the labs.
+original_catalog=module.catalog
+module.catalog=lambda:{k:v for k,v in original_catalog().items()if not v.get('resource_owner')}
+original_tasks=module.tasks
+module.tasks=lambda:{k:v for k,v in original_tasks().items()if v['design']in module.catalog()}
+original_dump=module.dump
+def deferred_dump(value,path):
+    path=Path(path)
+    if path.name=='QUEUE_gpu2001_FINAL.json'and(R/'COLAB_RESOURCE_ADDENDUM.json').exists()and not(R/'EXTERNAL_BACKENDS_COLLECTION_COMPLETE.json').exists():
+        path=path.with_name('DEFERRED_'+path.name)
+    return original_dump(value,path)
+module.dump=deferred_dump
 module.subprocess.run=wrapped
 a=argparse.ArgumentParser();a.add_argument('--pool',required=True);module.main(a.parse_args().pool)
