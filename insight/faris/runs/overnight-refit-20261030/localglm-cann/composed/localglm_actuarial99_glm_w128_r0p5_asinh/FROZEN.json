@@ -1,0 +1,51 @@
+{
+  "UTC": "2026-10-29T18:59:09.524884+00:00",
+  "design": "localglm_actuarial99_glm_w128_r0p5_asinh",
+  "design_spec": {
+    "admission_group": "localglm_actuarial99_glm_w128_r0p5_asinh",
+    "view": "actuarial99",
+    "offset_mode": "glm",
+    "width": 128,
+    "glm_C": 0.1,
+    "residual_penalty": 0.5,
+    "learning_rate": 0.0003,
+    "book_transform": "asinh",
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "Bernoulli_LocalGLMnet",
+    "resource": "cpu",
+    "hypothesis": "Feature-dependent regression attention adds explicit multiplicative interactions to CANN. Compare raw and robust numerical maps with exact earlier scalar-head CANN controls. No gain assumed.",
+    "sources": [
+      "user:978-3-031-12409-9.pdf#PDFpages504-506/Definition11.12"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s2026/fold0/RESULT.json": "57300e33eef44f977e555022de7327e9bfa49c5975d02c51132eddc3d534b7d4",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s2026/fold1/RESULT.json": "0d6abfcfad8598011e1b5077c8da0d8f47a089c6609cd8a2eade554c04364a38",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s2026/fold2/RESULT.json": "4bcb3a63ae494c7173138e5e621eff2f591683e735c2077a9133feb69ed35685",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s2026/fold3/RESULT.json": "6611d12ffba7bfeedfc5f89b0d97c14ce9f01868a97b0334830c7bbc148447b8",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s2026/fold4/RESULT.json": "279ccee9ef6ab169b7381e0c709b3752fc53070fc7e239ec34eaa9ac8334ceb2",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s7731/fold0/RESULT.json": "6a0bd450244792b80b9215bec60dd76c8fcb607cb923d99f35024ec7678b0a30",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s7731/fold1/RESULT.json": "35d07f93113dbbe26806287b26d168ba348c536fb9e45c33a6df2ef9aa93182d",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s7731/fold2/RESULT.json": "0cbdd9265df26d772a77218b05b78897a1b53f1bc56fbcd87a273b33744b55e1",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s7731/fold3/RESULT.json": "1c0f94a7e1dfd8e0a17d67fd8ffcbbbd4f0ee4b0742aec059a4310164fc6e66e",
+    "composed/localglm_actuarial99_glm_w128_r0p5_asinh/s7731/fold4/RESULT.json": "462107679c5f017e431c42617c1fdc548595db4f7933ddbdec7b9fede886b18e"
+  },
+  "config_sha256": "c0fdff5ec4d577b961e077f7107fe02b0802d2da460bf6477195f8e83fe2ad80",
+  "contract_sha256": "0fdfb8f4a8c33c2fc0a988284ae7b9a0327fc1b783e8100c5c227071adc48a7a",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
