@@ -1,6 +1,6 @@
 {
   "UTC": "2026-10-29T07:59:43.513609+00:00",
-  "reason": "Composition process used large inherited BLAS thread pool under2CPUquota, with7minCPUsaturation and staleprogress. Limit BLAS/OMP/MKL to2 before importingNumPy in operationalcoordinators; model workerparameters/RNG/source/clock unchanged.",
+  "reason": "Composition was CPU-active while progress lagged several minutes. BLASoversubscription was a possible execution cause; coordinators now pin2threads beforeNumPy to stay within the declaredCPUquota. This is not a predictive or causal claim.",
   "action": "Reconcile activeunits, restart onlycoordinator/composition under originalclock, preserve unfinishedcomposition evidence; never restart healthybasefits.",
   "scientific_source_changed": false
 }

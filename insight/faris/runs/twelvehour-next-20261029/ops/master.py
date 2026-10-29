@@ -90,7 +90,8 @@ def monitor():
         dump(state,R/'LIVE_STATE.json')
         if time.time()-last_health>=1800:
             dump(dict(state,health_check='30minute resource/queue reconciliation; idle healthy slots already admit next predeclared completecohort immediately',next_epoch=time.time()+1800),R/'HEALTH_30MIN.json');last_health=time.time()
-        if len(collected)==len(allowners):break
+        pending_studies=[n for n in load('WAIT_FOR_SUBSTUDIES.json')['studies']if not(R/n/'COMPLETION.json').exists()]if(R/'WAIT_FOR_SUBSTUDIES.json').exists()else[]
+        if len(collected)==len(allowners)and not pending_studies:break
         time.sleep(20)
     # Stop only this campaign's units at the original model cutoff, then collect.
     for owner,ssh in [('cpu2001',None),('cpu2003',SSH3),('gpu2003',SSH3)]:
@@ -103,6 +104,8 @@ def monitor():
         if not missing:break
         dump(dict(UTC=utc(),missing=missing,clock_sha256=sha(R/'CLOCK.json')),R/'TERMINAL_COLLECTION_WAIT.json');time.sleep(15)
     module('compose');module('evaluate',['--final']);module('audit')
+    if(R/'UNION_PLAN.json').exists():
+        with(R/'logs/union.log').open('ab')as f:subprocess.run([PY,str(R/'ops/final_union.py')],check=True,stdout=f,stderr=subprocess.STDOUT,timeout=max(1,clock['deadline_epoch']-time.time()-10))
     result=dict(stage='complete',UTC=utc(),completed_fits=len(list((R/'runs').glob('*/attempt1/RESULT.json'))),failed_attempts=len(list((R/'runs').glob('*/attempt1/FAILURE.json'))),planned_fits=len(tasks()),artifact_audit_sha256=sha(R/'ARTIFACT_CONSISTENCY_AUDIT.json'),final_evaluation_sha256=sha(R/'FINAL_EVALUATION.json'),clock_sha256=sha(R/'CLOCK.json'),no_refit=True,no_submission=True,laptop_required=False,source_seal_sha256=sha(R/'SOURCE_SEAL.json'))
     dump(result,R/'COMPLETION.json');dump(result,R/'LIVE_STATE.json')
 if __name__=='__main__':
