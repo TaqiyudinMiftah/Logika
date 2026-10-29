@@ -1,0 +1,114 @@
+{
+  "UTC": "2026-10-29T08:47:25.706325+00:00",
+  "design": "cc_large_global48_r1_e8_case_control",
+  "design_spec": {
+    "admission_group": "cc_large_global48_r1_e8_case_control",
+    "aggregation": "single_context",
+    "context_sampling": "case_control",
+    "engine": "concat_context_vocab",
+    "estimators": 8,
+    "family": "kumo_casecontrol",
+    "hypothesis": "Retain all supplied context default positives and sample1/3/5unique negatives per positive, versus natural-prevalence stratified subset of exact same derived N; 2/8estimators assess interaction with internal ensembling. No query-dependent sampling. Analogy from case-control sampling; no Kumo invariance or calibrated-risk claim.",
+    "max_seconds": 1800,
+    "memory_fraction": 0.7,
+    "negative_per_positive": 1,
+    "parameters": {},
+    "prediction_batch": 256,
+    "prior_correction": "none",
+    "resource": "gpu",
+    "size": "large",
+    "sources": [
+      "https://arxiv.org/abs/1306.3706",
+      "https://www.stat.berkeley.edu/~wfithian/papers/lcc.pdf",
+      "https://huggingface.co/nvidia/Kumo-Tabular"
+    ],
+    "view": "global48"
+  },
+  "seed": 7731,
+  "fold": 1,
+  "task_id": "cc_large_global48_r1_e8_case_control__s7731__f1",
+  "inputs": {
+    "raw_prediction_sha256": "3e4a5f7e0c7c3fd4c33e922ed86a2e20b2535378e56e3025cb24caceb6d931a0",
+    "raw_result_sha256": "859609b5beca60daadf132b770b554d4040ac8ef2f7343e5586a8fc75b1ba732",
+    "roles_sha256": "e15643ad78b1f23cc965d0ffedc3bb8478d4c4b803cf104dcfdacea82c497110",
+    "anchor_sha256": "13730275c8e2486bb4c2b39e02e96d0d7344e317a1d4d99b7d643ddcffaaeedd"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "9f42c55cb7cbc4e1efe24792e1925357d0cd1b22b0f61f3d8dfc9cf15811c7ee",
+  "config_sha256": "3cd93fecc21791d5b30dc9cfce1928965781af8dd9965fb8ff9d428fa1c8c3a4",
+  "prediction_sha256": "5a7267f159883aa77e1e881093c13f78919ad6da95b97cefd0cb744e3fbf8fc6",
+  "correction_rows_sha256": "bb705deff9448f216bdc34d21f2dd96c73fdb5f77a2af31610d852e08aa671f7",
+  "validation_rows_sha256": "88b81514185defbda6c0e3c8ce79812f6296cb90aface53516abb683557e4b75",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "12e6076e27300a3deaae501d74d8fbbbbd6dcb6ef8282107d0f6a526102e6c69",
+      "heldout_global_rows_sha256": "830f233dd4da5fa37a6e94a05c5aaf61f0485d9f7aa578ce5924eaa821a92055"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "072396db02476462816b6508005d9a64cebc656d8ccfd4ea5914efc28fd651b7",
+      "heldout_global_rows_sha256": "ac0ad8e42e0e6c267033edb5dc7c7dca7504c27b09081e23d1c58b43ffbb46e9"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "73bf2bdceaee052d14ea3cf9b0530704f905b0df7c9dfa2a767a7726098f563b",
+      "heldout_global_rows_sha256": "752dd8380ae3256fec6867a487a6bfabedd63dba454a3aee1439a024eff8bd4b"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.4,
+  "meta_weight_training_KS": [
+    0.5282214505031622,
+    0.528048701125829,
+    0.5282415651566873,
+    0.5272973596559211,
+    0.5272109849672545,
+    0.5271411752873734,
+    0.528142175103975,
+    0.5290402352231248,
+    0.5289503108897184,
+    0.5254621933254847
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 7,
+    "objective": 0.29592817992148057,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}
