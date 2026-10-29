@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-29T19:56:51.561019+00:00",
+  "design": "gpu_book_actuarial99_rank_normal_large_e2_n25000",
+  "design_spec": {
+    "admission_group": "gpu_book_actuarial99_rank_normal_large_e2_n25000",
+    "view": "actuarial99",
+    "book_transform": "rank_normal",
+    "size": "large",
+    "estimators": 2,
+    "context_count": 25000,
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "BookFeature_Kumo",
+    "resource": "gpu",
+    "hypothesis": "Context-only tail/quantile representations can change pretrained numerical token geometry while holding feature information and context count fixed.",
+    "sources": [
+      "user:LDAEd2.pdf#PDFpage51",
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage389"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s2026/fold0/RESULT.json": "b7472ece0a6ce80e9059a4f3ce3170133705ffd9084abe36c4e82378c59c0ab8",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s2026/fold1/RESULT.json": "eeb2d0cf2cb30fa9d4e86e5467592823c1e35e2988ab07ce259b075238ecabdb",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s2026/fold2/RESULT.json": "450cd853b0e2d95638aa00cbd9c204d142124355b68e00b89beb196c54ab5fdd",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s2026/fold3/RESULT.json": "7da935ce7bf5fd589225b128a8a20f2403f7cca67aa1ea3e5cb96b529623cde5",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s2026/fold4/RESULT.json": "161a58a783c1e7d42d7bf6298a09ea438b13135a52ac0f9c004ab673fd494ec0",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s7731/fold0/RESULT.json": "3176652023bd34802b7f8e33c1f4ec6fa5e87be4b7595e6928cc9af2da2c7be5",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s7731/fold1/RESULT.json": "ecada82da2b6992bf879777e6c4991814ca7a4b6e4b5011ed1241b937e573aa7",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s7731/fold2/RESULT.json": "9fc60059bcadb0a34c8a2d1d6d4ef8d9d865c2ae56fd09e45577de2c3e7771bb",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s7731/fold3/RESULT.json": "2d8aa6c86252b7e3a9654aad1cf63d1c0c196308cb5c99aba1b4b338dc2cccfd",
+    "composed/gpu_book_actuarial99_rank_normal_large_e2_n25000/s7731/fold4/RESULT.json": "3d6fdff2ccf9a9a47b093b646ae95891e21d84c86306e7407747bea323a73a2b"
+  },
+  "config_sha256": "b914fde1f2d2d3ebdabe0a80bcfa5c556c5c3966a4385b653fca6249ae604d46",
+  "contract_sha256": "64059e77be215aa6310262b6947cb0ea0828e080e21690ad1b5c81ad370a093e",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
