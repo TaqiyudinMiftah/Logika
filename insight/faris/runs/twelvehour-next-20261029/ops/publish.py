@@ -160,8 +160,10 @@ def collect_terminal(local, private, completion_hash):
             for relative, identity in json.loads(manifest_path.read_text()).items():
                 assert sha(local / 'FINAL_EVIDENCE' / relative) == identity['sha256']
             return saved
+    namespaces=['.','cpu-exactks-repair','gpu-extra-views-2002','neural-cann']
+    allowed=[str(Path(namespace)/name)for namespace in namespaces for name in TERMINAL_DIRS]
     code = ('from pathlib import Path;import json;r=Path(' + repr(REMOTE_ROOT)
-            + ');print(json.dumps([name for name in ' + repr(TERMINAL_DIRS) + ' if(r/name).is_dir()]))')
+            + ');print(json.dumps([name for name in ' + repr(allowed) + ' if(r/name).is_dir()]))')
     present = json.loads(run(['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=20',
                               REMOTE_HOST, 'python3 -c ' + shlex.quote(code)], timeout=45).stdout)
     destination = local / 'FINAL_EVIDENCE'
@@ -170,9 +172,9 @@ def collect_terminal(local, private, completion_hash):
                '--include=*.json', '--include=*.jsonl', '--include=*.md',
                '--include=*.log', '--exclude=*']
     for name in present:
-        assert name in TERMINAL_DIRS
+        assert name in allowed
         target = destination / name
-        target.mkdir(exist_ok=True)
+        target.mkdir(parents=True,exist_ok=True)
         # Reuse already collected identical files on this filesystem. Rsync's
         # default temporary-file replacement preserves existing linked copies.
         links = ['--link-dest=' + str((local / 'INCREMENTAL_EVIDENCE' / name).resolve())] \
@@ -187,7 +189,8 @@ def collect_terminal(local, private, completion_hash):
                 for path in sorted(destination.rglob('*')) if path.is_file()}
     fit_count, composition_count = 0, 0
     for directory in ['runs', 'composed']:
-        for path in (destination / directory).rglob('RESULT.json'):
+        for path in destination.rglob('RESULT.json'):
+            if directory not in path.relative_to(destination).parts:continue
             result = json.loads(path.read_text())
             if result.get('status') != 'complete':
                 continue
@@ -235,6 +238,22 @@ def counts(mirror, state):
     return complete,expected
 
 
+def union_counts(mirror):
+    plan=mirror/'UNION_PLAN.json'
+    if not plan.exists():return None
+    value=json.loads(plan.read_text());records={}
+    for name in value['component_studies']:
+        root=mirror if name=='.' else mirror/name
+        records[name]=dict(completed_fits=sum(json.loads(p.read_text()).get('status')=='complete'
+                           for p in (root/'runs').glob('*/attempt1/RESULT.json')),
+                           failure_records=len(list((root/'runs').glob('*/attempt1/FAILURE.json'))),
+                           complete=(root/'COMPLETION.json').exists())
+    return dict(planned_fit_slots=value['planned_fit_attempts'],
+                completed_fits=sum(x['completed_fits']for x in records.values()),
+                failure_records=sum(x['failure_records']for x in records.values()),components=records,
+                planned_slots_are_not_completion=True)
+
+
 def reserve_rsync(args,local):
     """Forecast changed bytes without mutation, preserve512MiB after transfer."""
     preview=run([args[0],*args[1:-2],'--dry-run','--stats',*args[-2:]],timeout=180)
@@ -274,7 +293,17 @@ def publish(local, repo, once=False):
             completion = mirror / 'COMPLETION.json'
             terminal = completion.exists()
             if terminal: stage='complete' if (mirror/'ARTIFACT_CONSISTENCY_AUDIT.json').exists() else 'terminal_audit_pending'
-            collection = collect_terminal(local, private, sha(completion)) if terminal else None
+            collection=None
+            if terminal:
+                try:collection=collect_terminal(local,private,sha(completion))
+                except RuntimeError as error:
+                    if 'Storage reserve would be breached'not in str(error):raise
+                    collection=dict(status='LOCAL_COLLECTION_DEFERRED_STORAGE',UTC=utc(),
+                        campaign_completion_sha256=sha(completion),private_local_copy_complete=False,
+                        canonical_evidence_retained=REMOTE_HOST+':'+REMOTE_ROOT,
+                        redundant_checkpoint_root='faris@100.98.169.42:/home/faris/logika-next-checkpoints-20261029',
+                        reason='Preserve the 512MiB workstation reserve; do not fabricate a local hash verification.')
+                    dump(collection,private/'COLLECTION_DEFERRED.json')
             exported = []
             # Operational repairs are versioned too; scientific sources remain
             # preregistered and sealed. Scan exactly what will be published.
@@ -302,12 +331,14 @@ def publish(local, repo, once=False):
                     target.write_bytes(payload)
                 exported.append(str(target.relative_to(repo)))
             complete, expected = counts(mirror, state)
+            union=union_counts(mirror)
             run_record = destination / 'RUN.json'
             if run_record.exists():
                 record = json.loads(run_record.read_text())
                 record.update(status=stage, completed_fits=complete,
                               expected_fits=expected, computation_clock_started=bool(clock),
                               current_state_evidence='LIVE_STATE.json', clock=clock)
+                if union:record['union_progress']=union
                 content = json.dumps(record, indent=2, allow_nan=False) + '\n'
                 if run_record.read_text() != content:
                     run_record.write_text(content)
@@ -348,11 +379,12 @@ def publish(local, repo, once=False):
             receipt = dict(UTC=utc(), remote_commit=verified, stage=stage,
                            completed_fits=complete, expected_fits=expected,
                            secret_findings=0, metadata_files=len(list(mirror.rglob('*.json'))),
-                           compact_evidence_collected=bool(collection), root_terminal_audit=audit)
+                           union_progress=union,
+                           compact_evidence_collected=bool(collection and collection.get('status')=='COLLECTED_AND_HASH_VERIFIED'), root_terminal_audit=audit)
             dump(receipt, private / 'LATEST_RECEIPT.json')
             print(json.dumps(receipt), flush=True)
             consecutive_errors = 0
-            if terminal and collection and audit:
+            if terminal and collection and collection.get('status')=='COLLECTED_AND_HASH_VERIFIED' and audit:
                 dump(dict(receipt, private_manifest_sha256=collection['private_manifest_sha256'],
                           final_evidence_location=str(local / 'FINAL_EVIDENCE')),
                      private / 'FINAL_RECEIPT.json')
