@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json,os,shutil,subprocess,time,traceback
 R=Path(__file__).resolve().parents[1];PY='/mnt/home/faris/logika-model-arena-20261025/env311/bin/python';EVAL='/mnt/home/faris/logika-sixhour-broad-20261028/env311/bin/python';clock=json.load(open(R/'CLOCK.json'))
 while time.time()<clock['admission_end_epoch']-600:
- for namespace in ['neural-focal-cann','book-feature-cann','gpu-book-features']:
+ for namespace in ['neural-focal-cann','book-feature-cann','gpu-book-features','localglm-cann']:
   study=R/namespace;target=R/'selected_fullfits'/namespace
   if(target/'DISPATCH.json').exists()or not(study/'COMPLETION.json').exists():continue
   try:
