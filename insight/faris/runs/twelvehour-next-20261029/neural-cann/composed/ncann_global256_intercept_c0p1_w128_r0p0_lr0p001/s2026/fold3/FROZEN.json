@@ -1,0 +1,110 @@
+{
+  "UTC": "2026-10-29T09:05:04.795105+00:00",
+  "design": "ncann_global256_intercept_c0p1_w128_r0p0_lr0p001",
+  "design_spec": {
+    "admission_group": "ncann_global256_intercept_c0p1_w128_r0p0_lr0p001",
+    "family": "neural_cann",
+    "glm_C": 0.1,
+    "hypothesis": "Direct neuralCANN from actuarial BernoulliGLM fixedlogit pluszero-initialized2layer nonlinearMLP, vs identicalintercept-onlycontrols; residualenergy penalty controls departurefrombase. Frozeninnerencoder, innerstopping120epochs/patience12 includeszeroepochGLMreversion, freshfull50krefit. Existingarchitecture sweeps were standaloneMLPs; treeCANN repairs tested a different correctionfamily.",
+    "learning_rate": 0.001,
+    "max_seconds": 1800,
+    "offset_mode": "intercept",
+    "parameters": {},
+    "residual_penalty": 0.0,
+    "resource": "cpu",
+    "sources": [
+      "https://doi.org/10.1017/asb.2018.42",
+      "https://www.mdpi.com/1999-4893/16/2/99",
+      "https://docs.pytorch.org/docs/2.7/generated/torch.nn.BCEWithLogitsLoss.html"
+    ],
+    "view": "global256",
+    "width": 128
+  },
+  "seed": 2026,
+  "fold": 3,
+  "task_id": "ncann_global256_intercept_c0p1_w128_r0p0_lr0p001__s2026__f3",
+  "inputs": {
+    "raw_prediction_sha256": "c9574991b85f439a769b3a85f2734650e7c12c73203fdb5a2a9899ad683fabd4",
+    "raw_result_sha256": "abf1f05cd585e8f077f7c335af0e99f60d21b6443a679ca75dd05ef18936f342",
+    "roles_sha256": "181cbca17ca98d347367acfc5bb3a65a3769f0f8462f9188fe42a4a514281e95",
+    "anchor_sha256": "94cca87de8d921d8dd8bd453aba6fd755725f87e3b5caf2182924ea8669549bd"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "607cbe34f6b693a3d72cb67a19c088ed958e74099afd45b2a0ba3ff2a9b004bc",
+  "config_sha256": "30a1a6963f428c989633d840c306c1175ea4807853a222fe694e7b66b3107c58",
+  "prediction_sha256": "7ef1b98b5a53023eb3ef2467b26afdb7cad9a2a0993f822d8be1ec7710583e15",
+  "correction_rows_sha256": "bd48464240d475910aa6b423b8f8c6a9c82e6072d7f93b0bc99c43c5f77bd4ac",
+  "validation_rows_sha256": "4db03cfd81a2580d6fc360ff85e1db8c9be534464e6955e2c3dd93190f31496a",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "722c38838105c741be0fc31807c8970d54d3ecca96e976a06475a7a1f1e3838c",
+      "heldout_global_rows_sha256": "cae79bc35207a4b8d908f9db35326fc62432bc9d403feccdad20f6933f3df3df"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "7cf38b450fbb30bae6c67954d72b5cf1a20103cad28312bc73b5226a79fd170e",
+      "heldout_global_rows_sha256": "a30b87678453ade85ba586c6b44090c31b67f94aefb93335af5f09cbcc12b182"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "c0c570acaeeab823b565b753cc26e82f87f1f95f88f0595071f9584c5e42580d",
+      "heldout_global_rows_sha256": "25bae715644a989b83d97d0686c2a2728c1bb2ecb41c36f763f679cefc11d81c"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.3,
+  "meta_weight_training_KS": [
+    0.5181392762274375,
+    0.5176837384858398,
+    0.5173678201040045,
+    0.5177003034946253,
+    0.5171453757003153,
+    0.5181724062450084,
+    0.5190574510001124,
+    0.5176044630866528,
+    0.5152628807733493,
+    0.5125994640036443
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 11,
+    "objective": 0.2940418449694192,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}
