@@ -1,0 +1,54 @@
+{
+  "UTC": "2026-10-29T16:48:55.460162+00:00",
+  "design": "softks_global32_intercept_w0p1_t1p0",
+  "design_spec": {
+    "admission_group": "softks_global32_intercept_w0p1_t1p0",
+    "view": "global32",
+    "offset_mode": "intercept",
+    "ks_weight": 0.1,
+    "ks_temperature": 1.0,
+    "width": 64,
+    "glm_C": 0.1,
+    "residual_penalty": 0.1,
+    "learning_rate": 0.0003,
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "hybrid_softKS_CANN",
+    "resource": "cpu",
+    "hypothesis": "At matched rawMLP CANN architecture, differentiable signedCDF separation reward may align training to KS more directly than BCE or pairwiseAUC ranking; compare two rewardweights/twotemperatures against six exactprior BCE controls. No assumed scoregain.",
+    "sources": [
+      "https://doi.org/10.1016/j.csda.2018.10.004",
+      "https://doi.org/10.1080/10485252.2026.2638780",
+      "https://doi.org/10.1017/asb.2018.42"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/softks_global32_intercept_w0p1_t1p0/s2026/fold0/RESULT.json": "f225fb3734ee007b259ef2cbdcf2dc2025f2951227d80d8841674e372462eaa4",
+    "composed/softks_global32_intercept_w0p1_t1p0/s2026/fold1/RESULT.json": "481e8b3fca135d69df96d8501111f6577bdc7cae5716d21d11529b5762ae7075",
+    "composed/softks_global32_intercept_w0p1_t1p0/s2026/fold2/RESULT.json": "2c2e07fcd0b992b106ba5b368cd30f7d8efd68d06f9bbbf80ec66476d07f0886",
+    "composed/softks_global32_intercept_w0p1_t1p0/s2026/fold3/RESULT.json": "bfce70fa95d6e043a8c779ff3baa52a9dc36bf1e6f4a9c136b8bc5642aac7c09",
+    "composed/softks_global32_intercept_w0p1_t1p0/s2026/fold4/RESULT.json": "30aa6a1e6fb0026d4155881ff12a93396a1c9b8219b1ffe0cf31335955b8f822",
+    "composed/softks_global32_intercept_w0p1_t1p0/s7731/fold0/RESULT.json": "08c69520fd0957993cbd697d3f598a21d9544adec3fae804f2a416a0dd8cb5ba",
+    "composed/softks_global32_intercept_w0p1_t1p0/s7731/fold1/RESULT.json": "4c3d67d327673c8332a46375226ac52c5b3822692bf4bdbdbc37fe9855899817",
+    "composed/softks_global32_intercept_w0p1_t1p0/s7731/fold2/RESULT.json": "5a2e7975a74b8bc7e8cb40f9c4f3da42ce117532baded35facf48a0a61cbb8f1",
+    "composed/softks_global32_intercept_w0p1_t1p0/s7731/fold3/RESULT.json": "00ba4a69dee5a57e5e4dcf6d1e83951508fef81bf68010a6d4f69a6797b9d531",
+    "composed/softks_global32_intercept_w0p1_t1p0/s7731/fold4/RESULT.json": "a6b84b76dbd582d25e426391ac4e51d338ad8a57dc3cfdee3ca67db104077880"
+  },
+  "config_sha256": "a0ca7049fad1702f3a0ce1ef232a92d8e2500541233ee0c63ec55e2253afd681",
+  "contract_sha256": "1bbf2364fd2169db18e01bb528ce503c52bd36f61bf8a0b44013aad570747a75",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
