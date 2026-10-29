@@ -1,0 +1,111 @@
+{
+  "UTC": "2026-10-29T12:38:58.792233+00:00",
+  "design": "numemb_global256_ple8_glm_w128_r0p1",
+  "design_spec": {
+    "admission_group": "numemb_global256_ple8_glm_w128_r0p1",
+    "encoding": "ple8",
+    "family": "neural_numeric_embedding",
+    "glm_C": 0.1,
+    "hypothesis": "Numerical embedding representation may capture irregular dose/risk relations missed by raw standardized MLPs; compare inner-quantile PLE8/16 and trainable periodic4frequencies at scale.1/1 in same fixedGLMoffset or interceptcontrol MLP. Reuse exact matched existing rawcontrols; newrawcontrols only for views not previously tested. This is embedding+CANN adaptation, no guaranteed KS effect.",
+    "learning_rate": 0.0003,
+    "max_seconds": 1800,
+    "offset_mode": "glm",
+    "parameters": {},
+    "residual_penalty": 0.1,
+    "resource": "cpu",
+    "sources": [
+      "https://arxiv.org/abs/2203.05556v4",
+      "https://github.com/yandex-research/rtdl-num-embeddings",
+      "https://doi.org/10.1017/asb.2018.42"
+    ],
+    "view": "global256",
+    "width": 128
+  },
+  "seed": 7731,
+  "fold": 2,
+  "task_id": "numemb_global256_ple8_glm_w128_r0p1__s7731__f2",
+  "inputs": {
+    "raw_prediction_sha256": "5dcad6b276af6a3a8bce080c338d5c3670be4561153aa9f9c0856bbfd4819e33",
+    "raw_result_sha256": "3cfdce19bf2d8216af6866e00fdba5d8f4be46fe814cccd27a398d26d88f0740",
+    "roles_sha256": "0949027682e3be126e14e8248000204e2ef83916bc9ba82f1ff6a50b56b902b1",
+    "anchor_sha256": "9adfe83cfed5cb248b9dd38d3fa3301dd4e69dfa33679e7107db7c4c71a4640a"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "313153c4e30461f1a9e9d2026d1109180cbcf29bd7822931d2f3c06247b9996e",
+  "config_sha256": "2feeb22d93a36a53d89cfaf53ac196fb946940c53e8c2489ac3a1650ce4202c5",
+  "prediction_sha256": "dba791026ed32e2f12cecba7f2564e9a43b4238cb002da465f46e8a65c0316cc",
+  "correction_rows_sha256": "58a18323a3da6e5abe97f54004b3667dfa7a2ddc75dc608c39111a35c940c776",
+  "validation_rows_sha256": "ec3a78d23fdf5d501ea0b05b20ab5bab02cd1d2e068475c0c435bfa28a5bb1c1",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "c1b9440a48779a1a01d2981bf033b5fe30e83efe68adc2fafbb0a18ffc5f56a6",
+      "heldout_global_rows_sha256": "ea48029e503c78bb26de8c142ff0ea6374b089e4edef8326103bd28d325eed20"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "210ad17ecd552035c8f7d62f906f503aa0b36c8e8927eb34c21468d8583528b5",
+      "heldout_global_rows_sha256": "82351c09334fc354b18d812aab4d44b2de66a129c956c01eadeb8fbe9fa0dbaa"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "004c7c81b40b69baf219df957724c70cbd18b011beb3f6b2c539e78aa86c55b0",
+      "heldout_global_rows_sha256": "bb1c33d089e5502eba4425adf62fa0290ce20948a1b2a78eeaba556d71758ffa"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.025,
+  "meta_weight_training_KS": [
+    0.5504670740870018,
+    0.5516940679520325,
+    0.5499050470032124,
+    0.5486946181469671,
+    0.5474581585626306,
+    0.5474581585626306,
+    0.5467695274831244,
+    0.5461057439167962,
+    0.5455034875259568,
+    0.532201785471304
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 11,
+    "objective": 0.28931604664331545,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}
