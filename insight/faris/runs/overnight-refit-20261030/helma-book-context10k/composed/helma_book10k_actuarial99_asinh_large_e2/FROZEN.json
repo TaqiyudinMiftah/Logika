@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-29T21:15:07.701735+00:00",
+  "design": "helma_book10k_actuarial99_asinh_large_e2",
+  "design_spec": {
+    "admission_group": "helma_book10k_actuarial99_asinh_large_e2",
+    "view": "actuarial99",
+    "book_transform": "asinh",
+    "size": "large",
+    "estimators": 2,
+    "context_count": 10000,
+    "max_seconds": 600,
+    "parameters": {},
+    "family": "BookFeature_Kumo",
+    "resource": "gpu",
+    "hypothesis": "Test interaction of inner-only numeric tail/quantile transforms with a small natural10k context; exact same-session raw controls distinguish representation from context size. Prior25k/50k transformed context studies differ; raw10k controls are explicit replications.",
+    "sources": [
+      "user:LDAEd2.pdf#PDFpage51",
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage389"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s2026/fold0/RESULT.json": "ee4d4334df202fa0f74adfca7d25f82890a7b60cc5b1ca1bdbc71b430b54b193",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s2026/fold1/RESULT.json": "d235ee4e0602312a17d74a8db6d95f29860f008dd090f166f9369802e4518b40",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s2026/fold2/RESULT.json": "22b40510725fdc7d282bff053a5749ea56d84cf8d5f02b777ab232f3a81a6e51",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s2026/fold3/RESULT.json": "34c7a38e8d4c72819e1b89dad2b662c2b8db6209422c5632331c52adda83190b",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s2026/fold4/RESULT.json": "d6c39f35f02df74293968d0ce525ee693b66a8122bbf6d7979d1860011926778",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s7731/fold0/RESULT.json": "8e71d8bb4c54a4c307cc2dd791a84deaf5e82b7ec08166ec98229f7ef59eb520",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s7731/fold1/RESULT.json": "6073d4f0e2ae92516109c0fce9ca3b017f8df16e064cfcb6560d5663c8ef7e67",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s7731/fold2/RESULT.json": "7acbe84012e424d91fbd9b5cf5789debcf5d54005f90dfdb28f026995b3c31b4",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s7731/fold3/RESULT.json": "4d65c7a7ee90b98feab45348cbf494ae189ba7299e8fdc9d67c88a3f16a624d2",
+    "composed/helma_book10k_actuarial99_asinh_large_e2/s7731/fold4/RESULT.json": "e6533a0d8e790d3d4329fde27faa53981bb77733ee630a5ea310e336fa174d13"
+  },
+  "config_sha256": "fc6dd19663fb7f163a56176f0ff7d10f6773f56f0102ce0444e9150538e1bf8e",
+  "contract_sha256": "ec07174b394ac8484952772281f25ea84a9b385c7cc3302a1d1a83503e7a5fff",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
