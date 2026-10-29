@@ -1,0 +1,54 @@
+{
+  "UTC": "2026-10-29T16:50:54.414461+00:00",
+  "design": "softks_actuarial99_glm_w0p1_t0p25",
+  "design_spec": {
+    "admission_group": "softks_actuarial99_glm_w0p1_t0p25",
+    "view": "actuarial99",
+    "offset_mode": "glm",
+    "ks_weight": 0.1,
+    "ks_temperature": 0.25,
+    "width": 64,
+    "glm_C": 0.1,
+    "residual_penalty": 0.1,
+    "learning_rate": 0.0003,
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "hybrid_softKS_CANN",
+    "resource": "cpu",
+    "hypothesis": "At matched rawMLP CANN architecture, differentiable signedCDF separation reward may align training to KS more directly than BCE or pairwiseAUC ranking; compare two rewardweights/twotemperatures against six exactprior BCE controls. No assumed scoregain.",
+    "sources": [
+      "https://doi.org/10.1016/j.csda.2018.10.004",
+      "https://doi.org/10.1080/10485252.2026.2638780",
+      "https://doi.org/10.1017/asb.2018.42"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s2026/fold0/RESULT.json": "99e2e91a4a63925f4ebf979a4956a15d3b81eff4c6d39f080058f3831dbcef92",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s2026/fold1/RESULT.json": "b328bbca1c0dad6f2ee6a7294a80f327b91812c06be504d9f251e544fdb8cd89",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s2026/fold2/RESULT.json": "60c17b5e99807f3bcd9dd792a3db4a748257116b5d45f33ca463c046c0ede537",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s2026/fold3/RESULT.json": "907983e6e3ced3344fbcd64645e4d90c48eaee2bdb3390e19443b9557dc7b26a",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s2026/fold4/RESULT.json": "d222f128c210b425228545ab29346cd855a11e5ac4d857326b49bb556a3363fd",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s7731/fold0/RESULT.json": "06afbe4a0a1c96132f1df0a9c6ba0125fa454e7eb70f4e3461b1c9807ebad031",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s7731/fold1/RESULT.json": "e284c86c2450cc81e29ca29e00fa72210b70474511e18b1f9efac6c613b1a248",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s7731/fold2/RESULT.json": "5372f04ef9cf2ee80d47ad553f9deb5e0b677dfdddd887c8b4785f87fc778994",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s7731/fold3/RESULT.json": "7788558d01027655a6201200731210ed980e6d26bd87d7857844e7a7bafc37c4",
+    "composed/softks_actuarial99_glm_w0p1_t0p25/s7731/fold4/RESULT.json": "769881db987e35e620909a4a4470e31f69e55eeffffeea48aadd19b9aecf97df"
+  },
+  "config_sha256": "a0ca7049fad1702f3a0ce1ef232a92d8e2500541233ee0c63ec55e2253afd681",
+  "contract_sha256": "1bbf2364fd2169db18e01bb528ce503c52bd36f61bf8a0b44013aad570747a75",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
