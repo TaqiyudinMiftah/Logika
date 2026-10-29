@@ -45,7 +45,9 @@ def collect(owner,remote=False):
     if remote:
         call(['rsync','-az','-e','ssh -o BatchMode=yes -p2003','--include=/*.json','--exclude=*','faris@gpu-labkc.ub.ac.id:'+str(R/'private/backends'/owner)+'/',str(dst)+'/'],60)
     else:
-        for p in (R/'private/backends'/owner).glob('*.json'):shutil.copy2(p,dst/p.name)
+        for p in (R/'private/backends'/owner).glob('*.json'):
+            q=dst/p.name
+            if not q.exists() or sha(p)!=sha(q):shutil.copy2(p,q)
     if(dst/'BACKEND_FINAL.json').exists():dump(dict(UTC=utc(),owner=owner,collected=True,receipt=result,terminal_metadata_sha256=sha(dst/'BACKEND_FINAL.json')),R/f'BACKEND_COLLECTION_{owner}_COMPLETE.json')
     return result
 def prepare_host119():
@@ -70,7 +72,10 @@ def launch():
     dump(dict(remote_commit=receipt['remote_commit'],extra_designs_sha256=sha(R/'EXTRA_DESIGNS.jsonl'),source_seal_sha256=sha(R/'SOURCE_SEAL.json')),R/'RESOURCE_PREPUBLICATION.json')
     dump(dict(assignments=load('EXECUTION_PLAN.json')['owners'],all11profiles=True,no_quota_churn=True),R/'COLAB_RESOURCE_ADDENDUM.json')
     for owner,remote in [('cpu2001',False),('cpu2003',True),('gpu2003',True)]:create_owner(owner,remote)
-    prepare_host119();last_eval=0;last_health=0;errors={}
+    prepare_host119();monitor()
+
+def monitor():
+    clock=check_seal();last_eval=0;last_health=0;errors={}
     allowners=list(load('EXECUTION_PLAN.json')['owners'])
     while time.time()<clock['model_deadline_epoch']-90:
         for owner,remote in [('cpu2001',False),('cpu2003',True),('gpu2003',True)]:
@@ -99,6 +104,6 @@ def launch():
     result=dict(stage='complete',UTC=utc(),completed_fits=len(list((R/'runs').glob('*/attempt1/RESULT.json'))),failed_attempts=len(list((R/'runs').glob('*/attempt1/FAILURE.json'))),planned_fits=len(tasks()),artifact_audit_sha256=sha(R/'ARTIFACT_CONSISTENCY_AUDIT.json'),final_evaluation_sha256=sha(R/'FINAL_EVALUATION.json'),clock_sha256=sha(R/'CLOCK.json'),no_refit=True,no_submission=True,laptop_required=False,source_seal_sha256=sha(R/'SOURCE_SEAL.json'))
     dump(result,R/'COMPLETION.json');dump(result,R/'LIVE_STATE.json')
 if __name__=='__main__':
-    try:launch()
+    try:monitor() if '--resume' in sys.argv else launch()
     except BaseException:
         p=R/'private/MASTER_FAILURE.log';p.parent.mkdir(exist_ok=True);p.write_text(traceback.format_exc());dump(dict(status='execution_review_required',UTC=utc(),trace_sha256=sha(p),clock_preserved=True),R/'MASTER_FAILURE.json');raise
