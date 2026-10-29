@@ -5,6 +5,7 @@ does not import scientific modules, select models, fit anything, or extend clock
 Initial source/configs must already have been reviewed and published by the root.
 """
 import argparse
+from artifact_aliases import apply_approved_aliases
 import datetime
 import fcntl
 import hashlib
@@ -179,6 +180,9 @@ def collect_terminal(local, private, completion_hash):
         transfer=['rsync','-az',*links,*filters,REMOTE_HOST+':'+REMOTE_ROOT+'/'+name+'/',str(target)+'/']
         reserve_rsync(transfer,local)
         run(transfer,timeout=300)
+    registry=local/'APPROVED_PRESTART_RETRIES.json'
+    if registry.exists():shutil.copy2(registry,destination/registry.name)
+    apply_approved_aliases(destination,require_predictions=True)
     manifest = {str(path.relative_to(destination)): dict(bytes=path.stat().st_size, sha256=sha(path))
                 for path in sorted(destination.rglob('*')) if path.is_file()}
     fit_count, composition_count = 0, 0
@@ -263,6 +267,7 @@ def publish(local, repo, once=False):
             transfer=['rsync','-az',*aggregate_filters(),REMOTE_HOST+':'+REMOTE_ROOT+'/',str(mirror)+'/']
             reserve_rsync(transfer,local)
             run(transfer,timeout=180)
+            apply_approved_aliases(mirror,require_predictions=False)
             state = json.loads((mirror / 'LIVE_STATE.json').read_text()) if (mirror / 'LIVE_STATE.json').exists() else {'stage': 'launch_pending'}
             clock = json.loads((mirror / 'CLOCK.json').read_text()) if (mirror / 'CLOCK.json').exists() else {}
             stage = str(state.get('stage', state.get('status', 'running')))

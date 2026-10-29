@@ -31,10 +31,15 @@ def backup():
     need=int(match.group(1).replace(',',''))
     free=int(run(SSH+['python3 -c '+repr('import shutil;print(shutil.disk_usage("/mnt/home/faris").free)')]).stdout.strip())
     assert free-need>1024**3,'Preserve1GiB backup-node reserve'
+    source_complete_before_transfer=len(list((R/'runs').glob('*/attempt1/RESULT.json')))
     run(args)
     code='''from pathlib import Path
 import json,hashlib
 r=Path(%r)
+import sys
+sys.path.insert(0,str(r/'ops'))
+from artifact_aliases import apply_approved_aliases
+aliases=apply_approved_aliases(r,require_predictions=True)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 assert sha(r/'CLOCK.json')==%r
 for name,value in json.loads((r/'SOURCE_SEAL.json').read_text()).items():assert sha(r/name)==value
@@ -47,7 +52,8 @@ print(json.dumps({'status':'HASH_VERIFIED','completed_fit_records':checked,'file
 '''%(DEST,CLOCK_SHA)
     import shlex
     result=json.loads(run(SSH+['python3 -c '+shlex.quote(code)]).stdout)
-    dump(P/'BACKUP_RECEIPT.json',dict(result,UTC=utc(),host='node2003',path=DEST,case_predictions_private=True))
+    assert result['completed_fit_records']>=source_complete_before_transfer,'Backup omitted a completed fit from its starting snapshot'
+    dump(P/'BACKUP_RECEIPT.json',dict(result,UTC=utc(),host='node2003',path=DEST,case_predictions_private=True,canonical_complete_at_transfer_start=source_complete_before_transfer,approved_aliases_preserved=True))
     return result
 
 def export():

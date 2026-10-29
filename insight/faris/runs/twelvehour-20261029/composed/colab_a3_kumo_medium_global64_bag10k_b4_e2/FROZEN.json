@@ -1,0 +1,61 @@
+{
+  "UTC": "2026-10-29T04:26:21.144581+00:00",
+  "design": "colab_a3_kumo_medium_global64_bag10k_b4_e2",
+  "design_spec": {
+    "admission_group": "colab_a3_gpu_medium",
+    "family": "kumo_context",
+    "hypothesis": "Resource-addendum whole-block replication: contextdiversification (4independent25k/e2 vsone25k/e8) atfixedselectedview global64. All5registeredarms stayononeaccount/backend; 50k/e2 control is anintentionalreplication, notnovelty.",
+    "max_seconds": 1800,
+    "novelty": "newfixedview_context_factorial_withmatchedreplication_control",
+    "parameters": {
+      "aggregation": "probability_mean",
+      "checkpoint_revision": "v1.0.1",
+      "context_bags": 4,
+      "context_count": 10000,
+      "context_sampling": "stratified_without_replacement_per_bag",
+      "engine": "concat_context_vocab",
+      "estimators": 2,
+      "memory_fraction": 0.7,
+      "prediction_batch": 256,
+      "size": "medium",
+      "strict_same_cache_replay_tolerance": 1e-07
+    },
+    "resource": "gpu",
+    "resource_owner": "colab_account3",
+    "sources": [
+      "https://huggingface.co/nvidia/Kumo-Tabular",
+      "https://github.com/NVIDIA/structured-data-models",
+      "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+    ],
+    "view": "global64"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s2026/fold0/RESULT.json": "f7845a84a89ba8a6ab9fedfd8ceb724d58dbba1d9b25cbe2b00b06ed5bf96075",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s2026/fold1/RESULT.json": "39090d5f9a0ba4d8095cdfb7da616c22c2d5d1bc30e7ab2e4d38e90b17f2004c",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s2026/fold2/RESULT.json": "8b01c01c0b2d39e14c5ec2deac7e70d4416ee90ef429c860066517fa7f777b5d",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s2026/fold3/RESULT.json": "e3e7b76ad34482645d4d6187ec2f5064c4f2ea378a445516cf015a6deb12f6a6",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s2026/fold4/RESULT.json": "0a20ebd7179b027cb2deeb4dc98640b5aea47ea75ee3f1cca71c3fb1d29e4e92",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s7731/fold0/RESULT.json": "f01f827b1d744b6e8375914b674dbcc1572093d8130a6ba5854a28c638ab3c91",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s7731/fold1/RESULT.json": "1078044af36b701e21bd058bb357594ae2579c7b783d4a66bea2059738505f84",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s7731/fold2/RESULT.json": "709e8359cb3c358f85342493760c294839275cf5f2a50e942d2a92ded7cf73f0",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s7731/fold3/RESULT.json": "e24460874e942c9ed849f0246b8e1b98470a5736262447e6e64d2b553dfdda82",
+    "composed/colab_a3_kumo_medium_global64_bag10k_b4_e2/s7731/fold4/RESULT.json": "b39047d6ea169e5f00726cadf1e23d970e8e6734e42af0a3a2b5816c80b74bdd"
+  },
+  "config_sha256": "9ef08e43f250d80505536ffd2410c16d72d38a53f0ee3c72b976e65e62e00ee8",
+  "contract_sha256": "e2c54d806c1a5d0f6578c82bd4a93d37ab0ed3ca886dc3fc87e2c09b1f998dfd",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

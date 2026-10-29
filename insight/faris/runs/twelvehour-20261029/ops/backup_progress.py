@@ -1,5 +1,6 @@
 """Workstation private compact-evidence backup; preserve512MiB; never fit or upload."""
 from pathlib import Path
+from artifact_aliases import apply_approved_aliases
 import argparse,datetime,fcntl,hashlib,json,os,re,shlex,shutil,subprocess,time,traceback
 R=Path(__file__).resolve().parents[1];REMOTE='faris@100.68.29.126';ROOT='/mnt/home/faris/logika-twelvehour-20261029';RESERVE=512*1024**2
 
@@ -24,11 +25,13 @@ def main(once=False):
  while True:
   try:
    # Small public state first. No labels/data/packets or modelweights are read.
-   for name in ['CLOCK.json','LIVE_STATE.json','COMPLETION.json','ARTIFACT_CONSISTENCY_AUDIT.json']:
+   for name in ['CLOCK.json','LIVE_STATE.json','COMPLETION.json','ARTIFACT_CONSISTENCY_AUDIT.json','APPROVED_PRESTART_RETRIES.json']:
     p=subprocess.run(['rsync','-az',REMOTE+':'+ROOT+'/'+name,str(R)+'/'],capture_output=True,text=True,timeout=30)
     assert p.returncode in [0,23],p.stderr
-   for name in ['runs','evaluation']:
+   if(R/'APPROVED_PRESTART_RETRIES.json').exists():__import__('shutil').copy2(R/'APPROVED_PRESTART_RETRIES.json',out/'APPROVED_PRESTART_RETRIES.json')
+   for name in ['runs','evaluation','failures']:
     target=out/name;target.mkdir(exist_ok=True);args=['rsync','-az','--include=*/','--include=prediction.npz','--include=*.json','--include=*.jsonl','--exclude=*',REMOTE+':'+ROOT+'/'+name+'/',str(target)+'/'];guarded_transfer(args)
+   aliases=apply_approved_aliases(out,require_predictions=True)
    manifest={str(p.relative_to(out)):dict(bytes=p.stat().st_size,sha256=sha(p)) for p in out.rglob('*') if p.is_file()}
    checked=0
    for p in (out/'runs').glob('*/attempt1/RESULT.json'):

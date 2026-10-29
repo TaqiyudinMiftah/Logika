@@ -1,0 +1,21 @@
+# Logika twelve-hour campaign: current handoff
+
+Updated29October2026 around04:25UTC. Live evidence takes precedence over these progress counts.
+
+Canonical state: `faris@100.68.29.126:/mnt/home/faris/logika-twelvehour-20261029/LIVE_STATE.json`. Main service `logika-twelvehour-20261029.service`. Persistent Colab control and completed80-fit CPU study: `faris@100.89.211.119:/home/faris/logika-twelvehour-20261029`. Users have linger enabled. Training, collection, safeguards and redundant lab backup continue with laptop off; Git publication/chat notification resume on reconnection.
+
+Original clock is immutable: admissions18:29WIB, model fits19:14WIB, all computation/owned billing19:44WIB on29October. Finish early when admitted queues are complete. Scientific CONFIG/source/input seals remain unchanged; resource addendum was preregistered at aed90b2db77c775253318037b35e207bde3c6294.
+
+137registered designs /1370planned fits. All original990lab fits and80host119 fits completed. A100account2 completed50fits and released. T4accounts4/6 retained one successful pilot each, failed the predeclared conservative resource gate, and released. Their remaining98planned fits were not admitted; those are resource limits, not negative predictive results. T4accounts1/3/5 are healthy and progressing toward50fits each; never stop a healthy fit. Never recreate released sessions. Account-specific private state is `private/colab/accountN/`; FINAL_STATE and RELEASED override stale CONTROLLER_STATE. CLI always uses explicit --account N and its private config.
+
+Host119 terminal bridge failed only at a redundant stop of an already unloaded normally completed unit. Receipt-only repair independently hash-matched240files for all80fits on both hosts; BACKEND_COLLECTION_host119_COMPLETE is true. No model was rerun. Twelve earlier node2003 pre-START missing-packet failures remain preserved with explicit approved attempt2 replacement records.
+
+External collection barrier waits all7owner flags before restoring deferred QUEUE_gpu2001_FINAL; original coordinator then performs frozen final evaluation and independent artifact audit. Do not restart original completed lab queues or change selection rules. Check any genuine failure against actual units/results before execution-only repairs within original deadline.
+
+At04:25UTC1260fits were complete; at most1272can finish under the current admitted design set. Best completed reused-development point .5312163876106586 (KumoLarge global99 sub25k/e2 stack), versus anchor .5306361042400267 and prior .5312029153339166. Only3/5folds improve anchor, so no supported gain established; final uncertainty pending. Target .54 is unmet. All70k cases are reused adaptive development, with no untouched audit. V25 public .56822 remains separate. No refit, submission or leaderboard probing in this campaign.
+
+Account2 read-only usage at04:21UTC:331.22CU,0assignments,0CU/hour versus337.28before this resource expansion, an observed6.06CU balance decrease. Accounts1/3/5 currently granted T4s have0CU balance; API advertises1.07CU/hour per active runtime. All released profiles showed0assignments and0rate. Reverify live usage; do not infer exact per-fit billing.
+
+Current local publisher and backup PID files require checking actual command lines; stale PID numbers may have been reused after laptop suspension. Publisher was repaired to count append-only planned designs instead of reporting990. Local old sixhour private evidence was hash-verified across23265files and relocated to/var/tmp with original symlink paths, recovering storage without dropping experiments. Keep512MiB local reserve. Remote canonical/node2003 copies remain. Every complete, partial, negative and failure record is sanitized for the shared Git repository; raw cases/predictions, credentials and fitted weights stay private. Fetch peer main before pushing and verify remote commit.
+
+Final deliverables: FINAL_SELECTION.json,FINAL_EVALUATION.json,ARTIFACT_CONSISTENCY_AUDIT.json,COMPLETION.json; all external collection/release flags, resource snapshot, final private manifests and publication receipt. Do not claim1370finished. Delete the30minute follow-up only after final results delivered and no authorized work remains.
