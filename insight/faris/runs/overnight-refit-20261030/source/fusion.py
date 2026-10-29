@@ -73,6 +73,7 @@ def export():
  sample=pd.read_csv('/mnt/home/faris/logika-faris-exploration/exploration-12h-20261017/raw/sample_submission(3).csv');probability=pd.Series(probability,index=ids).reindex(sample.application_id.astype(str)).to_numpy();assert np.isfinite(probability).all()
  out=R/f'submission_CURRENT_{selected["id"]}.csv';pd.DataFrame(dict(application_id=sample.application_id,default_probability=probability)).to_csv(out,index=False);rb=pd.read_csv(out);assert rb.application_id.tolist()==sample.application_id.tolist()and len(rb)==30000;assert np.max(abs(rb.default_probability-probability))<1e-15
  audit=R/'CURRENT_SUBMISSION_AUDIT.json';dump(audit,dict(status='PASS',campaign='overnight-refit-20261030',fresh_training=True,sha256=sha(out),candidate=selected,development_evidence_conditional=True,new_refit_validation_KS=None,rows=30000,members=evidence,selected_from_complete_current_refits=True,no_historical_prediction_fallback=True,preparation_audit_sha256=sha(R/'PREPARATION_AUDIT.json'),source_sha256=sha(Path(__file__))))
+ if (R/'READY_CANDIDATE.json').exists() and read(R/'READY_CANDIDATE.json')['local_KS']>selected['KS']:return
  dump(R/'READY_CANDIDATE.json',dict(campaign='overnight-refit-20261030',fresh_training=True,path=str(out),sha256=sha(out),audit_path=str(audit),identity=selected['id'],local_KS=selected['KS']))
  print(json.dumps(dict(status='CURRENT_TRAINED_CANDIDATE_READY',identity=selected['id'],KS=selected['KS'],sha256=sha(out))),flush=True)
 if __name__=='__main__':export()

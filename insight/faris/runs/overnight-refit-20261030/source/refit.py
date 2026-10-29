@@ -22,7 +22,7 @@ def run(kind,seed,fold):
    from kumo_engine import predict
    from context_recipe import sample_context
    env=json.load(open(R/'ENVIRONMENT.json'));checkpoint=env['checkpoint_large'];expected='cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613'
-   count=25000 if kind=='kumo25'else 70000;selected,draw=sample_context(y,count,seed+fold,0)
+   count=25000 if kind=='kumo25'else 70000;selected,draw=(np.arange(70000),None) if count==70000 else sample_context(y,count,seed+fold,0)
    raw,audit=predict(frame.iloc[selected],frame.iloc[70000:],columns,y[selected],checkpoint,seed+fold,engine='concat_context_vocab',estimators=2,pred_batch=256,mem_fraction=.7,size='large',expected_sha=expected)
    audit.update(context_count=count,context_draw_seed=draw,context_rows_sha256=hashlib.sha256(selected.astype('<i8').tobytes()).hexdigest())
   assert raw.shape==(30000,)and np.isfinite(raw).all()and np.all((raw>=0)&(raw<=1))
