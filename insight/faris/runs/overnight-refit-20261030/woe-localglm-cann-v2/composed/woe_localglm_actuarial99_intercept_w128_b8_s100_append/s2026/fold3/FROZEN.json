@@ -1,0 +1,113 @@
+{
+  "UTC": "2026-10-29T20:39:50.148051+00:00",
+  "design": "woe_localglm_actuarial99_intercept_w128_b8_s100_append",
+  "design_spec": {
+    "admission_group": "woe_localglm_actuarial99_intercept_w128_b8_s100_append",
+    "view": "actuarial99",
+    "offset_mode": "intercept",
+    "width": 128,
+    "glm_C": 0.1,
+    "residual_penalty": 0.1,
+    "learning_rate": 0.0003,
+    "book_transform": "crossfit_woe",
+    "woe_mode": "append",
+    "woe_bins": 8,
+    "woe_strength": 100,
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "Crossfit_WoE_LocalGLMnet",
+    "resource": "cpu",
+    "hypothesis": "Test the interaction between own-label-excluded smoothed WoE features and input-dependent regression attention. Exactly paired with64WOE scalar-headCANN controls; earlier rawLocalGLM highest current localpoint is suggestive development evidence, not independent support.",
+    "sources": [
+      "user:978-3-031-12409-9.pdf#PDFpages504-506/Definition11.12",
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage197"
+    ]
+  },
+  "seed": 2026,
+  "fold": 3,
+  "task_id": "woe_localglm_actuarial99_intercept_w128_b8_s100_append__s2026__f3",
+  "inputs": {
+    "raw_prediction_sha256": "7d1a8b4baa5584f6e565199ab877094cc8a9176bdfbba3dfbbbc3bc66b6ae0bf",
+    "raw_result_sha256": "abe81c31abd22e196e258991103d8631b7867c81a695f68ac9fe88a4a1165294",
+    "roles_sha256": "181cbca17ca98d347367acfc5bb3a65a3769f0f8462f9188fe42a4a514281e95",
+    "anchor_sha256": "94cca87de8d921d8dd8bd453aba6fd755725f87e3b5caf2182924ea8669549bd"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "160f068023c2d2b546b08a7c73e3c96f2c38ce08a5525bef54efb08dd55cc83b",
+  "config_sha256": "07a5293f29d40b13a972cd77e631f515528c3bd5997ffb3b00107beb495c5915",
+  "prediction_sha256": "8e9b6c6aedc3ec2d1d01b67adab0a85fced804bf5fd918128c7e703fb76eea5f",
+  "correction_rows_sha256": "bd48464240d475910aa6b423b8f8c6a9c82e6072d7f93b0bc99c43c5f77bd4ac",
+  "validation_rows_sha256": "4db03cfd81a2580d6fc360ff85e1db8c9be534464e6955e2c3dd93190f31496a",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "722c38838105c741be0fc31807c8970d54d3ecca96e976a06475a7a1f1e3838c",
+      "heldout_global_rows_sha256": "cae79bc35207a4b8d908f9db35326fc62432bc9d403feccdad20f6933f3df3df"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "7cf38b450fbb30bae6c67954d72b5cf1a20103cad28312bc73b5226a79fd170e",
+      "heldout_global_rows_sha256": "a30b87678453ade85ba586c6b44090c31b67f94aefb93335af5f09cbcc12b182"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "c0c570acaeeab823b565b753cc26e82f87f1f95f88f0595071f9584c5e42580d",
+      "heldout_global_rows_sha256": "25bae715644a989b83d97d0686c2a2728c1bb2ecb41c36f763f679cefc11d81c"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 1.0,
+  "meta_weight_training_KS": [
+    0.5181392762274375,
+    0.5177535481657211,
+    0.5169122823624068,
+    0.5173678201040045,
+    0.5192266507327058,
+    0.5190337867018475,
+    0.5193130254213725,
+    0.5203140252379741,
+    0.5232365660736787,
+    0.5248197076275949
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 10,
+    "objective": 0.2940732305656865,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}

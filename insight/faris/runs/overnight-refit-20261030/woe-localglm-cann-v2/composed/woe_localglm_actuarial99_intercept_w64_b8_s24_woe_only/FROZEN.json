@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-29T20:39:42.864890+00:00",
+  "design": "woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only",
+  "design_spec": {
+    "admission_group": "woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only",
+    "view": "actuarial99",
+    "offset_mode": "intercept",
+    "width": 64,
+    "glm_C": 0.1,
+    "residual_penalty": 0.1,
+    "learning_rate": 0.0003,
+    "book_transform": "crossfit_woe",
+    "woe_mode": "woe_only",
+    "woe_bins": 8,
+    "woe_strength": 24,
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "Crossfit_WoE_LocalGLMnet",
+    "resource": "cpu",
+    "hypothesis": "Test the interaction between own-label-excluded smoothed WoE features and input-dependent regression attention. Exactly paired with64WOE scalar-headCANN controls; earlier rawLocalGLM highest current localpoint is suggestive development evidence, not independent support.",
+    "sources": [
+      "user:978-3-031-12409-9.pdf#PDFpages504-506/Definition11.12",
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage197"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s2026/fold0/RESULT.json": "7bbb790bc149ba238c585fb811889828a84213c5ac6751792503621da0135161",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s2026/fold1/RESULT.json": "b410889e8859fe4bed9bcd8c5ec8bbff948d2622747b239bd48a06f6a95718e0",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s2026/fold2/RESULT.json": "47358520c3eece5d2f62bdafb6a1ff0a2f8cfc0437c7ba5dd73ee162f6940e87",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s2026/fold3/RESULT.json": "4b28447651dd037b2c3bfa3848871762e571886e07d220553c27850845d5ee7d",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s2026/fold4/RESULT.json": "d14052e17a0e1541b0f59cd90723baff0c513d989ab5b599fe98b07f6f9ece0b",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s7731/fold0/RESULT.json": "ce9fd0db06da293128b9ded45482bac91e6bc48c75268526b032efa798c82a6a",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s7731/fold1/RESULT.json": "7d7e24a31eaf534d014a8d99ddbb689d6667e1dd2bd93107fc58d56f8b88a34b",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s7731/fold2/RESULT.json": "ac56567b807ddc928c446c52d2d72a97365c9a25a402a160781cd226f1ff67c9",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s7731/fold3/RESULT.json": "f93b68df738100e8c5452086b9e0d35940eca87d9569591b94af05bd3e5d2a38",
+    "composed/woe_localglm_actuarial99_intercept_w64_b8_s24_woe_only/s7731/fold4/RESULT.json": "a49c1db88a395c8db6689d8f37ca7ff15f33972b117e572593ad7da8cb807af3"
+  },
+  "config_sha256": "07a5293f29d40b13a972cd77e631f515528c3bd5997ffb3b00107beb495c5915",
+  "contract_sha256": "160f068023c2d2b546b08a7c73e3c96f2c38ce08a5525bef54efb08dd55cc83b",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
