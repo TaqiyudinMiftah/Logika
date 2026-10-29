@@ -1,0 +1,52 @@
+{
+  "UTC": "2026-10-29T08:54:08.283997+00:00",
+  "design": "ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003",
+  "design_spec": {
+    "admission_group": "ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003",
+    "family": "neural_cann",
+    "glm_C": 0.1,
+    "hypothesis": "Direct neuralCANN from actuarial BernoulliGLM fixedlogit pluszero-initialized2layer nonlinearMLP, vs identicalintercept-onlycontrols; residualenergy penalty controls departurefrombase. Frozeninnerencoder, innerstopping120epochs/patience12 includeszeroepochGLMreversion, freshfull50krefit. Existingarchitecture sweeps were standaloneMLPs; treeCANN repairs tested a different correctionfamily.",
+    "learning_rate": 0.0003,
+    "max_seconds": 1800,
+    "offset_mode": "glm",
+    "parameters": {},
+    "residual_penalty": 0.1,
+    "resource": "cpu",
+    "sources": [
+      "https://doi.org/10.1017/asb.2018.42",
+      "https://www.mdpi.com/1999-4893/16/2/99",
+      "https://docs.pytorch.org/docs/2.7/generated/torch.nn.BCEWithLogitsLoss.html"
+    ],
+    "view": "actuarial99",
+    "width": 128
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s2026/fold0/RESULT.json": "6b5f2566bebde2a4e9213226f5b0b8b0d5d21092df705e1bb1395bde8ffb6575",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s2026/fold1/RESULT.json": "b6e967c6616497505cd638bb1cb067f0d5d3aaea9727804639d49cac6ee6123c",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s2026/fold2/RESULT.json": "b52bf1f8109d46d046fe27929327f709f06f23f74a2172c7b5dc2d4c2c915a00",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s2026/fold3/RESULT.json": "b7ce0eff08a3f9b60928e4daab00d0e0eb51ede6414b885a3e4b1a6932321052",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s2026/fold4/RESULT.json": "8c49951f187e2dd0def48cd9c7dfb0eb6f5cc9e2ee8764ff0653f6c2a95f7793",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s7731/fold0/RESULT.json": "21d4de194194bc5ec4ba8b918c2df8e489345607faa444c8fda9a1e33c63217a",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s7731/fold1/RESULT.json": "6400e1d82b3e0954b094d8d6d137f3144b8080bed2ceb2aab62edf83bf619a52",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s7731/fold2/RESULT.json": "d04445397ea44146b52960e9a9ffeb2d0eea8c1f4f7e0fc7c3f4afd1f859ad40",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s7731/fold3/RESULT.json": "3d879f5135968779c6b2dda480020b4d91427150a2e4871be88a152c39a26829",
+    "composed/ncann_actuarial99_glm_c0p1_w128_r0p1_lr0p0003/s7731/fold4/RESULT.json": "0f43ee98c4548dffc6a8890d29bb1650923562cddca3b9c3d5d87c83a60ccf55"
+  },
+  "config_sha256": "30a1a6963f428c989633d840c306c1175ea4807853a222fe694e7b66b3107c58",
+  "contract_sha256": "607cbe34f6b693a3d72cb67a19c088ed958e74099afd45b2a0ba3ff2a9b004bc",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
