@@ -1,0 +1,108 @@
+{
+  "UTC": "2026-10-29T19:28:14.358397+00:00",
+  "design": "helma_book10k_global99_raw_large_e2",
+  "design_spec": {
+    "admission_group": "helma_book10k_global99_raw_large_e2",
+    "view": "global99",
+    "book_transform": "raw",
+    "size": "large",
+    "estimators": 2,
+    "context_count": 10000,
+    "max_seconds": 600,
+    "parameters": {},
+    "family": "BookFeature_Kumo",
+    "resource": "gpu",
+    "hypothesis": "Test interaction of inner-only numeric tail/quantile transforms with a small natural10k context; exact same-session raw controls distinguish representation from context size. Prior25k/50k transformed context studies differ; raw10k controls are explicit replications.",
+    "sources": [
+      "user:LDAEd2.pdf#PDFpage51",
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage389"
+    ]
+  },
+  "seed": 2026,
+  "fold": 1,
+  "task_id": "helma_book10k_global99_raw_large_e2__s2026__f1",
+  "inputs": {
+    "raw_prediction_sha256": "3a47926872cd5416989e370bb60ee40db6d0b01ecfd595e7d39f4c548559f3ba",
+    "raw_result_sha256": "fe4c7ba047c2a4cc1d3581d7d388db547392358d25ca17149595f8f08249d915",
+    "roles_sha256": "e15643ad78b1f23cc965d0ffedc3bb8478d4c4b803cf104dcfdacea82c497110",
+    "anchor_sha256": "13730275c8e2486bb4c2b39e02e96d0d7344e317a1d4d99b7d643ddcffaaeedd"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "ec07174b394ac8484952772281f25ea84a9b385c7cc3302a1d1a83503e7a5fff",
+  "config_sha256": "fc6dd19663fb7f163a56176f0ff7d10f6773f56f0102ce0444e9150538e1bf8e",
+  "prediction_sha256": "4eb51773200ba1bde63619beb274426698afc4a817c48bf0bcfa26ccee51bdf4",
+  "correction_rows_sha256": "bb705deff9448f216bdc34d21f2dd96c73fdb5f77a2af31610d852e08aa671f7",
+  "validation_rows_sha256": "88b81514185defbda6c0e3c8ce79812f6296cb90aface53516abb683557e4b75",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "12e6076e27300a3deaae501d74d8fbbbbd6dcb6ef8282107d0f6a526102e6c69",
+      "heldout_global_rows_sha256": "830f233dd4da5fa37a6e94a05c5aaf61f0485d9f7aa578ce5924eaa821a92055"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "072396db02476462816b6508005d9a64cebc656d8ccfd4ea5914efc28fd651b7",
+      "heldout_global_rows_sha256": "ac0ad8e42e0e6c267033edb5dc7c7dca7504c27b09081e23d1c58b43ffbb46e9"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "73bf2bdceaee052d14ea3cf9b0530704f905b0df7c9dfa2a767a7726098f563b",
+      "heldout_global_rows_sha256": "752dd8380ae3256fec6867a487a6bfabedd63dba454a3aee1439a024eff8bd4b"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.15,
+  "meta_weight_training_KS": [
+    0.5282214505031622,
+    0.5271175109891085,
+    0.5286935532535453,
+    0.5282983594725228,
+    0.5295016890392886,
+    0.5276428584105873,
+    0.528048701125829,
+    0.5260443350627992,
+    0.5249202808952205,
+    0.5188716862587335
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 10,
+    "objective": 0.29590471598106904,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}
