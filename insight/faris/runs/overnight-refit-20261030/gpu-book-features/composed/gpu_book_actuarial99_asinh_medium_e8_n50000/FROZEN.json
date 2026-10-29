@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-29T19:55:35.863815+00:00",
+  "design": "gpu_book_actuarial99_asinh_medium_e8_n50000",
+  "design_spec": {
+    "admission_group": "gpu_book_actuarial99_asinh_medium_e8_n50000",
+    "view": "actuarial99",
+    "book_transform": "asinh",
+    "size": "medium",
+    "estimators": 8,
+    "context_count": 50000,
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "BookFeature_Kumo",
+    "resource": "gpu",
+    "hypothesis": "Context-only tail/quantile representations can change pretrained numerical token geometry while holding feature information and context count fixed.",
+    "sources": [
+      "user:LDAEd2.pdf#PDFpage51",
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage389"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s2026/fold0/RESULT.json": "3f7484bdd817227cd23516c7ed654cc4dd93657210d3f0372d144f3df545b4fb",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s2026/fold1/RESULT.json": "6f43b5054026c5195aa9fd17e057b3825c9264200ada37c7c6910c61d16fdab2",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s2026/fold2/RESULT.json": "68d766bc9c0d3a70ed47d84a608b8e3aee4c22ca5ef218847748681b36981b7b",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s2026/fold3/RESULT.json": "b93ad96fe01332c2623adfcd1cc40cc79e02f4837fd1b93a2fa7190d3bdea6d3",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s2026/fold4/RESULT.json": "b6a1a022fe0ab0bc6eea7e792fe12dae31b2dbe885c423b70d57dc0db4c98f02",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s7731/fold0/RESULT.json": "016630814d14db67e661437f43312007984b1b83136937286f08af978fcb3a06",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s7731/fold1/RESULT.json": "24e855ef7c58198ee4d74ad9df270d281439627c23f8e3cbc9b4896ed5fb2bc5",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s7731/fold2/RESULT.json": "fa934709e5e711cce13aefd4742f4595e2d4948cf0528fa52db6b9d9c2a86493",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s7731/fold3/RESULT.json": "5aa304ca5285ba5aeb5c5f4ad2cc03be5e356d39395dde9d426efd66666b1b77",
+    "composed/gpu_book_actuarial99_asinh_medium_e8_n50000/s7731/fold4/RESULT.json": "1966e3ce3ef68cbeb48be166b46c35ee24df6c085ea6513ad6243f302b621cf5"
+  },
+  "config_sha256": "b914fde1f2d2d3ebdabe0a80bcfa5c556c5c3966a4385b653fca6249ae604d46",
+  "contract_sha256": "64059e77be215aa6310262b6947cb0ea0828e080e21690ad1b5c81ad370a093e",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
