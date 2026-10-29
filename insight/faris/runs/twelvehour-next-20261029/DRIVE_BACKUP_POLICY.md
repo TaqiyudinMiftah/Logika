@@ -1,0 +1,3 @@
+# Remote private experiment archive
+
+Account2 identity was verified against the user-designated address and reported5497558138880bytes quota. The existing user projectFaris was enabled for the free DriveAPI to permit remote archive upload under that identity. A new private folder was created with API metadata readback; no sharing change. Personal host119 alone uses its existing scoped OAuth state, never shared Git credentials. Resumable remote streaming checks sourceSHA256 and returnedDriveMD5 andsize. Archive coverage is explicitly inventoried, excluding virtualenvs, credential state and modelweights/KVcaches. Ongoing experiments are archived at terminal after collection; no universal completeness claim is made before coverage and hashes pass.
