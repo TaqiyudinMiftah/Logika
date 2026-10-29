@@ -1,0 +1,9 @@
+# Hybrid smooth-KS CANN,29October2026
+
+24prospective recipes/240plannedfits, not completion. Threeexistingviews(global32/global99/actuarial99),GLMC.1offset/intercept, rewardweight.1/.5 andtemperature.25/1. RawMLPwidth64,twoGELUlayers/dropout.1,AdamWlr.0003,residualpenalty.1,120epochs/patience12 unchanged from six exactprevious BCEcontrols in MATCHED_BCE_CONTROLS.
+
+Loss is BCE+.1mean(residual^2)-lambda*mean(sigmoid((logit-threshold)/temperature)*(y/pi-(1-y)/(1-pi))). Fullcurrenttraining classproportionpi makes theminibatch term anunbiased estimateof signedCDFseparation, including singleclassbatches. Threshold has no weightdecay andis initializedat finite empiricalsignedKS cut of42500inner GLMlogits; sameinitialcut retained forfresh50krefit. Thresholdis notused forprediction. Noquery/metarows/labels guidebasefit orstopping.
+
+DirectKS motivation: Fang/Chen2019 doi10.1016/j.csda.2018.10.004 and Fang/Wang/Chen2026 doi10.1080/10485252.2026.2638780. This logisticCDF hybrid is anindependently derived adaptation, not exactDMKS orKSNet; fulltexts were notaccessible, no unseenformula orperformanceclaim imported. OlddirectKS splines andjoint56k featureheads are distinct fromthisfresh50k baseMLP; currentneuralranking optimizespairwiseAUC, notsinglethresholdCDFdifference.
+
+Same2129featurebank/views,42500innerencoder,7500stopper,fresh50000refit,6000heldmeta/14000outer excluded. All70k adaptivelyreuseddevelopment,noindependentaudit. Samefourprespecifiedcompositions andlargestcompleteauditedKS terminalunion, frozenbeforeconditionalintervals. Perdesign fullsizepilotsmustpass alloriginalboundary/finite/5e-6replay and1.5safety/300secfinishmargin beforeother9fits. Originalabsoluteclock unchanged(admission17:48:48UTC,models18:33:48,all19:18:48), no automaticfailure retries. No fittedweights/KV/refit/Kaggle.
