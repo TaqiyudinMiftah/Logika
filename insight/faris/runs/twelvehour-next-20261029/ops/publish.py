@@ -260,7 +260,11 @@ def reserve_rsync(args,local):
     match=re.search(r'Total transferred file size:\s*([\d,]+)',preview.stdout)
     assert match,'No rsync byte forecast; defer rather than assume zero'
     required=int(match.group(1).replace(',',''))
-    free=shutil.disk_usage(local).free
+    # The private mirror can be a path-preserving symlink onto another volume.
+    # Guard both the checkout volume and the actual rsync destination volume.
+    destination=Path(args[-1]).resolve()
+    while not destination.exists():destination=destination.parent
+    free=min(shutil.disk_usage(local).free,shutil.disk_usage(destination).free)
     if free-required < 512*1024**2:raise RuntimeError('Storage reserve would be breached; canonical artifacts retained')
     return required
 

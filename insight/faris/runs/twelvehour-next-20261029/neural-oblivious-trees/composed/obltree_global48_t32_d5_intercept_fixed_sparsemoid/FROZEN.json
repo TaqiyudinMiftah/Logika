@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-29T14:11:48.530168+00:00",
+  "design": "obltree_global48_t32_d5_intercept_fixed_sparsemoid",
+  "design_spec": {
+    "admission_group": "obltree_global48_t32_d5_intercept_fixed_sparsemoid",
+    "view": "global48",
+    "trees": 32,
+    "depth": 5,
+    "offset_mode": "intercept",
+    "learn_selection": false,
+    "route": "sparsemoid",
+    "glm_C": 0.1,
+    "learning_rate": 0.003,
+    "residual_penalty": 0.1,
+    "max_seconds": 1800,
+    "parameters": {},
+    "family": "sparse_oblivious_tree_CANN",
+    "resource": "cpu",
+    "hypothesis": "Endtoend sparse feature gates and symmetric conditional paths may recover interactions missed by rawMLP CANN; learnedvsfixed selector and sparsemoidvssigmoid matched controls isolate gatingmechanism. This singlelayer adaptation is not exact multi-layer NODE.",
+    "sources": [
+      "https://arxiv.org/abs/1909.06312v2",
+      "https://github.com/Qwicen/node",
+      "https://doi.org/10.1017/asb.2018.42"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s2026/fold0/RESULT.json": "a5029a80df8f22d8cbf7cef197a1e878b738af3e75dbe06a9c1ae221cf5178da",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s2026/fold1/RESULT.json": "304a7d42389e16e73de95773cb4cdf50f77c1f897b77d9588057203c7a689c6e",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s2026/fold2/RESULT.json": "2f343c1e88f80e087839671091050ad2c505d5fc05c3b67d330b2239680a8f94",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s2026/fold3/RESULT.json": "be3e49a0e31a74ab3a80850a42f999109a996319bcdff1ec4a586ceef4af26b7",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s2026/fold4/RESULT.json": "55b6652ddee9b0c47a6763c54a51cc6c97318c6c7df8dd76d64c5a25e8114652",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s7731/fold0/RESULT.json": "b5dd65efe93a384ac22a995f752a09ed91f2857b4c74caba054563dcf94f5b25",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s7731/fold1/RESULT.json": "c6ed9173f0c98e20ba6322738d0dd813339dfb0ec9208c82ea69ca2bca6b9c38",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s7731/fold2/RESULT.json": "fd41f0292a8b8c9ffb66991a30e81b36843ed8972f92da7bac5b0aa87e4b4adf",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s7731/fold3/RESULT.json": "11f02ef3ca0abe4a454a711e8d2eb4ceb9d981aad8303d9ba4a54c814dea903c",
+    "composed/obltree_global48_t32_d5_intercept_fixed_sparsemoid/s7731/fold4/RESULT.json": "e9a4933e3e23a3fd795ce92bbc51ecf3b150c2791b862df3b08a076d4cf60341"
+  },
+  "config_sha256": "10feca535e8753eef90e3295fce1d4517a41c6e73588d73ded535540842beb33",
+  "contract_sha256": "f1ff5d886e802ff4c213ea2cace53d4f3409a641407dcee7b6ed0e264862b92a",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
