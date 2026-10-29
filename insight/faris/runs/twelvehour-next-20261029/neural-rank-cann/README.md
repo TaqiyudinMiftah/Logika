@@ -1,0 +1,5 @@
+# Pairwise logistic neural CANN comparison
+
+96recipes/960plannedfits, same immutable parent deadline and frozen feature views. This tests base neural classification versus RankNet-inspired pairwise logistic loss, holding the inner encoder, GLM offset, architecture, optimizer, batches, stopping and full refit fixed. The24matchedBCE controls are existing preregistered neural-cann recipes, not duplicated or chosen using outer scores. Rank weights.5/1 and temperatures.5/1. Source is a binary risk adaptation, not a claimed exact RankNet reproduction or a guarantee of KS improvement.
+
+Old history includes a6kheldmeta linear/spline pairwise correction and XGBoost ranking; this50kbase-context neural correction is distinct. All70k remain reused adaptive development, no untouched audit. Only complete2seed5fold cohorts scored, all failures/partials retained, no weights, no Kaggle/refit. Owners wait for their previous neural CPU allocation to finish before dispatch; use new roots with existing CPU Torch environments.

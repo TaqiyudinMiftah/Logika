@@ -1,0 +1,5 @@
+# Single unlocked GPU2002 continuation
+
+Human now authorizes only the already unlocked device. Kernel log maps unlocked PCI0000:3c:00.0 to observed GPU1 UUIDGPU-7990a10f-1f72-2507-147a-2f4a121af0fc. One slot pinned to that UUID; GPU0 is excluded. No driver, firmware, reset or unlock operations are performed. Source/checkpoints/model parameters unchanged; strict runtime/finite/cache-replay gates run fresh on this backend. Kernel message identifies target, not a throughput or numerical-equivalence claim.
+
+Old213collected fits were frozen/audited after withdrawal and remain in their sealed component. This new component skips21fullycomplete olddesigns and registers75incomplete/unattempted recipes/750plannedfresh fits under the original absolute deadline. Three old partialfit recipes may be repeated; source versions and predictions are never merged. These are intentional resource/backend continuations of existing hypotheses, not75independent algorithmic novelties. Allfailures and old evidence retained. No features, Kaggle or refit; all70k adaptively reused development, no untouched audit.

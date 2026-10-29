@@ -160,7 +160,7 @@ def collect_terminal(local, private, completion_hash):
             for relative, identity in json.loads(manifest_path.read_text()).items():
                 assert sha(local / 'FINAL_EVIDENCE' / relative) == identity['sha256']
             return saved
-    namespaces=['.','cpu-exactks-repair','gpu-extra-views-2002','neural-cann']
+    namespaces=json.loads((local/'UNION_PLAN.json').read_text())['component_studies']
     allowed=[str(Path(namespace)/name)for namespace in namespaces for name in TERMINAL_DIRS]
     code = ('from pathlib import Path;import json;r=Path(' + repr(REMOTE_ROOT)
             + ');print(json.dumps([name for name in ' + repr(allowed) + ' if(r/name).is_dir()]))')
