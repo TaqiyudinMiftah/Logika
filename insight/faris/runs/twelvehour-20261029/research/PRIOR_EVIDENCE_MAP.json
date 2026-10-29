@@ -1,0 +1,475 @@
+{
+  "status": "READ_ONLY_COMPLETE_ARCHIVE_COHORT_REVIEW",
+  "UTC": "2026-10-29T00:34:18.178744+00:00",
+  "scope": "Every aggregate cohort in five named accessible Faris terminal result artifacts plus all254peerregistry entries. Historical mirrors outside these named results are not claimed exhaustively audited.",
+  "current_publication_HEAD": "5d8a98a72affed1bff794b2d61f9be2cb39164e7",
+  "fresh_peer_fetch_by_this_agent": false,
+  "root_must_fresh_fetch_before_registration": true,
+  "source_hashes": {
+    "a100/faris/sixhour-broad-20261028/CONFIG.json": "b49ae6a7afb8c9e711a8ce0eff09d43129712c65412702e97c66c2af9f7125ed",
+    ".history-publish-20261028/insight/faris/runs/sixhour-broad-20261028/EXTRA_DESIGNS.jsonl": "fbc53267057ce6b1db63b506515c653a5f40aef30ff12dace3ee017b327952cd",
+    "a100/faris/sixhour-broad-20261028/FINAL_EVIDENCE/evaluation/FINAL_SCOREBOARD_SNAPSHOT.json": "461fdecc58bd3725bfdfa7b8771fc0950543248851df9409e3ad1eea55b1f228",
+    ".history-publish-20261028/insight/adit/v25_research/EXPERIMENT_REGISTRY.json": "fd381092a906f58c4cbbfdcf92ce60e88bd7cd0014d281b4d58c17b09f95c63b"
+  },
+  "cohort_count_by_archive": {
+    "sixhour-broad-20261028": 728,
+    "fourhour-20261029": 54,
+    "feature-subspace-moe-20261028": 20,
+    "architecture-20261027": 52,
+    "frozen-shadow-20261026": 70
+  },
+  "summed_row_count_is_not_independent_experiments": true,
+  "sixhour_registered_designs": 114,
+  "sixhour_complete_base_designs": 104,
+  "sixhour_complete_composition_modes": 728,
+  "sixhour_incomplete_designs": {
+    "resnet_global64_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global64",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Residual network on reduced feature set tests whether correlated low-value inputs overwhelm representation learning.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global128_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global128",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched64to128 dimension expansion with the same model/training hyperparameters.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global256_bce": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "bce",
+        "inner_split_seed": 20261029
+      },
+      "view": "global256",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched128to256 expansion permits actuarial context absent from a99-predictor foundation view.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global128_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global128",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Matched objective contrast against128-feature BCE; train-only smooth KS gap targets the competition metric.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global256_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global256",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "Checks whether a KS-directed objective changes the effect of expanded inputs, rather than conflating architecture and dimension.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global64_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global64",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "KS-directed objective at a reduced or actuarial-focused dimension.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_global99_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "global99",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "KS-directed objective at a reduced or actuarial-focused dimension.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "resnet_actuarial99_smoothks": {
+      "family": "neural",
+      "parameters": {
+        "kind": "resnet",
+        "width": 128,
+        "blocks": 3,
+        "dropout": 0.15,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "min_epochs": 8,
+        "patience": 8,
+        "max_seconds": 900,
+        "ensemble_members": 16,
+        "loss": "smooth_ks",
+        "inner_split_seed": 20261029,
+        "ks_weight": 0.15,
+        "ks_bandwidth": 0.03,
+        "ks_softmax_temperature": 0.02
+      },
+      "view": "actuarial99",
+      "resource": "gpu",
+      "sources": [
+        "https://link.springer.com/book/10.1007/978-3-031-12409-9"
+      ],
+      "hypothesis": "KS-directed objective at a reduced or actuarial-focused dimension.",
+      "registration": "Before any actual-data fitting in this campaign."
+    },
+    "cpu_goss_global99_a20_b10": {
+      "class_balance": "none",
+      "family": "lightgbm",
+      "hypothesis": "Compare gradient-based one-side sampling with the existing random-bagging global99 LightGBM recipe. Retaining large-gradient cases may change regularization and complementarity under binary logistic loss; this is an inference to test, not a published gain guarantee. Two retention profiles isolate aggressive versus higher-retention GOSS.",
+      "inner_split_seed": 20261029,
+      "parameters": {
+        "data_sample_strategy": "goss",
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "other_rate": 0.1,
+        "reg_lambda": 25,
+        "subsample": 1.0,
+        "subsample_freq": 0,
+        "top_rate": 0.2
+      },
+      "registration": "Append-only CPU_GOSS_PLAN.json, runtime gate and original clock; two profiles on one fixed99feature view.",
+      "resource": "cpu",
+      "sources": [
+        "https://proceedings.neurips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html",
+        "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html#data_sample_strategy"
+      ],
+      "view": "global99"
+    },
+    "cpu_goss_global99_a40_b20": {
+      "class_balance": "none",
+      "family": "lightgbm",
+      "hypothesis": "Compare gradient-based one-side sampling with the existing random-bagging global99 LightGBM recipe. Retaining large-gradient cases may change regularization and complementarity under binary logistic loss; this is an inference to test, not a published gain guarantee. Two retention profiles isolate aggressive versus higher-retention GOSS.",
+      "inner_split_seed": 20261029,
+      "parameters": {
+        "data_sample_strategy": "goss",
+        "max_depth": 7,
+        "min_child_samples": 150,
+        "n_estimators": 1400,
+        "num_leaves": 31,
+        "other_rate": 0.2,
+        "reg_lambda": 25,
+        "subsample": 1.0,
+        "subsample_freq": 0,
+        "top_rate": 0.4
+      },
+      "registration": "Append-only CPU_GOSS_PLAN.json, runtime gate and original clock; two profiles on one fixed99feature view.",
+      "resource": "cpu",
+      "sources": [
+        "https://proceedings.neurips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html",
+        "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html#data_sample_strategy"
+      ],
+      "view": "global99"
+    }
+  },
+  "family_summary": [
+    {
+      "family": "lightgbm",
+      "complete_base_designs": 38,
+      "complete_composition_modes": 266,
+      "best_cohort": "cpu_capacity_augmented99_moderate__stack",
+      "best_KS": 0.5310589003818179,
+      "best_standalone": "lgb_top512_extratrees",
+      "best_standalone_KS": 0.5212813972752696,
+      "standalone_above_anchor": 0
+    },
+    {
+      "family": "catboost",
+      "complete_base_designs": 8,
+      "complete_composition_modes": 56,
+      "best_cohort": "cpu_ordercontrast_global99_plain__stack",
+      "best_KS": 0.5309052437448283,
+      "best_standalone": "cat_top512_balanced",
+      "best_standalone_KS": 0.52018779894733,
+      "standalone_above_anchor": 0
+    },
+    {
+      "family": "xgboost",
+      "complete_base_designs": 4,
+      "complete_composition_modes": 28,
+      "best_cohort": "xgb_top256_ksstop__stack",
+      "best_KS": 0.5308604138224022,
+      "best_standalone": "xgb_top256_ksstop",
+      "best_standalone_KS": 0.520363534955779,
+      "standalone_above_anchor": 0
+    },
+    {
+      "family": "glm",
+      "complete_base_designs": 17,
+      "complete_composition_modes": 119,
+      "best_cohort": "cpu_actuarial_global64_logit_linear__stack",
+      "best_KS": 0.530992427528493,
+      "best_standalone": "cpu_actuarial_augmented99_logit_linear",
+      "best_standalone_KS": 0.5226316974214418,
+      "standalone_above_anchor": 0
+    },
+    {
+      "family": "neural",
+      "complete_base_designs": 19,
+      "complete_composition_modes": 133,
+      "best_cohort": "tabm_augmented256_bce__stack",
+      "best_KS": 0.5310481371664033,
+      "best_standalone": "tabm_actuarial99_bce",
+      "best_standalone_KS": 0.5211356348221219,
+      "standalone_above_anchor": 0
+    },
+    {
+      "family": "kumo_large",
+      "complete_base_designs": 14,
+      "complete_composition_modes": 98,
+      "best_cohort": "kumo_large_global99_e2__stack",
+      "best_KS": 0.5312029153339166,
+      "best_standalone": "kumo_large_redundant99_e8",
+      "best_standalone_KS": 0.5267933181353602,
+      "standalone_above_anchor": 0
+    },
+    {
+      "family": "kumo_medium",
+      "complete_base_designs": 4,
+      "complete_composition_modes": 28,
+      "best_cohort": "kumo_medium_global32_e8__stack",
+      "best_KS": 0.5310254892050505,
+      "best_standalone": "kumo_medium_global99_e16",
+      "best_standalone_KS": 0.5256405290778688,
+      "standalone_above_anchor": 0
+    }
+  ],
+  "representation_coverage": [
+    "actuarial99",
+    "all",
+    "augmented256",
+    "augmented512",
+    "augmented99",
+    "core99",
+    "global128",
+    "global256",
+    "global32",
+    "global48",
+    "global512",
+    "global64",
+    "global80",
+    "global99",
+    "pca64_core",
+    "redundant99"
+  ],
+  "objective_coverage": [
+    "default",
+    "pairwise"
+  ],
+  "sixhour_all104_standalone_below_matched_anchor": true,
+  "fourhour_completed_designs": 54,
+  "fourhour_completed_fits": 540,
+  "fourhour_final": {
+    "status": "complete_development_assessment",
+    "UTC": "2026-10-29T00:07:21.633045+00:00",
+    "selected": "kumo_nonnegative_p0d01_global",
+    "result": {
+      "metrics": {
+        "KS": 0.5305100911569403,
+        "AUC": 0.8472902947055494,
+        "logloss": 0.29240890339320375,
+        "rows": 70000
+      },
+      "delta_anchor": -0.00012601308308646253,
+      "delta_previous": -0.0006928241769763588,
+      "seed_delta_previous": [
+        -0.0014142969383097448,
+        -0.0005469886939342139
+      ],
+      "fold_delta_previous": [
+        -0.00029438875724518976,
+        -0.000383127119900184,
+        0.00033060583519295417,
+        -0.0001788756699363514,
+        0.00021816226022364216
+      ],
+      "prediction_sha256": "44204b35b7e7626730096b401246737b367412d5a513c0c27e460649b3e45d0f"
+    },
+    "conditional_delta95_vs_previous": [
+      -0.0021072973433753444,
+      0.0008972677153419744
+    ],
+    "conditional_replicates": 2000,
+    "supported_development_gain": false,
+    "point_target054": false,
+    "independent_confirmation": false,
+    "limitations": "All70k reused adaptive development; conditional interval excludes fitting and selection uncertainty.",
+    "no_refit": true,
+    "no_submission": true,
+    "weights_saved": false,
+    "final_selection_sha256": "8ce5d9df215756ea63d684f1d45284e8876bed3ae9190499d95bde3c2361bae1"
+  },
+  "peer_entries": 254,
+  "peer_keyword_matches": {
+    "focal": [],
+    "linear_tree": [],
+    "grow_policy": [],
+    "Lossguide": [],
+    "Depthwise": [],
+    "dart": [],
+    "goss": [],
+    "tree_residual": [
+      {
+        "id": "V183",
+        "KS": 0.5299917510473631,
+        "signature": "993cb8cef3fb609637b38e690bf8fa29bbbdcdb009255239a89127ce42eef874"
+      }
+    ],
+    "context_bagging": [],
+    "bootstrap_context": []
+  },
+  "old_config_keyword_matches": {
+    "focal": false,
+    "linear_tree": false,
+    "grow_policy": false,
+    "Lossguide": false,
+    "Depthwise": false,
+    "dart": false,
+    "goss": true,
+    "tree_residual": false,
+    "context_bagging": false,
+    "bootstrap_context": false
+  },
+  "warnings": [
+    "All70000rows are adaptively reused development. No untouched audit.",
+    "Same-case composition variants are not independent experiments.",
+    "Cross-archive primary/diagnostic rows use different protocols. No naive pooled ranking.",
+    "Peer V183 already tests shallow nonlinear init_score correction on6000meta rows; stricter3foldOOF/global99 is a protocol replication, not a new mechanism.",
+    "Source mechanisms motivate hypotheses, not competition gain claims."
+  ]
+}

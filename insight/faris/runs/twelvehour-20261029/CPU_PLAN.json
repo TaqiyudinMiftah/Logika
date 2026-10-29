@@ -1,0 +1,80 @@
+{
+  "api": "train_predict(frame,ctx,y,query,spec,seed,device=cpu)",
+  "context_refit_rows": 50000,
+  "design_count": 84,
+  "family_pilots": {
+    "cpu_cat": [
+      "cpu_catcapacity_global256_d8_symmetric_ordered__s2026__f0",
+      "cpu_catcapacity_global256_d8_depthwise_plain__s2026__f0"
+    ],
+    "cpu_dart": [
+      "cpu_dropout_global256_800_dart__s2026__f0",
+      "cpu_dropout_global256_800_gbdt__s2026__f0"
+    ],
+    "cpu_focal": [
+      "cpu_objective_global256_expressive_focal2__s2026__f0",
+      "cpu_objective_global256_expressive_positive4__s2026__f0"
+    ],
+    "cpu_goss": [
+      "cpu_goss_complete_global256_a20_b10__s2026__f0",
+      "cpu_goss_complete_global256_bagging__s2026__f0"
+    ],
+    "cpu_linear": [
+      "cpu_linearleaf_actuarial99_linear10__s2026__f0",
+      "cpu_linearleaf_global64_constant__s2026__f0"
+    ]
+  },
+  "folds": 5,
+  "group_counts": {
+    "cpu_cat": 18,
+    "cpu_dart": 12,
+    "cpu_focal": 36,
+    "cpu_goss": 9,
+    "cpu_linear": 9
+  },
+  "learned_preprocessing_fit_rows": 42500,
+  "no_model_serialization": true,
+  "no_model_training_before_preregistration": true,
+  "no_paid_allocation": true,
+  "planned_fits": 840,
+  "preprocessing": "One fit-row mean/SD andcategorydictionary is learned on42500inner, frozenfor7500stop and50000modelrefit; numeric NaN remainsNaN. Thisnewv2protocol differsfromoldcontextencoderrefit, soallhypotheseshavenewmatchedcontrols.",
+  "query_rows": {
+    "meta": 6000,
+    "outer": 14000
+  },
+  "runtime_gate": {
+    "admit_only_if_complete_finite_replay_boundaries_and_conservative_finish_before_original_model_cutoff": true,
+    "max_single_pilot_seconds": 1800,
+    "no_automatic_retries": true,
+    "pilot_fits_reused_in_planned_fits": true,
+    "projected_work_rule": "For each admission_group use max pilot duration * group_remaining_fits *1.5; sum admitted workload/5slots plus900sec collection reserve must fit original modeldeadline. Root may choose stricter per-node estimates duefoldassignment.",
+    "queue_slots": 5,
+    "safety_factor": 1.5,
+    "whole_recipe": true
+  },
+  "scientific_limits": [
+    "Focal objective negativeHessian is explicitly floored1e-6; approximate second-order optimization, not convexityguarantee.",
+    "Class-cost/focal sigmoids are uncalibratedscores; oldheldmeta postprocessing only maycalibrate.",
+    "DARTfixed-round controls neveruseunsupportedearlystopping.",
+    "OrderedCatBoostatdepth8maybemuchslower; resourcefailureisnotpredictivenegative.",
+    "All70krowsareadaptivelyreuseddevelopment; noindependentaudit orpublicgainclaim."
+  ],
+  "seeds": [
+    2026,
+    7731
+  ],
+  "source": "source/cpu_models.py",
+  "sources": {
+    "cat": "https://proceedings.neurips.cc/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html",
+    "catdocs": "https://catboost.ai/docs/en/references/training-parameters/common",
+    "dart": "https://proceedings.mlr.press/v38/korlakaivinayak15.html",
+    "focal": "https://arxiv.org/abs/1708.02002v2",
+    "goss": "https://proceedings.neurips.cc/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html",
+    "lgb": "https://lightgbm.readthedocs.io/en/v4.6.0/pythonapi/lightgbm.train.html",
+    "lgbparams": "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html",
+    "linear": "https://lightgbm.readthedocs.io/en/v4.6.0/Parameters.html#linear_tree",
+    "linear_paper": "https://arxiv.org/abs/1802.05640v3"
+  },
+  "status": "PREPARED_NOT_LAUNCHED",
+  "stopping_rows": 7500
+}

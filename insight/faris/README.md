@@ -63,6 +63,12 @@ does not establish KS 0.54 or a public gain. The ALL66 refit completed; its publ
 See [the run record](runs/agy-all66-refit-20261028/README.md). It is rejected
 for promotion.
 
+## New twelve-hour base-model campaign — 29 October
+
+The preceding four-hour ceiling study finished early after all540fits/54designs. ArtifactauditPASS; bestKS0.5305100912 wasbelowanchor0.5306361042 andprevious0.5312029153. Noimprovement/refit/submission. Fullnegativeevidencepublishedatd2a13340.
+
+[New campaign](runs/twelvehour-20261029/README.md) is separatelyauthorized for12hours:99designs/990plannedbasefits, includingCPUobjective/linearleaf/deeperOrdered/growth/DART/GOSS andKumocontextbagging. Newimmutableclock, nooldclockextension. Onlylab2001/2003; nopaidallocation. Source/config/protocol preregistered beforepilots; complete/failed/partialresultsallretained. All70krowsremainreuseddevelopment, noindependentaudit. The highestKSdeploymentreturnedpublic0.56754, belowV25incumbent0.56822.
+
 ## Every new experiment
 
 1. Fetch and read peer changes; compare configuration/data/feature/fold/backbone

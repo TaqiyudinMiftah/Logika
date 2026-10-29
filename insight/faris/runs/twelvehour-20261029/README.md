@@ -1,0 +1,13 @@
+# Twelve-hour base-model research campaign
+
+New user authorization:29October2026,12-hour compute ceiling. Earlier campaigns remain complete/sealed. 99registered designs,990planned fits, not completion:84CPUdesigns plus15Kumocontextdesigns, two seeds andfive folds. This is substantive newbase fitting, following a negative540-fit expert-combiner study.
+
+CPU hypotheses: objective/class-cost/focal versus matchedlogloss controls; linearleaf versusconstantleaf; deeperCPUOrdered/Plain/DepthwiseCatBoost; DARTversusfixed-roundGBDT; fullGOSScohorts afteroldresourcegate preventedbroadtraining. Kumo tests representative10k/25kcontextsubsets andfourindependentsubsets/e2 versusone25k/e8 atmatched8internalestimators. The hypothesis is contextdiversity ratherthanmorefixedfeaturecolumns. Sourcesandlimits are in CPU_PLAN.json and research/.
+
+No newfeatures: same42500-inner-selected oldfeatureviews. CPUencoders fit42500inner andremainfixedfor7500stoppingand50000modelrefit. Thisv2 protocol differsfromoldcontextencoderrefit, so newhypotheses havematchedv2controls. Kumo usesonlypermittedcontextlabels. Meta6000 andouter14000excludedfrombasefit/stopping. All70krows previouslyexposed; noindependent audit orpublicgainclaim.
+
+Program startsanewimmutableclock onlyafter verifiedpreregistration andbeforefirstfit. Admissions10h45,modelfits11h30,total12h. Everygroupmustpasspredeclaredfullsizeruntimepilots; preserve failed/incomplete evidence. Do notresetorextendclock orrestartoldcampaigns. Originalparameters/source,seeds,recipesandcompactprivatepredictionsretained; no fittedweights/KVcaches. Completeandverifyearlyifalladmittedtasksfinish; ceilingisnotmandatoryidlepadding.
+
+Onlynodes2001and2003actual/mnt/home/faris; idleRTX3060GPUs0/1on2001only,CPU2slots2001and3slots2003,2threadsperfit. PerfitRAM12GiBGPU/10GiBCPU; noforeignworkinterference,newpaidColab,node2002orCPU Kumo. Mainservice logika-twelvehour-20261029.service. Data/referencegate, familygates,completecohortselection,terminalbootstrapandaudit runautonomously. Notebook/laptopnotrequiredforcompute. Remotehealthmonitorandnode2003hash-verifiedbackup+sanitizedGitoutboxcontinuewhilelaptopoff;actualGitpush/chatnotificationsresumeonreconnect.
+
+No Kaggle submission, leaderboard calls, automaticrefit orprobing inthiscampaign. Prior highestKSdeployment scoredpublic.56754; V25.56822remainsincumbent. These publicfactsneverdrivenewsealedexperimentselection. Terminaldeliverables FINAL_SELECTION.json,FINAL_EVALUATION.json,ARTIFACT_CONSISTENCY_AUDIT.json,COMPLETION.json andprivatehashreceipts. Gitgets sanitizedsource/params/aggregate/negative/partial/failuremetadataonly,neverrawlabels/OOF/credentials.

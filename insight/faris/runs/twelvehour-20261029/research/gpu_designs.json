@@ -1,0 +1,393 @@
+{
+  "scope": "Proposed recipes, no training or launch authorized by this file. Root must seal/publish before pilot.",
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "design_count": 15,
+  "planned_fits": 150,
+  "designs": {
+    "kumo_large_global99_full50k_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Intentional matched control replay: original feature/context50k/e2 recipe on current backend; identical recipe, not a novel method.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "context_count": 50000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "intentional_backend_control"
+    },
+    "kumo_large_global99_sub25k_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Context-size ablation at fixed two internal estimators; stratified sampling is confined to allowed50kcontext.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "context_count": 25000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_large_global99_sub25k_e8": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Single sampled25kcontext with eight internal estimators; matched total estimator budget for four independent25k/e2contexts.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "context_count": 25000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_large_global99_bag25k_b4_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Four independent stratified25kcontext subsets averaged in probability space; test context diversification versus one25kcontext/e8 at same total internal estimator budget8.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "context_count": 25000,
+        "context_bags": 4,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_large_global99_bag10k_b4_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Matched four-bag/e2 context-size sensitivity10k versus25k without feature regeneration or label-based query routing.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "context_count": 10000,
+        "context_bags": 4,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_large_actuarial99_full50k_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "actuarial99",
+      "hypothesis": "Intentional matched control replay: original feature/context50k/e2 recipe on current backend; identical recipe, not a novel method.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "context_count": 50000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "intentional_backend_control"
+    },
+    "kumo_large_actuarial99_sub25k_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "actuarial99",
+      "hypothesis": "Context-size ablation at fixed two internal estimators; stratified sampling is confined to allowed50kcontext.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "context_count": 25000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_large_actuarial99_sub25k_e8": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "actuarial99",
+      "hypothesis": "Single sampled25kcontext with eight internal estimators; matched total estimator budget for four independent25k/e2contexts.",
+      "parameters": {
+        "size": "large",
+        "estimators": 8,
+        "context_count": 25000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_large_actuarial99_bag25k_b4_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "actuarial99",
+      "hypothesis": "Four independent stratified25kcontext subsets averaged in probability space; test context diversification versus one25kcontext/e8 at same total internal estimator budget8.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "context_count": 25000,
+        "context_bags": 4,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_large_actuarial99_bag10k_b4_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "actuarial99",
+      "hypothesis": "Matched four-bag/e2 context-size sensitivity10k versus25k without feature regeneration or label-based query routing.",
+      "parameters": {
+        "size": "large",
+        "estimators": 2,
+        "context_count": 10000,
+        "context_bags": 4,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_medium_global99_full50k_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Intentional matched control replay: original feature/context50k/e2 recipe on current backend; identical recipe, not a novel method.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 2,
+        "context_count": 50000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "intentional_backend_control"
+    },
+    "kumo_medium_global99_sub25k_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Context-size ablation at fixed two internal estimators; stratified sampling is confined to allowed50kcontext.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 2,
+        "context_count": 25000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_medium_global99_sub25k_e8": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Single sampled25kcontext with eight internal estimators; matched total estimator budget for four independent25k/e2contexts.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 8,
+        "context_count": 25000,
+        "context_bags": 1,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_medium_global99_bag25k_b4_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Four independent stratified25kcontext subsets averaged in probability space; test context diversification versus one25kcontext/e8 at same total internal estimator budget8.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 2,
+        "context_count": 25000,
+        "context_bags": 4,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    },
+    "kumo_medium_global99_bag10k_b4_e2": {
+      "family": "kumo_context",
+      "resource": "gpu",
+      "view": "global99",
+      "hypothesis": "Matched four-bag/e2 context-size sensitivity10k versus25k without feature regeneration or label-based query routing.",
+      "parameters": {
+        "size": "medium",
+        "estimators": 2,
+        "context_count": 10000,
+        "context_bags": 4,
+        "context_sampling": "stratified_without_replacement_per_bag",
+        "aggregation": "probability_mean",
+        "prediction_batch": 256,
+        "memory_fraction": 0.7,
+        "engine": "concat_context_vocab",
+        "checkpoint_revision": "v1.0.1",
+        "strict_same_cache_replay_tolerance": 1e-07
+      },
+      "sources": [
+        "https://huggingface.co/nvidia/Kumo-Tabular",
+        "https://github.com/NVIDIA/structured-data-models",
+        "https://docs.nvidia.com/sdgm/faq/kumo-foundation-models/which-foundation-model-should-i-choose"
+      ],
+      "novelty": "context_subsample_bagging_new_protocol"
+    }
+  }
+}
