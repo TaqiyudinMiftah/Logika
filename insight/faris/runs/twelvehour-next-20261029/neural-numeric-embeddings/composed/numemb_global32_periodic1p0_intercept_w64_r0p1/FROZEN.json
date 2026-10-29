@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-29T12:08:37.745001+00:00",
+  "design": "numemb_global32_periodic1p0_intercept_w64_r0p1",
+  "design_spec": {
+    "admission_group": "numemb_global32_periodic1p0_intercept_w64_r0p1",
+    "encoding": "periodic1p0",
+    "family": "neural_numeric_embedding",
+    "glm_C": 0.1,
+    "hypothesis": "Numerical embedding representation may capture irregular dose/risk relations missed by raw standardized MLPs; compare inner-quantile PLE8/16 and trainable periodic4frequencies at scale.1/1 in same fixedGLMoffset or interceptcontrol MLP. Reuse exact matched existing rawcontrols; newrawcontrols only for views not previously tested. This is embedding+CANN adaptation, no guaranteed KS effect.",
+    "learning_rate": 0.0003,
+    "max_seconds": 1800,
+    "offset_mode": "intercept",
+    "parameters": {},
+    "residual_penalty": 0.1,
+    "resource": "cpu",
+    "sources": [
+      "https://arxiv.org/abs/2203.05556v4",
+      "https://github.com/yandex-research/rtdl-num-embeddings",
+      "https://doi.org/10.1017/asb.2018.42"
+    ],
+    "view": "global32",
+    "width": 64
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s2026/fold0/RESULT.json": "07564e6f03d7d08371cbdeb10355c332dd0e78caa82ee88058877ce6cbc3116c",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s2026/fold1/RESULT.json": "4fe4717f0239f7e5bdbdc7b942bdca5762fd18c3c6e74185368125e4549d542f",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s2026/fold2/RESULT.json": "8e08a8ad367744290f88b74138a7daa3174d8feced6aae27ee94a2621ac633a1",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s2026/fold3/RESULT.json": "e6be347282c7c8008a510a07fcecd480850e139c8478407b68012d58da6dad82",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s2026/fold4/RESULT.json": "e7f0cb6d1f66a1f44cc6eae45c52b06325fde8bd3f73c2ed88d30c2f29049673",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s7731/fold0/RESULT.json": "4ec3096c9d0ab89abfda599993d656369c26b7845ba004d7efbedfadb256611a",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s7731/fold1/RESULT.json": "56c6a5aaa0b91f9a8a8181fd14b2d62f78c89f8a66c4b089e873bd8a1a38fff8",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s7731/fold2/RESULT.json": "1420fb03a1092dec940cb4fef9f87803b9a7d78978c67fa57608cfeb6e26d2d4",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s7731/fold3/RESULT.json": "89b593a6ffc28d2d87eb16534e9f447c1d4da1f25479a9d554d6649bdf9bcc51",
+    "composed/numemb_global32_periodic1p0_intercept_w64_r0p1/s7731/fold4/RESULT.json": "e813ce819f9da99edddb944f2a63fc6b0247907f6dfa228d1f7c761791ddf774"
+  },
+  "config_sha256": "2feeb22d93a36a53d89cfaf53ac196fb946940c53e8c2489ac3a1650ce4202c5",
+  "contract_sha256": "313153c4e30461f1a9e9d2026d1109180cbcf29bd7822931d2f3c06247b9996e",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
