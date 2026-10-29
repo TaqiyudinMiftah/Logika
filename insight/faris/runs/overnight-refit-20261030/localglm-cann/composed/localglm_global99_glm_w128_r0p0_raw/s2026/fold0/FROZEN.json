@@ -1,0 +1,109 @@
+{
+  "UTC": "2026-10-29T19:04:57.815471+00:00",
+  "design": "localglm_global99_glm_w128_r0p0_raw",
+  "design_spec": {
+    "admission_group": "localglm_global99_glm_w128_r0p0_raw",
+    "view": "global99",
+    "offset_mode": "glm",
+    "width": 128,
+    "glm_C": 0.1,
+    "residual_penalty": 0.0,
+    "learning_rate": 0.0003,
+    "book_transform": "raw",
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "Bernoulli_LocalGLMnet",
+    "resource": "cpu",
+    "hypothesis": "Feature-dependent regression attention adds explicit multiplicative interactions to CANN. Compare raw and robust numerical maps with exact earlier scalar-head CANN controls. No gain assumed.",
+    "sources": [
+      "user:978-3-031-12409-9.pdf#PDFpages504-506/Definition11.12"
+    ]
+  },
+  "seed": 2026,
+  "fold": 0,
+  "task_id": "localglm_global99_glm_w128_r0p0_raw__s2026__f0",
+  "inputs": {
+    "raw_prediction_sha256": "a6d0b4d618927ecd70dd465be78bd6cdebb23c2525b69ad05d7874d53a1400f3",
+    "raw_result_sha256": "5e2ba02e51bb1e7f0dbd8103f9e76a0fff9620f59016cce9a2e5c9075dba4e38",
+    "roles_sha256": "5c5f47d3e5b28214991ef3eadccd2284fff18a49b1f25160613be91f56178dd6",
+    "anchor_sha256": "4bb1460ea6ff34395f2bd6cd9f75ceaa8060ff4ba5965b4f95792ba5f139b51d"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "0fdfb8f4a8c33c2fc0a988284ae7b9a0327fc1b783e8100c5c227071adc48a7a",
+  "config_sha256": "c0fdff5ec4d577b961e077f7107fe02b0802d2da460bf6477195f8e83fe2ad80",
+  "prediction_sha256": "dba161096bc982e8a0953b173788fc849fde09f62d09356f69609f10d76ff8fe",
+  "correction_rows_sha256": "d1e35ea2e923d88182ca01c9744870825e3218be76fd5901e8bf74882c1d67d1",
+  "validation_rows_sha256": "9df692fa989fb9562578ee5587a17f6bc18522c5c49e5ce8499677be3878db46",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "701fc54568515f1bbe5f65db41b13b95f05a52fb4f749917f3199876b1bed4ee",
+      "heldout_global_rows_sha256": "fb351b39a5a762229093a236a0643524b0deea0c7cfc5d5ed4d1e4717f84589b"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "459b46d2f144092ccf59fb3753e9a0defdcd532dff0f287b1cdb064cc85d357d",
+      "heldout_global_rows_sha256": "311e717adbb45831665b9e7663e1229042256074a9074af288c987c29f7d2d28"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "3e466d61caa2b9f50402813756ec4c13fd84f5b7b4c569227266b5f1c7212bc5",
+      "heldout_global_rows_sha256": "4ff7394d4a625f112f40663da76c4ab62957f49991d6299a5190122d6b111b69"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.15,
+  "meta_weight_training_KS": [
+    0.538103661458549,
+    0.5377877430767137,
+    0.5388751175819819,
+    0.5388419875644113,
+    0.5390679816128403,
+    0.538103661458549,
+    0.5345824138767445,
+    0.5338239731173572,
+    0.5318361720631127,
+    0.5224651099502458
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 8,
+    "objective": 0.2962795743878493,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}
