@@ -1,0 +1,54 @@
+{
+  "UTC": "2026-10-29T09:35:52.228160+00:00",
+  "design": "rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5",
+  "design_spec": {
+    "admission_group": "rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5",
+    "family": "neural_rank_cann",
+    "glm_C": 0.1,
+    "hypothesis": "Test classification versus pairwise logistic optimization of the same fixed-offset neural correction. RankNet motivates score-difference loss; binary risk adaptation does not guarantee improved KS. Same minibatches/epochs/preprocessing/fresh refit as exact matched parent BCE control. Fixed pen.1/lr.0003 chosen prospectively, not from parent outer scores.",
+    "learning_rate": 0.0003,
+    "max_seconds": 1800,
+    "offset_mode": "glm",
+    "parameters": {},
+    "rank_temperature": 0.5,
+    "rank_weight": 1.0,
+    "residual_penalty": 0.1,
+    "resource": "cpu",
+    "sources": [
+      "https://www.microsoft.com/en-us/research/wp-content/uploads/2005/08/icml_ranking.pdf",
+      "https://doi.org/10.1017/asb.2018.42",
+      "https://www.mdpi.com/1999-4893/16/2/99"
+    ],
+    "view": "global256",
+    "width": 128
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s2026/fold0/RESULT.json": "3dba8a30debca00f2d869aa172b4d799676c60403b58ebfb0d2997ecdce147c0",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s2026/fold1/RESULT.json": "9b715715784a0f43fae6610d65ab8d847b7656346d793fd2e093f96b068a3948",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s2026/fold2/RESULT.json": "5290423c26eb0da6848bf7c93c4e2b7b079e34b41e182d60eaa550306af940df",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s2026/fold3/RESULT.json": "8c6d4eadd5936f5cee0837eb0e30bef47c08327430b1b95bfcf6eac92dbab4f7",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s2026/fold4/RESULT.json": "3577f0720bf3c2e228e8fd8da57bdd0b5222668908342c7b5b83120362997a14",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s7731/fold0/RESULT.json": "b6db0e19e6cb7b55d667e5e3c5fb811ce53ddd967903f84a307d81d967466bbd",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s7731/fold1/RESULT.json": "090ae1b4e525e2248eece57bfdbea224c2b21cb78ace2b23b4fb9dbd8a2731cd",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s7731/fold2/RESULT.json": "e15709b6cccf16323aff713cdde498a542aca49cff90d24b6664a7d939a776b3",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s7731/fold3/RESULT.json": "3086528f0985ed8562be1f166699056c712fef9eac367643cd24ecbe9f87917a",
+    "composed/rankcann_global256_glm_c0p1_w128_r0p1_lr0p0003_a1p0_t0p5/s7731/fold4/RESULT.json": "6c62c5f2c65b285f2421b8a9787d2351dda8271db4246456a04cd14ea98a0a07"
+  },
+  "config_sha256": "b1c9e8251aa00934d2675aec1173aa181b0004198b99c257508c1c972c6411cb",
+  "contract_sha256": "f905b06c4cbde76c8f4367859612784dcd0ed21825e5eaaa66ae5ebb9aa7af0e",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

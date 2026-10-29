@@ -1,0 +1,112 @@
+{
+  "UTC": "2026-10-29T09:35:20.731353+00:00",
+  "design": "rankcann_actuarial99_glm_c0p1_w64_r0p1_lr0p0003_a0p5_t0p5",
+  "design_spec": {
+    "admission_group": "rankcann_actuarial99_glm_c0p1_w64_r0p1_lr0p0003_a0p5_t0p5",
+    "family": "neural_rank_cann",
+    "glm_C": 0.1,
+    "hypothesis": "Test classification versus pairwise logistic optimization of the same fixed-offset neural correction. RankNet motivates score-difference loss; binary risk adaptation does not guarantee improved KS. Same minibatches/epochs/preprocessing/fresh refit as exact matched parent BCE control. Fixed pen.1/lr.0003 chosen prospectively, not from parent outer scores.",
+    "learning_rate": 0.0003,
+    "max_seconds": 1800,
+    "offset_mode": "glm",
+    "parameters": {},
+    "rank_temperature": 0.5,
+    "rank_weight": 0.5,
+    "residual_penalty": 0.1,
+    "resource": "cpu",
+    "sources": [
+      "https://www.microsoft.com/en-us/research/wp-content/uploads/2005/08/icml_ranking.pdf",
+      "https://doi.org/10.1017/asb.2018.42",
+      "https://www.mdpi.com/1999-4893/16/2/99"
+    ],
+    "view": "actuarial99",
+    "width": 64
+  },
+  "seed": 2026,
+  "fold": 2,
+  "task_id": "rankcann_actuarial99_glm_c0p1_w64_r0p1_lr0p0003_a0p5_t0p5__s2026__f2",
+  "inputs": {
+    "raw_prediction_sha256": "58402157412d1dec4a852afe3ed230bbfccb1cdd558772e514b4cd2449e08f76",
+    "raw_result_sha256": "c478241d66fffd4c32f155457d4918b6fd65b74d5c879ae7d27b695d7877cea8",
+    "roles_sha256": "0949027682e3be126e14e8248000204e2ef83916bc9ba82f1ff6a50b56b902b1",
+    "anchor_sha256": "9adfe83cfed5cb248b9dd38d3fa3301dd4e69dfa33679e7107db7c4c71a4640a"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "f905b06c4cbde76c8f4367859612784dcd0ed21825e5eaaa66ae5ebb9aa7af0e",
+  "config_sha256": "b1c9e8251aa00934d2675aec1173aa181b0004198b99c257508c1c972c6411cb",
+  "prediction_sha256": "4e3505ef9b04d7ba723a757df24ab840c4a0216623ce85164dd2e8951b5b5ad3",
+  "correction_rows_sha256": "58a18323a3da6e5abe97f54004b3667dfa7a2ddc75dc608c39111a35c940c776",
+  "validation_rows_sha256": "ec3a78d23fdf5d501ea0b05b20ab5bab02cd1d2e068475c0c435bfa28a5bb1c1",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "c1b9440a48779a1a01d2981bf033b5fe30e83efe68adc2fafbb0a18ffc5f56a6",
+      "heldout_global_rows_sha256": "ea48029e503c78bb26de8c142ff0ea6374b089e4edef8326103bd28d325eed20"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "210ad17ecd552035c8f7d62f906f503aa0b36c8e8927eb34c21468d8583528b5",
+      "heldout_global_rows_sha256": "82351c09334fc354b18d812aab4d44b2de66a129c956c01eadeb8fbe9fa0dbaa"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "004c7c81b40b69baf219df957724c70cbd18b011beb3f6b2c539e78aa86c55b0",
+      "heldout_global_rows_sha256": "bb1c33d089e5502eba4425adf62fa0290ce20948a1b2a78eeaba556d71758ffa"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.3,
+  "meta_weight_training_KS": [
+    0.5504670740870018,
+    0.5495027539327105,
+    0.5501511557051665,
+    0.54887091716904,
+    0.5504303944246913,
+    0.5512917748815306,
+    0.5518171223030095,
+    0.5482118664623649,
+    0.5472510959528134,
+    0.5420177363915495
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 11,
+    "objective": 0.28931910554512985,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}
