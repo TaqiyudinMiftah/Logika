@@ -1,0 +1,29 @@
+{
+  "namespace": "localglm-cann",
+  "cohort": "localglm_actuarial99_intercept_w64_r0p1_raw__meta_adaptive",
+  "design": "localglm_actuarial99_intercept_w64_r0p1_raw",
+  "mode": "meta_adaptive",
+  "spec": {
+    "admission_group": "localglm_actuarial99_intercept_w64_r0p1_raw",
+    "view": "actuarial99",
+    "offset_mode": "intercept",
+    "width": 64,
+    "glm_C": 0.1,
+    "residual_penalty": 0.1,
+    "learning_rate": 0.0003,
+    "book_transform": "raw",
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "Bernoulli_LocalGLMnet",
+    "resource": "cpu",
+    "hypothesis": "Feature-dependent regression attention adds explicit multiplicative interactions to CANN. Compare raw and robust numerical maps with exact earlier scalar-head CANN controls. No gain assumed.",
+    "sources": [
+      "user:978-3-031-12409-9.pdf#PDFpages504-506/Definition11.12"
+    ]
+  },
+  "KS": 0.5316414268134972,
+  "kind": "selected_localglm-cann",
+  "original_source_seal_sha256": "bc0c72f1954f35b47f8f7f5ac7379eeea51cc8e2ed15c471a9a59f9587d8ca32",
+  "full_refit_adapter": "Same architecture/loss; inner59500/stop10500 then fresh70000model; numerical feature maps fit59500train only.",
+  "frozen_before_production": true
+}
