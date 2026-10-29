@@ -1,0 +1,43 @@
+{
+  "id": "submit-best-sub25k-20261029",
+  "authorized_UTC": "2026-10-29T05:55:32.887539+00:00",
+  "authorization": "Human explicitly asked: can you submit the best local ks? One fixed latest winner refit and one Kaggle upload; no model search.",
+  "cohort": "kumo_large_global99_sub25k_e2__stack",
+  "design": "kumo_large_global99_sub25k_e2",
+  "development_KS": 0.5312163876106586,
+  "supported_gain": false,
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "available_training_rows": 70000,
+  "refit_context_rows": 25000,
+  "test_rows": 30000,
+  "parameters": {
+    "size": "large",
+    "estimators": 2,
+    "context_count": 25000,
+    "context_bags": 1,
+    "context_sampling": "stratified_without_replacement_per_bag",
+    "aggregation": "probability_mean",
+    "prediction_batch": 256,
+    "memory_fraction": 0.7,
+    "engine": "concat_context_vocab",
+    "checkpoint_revision": "v1.0.1",
+    "strict_same_cache_replay_tolerance": 1e-07
+  },
+  "context_refit_policy": "Same stratified without-replacement sorted sampler and draw seed base+fold+49999. Draw25000from all70000permitted training rows per member; never silently replace selected25k model with70kcontext.",
+  "feature_policy": "Reuse already audited100k-row production packets with frozen global99 columns and70k-training-only covariate statistics. Verify parent packets and column identities match new winner before reuse; no new feature selection.",
+  "postprocessing": "Regenerate same3fold held-meta calibrators/ridge-logit stack per seed/fold from this selected development raw prediction and replay exact saved stack before deployment. Mean10test probabilities.",
+  "pretrained_sha256": "cc21484316949641cc3d65a7bb6c36cdea854cc569435755ff23b850018ec613",
+  "source_selection_sha256": "b7b4eac9c7f8cd3299e9d66fb8eada109643205e95fc084897fbe3e47f5c8d70",
+  "source_evaluation_sha256": "66aa2a7facd7ca563848af367b94540313b051f622e8ecdc28577d451178d95a",
+  "source_prediction_sha256": "376aaf0d26df19cfb2c528232015f2a4c8feda95cb1d1f3717625c88d315c5f8",
+  "old_campaign_clock_unchanged": true,
+  "no_weights_KV_saved": true,
+  "maximum_refit_seconds": 3600,
+  "execution": "Only currently idle lab2001 RTX3060 GPUs, no foreign workload changes or new Colab allocation.",
+  "CSV": "submission_KumoLarge99_sub25k_e2_stack_KS05312164.csv",
+  "limitations": "All70k reused adaptive development. Both conditional gain intervals cross zero; opposite seed signs vs prior. Local KS does not measure new refit/test; exploratory deployment only."
+}

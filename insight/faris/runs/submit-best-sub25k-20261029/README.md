@@ -1,0 +1,3 @@
+# Fixed latest best-local-KS submission
+
+Human-authorized deployment of kumo_large_global99_sub25k_e2__stack, developmentKS0.5312163876106586. No supported gain or public improvement is established. This is separate from the earlier50k/full-context submission. Ten fixed seed/fold members use exactly25000stratified contexts drawn from all70kpermitted training applications, existing frozen99-column production features, original CUDA AMP engine/checkpoint and replayed original held-meta calibrator/stack. No search, new features, fitted weights or KV dumps. Original completed campaigns/clocks stay sealed. Fresh fixed deployment has a3600second ceiling. One exact audited CSV is uploaded only after provenance/row/order/hash checks and quota readback.
