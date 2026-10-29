@@ -1,0 +1,9 @@
+# Book review and resulting experiments
+
+All four complete supplied PDFs were text-extracted and page-indexed: Loss Data Analytics2(734pages), Credit Scoring(2312), Wuthrich/Merz(611), Orth(136). The fifth file is a20-page excerpt of Credit Risk Analytics, not its full book. This is not a claim of a cover-to-cover reading of3793pages. BOOK_REVIEW_INDEX records the passages inspected.
+
+Loss Data Analytics PDFp51 explains tail compression through logarithmic plots. Credit Scoring PDFp389 discusses log/Winsor transformations of financial ratios. Wuthrich/Merz PDFp353, section7.5.1, explains empirical centering/scaling and its dependence on units. Proposed adaptations: append robust signed-asinh and/or empirical-normal quantile features for CANN; replace numeric columns by either map for99-input Kumo. These exact maps are our hypotheses, not formulas attributed verbatim to the books. Training-only fitting and unchanged raw-feature controls distinguish preprocessing effects from more architecture search.
+
+Orth PDFp20 explicitly requires observed lifetimes and censoring indicators; PDFp64 discusses frailty/heterogeneity. The supplied current-default target does not establish those outcomes. No fabricated survival duration/censoring labels or future information are admitted. Historical credibility and maturity-opportunity inputs are already present in the39earlier actuarial features. The20-page Credit Risk Analytics excerpt supplies an introduction and contents, not the full hazard-model chapters; it cannot substantiate unseen chapter details.
+
+New focal CANN draws its objective from Lin et al2017 https://arxiv.org/abs/1708.02002v2 as a tabular adaptation, distinct from the earlier focal tree controls. The full shared metadata scan covered68,999parseableJSONrecords. That is not a claim that all inaccessible/private historical raw experiments were recovered. No public score improvement or independent confirmation is claimed from adaptive localKS.

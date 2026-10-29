@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-29T18:34:25.098692+00:00",
+  "design": "focal_actuarial99_intercept_w64_r0p1_natural_g1",
+  "design_spec": {
+    "admission_group": "focal_actuarial99_intercept_w64_r0p1_natural_g1",
+    "view": "actuarial99",
+    "offset_mode": "intercept",
+    "width": 64,
+    "glm_C": 0.1,
+    "residual_penalty": 0.1,
+    "learning_rate": 0.0003,
+    "focal_gamma": 1.0,
+    "class_mode": "natural",
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "ClassWeighted_Focal_CANN",
+    "resource": "cpu",
+    "hypothesis": "Focus gradients on hard examples/class-balanced failures while retaining exact CANN controls and held-meta calibration; no assumed gain.",
+    "sources": [
+      "https://arxiv.org/abs/1708.02002v2",
+      "https://doi.org/10.1017/asb.2018.42"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s2026/fold0/RESULT.json": "fd526e81cefb0c9af0a65fed75553877fbd1c8f6a7de9531b23bda513bebe43d",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s2026/fold1/RESULT.json": "33be1b091cdc378c53f8647f96326227c8cafc8f1cbfa89ceb14c221c64f244e",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s2026/fold2/RESULT.json": "0867da798c6b8127afa40fe321372961ef507078fbc94bcf175b6176b906459a",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s2026/fold3/RESULT.json": "36d741cf0a079066eb29c2cbd4e875c49cb7e32128b76f621c455b498093e210",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s2026/fold4/RESULT.json": "3bf88c6a2b1d1640c817d0f570f6cc757913e9352a3c1a26e723b44a93df4374",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s7731/fold0/RESULT.json": "e762a5a027d00ce15cf8bed0f1d1a2de80bf04fe1df0c52cdc1e88a03908f5bd",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s7731/fold1/RESULT.json": "a4d09ea78ca021f511a8a8396ba91beb51c3c6431dd0396644e285db28f23b59",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s7731/fold2/RESULT.json": "41cf21f71fc609b3114e37f522c2a99900fc431e11e892b9610befb04e8e9fd7",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s7731/fold3/RESULT.json": "8031017737af879430730ae401f69140ae439b977bb451464513c3309cd089e6",
+    "composed/focal_actuarial99_intercept_w64_r0p1_natural_g1/s7731/fold4/RESULT.json": "968200be6d7f7277af28169d67e319a46095ca2dd8b59a473e10ee7062964c72"
+  },
+  "config_sha256": "bc405586881165f53ec2e9a6d2e2fd4391f1b02f42d169d1e474f7e4079d85ae",
+  "contract_sha256": "62861dbcd82377b1eec6beb63f3c3491dcdde4455dd76f47531c4290bff6d142",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

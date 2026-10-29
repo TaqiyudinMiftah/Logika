@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-29T18:41:33.741755+00:00",
+  "design": "focal_global99_glm_w128_r0p0_natural_g2",
+  "design_spec": {
+    "admission_group": "focal_global99_glm_w128_r0p0_natural_g2",
+    "view": "global99",
+    "offset_mode": "glm",
+    "width": 128,
+    "glm_C": 0.1,
+    "residual_penalty": 0.0,
+    "learning_rate": 0.0003,
+    "focal_gamma": 2.0,
+    "class_mode": "natural",
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "ClassWeighted_Focal_CANN",
+    "resource": "cpu",
+    "hypothesis": "Focus gradients on hard examples/class-balanced failures while retaining exact CANN controls and held-meta calibration; no assumed gain.",
+    "sources": [
+      "https://arxiv.org/abs/1708.02002v2",
+      "https://doi.org/10.1017/asb.2018.42"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s2026/fold0/RESULT.json": "7978baa9acc58674414afe1c6702103a7c7e9b9cfc0e9a35e43080b51b6eb94f",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s2026/fold1/RESULT.json": "a4f51fe4a26b471d7994a42a8a7f8e34496360856794a313ecf1191b2bd0963c",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s2026/fold2/RESULT.json": "5133800e35d7c6e0b4517415025420fd86e5cbd36eedd384810906f32283ce5c",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s2026/fold3/RESULT.json": "9121137b2d36c9202df0d229ed07c777eedd816308ae0824dc1f76084aea5ceb",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s2026/fold4/RESULT.json": "3ae7dfe4ba0a3c09e6d2615d9b7bb8d7a6f0e4affcba56828ba81093c32a7872",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s7731/fold0/RESULT.json": "c91408d235a6aa7750b517f7908b3a6cd3a08d0f5b717f4f0c04b1bcac8a6621",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s7731/fold1/RESULT.json": "5a5d02f1f82b783fd154acaf1cba1553e55c1773be4ef5a6b777907b0b2bab08",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s7731/fold2/RESULT.json": "870d60bd5a3e5539c4e8f1ec1343c62b263c124506552d1ecd181e542248efee",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s7731/fold3/RESULT.json": "bf3e4d49973a2ca3d6d162d056146100fd5a0edf92304236fc31be808a406b3d",
+    "composed/focal_global99_glm_w128_r0p0_natural_g2/s7731/fold4/RESULT.json": "747c6add8cd973fa6edf1dc1198f5eb0ced63263abe42d53a62b44bbad4e30ba"
+  },
+  "config_sha256": "bc405586881165f53ec2e9a6d2e2fd4391f1b02f42d169d1e474f7e4079d85ae",
+  "contract_sha256": "62861dbcd82377b1eec6beb63f3c3491dcdde4455dd76f47531c4290bff6d142",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

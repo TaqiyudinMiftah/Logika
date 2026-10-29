@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-29T18:47:48.348637+00:00",
+  "design": "book_actuarial99_glm_w128_r0p0_both",
+  "design_spec": {
+    "admission_group": "book_actuarial99_glm_w128_r0p0_both",
+    "view": "actuarial99",
+    "offset_mode": "glm",
+    "width": 128,
+    "glm_C": 0.1,
+    "residual_penalty": 0.0,
+    "learning_rate": 0.0003,
+    "book_transform": "both",
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "BookFeature_CANN",
+    "resource": "cpu",
+    "hypothesis": "Heavy-tailed financial ratios may be compressed by original mean/SD plus10SD clipping; append training-only robust signed-asinh and/or empirical-normal quantile features. Compare exact raw-feature CANN controls.",
+    "sources": [
+      "user:LDAEd2.pdf#PDFpage51",
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage389",
+      "user:978-3-031-12409-9.pdf#section7.5.1"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/book_actuarial99_glm_w128_r0p0_both/s2026/fold0/RESULT.json": "6dc4d56a82725ca37160ba268ecaba7fde46b2214f8c7c20837845945f47fa0a",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s2026/fold1/RESULT.json": "69d869e5866aa1410bcfda2d37c00a081ec240ad08bc2f662997fa0c2f770319",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s2026/fold2/RESULT.json": "1ff8029f6441614d6f2c1eb4004593aa3d1ef4c5772e62528c4839ea4a6fe5b8",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s2026/fold3/RESULT.json": "f3e9d41b5db4f4fbbc5a4dcbd11a9a994f9dfd84015328f76c00d790d5aa13fb",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s2026/fold4/RESULT.json": "507c5ca1b2153c3a6ff292dd5054eecde5660a7d8a7c5b36427b85dec5c8de5e",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s7731/fold0/RESULT.json": "4fcff71992a8e2eedfd12d5e646c7540a66ead50b4cccf1c3f572d63bc98160d",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s7731/fold1/RESULT.json": "e0d8750f54228e3f1fc0163fd50595236cbb97a52b03db367ee300cdd8148121",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s7731/fold2/RESULT.json": "cfb29a6dbf2643ee6d9bd7186c378ddba3660ea512907d7d2e8ecf1ef4207bbe",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s7731/fold3/RESULT.json": "f4bfa1fc6fcaed88f72ff59f241c1124e0e92b4f691ccd53e3563727bcad75cb",
+    "composed/book_actuarial99_glm_w128_r0p0_both/s7731/fold4/RESULT.json": "15451ee4dbb75fd7d414d631ee3a72de3947d79ffbdb52bbfc23f5e40dda803c"
+  },
+  "config_sha256": "d08f211f6c933416dd11b816b1bcf9f1f9e4b6745910e2f64e74e5b7d6adf49f",
+  "contract_sha256": "2fd29f5e9d8c3d9a9c917327eed4fe2838897094c9775ee28805f4c02691a7f5",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
