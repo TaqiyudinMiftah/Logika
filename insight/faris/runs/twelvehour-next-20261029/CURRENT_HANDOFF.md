@@ -1,6 +1,6 @@
 # Current twelve-hour campaign handoff
 
-Updated29October2026 13:51UTC. Read this before older update records. Actual remote units and artifacts supersede stale LIVE snapshots.
+Updated29October2026 14:39UTC. Read this before older update records. Actual remote units and artifacts supersede stale LIVE snapshots.
 
 The immutable parent clock began29October07:18:48.643995UTC. Admissions end17:48:48, models18:33:48, all computation and ownedbilling19:18:48UTC =30October02:18:48WIB. Never reset/extend it or restart expired studies. ParentCLOCK SHA256 `4e46404d772b35144cb9c5e6b7e14e5e86fccbe189bc494d96d7535f0070f55e`. Every component derives identical epochs with separate config/source/contract digests.
 
@@ -13,9 +13,9 @@ Canonical parent: faris@100.68.29.126:/mnt/home/faris/logika-twelvehour-next-202
 | gpu-extra-views-2002 |960|213|terminalresourcewithdrawal,auditPASS; oldselectionsealed |
 | neural-cann |1440|1440|complete,auditPASS; KS.5314056984854632; priorconditionalCIcrosseszero |
 | neural-rank-cann |960|960|complete,auditPASS; KS.5311550268499536; no supportedgain |
-| gpu2002-single-unlocked |750|151|healthyGPU1only; one rebootinterruption retained,notretried |
+| gpu2002-single-unlocked |750|180|nodeunreachableagain, remoteactiveattemptUNKNOWN; preserved180, no duplicate/retry |
 | neural-numeric-embeddings |2080|2080|complete,auditPASS; KS.5312903321177213; no supportedgain |
-| neural-oblivious-trees |1920|14canonical initial|NEWhealthy20CPUslots; refreshactualownerresults |
+| neural-oblivious-trees |1920|1273canonical at14:34|1537onworkers14:35,0fails;119finished480;otherownerscontinue |
 
 The new treecomponent was preregistered/pushed `4f0a790e6c0832750c12a97f8c350162d13870c7` before launch13:45UTC.192configurations compare6existingviews,16/32trees,depth3/5,GLMC.1offset/intercept,learned/fixed sparsemaxselectors,sparsemoid/sigmoidroutes. This one-layer NODE-inspired CANN adaptation is not exact NODE: zero leafresponses, innerdata initialization reused duringfreshrefit, AdamWlr.003, KSstopping120epochs/patience12. PrimarypaperPopov2019 arxiv1909.06312v2 andofficialQwicen/node inspected; peer/config/source duplicate review andsynthetic gradients/pathsum/zeroinitialization/constantfeature/batchreplay PASS. No newstoredfeatures. Each fullsizepilot mustpass originalstrict5e-6numerics/boundaries and1.5safety/300secfinishmargin before9remainingfits. Firstpilots18-20sec,PASS; noautomaticretry. Coordinator logika-next-obltree-20261029, ops/tree_coordinator.py; workers logika-next-obltree-cpu{2001,2003,119,42}-20261029,slots4/4/6/6,twoCPUthreads. Fourowners observeddispatched andtraining. Numericembedding completed13:49UTC: all2080fits/832compositionmodes auditedPASS; delta95CIvsprior[-.0005231362,.0008867043], opposite seed signs, no supportedgain. Neverrestart it. Healthycomposition can make LIVE lag; inspect actualprocesses.
 
@@ -32,3 +32,9 @@ Publiccheckout .history-publish-20261028, namespace insight/faris/runs/twelvehou
 Storage: privatepublication symlinkto/var/tmp/logika-next-publication-20261029; old6hprivate symlinkto/var/tmp/logika-sixhour-private-rest-20261029. New13:47hashverified pathpreservingrelocation of prior12hprivatepublication(6749files/12symlinks) and4hprivate(1717files) to/var/tmp; no evidence dropped. Git13:48 non-all localrepack verifiednewpackSHA thenprune-packed removedonly duplicatedlooseobjects; allrefsunchanged, no commits orworkingtreefileschanged. GIT_OBJECT_STORAGE_REPAIR andSTORAGE_RELOCATION_1347 recordit. Home~825MiB/root~578MiBfree afterward; preserve512MiBreserve,don'trepeatENOSPCrestarts. Localprivatecollection maydeferwhilecanonical/42/Drivepreserved; don'tclaimdeferredcopyverified.
 
 AI followup hourly tosave tokens. Furthercapacityuse requires usefuldistinct source-backed hypothesis, peer/configduplicate review, prospectiveregistration, separatecomponent andoriginalremainingdeadline. Healthyqueues refillautomatically, noutilization-onlyduplicatechurn. Reconcile actualunits/outputs before execution-onlyrepair; oldfailuremarkers maybehistorical. Atterminal auditraw/cohorthashes,rows/seeds/trainingboundaries,exactSciPyKS/baseline/priorreplay,frozenunionchoice,conditionaluncertainty,failed/partial/resourceunattemptedcounts,cost andactualzeroownedassignments. Noautomaticpromotion/refit/submission. Deletefollowup onlyafterfinaldeliverables andnoauthorizedwork remains.
+
+Hourly14:39UTC: node2002 knownport2002 again NoRoute. LastcollectedBACKEND14:12:28 had active cc_large_global32_r5_e8_case_control__s2026__f1; on-disk stateUNKNOWN untilreachabilityreturns.180canonicalresults safe, coordinator retriescollection. Neverduplicate/relocate/retry unknownwork. NODE2002_CONNECTION_INTERRUPTION_1434 retainsreceipt, no predictivefailureclaim.
+
+Treeworker14:35snapshot:2001=205complete/4active,2003=475/4active,119=480/terminal,42=377/6active;all0fails. Whole-design fixedownership, healthyremainingfitscontinue. Canonical1273/checkpoint8173 at14:34;CPUactivecomposition explainscollectionlag. Firstpartialdevelopmentbest.5311782138414808 fromobltree_global256_t16_d3_intercept_fixed_sigmoid__fixed_010,belowprior andnotfinaluncertainty. No supportedgain.
+
+Workstationpublisher processwasabsent (lastreceipt14:11, no failuretrace),causeunknown. Restored14:37afterPID/flock/freespacereconciliation;onlypublisher restarted,no modelinterference. Actualdestination-volume reserveguard added becauseprivateaggregatecache is a symlink to/var/tmp; capturedforecast testPASS, source45ebfefc1c3a4ebfb1f92307e8175a28a4355e884fc84491f32f05d2b26a1df8. Prior12hpublication cache restored from/var/tmp toitsoriginalhome after6749file/12symlinkhashmatching, no uniquecontentdeleted. STORAGE_REBALANCE_1436 andPUBLICATION_RESUME_1437 recordit. Home664MiB/root608MiB afterrepair,checkbeforecollection. LocalpublisherPIDfile remainscanonical; never signalstalePIDs.
