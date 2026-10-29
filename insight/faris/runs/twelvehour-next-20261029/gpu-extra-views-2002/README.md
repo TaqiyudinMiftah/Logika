@@ -1,0 +1,3 @@
+# Additional frozen-view case-control comparisons on2002
+
+The human explicitly reopened node2002GPUuse. Two idleRTX3060were measured;actualhome/home/faris. This prospective96design/960plannedfit expansion uses4existing frozenviews(global32,augmented99,redundant99,pca64_core), notnewfeaturegeneration. Exactsame source/checkpoints/contextsampler,2seeds5folds,ratios1/3/5,2/8estimators andexactNnaturalcontrols. Perdesign fullsize pilots qualify remaining9fits. The original12hparentdeadline is unchanged; onlyremaining time is allocated. Existing healthy workloads stayrunning; no newColaballocation or unapproved ownership migration. Allcomplete,negative,partial,resource-limited and failed evidence remains recorded, never modelweights/KVcaches.

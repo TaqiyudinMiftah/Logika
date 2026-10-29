@@ -1,4 +1,6 @@
 """Canonical laptop-independent launch, collection, freeze and terminal audit."""
+import os
+for _key in ['OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS']:os.environ[_key]='2'
 from pathlib import Path
 import datetime,fcntl,hashlib,json,os,shlex,shutil,subprocess,sys,time,traceback
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'source'))

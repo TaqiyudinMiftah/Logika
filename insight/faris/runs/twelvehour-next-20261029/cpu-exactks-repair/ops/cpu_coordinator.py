@@ -1,4 +1,6 @@
 """Prospective CPU repair, strictly inside the immutable parent deadline."""
+import os
+for _key in ['OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS']:os.environ[_key]='2'
 from pathlib import Path
 import fcntl,json,os,shlex,shutil,subprocess,sys,time,traceback
 R=Path(__file__).resolve().parents[1];P=R.parent;sys.path.insert(0,str(R/'source'));sys.path.insert(0,str(R/'ops'))
@@ -47,15 +49,20 @@ def main():
  lock=(R/'coordinator.lock').open('a+');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
  parent=load(P/'CLOCK.json');assert sha(P/'CLOCK.json')==load('PARENT_CLOCK_REFERENCE.json')['sha256']
  receipt=load('PREPUBLICATION.json');assert receipt['config_sha256']==sha(R/'CONFIG.json')and receipt['source_seal_sha256']==sha(R/'SOURCE_SEAL.json')
- assert not(R/'CLOCK.json').exists(),'Never reset delegated deadline'
+ existing_clock=(R/'CLOCK.json').exists()
+ assert not existing_clock or '--resume' in sys.argv,'Never reset delegated deadline without explicit execution resume'
  for n in ['TRAINING_BRIEF.md','DEADLINE.md','TRAINING_STATE.json']:shutil.copy2(P/n,R/n)
  clock=dict(parent,config_sha256=sha(R/'CONFIG.json'),contract_sha256=sha(R/'VALIDATION_CONTRACT.json'),source_seal_sha256=sha(R/'SOURCE_SEAL.json'),execution_plan_sha256=sha(R/'EXECUTION_PLAN.json'),parent_clock_sha256=sha(P/'CLOCK.json'),derived_budget_only=True)
- dump(clock,R/'CLOCK.json');os.chmod(R/'CLOCK.json',0o444)
+ if existing_clock:
+  assert load('CLOCK.json')==clock,'Delegated clock cannot change during resume'
+ else:dump(clock,R/'CLOCK.json');os.chmod(R/'CLOCK.json',0o444)
  if not(R/'packets').exists():(R/'packets').symlink_to(P/'packets',target_is_directory=True)
  for n in ['baseline.npz','previous.npz','target.npy']:shutil.copy2(P/'evaluation_inputs'/n,R/'evaluation_inputs'/n)
- module('gate');assert load('GATE.json')['status']=='PASS'
+ if not(R/'GATE.json').exists():module('gate')
+ assert load('GATE.json')['status']=='PASS'
  # Setups are independent and do not modify model/selection state.
- for owner in SPECS:setup(owner)
+ for owner in SPECS:
+  if not(R/f'DISPATCH_{owner}.json').exists():setup(owner)
  last=0
  while time.time()<clock['model_deadline_epoch']-90:
   errors={}
