@@ -224,7 +224,10 @@ def root_audit(mirror):
 
 def counts(mirror, state):
     complete = len([p for p in (mirror/'runs').glob('*/attempt1/RESULT.json') if json.loads(p.read_text()).get('status')=='complete'])
-    expected = json.loads((mirror/'CONFIG.json').read_text())['planned_fits'] if (mirror/'CONFIG.json').exists() else 990
+    config=json.loads((mirror/'CONFIG.json').read_text())if(mirror/'CONFIG.json').exists()else{}
+    ledger=mirror/'EXTRA_DESIGNS.jsonl'
+    extra=sum(bool(line.strip())for line in ledger.read_text().splitlines())if ledger.exists()else 0
+    expected=(len(config.get('designs',{}))+extra)*len(config.get('seeds',[2026,7731]))*5 if config else state.get('expected_fits',990)
     return complete,expected
 
 
