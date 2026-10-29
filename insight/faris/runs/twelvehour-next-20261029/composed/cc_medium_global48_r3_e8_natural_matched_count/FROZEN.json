@@ -1,0 +1,56 @@
+{
+  "UTC": "2026-10-29T10:55:57.421955+00:00",
+  "design": "cc_medium_global48_r3_e8_natural_matched_count",
+  "design_spec": {
+    "admission_group": "cc_medium_global48_r3_e8_natural_matched_count",
+    "aggregation": "single_context",
+    "context_sampling": "natural_matched_count",
+    "engine": "concat_context_vocab",
+    "estimators": 8,
+    "family": "kumo_casecontrol",
+    "hypothesis": "Retain all supplied context default positives and sample1/3/5unique negatives per positive, versus natural-prevalence stratified subset of exact same derived N; 2/8estimators assess interaction with internal ensembling. No query-dependent sampling. Analogy from case-control sampling; no Kumo invariance or calibrated-risk claim.",
+    "max_seconds": 1800,
+    "memory_fraction": 0.7,
+    "negative_per_positive": 3,
+    "parameters": {},
+    "prediction_batch": 256,
+    "prior_correction": "none",
+    "resource": "gpu",
+    "size": "medium",
+    "sources": [
+      "https://arxiv.org/abs/1306.3706",
+      "https://www.stat.berkeley.edu/~wfithian/papers/lcc.pdf",
+      "https://huggingface.co/nvidia/Kumo-Tabular"
+    ],
+    "view": "global48"
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s2026/fold0/RESULT.json": "0ba0b41ffa9c396518f1acc8748905c72f1ff2d9435e61284c3620c80fc7e0f1",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s2026/fold1/RESULT.json": "540882c900988453329a8bd5f197e81d79a2ddb0f6cf5130be078335d9b28314",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s2026/fold2/RESULT.json": "b8607228dd8f9273a29f4450e0de2412c0b412eee57d96a74b9f1b09492f7acc",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s2026/fold3/RESULT.json": "ae952cb0f693389ed8d26d54ca25876dad35e55e3dfa37e1e21676fccbf84efd",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s2026/fold4/RESULT.json": "494424ce65a1fc8380df53097a1ce5c5e6779382fae113401c144911c354ec11",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s7731/fold0/RESULT.json": "32f7de3efabc0c6ce2c6bf88bf70ab7db362687186967ce478becc4b6eb6cf5c",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s7731/fold1/RESULT.json": "120251803f7f12afa5bde0401e377ccb736c72ffad8d374e063f23b7e51df808",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s7731/fold2/RESULT.json": "1e6d609f0db1c05e4033c7aaa4cef90f2f97345c6e9186102ab5ab48c70d0d8f",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s7731/fold3/RESULT.json": "bb1ef2edd7ef07e5ef80a6c05d07efd2e38fd8b9a0f3693e178ef3ccb559120c",
+    "composed/cc_medium_global48_r3_e8_natural_matched_count/s7731/fold4/RESULT.json": "a8e5fba50f8527b4505d9c05ba565b84e0c9db59405fd541b3b8cf8b87b9718e"
+  },
+  "config_sha256": "3cd93fecc21791d5b30dc9cfce1928965781af8dd9965fb8ff9d428fa1c8c3a4",
+  "contract_sha256": "9f42c55cb7cbc4e1efe24792e1925357d0cd1b22b0f61f3d8dfc9cf15811c7ee",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
