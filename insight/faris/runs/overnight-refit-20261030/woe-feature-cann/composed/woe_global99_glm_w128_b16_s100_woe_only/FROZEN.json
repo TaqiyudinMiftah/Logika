@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-29T19:39:58.463207+00:00",
+  "design": "woe_global99_glm_w128_b16_s100_woe_only",
+  "design_spec": {
+    "admission_group": "woe_global99_glm_w128_b16_s100_woe_only",
+    "view": "global99",
+    "offset_mode": "glm",
+    "width": 128,
+    "glm_C": 0.1,
+    "residual_penalty": 0.1,
+    "learning_rate": 0.0003,
+    "book_transform": "crossfit_woe",
+    "woe_mode": "woe_only",
+    "woe_bins": 16,
+    "woe_strength": 100,
+    "max_seconds": 900,
+    "parameters": {},
+    "family": "Crossfit_WoE_Bernoulli_CANN",
+    "resource": "cpu",
+    "hypothesis": "Cross-fitted univariate credit-risk enrichment can regularize sparse feature effects before nonlinear residual learning. Compare appended vs encoded-only inputs, smoothness and bin counts, with archived rawCANN controls; prior standalone WOE scorecards are distinct.",
+    "sources": [
+      "user:Credit-Scoring--Theory,-Methods,-and-Practice.pdf#PDFpage197",
+      "prior:exploration-12h-20261017/README.md#standalone-WOE-scorecards"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s2026/fold0/RESULT.json": "1044dd834334f4c19a2f9bccddc97a82caddd9599adcca49e33e35f016379231",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s2026/fold1/RESULT.json": "faf8a9228912ba2928fa088610ab8d9004f479e0c416cea41a99b35f1569075b",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s2026/fold2/RESULT.json": "86b67d8457b8466b1a9a5e547418c588d451bfe84ae41087932479674e6bdf86",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s2026/fold3/RESULT.json": "064e61d0fa5f2cfedee7fd44d9a8105794219385d8ed9215468e7489ef651079",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s2026/fold4/RESULT.json": "61376666029a63daeb2541f4dcb371ce83b967684c1e9b8d71f6183dfe28c561",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s7731/fold0/RESULT.json": "ed50ecc9b5ecb47feece3835b65ad5adc89c897c9fb9f617c930d290c3898149",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s7731/fold1/RESULT.json": "b3ba1d9c7162aef95a35af412c51af3495a3693ae916e67d4b9e4fe6d10d751e",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s7731/fold2/RESULT.json": "5e5f9a64f90d9450258ed1c681bac4e60d6a3303fa2ef8df8f2952a2680e8f84",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s7731/fold3/RESULT.json": "e01b02fad82db70fc50914b24837ae88ad60a560c21edd6b341d7d55c98c6488",
+    "composed/woe_global99_glm_w128_b16_s100_woe_only/s7731/fold4/RESULT.json": "b089cb2d4a39824340ce5650db3943212b82af971e729176db21da7eb4b36003"
+  },
+  "config_sha256": "c09083fff5b9d37c21c09c9824add98f6121f6d19fcf492cd7f6ea4f16f0a0ef",
+  "contract_sha256": "8edcc37906ca827f8048c8944db9d59aa8a480d54f09a3d7df98f1def36ba8d4",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
