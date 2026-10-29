@@ -27,7 +27,7 @@ def main(once=False):
    for name in ['CLOCK.json','LIVE_STATE.json','COMPLETION.json','ARTIFACT_CONSISTENCY_AUDIT.json']:
     p=subprocess.run(['rsync','-az',REMOTE+':'+ROOT+'/'+name,str(R)+'/'],capture_output=True,text=True,timeout=30)
     assert p.returncode in [0,23],p.stderr
-   for name in ['runs','composed','evaluation']:
+   for name in ['runs','evaluation']:
     target=out/name;target.mkdir(exist_ok=True);args=['rsync','-az','--include=*/','--include=prediction.npz','--include=*.json','--include=*.jsonl','--exclude=*',REMOTE+':'+ROOT+'/'+name+'/',str(target)+'/'];guarded_transfer(args)
    manifest={str(p.relative_to(out)):dict(bytes=p.stat().st_size,sha256=sha(p)) for p in out.rglob('*') if p.is_file()}
    checked=0

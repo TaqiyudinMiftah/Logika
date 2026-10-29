@@ -1,6 +1,6 @@
 {
   "campaign": "twelvehour-20261029",
-  "stage": "preregistered_not_started",
+  "stage": "running_pilots",
   "canonical_root": "faris@100.68.29.126:/mnt/home/faris/logika-twelvehour-20261029",
   "service": "logika-twelvehour-20261029.service",
   "workers": [
@@ -8,11 +8,22 @@
     "logika-twelvehour-cpu2003-20261029.service",
     "logika-twelvehour-gpu2001-20261029.service"
   ],
-  "next_action": "Root verifiesprepublicationremotecommitthenlaunchcoordinator.py. Onresume reconcileallactualunitsandoutputs; do notresetclock orrestarthealthy/completedworkers.",
+  "next_action": "Leave healthy jobs alone. Inspect LIVE_STATE, familygates andactualworkerunits. Onfailure readprivatecoordinator/workerlogs, reconcileallunits/results beforeexecution-onlyrepair withinoriginalclock; neverresetornewlaunch.",
   "expected_designs": 99,
   "planned_fits": 990,
   "all70000reused_development": true,
   "no_automatic_refit_or_submission": true,
   "laptop_required_for_compute": false,
-  "github_push_deferred_when_laptop_off": true
+  "github_push_deferred_when_laptop_off": true,
+  "started_UTC": "2026-10-29T00:44:29.080445+00:00",
+  "deadline_UTC": "2026-10-29T12:44:29.080445+00:00",
+  "clock_sha256": "a295467aeca0f22be33414ca7c2a5dae4e727dc0cc6ba22a0ed4552ad675315b",
+  "laptop_required_for_training_validation_backup": false,
+  "remote_monitor": "logika-twelvehour-offline-20261029.service",
+  "remote_backup": "node2003:/mnt/home/faris/logika-twelvehour-20261029-backup-2001",
+  "remote_offline_publication_outbox": "private/laptop-independent/PUBLICATION_OUTBOX",
+  "followup_automation": "logika-twelve-hour-experiment-follow-up",
+  "remote_monitor_first_snapshot": "PASS2026-10-29T00:45:57UTC; onecompletedpilotbackedup",
+  "monitor_or_backup_requires_laptop": false,
+  "actual_GitHub_push_requires_laptop": true
 }

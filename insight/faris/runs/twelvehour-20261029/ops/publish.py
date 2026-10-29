@@ -27,7 +27,7 @@ BLOCKED_PARTS = {
     'huggingface', 'hf', 'storage', 'env', 'env311', '.venv', '__pycache__',
     'data', 'datasets', 'raw_data', 'raw_logs', 'logs', 'catboost_info',
 }
-TERMINAL_DIRS = ['runs', 'composed', 'evaluation', 'failures']
+TERMINAL_DIRS = ['runs', 'evaluation', 'failures']  # Full composed cases remain in both lab copies; local retains raw/cohort evidence.
 
 
 class PublicationConflict(RuntimeError):
