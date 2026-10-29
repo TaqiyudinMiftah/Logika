@@ -1,6 +1,6 @@
 # Current twelve-hour campaign handoff
 
-Updated29October2026 14:39UTC. Read this before older update records. Actual remote units and artifacts supersede stale LIVE snapshots.
+Updated29October2026 15:34UTC. Read this before older update records. Actual remote units and artifacts supersede stale LIVE snapshots.
 
 The immutable parent clock began29October07:18:48.643995UTC. Admissions end17:48:48, models18:33:48, all computation and ownedbilling19:18:48UTC =30October02:18:48WIB. Never reset/extend it or restart expired studies. ParentCLOCK SHA256 `4e46404d772b35144cb9c5e6b7e14e5e86fccbe189bc494d96d7535f0070f55e`. Every component derives identical epochs with separate config/source/contract digests.
 
@@ -38,3 +38,5 @@ Hourly14:39UTC: node2002 knownport2002 again NoRoute. LastcollectedBACKEND14:12:
 Treeworker14:35snapshot:2001=205complete/4active,2003=475/4active,119=480/terminal,42=377/6active;all0fails. Whole-design fixedownership, healthyremainingfitscontinue. Canonical1273/checkpoint8173 at14:34;CPUactivecomposition explainscollectionlag. Firstpartialdevelopmentbest.5311782138414808 fromobltree_global256_t16_d3_intercept_fixed_sigmoid__fixed_010,belowprior andnotfinaluncertainty. No supportedgain.
 
 Workstationpublisher processwasabsent (lastreceipt14:11, no failuretrace),causeunknown. Restored14:37afterPID/flock/freespacereconciliation;onlypublisher restarted,no modelinterference. Actualdestination-volume reserveguard added becauseprivateaggregatecache is a symlink to/var/tmp; capturedforecast testPASS, source45ebfefc1c3a4ebfb1f92307e8175a28a4355e884fc84491f32f05d2b26a1df8. Prior12hpublication cache restored from/var/tmp toitsoriginalhome after6749file/12symlinkhashmatching, no uniquecontentdeleted. STORAGE_REBALANCE_1436 andPUBLICATION_RESUME_1437 recordit. Home664MiB/root608MiB afterrepair,checkbeforecollection. LocalpublisherPIDfile remainscanonical; never signalstalePIDs.
+
+Hourly15:31UTC: all8scientificsource/config/contract seals reverifiedPASS, originalclock unchanged. Canonical/checkpoint8710completedfits; tree1810canonical,1824workercompleted (2001=384with4active;2003/119/42 all480terminal),0fails. Finaltreeassessmentpending; provisionalbest.5311782138414808, no supportedgain. Healthy4remainingCPUfitsandcompositioncontinue; no processinterference. Node2002 stillNoRoute,180saved,unknownactivef1notduplicated. Publisheralive,15:31remote f169ecdd02c881ab14e7478e980d5b5523a1fb14verified,0secretfindings; Driveactive. Localreserveapproaching512MiB; forecastchecksdefercollectionratherthanfillvolumes. No newadmissionsorresourceallocationsatthischeck. Read HOURLY_CHECK_1531 forcompactevidence.
