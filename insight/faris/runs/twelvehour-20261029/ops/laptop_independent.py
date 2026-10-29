@@ -9,6 +9,19 @@ R = Path(__file__).resolve().parents[1]
 DEST = '/mnt/home/faris/logika-twelvehour-20261029-backup-2001'
 HOST = 'faris@gpu-labkc.ub.ac.id'
 SSH = ['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-p', '2003', HOST]
+BACKUP_HOST=HOST
+BACKUP_SSH=SSH
+BACKUP_RSH='ssh -o BatchMode=yes -o ConnectTimeout=10 -p2003'
+BACKUP_HOME='/mnt/home/faris'
+BACKUP_LABEL='node2003'
+if os.environ.get('LOGIKA_BACKUP_TARGET')=='host119':
+    BACKUP_HOST='faris@100.89.211.119'
+    BACKUP_RSH='ssh -o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -i /mnt/home/faris/.ssh/id_ed25519_logika_backup119'
+    import shlex
+    BACKUP_SSH=shlex.split(BACKUP_RSH)+[BACKUP_HOST]
+    BACKUP_HOME='/home/faris'
+    BACKUP_LABEL='host119'
+    DEST='/home/faris/logika-twelvehour-20261029-backup-2001'
 CLOCK_SHA = None  # bound once from immutable CLOCK at daemon start
 P = R / 'private/laptop-independent'
 
@@ -22,14 +35,14 @@ def module(name,path):
     s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 
 def backup():
-    run(SSH+['mkdir','-p',DEST])
-    args=['rsync','-az','-e','ssh -o BatchMode=yes -o ConnectTimeout=10 -p2003',
+    run(BACKUP_SSH+['mkdir','-p',DEST])
+    args=['rsync','-az','-e',BACKUP_RSH,
           '--exclude=private/***','--exclude=publication_ready/***','--exclude=__pycache__/***',
           '--include=*/','--include=*.json','--include=*.jsonl','--include=*.py',
-          '--include=*.npz','--include=*.npy','--include=*.md','--include=*.log','--exclude=*',str(R)+'/',HOST+':'+DEST+'/']
+          '--include=*.npz','--include=*.npy','--include=*.md','--include=*.log','--exclude=*',str(R)+'/',BACKUP_HOST+':'+DEST+'/']
     preview=run(args[:-2]+['--dry-run','--stats']+args[-2:]);match=re.search(r'Total transferred file size:\s*([\d,]+)',preview.stdout);assert match
     need=int(match.group(1).replace(',',''))
-    free=int(run(SSH+['python3 -c '+repr('import shutil;print(shutil.disk_usage("/mnt/home/faris").free)')]).stdout.strip())
+    free=int(run(BACKUP_SSH+['python3 -c '+repr('import shutil;print(shutil.disk_usage('+repr(BACKUP_HOME)+').free)')]).stdout.strip())
     assert free-need>1024**3,'Preserve1GiB backup-node reserve'
     source_complete_before_transfer=len(list((R/'runs').glob('*/attempt1/RESULT.json')))
     run(args)
@@ -51,9 +64,9 @@ manifest={str(p.relative_to(r)):{'sha256':sha(p),'bytes':p.stat().st_size}for p 
 print(json.dumps({'status':'HASH_VERIFIED','completed_fit_records':checked,'files':len(manifest),'manifest_sha256':sha(r/'BACKUP_MANIFEST.json'),'clock_sha256':sha(r/'CLOCK.json')}))
 '''%(DEST,CLOCK_SHA)
     import shlex
-    result=json.loads(run(SSH+['python3 -c '+shlex.quote(code)]).stdout)
+    result=json.loads(run(BACKUP_SSH+['python3 -c '+shlex.quote(code)]).stdout)
     assert result['completed_fit_records']>=source_complete_before_transfer,'Backup omitted a completed fit from its starting snapshot'
-    dump(P/'BACKUP_RECEIPT.json',dict(result,UTC=utc(),host='node2003',path=DEST,case_predictions_private=True,canonical_complete_at_transfer_start=source_complete_before_transfer,approved_aliases_preserved=True))
+    dump(P/'BACKUP_RECEIPT.json',dict(result,UTC=utc(),host=BACKUP_LABEL,path=DEST,case_predictions_private=True,canonical_complete_at_transfer_start=source_complete_before_transfer,approved_aliases_preserved=True))
     return result
 
 def export():
