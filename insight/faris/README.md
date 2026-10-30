@@ -91,3 +91,9 @@ authoritative for peer coordination and public/private evidence separation.
 ## Requested latest best-local submission —29October
 
 [Fixed25kcontext refit](runs/submit-best-sub25k-20261029/README.md) completed10frozen seed/fold members with exact context and postprocessing replay. Submission57761141 scored publicKS0.56793; V25 at0.56822 remains incumbent. LocalKS0.5312163876 is adaptively reused development without a supported gain. This separate requested deployment preserved all completed study seals and clocks.
+
+## Completed midnight multiseed continuation —30October
+
+[Study](runs/midnight-multiseed-20261030/README.md) completed 70 successful fit packets: 60 paired main-branch fits across two new seeds, six reference fits and four Transformer probes. The fixed four-seed bag reached pooled development KS **0.5311092649**, below reference **0.5319679800**; conditional delta95% interval **[-0.0021656647, 0.0006028221]** crosses zero. No supported gain or 0.54 target attainment. The complete Transformer grid was not admitted after runtime qualification. All 70k cases remain adaptively reused development.
+
+All owned worker processes ended, both lab2003 GPUs became idle, and authenticated checks found all eleven Colab servers empty. Raw predictions, failures, sources, parameter/environment manifests, held CSV and separate arithmetic audit are retained privately with published hashes. The held CSV was not uploaded; previous Kaggle receipt 57806062 / public KS 0.56716 remains the latest actual submission. Original campaign clocks and scientific seals were preserved.

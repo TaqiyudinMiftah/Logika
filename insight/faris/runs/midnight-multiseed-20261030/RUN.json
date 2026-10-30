@@ -1,9 +1,12 @@
 {
   "id": "midnight-multiseed-20261030",
-  "status": "scientific_source_preregistered_before_any_fit",
+  "status": "completed",
   "hypothesis": "User explicitlyrequests multiseed variance reduction, prior2-seed CANN/Kumo/LocalGLM fusion weakgain; expand sampling instead of more recipe selection.",
   "config_sha256": "5a9ddf3fcf89ec2afedd2a876e3120c0fad070b4143d99a0c754d458f29c1ad3",
   "clock_sha256": "7ca964547b3305c1b452977b6f3947313191b552f87b3600a7c7ed9bb587997d",
+  "source_seal_sha256": "aeb60ca7cfe768c4fb4e7f119d91ddc5ae7949bbf269cc75f66386dcfc93586f",
+  "registered_source_commit": "63ba740cdc7d787bb0a5b0346ff019db86987f1b",
+  "continuation_progress_commit": "ec8dbcdda1fbba2616158bd4125328e9e65b7d29",
   "seeds": [
     10103,
     20076,
@@ -26,13 +29,193 @@
     189617,
     199590
   ],
+  "admitted_new_seeds": [
+    10103,
+    20076
+  ],
+  "retained_original_seeds": [
+    2026,
+    7731
+  ],
   "planned_fits": 686,
-  "completed_fits": 0,
-  "source_seal_sha256": "a186465054809cb82593c0e3dd0042c2cab810a8e12ceecf019bb93a75a2e4df",
-  "transformer_planned_fits": 80,
+  "completed_fits": 70,
+  "completed_new_paired_fits": 60,
+  "completed_reference_fits": 6,
+  "completed_Transformer_probe_fits": 4,
+  "not_admitted_fits": 616,
+  "extra_pretraining_worker_failures": 3,
+  "full_data_production_fits_included": true,
+  "metric": "pooled tie-aware absolute KS",
+  "validation_protocol": "same five outer folds; all 70000 adaptively reused",
+  "KS": 0.5311092649269684,
+  "AUC": 0.8469012714123846,
+  "reference_KS": 0.5319679799870825,
+  "delta_reference": -0.0008587150601140348,
+  "conditional_CI95_reference": [
+    -0.002165664704336845,
+    0.0006028221349026968
+  ],
+  "fold_delta_reference": [
+    -0.0004287354209414618,
+    -0.0006009513222037244,
+    -0.00021256337825592553,
+    0.0012507390137918017,
+    -0.00021138271588205804
+  ],
+  "supported_gain": false,
+  "target054": false,
+  "private_artifact_SHA256": "a1589bd807ffc21f90d6df90535d56dd39e69ec60f8cf0b9b13f66dab101a1e0",
+  "private_artifact": "evaluation/paired_equal_seedbag/submission_HELD.csv",
+  "all_own_workers_stopped": true,
+  "all_eleven_Colab_servers_empty": true,
+  "no_new_Kaggle_upload": true,
+  "finished_epoch": 1793376960.0448418,
+  "owner": "faris",
+  "outcome": "no_supported_gain",
+  "source_commit": "63ba740cdc7d787bb0a5b0346ff019db86987f1b",
+  "created_UTC": "2026-10-30T14:52:22.237524+00:00",
+  "finished_UTC": "2026-10-30T16:16:00.044842+00:00",
+  "signature_sha256": "67c5219d7010c74de033c0d77b9ca4ce03c075cac00a98d67391bf17e63ed93a",
+  "configuration_source_sha256": "5a9ddf3fcf89ec2afedd2a876e3120c0fad070b4143d99a0c754d458f29c1ad3",
+  "protocol_source_sha256": "9e1815fd6d673b00bf660cea63a2d9ade6af2e4a72e6c16b9aca52330590ce57",
+  "replication_reason": "User explicitlyrequests multiseed variance reduction, prior2-seed CANN/Kumo/LocalGLM fusion weakgain; expand sampling instead of more recipe selection.",
+  "configuration": {
+    "id": "midnight-multiseed-20261030",
+    "new_seeds": [
+      10103,
+      20076,
+      30049,
+      40022,
+      49995,
+      59968,
+      69941,
+      79914,
+      89887,
+      99860,
+      109833,
+      119806,
+      129779,
+      139752,
+      149725,
+      159698,
+      169671,
+      179644,
+      189617,
+      199590
+    ],
+    "reference_seeds": [
+      2026,
+      7731
+    ],
+    "folds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "kinds": [
+      "localglm",
+      "cann",
+      "kumo70"
+    ],
+    "phases": [
+      "validation",
+      "production"
+    ],
+    "scientific_fit_slots": 600,
+    "qualification_reference_fits": 6,
+    "planned_fit_slots": 606,
+    "features": "Existing2129bank andexactfrozenactuarial99/global99views;no newfeaturework",
+    "primary": "Equalprobabilityaverage over original2 plus allnewfullypairedseeds. Perseedfold .9LocalGLMmetaAdaptive+.1[CANN+Kumo70 positive-logitstack penalty.003]. Noseedperformancefilter. Aseedeligibleonlyall3branches5foldsbothphasespresent+audited.",
+    "secondary_seed_prefixes": [
+      2,
+      4,
+      8,
+      12,
+      16,
+      20
+    ],
+    "primary_comparator_local_KS": 0.5319679799870825,
+    "public_submission_reference": 0.56716,
+    "outer_data": "All70000adaptivelyreused,no untouched audit",
+    "source_replication_reason": "User explicitlyrequests multiseed variance reduction, prior2-seed CANN/Kumo/LocalGLM fusion weakgain; expand sampling instead of more recipe selection.",
+    "runtime_gate": "Eachowner fullsize firstpair eachkind mustpass finite,rowboundary,strictoriginalbatchreplay and finish remainingassigned work*1.5+300sec before admission. No failed autoretries.",
+    "retention": "source,recipes,seeds,compactCV/testpreds+hashes; no fittedweights/KVcaches",
+    "resource_policy": "Lab2001CPUonly;2003idleGPUs0/1+CPU;119/42CPU;one new Colab perprofile1..11,account2A100/othersT4 ifgrant. No quota retry,recreation,foreignworkload interference. node680 onlyifidleA100. node2002onlypreviouslyidentifiedGPU1 ifreconciledonline.",
+    "no_automatic_Kaggle": true
+  },
+  "protocol": {
+    "inherits": "Exactold5fold50000context/6000heldmeta/14000outer,42500inner7500stopper,fresh70000production refit with59500inner10500stopper; no outer labels at validation basefit. Existinganchors fixed.",
+    "metric": "PooledabsoluteSciPy2sampleKS on meanOOFprobabilities; nofoldmean substitution",
+    "baseline": 0.5306361042400267,
+    "reference": 0.5319679799870825,
+    "availability_selection": "Freeze complete seedlist fromartifactstatus before anynewoutermetrics; includeallfullypairedseeds byavailability, neverrankseeds byscore",
+    "uncertainty": "2000conditionalfold/classbootstrap seed20261031 plusperseed/foldstability; noindependenceclaim",
+    "success": "delta>=.0005 andconditionalCI lower>0 plus4positivefolds; target.54separate",
+    "required_checks": [
+      "exactpriorreference_replay",
+      "roleandfeaturehashes",
+      "seed+foldidentity",
+      "finiteprobabilities",
+      "CPU5e-6batchreplay",
+      "Kumo1e-7samecache",
+      "sampleIDalignment",
+      "newseedinclusionfrozenbeforeouter"
+    ],
+    "independent_audit_available": false
+  },
+  "independent_confirmation_claimed": false,
   "source_primary": [
     "https://arxiv.org/abs/2106.11959",
     "https://arxiv.org/abs/2107.11059",
     "https://papers.nips.cc/paper_files/paper/2017/hash/9ef2ed4b7fd2c810847ffa5fa85bce38-Abstract.html"
+  ],
+  "results": {
+    "status": "completed_adaptive_development",
+    "candidates": [
+      {
+        "id": "paired_equal_seedbag",
+        "KS": 0.5311092649269684,
+        "delta_reference": -0.0008587150601140348,
+        "fold_delta_reference": [
+          -0.0004287354209414618,
+          -0.0006009513222037244,
+          -0.00021256337825592553,
+          0.0012507390137918017,
+          -0.00021138271588205804
+        ],
+        "prediction_sha256": "ad3bb186fe3d89a444182f16982a2c8add8ae0a57bc084c12f61b696a9438f27",
+        "CSV_sha256": "a1589bd807ffc21f90d6df90535d56dd39e69ec60f8cf0b9b13f66dab101a1e0"
+      }
+    ],
+    "new_seeds": [
+      10103,
+      20076
+    ],
+    "conditional_interval_reference": {
+      "replicates": 2000,
+      "seed": 20261031,
+      "percentile95": [
+        -0.002165664704336845,
+        0.0006028221349026968
+      ],
+      "excludes_adaptive_selection_and_refitting": true,
+      "independent_confirmation": false
+    },
+    "all70000_reused": true,
+    "no_untouched_audit": true,
+    "supported_gain": false,
+    "target054": false,
+    "no_Kaggle_submission": true
+  },
+  "results_source_sha256": "1b8e067535aa1dad566a4d730687fc4c1b2cf4b9e2c777b39079146a338feb4d",
+  "private_artifacts": [
+    {
+      "private_path": "/mnt/home/faris/logika-midnight-multiseed-20261030/evaluation/paired_equal_seedbag/submission_HELD.csv",
+      "bytes": 1184899,
+      "sha256": "a1589bd807ffc21f90d6df90535d56dd39e69ec60f8cf0b9b13f66dab101a1e0",
+      "uploaded": false
+    }
   ]
 }
