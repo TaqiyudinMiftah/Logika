@@ -1,6 +1,6 @@
 # Final continuation handoff
 
-Read `FINAL_REPORT.md`, `FINAL_DELIVERY.json`, `paired/FINAL_AUDIT.json`, `rankmeta/FINAL_AUDIT.json`, and the original `FINAL_AUDIT.json`. All model work is complete. Do not restart completed queues or change their frozen selections.
+Read `FINAL_REPORT.md`, `FINAL_DELIVERY.json`, `paired/FINAL_AUDIT.json`, `rankmeta/FINAL_AUDIT.json`, and the original `FINAL_AUDIT.json`. All model studies, including gatedmeta, are complete. Gatedmeta finished160fits/16recipes with auditPASS and bestKS0.5306168643404208; it did not beat the current reference. Do not restart completed queues or change their frozen selections.
 
 The human deadline is 30 October 2026, 20:00 WIB (13:00 UTC). No automatic Kaggle submission is authorized in this campaign. The strongest paired held CSV has local development KS 0.5319679799870825; its conditional improvement interval crosses zero.
 

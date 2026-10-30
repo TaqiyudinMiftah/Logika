@@ -7,6 +7,7 @@ All work is bounded by 30 October 2026, 20:00 WIB (13:00 UTC). No Kaggle upload 
 | Cross-network base-model campaign | 520 complete designs / 2,080 composition cohorts | 0.5316414268134972 | Equal to the previous reference |
 | Historical probability, linear, neural and greedy blends | 104 | 0.5307384643313067 | Below the reference |
 | Additional pairwise-ranking GPU meta-models | 16 | 0.5302751348592203 | Below the reference |
+| Gated-expert GPU meta-models | 16 | 0.5306168643404208 | Below the reference |
 | Blends with matching saved validation and fresh-production test predictions | 48 | **0.5319679799870825** | Higher point estimate; uncertainty includes no improvement |
 
 The selected paired recipe is `current_fusion_cann_kumo70_p0.003_w0.1`: 90% of the current LocalGLM-CANN prediction plus 10% of the saved CANN/Kumo70 fusion with its previously declared 0.003 meta penalty. Its held test CSV has SHA256 `5424942d99024daa4aacbde5dd60d07f87a64df5472050bbea3ba073a769ae99`.
@@ -19,9 +20,9 @@ The base campaign completed **5,208 of 6,160 planned fits**, with zero predictiv
 
 The history bank contains 1,925 compatible complete pipelines from 29 study/family groups. Coverage is restricted to accessible, hash-verified artifacts using the matching validation protocol. It is not a universal claim about every historical experiment, archived ZIP or inaccessible host. Two linear blend recipes were excluded because their optimizers did not converge; their evidence is preserved rather than classified as a predictive negative.
 
-There were 620 new meta-training/selection fit packets: 120 linear, 160 probability-based GPU neural, 180 greedy fold selections, and 160 additional ranking-based GPU neural. Fixed arithmetic recipes and the 48 paired recompositions are not new independent base-model fits. The paired study reconstructed eleven previously declared recipes from the saved 30 fresh production members; it did not retrain those members.
+There were 780 new meta-training/selection fit packets: 120 linear, 160 probability-based GPU neural, 180 greedy fold selections, 160 ranking-based GPU neural, and 160 gated-expert GPU neural. Fixed arithmetic recipes and the 48 paired recompositions are not new independent base-model fits. The paired study reconstructed eleven previously declared recipes from the saved 30 fresh production members; it did not retrain those members.
 
-Both authorized RTX 3060 GPUs on node2003 were used. All ranking fits passed the original strict 5e-6 batch replay gate. Node680 login succeeded, but its A100 80GB was already at 100% utilization on another user's workload; that workload was untouched. The authorized account contributed 45 unique saved test vectors. Its older three-fold validation protocol is incompatible with this run's five folds, so those local scores were not combined. Our inventory kernel was explicitly shut down (HTTP204).
+Both authorized RTX 3060 GPUs on node2003 were used. All ranking and gated-expert fits passed the original strict 5e-6 batch replay gate. The separate gated study was preregistered at commit ad7fbcc9dcaa4202d1c6d5cc050f134ba60a30e8 before fitting and completed with 16 audited recipes; it did not change earlier frozen selections. Node680 login succeeded, but its A100 80GB was already at 100% utilization on another user's workload; that workload was untouched. The authorized account contributed 45 unique saved test vectors. Its older three-fold validation protocol is incompatible with this run's five folds, so those local scores were not combined. Our inventory kernel was explicitly shut down (HTTP204).
 
 Fresh authenticated checks confirmed zero active assignments and zero usage rate on all eleven Colab accounts. Account2's observed balance changed from 298.62 to 253.57 CU during this campaign, a 45.05 CU decrease; this is an account-level observation, not a per-fit bill.
 
