@@ -67,10 +67,13 @@ assert [x['weight'] for x in weights]==[x['LocalGLM_meta_weight'] for x in meta[
 sample=pd.read_csv(R/'sample_submission.csv');csv=pd.read_csv(R/'evaluation/paired_equal_seedbag/submission_HELD.csv',float_precision='round_trip')
 assert list(csv.columns)==['application_id','default_probability'] and len(csv)==30000 and csv.application_id.nunique()==30000
 assert np.array_equal(csv.application_id.astype(str),sample.application_id.astype(str))
-aligned=pd.Series(t,index=ids).reindex(sample.application_id.astype(str)).to_numpy();assert np.array_equal(csv.default_probability.to_numpy(),aligned)
+aligned=pd.Series(saved['test'],index=ids).reindex(sample.application_id.astype(str)).to_numpy();assert np.array_equal(csv.default_probability.to_numpy(),aligned)
 assert np.all((aligned>0)&(aligned<1))
 # Only now open reused outer labels, after all complete predictions were frozen.
 y=np.load(R/'evaluation_inputs/target.npy');baseline=np.load(R/'evaluation_inputs/baseline.npz')
+# Recomposition was already checked against the original strict 1e-12 tolerance.
+# Rank metrics and bootstrap audit the exact published bytes, including exact ties.
+v=saved['validation']
 base=baseline['validation'] if 'validation' in baseline.files else baseline['prediction'] if 'prediction' in baseline.files else baseline['pred']
 baseks=ks(y,base);refks=ks(y,reference['validation']);value=ks(y,v)
 assert abs(baseks-.5306361042400267)<1e-12 and abs(refks-.5319679799870825)<1e-12

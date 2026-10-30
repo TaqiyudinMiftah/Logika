@@ -97,3 +97,7 @@ authoritative for peer coordination and public/private evidence separation.
 [Study](runs/midnight-multiseed-20261030/README.md) completed 70 successful fit packets: 60 paired main-branch fits across two new seeds, six reference fits and four Transformer probes. The fixed four-seed bag reached pooled development KS **0.5311092649**, below reference **0.5319679800**; conditional delta95% interval **[-0.0021656647, 0.0006028221]** crosses zero. No supported gain or 0.54 target attainment. The complete Transformer grid was not admitted after runtime qualification. All 70k cases remain adaptively reused development.
 
 All owned worker processes ended, both lab2003 GPUs became idle, and authenticated checks found all eleven Colab servers empty. Raw predictions, failures, sources, parameter/environment manifests, held CSV and separate arithmetic audit are retained privately with published hashes. The held CSV was not uploaded; previous Kaggle receipt 57806062 / public KS 0.56716 remains the latest actual submission. Original campaign clocks and scientific seals were preserved.
+
+## Final three experiments and requested ecommerce submission —30October
+
+[Results](runs/final-three-20261030/README.md): ecommerce validation KS0.529645026, literal seed3 KS0.528857823; seed4 remained incomplete and received no pooled score. Ecommerce was explicitly submitted as **57812068**, Kaggle COMPLETE / public KS **0.56531**, at16:59:21UTC before the cutoff. All experiment workers were verified stopped on all four hosts; no further experiment is queued.
