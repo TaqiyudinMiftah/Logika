@@ -1,0 +1,211 @@
+{
+  "epoch": 1793375924.9102764,
+  "seeds": [
+    10103,
+    20076
+  ],
+  "planned_new_fit_slots": 60,
+  "remaining_registered_seed_slots_not_admitted": 540,
+  "rule": "Fixed prefix and round-robin paired ownership before new outer metrics; all complete seeds enter equal bag; no score-based seed selection.",
+  "model_deadline_unchanged": true,
+  "admission_clock_applies_to_each_phase": true,
+  "transformers": "Full-size scalar/coefficient pilots retained; entire eighty-fit grid requires measured runtime qualification before broader admission.",
+  "plans": {
+    "lab2001": {
+      "owner": "lab2001",
+      "slots": 4,
+      "python": "/mnt/home/faris/logika-model-arena-20261025/env311/bin/python",
+      "tasks": [
+        {
+          "kind": "localglm",
+          "seed": 10103,
+          "fold": 0
+        },
+        {
+          "kind": "localglm",
+          "seed": 10103,
+          "fold": 3
+        },
+        {
+          "kind": "localglm",
+          "seed": 20076,
+          "fold": 0
+        },
+        {
+          "kind": "localglm",
+          "seed": 20076,
+          "fold": 3
+        }
+      ]
+    },
+    "lab2003": {
+      "owner": "lab2003",
+      "slots": 4,
+      "python": "/mnt/home/faris/logika-submit-best-sub25k-20261029/env_gpu/bin/python",
+      "tasks": [
+        {
+          "kind": "cann",
+          "seed": 10103,
+          "fold": 0
+        },
+        {
+          "kind": "cann",
+          "seed": 10103,
+          "fold": 3
+        },
+        {
+          "kind": "cann",
+          "seed": 20076,
+          "fold": 0
+        },
+        {
+          "kind": "cann",
+          "seed": 20076,
+          "fold": 3
+        }
+      ]
+    },
+    "host119": {
+      "owner": "host119",
+      "slots": 6,
+      "python": "/home/faris/logika-next-neural-cann-20261029/env311/bin/python",
+      "tasks": [
+        {
+          "kind": "localglm",
+          "seed": 10103,
+          "fold": 1
+        },
+        {
+          "kind": "localglm",
+          "seed": 10103,
+          "fold": 2
+        },
+        {
+          "kind": "localglm",
+          "seed": 10103,
+          "fold": 4
+        },
+        {
+          "kind": "localglm",
+          "seed": 20076,
+          "fold": 1
+        },
+        {
+          "kind": "localglm",
+          "seed": 20076,
+          "fold": 2
+        },
+        {
+          "kind": "localglm",
+          "seed": 20076,
+          "fold": 4
+        }
+      ]
+    },
+    "host42": {
+      "owner": "host42",
+      "slots": 6,
+      "python": "/home/faris/logika-next-neural-cann-20261029/env311/bin/python",
+      "tasks": [
+        {
+          "kind": "cann",
+          "seed": 10103,
+          "fold": 1
+        },
+        {
+          "kind": "cann",
+          "seed": 10103,
+          "fold": 2
+        },
+        {
+          "kind": "cann",
+          "seed": 10103,
+          "fold": 4
+        },
+        {
+          "kind": "cann",
+          "seed": 20076,
+          "fold": 1
+        },
+        {
+          "kind": "cann",
+          "seed": 20076,
+          "fold": 2
+        },
+        {
+          "kind": "cann",
+          "seed": 20076,
+          "fold": 4
+        }
+      ]
+    },
+    "lab2003-gpu0": {
+      "owner": "lab2003-gpu0",
+      "slots": 1,
+      "gpu": 0,
+      "python": "/mnt/home/faris/logika-submit-best-sub25k-20261029/env_gpu/bin/python",
+      "tasks": [
+        {
+          "kind": "kumo70",
+          "seed": 10103,
+          "fold": 0
+        },
+        {
+          "kind": "kumo70",
+          "seed": 10103,
+          "fold": 2
+        },
+        {
+          "kind": "kumo70",
+          "seed": 10103,
+          "fold": 4
+        },
+        {
+          "kind": "kumo70",
+          "seed": 20076,
+          "fold": 1
+        },
+        {
+          "kind": "kumo70",
+          "seed": 20076,
+          "fold": 3
+        }
+      ],
+      "wait_unit": "logika-midnight-transformer-scalar-probe-20261030.service"
+    },
+    "lab2003-gpu1": {
+      "owner": "lab2003-gpu1",
+      "slots": 1,
+      "gpu": 1,
+      "python": "/mnt/home/faris/logika-submit-best-sub25k-20261029/env_gpu/bin/python",
+      "tasks": [
+        {
+          "kind": "kumo70",
+          "seed": 10103,
+          "fold": 1
+        },
+        {
+          "kind": "kumo70",
+          "seed": 10103,
+          "fold": 3
+        },
+        {
+          "kind": "kumo70",
+          "seed": 20076,
+          "fold": 0
+        },
+        {
+          "kind": "kumo70",
+          "seed": 20076,
+          "fold": 2
+        },
+        {
+          "kind": "kumo70",
+          "seed": 20076,
+          "fold": 4
+        }
+      ],
+      "wait_unit": "logika-midnight-transformer-coefficient-qualified-20261030.service"
+    }
+  }
+}
