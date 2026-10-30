@@ -1,15 +1,13 @@
-# Final Logika blending handoff
+# Final continuation handoff
 
-Hard human deadline30October2026 20:00WIB=13:00UTC. No Kaggle/refit automatically. Earlier CLOCK/source/config/selections immutable.
+Read `FINAL_REPORT.md`, `FINAL_DELIVERY.json`, `paired/FINAL_AUDIT.json`, `rankmeta/FINAL_AUDIT.json`, and the original `FINAL_AUDIT.json`. All model work is complete. Do not restart completed queues or change their frozen selections.
 
-Canonical parent /mnt/home/faris/logika-twelvehour-cross-20261030:5208fits,0predictivefails,1providerinterruption; terminal2080compositioncohorts; selectedKS0.5316414268134972 equalreference. AllownedColabcollections complete. Read actualaccount2releaseaudit/API receipt. Independent read-only replay running logika-cross-independent-terminal-replay-20261030, log in newstudy/private/cross_replay.log. Must completebeforedeadline.
+The human deadline is 30 October 2026, 20:00 WIB (13:00 UTC). No automatic Kaggle submission is authorized in this campaign. The strongest paired held CSV has local development KS 0.5319679799870825; its conditional improvement interval crosses zero.
 
-Canonical newstudy /mnt/home/faris/logika-final-history-blend-20261030:1925eligiblecompletehistoricalpipelines in29groups.120CPUlinear+160GPUBCE+180greedy=460newmeta fit/selectionpackets.104eligibleblendrecipes (2nonconvergedexcluded) auditPASS; best0.5307384643313067,belowcurrent. Originalfinalfrozen.
+Canonical new study: `faris@100.68.29.126:/mnt/home/faris/logika-final-history-blend-20261030`. Parent: `/mnt/home/faris/logika-twelvehour-cross-20261030`, with `COMPLETION.json`, original artifact audit, independent terminal replay and final resource audit all complete. Original clock/source/config are preserved.
 
-Separate rankmeta prereg42ed11d47:160GPUfits allcompleteon2003/16recipes, auditPASS best0.5302751348592203,belowcurrent. Its160fittrainingunits terminal; neverrestart. Everyrecipe strict5e-6replay passed. This is an adaptive source-distinct followup, not independentconfirmation.
+All eleven Colab accounts were freshly checked: zero assignments and zero usage rate. Node680's A100 was occupied by a foreign job; no training was launched there. Its owned inventory kernel has been explicitly shut down. Node2003's additional 160 ranking fits are complete; both owned units are terminal.
 
-Separate paired recomposition prereg237da931c:11oldfusionvalidation/testrecipes reconstructedfrom30savedfreshproductionfits,pluscurrent;48fixedrecipes, allpredictions frozenbeforethisouterscoring. Best current_fusion_cann_kumo70_p0.003_w0.1 KS0.5319679799870825. MatchingheldCSVsha5424942d99024daa4aacbde5dd60d07f87a64df5472050bbea3ba073a769ae99. FinalauditPASS; conditionaldelta95CI vscurrent[-0.00048090211658640135,0.0008210384593371835],2positivefolds/2negative/1tie. No supportedgain,below0.54. CSVnotuploaded. No newbasefits. Keep thisselectionseparatefromoriginal104.
+Finish any ongoing sanitized Git publication and verify the remote hash. Preserve older dirty `Logika/`. Compact private evidence is backed up on host42 under `/home/faris/logika-final-history-blend-20261030-backup-2001`; read `COMPACT_BACKUP_RECEIPT.json` for exact coverage. Do not claim the large input bank is included there. Keep at least 512MiB free on home and the root volume.
 
-Testdisagreement study164uniquevectors includes45unique680vectors;3uniformprob/logit/rankheldCSVs haveNOlocal/testKS. Neverclaimdisagreement establishescomplementarity. Node680A10080GBactually100%foreignjob; leftuntouched. Ownkerneldeadline12:59:30UTC; explicitlyshutdownafterinventory, cookiesprivate. Peer3foldOOFcannotmixwithour5foldlocalKS.
-
-Pending: finishindependentparentreplay, collectprivatecompactoutputs/source/metadata backup42, sanitizedpublishallnewoutcomes, resumeparentpublisheraftermanualGitoperations; verifyactual0ownedColabassignments andaccount2observedCU.512MiBreserve BOTHvolumes (root~547MB), no /var/tmpwrites. Finalizeby13:00UTC thenstopautomationafterfinaldelivery. All70kadaptive/no untouchedaudit; no public/privateimprovementclaim.
+After final publication, resource verification and delivery, delete the hourly follow-up. No further training, refit or upload is implied.
