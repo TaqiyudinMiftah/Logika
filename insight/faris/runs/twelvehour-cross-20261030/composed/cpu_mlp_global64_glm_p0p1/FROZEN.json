@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-30T06:20:02.507680+00:00",
+  "design": "cpu_mlp_global64_glm_p0p1",
+  "design_spec": {
+    "kind": "mlp",
+    "view": "global64",
+    "resource": "cpu",
+    "offset_mode": "glm",
+    "residual_penalty": 0.1,
+    "width": 64,
+    "learning_rate": 0.0003,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 1800,
+    "parameters": {},
+    "family": "Bernoulli_Cross",
+    "admission_group": "cpu_mlp_global64_glm_p0p1",
+    "hypothesis": "Matched MLP/LocalGLM control",
+    "sources": [
+      "https://arxiv.org/html/2008.13535",
+      "https://github.com/tensorflow/recommenders/blob/main/tensorflow_recommenders/layers/feature_interaction/dcn.py"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_mlp_global64_glm_p0p1/s2026/fold0/RESULT.json": "e176d02b4db669f85daacb9c7302372237e2ec5a826fcd3c3d5bb790c734ae4b",
+    "composed/cpu_mlp_global64_glm_p0p1/s2026/fold1/RESULT.json": "797d5e69c014dbf591c14e7c28052ca9732b5206537b7a8805c955a1ea61d65f",
+    "composed/cpu_mlp_global64_glm_p0p1/s2026/fold2/RESULT.json": "a14e7fcd941471ae75aeb627407acd3beed27125c937e6911188695075fad0c8",
+    "composed/cpu_mlp_global64_glm_p0p1/s2026/fold3/RESULT.json": "d93cd4fc928f9070bfe5f9bcdf2f5eed5d8c92c165cfac7c2a87d3fecf5dc8d4",
+    "composed/cpu_mlp_global64_glm_p0p1/s2026/fold4/RESULT.json": "38e1705e3b5ae0e59b18bfda8361457cff451ff61791edea56e282c44f171a94",
+    "composed/cpu_mlp_global64_glm_p0p1/s7731/fold0/RESULT.json": "8b2dbfd97b4e1b04eb6174a11520bffc03845a9258670e61b0ea2b9396989f2b",
+    "composed/cpu_mlp_global64_glm_p0p1/s7731/fold1/RESULT.json": "891553dd7c55ddf00e9b5c6235ce446d262e6c44b8bb1a515091b678166ee64f",
+    "composed/cpu_mlp_global64_glm_p0p1/s7731/fold2/RESULT.json": "2a16487035074cbc59dc9a0a7b498d836c004a94af77088b7709ed4137611221",
+    "composed/cpu_mlp_global64_glm_p0p1/s7731/fold3/RESULT.json": "2aaf4d698c26813af6fcff00e47a74eb6e6527bff73b8cc1563b5e93c2de8c8d",
+    "composed/cpu_mlp_global64_glm_p0p1/s7731/fold4/RESULT.json": "d1f6bdb8163729d5cf5fbecd98df0d00ba8919e40f176f28957f1c71f9b82da6"
+  },
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
