@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-30T06:57:37.094370+00:00",
+  "design": "gpu_mlp_all_glm_p0p1",
+  "design_spec": {
+    "kind": "mlp",
+    "view": "all",
+    "resource": "gpu",
+    "offset_mode": "glm",
+    "residual_penalty": 0.1,
+    "width": 128,
+    "learning_rate": 0.0003,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 2400,
+    "parameters": {},
+    "family": "Bernoulli_Cross",
+    "admission_group": "gpu_mlp_all_glm_p0p1",
+    "hypothesis": "Matched MLP/LocalGLM control",
+    "sources": [
+      "https://arxiv.org/html/2008.13535",
+      "https://github.com/tensorflow/recommenders/blob/main/tensorflow_recommenders/layers/feature_interaction/dcn.py"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/gpu_mlp_all_glm_p0p1/s2026/fold0/RESULT.json": "5a13ad9d96964ed0a96e71879ea8af594117c312b5bba2070ef1880fed0981d4",
+    "composed/gpu_mlp_all_glm_p0p1/s2026/fold1/RESULT.json": "5d6e1c37047902b16e2af96330960034896e52aa112dfe90ac6af5fb59132e05",
+    "composed/gpu_mlp_all_glm_p0p1/s2026/fold2/RESULT.json": "01023ea19f2b624aab7ee3970fe8ef08c64906f8c88a103211c9457c7a34e855",
+    "composed/gpu_mlp_all_glm_p0p1/s2026/fold3/RESULT.json": "d68b4541374ac5ce37c1ffc59d3908b0abb26e6d84f737789a102817cd93846d",
+    "composed/gpu_mlp_all_glm_p0p1/s2026/fold4/RESULT.json": "701c1ed6e187a27b5b255a035e65d3f364606b86a175198f6b3ded7044954a7d",
+    "composed/gpu_mlp_all_glm_p0p1/s7731/fold0/RESULT.json": "42e8d1b2a1d03dc86412a75d7bd02f2e6b10b86ccf29fd1d0e8e2a00f09d5fc6",
+    "composed/gpu_mlp_all_glm_p0p1/s7731/fold1/RESULT.json": "e01fe5652e5966a54945a1a9263e6d58322b1491e0358d2c0633b9ee74cea8eb",
+    "composed/gpu_mlp_all_glm_p0p1/s7731/fold2/RESULT.json": "3172ea1559d46af769d6ba6a7ac8fdb8d3c12bdf59c417440e1068e2bdc26c52",
+    "composed/gpu_mlp_all_glm_p0p1/s7731/fold3/RESULT.json": "4120a002e7da358e7ed91f8861519b0afd0550762901878a72f1f3b71cc16398",
+    "composed/gpu_mlp_all_glm_p0p1/s7731/fold4/RESULT.json": "4c68dbeff17d64b43a6b5e1c387d9c5fbf484de3dc5be52bc59b174dee981643"
+  },
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

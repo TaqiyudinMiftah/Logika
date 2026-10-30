@@ -1,0 +1,113 @@
+{
+  "UTC": "2026-10-30T06:57:30.699648+00:00",
+  "design": "gpu_cross_linear_global512_intercept_p0p0_rank16_cross_layers2",
+  "design_spec": {
+    "kind": "cross_linear",
+    "view": "global512",
+    "resource": "gpu",
+    "offset_mode": "intercept",
+    "residual_penalty": 0.0,
+    "width": 128,
+    "learning_rate": 0.0003,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 2400,
+    "parameters": {},
+    "family": "Bernoulli_Cross",
+    "rank": 16,
+    "cross_layers": 2,
+    "admission_group": "gpu_cross_linear_global512_intercept_p0p0_rank16_cross_layers2",
+    "hypothesis": "Explicit low-rank feature cross adaptation; compare compact/wide views and matched controls",
+    "sources": [
+      "https://arxiv.org/html/2008.13535",
+      "https://github.com/tensorflow/recommenders/blob/main/tensorflow_recommenders/layers/feature_interaction/dcn.py"
+    ]
+  },
+  "seed": 7731,
+  "fold": 1,
+  "task_id": "gpu_cross_linear_global512_intercept_p0p0_rank16_cross_layers2__s7731__f1",
+  "inputs": {
+    "raw_prediction_sha256": "5221ecb9e4fb6e6d97b7e959533222071e237feb21fcdc682884a5ff38760a0b",
+    "raw_result_sha256": "e435574c4d01b9f8f5988a974bcc30353c9025ab707bb4a17f25af8cbda47ff4",
+    "roles_sha256": "e15643ad78b1f23cc965d0ffedc3bb8478d4c4b803cf104dcfdacea82c497110",
+    "anchor_sha256": "13730275c8e2486bb4c2b39e02e96d0d7344e317a1d4d99b7d643ddcffaaeedd"
+  },
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "gating_source_sha256": "ec807deeaa6fd8c0f974c6092fbd95e1604bc9a398c95d5bde6d14035f621140",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "prediction_sha256": "e1ec4f498da529b7dbc163bd1f0c2f64bbc5b51fd18d9db8d9ef1ae7b09315cc",
+  "correction_rows_sha256": "bb705deff9448f216bdc34d21f2dd96c73fdb5f77a2af31610d852e08aa671f7",
+  "validation_rows_sha256": "88b81514185defbda6c0e3c8ce79812f6296cb90aface53516abb683557e4b75",
+  "calibration": "three-fold monotone logistic OOF on6000 meta rows; full calibration fits6000 for outer inference",
+  "calibration_penalty": 0.005,
+  "calibration_boundaries": [
+    {
+      "block": 0,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "12e6076e27300a3deaae501d74d8fbbbbd6dcb6ef8282107d0f6a526102e6c69",
+      "heldout_global_rows_sha256": "830f233dd4da5fa37a6e94a05c5aaf61f0485d9f7aa578ce5924eaa821a92055"
+    },
+    {
+      "block": 1,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "072396db02476462816b6508005d9a64cebc656d8ccfd4ea5914efc28fd651b7",
+      "heldout_global_rows_sha256": "ac0ad8e42e0e6c267033edb5dc7c7dca7504c27b09081e23d1c58b43ffbb46e9"
+    },
+    {
+      "block": 2,
+      "training_rows": 4000,
+      "heldout_rows": 2000,
+      "training_global_rows_sha256": "73bf2bdceaee052d14ea3cf9b0530704f905b0df7c9dfa2a767a7726098f563b",
+      "heldout_global_rows_sha256": "752dd8380ae3256fec6867a487a6bfabedd63dba454a3aee1439a024eff8bd4b"
+    }
+  ],
+  "fixed_weights": {
+    "fixed_010": 0.1
+  },
+  "meta_weight_grid": [
+    0.0,
+    0.025,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ],
+  "meta_weight_tie_rule": "smaller candidate weight",
+  "selected_meta_weight": 0.1,
+  "meta_weight_training_KS": [
+    0.5282214505031622,
+    0.5286769882447598,
+    0.528520803876212,
+    0.5286935532535453,
+    0.5277126680904686,
+    0.5261898704971277,
+    0.525188870680526,
+    0.5244647431536227,
+    0.5256384923475576,
+    0.5278901503274547
+  ],
+  "stack": {
+    "method": "ridge Bernoulli logistic stack of two logits and intercept",
+    "penalty": 0.03,
+    "prior": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nonnegative_channel_coefficients": true,
+    "iterations": 10,
+    "objective": 0.29582992431263994,
+    "learned_coefficients_serialized": false
+  },
+  "outer_labels_opened": false,
+  "learned_coefficients_serialized": false,
+  "independent_audit_available": false,
+  "interpretation": "Nested training boundaries on historically exposed development; not independent confirmation."
+}
