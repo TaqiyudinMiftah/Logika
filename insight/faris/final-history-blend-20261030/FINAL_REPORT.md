@@ -10,7 +10,7 @@ All work is bounded by 30 October 2026, 20:00 WIB (13:00 UTC). No Kaggle upload 
 | Gated-expert GPU meta-models | 16 | 0.5306168643404208 | Below the reference |
 | Blends with matching saved validation and fresh-production test predictions | 48 | **0.5319679799870825** | Higher point estimate; uncertainty includes no improvement |
 
-The selected paired recipe is `current_fusion_cann_kumo70_p0.003_w0.1`: 90% of the current LocalGLM-CANN prediction plus 10% of the saved CANN/Kumo70 fusion with its previously declared 0.003 meta penalty. Its held test CSV has SHA256 `5424942d99024daa4aacbde5dd60d07f87a64df5472050bbea3ba073a769ae99`.
+The final CSV exports follow the official sample row order. EXPORT_AUDIT verifies every ID/probability pair is preserved exactly after parsing, and the original candidate files remain unchanged. The selected paired recipe is `current_fusion_cann_kumo70_p0.003_w0.1`: 90% of the current LocalGLM-CANN prediction plus 10% of the saved CANN/Kumo70 fusion with its previously declared 0.003 meta penalty. Its held test CSV has SHA256 `f14cb4555575016828f656d722aa9cb9f9d85217bb3518ba18eddd59c7b10f62`.
 
 The paired recipe improves the reused-development point by 0.000326553173585209. Its 2,000-replicate conditional 95% interval for that difference is **[-0.00048090211658640135, 0.0008210384593371835]**. Two folds improve, two decline, and one ties. This does not establish a supported gain, reach 0.54, or establish a public/private leaderboard improvement. All 70,000 cases have been adaptively reused; no untouched audit exists. These intervals also exclude candidate-selection and refitting uncertainty.
 
