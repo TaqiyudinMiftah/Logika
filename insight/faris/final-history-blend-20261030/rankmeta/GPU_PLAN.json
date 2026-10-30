@@ -1,0 +1,31 @@
+{
+  "base_plan_sha256": "80cef480cd7c54b0fdb6bb717f4d359baccac14a27d906d7d3c4590de0648fba",
+  "source_sha256": "06f2e4d0b0991602276f5344cb45396eaa4d73338877f024af406cc6471fd7c7",
+  "model_deadline_epoch": 1793364720.0,
+  "deadline_epoch": 1793365200.0,
+  "recipes": 16,
+  "planned_fit_slots": 160,
+  "folds": 5,
+  "seeds": [
+    2026,
+    7731
+  ],
+  "frozen_before_reading_CPU_blend_outer_results": true,
+  "banks": [
+    "all1925compatiblecompletepipelines",
+    "29studyfamilymeans"
+  ],
+  "meta_model": "BCE + pairwise logistic RankNet loss sampled4096pairs per fullbatch, weights.5/1; width0/32; penalties.01/.1; fixedlr.001; rest identical previous GPU control. New adaptive followup after negative history blend; no independent confirmation.",
+  "meta_roles": "4000train/2000stop stratified seed20261030+fold; encoder4000only, freshrandomreinit6000meta refit bestepochs.14kouterneverfortraining.",
+  "devices": "Only currentlyidleRTX2003GPU0/1; oneownedjobperGPU;2001foreignGPUsexcluded;noColabreallocation",
+  "backend": "CUDAfloat32/TF32off/noAMP;strict5e-6wholebatchreplay",
+  "pilot_gate": "Fullsize seed2026fold0perrecipe finite/replay/row checks,9remainingfits*1.5runtime+120secfinishmargin before admission;noautoretries",
+  "no_new_base_features_or_refits": true,
+  "no_fittedweights_or_KVcaches": true,
+  "selection": "Separate component;freeze all160 predictions before any outer evaluation. Largest complete2seed5foldKS; compare against current reference. Never change original104-blend finalselection.",
+  "fixed_controls": null,
+  "peer_review": "Distinctfrom priorpeerfixed2/3sourcepopulationfusions andearlier3branchFarisfusion; everyeligiblehistoricalrawpipeline included. No CPUblendresults read to design GPU grid.",
+  "source": "https://www.microsoft.com/en-us/research/publication/learning-to-rank-using-gradient-descent/",
+  "reason": "User explicitly requested idle2003 utilization; ranking objective may retain discriminatory order when BCE residual losses did not. No claim of novelty or expected gain.",
+  "created_utc": "2026-10-30T12:24:44Z"
+}
