@@ -33,6 +33,7 @@ def fit(kind,seed,fold,phase,reference=False):
    os.environ['CUDA_VISIBLE_DEVICES']='';sys.path.insert(0,str(R/'source'/f'{kind}_{phase}'));from cpu_models import train_predict
    spec=dict(offset_mode='intercept',glm_C=.1,width=64 if kind=='localglm' else 128,residual_penalty=.1 if kind=='localglm' else 0.,learning_rate=.0003,book_transform='raw',deadline_epoch=C['model_deadline_epoch']-30,max_seconds=min(1800,C['model_deadline_epoch']-time.time()-30),inner_split_seed=20261029+fold)
    raw,audit=train_predict(frame,ctx,y,query,spec,seed+fold)
+  if phase=='validation':raw=np.asarray(raw,dtype=np.float64)
   assert raw.shape==(len(query),)and np.isfinite(raw).all()and np.all((raw>=0)&(raw<=1))
   if kind=='kumo70':assert audit['first_batch_replay_error']<1e-7
   else:assert audit['batch_replay_max_abs_probability_error']<=5e-6

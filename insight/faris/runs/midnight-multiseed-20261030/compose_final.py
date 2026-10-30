@@ -17,7 +17,7 @@ def raw(kind,seed,f,phase):
  if seed in [2026,7731]and kind in ['localglm','cann','kumo70']:p=R/f'original/{kind}/s{seed}/fold{f}/{phase}.npz';z=np.load(p)
  else:
   d=R/f'runs/{kind}__s{seed}__f{f}/{phase}';j=json.loads((d/'RESULT.json').read_text());p=d/'prediction.npz';assert sha(p)==j['prediction_sha256']and sha(d/'START.json')==j['start_sha256'];z=np.load(p)
- return np.asarray(z['raw'],float)
+ return np.asarray(z['raw'])
 def complete(kind,s):return all((R/f'runs/{kind}__s{s}__f{f}/{p}/RESULT.json').exists()for f,p in itertools.product(range(5),['validation','production']))
 def branch(kind,s,f):
  p=R/f'packets/fold{f}';roles=np.load(p/'roles.npz');a=np.load(p/'anchor.npz');y=roles['y_correction'].astype(int);assign=a['inner_fold'];r=raw(kind,s,f,'validation');test=raw(kind,s,f,'production');assert len(r)==20000 and len(test)==30000;inner=np.full(6000,np.nan)
