@@ -1,0 +1,36 @@
+{
+  "source_sha256": "aadc34e489bedc44a871bbea1fbf2d223fec17e431d8f60ebeed19d1fcbf346d",
+  "model_deadline_epoch": 1793364000.0,
+  "deadline_epoch": 1793365200.0,
+  "recipes": 36,
+  "planned_fivefold_outputs": 180,
+  "banks": [
+    "all",
+    "family"
+  ],
+  "metrics": [
+    "absoluteKS",
+    "logloss"
+  ],
+  "anchor_initial_mass": [
+    1,
+    4,
+    16
+  ],
+  "steps": [
+    1,
+    5,
+    20
+  ],
+  "shortlist": "Score everyeligiblepipeline on6000meta;top64 byspecifiedmetric+fixedanchor; greedywithreplacementmax20steps. No outer labels used forselection.",
+  "frozen_before_reading_CPU_or_GPU_blend_scores": true,
+  "base_seed_policy": "Bothcompletebaseseeds averaged before deterministicmeta ensemble selection",
+  "scope": "Source-backed distinctfrom ridgeallbank/nonlinearstack:directKS andlogloss forwardselection andexplicitanchorshrinkage; no modelqualityinferencefromexecutionlimits",
+  "sources": [
+    "https://www.cs.cornell.edu/~caruana/ctp/ct.papers/caruana.icml04.icdm06long.pdf",
+    "https://doi.org/10.1145/1015330.1015432"
+  ],
+  "validation": "Fiveouterfolds/6000heldmeta trainonly;25yearsadaptive70k sameknownboundary/no independentaudit; alloutputsfrozenbeforetargetscore",
+  "no_Kaggle_upload": true,
+  "no_fittedtensorweights_or_KV": true
+}
