@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-30T05:58:36.067093+00:00",
+  "design": "cpu_mlp_actuarial99_glm_p0p0",
+  "design_spec": {
+    "kind": "mlp",
+    "view": "actuarial99",
+    "resource": "cpu",
+    "offset_mode": "glm",
+    "residual_penalty": 0.0,
+    "width": 64,
+    "learning_rate": 0.0003,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 1800,
+    "parameters": {},
+    "family": "Bernoulli_Cross",
+    "admission_group": "cpu_mlp_actuarial99_glm_p0p0",
+    "hypothesis": "Matched MLP/LocalGLM control",
+    "sources": [
+      "https://arxiv.org/html/2008.13535",
+      "https://github.com/tensorflow/recommenders/blob/main/tensorflow_recommenders/layers/feature_interaction/dcn.py"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s2026/fold0/RESULT.json": "0b1e353242746627bf3503e4992eebda54228bbfbd095229d35140758c5d6a4b",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s2026/fold1/RESULT.json": "fffcba26330360d3fe2a3e6800ffcc4548777aa739ce2652a2dd955cf9771e0a",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s2026/fold2/RESULT.json": "ca3d24c3b82d926ad63232747a9656776b62b1c20ceb74bdb44d0c805b87c958",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s2026/fold3/RESULT.json": "8447f9249a35df51d00826a90678bb95d772c7f7cfbcebabc5cf06b291c7e62b",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s2026/fold4/RESULT.json": "26c9cb6f30eb893686f71e3ac3544cf8d425da1f3c8d434a06b93ab08899dcf3",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s7731/fold0/RESULT.json": "b497ba5aef2f27ce861324c6e8066341a9da40794fdb631cba2ae1e04996e730",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s7731/fold1/RESULT.json": "6e34be57e77829d549f63499c94d481be8f6f00c7cb3db7796e464a18c2e402a",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s7731/fold2/RESULT.json": "76dadd08d7e4152d4bec061b12bb7838eeb06de2a9f99bea1d8e3f0e2802544c",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s7731/fold3/RESULT.json": "76dc31718613b6061d6ec0aa78ea7e38bef5f8937321b18698a7665dc3689abc",
+    "composed/cpu_mlp_actuarial99_glm_p0p0/s7731/fold4/RESULT.json": "ac9e4e2967786601542ac61de18ca83bff56f337a07ae209ce3fcf73572b84d1"
+  },
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

@@ -20,7 +20,7 @@ def module(name, extra=()):
     if remaining < 1:
         raise TimeoutError('Original finalization ceiling reached')
     with (R / 'logs' / (name + '.log')).open('ab') as stream:
-        subprocess.run([sys.executable, str(R / 'source' / (name + '.py')), *extra],
+        subprocess.run([sys.executable, str(R / 'ops/assessment_cached.py'), '--module', name, *extra],
                        check=True, stdout=stream, stderr=subprocess.STDOUT, timeout=remaining)
 
 

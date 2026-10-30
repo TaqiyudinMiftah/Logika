@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-30T05:58:28.473745+00:00",
+  "design": "cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1",
+  "design_spec": {
+    "kind": "cross_linear",
+    "view": "pca64_core",
+    "resource": "cpu",
+    "offset_mode": "glm",
+    "residual_penalty": 0.1,
+    "width": 64,
+    "learning_rate": 0.0003,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 1800,
+    "parameters": {},
+    "family": "Bernoulli_Cross",
+    "rank": 32,
+    "cross_layers": 1,
+    "admission_group": "cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1",
+    "hypothesis": "Explicit low-rank feature cross adaptation; compare compact/wide views and matched controls",
+    "sources": [
+      "https://arxiv.org/html/2008.13535",
+      "https://github.com/tensorflow/recommenders/blob/main/tensorflow_recommenders/layers/feature_interaction/dcn.py"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s2026/fold0/RESULT.json": "7a8f2f6819899e44032663fb94b57b239715c89e3be656237538c99e5844b5cd",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s2026/fold1/RESULT.json": "d806861b1269938148374bb4e0f706fd700bb3dbfdd6eaa7e4c374bb7ebb1d6a",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s2026/fold2/RESULT.json": "bbd322def548f3e93a23eff8b4b65d9ae525f770a0f00005a406442b6556a3ff",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s2026/fold3/RESULT.json": "2bf2f6684577f471f5beaf846ebaf83c7beb3153b48ca008aee38c9d16d3a3ad",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s2026/fold4/RESULT.json": "c3e3a8888b4388e3576368d82ca5ee2f8144a51ea5d56ad32d87e4f619c55eaa",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s7731/fold0/RESULT.json": "ba9466aeade627601df6b0cc5c1216cf88120b8c88cc9b77feeec2a448c5f36f",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s7731/fold1/RESULT.json": "e7598e17db3e0da35f19f04a2f94f0caf645811741edc45881fa43d85dedddf9",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s7731/fold2/RESULT.json": "dd83c1c9b01abf0c8d7f35f96c316226a091794b60bc23482fd81bb931cad9ce",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s7731/fold3/RESULT.json": "34e467731f6f3781e7b2a44650a63973c76f2fe832a86d254e8612f348df52d9",
+    "composed/cpu_cross_linear_pca64_core_glm_p0p1_rank32_cross_layers1/s7731/fold4/RESULT.json": "b5507666d21d31a1bc9ccee595b2b5988414bf0ecad187f1f58ad5e9d015f04e"
+  },
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-30T05:58:42.899152+00:00",
+  "design": "cpu_localglm_pca64_core_intercept_p0p1",
+  "design_spec": {
+    "kind": "localglm",
+    "view": "pca64_core",
+    "resource": "cpu",
+    "offset_mode": "intercept",
+    "residual_penalty": 0.1,
+    "width": 64,
+    "learning_rate": 0.0003,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 1800,
+    "parameters": {},
+    "family": "Bernoulli_Cross",
+    "admission_group": "cpu_localglm_pca64_core_intercept_p0p1",
+    "hypothesis": "Matched MLP/LocalGLM control",
+    "sources": [
+      "https://arxiv.org/html/2008.13535",
+      "https://github.com/tensorflow/recommenders/blob/main/tensorflow_recommenders/layers/feature_interaction/dcn.py"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s2026/fold0/RESULT.json": "c7ee65c9e71dafb241bc4eefa14f6b56cec4e9abcab26f0598f98dadbff115b6",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s2026/fold1/RESULT.json": "d72c250995b1914248601829dec81e9e14ed878d74b4ff2a963cd5db01e32b40",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s2026/fold2/RESULT.json": "7a625364faead34c9e8a1b8510c09a32a8b6962bc54d16b2b6cd621555b7310f",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s2026/fold3/RESULT.json": "494b6ba4ef695d85c013f2b91d2159f7881ae7498a2f5c8022488a4c79a878cb",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s2026/fold4/RESULT.json": "d703980ce456e0e43f853256e7023160b3f44e2647541d21ee0cfb8063862318",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s7731/fold0/RESULT.json": "e7ac9418769057b85d41bf5d9dfd2bceba7d5f0a0d66901c9aeb8c431b63e6b8",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s7731/fold1/RESULT.json": "6f42c4dfbf5a2cd40efb6f8273e54ac807b13d0e0aa107d5e89dde2aebdbfcea",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s7731/fold2/RESULT.json": "d00588b32df2dc64367f3a32268a59781821d80e986c7c324f06f726130055a4",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s7731/fold3/RESULT.json": "85c00a846cc0fa05b419082a2d583aa78206ee155f0c78f62257496f8771a756",
+    "composed/cpu_localglm_pca64_core_intercept_p0p1/s7731/fold4/RESULT.json": "a62619b1c66d12f50ab737204f0ab7199f1f43eb453d4668ba0a2210e83ce6cd"
+  },
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-30T05:58:43.976861+00:00",
+  "design": "gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4",
+  "design_spec": {
+    "kind": "cross_linear",
+    "view": "global256",
+    "resource": "gpu",
+    "offset_mode": "intercept",
+    "residual_penalty": 0.1,
+    "width": 128,
+    "learning_rate": 0.0003,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 2400,
+    "parameters": {},
+    "family": "Bernoulli_Cross",
+    "rank": 64,
+    "cross_layers": 4,
+    "admission_group": "gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4",
+    "hypothesis": "Explicit low-rank feature cross adaptation; compare compact/wide views and matched controls",
+    "sources": [
+      "https://arxiv.org/html/2008.13535",
+      "https://github.com/tensorflow/recommenders/blob/main/tensorflow_recommenders/layers/feature_interaction/dcn.py"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s2026/fold0/RESULT.json": "2b193211fbb56cf66a206137a5a1e6ae8461a69217a2786145f3a48c12931622",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s2026/fold1/RESULT.json": "a6150641a079558b7615cab2da7157e02338f158832213bc114be23b3f85d7fa",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s2026/fold2/RESULT.json": "d3a3567068312d0f0a9dc9557b2e1b431f8984f236caaddd6a099c3ee123d771",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s2026/fold3/RESULT.json": "bf107eb1c921cd133d1ad8317d86e333276d09e9222aab1210304e058225765f",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s2026/fold4/RESULT.json": "23b291b019c487f37215aaa746c97ed1eb5e250cb4deac053990b915fea6630f",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s7731/fold0/RESULT.json": "1988d16e924df054342629b3dafae8df78c2f68032117c40686fe03971efd16a",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s7731/fold1/RESULT.json": "fe52d7055dc0a1ccdf6351138ccaae27b7de87f8a87c0a96618c424a321b035e",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s7731/fold2/RESULT.json": "893cb8c1c17ca5758614fe5a6fee9eed06fadd21ac53d33b257068714507bcc1",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s7731/fold3/RESULT.json": "c3e7750f49d3963b70b4c01af313249b01d04efe129291f2e8fb1ee883d45187",
+    "composed/gpu_cross_linear_global256_intercept_p0p1_rank64_cross_layers4/s7731/fold4/RESULT.json": "6e0066ed616776882ac731155a6434650e238756c5622314d7272bf9cb1b278d"
+  },
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}

@@ -1,0 +1,54 @@
+{
+  "UTC": "2026-10-30T05:59:19.804454+00:00",
+  "design": "cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0",
+  "design_spec": {
+    "kind": "rff",
+    "view": "actuarial99",
+    "resource": "cpu",
+    "offset_mode": "intercept",
+    "residual_penalty": 0.1,
+    "width": 64,
+    "learning_rate": 0.01,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 1800,
+    "parameters": {},
+    "family": "Bernoulli_RFF",
+    "rff_components": 512,
+    "gamma_multiplier": 10.0,
+    "admission_group": "cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0",
+    "hypothesis": "Fixed-RFF residual kernel under inner-only scaling",
+    "sources": [
+      "https://papers.nips.cc/paper/3182-random-features-for-large-scale-kernel-machines.pdf"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s2026/fold0/RESULT.json": "e4deec0e8bca7be8fc70ad9dd04110213bd1b848de0dcf472c788363d3cef070",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s2026/fold1/RESULT.json": "43d8286d8a07e097347bd341aad68ade8d41d48fe354dcbde7ee740f92784b46",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s2026/fold2/RESULT.json": "bbbe93ff62d5d10b4aa8b2a6cf99ae97eb35cba550327fa5a87b7dfe58ad5c68",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s2026/fold3/RESULT.json": "534e928960f38fa4b33ceddb8f98478dfd75eeae1b14b0794057ff7a1b4a9edf",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s2026/fold4/RESULT.json": "0217710cc674d271a24892fdbea94b02070c7288f3ccfbf91d9e1a9a0981be1b",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s7731/fold0/RESULT.json": "cba4745e8674cf5f33a6e24018570e84f56e9f2320e16488828a8910cf01f2df",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s7731/fold1/RESULT.json": "404b35792810395d673b540e6267848628fef6e4b96ece4dfb3635e6690478e4",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s7731/fold2/RESULT.json": "7e37d0c8de48707222942c7d36f974a09aeb255c8d8c34184a9992fb0539ebd2",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s7731/fold3/RESULT.json": "e5a02a311d94eddede44b229e0934b22fa9a5b46bfb569c367999ef95e29b450",
+    "composed/cpu_rff_actuarial99_intercept_p0p1_rff_components512_gamma_multiplier10p0/s7731/fold4/RESULT.json": "cd2a9ad38c13fda9ad559131c53ad06efea4819f43b1efeb923fa1ca34e2170e"
+  },
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
