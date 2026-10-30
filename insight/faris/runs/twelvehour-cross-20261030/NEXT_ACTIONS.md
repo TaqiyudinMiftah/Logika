@@ -1,3 +1,11 @@
+# Terminal state — 30 October 2026
+
+The campaign completed before the human deadline20:00WIB/13:00UTC. 5,208 rawfits,520 complete2seed5fold designs and2,080 composition cohorts were audited. BestKS0.5316414268134972 equals the previous reference; no supportedgain or0.54 result. Source/config/originalCLOCK unchanged. All eleven Colab accounts have fresh zero-assignment/zero-rate checks. Never restart completed queues.
+
+Read INDEPENDENT_TERMINAL_REPLAY.json, FINAL_RESOURCE_AUDIT.json and canonical COMPLETION.json. Separate follow-up blending is documented in ../final-history-blend-20261030/FINAL_REPORT.md: strongest paired heldCSV localKS0.5319679799870825 with uncertainty crossingzero. No automatic refit/Kaggle action. End hourly follow-up after final publication/backup delivery.
+
+## Preserved earlier operational notes
+
 # Resume this campaign
 
 Read README.md and canonical RESUME_STATE.json/LIVE_STATE.json first. All exact clocks and core scientific hashes are in CLOCK.json, SOURCE_SEAL.json, PREPUBLICATION.json and DISPATCH_SEAL.json. Do not rerun start_clock.py, allocation or build_schedule.py. Do not restart prior sealed campaigns.
