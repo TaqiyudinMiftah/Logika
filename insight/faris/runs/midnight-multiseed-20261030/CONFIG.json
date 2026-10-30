@@ -1,0 +1,66 @@
+{
+  "id": "midnight-multiseed-20261030",
+  "new_seeds": [
+    10103,
+    20076,
+    30049,
+    40022,
+    49995,
+    59968,
+    69941,
+    79914,
+    89887,
+    99860,
+    109833,
+    119806,
+    129779,
+    139752,
+    149725,
+    159698,
+    169671,
+    179644,
+    189617,
+    199590
+  ],
+  "reference_seeds": [
+    2026,
+    7731
+  ],
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "kinds": [
+    "localglm",
+    "cann",
+    "kumo70"
+  ],
+  "phases": [
+    "validation",
+    "production"
+  ],
+  "scientific_fit_slots": 600,
+  "qualification_reference_fits": 6,
+  "planned_fit_slots": 606,
+  "features": "Existing2129bank andexactfrozenactuarial99/global99views;no newfeaturework",
+  "primary": "Equalprobabilityaverage over original2 plus allnewfullypairedseeds. Perseedfold .9LocalGLMmetaAdaptive+.1[CANN+Kumo70 positive-logitstack penalty.003]. Noseedperformancefilter. Aseedeligibleonlyall3branches5foldsbothphasespresent+audited.",
+  "secondary_seed_prefixes": [
+    2,
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "primary_comparator_local_KS": 0.5319679799870825,
+  "public_submission_reference": 0.56716,
+  "outer_data": "All70000adaptivelyreused,no untouched audit",
+  "source_replication_reason": "User explicitlyrequests multiseed variance reduction, prior2-seed CANN/Kumo/LocalGLM fusion weakgain; expand sampling instead of more recipe selection.",
+  "runtime_gate": "Eachowner fullsize firstpair eachkind mustpass finite,rowboundary,strictoriginalbatchreplay and finish remainingassigned work*1.5+300sec before admission. No failed autoretries.",
+  "retention": "source,recipes,seeds,compactCV/testpreds+hashes; no fittedweights/KVcaches",
+  "resource_policy": "Lab2001CPUonly;2003idleGPUs0/1+CPU;119/42CPU;one new Colab perprofile1..11,account2A100/othersT4 ifgrant. No quota retry,recreation,foreignworkload interference. node680 onlyifidleA100. node2002onlypreviouslyidentifiedGPU1 ifreconciledonline.",
+  "no_automatic_Kaggle": true
+}
