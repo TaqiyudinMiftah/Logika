@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-30T07:23:13.760288+00:00",
+  "design": "gpu_mlp_all_intercept_p0p0",
+  "design_spec": {
+    "kind": "mlp",
+    "view": "all",
+    "resource": "gpu",
+    "offset_mode": "intercept",
+    "residual_penalty": 0.0,
+    "width": 128,
+    "learning_rate": 0.0003,
+    "glm_C": 0.1,
+    "book_transform": "raw",
+    "max_seconds": 2400,
+    "parameters": {},
+    "family": "Bernoulli_Cross",
+    "admission_group": "gpu_mlp_all_intercept_p0p0",
+    "hypothesis": "Matched MLP/LocalGLM control",
+    "sources": [
+      "https://arxiv.org/html/2008.13535",
+      "https://github.com/tensorflow/recommenders/blob/main/tensorflow_recommenders/layers/feature_interaction/dcn.py"
+    ]
+  },
+  "seeds": [
+    2026,
+    7731
+  ],
+  "folds": 5,
+  "modes": [
+    "standalone",
+    "fixed_010",
+    "meta_adaptive",
+    "stack"
+  ],
+  "composed_results": {
+    "composed/gpu_mlp_all_intercept_p0p0/s2026/fold0/RESULT.json": "b58249d54e3d3402731651b2348892ec8561e823d7ffe95cf8e3f61f393ed001",
+    "composed/gpu_mlp_all_intercept_p0p0/s2026/fold1/RESULT.json": "4c8faa0a714e720e02fbf2bea4ed824a4aa5e5d767624ca253473fb6a369209b",
+    "composed/gpu_mlp_all_intercept_p0p0/s2026/fold2/RESULT.json": "6d2d1cd24dc40f16c264914b821b41f39f024d22e4f447e9ced3564383485cc7",
+    "composed/gpu_mlp_all_intercept_p0p0/s2026/fold3/RESULT.json": "8d7186680cd98a654fc1d7284941d38cf364a54cba91409836aa45a972077983",
+    "composed/gpu_mlp_all_intercept_p0p0/s2026/fold4/RESULT.json": "c712fdf51ae629b45b5a659ea846498a52e73ff42e599c47cd6a26d5c769627d",
+    "composed/gpu_mlp_all_intercept_p0p0/s7731/fold0/RESULT.json": "c0202180ffdf32bf4205a40346bfca634eab00fafcdf17e5952bd78f056c9feb",
+    "composed/gpu_mlp_all_intercept_p0p0/s7731/fold1/RESULT.json": "3dbe583e5a8a8ee256ea95d8e5652613706762698a1b5756b5a2728d89ec571f",
+    "composed/gpu_mlp_all_intercept_p0p0/s7731/fold2/RESULT.json": "0c144a34d1a949462c3f240dcf85b9ca3782cb47356c476b929e9f81f9d3b345",
+    "composed/gpu_mlp_all_intercept_p0p0/s7731/fold3/RESULT.json": "ca470f14cb28af1e83694b2c433c134b54fece26efbd1c052db32e7e97ecf5b9",
+    "composed/gpu_mlp_all_intercept_p0p0/s7731/fold4/RESULT.json": "003c22ca86e94f0f30e664a6238f1b83af3a4e089b3ad6cfb242dfa898e424b4"
+  },
+  "config_sha256": "3bfa0819c4fd5ee9db27a794c031341d7d22f1ee6aa399748ab5cfe11e7de429",
+  "contract_sha256": "993609ae068030576ba9939d66e08307ef8e78e01e8c89d7a58d2b2760130bd9",
+  "source_sha256": "6e968d9917411ed678fc44a2661500f0f82bdae3261ca9973911ceabe1276a07",
+  "outer_scores_used_for_this_design_composition": false,
+  "prior_exposure": "All70k rows historically exposed; newly appended designs may adapt to previous development results.",
+  "independent_audit_available": false
+}
