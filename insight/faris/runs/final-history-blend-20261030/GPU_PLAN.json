@@ -1,0 +1,47 @@
+{
+  "base_plan_sha256": "80cef480cd7c54b0fdb6bb717f4d359baccac14a27d906d7d3c4590de0648fba",
+  "source_sha256": "b19a609073ce66c4de334136714896a161d8834c3e6a48859317ea4aef5a09d0",
+  "model_deadline_epoch": 1793364000.0,
+  "deadline_epoch": 1793365200.0,
+  "recipes": 16,
+  "planned_fit_slots": 160,
+  "folds": 5,
+  "seeds": [
+    2026,
+    7731
+  ],
+  "frozen_before_reading_CPU_blend_outer_results": true,
+  "banks": [
+    "all1925compatiblecompletepipelines",
+    "29studyfamilymeans"
+  ],
+  "meta_model": "Anchoroffset plus zerohead linear or width32SiLU correction over historical model logits; widths0/32,penalty.01/.1,lr.001/.003.100epochs/patience12.BCE+residualL2.",
+  "meta_roles": "4000train/2000stop stratified seed20261030+fold; encoder4000only, freshrandomreinit6000meta refit bestepochs.14kouterneverfortraining.",
+  "devices": "Only currentlyidleRTX2003GPU0/1; oneownedjobperGPU;2001foreignGPUsexcluded;noColabreallocation",
+  "backend": "CUDAfloat32/TF32off/noAMP;strict5e-6wholebatchreplay",
+  "pilot_gate": "Fullsize seed2026fold0perrecipe finite/replay/row checks,9remainingfits*1.5runtime+120secfinishmargin before admission;noautoretries",
+  "no_new_base_features_or_refits": true,
+  "no_fittedweights_or_KVcaches": true,
+  "selection": "Complete2seed5fold only,freezeallpredictionsbeforeouterread.Overallunion CPUlinear/GPUneural/fixedcontrols largestKSbefore2000conditionalbootstrap. Reusedadaptive data,no independentconfirmation.",
+  "fixed_controls": {
+    "banks": [
+      "all",
+      "family"
+    ],
+    "aggregation": [
+      "probability",
+      "logit",
+      "rank"
+    ],
+    "anchor_weight_grid": [
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1.0
+    ],
+    "count": 30,
+    "trained_on_outer": false
+  },
+  "peer_review": "Distinctfrom priorpeerfixed2/3sourcepopulationfusions andearlier3branchFarisfusion; everyeligiblehistoricalrawpipeline included. No CPUblendresults read to design GPU grid."
+}
