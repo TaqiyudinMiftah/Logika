@@ -1,0 +1,27 @@
+{
+  "authorization": "Latest human asksLocalGLMnet+BertNEToranyTransformer",
+  "same_clock": true,
+  "kinds": [
+    "transformer_scalar",
+    "transformer_coefficient"
+  ],
+  "seeds": [
+    10103,
+    20076,
+    30049,
+    40022
+  ],
+  "folds": 5,
+  "phases": 2,
+  "planned_fit_slots": 80,
+  "preprocessing": "99originalfields, numericmedian/mean/std andcategoricalvocabularyinner42500only; production59500only. No pretraining or newexternaldata.",
+  "architecture": "FTinspired one16dimlayer/4heads/FFN64/GELU/dropout.1. CompareCLSscalarhead vsfeaturedependentcoefficients; bothzerohead,interceptoffset,residualpenalty.1.",
+  "training": "batch256,lr.0003,AdamWweightdecay.01,max40epochs/patience6,innerKSstop/freshrefit,TF32offfloat32,strict5e-6batchreplay",
+  "selection": "Complete4seed5fold only; fixedmetaAdaptive andstack. Fullpredictionsfrozenbeforeouter. Noindependenceclaim or seedcherrypick.",
+  "sources": [
+    "https://arxiv.org/abs/2106.11959",
+    "https://github.com/yandex-research/rtdl-revisiting-models",
+    "https://arxiv.org/abs/2107.11059"
+  ],
+  "adaptation": "FTinspired,notexactFTTransformerorBertNET; inputisstructuredtable,nounsuppliedtext."
+}
