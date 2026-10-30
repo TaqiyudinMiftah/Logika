@@ -1,0 +1,1 @@
+NEW human-authorized12-hour Logika research campaign. Bound all work to CLOCK.json. Use registered cross/kernel configurations and measured gates only. Keep parameters, source, seeds and compact private predictions; no fitted weights or KV dumps. No automatic refit, Kaggle upload or leaderboard probe. All70k cases are reused development.

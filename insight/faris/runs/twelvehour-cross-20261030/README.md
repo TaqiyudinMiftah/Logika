@@ -1,3 +1,17 @@
-# Twelve-hour explicit feature interaction and kernel campaign
+# Twelve-hour cross-network and residual-kernel campaign
 
-New12-hour human authorization, separate from all completed clocks. See PLAN.json for hypotheses, references and boundaries. No training admitted before sealed source/configuration and prospective Git registration. No automatic Kaggle submission or full-data refit in this new research campaign.
+Human authorization: a new12-hour run with hourly checks, authorized labs/ThinkCentres/Colab profiles, laptop-independent execution, no automatic refit or Kaggle submission. Earlier campaigns remain sealed.
+
+CLOCK started30October2026 05:29:30UTC (12:29WIB); admissions15:59:30UTC, models16:44:30UTC, all computation and owned billing17:29:30UTC =31October00:29WIB. CLOCK SHA25620ae751bc9e14e98b28eee24b6dcfa7f4171f85f108cfd1ec797d5936fa2e9ae. Never restart the clock or extend deadlines.
+
+616configurations/6160plannedfits, not completed fits:456CPU cross/MLP/LocalGLM/RFF recipes and160GPU cross/MLP/LocalGLM recipes,2seeds5folds. Frozen2129bank and existing views. All70k cases reused adaptive development, no untouched audit. Local baseline.5306361042400267; current-reference.5316414268134972. RFF extends an earlier family; DCNv2 adaptation is not an exact benchmark reproduction. Source/validation details are in PLAN.json, VALIDATION_CONTRACT.json and evidence/RESEARCH_SOURCES.json.
+
+Source preregistered a8eb77de5adee74451e1ce7bf058d5ad729561e5; actual ownership/clock registration d6ebe846d1880c4801b6d3910d69facdd49a57c1. Data/synthetic gates PASS. Actual full-size current LocalGLM replay PASS, max probability error1.7881393432617188e-7 versus5e-6 threshold. That registered pilot counts in6160. Scientific seals remain immutable.
+
+Canonical root faris@100.68.29.126:/mnt/home/faris/logika-twelvehour-cross-20261030. Persistent master logika-cross-coordinator-20261030, independent compose/evaluate/checkpoint42 services; owner queues20CPUslots4/4/6/6 on2001/2003/119/42,2RTX3060slots on2003.2001 GPUs belong to others and are excluded;2002 excluded. User homes only. Ten Colab profiles granted1/2/3/4/5/6/8/9/10/11;7refused, no retry. On119 /home/faris/logika-twelvehour-cross-20261030, persistent logika-cross-colab-aN-20261030 controllers, explicit --account N and private per-account sessions.json. Actual startup/progress must be verified; allocation alone is not a training claim.
+
+Each design has one full-size pilot, strict finite/row/numerical replay and measured conservative finish gate before the remaining9fits. No automatic failed-fit retries. Installed user units use absolute deadline guards and survive reboot; Colab kernels have independent deadline/setup release. Collectors retain parameters/source/seeds/recipes/compact predictions/failed attempts, no fitted weights or KV dumps. Only complete2seed5fold cohorts receive four fixed compositions; freeze before outer scoring, final freeze before conditional2000bootstrap. No unsupported private/public gain claims.
+
+Remote compute, collection, deadline release, checkpoint42 and hourly read-only resource/health checks continue without the laptop. Actual Git push/chat needs the laptop online; no broad Git credentials are copied to shared hosts. Workstation publisher ops/publish.py exports sanitized metadata/source to .history-publish-20261028, preserves peers and verifies remote commit. Private raw labels/OOF/OAuth/session credentials remain private.
+
+Local setup had one read-only identical CLOCK recopy error; LOCAL_SETUP_IDEMPOTENCY_REPAIR.json records the execution-only skip, no clock/scientific change or retraining. Initial intermittent SSH failures are preserved; transport diagnostics now retain captured stderr privately. Reconcile actual processes/outputs before repair and never duplicate unknown active fits.

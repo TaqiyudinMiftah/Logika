@@ -74,7 +74,9 @@ def setup(owner, start=True):
         destination.mkdir(parents=True, exist_ok=True);destination.chmod(0o700)
         for name in FILES:
             if not (R/name).exists():continue
-            shutil.copy2(R / name, destination / name)
+            target=destination/name
+            if target.exists() and sha(R/name)==sha(target):continue
+            shutil.copy2(R / name, target)
         for name in ['source', 'ops', 'evidence']:
             shutil.copytree(R / name, destination / name, dirs_exist_ok=True)
         if not (destination / 'packets').exists():

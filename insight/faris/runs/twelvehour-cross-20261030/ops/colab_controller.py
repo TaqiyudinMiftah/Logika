@@ -46,14 +46,22 @@ def dump(path, value):
 def run(args, timeout=180):
     remaining=C['deadline_epoch']-time.time()-10
     assert remaining>0, 'Original control deadline reached'
-    return subprocess.run(args,capture_output=True,text=True,check=True,timeout=min(timeout,remaining))
+    try:
+        return subprocess.run(args,capture_output=True,text=True,check=True,timeout=min(timeout,remaining))
+    except subprocess.CalledProcessError as exc:
+        (P/'TRANSPORT_FAILURE_PRIVATE.log').write_text(str(exc)+'\n'+(exc.stderr or '')+'\n'+(exc.stdout or ''))
+        raise
 
 
 def ssh(code, timeout=120):
     timeout=min(timeout,max(1,C['deadline_epoch']-time.time()-10))
     assert time.time()<C['deadline_epoch']-10
-    return subprocess.run(['ssh', '-T', *OPTS, 'root@colab', 'python3 -'],
-                          input=code, capture_output=True, text=True, check=True, timeout=timeout)
+    try:
+        return subprocess.run(['ssh', '-T', *OPTS, 'root@colab', 'python3 -'],
+                              input=code, capture_output=True, text=True, check=True, timeout=timeout)
+    except subprocess.CalledProcessError as exc:
+        (P/'TRANSPORT_FAILURE_PRIVATE.log').write_text(str(exc)+'\n'+(exc.stderr or '')+'\n'+(exc.stdout or ''))
+        raise
 
 
 def remote_json(name):
